@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>검색하던 커뮤니티에서, 생각하는 커뮤니티로</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg: #f7f5f0;
+    --surface: #ffffff;
+    --ink: #1a1814;
+    --ink-2: #4a4640;
+    --ink-3: #8a8680;
+    --accent: #2d5a8e;
+    --accent-light: #e8f0f9;
+    --phase1: #888780;
+    --phase1-bg: #f1efe8;
+    --phase2: #0f6e56;
+    --phase2-bg: #e1f5ee;
+    --phase3: #534ab7;
+    --phase3-bg: #eeedfe;
+    --phase4: #993c1d;
+    --phase4-bg: #faece7;
+    --border: #e0ddd5;
+    --serif: 'Noto Serif KR', Georgia, serif;
+    --sans: 'Noto Sans KR', sans-serif;
+    --max: 720px;
+    --pad: clamp(1rem, 5vw, 2.5rem);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--ink);
+    color: #fff;
+    padding: 3rem var(--pad) 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.02) 40px,
+      rgba(255,255,255,0.02) 41px
+    );
+  }
+  .header-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    position: relative;
+  }
+  .header-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 1rem;
+  }
+  .site-header h1 {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.35;
+    margin-bottom: 0.75rem;
+  }
+  .site-header h1 em {
+    font-style: normal;
+    color: #b8c9e0;
+  }
+  .header-sub {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 1.5rem;
+    font-family: var(--serif);
+    font-style: italic;
+  }
+  .header-meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: #666;
+    border-top: 1px solid #333;
+    padding-top: 1rem;
+  }
+  .header-meta span { display: flex; align-items: center; gap: 4px; }
+
+  /* ── TOC ── */
+  .toc-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .toc-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: flex;
+    overflow-x: auto;
+    gap: 0;
+    scrollbar-width: none;
+  }
+  .toc-inner::-webkit-scrollbar { display: none; }
+  .toc-link {
+    display: block;
+    padding: 0.75rem 1rem;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-3);
+    text-decoration: none;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .toc-link:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ── MAIN ── */
+  .main { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
+
+  /* ── SECTION WRAPPER ── */
+  .section {
+    padding: 3rem 0 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 0.5rem;
+  }
+  .section h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+  }
+  .section h3 {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 2rem 0 0.75rem;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .section h3::before {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 1em;
+    background: var(--accent);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  p { margin-bottom: 1rem; color: var(--ink-2); }
+  p:last-child { margin-bottom: 0; }
+
+  /* ── INTRO BLOCKQUOTE ── */
+  .intro-box {
+    background: var(--ink);
+    color: #e8e4da;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    line-height: 1.9;
+    position: relative;
+  }
+  .intro-box::before {
+    content: '"';
+    position: absolute;
+    top: -0.5rem;
+    left: 1rem;
+    font-size: 4rem;
+    color: #444;
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+
+  /* ── TIMELINE VISUALIZATION ── */
+  #timeline-viz {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+  .viz-header {
+    padding: 1.25rem 1.5rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .viz-header h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink-3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .viz-header h3::before { display: none; }
+
+  /* Timeline phases - always visible */
+  .timeline-phases {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+  .timeline-phases::before {
+    content: '';
+    position: absolute;
+    left: calc(1.5rem + 18px);
+    top: 1.5rem;
+    bottom: 1.5rem;
+    width: 2px;
+    background: var(--border);
+  }
+
+  .phase-block {
+    display: flex;
+    gap: 1rem;
+    position: relative;
+  }
+  .phase-dot-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 36px;
+    position: relative;
+    z-index: 1;
+  }
+  .phase-dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .phase-dot.p1 { background: var(--phase1); }
+  .phase-dot.p2 { background: var(--phase2); }
+  .phase-dot.p3 { background: var(--phase3); }
+  .phase-dot.p4 { background: var(--phase4); }
+
+  .phase-content {
+    flex: 1;
+    padding-bottom: 2rem;
+  }
+  .phase-block:last-child .phase-content { padding-bottom: 0; }
+
+  .phase-title {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+  .phase-title.p1 { color: var(--phase1); }
+  .phase-title.p2 { color: var(--phase2); }
+  .phase-title.p3 { color: var(--phase3); }
+  .phase-title.p4 { color: var(--phase4); }
+
+  .phase-sub {
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-bottom: 0.75rem;
+  }
+
+  /* Post cards - always visible in timeline */
+  .post-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .post-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.6rem 0.8rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    border-left-width: 3px;
+  }
+  .post-card:hover {
+    transform: translateX(3px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .post-card.p1 { border-left-color: var(--phase1); }
+  .post-card.p2 { border-left-color: var(--phase2); }
+  .post-card.p3 { border-left-color: var(--phase3); }
+  .post-card.p4 { border-left-color: var(--phase4); }
+
+  .post-card-left { flex: 1; min-width: 0; }
+  .post-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .post-meta-row {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 3px;
+  }
+  .post-date { font-size: 11px; color: var(--ink-3); }
+  .post-views { font-size: 11px; color: var(--ink-3); }
+  .post-link-icon {
+    font-size: 16px;
+    color: var(--ink-3);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* ── ACCORDION (in body sections) ── */
+  .accordion {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1.25rem 0;
+  }
+  .accordion-item { border-bottom: 1px solid var(--border); }
+  .accordion-item:last-child { border-bottom: none; }
+
+  .accordion-btn {
+    width: 100%;
+    background: var(--surface);
+    border: none;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s;
+  }
+  .accordion-btn:hover { background: var(--bg); }
+  .accordion-btn-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+    min-width: 0;
+  }
+  .acc-phase-badge {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .acc-phase-badge.p1 { background: var(--phase1); }
+  .acc-phase-badge.p2 { background: var(--phase2); }
+  .acc-phase-badge.p3 { background: var(--phase3); }
+  .acc-phase-badge.p4 { background: var(--phase4); }
+
+  .acc-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .acc-count {
+    font-size: 11px;
+    color: var(--ink-3);
+    font-weight: 400;
+  }
+  .acc-arrow {
+    font-size: 18px;
+    color: var(--ink-3);
+    transition: transform 0.25s;
+    flex-shrink: 0;
+  }
+  .accordion-btn[aria-expanded="true"] .acc-arrow { transform: rotate(180deg); }
+
+  .accordion-body {
+    display: none;
+    padding: 0.5rem 1rem 1rem;
+    background: var(--surface);
+  }
+  .accordion-body.open { display: block; }
+
+  .acc-post-list { display: flex; flex-direction: column; gap: 5px; }
+  .acc-post-link {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.5rem 0.6rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.15s;
+    border-left: 2px solid transparent;
+  }
+  .acc-post-link:hover { background: var(--bg); }
+  .acc-post-link.p1 { border-left-color: var(--phase1); }
+  .acc-post-link.p2 { border-left-color: var(--phase2); }
+  .acc-post-link.p3 { border-left-color: var(--phase3); }
+  .acc-post-link.p4 { border-left-color: var(--phase4); }
+  .acc-post-link-inner { flex: 1; }
+  .acc-post-name {
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.4;
+    font-weight: 400;
+  }
+  .acc-post-info {
+    font-size: 11px;
+    color: var(--ink-3);
+    margin-top: 1px;
+  }
+  .acc-ext { font-size: 12px; color: var(--ink-3); flex-shrink: 0; margin-top: 2px; }
+
+  /* ── STAT CARDS ── */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+    margin: 1.25rem 0;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label { font-size: 11px; color: var(--ink-3); line-height: 1.3; }
+
+  /* ── TABLE ── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 1.25rem 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .data-table th {
+    background: var(--bg);
+    padding: 0.6rem 0.75rem;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink-3);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+  .data-table td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink-2);
+    vertical-align: top;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: var(--bg); }
+
+  /* ── QUOTE ── */
+  .pull-quote {
+    border-left: 3px solid var(--accent);
+    padding: 0.75rem 1.25rem;
+    margin: 1.25rem 0;
+    background: var(--accent-light);
+    border-radius: 0 8px 8px 0;
+  }
+  .pull-quote p {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--accent);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+  .pull-quote .pq-source {
+    font-size: 11px;
+    color: var(--ink-3);
+    margin-top: 4px;
+    font-style: normal;
+    font-family: var(--sans);
+  }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight-box {
+    background: var(--ink);
+    color: #e8e4da;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .highlight-box h4 {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: #fff;
+  }
+  .highlight-box p { color: #c8c4ba; font-size: 14px; margin-bottom: 0.5rem; }
+  .highlight-box p:last-child { margin-bottom: 0; }
+
+  /* ── COMPARISON ── */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin: 1.25rem 0;
+  }
+  @media (max-width: 480px) { .compare-grid { grid-template-columns: 1fr; } }
+  .compare-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.1rem;
+    background: var(--surface);
+  }
+  .compare-card h5 {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink-3);
+  }
+  .compare-card.old h5 { color: var(--phase1); border-color: var(--phase1-bg); }
+  .compare-card.new h5 { color: var(--phase4); border-color: var(--phase4-bg); }
+  .compare-card ul { list-style: none; }
+  .compare-card ul li {
+    font-size: 13px;
+    color: var(--ink-2);
+    padding: 0.3rem 0;
+    padding-left: 1.1rem;
+    position: relative;
+    line-height: 1.5;
+  }
+  .compare-card.old ul li::before { content: '→'; position: absolute; left: 0; color: var(--phase1); }
+  .compare-card.new ul li::before { content: '✦'; position: absolute; left: 0; color: var(--phase4); }
+
+  /* ── FUTURE ITEMS ── */
+  .future-list { display: flex; flex-direction: column; gap: 1rem; margin: 1.25rem 0; }
+  .future-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+  }
+  .future-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--phase4-bg);
+    color: var(--phase4);
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .future-text h5 { font-size: 14px; font-weight: 700; margin-bottom: 3px; color: var(--ink); }
+  .future-text p { font-size: 13px; color: var(--ink-2); margin: 0; line-height: 1.6; }
+
+  /* ── REFS ── */
+  .refs-list { list-style: none; }
+  .refs-list li {
+    font-size: 12px;
+    color: var(--ink-3);
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--border);
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .refs-list li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .refs-list li:last-child { border-bottom: none; }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    background: var(--ink);
+    color: #666;
+    padding: 2rem var(--pad);
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+  .site-footer a { color: #888; }
+
+  /* ── PHASE COLOR BARS ── */
+  .phase-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    letter-spacing: 0.06em;
+    margin-left: 0.4rem;
+  }
+  .phase-tag.p1 { background: var(--phase1-bg); color: var(--phase1); }
+  .phase-tag.p2 { background: var(--phase2-bg); color: var(--phase2); }
+  .phase-tag.p3 { background: var(--phase3-bg); color: var(--phase3); }
+  .phase-tag.p4 { background: var(--phase4-bg); color: var(--phase4); }
+
+  /* Scroll fade-in */
+  .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s, transform 0.5s; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-tag">특별기고 · 미래분석 · 커뮤니티변천사</div>
+    <h1>검색하던 커뮤니티에서,<br><em>생각하는 커뮤니티로</em></h1>
+    <div class="header-sub">— 환자주도형 암 임상시험 커뮤니티의 패러다임 전환 선언 —</div>
+    <div class="header-meta">
+      <span>✍ 꿈많은사람 (시드니)</span>
+      <span>📅 2026년 5월</span>
+      <span>📊 6년 게시글 데이터 기반</span>
+    </div>
+  </div>
+</header>
+
+<!-- ══ TOC ══ -->
+<nav class="toc-bar" aria-label="목차">
+  <div class="toc-inner">
+    <a class="toc-link" href="#intro">들어가며</a>
+    <a class="toc-link" href="#timeline">타임라인</a>
+    <a class="toc-link" href="#part1">1부·과거</a>
+    <a class="toc-link" href="#part2">2부·현재</a>
+    <a class="toc-link" href="#part3">3부·전환점</a>
+    <a class="toc-link" href="#part4">4부·미래</a>
+    <a class="toc-link" href="#conclusion">결론</a>
+    <a class="toc-link" href="#refs">참고문헌</a>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- ══ INTRO ══ -->
+<section class="section fade-in" id="intro">
+  <div class="section-label">들어가며</div>
+  <h2>이 글을 쓰는 이유</h2>
+  <div class="intro-box">
+    나는 지난 6년 동안 이 커뮤니티에 약 1,000개에 가까운 게시글을 올렸다.<br><br>
+    해외 호전사례를 번역했고, 논문을 소개했고, 커뮤니티를 분석했고, 인공지능 도구를 실험했다. 그 과정에서 나는 한 가지 큰 흐름을 목격했다. 우리 커뮤니티가 어떻게 태어났고, 어떻게 성장했으며, 이제 어디로 가야 하는가.
+  </div>
+  <p>이 글은 그 흐름에 대한 기록이자 선언이다.</p>
+  <p>대한민국만의 이야기가 아니다. 해외 커뮤니티도 똑같은 상황에 있다. 그래서 이 선언은 국경 없이 유효하다.</p>
+
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-num">~1,000</div>
+      <div class="stat-label">6년간 작성한<br>게시글 수</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">4</div>
+      <div class="stat-label">커뮤니티 진화<br>단계</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">12만</div>
+      <div class="stat-label">해외 최대<br>관련 그룹 회원 수</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">33%</div>
+      <div class="stat-label">2028년 에이전틱 AI<br>기업 채택률 전망</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TIMELINE VISUALIZATION ══ -->
+<section class="section fade-in" id="timeline">
+  <div class="section-label">시각화 · 6년 게시글 데이터</div>
+  <h2>커뮤니티 진화 4단계 타임라인</h2>
+  <p>아래 타임라인은 6년간 실제 작성된 게시글을 기반으로 구성했습니다. 각 게시글 제목을 클릭하면 원문으로 이동합니다.</p>
+
+  <div id="timeline-viz">
+    <div class="viz-header">
+      <h3>📊 6년간 게시글로 보는 커뮤니티 진화 단계</h3>
+    </div>
+    <div class="timeline-phases">
+
+      <!-- Phase 1 -->
+      <div class="phase-block">
+        <div class="phase-dot-wrap">
+          <div class="phase-dot p1">1</div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-title p1">2020 ~ 2021년 · 1단계</div>
+          <div class="phase-sub">검색 기반 정보 공유 시대 · 정보화 시대의 꽃</div>
+          <div class="post-cards">
+            <a class="post-card p1" href="https://cafe.naver.com/friendsofhippocrates/9713" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">카페 이용법 시즌1 — "카페에서 검색만 잘해도 나는 벌써 암 극복" 검색 기초편</div>
+                <div class="post-meta-row"><span class="post-date">2020.12.13</span><span class="post-views">👁 961</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p1" href="https://cafe.naver.com/friendsofhippocrates/9980" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">영어권 암 관련 커뮤니티 목록 정리 (페이스북 계정 필요) — 대사항암제 및 기생충 관련</div>
+                <div class="post-meta-row"><span class="post-date">2020.12.30</span><span class="post-views">👁 155</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p1" href="https://cafe.naver.com/friendsofhippocrates/10019" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">영어권 커뮤니티 호전사례 키워드 분석 — 구충제(조티펜스) vs 대사치료(제인) 비교</div>
+                <div class="post-meta-row"><span class="post-date">2021.01.02</span><span class="post-views">👁 286</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p1" href="https://cafe.naver.com/friendsofhippocrates/12214" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">번역 도구 활용 방법 기초편 (상) — 단어를 하나씩 키보드로 입력하시는 분들께</div>
+                <div class="post-meta-row"><span class="post-date">2021.05.23</span><span class="post-views">👁 335</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p1" href="https://cafe.naver.com/friendsofhippocrates/12733" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">카페 스텝분들께 알려드리는 카페 백업 방법과 그 이유들</div>
+                <div class="post-meta-row"><span class="post-date">2021.07.02</span><span class="post-views">👁 264</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="phase-block">
+        <div class="phase-dot-wrap">
+          <div class="phase-dot p2">2</div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-title p2">2021 ~ 2022년 · 2단계</div>
+          <div class="phase-sub">커뮤니티 구조 분석 & 데이터화 시대 · 집단지성의 출현</div>
+          <div class="post-cards">
+            <a class="post-card p2" href="https://cafe.naver.com/friendsofhippocrates/14345" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">"독립운동이라고 쓰고 자가 임상 사회 운동(self clinical trial social movement)이라고 읽는다"</div>
+                <div class="post-meta-row"><span class="post-date">2021.12.24</span><span class="post-views">👁 233</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p2" href="https://cafe.naver.com/friendsofhippocrates/14316" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">검색 키워드 조회수로 보는 현재까지의 흐름. feat 공룡의 발자취</div>
+                <div class="post-meta-row"><span class="post-date">2021.12.21</span><span class="post-views">👁 222</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p2" href="https://cafe.naver.com/friendsofhippocrates/14415" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">[기획시리즈] 해외 커뮤니티 분석 1편 — 제인 맥클랜드, 페이스북 그룹 off label drugs for cancer 1-1</div>
+                <div class="post-meta-row"><span class="post-date">2022.01.02</span><span class="post-views">👁 176</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p2" href="https://cafe.naver.com/friendsofhippocrates/14421" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">[기획시리즈] 해외 커뮤니티 분석 1편 — 페이스북 그룹 off label drugs for cancer 1-2</div>
+                <div class="post-meta-row"><span class="post-date">2022.01.04</span><span class="post-views">👁 313</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p2" href="https://cafe.naver.com/friendsofhippocrates/15019" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">[기획시리즈] 해외 커뮤니티들 분석 마지막편 — Platform & Movie 맛보기</div>
+                <div class="post-meta-row"><span class="post-date">2022.03.20</span><span class="post-views">👁 119</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p2" href="https://cafe.naver.com/friendsofhippocrates/14880" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">카페 이용법 시즌2 검색 중급편 — 카페 내 검색어 리스트 정리 모음집 발간 (엑셀·PDF)</div>
+                <div class="post-meta-row"><span class="post-date">2022.03.05</span><span class="post-views">👁 604</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p2" href="https://cafe.naver.com/friendsofhippocrates/15187" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">카페 게시글들을 구글 드라이브에 백업 해놓았슴 — 검색 가능, 댓글들이 PDF로 저장됨</div>
+                <div class="post-meta-row"><span class="post-date">2022.04.10</span><span class="post-views">👁 201</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p2" href="https://cafe.naver.com/friendsofhippocrates/16483" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">영어권 해외 커뮤니티들 회원수 증가율 비교 — 2020년 12월부터 2022년 12월까지</div>
+                <div class="post-meta-row"><span class="post-date">2022.12.17</span><span class="post-views">👁 104</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="phase-block">
+        <div class="phase-dot-wrap">
+          <div class="phase-dot p3">3</div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-title p3">2022 ~ 2023년 · 3단계</div>
+          <div class="phase-sub">AI 도구 탐색 & 커뮤니티 비전 구상 시대</div>
+          <div class="post-cards">
+            <a class="post-card p3" href="https://cafe.naver.com/friendsofhippocrates/14670" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">[쓸데없는 잡담] 인공지능으로 논문들을 모조리 읽어버릴거야 — 정말?</div>
+                <div class="post-meta-row"><span class="post-date">2022.02.06</span><span class="post-views">👁 144</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p3" href="https://cafe.naver.com/friendsofhippocrates/15773" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">Open Social Self-Care System 이라고 하고 이런 저런 생각들을 그림으로 그려봤습니다</div>
+                <div class="post-meta-row"><span class="post-date">2022.07.18</span><span class="post-views">👁 135</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p3" href="https://cafe.naver.com/friendsofhippocrates/16568" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">[딴짓거리-인공지능] ChatGPT를 통해서 보는 건강/의료에 대한 영향 1탄 — 의료 분야 AI의 미래</div>
+                <div class="post-meta-row"><span class="post-date">2023.01.07</span><span class="post-views">👁 117</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p3" href="https://cafe.naver.com/friendsofhippocrates/16591" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">[딴짓거리-인공지능] ChatGPT 건강/의료 영향 마지막편 — "미래를 예측하는 가장 좋은 방법은 미래를 만드는 것"</div>
+                <div class="post-meta-row"><span class="post-date">2023.01.14</span><span class="post-views">👁 117</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p3" href="https://cafe.naver.com/friendsofhippocrates/16876" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">[딴짓거리-인공지능] ChatGPT(ChatPDF.com)를 이용해서 개인 PDF 문서들과 대화 — 예제 동영상</div>
+                <div class="post-meta-row"><span class="post-date">2023.03.18</span><span class="post-views">👁 291</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p3" href="https://cafe.naver.com/friendsofhippocrates/16885" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">[딴짓거리-인공지능] 마이크로소프트 Bing에서 펜벤다졸 논문 검색해보기 — 이제 대화로 검색해요</div>
+                <div class="post-meta-row"><span class="post-date">2023.03.20</span><span class="post-views">👁 159</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p3" href="https://cafe.naver.com/friendsofhippocrates/16964" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">[딴짓거리-인공지능] 해외 논문 검색에 활용 가능한 인공지능 도구들 소개 영상과 예제</div>
+                <div class="post-meta-row"><span class="post-date">2023.04.08</span><span class="post-views">👁 206</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p3" href="https://cafe.naver.com/friendsofhippocrates/17945" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">영어권 해외 커뮤니티들 회원수 증가율 비교 — 2023년 12월까지</div>
+                <div class="post-meta-row"><span class="post-date">2023.11.29</span><span class="post-views">👁 94</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 4 -->
+      <div class="phase-block">
+        <div class="phase-dot-wrap">
+          <div class="phase-dot p4">4</div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-title p4">2024 ~ 2026년 · 4단계 (현재 진행형)</div>
+          <div class="phase-sub">에이전틱 AI 커뮤니티 실현 단계 · 비전이 현실로</div>
+          <div class="post-cards">
+            <a class="post-card p4" href="https://cafe.naver.com/friendsofhippocrates/18490" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">[실전편] 암 진단서 해석은 인공지능 챗봇으로 하세요. Poe.com 강추</div>
+                <div class="post-meta-row"><span class="post-date">2024.05.19</span><span class="post-views">👁 178</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p4" href="https://cafe.naver.com/friendsofhippocrates/18627" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">[기초편] claude.ai와 GPT-4o로 메벤다졸 리뷰 논문 표들을 해석해 달라고 함. 깜놀!</div>
+                <div class="post-meta-row"><span class="post-date">2024.06.25</span><span class="post-views">👁 171</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p4" href="https://cafe.naver.com/friendsofhippocrates/18551" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">[기록목적] 암 치료 계획을 위한 AI 지원 — Nature에 소개된 글 번역</div>
+                <div class="post-meta-row"><span class="post-date">2024.06.02</span><span class="post-views">👁 99</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p4" href="https://cafe.naver.com/friendsofhippocrates/18810" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">[정보검색AI] Genspark.ai — "지금까지 이런 검색엔진은 없었다" 강추 별 5개</div>
+                <div class="post-meta-row"><span class="post-date">2024.08.24</span><span class="post-views">👁 174</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p4" href="https://cafe.naver.com/friendsofhippocrates/19237" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">[의료인공지능챗봇] 강추 5개 — OpenEvidence AI, 병원 의사의 대답과 일치 또는 더 정확함</div>
+                <div class="post-meta-row"><span class="post-date">2025.02.01</span><span class="post-views">👁 223</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p4" href="https://cafe.naver.com/friendsofhippocrates/19247" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">[인공지능] OpenAI Deep Research — Felipe의 아내 유방암 치료 계획 자료 조사 사연</div>
+                <div class="post-meta-row"><span class="post-date">2025.02.05</span><span class="post-views">👁 138</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p4" href="https://cafe.naver.com/friendsofhippocrates/19692" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">[특별기고] 환자주도형 암 임상시험 및 치료 혁신 공동체를 위한 전략 보고서 — 용도변경 약물, AI, 집단지성</div>
+                <div class="post-meta-row"><span class="post-date">2025.08.17</span><span class="post-views">👁 101</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+            <a class="post-card p4" href="https://cafe.naver.com/friendsofhippocrates/20479" target="_blank" rel="noopener">
+              <div class="post-card-left">
+                <div class="post-title">[특별기고] 현재 쓰고 있는 인공지능 도구들은 또 다른 구글 검색이 아닙니다 — 용도변경된 약들과 AI의 의미</div>
+                <div class="post-meta-row"><span class="post-date">2026.05.03</span><span class="post-views">👁 73</span></div>
+              </div>
+              <div class="post-link-icon">↗</div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /timeline-phases -->
+  </div><!-- /timeline-viz -->
+</section>
+
+<!-- ══ PART 1 ══ -->
+<section class="section fade-in" id="part1">
+  <div class="section-label">1부 · 과거</div>
+  <h2>우리는 어떻게 여기까지 왔는가<br>— 데이터로 보는 6년</h2>
+
+  <h3>1-1. 출발점 : 정보화 시대가 만든 기적</h3>
+  <p>2019년 펜벤다졸 이슈가 한국 사회를 뒤흔들 때, 우리 커뮤니티는 폭발적으로 성장했다. 그 성장의 동력은 단 하나였다. <strong>인터넷 검색과 번역 도구.</strong></p>
+  <p>구글 검색으로 해외 논문을 찾고, 파파고와 구글 번역으로 번역하고, 네이버 카페에 올렸다. 페이스북 그룹에서 해외 환자들의 호전 사례를 실시간으로 가져왔다. 검색만 할 줄 알면, 세계 최전선의 정보를 내 손 안에 쥘 수 있었다.</p>
+
+  <div class="pull-quote">
+    <p>"카페 이용법 시즌1 — 카페에서 검색만 잘해도 나는 벌써 암 극복"</p>
+    <div class="pq-source">2020년 12월 13일 · 조회 961회 · 1세대 커뮤니티 정신의 상징</div>
+  </div>
+
+  <p>이것이 1세대 커뮤니티의 정신이었다. <em>검색 = 생존.</em> 이 등식은 실제로 많은 분들의 생명을 연장하는 데 기여했다.</p>
+
+  <h3>1-2. 성장기 : 집단지성의 출현 (2021~2022)</h3>
+  <p>단순 정보 공유를 넘어, 우리는 데이터를 만들기 시작했다. 호전사례를 분류하고, 커뮤니티를 비교하고, 검색 키워드의 흐름을 분석했다.</p>
+
+  <!-- Accordion: 2단계 주요 게시글 -->
+  <div class="accordion">
+    <div class="accordion-item">
+      <button class="accordion-btn" aria-expanded="false" onclick="toggleAcc(this)">
+        <div class="accordion-btn-left">
+          <div class="acc-phase-badge p2">2</div>
+          <div>
+            <div class="acc-title">2단계 주요 게시글 목록</div>
+            <div class="acc-count">2021~2022 · 데이터화 시대 · 8개 게시글</div>
+          </div>
+        </div>
+        <span class="acc-arrow">⌄</span>
+      </button>
+      <div class="accordion-body">
+        <div class="acc-post-list">
+          <a class="acc-post-link p2" href="https://cafe.naver.com/friendsofhippocrates/14345" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner">
+              <div class="acc-post-name">독립운동이라고 쓰고 자가 임상 사회 운동이라고 읽는다 — self-care research 자가 관리 연구 시작</div>
+              <div class="acc-post-info">2021.12.24 · 👁 233</div>
+            </div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p2" href="https://cafe.naver.com/friendsofhippocrates/14316" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner">
+              <div class="acc-post-name">검색 키워드 조회수로 보는 현재까지의 흐름. feat 공룡의 발자취</div>
+              <div class="acc-post-info">2021.12.21 · 👁 222</div>
+            </div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p2" href="https://cafe.naver.com/friendsofhippocrates/12623" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner">
+              <div class="acc-post-name">[해외호전사례모음집] 조티펜스 페이스북 그룹에서 2019년 8월부터 2021년 5월까지 data 분석 맛보기 1편</div>
+              <div class="acc-post-info">2021.06.22 · 👁 212</div>
+            </div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p2" href="https://cafe.naver.com/friendsofhippocrates/14415" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner">
+              <div class="acc-post-name">[기획시리즈] 해외 커뮤니티 분석 1편 — 제인 맥클랜드 페이스북 그룹 off label drugs for cancer 1-1</div>
+              <div class="acc-post-info">2022.01.02 · 👁 176</div>
+            </div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p2" href="https://cafe.naver.com/friendsofhippocrates/14421" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner">
+              <div class="acc-post-name">[기획시리즈] 해외 커뮤니티 분석 1편 — off label drugs for cancer 1-2</div>
+              <div class="acc-post-info">2022.01.04 · 👁 313</div>
+            </div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p2" href="https://cafe.naver.com/friendsofhippocrates/15019" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner">
+              <div class="acc-post-name">[기획시리즈] 해외 커뮤니티들 분석 마지막편 약간 맛보기 — Platform & Movie</div>
+              <div class="acc-post-info">2022.03.20 · 👁 119</div>
+            </div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p2" href="https://cafe.naver.com/friendsofhippocrates/14880" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner">
+              <div class="acc-post-name">카페 이용법 시즌2 검색 중급편 — 카페 내 검색어 리스트 정리 모음집 발간 (엑셀·PDF)</div>
+              <div class="acc-post-info">2022.03.05 · 👁 604</div>
+            </div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p2" href="https://cafe.naver.com/friendsofhippocrates/15187" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner">
+              <div class="acc-post-name">카페 게시글들을 구글 드라이브에 백업 해놓았슴 — 검색 가능, PDF로 저장됨</div>
+              <div class="acc-post-info">2022.04.10 · 👁 201</div>
+            </div>
+            <span class="acc-ext">↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pull-quote">
+    <p>"독립운동이라고 쓰고, 자가 임상 사회운동(self clinical trial social movement)이라고 읽는다."</p>
+    <div class="pq-source">2021년 12월 24일 · 2단계의 분기점이 된 선언</div>
+  </div>
+  <p>우리는 단순한 카페 회원이 아니었다. 우리는 시민 과학자(citizen scientist)였고, 환자 주도 임상시험의 선구자였다. 학술 연구도 이를 뒷받침한다. 2021년 <em>BMC Health Services Research</em>에 발표된 연구는 온라인 환자 커뮤니티가 정보 교환에서 시작해 집단 행동으로 이어지는 집단 역량강화(collective empowerment)를 형성한다는 것을 증명했다 (Fayn et al., 2021).</p>
+
+  <h3>1-3. 해외 커뮤니티와의 비교 — 우리만이 아니었다</h3>
+  <p>나는 영어권 해외 커뮤니티들의 회원수 증가율을 2020년 12월부터 꾸준히 추적했다.</p>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>시점</th>
+        <th>조티펜스 복용법</th>
+        <th>고용량 펜벤다졸</th>
+        <th>이버멕틴 & 암</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>2020년 12월</td><td>초기</td><td>초기</td><td>—</td></tr>
+      <tr><td>2021년 말</td><td>수만 명</td><td>급성장</td><td>형성</td></tr>
+      <tr><td>2022년 12월</td><td>지속 성장</td><td>지속 성장</td><td>성장</td></tr>
+      <tr><td>2024년 12월</td><td>더 큰 성장</td><td>12만 명</td><td>급성장</td></tr>
+      <tr><td>2025년 4월</td><td>—</td><td>Meta 삭제 → 즉시 재건</td><td>활발</td></tr>
+      <tr><td>2026년 현재</td><td>활발</td><td>재건 후 성장</td><td>800개 댓글 등 왕성</td></tr>
+    </tbody>
+  </table>
+
+  <p>2025년 4월, 고용량 펜벤다졸 12만 회원 페이스북 그룹이 Meta에 의해 삭제됐다. 그러나 다음 날 바로 재건됐다. 이것이 커뮤니티의 생명력이다.</p>
+  <p>관련 게시글: <a href="https://cafe.naver.com/friendsofhippocrates/19460" target="_blank" rel="noopener" style="color:var(--accent)">고용량 펜벤다졸 12만 회원 페이스북 그룹이 4월 19일 Meta에 의해 삭제됨, 4월 20일 다시 만듬 ↗</a></p>
+</section>
+
+<!-- ══ PART 2 ══ -->
+<section class="section fade-in" id="part2">
+  <div class="section-label">2부 · 현재 진단</div>
+  <h2>검색 기반 모델의 한계</h2>
+
+  <h3>2-1. 정보 과잉의 시대</h3>
+  <p>우리 커뮤니티는 2020년부터 2026년까지 엄청난 양의 게시글을 쌓아왔다. 그것이 바로 문제가 되기 시작했다.</p>
+  <p>처음 커뮤니티에 오는 환자나 보호자를 생각해보자. 급하다. 겁먹었다. 그리고 카페 검색창에 병명을 입력한다. 수백, 수천 개의 게시글이 쏟아진다. 무엇을 먼저 읽어야 할지 모른다. 2020년에 올라온 정보와 2025년에 올라온 정보 중 어느 것이 더 정확한지도 모른다.</p>
+  <p><strong>정보의 양이 곧 정보의 질을 보장하지 않는다.</strong> 오히려 정보가 많아질수록, 길을 잃는 사람이 생긴다.</p>
+
+  <h3>2-2. 검색의 수고</h3>
+  <p>병원 진료를 받고 지친 몸으로 집에 돌아온 환자가, 수백 개의 게시글을 읽고, 해외 논문을 번역하고, 복용법을 스스로 조합해야 한다. 이것은 의지의 문제가 아니라, <strong>시스템의 문제</strong>다.</p>
+  <p>검색은 수동적이다. 내가 질문해야, 내가 찾아야, 내가 판단해야 한다. 그 모든 수고가 이미 지쳐있는 환자에게 전가된다.</p>
+
+  <h3>2-3. 개인화의 부재</h3>
+  <p>검색 기반 시스템의 가장 큰 약점은 개인화가 없다는 것이다. 같은 검색어를 입력해도, 65세 남성 췌장암 4기와 45세 여성 유방암 2기는 완전히 다른 정보가 필요하다.</p>
+  <p>커뮤니티는 그것을 알면서도, 제공할 수 없었다. 기술이 아직 거기에 이르지 못했기 때문이다. 이제 그 기술이 왔다.</p>
+</section>
+
+<!-- ══ PART 3 ══ -->
+<section class="section fade-in" id="part3">
+  <div class="section-label">3부 · 전환점</div>
+  <h2>인공지능이 등장했다</h2>
+
+  <h3>3-1. 내가 처음 본 신호</h3>
+  <div class="pull-quote">
+    <p>"[쓸데없는 잡담] 인공지능으로 논문들을 모조리 읽어버릴거야 — 정말?"</p>
+    <div class="pq-source">2022년 2월 6일 · '쓸데없는 잡담'이라고 썼지만, 이것이 진심이었다</div>
+  </div>
+
+  <!-- Accordion: 3단계 AI 탐색 게시글 -->
+  <div class="accordion">
+    <div class="accordion-item">
+      <button class="accordion-btn" aria-expanded="false" onclick="toggleAcc(this)">
+        <div class="accordion-btn-left">
+          <div class="acc-phase-badge p3">3</div>
+          <div>
+            <div class="acc-title">AI 도구 탐색 게시글 연대기</div>
+            <div class="acc-count">2022~2024 · 12개 게시글</div>
+          </div>
+        </div>
+        <span class="acc-arrow">⌄</span>
+      </button>
+      <div class="accordion-body">
+        <div class="acc-post-list">
+          <a class="acc-post-link p3" href="https://cafe.naver.com/friendsofhippocrates/14670" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner"><div class="acc-post-name">[쓸데없는 잡담] 인공지능으로 논문들을 모조리 읽어버릴거야 — 정말?</div><div class="acc-post-info">2022.02.06 · 👁 144</div></div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p3" href="https://cafe.naver.com/friendsofhippocrates/15773" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner"><div class="acc-post-name">Open Social Self-Care System — 이런 저런 생각들을 그림으로 그려봤습니다</div><div class="acc-post-info">2022.07.18 · 👁 135</div></div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p3" href="https://cafe.naver.com/friendsofhippocrates/16568" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner"><div class="acc-post-name">[딴짓거리-인공지능] ChatGPT를 통해서 보는 건강/의료에 대한 영향 1탄</div><div class="acc-post-info">2023.01.07 · 👁 117</div></div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p3" href="https://cafe.naver.com/friendsofhippocrates/16591" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner"><div class="acc-post-name">[딴짓거리-인공지능] ChatGPT 건강/의료 영향 마지막편 — 미래를 예측하는 가장 좋은 방법은 미래를 만드는 것</div><div class="acc-post-info">2023.01.14 · 👁 117</div></div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p3" href="https://cafe.naver.com/friendsofhippocrates/16876" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner"><div class="acc-post-name">[딴짓거리-인공지능] ChatPDF.com으로 개인 PDF 문서들과 대화할 수 있슴 — 예제 동영상</div><div class="acc-post-info">2023.03.18 · 👁 291</div></div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p3" href="https://cafe.naver.com/friendsofhippocrates/16885" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner"><div class="acc-post-name">[딴짓거리-인공지능] 마이크로소프트 Bing에서 펜벤다졸 논문 검색해보기 — 이제 대화로 검색해요</div><div class="acc-post-info">2023.03.20 · 👁 159</div></div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p3" href="https://cafe.naver.com/friendsofhippocrates/16964" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner"><div class="acc-post-name">[딴짓거리-인공지능] 해외 논문 검색에 활용 가능한 인공지능 도구들 소개 영상과 예제</div><div class="acc-post-info">2023.04.08 · 👁 206</div></div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p3" href="https://cafe.naver.com/friendsofhippocrates/17160" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner"><div class="acc-post-name">[딴짓거리-인공지능] MirrorThink.Ai 를 써 봤습니다 — 차츰 이렇게 발전해 간다고 보여드리고 싶어서요</div><div class="acc-post-info">2023.05.19 · 👁 93</div></div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p3" href="https://cafe.naver.com/friendsofhippocrates/17226" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner"><div class="acc-post-name">[인공지능] MBC 스트레이트에서 의무기록을 이해하기 쉽게 풀어주는 앱 SickGPT 소개</div><div class="acc-post-info">2023.06.05 · 👁 169</div></div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p3" href="https://cafe.naver.com/friendsofhippocrates/18490" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner"><div class="acc-post-name">[실전편] 암 진단서 해석은 인공지능 챗봇으로 하세요. Poe.com 강추</div><div class="acc-post-info">2024.05.19 · 👁 178</div></div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p3" href="https://cafe.naver.com/friendsofhippocrates/18627" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner"><div class="acc-post-name">[기초편] claude.ai와 GPT-4o로 메벤다졸 리뷰 논문 표들을 해석해 달라고 함. 깜놀!</div><div class="acc-post-info">2024.06.25 · 👁 171</div></div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p3" href="https://cafe.naver.com/friendsofhippocrates/18810" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner"><div class="acc-post-name">[정보검색AI] Genspark.ai — 지금까지 이런 검색엔진은 없었다. 강추 별 5개</div><div class="acc-post-info">2024.08.24 · 👁 174</div></div>
+            <span class="acc-ext">↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>3-2. 세상도 같은 방향을 보고 있다</h3>
+  <p>이것은 나만의 생각이 아니다. 전 세계 의료계와 학계가 같은 방향을 보고 있다.</p>
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-num">1%</div>
+      <div class="stat-label">2024년 에이전틱 AI<br>기업 채택률</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">33%</div>
+      <div class="stat-label">2028년 전망<br>(Gartner)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">$200B</div>
+      <div class="stat-label">2034년 에이전틱 AI<br>글로벌 시장 규모</div>
+    </div>
+  </div>
+  <p>딜로이트가 2025년 9월 미국 의료기술 경영자 100명을 대상으로 한 조사에서는 AI 도입의 오랜 장벽들이 이제 완화되고 있다고 보고했다. AI는 더 이상 실험이 아니라, 운영의 영역으로 이동하고 있다.</p>
+  <p>용도변경약물 연구도 마찬가지다. <em>Advanced Science</em> (Wiley, 2025)는 AI 알고리즘이 약물 재배치의 새로운 치료 타겟과 메커니즘을 발굴하는 핵심 역할을 하며, 후보 물질 선별 시간을 기존 수개월에서 수 시간으로 단축하고 있다고 보고했다.</p>
+  <p>우리가 손으로, 발로 해온 일들을 AI가 수천 배 빠르게 할 수 있게 됐다.</p>
+</section>
+
+<!-- ══ PART 4 ══ -->
+<section class="section fade-in" id="part4">
+  <div class="section-label">4부 · 미래 선언</div>
+  <h2>에이전틱 AI 커뮤니티로</h2>
+
+  <h3>4-1. 무엇이 달라지는가</h3>
+  <div class="compare-grid">
+    <div class="compare-card old">
+      <h5>🔍 검색 지향형 커뮤니티 (현재)</h5>
+      <ul>
+        <li>환자가 검색창에 병명 입력</li>
+        <li>수백 개 게시글 쏟아짐</li>
+        <li>환자가 직접 읽고 판단</li>
+        <li>복용법을 스스로 조합</li>
+        <li>개인화 없음</li>
+      </ul>
+    </div>
+    <div class="compare-card new">
+      <h5>✦ 에이전틱 AI 커뮤니티 (미래)</h5>
+      <ul>
+        <li>진단서·복용약 목록 입력</li>
+        <li>AI가 유사 사례 통합 분석</li>
+        <li>맞춤형 정보 제시</li>
+        <li>사람은 판단·연대에 집중</li>
+        <li>완전한 개인화</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <h4>핵심 원칙</h4>
+    <p>검색의 수고는 AI가 진다. 판단과 연대는 사람이 한다.</p>
+  </div>
+
+  <h3>4-2. 무엇은 변하지 않는가</h3>
+  <p><strong>사람 간의 유대와 연대는 절대 AI로 대체되지 않는다.</strong></p>
+  <p>사람들이 커뮤니티에 오는 것은 정보만을 위해서가 아니다. 같은 길을 걷는 사람과의 만남, 두려움을 나누는 공간, 살아남은 사람들의 이야기 — 이것은 어떤 AI도 대신할 수 없다.</p>
+  <p><em>BMC Health Services Research</em> (2017)의 체계적 문헌 고찰은 온라인 환자 커뮤니티 참여가 삶의 질, 자기 효능감, 사회적 지지에 실질적인 긍정적 효과를 미친다는 것을 21개 연구를 통해 증명했다 (van Eenbergen et al., 2017). 이것은 AI가 만들어주는 것이 아니다. 사람이 사람에게 주는 것이다.</p>
+  <p>에이전틱 AI는 그 공간을 침범하는 것이 아니라, 그 공간을 보호하는 도구다. 정보 탐색의 수고를 덜어줌으로써, 사람들이 서로에게 더 많은 시간과 에너지를 쏟을 수 있게 해준다.</p>
+
+  <h3>4-3. 구체적인 전환의 모습</h3>
+  <div class="future-list">
+    <div class="future-item">
+      <div class="future-num">①</div>
+      <div class="future-text">
+        <h5>개인화된 정보 탐색</h5>
+        <p>"65세 남성, 비소세포폐암 3기, 표적치료 중"이라고 입력하면 AI가 커뮤니티 내 유사 케이스와 해외 호전사례를 통합해서 보여준다. 환자가 직접 수백 개를 뒤질 필요가 없다.</p>
+      </div>
+    </div>
+    <div class="future-item">
+      <div class="future-num">②</div>
+      <div class="future-text">
+        <h5>논문 요약과 해석</h5>
+        <p>새로운 오프라벨 약물 논문이 나오면, AI가 자동으로 요약하고 커뮤니티 맥락에서의 의미를 해석해준다. 파파고로 번역하고 직접 읽던 수고를 AI가 대신한다.</p>
+      </div>
+    </div>
+    <div class="future-item">
+      <div class="future-num">③</div>
+      <div class="future-text">
+        <h5>복용법 안전성 체크</h5>
+        <p>현재 복용 중인 약들의 조합 안전성, 상호작용 위험을 AI가 1차로 검토해준다. 커뮤니티 선배님들의 최종 판단 이전에 AI가 기초 필터링을 담당한다.</p>
+      </div>
+    </div>
+    <div class="future-item">
+      <div class="future-num">④</div>
+      <div class="future-text">
+        <h5>커뮤니티 집단지성의 영구 축적</h5>
+        <p>댓글 하나하나, 게시글 하나하나가 AI 학습의 재료가 된다. 우리의 6년 경험이 데이터가 되고, 그 데이터가 다음 환자를 돕는 AI의 지식 기반이 된다.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Accordion: 4단계 관련 게시글 -->
+  <div class="accordion">
+    <div class="accordion-item">
+      <button class="accordion-btn" aria-expanded="false" onclick="toggleAcc(this)">
+        <div class="accordion-btn-left">
+          <div class="acc-phase-badge p4">4</div>
+          <div>
+            <div class="acc-title">4단계 실현 관련 게시글</div>
+            <div class="acc-count">2024~2026 · 이미 시작된 변화</div>
+          </div>
+        </div>
+        <span class="acc-arrow">⌄</span>
+      </button>
+      <div class="accordion-body">
+        <div class="acc-post-list">
+          <a class="acc-post-link p4" href="https://cafe.naver.com/friendsofhippocrates/18551" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner"><div class="acc-post-name">[기록목적] 암 치료 계획을 위한 AI 지원 — Nature에 소개된 글 번역</div><div class="acc-post-info">2024.06.02 · 👁 99</div></div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p4" href="https://cafe.naver.com/friendsofhippocrates/18699" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner"><div class="acc-post-name">[고품질논문생성] 인공지능 STORM — 주제만 입력하면 고품질 리포트 3분 완성 (스탠퍼드 대학)</div><div class="acc-post-info">2024.07.14 · 👁 107</div></div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p4" href="https://cafe.naver.com/friendsofhippocrates/18720" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner"><div class="acc-post-name">[인공지능] 2024년 보건의료빅데이터 활용 창업경진대회 — AI 기반 Off-label Indication 제시 서비스</div><div class="acc-post-info">2024.07.20 · 👁 219</div></div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p4" href="https://cafe.naver.com/friendsofhippocrates/18779" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner"><div class="acc-post-name">[암치료역사] 당신은 역사의 큰 흐름에 변곡점을 목격하고 있습니다. 그 이유는 이렇습니다.</div><div class="acc-post-info">2024.08.09 · 👁 221</div></div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p4" href="https://cafe.naver.com/friendsofhippocrates/19237" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner"><div class="acc-post-name">[의료AI챗봇] OpenEvidence AI — 병원 의사의 대답과 일치 또는 더 정확함. 현재 무료</div><div class="acc-post-info">2025.02.01 · 👁 223</div></div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p4" href="https://cafe.naver.com/friendsofhippocrates/19247" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner"><div class="acc-post-name">[인공지능] OpenAI Deep Research로 유방암 치료 계획 자료 조사 — Felipe Millon의 사연</div><div class="acc-post-info">2025.02.05 · 👁 138</div></div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p4" href="https://cafe.naver.com/friendsofhippocrates/19692" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner"><div class="acc-post-name">[특별기고] 환자주도형 암 임상시험 및 치료 혁신 공동체를 위한 전략 보고서 초벌구이</div><div class="acc-post-info">2025.08.17 · 👁 101</div></div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p4" href="https://cafe.naver.com/friendsofhippocrates/19702" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner"><div class="acc-post-name">[의료인공지능챗봇] OpenEvidence 미국의사면허시험 100점 — 일반인도 무제한 사용 가능</div><div class="acc-post-info">2025.08.21 · 👁 191</div></div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p4" href="https://cafe.naver.com/friendsofhippocrates/19727" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner"><div class="acc-post-name">[실전편] 인공지능 도구들 활용법 — 설금홍님 블로그글들 이렇게 해보셔요</div><div class="acc-post-info">2025.08.27 · 👁 145</div></div>
+            <span class="acc-ext">↗</span>
+          </a>
+          <a class="acc-post-link p4" href="https://cafe.naver.com/friendsofhippocrates/20479" target="_blank" rel="noopener">
+            <div class="acc-post-link-inner"><div class="acc-post-name">[특별기고] 현재 쓰고 있는 인공지능 도구들은 또 다른 구글 검색이 아닙니다</div><div class="acc-post-info">2026.05.03 · 👁 73</div></div>
+            <span class="acc-ext">↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONCLUSION ══ -->
+<section class="section fade-in" id="conclusion">
+  <div class="section-label">결론</div>
+  <h2>우리가 서 있는 역사적 위치</h2>
+
+  <p>2020년에 나는 아무것도 모르는 환자 보호자로 이 커뮤니티에 왔다. 검색을 배웠고, 번역을 했고, 데이터를 모았다. 그 과정에서 커뮤니티가 얼마나 강력한 생명력을 가지고 있는지를 목격했다.</p>
+
+  <div class="highlight-box">
+    <h4>우리가 만들어온 환자주도형 임상시험 커뮤니티는,<br>정보화 시대가 낳은 가장 혁신적인 시민 과학 운동이다.</h4>
+    <p>의사도, 제약회사도, 정부도 하지 못한 일을 우리는 해왔다.</p>
+    <p>그리고 이제, 다음 단계가 왔다.</p>
+  </div>
+
+  <p>에이전틱 AI를 장착한 커뮤니티. 검색하는 커뮤니티가 아니라, 생각하는 커뮤니티. 사람의 수고를 AI에게 넘기고, 사람은 사람다운 일 — 판단하고, 연대하고, 위로하고, 함께 살아남는 일 — 에 집중하는 커뮤니티.</p>
+  <p>이것은 먼 미래의 이야기가 아니다. 지금 이 순간, 이미 시작되고 있다.</p>
+
+  <div class="pull-quote">
+    <p>이 글을 읽는 모든 분이 그 변화의 목격자이자 주인공이다.</p>
+    <div class="pq-source">꿈많은사람 (시드니) · 2026년 5월</div>
+  </div>
+</section>
+
+<!-- ══ REFS ══ -->
+<section class="section fade-in" id="refs">
+  <div class="section-label">참고문헌</div>
+  <h2>근거 자료</h2>
+  <ul class="refs-list">
+    <li>Fayn MG, des Garets V, Rivière A. (2021). Collective empowerment of an online patient community: conceptualizing process dynamics using a multi-method qualitative approach. <em>BMC Health Services Research</em>, 21, 993.</li>
+    <li>van Eenbergen MC, et al. (2017). The Impact of Participation in Online Cancer Communities on Patient Reported Outcomes: Systematic Review. <em>JMIR Cancer</em>.</li>
+    <li>Wan et al. (2025). Applications of Artificial Intelligence in Drug Repurposing. <em>Advanced Science</em> (Wiley Online Library).</li>
+    <li>Deloitte Center for Health Solutions. (2026). Many health care leaders are leaning into agentic AI as adoption hurdles ease. — Deloitte Insights.</li>
+    <li>Oral Health Group. (2026). Agentic AI in healthcare: Autonomous systems transforming clinical practice. — Gartner 2028 전망 인용.</li>
+    <li>Herráiz-Gil S, et al. (2025). Artificial intelligence-based methods for drug repurposing and development in cancer. <em>Applied Sciences</em>, 15(5), 2798.</li>
+    <li>꿈많은사람. (2020~2026). 네이버 카페 friendsofhippocrates 게시글 약 1,000건. — 본 보고서의 1차 데이터.</li>
+  </ul>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <p>이 글은 6년간 이 커뮤니티에 올린 약 1,000개의 게시글 데이터를 기반으로,<br>그리고 현재 발표되고 있는 관련 연구들을 참고하여 작성되었습니다.</p>
+  <p style="margin-top:0.5rem"><strong style="color:#aaa">꿈많은사람 (시드니)</strong> · 2026년 5월</p>
+  <p style="margin-top:0.75rem"><a href="https://cafe.naver.com/friendsofhippocrates">cafe.naver.com/friendsofhippocrates</a></p>
+</footer>
+
+<script>
+  function toggleAcc(btn) {
+    const body = btn.nextElementSibling;
+    const open = body.classList.contains('open');
+    body.classList.toggle('open', !open);
+    btn.setAttribute('aria-expanded', String(!open));
+  }
+
+  // Scroll fade-in
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.07 }
+  );
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

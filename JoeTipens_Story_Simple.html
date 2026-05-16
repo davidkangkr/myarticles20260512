@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>조 티펜스 완전 이해 로드맵 - 암환자와 보호자를 위한 안내서</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+  :root {
+    --step1: #c0392b;
+    --step2: #d35400;
+    --step3: #27ae60;
+    --step4: #2980b9;
+    --step5: #8e44ad;
+    --step6: #2c3e50;
+    --blog: #16a085;
+    --bg: #fdfaf6;
+    --card-bg: #ffffff;
+    --text: #2c2c2c;
+    --text-light: #666;
+    --border: #e8e0d5;
+    --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 17px;
+    line-height: 1.8;
+  }
+
+  /* 헤더 */
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: white;
+    padding: 50px 20px 40px;
+    text-align: center;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 30px;
+    padding: 6px 20px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(24px, 5vw, 38px);
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .hero p {
+    font-size: clamp(15px, 3vw, 18px);
+    color: rgba(255,255,255,0.8);
+    max-width: 640px;
+    margin: 0 auto 24px;
+  }
+  .blog-link-hero {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--blog);
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 700;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .blog-link-hero:hover { opacity: 0.9; transform: translateY(-2px); }
+
+  /* 조티펜스 소개 박스 */
+  .intro-box {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 20px;
+  }
+  .intro-card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--blog);
+  }
+  .intro-card h2 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 20px;
+    color: var(--blog);
+    margin-bottom: 14px;
+  }
+  .intro-card p {
+    font-size: 16px;
+    line-height: 1.9;
+    color: #444;
+    margin-bottom: 12px;
+  }
+  .blog-official-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #f0faf8;
+    border: 2px solid var(--blog);
+    color: var(--blog);
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: 8px;
+    transition: background 0.2s;
+  }
+  .blog-official-link:hover { background: #d5f0ea; }
+
+  /* 로드맵 안내 */
+  .roadmap-intro {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px 20px 20px;
+    text-align: center;
+  }
+  .roadmap-intro h2 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(20px, 4vw, 26px);
+    margin-bottom: 10px;
+    color: #1a1a2e;
+  }
+  .roadmap-intro p {
+    font-size: 16px;
+    color: var(--text-light);
+  }
+
+  /* 스텝 카드 */
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px 40px;
+  }
+
+  .step-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .step-header {
+    padding: 20px 24px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .step-num {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 700;
+    flex-shrink: 0;
+    border: 2px solid rgba(255,255,255,0.5);
+  }
+  .step-title-wrap h3 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(17px, 3.5vw, 21px);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .step-title-wrap .step-sub {
+    font-size: 13px;
+    opacity: 0.85;
+    margin-top: 3px;
+  }
+
+  .step1 .step-header { background: var(--step1); }
+  .step2 .step-header { background: var(--step2); }
+  .step3 .step-header { background: var(--step3); }
+  .step4 .step-header { background: var(--step4); }
+  .step5 .step-header { background: var(--step5); }
+  .step6 .step-header { background: var(--step6); }
+  .step-blog .step-header { background: var(--blog); }
+
+  .step-why {
+    padding: 18px 24px;
+    background: #fafafa;
+    border-bottom: 1px solid var(--border);
+    font-size: 15px;
+    color: #555;
+    line-height: 1.8;
+  }
+  .step-why strong { color: #333; }
+
+  .step-links {
+    padding: 16px 24px;
+  }
+  .step-links .section-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #999;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .post-link {
+    display: block;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 15px;
+    line-height: 1.6;
+    transition: transform 0.15s, box-shadow 0.15s;
+    border: 1px solid transparent;
+  }
+  .post-link:hover {
+    transform: translateX(4px);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  .post-link:active { transform: scale(0.98); }
+
+  .post-link .post-num {
+    font-size: 12px;
+    font-weight: 700;
+    opacity: 0.7;
+    margin-bottom: 2px;
+  }
+  .post-link .post-title {
+    font-weight: 500;
+  }
+  .post-link .post-meta {
+    font-size: 12px;
+    opacity: 0.65;
+    margin-top: 2px;
+  }
+
+  .step1 .post-link { background: #fef5f4; border-color: #f5c6c2; color: #7b1a13; }
+  .step1 .post-link:hover { background: #fde8e6; }
+  .step2 .post-link { background: #fef6f0; border-color: #f5d5bb; color: #7a3000; }
+  .step2 .post-link:hover { background: #fde9d5; }
+  .step3 .post-link { background: #f0faf4; border-color: #b8e8c8; color: #1a5c35; }
+  .step3 .post-link:hover { background: #d5f0e0; }
+  .step4 .post-link { background: #f0f6fc; border-color: #b8d8f0; color: #1a4a6e; }
+  .step4 .post-link:hover { background: #d5e8f5; }
+  .step5 .post-link { background: #f8f0fc; border-color: #d8b8f0; color: #4a1a6e; }
+  .step5 .post-link:hover { background: #edd5f5; }
+  .step6 .post-link { background: #f5f5f7; border-color: #c8c8d5; color: #1a1a2e; }
+  .step6 .post-link:hover { background: #e5e5ee; }
+  .step-blog .post-link { background: #f0faf8; border-color: #a8ddd5; color: #0d5c50; }
+  .step-blog .post-link:hover { background: #d5f0ea; }
+
+  /* 외부 링크 (블로그) */
+  .ext-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    background: #f0faf8;
+    border: 2px solid var(--blog);
+    color: #0d5c50;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .ext-link:hover { background: #d5f0ea; transform: translateX(4px); }
+  .ext-link .ext-icon { font-size: 20px; }
+
+  /* 면책 */
+  .disclaimer {
+    max-width: 800px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+  }
+  .disclaimer-box {
+    background: #fff8e1;
+    border: 2px solid #ffe082;
+    border-radius: 12px;
+    padding: 20px 24px;
+    font-size: 15px;
+    color: #5d4037;
+    line-height: 1.8;
+    text-align: center;
+  }
+  .disclaimer-box strong {
+    display: block;
+    font-size: 17px;
+    margin-bottom: 8px;
+    color: #e65100;
+  }
+
+  /* 출처 */
+  .source-note {
+    text-align: center;
+    font-size: 13px;
+    color: #aaa;
+    padding: 0 20px 30px;
+  }
+
+  @media (max-width: 480px) {
+    .step-header { padding: 16px 18px; gap: 12px; }
+    .step-num { width: 40px; height: 40px; font-size: 18px; }
+    .step-why { padding: 14px 18px; }
+    .step-links { padding: 12px 18px; }
+    .post-link { padding: 11px 14px; font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 헤더 -->
+<div class="hero">
+  <div class="hero-badge">암환자와 보호자를 위한 안내서</div>
+  <h1>조 티펜스(Joe Tippens)<br>완전 이해 로드맵</h1>
+  <p>구충제로 말기 암을 이겨낸 남자의 이야기,<br>처음 접하는 분들을 위한 6단계 읽기 순서</p>
+  <a href="https://mycancerstory.rocks/the-blog/" target="_blank" class="blog-link-hero">
+    🌐 조 티펜스 공식 블로그 바로가기 (영문)
+  </a>
+</div>
+
+<!-- 조티펜스 소개 -->
+<div class="intro-box">
+  <div class="intro-card">
+    <h2>🙋 조 티펜스는 누구인가요?</h2>
+    <p>조 티펜스(Joe Tippens)는 미국인으로, 2016년 소세포폐암 말기를 진단받고 생존율 1% 미만, 여명 3개월이라는 선고를 받았습니다. 의사들이 포기한 상황에서 그는 반려동물 구충제인 <strong>펜벤다졸(Fenbendazole)</strong>을 비롯한 몇 가지 보조제를 복용하기 시작했고, 3개월 뒤 모든 암이 사라졌습니다. 이 이야기가 2019년 그의 블로그와 소셜미디어를 통해 알려지면서 전 세계 암 환자들 사이에 큰 반향을 일으켰습니다.</p>
+    <p>그는 현재(2026년)까지도 건강하게 살아있으며, 정기적으로 Q&A 방송을 진행하고 공식 유튜브 채널도 운영하고 있습니다.</p>
+    <a href="https://mycancerstory.rocks/the-blog/" target="_blank" class="blog-official-link">
+      🌐 공식 블로그: mycancerstory.rocks (영문)
+    </a>
+  </div>
+</div>
+
+<!-- 로드맵 안내 -->
+<div class="roadmap-intro">
+  <h2>📋 지금 당장 읽어야 할 순서 6단계</h2>
+  <p>아래 순서대로 읽으시면 조 티펜스를 처음 접하는 분도<br>핵심을 빠르게 이해하실 수 있습니다.</p>
+</div>
+
+<div class="container">
+
+  <!-- STEP 1 -->
+  <div class="step-card step1">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title-wrap">
+        <h3>그가 누구인지, 어떤 일이 일어났는지 먼저 알기</h3>
+        <div class="step-sub">⏱ 읽기 시간 약 15~20분</div>
+      </div>
+    </div>
+    <div class="step-why">
+      <strong>왜 지금 이걸 읽어야 하나요?</strong><br>
+      "구충제로 암이 낫는다고?" 반신반의하는 마음이 드는 것은 당연합니다. 하지만 이 이야기가 어떻게 시작되었는지, 조 티펜스가 어떤 사람인지부터 알면 나머지 내용이 훨씬 잘 이해됩니다. 공식 블로그의 영문 원본과 함께, 한국 커뮤니티에서 처음 이 이야기가 어떻게 소개되었는지 확인하세요.
+    </div>
+    <div class="step-links">
+      <div class="section-label">📌 필독 게시글</div>
+
+      <a href="https://mycancerstory.rocks/the-blog/" target="_blank" class="ext-link">
+        <span class="ext-icon">🌐</span>
+        조 티펜스 공식 블로그 - "Get Busy Living" (영문 원본)
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/4897" target="_blank" class="post-link">
+        <div class="post-num">#4897</div>
+        <div class="post-title">구충제 신드롬의 시발이 된 조티펜스 블로거</div>
+        <div class="post-meta">2020.06.03 · 조회 761</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/10" target="_blank" class="post-link">
+        <div class="post-num">#10</div>
+        <div class="post-title">조티펜스영상 Joe Tippens Cures Terminal Cancer with Pet Medicine.</div>
+        <div class="post-meta">2020.01.08 · 조회 44</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/16620" target="_blank" class="post-link">
+        <div class="post-num">#16620</div>
+        <div class="post-title">[조티펜스영상] 2019년 4월 27일에 KOKO 5뉴스 방송국 ( 미국 오클라호마 )에서 소개된 내용 - 입가에 웃음이 너무 보기 좋아요 😍</div>
+        <div class="post-meta">2023.01.21 · 조회 111</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/13774" target="_blank" class="post-link">
+        <div class="post-num">#13774</div>
+        <div class="post-title">[해외호전사례] 조티펜스가 소개한 펜벤다졸 관련 연구 보고서 입니다 - 개인의 임상 실험이 아니라, 스텐포드 대학하고 워싱턴 대학에서 나온 보고서라는 것이 더 큰 의미가 있는듯</div>
+        <div class="post-meta">2021.10.19 · 조회 640</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step-card step2">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title-wrap">
+        <h3>그가 직접 말하는 것 듣기 - 인터뷰와 강연</h3>
+        <div class="step-sub">⏱ 읽기 시간 약 20~30분</div>
+      </div>
+    </div>
+    <div class="step-why">
+      <strong>왜 지금 이걸 읽어야 하나요?</strong><br>
+      소문으로 듣는 것과 본인이 직접 말하는 것은 다릅니다. 조 티펜스는 2021년부터 유튜브 인터뷰, 페이스북 라이브, 강연 등을 통해 꾸준히 자신의 이야기를 전해왔습니다. 한국 커뮤니티 회원들이 이를 번역하고 요약한 글들을 통해, 그의 목소리를 직접 확인해 보세요. 그가 2026년에도 건강하게 살아있다는 사실도 함께 확인할 수 있습니다.
+    </div>
+    <div class="step-links">
+      <div class="section-label">📌 필독 게시글</div>
+
+      <a href="https://mycancerstory.rocks/81-2/" target="_blank" class="ext-link">
+        <span class="ext-icon">🌐</span>
+        공식 복용법 페이지 - "The Protocol" (영문 원본 · 가장 많이 요청되는 페이지)
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/14053" target="_blank" class="post-link">
+        <div class="post-num">#14053</div>
+        <div class="post-title">영어 유튜브 - 조티펜스 2021년 7월 인터뷰 - 옆집 할아버지 같아요 ^^ -한글 자막 가능- 2019년, 2020년도 있슴</div>
+        <div class="post-meta">2021.11.26 · 조회 177</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/14065" target="_blank" class="post-link">
+        <div class="post-num">#14065</div>
+        <div class="post-title">감명깊은 조 티펜스님의 2021년 7월 21일 유튜브 인터뷰 내용을 한글로 옮겨 봤습니다 - 1/5 완성</div>
+        <div class="post-meta">2021.11.28 · 조회 264</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/14149" target="_blank" class="post-link">
+        <div class="post-num">#14149</div>
+        <div class="post-title">조티펜스님의 2021년 9월 29일 영어 강연 @ OCPAC 미국 - 한글 자막 설명 - 5년차를 맞이하는 만큼 큰 의미의 강연임 1/4</div>
+        <div class="post-meta">2021.12.08 · 조회 313</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/18947" target="_blank" class="post-link">
+        <div class="post-num">#18947</div>
+        <div class="post-title">[조티펜스] 가장 최진 소식 - 방금 자신의 건강한 사진을 올렸어요! （￣︶￣）↗　❤💘💥</div>
+        <div class="post-meta">2024.10.08 · 조회 446</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/20086" target="_blank" class="post-link">
+        <div class="post-num">#20086</div>
+        <div class="post-title">[해외소식] 공식 조티펜스 유튜브 채널 개설 - 여기 빼고는 나머지는 조티펜스의 원본이 아니다 생각하시면 됩니다.</div>
+        <div class="post-meta">2026.01.20 · 조회 121</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step-card step3">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title-wrap">
+        <h3>복용법 핵심 파악하기 - 무엇을 어떻게 먹는가</h3>
+        <div class="step-sub">⏱ 읽기 시간 약 30~40분</div>
+      </div>
+    </div>
+    <div class="step-why">
+      <strong>왜 지금 이걸 읽어야 하나요?</strong><br>
+      이야기에 공감이 됐다면, 이제 "구체적으로 무엇을 어떻게 먹는 건지"가 궁금하실 겁니다. 복용법은 처음 공개된 이후 계속 업데이트되어 왔습니다. 신/구 버전의 차이, 보조제 구성, 고용량 논쟁까지 핵심만 빠르게 파악하는 게시글들을 선정했습니다. 단, 실제 복용 전에는 반드시 전문의와 상담하세요.
+    </div>
+    <div class="step-links">
+      <div class="section-label">📌 필독 게시글</div>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/14251" target="_blank" class="post-link">
+        <div class="post-num">#14251</div>
+        <div class="post-title">"최신 조티펜스 프로토콜" 요약</div>
+        <div class="post-meta">2021.12.16 · 조회 472</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/14267" target="_blank" class="post-link">
+        <div class="post-num">#14267</div>
+        <div class="post-title">조티펜스 프로토콜 신/구 요약 비교 최종. 12/19.17;30.</div>
+        <div class="post-meta">2021.12.17 · 조회 397</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/13855" target="_blank" class="post-link">
+        <div class="post-num">#13855</div>
+        <div class="post-title">[해외속보] 조티펜스 프로토콜 최신 갱신 정보 공유 (조티펜스가 직접 오늘 올린글) - 영어 원본 - 그리고 전문가분께서 자세한 설명을 한글로 추가해주셨슴(갱신).❤️‍🔥</div>
+        <div class="post-meta">2021.10.30 · 조회 694</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/13915" target="_blank" class="post-link">
+        <div class="post-num">#13915</div>
+        <div class="post-title">[해외속보] 조티펜스 2021년10월 30일에 갱신된 최신 복용법에 달린 댓글들 중에서- 정리 4편 - 복용법에 진짜 핵심을 찌르는 질문들과 답변들 - 같이 꼭 읽고 생각 나눠요</div>
+        <div class="post-meta">2021.11.05 · 조회 358</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/15134" target="_blank" class="post-link">
+        <div class="post-num">#15134</div>
+        <div class="post-title">[해외] 누구나 하는 질문 시리즈 - 조티펜스 222mg vs 고용량 펜벤 2000mg, 왜/어떻하죠 라는 질문이 올라 왔네요.</div>
+        <div class="post-meta">2022.04.04 · 조회 253</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/19233" target="_blank" class="post-link">
+        <div class="post-num">#19233</div>
+        <div class="post-title">Haley 정리노트 - 나의 프로토콜/복용법을 만들 것인가? 커뮤니티 복용법을 따를 것인가? - 조티펜스 페이스북 그룹에</div>
+        <div class="post-meta">2025.01.30 · 조회 253</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step-card step4">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <div class="step-title-wrap">
+        <h3>내 암종과 비슷한 사례 찾기 - 전 세계 호전사례</h3>
+        <div class="step-sub">⏱ 읽기 시간 약 40~60분 (관심 암종 중심으로)</div>
+      </div>
+    </div>
+    <div class="step-why">
+      <strong>왜 지금 이걸 읽어야 하나요?</strong><br>
+      "다른 사람들은 어떻게 됐나요?"가 가장 궁금하실 겁니다. 조 티펜스 페이스북 그룹에는 전 세계 수천 명의 사례가 올라왔고, 한국 커뮤니티 회원들이 이를 번역해 공유했습니다. 내가 앓고 있는 암종과 비슷한 사례를 찾아 읽어보세요. 특히 Kirk처럼 5년 이상 장기 추적이 가능한 사례에 주목하세요.
+    </div>
+    <div class="step-links">
+      <div class="section-label">📌 폐암 사례 (가장 많은 사례)</div>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/16192" target="_blank" class="post-link">
+        <div class="post-num">#16192</div>
+        <div class="post-title">[해외호전사례] 미국 Kirk 남성 소세포폐암 SCLC 4기 뇌전이 (2019) - 조티펜스 복용법 (Joe를 개인적으로 아는 사람을 알게됨) 🎯 - 엄청 긴 글</div>
+        <div class="post-meta">2022.10.09 · 조회 475</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/19093" target="_blank" class="post-link">
+        <div class="post-num">#19093</div>
+        <div class="post-title">[해외호전사례] 미국 Kirk 남성 소세포폐암 SCLC 4기 뇌전이 (2019) - 조티펜스 복용법🎯 - 담당의사의 감탄사</div>
+        <div class="post-meta">2024.11.28 · 조회 175</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/19767" target="_blank" class="post-link">
+        <div class="post-num">#19767</div>
+        <div class="post-title">[해외호전사례] 의료진도 놀란 결과! 4기 폐암, 주 종양 1/3 축소+ 전이 종양 소멸! 미국 여성 terri 60대 후반, 4월 비소세포 = 타그리소 + 조티펜스 복용법</div>
+        <div class="post-meta">2025.09.07 · 조회 648</div>
+      </a>
+
+      <div class="section-label" style="margin-top:14px">📌 유방암 사례</div>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/18908" target="_blank" class="post-link">
+        <div class="post-num">#18908</div>
+        <div class="post-title">[해외호전사례] 미국 Angel 유방암 3기 ER, PR 양성 (HER2음성) 2023년 5월 - 2024년 9월까지 NED - 조티펜스 복용법</div>
+        <div class="post-meta">2024.09.25 · 조회 753</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/18731" target="_blank" class="post-link">
+        <div class="post-num">#18731</div>
+        <div class="post-title">[실전편] 조티펜스복용법- 호르몬 양성 및 삼중 음성 유방암에 대한 JTP/펜벤다졸의 효능: 114명 유방암 회원 분석 결과 (현재 Health Sciences 겸임교수 , 전 의과대학 교수가 작성)</div>
+        <div class="post-meta">2024.07.24 · 조회 243</div>
+      </a>
+
+      <div class="section-label" style="margin-top:14px">📌 대장암·췌장암·전립선암·기타</div>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/16513" target="_blank" class="post-link">
+        <div class="post-num">#16513</div>
+        <div class="post-title">[해외호전사례] 미국 Jake의 아내 40세 (5명의 아이들), 대장암, PET 스캔 기다리다가 좋아진 경우 - 조티펜스 복용법 🎯 1-2</div>
+        <div class="post-meta">2022.12.23 · 조회 568</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/19038" target="_blank" class="post-link">
+        <div class="post-num">#19038</div>
+        <div class="post-title">[해외호전사례] 미국 Chas의 남편 (59세) 췌장암 4기(2023년 8월) 간과 폐전이 (2016년에는 전립선암) - 조티펜스 복용법 💥</div>
+        <div class="post-meta">2024.11.09 · 조회 800</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/19602" target="_blank" class="post-link">
+        <div class="post-num">#19602</div>
+        <div class="post-title">[해외호전사례] 미국 Ken 와! PSA 수치가 3년째 미검출이라고? 4기 전립선암 켄은 어떻게 기적을 만들었을까?   암과의 싸움에서 승리하는 켄의 놀라운 비법 대공개! - 조티펜스복용법</div>
+        <div class="post-meta">2025.07.01 · 조회 395</div>
+      </a>
+
+      <div class="section-label" style="margin-top:14px">📌 전체 사례 모음</div>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/12228" target="_blank" class="post-link">
+        <div class="post-num">#12228</div>
+        <div class="post-title">[해외호전사례모음집] 조티펜스 페이스북 그룹에서 2019년 8월부터 2021년 5월까지 약 165개 - 자료수집 정확도 약80~90%</div>
+        <div class="post-meta">2021.05.24 · 조회 478</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step-card step5">
+    <div class="step-header">
+      <div class="step-num">5</div>
+      <div class="step-title-wrap">
+        <h3>데이터로 검증하기 - 수치와 통계로 보는 현실</h3>
+        <div class="step-sub">⏱ 읽기 시간 약 20~30분</div>
+      </div>
+    </div>
+    <div class="step-why">
+      <strong>왜 지금 이걸 읽어야 하나요?</strong><br>
+      사례 하나하나는 감동적이지만, "정말 통계적으로 의미 있는 건가?"라는 의심이 드는 것도 당연합니다. 이 커뮤니티는 놀랍게도 수백 개의 사례를 직접 데이터로 분석했습니다. 어떤 암종에서 얼마나 효과가 있는지, 441개의 댓글을 분석한 결과는 무엇인지 확인해 보세요. 냉정하게 현실을 보고 싶은 분께 추천합니다.
+    </div>
+    <div class="step-links">
+      <div class="section-label">📌 필독 게시글</div>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/19291" target="_blank" class="post-link">
+        <div class="post-num">#19291</div>
+        <div class="post-title">[실전편] Roger님이 어떤 암종들이 펜벤다졸로 얼마나 효과가 있을까? 를 정리했슴 - 조티펜스 복용법 페이스북 그룹 - 2편 - 댓글들 정리</div>
+        <div class="post-meta">2025.02.23 · 조회 438</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/19410" target="_blank" class="post-link">
+        <div class="post-num">#19410</div>
+        <div class="post-title">[실전편] 미국 래리(Larry)의 NSCLC 4기 치료 중에 질문 - 조티펜스 복용법 - 441개 댓글 분석 [4편]</div>
+        <div class="post-meta">2025.04.05 · 조회 393</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/12628" target="_blank" class="post-link">
+        <div class="post-num">#12628</div>
+        <div class="post-title">[해외호전사례] 조티펜스쪽과 제인 (대사 치료)쪽 페이스북 그룹 - 암이 생기는 부위 - 데이터 분석 - 맛보기 2편</div>
+        <div class="post-meta">2021.06.22 · 조회 377</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/18620" target="_blank" class="post-link">
+        <div class="post-num">#18620</div>
+        <div class="post-title">[실전편] 조티펜스 복용법으로 어느 정도 지나야 NED 관해 또는 Cure 완치에 이르렀나요? 라는 질문이 페이스북 그룹에 올라와서 댓글들을 옮겨봅니다.</div>
+        <div class="post-meta">2024.06.23 · 조회 242</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- STEP 6 -->
+  <div class="step-card step6">
+    <div class="step-header">
+      <div class="step-num">6</div>
+      <div class="step-title-wrap">
+        <h3>비판적으로 보기 - 효과 없는 경우와 논쟁</h3>
+        <div class="step-sub">⏱ 읽기 시간 약 20~30분 · ⚠️ 가장 중요한 단계</div>
+      </div>
+    </div>
+    <div class="step-why">
+      <strong>왜 지금 이걸 읽어야 하나요?</strong><br>
+      희망적인 이야기만 보면 판단이 흐려질 수 있습니다. 이 커뮤니티는 솔직하게 "효과가 없는 경우"와 "왜 사람들이 계속 죽는가"라는 불편한 질문도 다뤘습니다. 특히 전체 카페에서 조회수 1위(1,236회)를 기록한 글은 이 프로토콜의 한계를 정직하게 보여줍니다. 이 단계를 읽어야 균형 잡힌 판단을 내릴 수 있습니다.
+    </div>
+    <div class="step-links">
+      <div class="section-label">📌 필독 게시글</div>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/18514" target="_blank" class="post-link">
+        <div class="post-num">#18514 ⭐ 전체 최다 조회 1,236회</div>
+        <div class="post-title">[해외의견] 조티펜스(JT) 프로토콜이 왜 저에게 작동하지 않나요? 질문에 대한 어떤 분의 의견. (하) ❤💘💥</div>
+        <div class="post-meta">2024.05.24 · 조회 1,236</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/18506" target="_blank" class="post-link">
+        <div class="post-num">#18506</div>
+        <div class="post-title">[해외의견] 조티펜스(JT) 프로토콜이 왜 저에게 작동하지 않나요? 질문에 대한 어떤 분의 의견. (상) ❤💘💥</div>
+        <div class="post-meta">2024.05.23 · 조회 222</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/18830" target="_blank" class="post-link">
+        <div class="post-num">#18830</div>
+        <div class="post-title">[실전편] Sherri 님께서 물어본 - 이게 정말 효과가 있다면 왜 사람들이 계속 죽는 걸까요? 조티펜스 복용법 페북 그</div>
+        <div class="post-meta">2024.09.02 · 조회 694</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/14629" target="_blank" class="post-link">
+        <div class="post-num">#14629</div>
+        <div class="post-title">[해외비평] 조티펜스 복용법에 대한 날까로운 비평 🥇 - 선배님들께서는 어떻게 생각하시는지요 ? 📣</div>
+        <div class="post-meta">2022.02.01 · 조회 228</div>
+      </a>
+
+      <a href="https://cafe.naver.com/friendsofhippocrates/14465" target="_blank" class="post-link">
+        <div class="post-num">#14465</div>
+        <div class="post-title">[해외-조티펜스-페북] 자주 하는 질문 - 2~3년 이상 생존해 계신 분들 있나요 ?</div>
+        <div class="post-meta">2022.01.09 · 조회 445</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 에필로그 -->
+  <div class="step-card step-blog">
+    <div class="step-header">
+      <div class="step-num">🎬</div>
+      <div class="step-title-wrap">
+        <h3>에필로그 - 이 운동이 어디까지 왔는가</h3>
+        <div class="step-sub">환자 주도형 임상의 상징적 장면</div>
+      </div>
+    </div>
+    <div class="step-why">
+      <strong>마지막으로 이 장면을 보세요.</strong><br>
+      조 티펜스, 제인 맥클랜드(대사치료), 크리스. 각자 다른 방향으로 암과 싸우는 방법을 세상에 알린 세 사람이 한자리에 모였습니다. 이 한 장의 사진은 환자 주도형 임상이 이미 하나의 운동이 되었음을 상징적으로 보여줍니다.
+    </div>
+    <div class="step-links">
+      <a href="https://cafe.naver.com/friendsofhippocrates/20243" target="_blank" class="post-link">
+        <div class="post-num">#20243</div>
+        <div class="post-title">[해외소식] 제인 맥클랜드, 조티펜스, 크리스 님들이 한자리에 모였다는 사진 공개 - 너무 부럽습니다.</div>
+        <div class="post-meta">2026.03.01 · 조회 106</div>
+      </a>
+
+      <a href="https://mycancerstory.rocks/the-blog/" target="_blank" class="ext-link">
+        <span class="ext-icon">🌐</span>
+        조 티펜스 공식 블로그 - 계속 업데이트 중 (영문)
+      </a>
+
+      <a href="https://www.facebook.com/groups/mycancerstoryrocks" target="_blank" class="ext-link">
+        <span class="ext-icon">👥</span>
+        조 티펜스 공식 페이스북 그룹 (영문 · 전 세계 회원)
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- 면책 고지 -->
+<div class="disclaimer">
+  <div class="disclaimer-box">
+    <strong>⚠️ 중요 안내</strong>
+    이 자료는 정보 참고용이며, 의학적 치료를 대체하지 않습니다.<br>
+    암 치료와 관련된 모든 결정은 반드시 담당 전문의와 충분히 상담하신 후에 내리시기 바랍니다.<br>
+    <br>
+    펜벤다졸을 포함한 모든 약물은 개인에 따라 다르게 작용할 수 있으며,<br>
+    이 자료에 소개된 사례가 모든 환자에게 동일한 결과를 보장하지 않습니다.
+  </div>
+</div>
+
+<div class="source-note">
+  자료 출처: 암(만성병) 극복의 길을 찾는 사람들 카페 (2020~2026) · 게시글 16,141개 분석<br>
+  조 티펜스 공식 블로그: mycancerstory.rocks · 제작일: 2026년 5월
+</div>
+
+</body>
+</html>

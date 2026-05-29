@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fenbendazole & Cancer — PubMed Literature Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+
+  :root {
+    --paper:#faf8f3; --card:#ffffff; --ink:#1b1d1a; --muted:#56594f;
+    --faint:#8a8d83; --line:#e6e0d3; --line-strong:#d6cfbe;
+    --accent:#0f5f57; --accent-soft:#e5efed;
+    --pos:#2f7d4f; --pos-bg:#e8f1ea;
+    --neg:#a8443a; --neg-bg:#f4e7e4;
+    --mix:#9a6b16; --mix-bg:#f4edda;
+    --neu:#6b6e64; --neu-bg:#efeee7;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:'Pretendard','Pretendard Variable',-apple-system,system-ui,sans-serif;
+    font-size:16.5px;line-height:1.72;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 18px;}
+
+  /* ── LANG SWITCHER ── */
+  .langbar{
+    position:sticky;top:0;z-index:100;
+    background:rgba(250,248,243,.95);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .langbar .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:9px;padding-bottom:9px;gap:12px;}
+  .langtabs{display:flex;gap:4px;}
+  .langtab{
+    font:inherit;font-size:.82rem;font-weight:700;letter-spacing:.04em;
+    background:transparent;border:1px solid var(--line-strong);border-radius:999px;
+    padding:5px 16px;cursor:pointer;color:var(--muted);transition:all .18s;
+  }
+  .langtab.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .printbtn{
+    font:inherit;font-size:.82rem;font-weight:600;color:var(--accent);
+    background:var(--accent-soft);border:1px solid var(--accent);border-radius:999px;
+    padding:5px 15px;cursor:pointer;
+  }
+  .printbtn:active{transform:scale(.97);}
+
+  /* ── LANG VISIBILITY ── */
+  .ko,.en{transition:opacity .2s;}
+  body.lang-en .ko{display:none;}
+  body.lang-ko .en{display:none;}
+
+  /* ── NAV TABS ── */
+  .navtabs{
+    display:flex;gap:2px;margin:0 0 28px;border-bottom:2px solid var(--line-strong);
+    overflow-x:auto;scrollbar-width:none;
+  }
+  .navtabs::-webkit-scrollbar{display:none;}
+  .navtab{
+    font:inherit;font-size:.82rem;font-weight:600;background:none;border:none;
+    padding:9px 16px 10px;cursor:pointer;color:var(--faint);border-bottom:2px solid transparent;
+    margin-bottom:-2px;white-space:nowrap;transition:color .15s,border-color .15s;
+  }
+  .navtab.active{color:var(--accent);border-bottom-color:var(--accent);}
+  .navtab:hover:not(.active){color:var(--ink);}
+
+  /* panels */
+  .panel{display:none;} .panel.active{display:block;}
+
+  /* ── HERO ── */
+  header.hero{padding:36px 0 28px;border-bottom:2px solid var(--ink);}
+  .kicker{font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:14px;}
+  h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(1.85rem,7vw,2.65rem);line-height:1.12;letter-spacing:-.01em;margin:0 0 13px;}
+  h1 em{font-style:italic;color:var(--accent);}
+  .lede{font-size:1rem;color:var(--muted);}
+  .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:7px 18px;font-size:.8rem;color:var(--faint);}
+  .meta b{color:var(--ink);font-weight:600;}
+
+  /* ── KEY STRIP ── */
+  .keystrip{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:26px 0 6px;}
+  .kc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;}
+  .kc .n{font-family:'Fraunces',serif;font-size:2rem;font-weight:600;line-height:1;color:var(--accent);}
+  .kc .n small{font-family:'Pretendard';font-size:.95rem;color:var(--faint);font-weight:500;}
+  .kc .l{font-size:.8rem;color:var(--muted);margin-top:7px;line-height:1.45;}
+
+  section{padding:32px 0;border-bottom:1px solid var(--line);}
+  h2{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(1.3rem,5vw,1.65rem);margin:0 0 4px;line-height:1.2;}
+  .sec-num{color:var(--accent);font-style:italic;margin-right:.35em;}
+  .sec-sub{color:var(--faint);font-size:.84rem;margin:0 0 20px;}
+  p{margin:0 0 13px;}
+  a{color:var(--accent);}
+
+  .callout{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:15px 17px;margin:6px 0 18px;}
+  .callout h3{margin:0 0 6px;font-size:.97rem;font-weight:700;}
+  .callout p{margin:0;color:var(--muted);font-size:.92rem;}
+  .callout p+p{margin-top:8px;}
+
+  /* ── BARS ── */
+  .bars{margin:4px 0;}
+  .bar-row{display:grid;grid-template-columns:105px 1fr 30px;align-items:center;gap:10px;margin:8px 0;}
+  .bar-row .name{font-size:.86rem;text-align:right;line-height:1.25;}
+  .bar-row .name small{color:var(--faint);display:block;font-size:.72rem;}
+  .bar-track{height:22px;background:#efeadd;border-radius:5px;overflow:hidden;border:1px solid var(--line);}
+  .bar-fill{height:100%;background:var(--accent);border-radius:4px 0 0 4px;}
+  .bar-row.kr .bar-fill{background:#127a70;}
+  .bar-row.alt .bar-fill{background:#caa24a;}
+  .bar-row .v{font-family:'Fraunces',serif;font-weight:600;font-size:.95rem;}
+
+  /* ── MATRIX ── */
+  .scrollnote{font-size:.76rem;color:var(--faint);margin:0 0 6px;}
+  .tbl-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px;-webkit-overflow-scrolling:touch;}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:.84rem;}
+  th,td{padding:8px 9px;border-bottom:1px solid var(--line);text-align:center;}
+  thead th{background:#f1ede2;color:var(--muted);font-weight:700;font-size:.72rem;}
+  td:first-child,th:first-child{text-align:left;font-weight:600;white-space:nowrap;}
+  .matrix .tot{color:var(--accent);font-weight:700;}
+  .matrix .z{color:#c9c3b3;}
+  .heat1{background:#f2ede0;}.heat2{background:#e4d9bd;}.heat3{background:#d3c191;}
+
+  /* ── STANCE TAGS ── */
+  .tag{display:inline-block;font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap;line-height:1.5;}
+  .t-pos{background:var(--pos-bg);color:var(--pos);}
+  .t-neg{background:var(--neg-bg);color:var(--neg);}
+  .t-mix{background:var(--mix-bg);color:var(--mix);}
+  .t-neu{background:var(--neu-bg);color:var(--neu);}
+
+  .legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin:12px 0 16px;font-size:.8rem;color:var(--muted);}
+  .legend span{display:inline-flex;align-items:center;gap:6px;}
+  .dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
+
+  /* ── PAPER CARDS ── */
+  .cgroup{margin:18px 0;}
+  .cgroup>h4{font-size:1rem;margin:0 0 9px;padding-bottom:6px;border-bottom:1px solid var(--line-strong);display:flex;align-items:baseline;justify-content:space-between;gap:8px;}
+  .cgroup>h4 .cn{font-family:'Fraunces',serif;color:var(--accent);font-size:.9rem;font-weight:600;}
+  .paper{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 13px;margin:6px 0;}
+  .paper .top{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:3px;}
+  .yr{font-family:'Fraunces',serif;font-weight:600;font-size:.82rem;color:var(--muted);background:#f1ede2;border-radius:6px;padding:1px 7px;}
+  .paper .brief{font-size:.88rem;color:var(--ink);line-height:1.5;}
+  .paper .pmid{font-family:ui-monospace,Menlo,monospace;font-size:.74rem;color:var(--accent);text-decoration:none;}
+  .paper .pmid:hover{text-decoration:underline;}
+
+  .keybox{background:var(--card);border:1px solid var(--line-strong);border-radius:12px;padding:19px;margin:8px 0;}
+  .keybox h3{font-family:'Fraunces',serif;color:var(--accent);margin:0 0 11px;font-size:1.06rem;}
+  .keybox p{margin:0 0 10px;font-size:.94rem;}
+  .keybox p:last-child{margin-bottom:0;}
+  .keybox b{color:var(--ink);}
+
+  ul.clean{margin:6px 0 0;padding-left:18px;color:var(--muted);font-size:.9rem;}
+  ul.clean li{margin:5px 0;}
+
+  /* ── PAPER LIST TABLE (Panel) ── */
+  .list-controls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;align-items:center;}
+  .list-controls input[type=text]{
+    flex:1;min-width:160px;font:inherit;font-size:.85rem;
+    border:1px solid var(--line-strong);border-radius:8px;padding:7px 12px;
+    background:var(--card);color:var(--ink);outline:none;
+  }
+  .list-controls input:focus{border-color:var(--accent);}
+  .list-controls select{
+    font:inherit;font-size:.82rem;border:1px solid var(--line-strong);border-radius:8px;
+    padding:7px 10px;background:var(--card);color:var(--ink);cursor:pointer;outline:none;
+  }
+  .list-controls select:focus{border-color:var(--accent);}
+  .list-count{font-size:.8rem;color:var(--faint);margin-left:4px;}
+
+  #paper-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;}
+  #paper-table{border-collapse:collapse;width:100%;min-width:640px;font-size:.82rem;}
+  #paper-table thead th{
+    background:#f1ede2;color:var(--muted);font-weight:700;font-size:.72rem;
+    padding:9px 10px;border-bottom:1px solid var(--line-strong);
+    text-align:left;white-space:nowrap;cursor:pointer;user-select:none;
+  }
+  #paper-table thead th:hover{background:#e8e1d2;color:var(--ink);}
+  #paper-table tbody td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
+  #paper-table tbody tr:last-child td{border-bottom:none;}
+  #paper-table tbody tr:hover{background:#f5f1e8;}
+  .td-yr{font-family:'Fraunces',serif;font-weight:600;color:var(--muted);white-space:nowrap;}
+  .td-pmid a{font-family:ui-monospace,Menlo,monospace;font-size:.74rem;color:var(--accent);text-decoration:none;}
+  .td-pmid a:hover{text-decoration:underline;}
+  .td-brief{color:var(--ink);line-height:1.45;}
+  .td-type{font-size:.76rem;color:var(--faint);}
+  .badge-core{background:var(--accent-soft);color:var(--accent);font-size:.68rem;font-weight:700;padding:2px 7px;border-radius:999px;}
+  .badge-other{background:var(--neu-bg);color:var(--neu);font-size:.68rem;font-weight:700;padding:2px 7px;border-radius:999px;}
+  .sort-arrow{margin-left:4px;opacity:.5;}
+  .sort-arrow.active{opacity:1;}
+
+  /* ── FOOTER ── */
+  footer{padding:28px 0 56px;color:var(--faint);font-size:.8rem;}
+  .disc{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:14px;color:var(--muted);line-height:1.6;}
+  .disc b{color:var(--ink);}
+
+  @media (min-width:560px){
+    .keystrip{grid-template-columns:repeat(4,1fr);}
+    .bar-row{grid-template-columns:125px 1fr 34px;gap:12px;}
+    .bar-row .name{font-size:.9rem;}
+    .bar-row .name small{display:inline;font-size:.75rem;}
+  }
+
+  @media print{
+    @page{margin:14mm;}
+    html,body{background:#fff;color:#000;font-size:10.5pt;}
+    .langbar{display:none!important;}
+    .navtabs{display:none!important;}
+    .panel{display:block!important;}
+    .wrap{max-width:none;padding:0;}
+    a{color:#000;text-decoration:none;}
+    section{padding:14px 0;border-bottom:1px solid #bbb;}
+    header.hero{padding:0 0 14px;border-bottom:2px solid #000;}
+    h1{font-size:22pt;}
+    .kc,.callout,.paper,.keybox,.disc{box-shadow:none;background:#fff;border-color:#ccc;}
+    .bar-track{border-color:#999;background:#eee;}
+    .bar-fill{background:#444!important;}
+    .tbl-scroll{overflow:visible;border-color:#999;}
+    table{min-width:0;font-size:8.5pt;}
+    thead th{background:#eee;}
+    .heat1{background:#f0f0f0;}.heat2{background:#dcdcdc;}.heat3{background:#bdbdbd;}
+    .t-pos,.t-neg,.t-mix,.t-neu{border:1px solid #999;background:#fff!important;color:#000!important;}
+  }
+</style>
+</head>
+<body class="lang-ko">
+
+<!-- ═══════════════════════════════════ TOP BAR ═══════════════════════════════════ -->
+<div class="langbar">
+  <div class="wrap">
+    <div class="langtabs">
+      <button class="langtab active" onclick="setLang('ko')">한국어</button>
+      <button class="langtab" onclick="setLang('en')">English</button>
+    </div>
+    <button class="printbtn" onclick="window.print()">🖨️ <span class="ko">인쇄 / PDF</span><span class="en">Print / PDF</span></button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ═══════════════════════════════════ HERO ═══════════════════════════════════ -->
+<header class="hero">
+  <div class="kicker ko">PubMed 문헌 전수 분석 · 용도변경 항암 연구</div>
+  <div class="kicker en">PubMed Full Literature Analysis · Drug Repurposing Research</div>
+
+  <h1 class="ko">펜벤다졸과 암,<br>문헌은 <em>실제로</em> 무엇을 말하나</h1>
+  <h1 class="en">Fenbendazole &amp; Cancer:<br>What the Literature <em>Actually</em> Says</h1>
+
+  <p class="lede ko">"fenbendazole AND cancer"로 검색된 PubMed 논문을 한 편씩 확인해 국가·연도·결론으로 분해했습니다. 소문이나 인상이 아니라, 데이터를 있는 그대로 — 긍정도 부정도 가감 없이 — 정리합니다.</p>
+  <p class="lede en">Every paper returned by the PubMed query "fenbendazole AND cancer" was reviewed and categorised by country, year, and conclusion — positive findings and cautionary evidence alike, without bias.</p>
+
+  <div class="meta">
+    <span class="ko">검색식 <b>fenbendazole AND cancer</b></span>
+    <span class="en">Query <b>fenbendazole AND cancer</b></span>
+    <span class="ko">원시 결과 <b>약 83~93편</b></span>
+    <span class="en">Raw results <b>~83–93 papers</b></span>
+    <span class="ko">핵심 항암 문헌 <b>45편</b></span>
+    <span class="en">Core anti-cancer papers <b>45</b></span>
+    <span>Source <b>PubMed/NCBI</b></span>
+    <span class="ko">기준 <b>2026</b></span>
+    <span class="en">As of <b>2026</b></span>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════ KEY STRIP ═══════════════════════════════════ -->
+<section style="border-bottom:none;padding-bottom:0;">
+  <div class="keystrip">
+    <div class="kc">
+      <div class="n">45<small class="ko">편</small><small class="en"> papers</small></div>
+      <div class="l ko">펜벤다졸을 직접 다룬<br>핵심 항암 문헌</div>
+      <div class="l en">Core papers evaluating<br>FBZ as anti-cancer agent</div>
+    </div>
+    <div class="kc">
+      <div class="n">16<small class="ko">개국</small><small class="en"> countries</small></div>
+      <div class="l ko">연구가 나온<br>국가 수</div>
+      <div class="l en">Countries represented<br>in the literature</div>
+    </div>
+    <div class="kc">
+      <div class="n">2022<small class="ko">년</small></div>
+      <div class="l ko">발표가 가장 많았던 해<br>(10편)</div>
+      <div class="l en">Peak publication year<br>(10 papers)</div>
+    </div>
+    <div class="kc">
+      <div class="n">0<small class="ko">건</small></div>
+      <div class="l ko">'경구 단독'으로 사람 종양<br>축소를 입증한 임상시험</div>
+      <div class="l en">RCTs showing oral FBZ alone<br>shrinks human tumours</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ SECTION TABS ═══════════════════════════════════ -->
+<section style="padding-top:28px;">
+  <div class="navtabs">
+    <button class="navtab active ko" onclick="showPanel('overview','ko')">개요</button>
+    <button class="navtab active en" onclick="showPanel('overview','en')">Overview</button>
+    <button class="navtab ko" onclick="showPanel('country','ko')">국가별</button>
+    <button class="navtab en" onclick="showPanel('country','en')">By Country</button>
+    <button class="navtab ko" onclick="showPanel('year','ko')">연도별</button>
+    <button class="navtab en" onclick="showPanel('year','en')">By Year</button>
+    <button class="navtab ko" onclick="showPanel('matrix','ko')">분포표</button>
+    <button class="navtab en" onclick="showPanel('matrix','en')">Matrix</button>
+    <button class="navtab ko" onclick="showPanel('korea','ko')">한국 14편</button>
+    <button class="navtab en" onclick="showPanel('korea','en')">Korea ×14</button>
+    <button class="navtab ko" onclick="showPanel('all45','ko')">전체 45편</button>
+    <button class="navtab en" onclick="showPanel('all45','en')">All 45 papers</button>
+    <button class="navtab ko" onclick="showPanel('paperlist','ko')">논문 목록</button>
+    <button class="navtab en" onclick="showPanel('paperlist','en')">Paper List</button>
+    <button class="navtab ko" onclick="showPanel('conclusion','ko')">결론</button>
+    <button class="navtab en" onclick="showPanel('conclusion','en')">Conclusion</button>
+  </div>
+
+  <!-- ── OVERVIEW ── -->
+  <div id="panel-overview" class="panel active">
+    <h2><span class="sec-num ko">00</span><span class="ko">숫자 읽는 법</span><span class="en">How to Read the Numbers</span></h2>
+    <p class="sec-sub ko">전체 83~93편 ≠ 펜벤다졸 항암 논문 83~93편</p>
+    <p class="sec-sub en">Total 83–93 results ≠ 83–93 anti-cancer fenbendazole papers</p>
+    <p class="ko">검색 결과의 총 편수에는 <b>펜벤다졸을 암 치료제로 본 연구가 아닌 것</b>이 많이 섞여 있습니다. 구충 치료를 받던 동물이 우연히 종양을 갖고 있던 수의학 증례, 실험용 쥐 사료의 펜벤다졸이 종양실험을 교란한 사례, 펜벤다졸이 곁다리로만 언급된 메벤다졸 중심 논문, 순수 기생충 연구 등입니다.</p>
+    <p class="en">The total hit count includes many papers that are <b>not</b> evaluating fenbendazole as an anti-cancer agent: veterinary case reports where dewormed animals happened to have tumours, studies on FBZ in rodent chow confounding tumour experiments, papers primarily about mebendazole where FBZ appears only incidentally, and pure parasitology research.</p>
+    <p class="ko">연도별로 한 편씩 직접 확인한 결과, 펜벤다졸을 항암 후보로 <b>직접 평가·논의한 핵심 문헌은 45편</b>이고, 그 외 약 38~48편이 비핵심이었습니다.</p>
+    <p class="en">After reviewing each paper year by year, <b>45 papers</b> directly evaluate or discuss FBZ as an anti-cancer candidate. The remaining ~38–48 are classified as non-core.</p>
+    <div class="callout">
+      <h3 class="ko">분류 기준 (투명하게)</h3>
+      <h3 class="en">Classification criteria (transparent)</h3>
+      <p class="ko"><b>핵심</b> = 펜벤다졸 자체를 항암제로 평가/논의. <b>비핵심</b> = 단순 구충 사용·메벤다졸 중심·전산 도킹만·순수 기생충/실험동물 연구.</p>
+      <p class="en"><b>Core</b> = evaluates/discusses FBZ specifically as an anti-cancer agent (in vitro, in vivo, formulation, case report, review, public health). <b>Non-core</b> = anthelmintic use only, mebendazole-centred, computational docking only, pure parasitology or lab-animal research.</p>
+      <p class="ko">경계 논문 4~5편의 포함 여부에 따라 핵심은 <b>40~45편</b> 범위로 볼 수 있습니다.</p>
+      <p class="en">Depending on how 4–5 borderline papers (computational screening) are treated, the core count ranges from <b>40–45</b>.</p>
+    </div>
+  </div>
+
+  <!-- ── COUNTRY ── -->
+  <div id="panel-country" class="panel">
+    <h2><span class="sec-num ko">01</span><span class="ko">국가별 집계</span><span class="en">By Country</span></h2>
+    <p class="sec-sub ko">핵심 45편 · 제1·교신저자 소속 국가 기준</p>
+    <p class="sec-sub en">Core 45 papers · attributed to the country of the first / corresponding author</p>
+    <div class="bars">
+      <div class="bar-row kr"><div class="name">🇰🇷 <span class="ko">한국</span><span class="en">Korea</span></div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><div class="v">14</div></div>
+      <div class="bar-row"><div class="name">🇨🇳 <span class="ko">중국</span><span class="en">China</span></div><div class="bar-track"><div class="bar-fill" style="width:57%"></div></div><div class="v">8</div></div>
+      <div class="bar-row"><div class="name">🇺🇸 <span class="ko">미국</span><span class="en">USA</span></div><div class="bar-track"><div class="bar-fill" style="width:50%"></div></div><div class="v">7</div></div>
+      <div class="bar-row"><div class="name">🇻🇳 <span class="ko">베트남</span><span class="en">Vietnam</span><small class="ko"> (미국 공동)</small><small class="en"> (w/ US)</small></div><div class="bar-track"><div class="bar-fill" style="width:21%"></div></div><div class="v">3</div></div>
+      <div class="bar-row alt"><div class="name">🇦🇷 <span class="ko">아르헨티나</span><span class="en">Argentina</span></div><div class="bar-track"><div class="bar-fill" style="width:14%"></div></div><div class="v">2</div></div>
+      <div class="bar-row alt"><div class="name">🇦🇺 <span class="ko">호주</span><span class="en">Australia</span></div><div class="bar-track"><div class="bar-fill" style="width:14%"></div></div><div class="v">2</div></div>
+      <div class="bar-row alt"><div class="name">🇮🇪 <span class="ko">아일랜드</span><span class="en">Ireland</span></div><div class="bar-track"><div class="bar-fill" style="width:14%"></div></div><div class="v">2</div></div>
+      <div class="bar-row alt"><div class="name"><span class="ko">기타 7개국</span><span class="en">Other 7</span></div><div class="bar-track"><div class="bar-fill" style="width:50%"></div></div><div class="v">7</div></div>
+    </div>
+    <p style="font-size:.82rem;color:var(--faint);margin-top:10px;">
+      <span class="ko">기타 각 1편: 🇯🇵일본 · 🇬🇧영국(이란 공동) · 🇮🇹이탈리아 · 🇬🇷그리스 · 🇳🇴노르웨이 · 🇪🇬이집트 · 🇨🇦캐나다(프랑스 공동)</span>
+      <span class="en">One each: 🇯🇵Japan · 🇬🇧UK (w/ Iran) · 🇮🇹Italy · 🇬🇷Greece · 🇳🇴Norway · 🇪🇬Egypt · 🇨🇦Canada (w/ France)</span>
+    </p>
+    <div class="callout">
+      <h3 class="ko">관찰</h3><h3 class="en">Observation</h3>
+      <p class="ko">한국이 단일 국가 최다(14편), 중국(8)·미국(7)이 뒤를 잇습니다. 다만 <b>"누가 많이 냈나"와 "무슨 결론을 냈나"는 별개</b>입니다.</p>
+      <p class="en">Korea leads by volume (14), followed by China (8) and the US (7). However, <b>output volume and conclusion direction are separate questions</b> — see the Korea section for detail.</p>
+    </div>
+  </div>
+
+  <!-- ── YEAR ── -->
+  <div id="panel-year" class="panel">
+    <h2><span class="sec-num ko">02</span><span class="ko">연도별 추이</span><span class="en">Publications by Year</span></h2>
+    <p class="sec-sub ko">핵심 45편 · 2020년 전후 급증</p>
+    <p class="sec-sub en">Core 45 papers · sharp rise around 2020</p>
+    <div class="bars">
+      <div class="bar-row"><div class="name">~2017</div><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><div class="v">4</div></div>
+      <div class="bar-row"><div class="name">2020</div><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div><div class="v">4</div></div>
+      <div class="bar-row"><div class="name">2021</div><div class="bar-track"><div class="bar-fill" style="width:50%"></div></div><div class="v">5</div></div>
+      <div class="bar-row alt"><div class="name">2022</div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><div class="v">10</div></div>
+      <div class="bar-row"><div class="name">2023</div><div class="bar-track"><div class="bar-fill" style="width:30%"></div></div><div class="v">3</div></div>
+      <div class="bar-row"><div class="name">2024</div><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><div class="v">8</div></div>
+      <div class="bar-row"><div class="name">2025</div><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><div class="v">8</div></div>
+      <div class="bar-row"><div class="name">2026*</div><div class="bar-track"><div class="bar-fill" style="width:30%"></div></div><div class="v">3</div></div>
+    </div>
+    <p style="font-size:.82rem;color:var(--faint);margin-top:10px;">
+      <span class="ko">* 2026년은 ahead-of-print 포함. '~2017'은 미국 초기 연구 4편(2008·2012·2013·2017).</span>
+      <span class="en">* 2026 includes ahead-of-print. '~2017' covers the 4 early US papers (2008, 2012, 2013, 2017).</span>
+    </p>
+  </div>
+
+  <!-- ── MATRIX ── -->
+  <div id="panel-matrix" class="panel">
+    <h2><span class="sec-num ko">03</span><span class="ko">국가 × 연도 분포</span><span class="en">Country × Year Matrix</span></h2>
+    <p class="sec-sub ko">색이 짙을수록 많음</p>
+    <p class="sec-sub en">Darker shading = more papers</p>
+    <p class="scrollnote ko">← 표를 좌우로 넘겨보세요 →</p>
+    <p class="scrollnote en">← Scroll horizontally →</p>
+    <div class="tbl-scroll">
+      <table class="matrix">
+        <thead><tr><th><span class="ko">국가</span><span class="en">Country</span></th><th>~17</th><th>20</th><th>21</th><th>22</th><th>23</th><th>24</th><th>25</th><th>26</th><th><span class="ko">계</span><span class="en">Total</span></th></tr></thead>
+        <tbody>
+          <tr><td>🇰🇷<span class="ko">한국</span><span class="en">Korea</span></td><td class="z">·</td><td class="heat2">2</td><td class="heat1">1</td><td class="heat3">6</td><td class="heat2">3</td><td class="heat1">1</td><td class="heat1">1</td><td class="z">·</td><td class="tot">14</td></tr>
+          <tr><td>🇨🇳<span class="ko">중국</span><span class="en">China</span></td><td class="z">·</td><td class="z">·</td><td class="z">·</td><td class="heat2">2</td><td class="z">·</td><td class="heat2">3</td><td class="heat2">2</td><td class="heat1">1</td><td class="tot">8</td></tr>
+          <tr><td>🇺🇸<span class="ko">미국</span><span class="en">USA</span></td><td class="heat2">4</td><td class="heat2">2</td><td class="z">·</td><td class="z">·</td><td class="z">·</td><td class="z">·</td><td class="z">·</td><td class="heat1">1</td><td class="tot">7</td></tr>
+          <tr><td>🇻🇳<span class="ko">베트남</span><span class="en">Vietnam</span></td><td class="z">·</td><td class="z">·</td><td class="z">·</td><td class="z">·</td><td class="z">·</td><td class="heat2">2</td><td class="heat1">1</td><td class="z">·</td><td class="tot">3</td></tr>
+          <tr><td>🇦🇷<span class="ko">아르헨티나</span><span class="en">Argentina</span></td><td class="z">·</td><td class="z">·</td><td class="z">·</td><td class="z">·</td><td class="z">·</td><td class="heat2">2</td><td class="z">·</td><td class="z">·</td><td class="tot">2</td></tr>
+          <tr><td>🇦🇺<span class="ko">호주</span><span class="en">Australia</span></td><td class="z">·</td><td class="z">·</td><td class="heat1">1</td><td class="heat1">1</td><td class="z">·</td><td class="z">·</td><td class="z">·</td><td class="z">·</td><td class="tot">2</td></tr>
+          <tr><td>🇮🇪<span class="ko">아일랜드</span><span class="en">Ireland</span></td><td class="z">·</td><td class="z">·</td><td class="z">·</td><td class="z">·</td><td class="z">·</td><td class="z">·</td><td class="heat1">1</td><td class="heat1">1</td><td class="tot">2</td></tr>
+          <tr><td><span class="ko">기타 7국</span><span class="en">Other 7</span></td><td class="z">·</td><td class="z">·</td><td class="heat2">3</td><td class="heat1">1</td><td class="z">·</td><td class="z">·</td><td class="heat2">3</td><td class="z">·</td><td class="tot">7</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:.8rem;color:var(--faint);margin-top:8px;">
+      <span class="ko">분류·귀속 판단을 포함한 근사치(±1~2편). 기타 7국: 일본·영국(이란)·이탈리아·그리스(2021~22), 노르웨이·이집트·캐나다(2025).</span>
+      <span class="en">Approximate counts (±1–2) reflecting attribution judgement. Other 7: Japan, UK(Iran), Italy, Greece (2021–22); Norway, Egypt, Canada (2025).</span>
+    </p>
+  </div>
+
+  <!-- ── KOREA ── -->
+  <div id="panel-korea" class="panel">
+    <h2><span class="sec-num ko">04</span><span class="ko">한국 14편, 결론 분포</span><span class="en">Korea — 14 Papers, Conclusions</span></h2>
+    <p class="sec-sub ko">긍정과 부정을 가감 없이</p>
+    <p class="sec-sub en">Positive and cautionary findings presented equally</p>
+    <div class="legend">
+      <span><i class="dot" style="background:var(--pos)"></i><span class="ko">긍정 전임상</span><span class="en">Positive preclinical</span></span>
+      <span><i class="dot" style="background:var(--neg)"></i><span class="ko">경고·부정</span><span class="en">Warning / negative</span></span>
+      <span><i class="dot" style="background:var(--mix)"></i><span class="ko">혼합</span><span class="en">Mixed</span></span>
+      <span><i class="dot" style="background:var(--neu)"></i><span class="ko">중립</span><span class="en">Neutral</span></span>
+    </div>
+    <div class="cgroup">
+      <div class="paper"><div class="top"><span class="yr">2020</span><span class="tag t-neg"><span class="ko">경고</span><span class="en">Warning</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/32056406/" target="_blank">32056406</a></div><div class="brief ko">「구충제가 항암제?」 대한의학회지 사설 — 간염 위험 언급, 신중론</div><div class="brief en">JKMA editorial: "Antiparasitic as anticancer?" — notes hepatitis risk, urges caution</div></div>
+      <div class="paper"><div class="top"><span class="yr">2020</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/33096915/" target="_blank">33096915</a></div><div class="brief ko">Soluplus 마이셀로 용해도·약동학·독성 평가 (제형)</div><div class="brief en">Soluplus micelles improve FBZ solubility, pharmacokinetics, and low toxicity (formulation)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2021</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/34295160/" target="_blank">34295160</a></div><div class="brief ko">FBZ+라파마이신 마이셀, A549 폐암 시너지 (제형)</div><div class="brief en">FBZ + rapamycin mPEG micelles show synergistic effect in A549 lung cancer (formulation)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2022</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/35020278/" target="_blank">35020278</a></div><div class="brief ko">개 흑색종세포 G2/M 정지·유사분열 파국 (시험관)</div><div class="brief en">G2/M arrest and mitotic catastrophe in canine melanoma cells (in vitro)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2022</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/35110505/" target="_blank">35110505</a></div><div class="brief ko">간암 H4IIE 세포, p21 매개 주기정지·세포자멸 (시험관)</div><div class="brief en">p21-mediated cell cycle arrest and apoptosis in H4IIE hepatocellular carcinoma (in vitro)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2022</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/36039738/" target="_blank">36039738</a></div><div class="brief ko">5-FU 내성 대장암세포 세포자멸·페롭토시스 (시험관)</div><div class="brief en">Apoptosis and ferroptosis in 5-FU-resistant colorectal cancer cells (in vitro)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2022</span><span class="tag t-neu"><span class="ko">중립</span><span class="en">Neutral</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/36286053/" target="_blank">36286053</a></div><div class="brief ko">종설 「펜벤다졸 열풍」 — 전임상 정리 + 자가복용 경고</div><div class="brief en">Review: "Fenbendazole fever" — summarises preclinical evidence, warns against self-medication</div></div>
+      <div class="paper"><div class="top"><span class="yr">2022</span><span class="tag t-neg"><span class="ko">경고</span><span class="en">Warning</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/36374534/" target="_blank">36374534</a></div><div class="brief ko">유튜브 암 허위정보 확산구조·차단전략 (공중보건)</div><div class="brief en">YouTube cancer misinformation: spread mechanisms and intervention strategies (public health)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2022</span><span class="tag t-neg"><span class="ko">경고</span><span class="en">Warning</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/36387110/" target="_blank">36387110</a></div><div class="brief ko">폐암환자 21명 허위정보 인식 질적연구 (공중보건)</div><div class="brief en">Qualitative study of misinformation awareness in 21 lung cancer patients (public health)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2023</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/37152471/" target="_blank">37152471</a></div><div class="brief ko">난소암 FBZ+라파마이신 mPEG 마이셀 (제형)</div><div class="brief en">FBZ + rapamycin mPEG micelles in ovarian cancer (formulation)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2023</span><span class="tag t-mix"><span class="ko">혼합</span><span class="en">Mixed</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/37170725/" target="_blank">37170725</a></div><div class="brief ko">난소암 PLGA 나노입자 — <b>경구는 무효</b>, 정맥 NP만 효과</div><div class="brief en">PLGA NPs in ovarian cancer — <b>oral FBZ inactive</b>, IV nanoparticles effective</div></div>
+      <div class="paper"><div class="top"><span class="yr">2023</span><span class="tag t-neg"><span class="ko">부정</span><span class="en">Negative</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/37998737/" target="_blank">37998737</a></div><div class="brief ko">마우스 림프종 — 시험관 효과, <b>생체 내 무효</b>·체중 감소</div><div class="brief en">Mouse lymphoma — in vitro active, <b>no in vivo efficacy</b>, weight loss observed</div></div>
+      <div class="paper"><div class="top"><span class="yr">2024</span><span class="tag t-neg"><span class="ko">경고</span><span class="en">Warning</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/39109788/" target="_blank">39109788</a></div><div class="brief ko">「펜벤다졸 스캔들」 허위정보 확산 SIR 시뮬레이션 (공중보건)</div><div class="brief en">SIR simulation model of "fenbendazole scandal" misinformation spread (public health)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2025</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/40642276/" target="_blank">40642276</a></div><div class="brief ko">개 흑색종, 아베마시클립+FBZ 시너지 (전임상)</div><div class="brief en">Synergistic effect of abemaciclib + FBZ in canine melanoma (preclinical)</div></div>
+    </div>
+    <div class="keybox">
+      <h3 class="ko">한국 14편을 읽는 균형 잡힌 시각</h3>
+      <h3 class="en">A balanced reading of Korea's 14 papers</h3>
+      <p class="ko"><b>긍정 전임상 7 · 경고·부정 6 · 혼합 1 · 중립 1.</b> 수적으로는 양쪽이 비슷합니다.</p>
+      <p class="en"><b>Positive preclinical: 7 · Warning/negative: 6 · Mixed: 1 · Neutral: 1.</b> The two camps are roughly balanced in number.</p>
+      <p class="ko">결의 차이가 있습니다. <b>긍정</b>은 대부분 시험관·동물·제형 연구이고, <b>경고·부정</b>은 공중보건·임상·생체 내 효능처럼 사람의 실제 사용에 가까운 영역에 집중되어 있습니다.</p>
+      <p class="en">Quality matters more than count. <b>Positive papers</b> are mostly in vitro, animal, or formulation studies. <b>Warning/negative papers</b> cluster in public health, clinical cases, and in vivo efficacy — the areas closest to real human use.</p>
+    </div>
+  </div>
+
+  <!-- ── ALL 45 ── -->
+  <div id="panel-all45" class="panel">
+    <h2><span class="sec-num ko">05</span><span class="ko">핵심 45편 전체 목록</span><span class="en">All 45 Core Papers</span></h2>
+    <p class="sec-sub ko">국가별 · 결론 성향 포함 · PMID 클릭 시 PubMed 원문</p>
+    <p class="sec-sub en">By country · with conclusion stance · click PMID to open PubMed</p>
+    <div class="legend">
+      <span><i class="dot" style="background:var(--pos)"></i><span class="ko">긍정</span><span class="en">Positive</span></span>
+      <span><i class="dot" style="background:var(--neg)"></i><span class="ko">경고·부정</span><span class="en">Warning/Negative</span></span>
+      <span><i class="dot" style="background:var(--mix)"></i><span class="ko">혼합</span><span class="en">Mixed</span></span>
+      <span><i class="dot" style="background:var(--neu)"></i><span class="ko">중립</span><span class="en">Neutral</span></span>
+    </div>
+    <div class="cgroup">
+      <h4>🇨🇳 <span class="ko">중국 <span class="cn">8편 · 거의 전부 긍정 전임상</span></span><span class="en">China <span class="cn">8 papers — almost all positive preclinical</span></span></h4>
+      <div class="paper"><div class="top"><span class="yr">2022</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/34433903/" target="_blank">34433903</a></div><div class="brief ko">교모세포종, 벤즈이미다졸 3종 증식억제 (시험관)</div><div class="brief en">Glioblastoma: three benzimidazoles inhibit proliferation (in vitro)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2022</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/35569513/" target="_blank">35569513</a></div><div class="brief ko">자궁경부암 HeLa, FBZ·유도체 산화스트레스</div><div class="brief en">HeLa cervical cancer: FBZ and analogues induce oxidative stress</div></div>
+      <div class="paper"><div class="top"><span class="yr">2024</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/38769544/" target="_blank">38769544</a></div><div class="brief ko">메틸-β-사이클로덱스트린으로 용해도↑ (제형)</div><div class="brief en">Methyl-β-cyclodextrin inclusion complex improves FBZ solubility (formulation)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2024</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/39128990/" target="_blank">39128990</a></div><div class="brief ko">방광암 CRISPR-Cas13a + FBZ 방광내 주입 (동물)</div><div class="brief en">Bladder cancer: CRISPR-Cas13a + FBZ intravesical instillation (in vivo)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2024</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/39736624/" target="_blank">39736624</a></div><div class="brief ko">난소암 전사체 — 경구 FBZ가 마우스 종양 억제</div><div class="brief en">Transcriptome analysis: oral FBZ suppresses ovarian tumours in mice</div></div>
+      <div class="paper"><div class="top"><span class="yr">2025</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/40509264/" target="_blank">40509264</a></div><div class="brief ko">자궁경부암 암세포+암줄기세포 이중표적 (동물)</div><div class="brief en">Cervical cancer: dual targeting of cancer cells and CSCs (in vivo)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2025</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/40756987/" target="_blank">40756987</a></div><div class="brief ko">유방암 파이롭토시스 HK2 경로</div><div class="brief en">Breast cancer pyroptosis via HK2/caspase-3/GSDME pathway</div></div>
+      <div class="paper"><div class="top"><span class="yr">2026</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/41861111/" target="_blank">41861111</a></div><div class="brief ko">방광암 페롭토시스+광열치료 나노플랫폼 (동물)</div><div class="brief en">Bladder cancer: ferroptosis + photothermal therapy nanoplatform (in vivo)</div></div>
+    </div>
+    <div class="cgroup">
+      <h4>🇺🇸 <span class="ko">미국 <span class="cn">7편 · 기원이자 가장 엄격한 음성 결과</span></span><span class="en">USA <span class="cn">7 papers — origin of the field, and most rigorous negative results</span></span></h4>
+      <div class="paper"><div class="top"><span class="yr">2008</span><span class="tag t-pos"><span class="ko">긍정(우연)</span><span class="en">Positive (serendipitous)</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/19049251/" target="_blank">19049251</a></div><div class="brief ko">FBZ+비타민이 림프종 이식암 억제 — 이 분야의 기원(우연한 발견)</div><div class="brief en">FBZ + vitamins suppress lymphoma xenograft — origin of this research area (serendipitous discovery)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2012</span><span class="tag t-neg"><span class="ko">부정</span><span class="en">Negative</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/22776123/" target="_blank">22776123</a></div><div class="brief ko">FBZ 사료가 종양 성장을 바꾸지 못함 (예일대)</div><div class="brief en">FBZ-medicated feed does not alter tumour growth (Yale)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2013</span><span class="tag t-neg"><span class="ko">부정</span><span class="en">Negative</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/23393324/" target="_blank">23393324</a></div><div class="brief ko">"항암 가치의 증거를 찾지 못함" (예일대)</div><div class="brief en">"No evidence of anti-cancer value found" (Yale)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2017</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/28078780/" target="_blank">28078780</a></div><div class="brief ko">개 신경교종 세포에 메벤다졸·FBZ 항튜불린 (시험관)</div><div class="brief en">Anti-tubulin activity of mebendazole and FBZ in canine glioma cells (in vitro)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2020</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/32895616/" target="_blank">32895616</a></div><div class="brief ko">벤즈이미다졸 구충제의 항암 잠재력 종설</div><div class="brief en">Review: anti-cancer potential of benzimidazole anthelmintics</div></div>
+      <div class="paper"><div class="top"><span class="yr">2020</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/33738243/" target="_blank">33738243</a></div><div class="brief ko">전이성 전립선암 표현형 스크리닝에서 FBZ계 선별</div><div class="brief en">FBZ-class compounds identified in phenotypic screen for metastatic prostate cancer</div></div>
+      <div class="paper"><div class="top"><span class="yr">2026</span><span class="tag t-neg"><span class="ko">부정</span><span class="en">Negative</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/41608149/" target="_blank">41608149</a></div><div class="brief ko">자가복용 후 중증 약물성 간손상 (면역항암제 병용 증례)</div><div class="brief en">Severe DILI after self-administration combined with immunotherapy (case report)</div></div>
+    </div>
+    <div class="cgroup">
+      <h4>🇻🇳 <span class="ko">베트남 (미국 공동) <span class="cn">3편 · 적극 옹호 그룹</span></span><span class="en">Vietnam (w/ US) <span class="cn">3 papers — actively pro-FBZ</span></span></h4>
+      <div class="paper"><div class="top"><span class="yr">2024</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/39197912/" target="_blank">39197912</a></div><div class="brief ko">경구 FBZ 항암 약동학 종설 (옹호적)</div><div class="brief en">Review of oral FBZ pharmacokinetics and anti-cancer use (advocacy-oriented)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2024</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/39477286/" target="_blank">39477286</a></div><div class="brief ko">A549 폐암 FBZ+DADA 세포자멸·주기정지 (시험관)</div><div class="brief en">A549 lung cancer: FBZ + DADA induce apoptosis and cell cycle arrest (in vitro)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2025</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/40799435/" target="_blank">40799435</a></div><div class="brief ko">A549 마우스 FBZ+DADA 종양 억제 (동물)</div><div class="brief en">A549 mouse model: FBZ + DADA suppress tumour growth (in vivo)</div></div>
+    </div>
+    <div class="cgroup">
+      <h4>🇰🇷 <span class="ko">한국 <span class="cn">14편 · 상세 분포는 04장 참고</span></span><span class="en">Korea <span class="cn">14 papers — see previous tab for detail</span></span></h4>
+      <div class="paper"><div class="top"><span class="yr"><span class="ko">전체 14편</span><span class="en">All 14</span></span></div><div class="brief ko">긍정 7 · 경고·부정 6 · 혼합 1 · 중립 1 — 위 <b>04장</b>에 한 편씩 정리되어 있습니다.</div><div class="brief en">Positive 7 · Warning/negative 6 · Mixed 1 · Neutral 1 — see the <b>Korea ×14</b> tab for individual summaries.</div></div>
+    </div>
+    <div class="cgroup">
+      <h4>🌍 <span class="ko">기타 9개국 <span class="cn">13편</span></span><span class="en">Other 9 countries <span class="cn">13 papers</span></span></h4>
+      <div class="paper"><div class="top"><span class="yr">2021</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/34683898/" target="_blank">34683898</a></div><div class="brief ko">🇦🇺 호주 — PEG-MCM-41 나노입자로 FBZ 전립선암 (제형)</div><div class="brief en">🇦🇺 Australia — PEG-MCM-41 NPs deliver FBZ to prostate cancer (formulation)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2022</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/35456716/" target="_blank">35456716</a></div><div class="brief ko">🇦🇺 호주 — β-락토글로불린 MCM-48 나노입자 FBZ 전립선암</div><div class="brief en">🇦🇺 Australia — β-lactoglobulin MCM-48 NPs for FBZ prostate cancer delivery</div></div>
+      <div class="paper"><div class="top"><span class="yr">2024</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/39198340/" target="_blank">39198340</a></div><div class="brief ko">🇦🇷 아르헨티나 — FBZ 나노입자 용해도·3년 안정성 (제형)</div><div class="brief en">🇦🇷 Argentina — FBZ nanoparticle solubility and 3-year stability (formulation)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2024</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/39490787/" target="_blank">39490787</a></div><div class="brief ko">🇦🇷 아르헨티나 — 키토산 미립자로 FBZ 용출 개선 (제형)</div><div class="brief en">🇦🇷 Argentina — chitosan microparticles improve FBZ dissolution (formulation)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2025</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/41012500/" target="_blank">41012500</a></div><div class="brief ko">🇮🇪 아일랜드 — Soluplus 입자크기 축소로 용해도 개선 (제형)</div><div class="brief en">🇮🇪 Ireland — particle size reduction of Soluplus improves FBZ solubility</div></div>
+      <div class="paper"><div class="top"><span class="yr">2026</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/41682042/" target="_blank">41682042</a></div><div class="brief ko">🇮🇪 아일랜드(스페인) — FBZ-Soluplus 고체분산체 용출 (제형)</div><div class="brief en">🇮🇪 Ireland (Spain) — FBZ-Soluplus solid dispersion dissolution (formulation)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2021</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/33920661/" target="_blank">33920661</a></div><div class="brief ko">🇮🇹 이탈리아 — 벤즈이미다졸 스크리닝(부신경절종·췌장·대장)</div><div class="brief en">🇮🇹 Italy — benzimidazole screening in paraganglioma, pancreatic, colorectal cancer</div></div>
+      <div class="paper"><div class="top"><span class="yr">2021</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/34131166/" target="_blank">34131166</a></div><div class="brief ko">🇬🇧 영국(이란) — 백혈병 분화유도 (전사체 리포지셔닝)</div><div class="brief en">🇬🇧 UK (Iran) — leukaemia differentiation induction (transcriptome repositioning)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2022</span><span class="tag t-mix"><span class="ko">혼합</span><span class="en">Mixed</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/35780728/" target="_blank">35780728</a></div><div class="brief ko">🇬🇷 그리스 — 암세포주 세포독성 있으나 용출(흡수) 불량</div><div class="brief en">🇬🇷 Greece — cytotoxic in cancer lines but poor dissolution/absorption</div></div>
+      <div class="paper"><div class="top"><span class="yr">2025</span><span class="tag t-pos"><span class="ko">긍정</span><span class="en">Positive</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/41053454/" target="_blank">41053454</a></div><div class="brief ko">🇪🇬 이집트 — 약물 용도변경·나노제형 종설(FBZ 포함)</div><div class="brief en">🇪🇬 Egypt — drug repurposing and nanoformulation review (includes FBZ)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2025</span><span class="tag t-pos"><span class="ko">긍정(일화)</span><span class="en">Positive (anecdotal)</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/40605964/" target="_blank">40605964</a></div><div class="brief ko">🇨🇦 캐나다(프랑스) — 진행성암 3명 관해 증례(병용·대조군 없음)</div><div class="brief en">🇨🇦 Canada (France) — remission in 3 advanced cancer patients (combination, no controls)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2021</span><span class="tag t-neg"><span class="ko">부정</span><span class="en">Negative</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/34248555/" target="_blank">34248555</a></div><div class="brief ko">🇯🇵 일본 — 자가복용 NSCLC 간손상·종양 축소 없음 (첫 인체 증례)</div><div class="brief en">🇯🇵 Japan — self-administered FBZ in NSCLC: liver injury, no tumour shrinkage (first human case)</div></div>
+      <div class="paper"><div class="top"><span class="yr">2025</span><span class="tag t-neg"><span class="ko">경고</span><span class="en">Warning</span></span><a class="pmid" href="https://pubmed.ncbi.nlm.nih.gov/41097960/" target="_blank">41097960</a></div><div class="brief ko">🇳🇴 노르웨이 — 자가복용 후 담즙정체성 간염 증례</div><div class="brief en">🇳🇴 Norway — cholestatic hepatitis after self-administration (case report)</div></div>
+    </div>
+  </div>
+
+  <!-- ── PAPER LIST ── -->
+  <div id="panel-paperlist" class="panel">
+    <h2><span class="ko">전체 논문 목록</span><span class="en">Full Paper List</span></h2>
+    <p class="sec-sub ko">핵심 45편 + 비핵심 18편 · 필터·정렬 가능</p>
+    <p class="sec-sub en">Core 45 + Non-core 18 papers · searchable and sortable</p>
+    <div class="list-controls">
+      <input type="text" id="search-input" placeholder="🔍 Search PMID, country, keywords..." oninput="filterTable()">
+      <select id="filter-type" onchange="filterTable()">
+        <option value="all" class="ko">전체</option>
+        <option value="all" class="en">All</option>
+        <option value="핵심">Core / 핵심</option>
+        <option value="비핵심">Non-core / 비핵심</option>
+      </select>
+      <select id="filter-stance" onchange="filterTable()">
+        <option value="all" class="ko">성향 전체</option>
+        <option value="all" class="en">All stances</option>
+        <option value="긍정">Positive / 긍정</option>
+        <option value="부정">Negative / 부정</option>
+        <option value="경고">Warning / 경고</option>
+        <option value="혼합">Mixed / 혼합</option>
+        <option value="중립">Neutral / 중립</option>
+      </select>
+      <span class="list-count" id="list-count"></span>
+    </div>
+    <div id="paper-table-wrap">
+      <table id="paper-table">
+        <thead>
+          <tr>
+            <th onclick="sortTable(0)"><span class="ko">구분</span><span class="en">Type</span> <span class="sort-arrow" id="arr0">↕</span></th>
+            <th onclick="sortTable(1)"><span class="ko">연도</span><span class="en">Year</span> <span class="sort-arrow" id="arr1">↕</span></th>
+            <th onclick="sortTable(2)"><span class="ko">국가</span><span class="en">Country</span> <span class="sort-arrow" id="arr2">↕</span></th>
+            <th>PMID</th>
+            <th><span class="ko">유형</span><span class="en">Study type</span></th>
+            <th onclick="sortTable(5)"><span class="ko">성향</span><span class="en">Stance</span> <span class="sort-arrow" id="arr5">↕</span></th>
+            <th><span class="ko">요지</span><span class="en">Summary</span></th>
+          </tr>
+        </thead>
+        <tbody id="paper-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── CONCLUSION ── -->
+  <div id="panel-conclusion" class="panel">
+    <h2><span class="sec-num ko">07</span><span class="ko">데이터가 가리키는 것</span><span class="en">What the Data Points To</span></h2>
+    <div class="keybox">
+      <h3 class="ko">세 가지 관찰 (해석은 독자에게)</h3>
+      <h3 class="en">Three observations (interpretation is yours)</h3>
+      <p><b class="ko">1. 양 —</b><b class="en">1. Volume —</b> <span class="ko">한국·중국이 양적으로 주도하며, 발표는 2020~2022년에 급증했습니다. 이는 한국의 "펜벤다졸 스캔들"(2019~2020)이라는 사회현상과 시기적으로 맞물립니다.</span><span class="en">Korea and China dominate by volume, with publications surging in 2020–2022, coinciding with the Korean "fenbendazole scandal" of 2019–2020.</span></p>
+      <p><b class="ko">2. 긍정 신호 —</b><b class="en">2. Positive signals —</b> <span class="ko">45편 중 약 32편이 긍정적입니다. 시험관·동물에서 세포자멸·세포주기 정지·페롭토시스 등 다양한 항암 기전이 반복 보고되며, 이는 분자 수준의 실재하는 현상입니다.</span><span class="en">About 32 of 45 papers report positive results. Multiple anti-cancer mechanisms (apoptosis, cell cycle arrest, ferroptosis) are repeatedly demonstrated in vitro and in animals — these are real molecular-level phenomena.</span></p>
+      <p style="margin-bottom:0"><b class="ko">3. 공백 —</b><b class="en">3. The gap —</b> <span class="ko">동시에, '평범한 경구 펜벤다졸 단독'이 사람의 종양을 줄인다는 것을 보인 통제된 임상시험은 45편 어디에도 없습니다. 긍정적 동물 결과는 대부분 특수 제형(나노입자)이나 병용에서 나왔고, 인체 보고는 증례 수준에 머뭅니다.</span><span class="en">At the same time, not a single controlled clinical trial across all 45 papers demonstrates that plain oral fenbendazole alone shrinks human tumours. Positive animal results mostly involve special formulations (nanoparticles) or combination regimens. Human reports remain at the case-report level.</span></p>
+    </div>
+    <div class="callout">
+      <h3 class="ko">요약 한 문장</h3>
+      <h3 class="en">One-sentence summary</h3>
+      <p class="ko">펜벤다졸은 <b>"무조건 가짜"도 "이미 입증된 치료"도 아닙니다.</b> 기전 연구는 활발하고 흥미롭지만, 현재의 복용 방식을 뒷받침하는 인체 임상 근거는 아직 비어 있는 — 정밀한 중간지대에 있습니다.</p>
+      <p class="en">Fenbendazole is neither <b>"definitively fake"</b> nor <b>"proven therapy."</b> Mechanistic research is active and interesting, but the human clinical evidence supporting current self-administration practices remains absent — it sits in a precise middle ground.</p>
+    </div>
+    <section style="border:none;padding-top:24px;padding-bottom:0;">
+      <h2 style="font-size:1.15rem;"><span class="ko">비핵심으로 분류한 것들</span><span class="en">Papers classified as non-core</span></h2>
+      <p class="sec-sub ko">전체 검색에는 잡히지만 펜벤다졸 항암 연구가 아닌 논문</p>
+      <p class="sec-sub en">Papers in the search results but not evaluating FBZ as an anti-cancer agent</p>
+      <ul class="clean">
+        <li class="ko"><b>메벤다졸 중심</b> 연구에서 펜벤다졸이 비교·분류로만 언급</li>
+        <li class="en"><b>Mebendazole-centred</b> studies where FBZ appears only for comparison or classification</li>
+        <li class="ko"><b>전산 도킹·스크리닝</b>만 한 연구에서 펜벤다졸이 후보 목록에만 등장</li>
+        <li class="en"><b>Computational docking/screening</b> studies where FBZ appears only in a candidate list</li>
+        <li class="ko"><b>순수 수의·기생충</b> 연구 — 구충 치료받던 동물이 우연히 종양을 갖고 있거나, 지아르디아 구충 효능 연구</li>
+        <li class="en"><b>Pure veterinary/parasitology</b> research — dewormed animals that happened to have tumours, or Giardia treatment studies</li>
+        <li class="ko"><b>실험동물 사료</b>의 펜벤다졸이 종양실험을 교란한 사례·종설</li>
+        <li class="en"><b>Rodent chow confounding</b> — FBZ in laboratory animal feed interfering with tumour experiments</li>
+      </ul>
+    </section>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ FOOTER ═══════════════════════════════════ -->
+<footer>
+  <div class="disc">
+    <b class="ko">방법론 및 한계</b><b class="en">Methods & Limitations</b>
+    <span class="ko"> · PubMed "fenbendazole AND cancer" 결과를 연도별로 직접 조회해 핵심 문헌을 선별하고 제1·교신저자 소속 국가로 귀속했습니다. 2020~2026년은 전수에 가깝게 확인, 2007년 이전(약 8편)은 비핵심으로 분류했습니다. 핵심/비핵심 경계, 귀속, 긍·부정 분류에는 해석 판단이 포함되어 ±1~2편의 오차가 있을 수 있습니다.</span>
+    <span class="en"> · PubMed results for "fenbendazole AND cancer" were reviewed year by year. Core papers were identified and attributed to the country of the first/corresponding author. 2020–2026 papers were reviewed near-exhaustively; ~8 papers before 2007 were classified as non-core without individual review. Classification, attribution, and stance judgements carry interpretation and ±1–2 paper uncertainty.</span>
+  </div>
+  <div class="disc">
+    <b class="ko">의학적 고지</b><b class="en">Medical disclaimer</b>
+    <span class="ko"> · 이 문서는 학술 문헌의 경향을 정리한 자료이며 의학적 조언이 아닙니다. 펜벤다졸은 사람에 대해 어떤 규제기관에서도 항암제로 승인되지 않았고, 자가복용 시 간손상 등 위험이 보고되어 있습니다. 모든 치료 결정은 반드시 주치의와 상의하십시오.</span>
+    <span class="en"> · This document summarises trends in the academic literature and does not constitute medical advice. Fenbendazole is not approved as an anti-cancer agent by any regulatory authority, and self-administration has been associated with liver injury and other risks. All treatment decisions must be made with a qualified physician.</span>
+  </div>
+  <p style="margin-top:12px;"><span class="ko">데이터 기준 2026년 · 출처 PubMed/NCBI</span><span class="en">Data as of 2026 · Source: PubMed/NCBI</span></p>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+/* ═══════════════ PAPER DATA ═══════════════ */
+const papers = [
+  ["핵심","2008","미국","19049251","전임상(동물)","긍정(우연)","FBZ+비타민이 림프종 이식암 억제 — 이 분야의 기원 연구","FBZ + vitamins suppress lymphoma xenograft — origin of this research field","https://pubmed.ncbi.nlm.nih.gov/19049251/"],
+  ["핵심","2012","미국","22776123","전임상(동물)","부정","FBZ 사료가 종양 성장 변화 못 시킴 (예일대)","FBZ-medicated feed does not alter tumour growth (Yale)","https://pubmed.ncbi.nlm.nih.gov/22776123/"],
+  ["핵심","2013","미국","23393324","전임상(동물)","부정","'항암 가치의 증거 못 찾음' (예일대)","'No evidence of anti-cancer value found' (Yale)","https://pubmed.ncbi.nlm.nih.gov/23393324/"],
+  ["핵심","2017","미국","28078780","전임상(시험관)","긍정","개 신경교종 세포에 메벤다졸·FBZ 항튜불린 효과","Anti-tubulin activity of mebendazole/FBZ in canine glioma cells","https://pubmed.ncbi.nlm.nih.gov/28078780/"],
+  ["핵심","2020","한국","32056406","사설/논평","경고","'구충제가 항암제?' 간염 위험 언급·신중론 (대한의학회지)","JKMA editorial: FBZ as anticancer? Warns hepatitis risk","https://pubmed.ncbi.nlm.nih.gov/32056406/"],
+  ["핵심","2020","미국","32895616","종설","긍정","벤즈이미다졸 구충제의 항암 잠재력 종설","Review: anti-cancer potential of benzimidazole anthelmintics","https://pubmed.ncbi.nlm.nih.gov/32895616/"],
+  ["핵심","2020","한국","33096915","제형/전임상","긍정","Soluplus 마이셀로 FBZ 용해도·약동학·독성 개선","Soluplus micelles improve FBZ solubility, pharmacokinetics and toxicity","https://pubmed.ncbi.nlm.nih.gov/33096915/"],
+  ["핵심","2020","미국","33738243","전임상(스크리닝)","긍정","전이성 전립선암 표현형 스크리닝에서 FBZ계 선별","FBZ-class hits in phenotypic screen for metastatic prostate cancer","https://pubmed.ncbi.nlm.nih.gov/33738243/"],
+  ["핵심","2021","호주","34683898","제형/전임상","긍정","PEG-MCM-41 나노입자로 FBZ 전립선암(PC-3) 전달","PEG-MCM-41 NPs deliver FBZ to prostate cancer (PC-3)","https://pubmed.ncbi.nlm.nih.gov/34683898/"],
+  ["핵심","2021","한국","34295160","제형/전임상","긍정","FBZ+라파마이신 mPEG 마이셀 A549 시너지","FBZ + rapamycin mPEG micelles: synergy in A549 lung cancer","https://pubmed.ncbi.nlm.nih.gov/34295160/"],
+  ["핵심","2021","일본","34248555","임상증례","부정","자가복용 NSCLC 환자 간손상·종양 축소 없음 (첫 증례)","Self-administered FBZ in NSCLC: liver injury, no tumour shrinkage (first case)","https://pubmed.ncbi.nlm.nih.gov/34248555/"],
+  ["핵심","2021","영국·이란","34131166","전임상(시험관)","긍정","백혈병 분화유도 (전사체 리포지셔닝)","Leukaemia differentiation induction (transcriptome repositioning)","https://pubmed.ncbi.nlm.nih.gov/34131166/"],
+  ["핵심","2021","이탈리아","33920661","전임상(시험관)","긍정","벤즈이미다졸 거울상체 스크리닝(부신경절종·췌장·대장)","Benzimidazole enantiomer screening in paraganglioma/pancreatic/colorectal cancer","https://pubmed.ncbi.nlm.nih.gov/33920661/"],
+  ["핵심","2022","한국","36387110","공중보건","경고","폐암환자 21명 허위정보 인식 질적연구","Qualitative study: misinformation awareness in 21 lung cancer patients","https://pubmed.ncbi.nlm.nih.gov/36387110/"],
+  ["핵심","2022","한국","36374534","공중보건","경고","유튜브 암 허위정보 확산구조·차단전략","YouTube cancer misinformation: spread mechanism and intervention","https://pubmed.ncbi.nlm.nih.gov/36374534/"],
+  ["핵심","2022","한국","36286053","종설","중립","'펜벤다졸 열풍' 전임상 정리 + 자가복용 경고","'FBZ fever' review: preclinical summary + self-medication warning","https://pubmed.ncbi.nlm.nih.gov/36286053/"],
+  ["핵심","2022","한국","36039738","전임상(시험관)","긍정","5-FU 내성 대장암세포 세포자멸·페롭토시스","Apoptosis and ferroptosis in 5-FU-resistant colorectal cancer cells","https://pubmed.ncbi.nlm.nih.gov/36039738/"],
+  ["핵심","2022","그리스","35780728","전임상/분석","혼합","암세포주 세포독성 있으나 용출(흡수) 불량","Cytotoxic in cancer lines but poor dissolution/absorption","https://pubmed.ncbi.nlm.nih.gov/35780728/"],
+  ["핵심","2022","중국","35569513","전임상","긍정","자궁경부암 HeLa, FBZ·유도체 산화스트레스","HeLa cervical cancer: FBZ and analogues induce oxidative stress","https://pubmed.ncbi.nlm.nih.gov/35569513/"],
+  ["핵심","2022","호주","35456716","제형/전임상","긍정","β-락토글로불린 MCM-48 나노입자 FBZ 전립선암","β-lactoglobulin MCM-48 NPs for FBZ prostate cancer delivery","https://pubmed.ncbi.nlm.nih.gov/35456716/"],
+  ["핵심","2022","한국","35110505","전임상(시험관)","긍정","간암 H4IIE 세포 p21 매개 주기정지·세포자멸","p21-mediated cell cycle arrest and apoptosis in H4IIE hepatocellular carcinoma","https://pubmed.ncbi.nlm.nih.gov/35110505/"],
+  ["핵심","2022","한국","35020278","전임상(시험관)","긍정","개 흑색종세포 G2/M 정지·유사분열 파국","G2/M arrest and mitotic catastrophe in canine melanoma cells","https://pubmed.ncbi.nlm.nih.gov/35020278/"],
+  ["핵심","2022","중국","34433903","전임상(시험관)","긍정","교모세포종, 벤즈이미다졸 3종 증식억제","Glioblastoma: three benzimidazoles inhibit proliferation","https://pubmed.ncbi.nlm.nih.gov/34433903/"],
+  ["핵심","2023","한국","37998737","전임상(동물)","부정","마우스 림프종 생체 내 무효·체중 감소","Mouse lymphoma: no in vivo efficacy, weight loss observed","https://pubmed.ncbi.nlm.nih.gov/37998737/"],
+  ["핵심","2023","한국","37170725","전임상(동물)","혼합","난소암 PLGA NP; 경구 무효·정맥 NP만 효과","Ovarian cancer PLGA NPs: oral FBZ inactive, IV NPs effective","https://pubmed.ncbi.nlm.nih.gov/37170725/"],
+  ["핵심","2023","한국","37152471","제형/전임상","긍정","난소암 FBZ+라파마이신 mPEG 마이셀","FBZ + rapamycin mPEG micelles in ovarian cancer","https://pubmed.ncbi.nlm.nih.gov/37152471/"],
+  ["핵심","2024","중국","39736624","전임상(동물)","긍정","난소암 전사체; 경구 FBZ 마우스 종양억제","Transcriptome: oral FBZ suppresses ovarian tumours in mice","https://pubmed.ncbi.nlm.nih.gov/39736624/"],
+  ["핵심","2024","아르헨티나·미국","39490787","제형","긍정","키토산 미립자로 FBZ 용출 개선","Chitosan microparticles improve FBZ dissolution","https://pubmed.ncbi.nlm.nih.gov/39490787/"],
+  ["핵심","2024","베트남·미국","39477286","전임상(시험관)","긍정","A549 FBZ+DADA 세포자멸·주기정지","A549 lung cancer: FBZ + DADA induce apoptosis and cell cycle arrest","https://pubmed.ncbi.nlm.nih.gov/39477286/"],
+  ["핵심","2024","아르헨티나","39198340","제형","긍정","FBZ 나노입자 용해도·3년 안정성","FBZ nanoparticle solubility and 3-year storage stability","https://pubmed.ncbi.nlm.nih.gov/39198340/"],
+  ["핵심","2024","베트남·미국","39197912","종설","긍정","경구 FBZ 항암 약동학 종설(옹호적)","Review of oral FBZ pharmacokinetics for cancer (advocacy-oriented)","https://pubmed.ncbi.nlm.nih.gov/39197912/"],
+  ["핵심","2024","중국","39128990","전임상(동물)","긍정","방광암 CRISPR-Cas13a + FBZ 방광내 주입","Bladder cancer: CRISPR-Cas13a + FBZ intravesical instillation","https://pubmed.ncbi.nlm.nih.gov/39128990/"],
+  ["핵심","2024","한국","39109788","공중보건","경고","'펜벤다졸 스캔들' 허위정보 SIR 시뮬레이션","SIR simulation of 'fenbendazole scandal' misinformation spread","https://pubmed.ncbi.nlm.nih.gov/39109788/"],
+  ["핵심","2024","중국","38769544","제형","긍정","메틸-β-사이클로덱스트린으로 FBZ 용해도↑","Methyl-β-cyclodextrin inclusion complex improves FBZ solubility","https://pubmed.ncbi.nlm.nih.gov/38769544/"],
+  ["핵심","2025","노르웨이","41097960","임상증례","경고","자가복용 후 담즙정체성 간염","Cholestatic hepatitis after FBZ self-administration","https://pubmed.ncbi.nlm.nih.gov/41097960/"],
+  ["핵심","2025","이집트","41053454","종설","긍정","약물 용도변경·나노제형 종설(FBZ 포함)","Drug repurposing and nanoformulation review (includes FBZ)","https://pubmed.ncbi.nlm.nih.gov/41053454/"],
+  ["핵심","2025","아일랜드","41012500","제형","긍정","Soluplus 입자크기 축소로 FBZ 용해도 개선","Particle size reduction of Soluplus improves FBZ solubility","https://pubmed.ncbi.nlm.nih.gov/41012500/"],
+  ["핵심","2025","베트남·미국","40799435","전임상(동물)","긍정","A549 마우스 FBZ+DADA 종양억제","A549 mouse model: FBZ + DADA suppress tumour growth","https://pubmed.ncbi.nlm.nih.gov/40799435/"],
+  ["핵심","2025","중국","40756987","전임상","긍정","유방암 파이롭토시스 HK2 경로","Breast cancer pyroptosis via HK2/caspase-3/GSDME pathway","https://pubmed.ncbi.nlm.nih.gov/40756987/"],
+  ["핵심","2025","한국","40642276","전임상(시험관)","긍정","개 흑색종 아베마시클립+FBZ 시너지","Synergy of abemaciclib + FBZ in canine melanoma","https://pubmed.ncbi.nlm.nih.gov/40642276/"],
+  ["핵심","2025","캐나다·프랑스","40605964","임상증례","긍정(일화)","진행성암 3명 관해(병용·대조군 없음)","Remission in 3 advanced cancer patients (combination, no controls)","https://pubmed.ncbi.nlm.nih.gov/40605964/"],
+  ["핵심","2025","중국","40509264","전임상(동물)","긍정","자궁경부암 암세포+암줄기세포 이중표적","Cervical cancer: dual targeting of cancer cells and cancer stem cells","https://pubmed.ncbi.nlm.nih.gov/40509264/"],
+  ["핵심","2026","중국","41861111","전임상(동물)","긍정","방광암 페롭토시스+광열치료 나노플랫폼","Bladder cancer: ferroptosis + photothermal therapy nanoplatform","https://pubmed.ncbi.nlm.nih.gov/41861111/"],
+  ["핵심","2026","아일랜드·스페인","41682042","제형","긍정","FBZ-Soluplus 고체분산체 용출","FBZ-Soluplus solid dispersion dissolution study","https://pubmed.ncbi.nlm.nih.gov/41682042/"],
+  ["핵심","2026","미국","41608149","임상증례","부정","자가복용 후 중증 약물성 간손상(면역항암제 병용)","Severe DILI after self-administration combined with immunotherapy","https://pubmed.ncbi.nlm.nih.gov/41608149/"],
+  ["비핵심","2008","미국","18667591","메벤다졸 중심","-","흑색종 스크리닝; FBZ는 hit이나 메벤다졸 기전 연구","Melanoma screening; FBZ hits but paper is mebendazole-focused","https://pubmed.ncbi.nlm.nih.gov/18667591/"],
+  ["비핵심","2011","미국","21764822","메벤다졸 중심","-","교모세포종 메벤다졸 개발(FBZ는 우연한 단서)","Glioblastoma mebendazole development (FBZ as incidental lead)","https://pubmed.ncbi.nlm.nih.gov/21764822/"],
+  ["비핵심","2021","미국","33131904","메벤다졸 중심","-","난소암 메벤다졸 효능(FBZ는 비교/분류)","Ovarian cancer mebendazole efficacy (FBZ for comparison only)","https://pubmed.ncbi.nlm.nih.gov/33131904/"],
+  ["비핵심","2021","미국","33970966","기생충/감염","-","원숭이 SIV 다제요법(FBZ는 구충제 1종)","Monkey SIV multi-drug regimen (FBZ as one dewormer)","https://pubmed.ncbi.nlm.nih.gov/33970966/"],
+  ["비핵심","2021","이집트","33842429","전산 도킹","-","튜불린 도킹; 플루벤다졸 최상위(FBZ 하위)","Tubulin docking; flubendazole top hit (FBZ lower rank)","https://pubmed.ncbi.nlm.nih.gov/33842429/"],
+  ["비핵심","2021","체코","34372133","메벤다졸 중심","-","HPMA-메벤다졸 고분자(FBZ는 언급)","HPMA-mebendazole polymer (FBZ mentioned only)","https://pubmed.ncbi.nlm.nih.gov/34372133/"],
+  ["비핵심","2022","체코","35745774","메벤다졸 중심","-","HPMA-메벤다졸 접합체","HPMA-mebendazole conjugate","https://pubmed.ncbi.nlm.nih.gov/35745774/"],
+  ["비핵심","2022","이집트","35036753","메벤다졸/전산","-","VEGFR-2 도킹 + 메벤다졸 마이셀","VEGFR-2 docking + mebendazole micelles","https://pubmed.ncbi.nlm.nih.gov/35036753/"],
+  ["비핵심","2022","미국","35764389","실험동물 종설","-","FBZ의 생물학적 효과 종설(연구동물 영향)","Review of FBZ biological effects on laboratory animals","https://pubmed.ncbi.nlm.nih.gov/35764389/"],
+  ["비핵심","2022","프랑스","36315102","기생충","-","개 지아르디아에 FBZ 무효(구충 효능)","FBZ ineffective against canine Giardia (anthelmintic efficacy)","https://pubmed.ncbi.nlm.nih.gov/36315102/"],
+  ["비핵심","2023","중국","37069494","전산/바이오인포","-","EZH2 폐선암; FBZ는 CMap 후보로만 등장","EZH2 lung adenocarcinoma; FBZ appears only as CMap candidate","https://pubmed.ncbi.nlm.nih.gov/37069494/"],
+  ["비핵심","2024","인도","37740654","전산/네트워크약리","-","폐암 BBA 도킹; 리코벤다졸 최상위","Lung cancer BBA docking; ricobendazole top hit","https://pubmed.ncbi.nlm.nih.gov/37740654/"],
+  ["비핵심","2017","일본·중국","27914986","독성학","-","쥐 간발암 후성유전(FBZ 부수적)","Rat liver carcinogenesis epigenetics (FBZ incidental)","https://pubmed.ncbi.nlm.nih.gov/27914986/"],
+  ["비핵심","2018","미국·한국","29601575","기생충 유전","-","선충 벤즈이미다졸 저항성 QTL(암 무관)","Nematode benzimidazole resistance QTL (unrelated to cancer)","https://pubmed.ncbi.nlm.nih.gov/29601575/"],
+  ["비핵심","2018","미국","30412580","기생충/면역","-","다람쥐원숭이 지아르디아 FBZ 면역영향","Squirrel monkey Giardia: FBZ effect on immunity","https://pubmed.ncbi.nlm.nih.gov/30412580/"],
+  ["비핵심","2013","미국","23146113","수의 증례","-","개 두개내 선충(수막종으로 오인)","Canine intracranial helminth (misidentified as meningioma)","https://pubmed.ncbi.nlm.nih.gov/23146113/"],
+  ["비핵심","2009","미국","19530405","수의 증례","-","올빼미 만성골수성백혈병(FBZ는 구충)","Owl chronic myelogenous leukaemia (FBZ as dewormer)","https://pubmed.ncbi.nlm.nih.gov/19530405/"],
+  ["비핵심","1998","미국","9539369","수의 증례","-","말 장 림프육종(FBZ 구충 병용)","Equine intestinal lymphosarcoma (FBZ as part of deworming)","https://pubmed.ncbi.nlm.nih.gov/9539369/"]
+];
+
+const stanceColor = {"긍정":"t-pos","긍정(우연)":"t-pos","긍정(일화)":"t-pos","부정":"t-neg","경고":"t-neg","혼합":"t-mix","중립":"t-neu","-":"t-neu"};
+
+let sortCol = 1, sortDir = 1;
+
+function renderTable(data){
+  const isEn = document.body.classList.contains('lang-en');
+  const tbody = document.getElementById('paper-tbody');
+  tbody.innerHTML = '';
+  document.getElementById('list-count').textContent = `${data.length} / ${papers.length}`;
+  data.forEach(r=>{
+    const [type,yr,country,pmid,studyType,stance,briefKo,briefEn,url]=r;
+    const cl = stanceColor[stance]||'t-neu';
+    const brief = isEn ? briefEn : briefKo;
+    const typeLabel = type==='핵심'
+      ? `<span class="badge-core">${isEn?'Core':'핵심'}</span>`
+      : `<span class="badge-other">${isEn?'Non-core':'비핵심'}</span>`;
+    const stanceLabel = isEn
+      ? stance.replace('긍정','Positive').replace('부정','Negative').replace('경고','Warning').replace('혼합','Mixed').replace('중립','Neutral').replace('(우연)','(seren.)').replace('(일화)','(anec.')
+      : stance;
+    tbody.innerHTML += `<tr>
+      <td>${typeLabel}</td>
+      <td class="td-yr">${yr}</td>
+      <td style="font-size:.82rem;white-space:nowrap;">${country}</td>
+      <td class="td-pmid"><a href="${url}" target="_blank">${pmid}</a></td>
+      <td class="td-type">${studyType}</td>
+      <td><span class="tag ${cl}">${stanceLabel}</span></td>
+      <td class="td-brief">${brief}</td>
+    </tr>`;
+  });
+}
+
+function filterTable(){
+  const q = document.getElementById('search-input').value.toLowerCase();
+  const typeF = document.getElementById('filter-type').value;
+  const stanceF = document.getElementById('filter-stance').value;
+  let data = papers.filter(r=>{
+    const [type,yr,country,pmid,studyType,stance,briefKo,briefEn]=r;
+    const matchQ = !q || [type,yr,country,pmid,studyType,stance,briefKo,briefEn].some(v=>v.toLowerCase().includes(q));
+    const matchType = typeF==='all' || r[0]===typeF;
+    const matchStance = stanceF==='all' || r[5].includes(stanceF);
+    return matchQ && matchType && matchStance;
+  });
+  sortData(data);
+  renderTable(data);
+}
+
+function sortData(data){
+  data.sort((a,b)=>{
+    const av = a[sortCol]||'', bv = b[sortCol]||'';
+    return av<bv ? -sortDir : av>bv ? sortDir : 0;
+  });
+}
+
+function sortTable(col){
+  if(sortCol===col) sortDir*=-1; else {sortCol=col;sortDir=1;}
+  [0,1,2,5].forEach(i=>{
+    const el=document.getElementById('arr'+i);
+    if(el) el.textContent = i===col ? (sortDir===1?'↑':'↓') : '↕';
+    if(el) el.classList.toggle('active', i===col);
+  });
+  filterTable();
+}
+
+/* ═══════════════ LANGUAGE ═══════════════ */
+function setLang(lang){
+  document.body.className = 'lang-'+lang;
+  document.querySelectorAll('.langtab').forEach(b=>b.classList.toggle('active', b.textContent.trim()===(lang==='ko'?'한국어':'English')));
+  filterTable();
+}
+
+/* ═══════════════ NAV TABS ═══════════════ */
+function showPanel(id, lang){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.navtab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+/* ═══════════════ INIT ═══════════════ */
+let sorted = [...papers];
+sortData(sorted);
+renderTable(sorted);
+document.getElementById('list-count').textContent = `${papers.length} / ${papers.length}`;
+</script>
+</body>
+</html>

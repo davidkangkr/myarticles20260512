@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReDO_DB — 항암 용도변경 약물 가이드</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f8fc;
+  --surface: #ffffff;
+  --border: #e2e8f0;
+  --text: #1a202c;
+  --text2: #4a5568;
+  --text3: #718096;
+  --accent: #2563eb;
+  --accent-light: #dbeafe;
+  --gold: #d97706;
+  --gold-light: #fef3c7;
+  --green: #059669;
+  --green-light: #d1fae5;
+  --orange: #ea580c;
+  --orange-light: #ffedd5;
+  --red: #dc2626;
+  --red-light: #fee2e2;
+  --purple: #7c3aed;
+  --purple-light: #ede9fe;
+  --community: #0891b2;
+  --community-light: #cffafe;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.08), 0 4px 6px rgba(0,0,0,0.05);
+  --radius: 10px;
+  --radius-sm: 6px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ── PRINT ── */
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; font-size: 11px; }
+  .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+  .header { background: #1e3a5f !important; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  #mainTable th { background: #1e3a5f !important; color: white !important; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .detail-row { display: none; }
+  .priority-tabs { display: none; }
+  #tab-all { display: block !important; }
+  .section { break-before: auto; }
+  .stats-grid { display: grid !important; grid-template-columns: repeat(3,1fr); }
+  tr:nth-child(even) { background: #f8f8f8 !important; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+}
+
+/* ── HEADER ── */
+.header {
+  background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 60%, #1d4ed8 100%);
+  color: white;
+  padding: 28px 24px 22px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(30,58,95,0.3);
+}
+.header-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.header h1 { font-size: 1.5rem; font-weight: 900; letter-spacing: -0.02em; }
+.header h1 span { color: #93c5fd; }
+.header-sub { font-size: 0.78rem; opacity: 0.8; margin-top: 2px; }
+.header-actions { display: flex; gap: 8px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: var(--radius-sm); font-size: 0.8rem; font-weight: 600; cursor: pointer; border: none; transition: all .2s; font-family: inherit; }
+.btn-white { background: white; color: var(--accent); }
+.btn-white:hover { background: #f0f9ff; }
+.btn-outline { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.5); }
+.btn-outline:hover { background: rgba(255,255,255,0.1); border-color: white; }
+
+/* ── CONTAINER ── */
+.container { max-width: 1400px; margin: 0 auto; padding: 24px 16px; }
+
+/* ── WARNING BOX ── */
+.warning-box {
+  background: #fff8e1;
+  border: 2px solid #f59e0b;
+  border-left: 6px solid #f59e0b;
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 28px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.warning-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 1px; }
+.warning-text strong { color: #92400e; display: block; margin-bottom: 4px; font-size: 0.9rem; }
+.warning-text p { color: #78350f; font-size: 0.82rem; line-height: 1.5; }
+
+/* ── SECTION ── */
+.section { margin-bottom: 32px; }
+.section-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+}
+.section-title .badge {
+  background: var(--accent-light);
+  color: var(--accent);
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* ── STATS GRID ── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.stat-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  border-top: 3px solid transparent;
+  transition: transform .15s;
+}
+.stat-card:hover { transform: translateY(-2px); }
+.stat-card.blue { border-color: var(--accent); }
+.stat-card.gold { border-color: var(--gold); }
+.stat-card.green { border-color: var(--green); }
+.stat-card.orange { border-color: var(--orange); }
+.stat-card.purple { border-color: var(--purple); }
+.stat-card.cyan { border-color: var(--community); }
+.stat-number { font-size: 1.8rem; font-weight: 900; line-height: 1; margin-bottom: 4px; font-family: 'JetBrains Mono', monospace; }
+.stat-card.blue .stat-number { color: var(--accent); }
+.stat-card.gold .stat-number { color: var(--gold); }
+.stat-card.green .stat-number { color: var(--green); }
+.stat-card.orange .stat-number { color: var(--orange); }
+.stat-card.purple .stat-number { color: var(--purple); }
+.stat-card.cyan .stat-number { color: var(--community); }
+.stat-label { font-size: 0.73rem; color: var(--text2); line-height: 1.3; }
+
+/* ── PRIORITY GUIDE ── */
+.priority-guide {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.prio-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  border-left: 4px solid;
+  cursor: pointer;
+  transition: box-shadow .2s;
+}
+.prio-card:hover { box-shadow: var(--shadow-md); }
+.prio-card.p1 { border-color: var(--gold); }
+.prio-card.p2 { border-color: var(--green); }
+.prio-card.p3 { border-color: var(--orange); }
+.prio-card.pc { border-color: var(--community); }
+.prio-icon { font-size: 1.6rem; flex-shrink: 0; }
+.prio-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 3px; }
+.prio-card.p1 .prio-title { color: var(--gold); }
+.prio-card.p2 .prio-title { color: var(--green); }
+.prio-card.p3 .prio-title { color: var(--orange); }
+.prio-card.pc .prio-title { color: var(--community); }
+.prio-desc { font-size: 0.77rem; color: var(--text2); line-height: 1.4; }
+.prio-count { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 0.85rem; margin-top: 5px; }
+
+/* ── PRIORITY TABS ── */
+.priority-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.tab-btn {
+  padding: 7px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all .2s;
+  background: var(--surface);
+  color: var(--text2);
+  font-family: inherit;
+}
+.tab-btn.active { border-color: currentColor; }
+.tab-btn[data-tab="community"] { color: var(--community); }
+.tab-btn[data-tab="community"].active { background: var(--community-light); }
+.tab-btn[data-tab="p1"] { color: var(--gold); }
+.tab-btn[data-tab="p1"].active { background: var(--gold-light); }
+.tab-btn[data-tab="p2"] { color: var(--green); }
+.tab-btn[data-tab="p2"].active { background: var(--green-light); }
+.tab-btn[data-tab="p3"] { color: var(--orange); }
+.tab-btn[data-tab="p3"].active { background: var(--orange-light); }
+.tab-btn[data-tab="all"] { color: var(--accent); }
+.tab-btn[data-tab="all"].active { background: var(--accent-light); }
+
+/* ── SEARCH ── */
+.search-bar {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+.search-input-wrap { flex: 1; min-width: 200px; position: relative; }
+.search-input-wrap input {
+  width: 100%;
+  padding: 9px 12px 9px 36px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-family: inherit;
+  background: var(--bg);
+  transition: border-color .2s;
+}
+.search-input-wrap input:focus { outline: none; border-color: var(--accent); background: white; }
+.search-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--text3); font-size: 0.9rem; pointer-events: none; }
+.filter-group { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.filter-btn {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid var(--border);
+  background: white;
+  color: var(--text2);
+  font-family: inherit;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.filter-btn.active { border-color: var(--accent); background: var(--accent-light); color: var(--accent); }
+.filter-label { font-size: 0.75rem; color: var(--text3); font-weight: 600; white-space: nowrap; }
+
+/* ── TABLE WRAPPER ── */
+.table-wrap {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+.table-info {
+  padding: 12px 16px;
+  font-size: 0.8rem;
+  color: var(--text2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8fafc;
+}
+.result-count { font-weight: 700; color: var(--accent); }
+.table-scroll { overflow-x: auto; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+thead th {
+  background: #1e3a5f;
+  color: white;
+  padding: 11px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.77rem;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+}
+thead th:first-child { padding-left: 16px; border-radius: 0; }
+tbody tr { border-bottom: 1px solid #f0f4f8; cursor: pointer; transition: background .1s; }
+tbody tr:hover { background: #f0f7ff; }
+tbody tr:nth-child(even) { background: #fafbfd; }
+tbody tr:nth-child(even):hover { background: #f0f7ff; }
+tbody tr.community-row { background: #f0fdff; }
+tbody tr.community-row:hover { background: #cffafe; }
+tbody td { padding: 9px 12px; vertical-align: middle; }
+tbody td:first-child { padding-left: 16px; }
+
+.drug-name { font-weight: 700; color: var(--accent); font-size: 0.85rem; }
+.drug-synonym { font-size: 0.73rem; color: var(--text3); margin-top: 1px; }
+.indication { color: var(--text2); font-size: 0.78rem; max-width: 200px; }
+.community-badge {
+  display: inline-block;
+  background: var(--community);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 10px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+/* Evidence dots */
+.ev-dots { display: flex; gap: 3px; flex-wrap: nowrap; }
+.ev-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  title: '';
+}
+.ev-dot.on { opacity: 1; }
+.ev-dot.off { opacity: 0.15; }
+.ev-dot.vitro.on { background: #6366f1; }
+.ev-dot.vivo.on { background: #0891b2; }
+.ev-dot.cases.on { background: #d97706; }
+.ev-dot.obs.on { background: #16a34a; }
+.ev-dot.trials.on { background: #dc2626; }
+.ev-dot.human.on { background: #1d4ed8; }
+.ev-dot.off { background: #cbd5e1; }
+
+/* Score bar */
+.score-wrap { display: flex; align-items: center; gap: 6px; }
+.score-bar { height: 6px; border-radius: 3px; background: #e2e8f0; width: 60px; overflow: hidden; }
+.score-fill { height: 100%; border-radius: 3px; }
+.score-6 { background: linear-gradient(90deg, #16a34a, #4ade80); }
+.score-5 { background: linear-gradient(90deg, #0891b2, #38bdf8); }
+.score-4 { background: linear-gradient(90deg, #d97706, #fbbf24); }
+.score-3 { background: linear-gradient(90deg, #ea580c, #fb923c); }
+.score-2 { background: linear-gradient(90deg, #dc2626, #f87171); }
+.score-1, .score-0 { background: #94a3b8; }
+.score-num { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; }
+
+/* WHO / Patent badges */
+.tag {
+  display: inline-block;
+  padding: 2px 7px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.tag-yes { background: var(--green-light); color: var(--green); }
+.tag-no { background: #f1f5f9; color: #94a3b8; }
+.tag-na { background: #f1f5f9; color: #94a3b8; }
+
+/* Detail row */
+.detail-row { display: none; background: #f8fafc !important; }
+.detail-row.open { display: table-row; }
+.detail-content { padding: 16px; border-top: 2px solid var(--accent-light); }
+.detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.detail-block { background: white; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border); }
+.detail-block h4 { font-size: 0.75rem; color: var(--text3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+.detail-block p { font-size: 0.8rem; color: var(--text); }
+.targets-list { display: flex; flex-wrap: wrap; gap: 4px; }
+.target-tag {
+  background: var(--accent-light);
+  color: var(--accent);
+  padding: 1px 7px;
+  border-radius: 10px;
+  font-size: 0.72rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+}
+.detail-links { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.detail-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity .15s;
+}
+.detail-link:hover { opacity: 0.8; }
+.link-pubmed { background: #dbeafe; color: #1d4ed8; }
+.link-drugbank { background: #d1fae5; color: #065f46; }
+.link-pubchem { background: #fce7f3; color: #9d174d; }
+.ev-legend { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; padding: 8px 16px; font-size: 0.73rem; color: var(--text3); border-top: 1px solid var(--border); }
+.ev-legend-item { display: flex; align-items: center; gap: 4px; }
+
+/* Community section */
+.community-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.community-cat {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--community);
+}
+.community-cat h3 { font-size: 0.82rem; font-weight: 700; color: var(--community); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.community-drug-list { display: flex; flex-wrap: wrap; gap: 5px; }
+.community-drug {
+  background: var(--community-light);
+  color: #164e63;
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid #a5f3fc;
+  transition: background .15s;
+}
+.community-drug:hover { background: #a5f3fc; }
+.community-drug.in-db { border-color: var(--community); }
+.community-drug.not-db { opacity: 0.5; font-style: italic; }
+.db-note { font-size: 0.71rem; color: var(--text3); margin-top: 6px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header h1 { font-size: 1.15rem; }
+  .container { padding: 16px 10px; }
+  .stats-grid { grid-template-columns: repeat(3, 1fr); }
+  .priority-guide { grid-template-columns: 1fr; }
+  .hide-mobile { display: none; }
+  .table-scroll { font-size: 0.78rem; }
+}
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .header-actions { display: none; }
+}
+
+/* Target explanation tooltip */
+.target-tag { position: relative; cursor: default; }
+
+/* Score priority labels */
+.prio-label {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+.prio-gold { background: var(--gold-light); color: var(--gold); }
+.prio-green { background: var(--green-light); color: var(--green); }
+.prio-orange { background: var(--orange-light); color: var(--orange); }
+
+/* Highlight search */
+mark { background: #fef08a; border-radius: 2px; }
+
+.empty-msg { text-align: center; padding: 40px; color: var(--text3); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="header no-print" role="banner">
+  <div class="header-inner">
+    <div>
+      <h1>ReDO_DB <span>항암 용도변경 약물 가이드</span></h1>
+      <p class="header-sub">George Pantziarka TP53 Trust · 총 373개 약물 · 2025년 12월 최신 데이터</p>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-white" onclick="window.print()">🖨️ 인쇄</button>
+      <a href="https://data.tp53.org.uk/redo_db.php" target="_blank" class="btn btn-outline">원본 데이터베이스 ↗</a>
+    </div>
+  </div>
+</header>
+
+<!-- ── MAIN ── -->
+<main class="container">
+
+  <!-- WARNING -->
+  <div class="warning-box">
+    <span class="warning-icon">⚠️</span>
+    <div class="warning-text">
+      <strong>중요 안내 — 환자 분들께</strong>
+      <p>이 목록은 과학적 특성에 기반하여 <strong>추가 연구가 필요한 약물</strong>을 정리한 것입니다. 대부분의 경우, 항암 효과에 대한 기존 과학적 근거는 매우 제한적입니다. 이 목록을 <strong>실제 치료 옵션의 출처로 사용하지 마십시오.</strong> 치료 옵션 탐색은 반드시 의료 전문가와 함께 하시기 바랍니다.</p>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <section class="section">
+    <div class="stats-grid">
+      <div class="stat-card blue"><div class="stat-number">373</div><div class="stat-label">총 약물 수</div></div>
+      <div class="stat-card gold"><div class="stat-number" id="cnt-gold">84</div><div class="stat-label">🏆 황금 기준<br>(WHO+특허만료+임상+인간)</div></div>
+      <div class="stat-card green"><div class="stat-number">245</div><div class="stat-label">임상시험 진행<br>약물 수</div></div>
+      <div class="stat-card orange"><div class="stat-number">268</div><div class="stat-label">인간 데이터<br>보유 약물</div></div>
+      <div class="stat-card purple"><div class="stat-number">325</div><div class="stat-label">특허 만료<br>(저렴 구입 가능)</div></div>
+      <div class="stat-card cyan"><div class="stat-number">118</div><div class="stat-label">WHO<br>필수의약품</div></div>
+    </div>
+  </section>
+
+  <!-- PRIORITY GUIDE -->
+  <section class="section no-print">
+    <div class="section-title">📌 우선순위 가이드 — 어떤 것을 먼저 볼까요?</div>
+    <div class="priority-guide">
+      <div class="prio-card pc" onclick="setTab('community')">
+        <span class="prio-icon">⭐</span>
+        <div>
+          <div class="prio-title">커뮤니티 주목 약물</div>
+          <div class="prio-desc">펜벤다졸, 이버멕틴, 메트포르민, 이트라코나졸 등 커뮤니티에서 실제로 많이 언급되는 약물들을 모아 빠르게 확인할 수 있습니다.</div>
+        </div>
+      </div>
+      <div class="prio-card p1" onclick="setTab('p1')">
+        <span class="prio-icon">🏆</span>
+        <div>
+          <div class="prio-title">1순위: 황금 기준 (가장 신뢰도 높음)</div>
+          <div class="prio-desc">WHO 필수의약품 + 특허만료 + 임상시험 + 인간 데이터 <strong>4가지 모두 충족</strong>. 사람에게 써봤고, 안전성이 검증됐으며, 비교적 저렴하게 구할 수 있는 약물들입니다.</div>
+          <div class="prio-count" style="color:var(--gold)">해당: 약 84개</div>
+        </div>
+      </div>
+      <div class="prio-card p2" onclick="setTab('p2')">
+        <span class="prio-icon">🔬</span>
+        <div>
+          <div class="prio-title">2순위: 임상 검증 있음</div>
+          <div class="prio-desc">실제 사람 대상 임상시험이 진행됐고 인간 데이터가 있는 약물. 연구자들이 암 환자에게 적용하고 결과를 발표한 근거가 있습니다.</div>
+          <div class="prio-count" style="color:var(--green)">해당: 약 200개+</div>
+        </div>
+      </div>
+      <div class="prio-card p3" onclick="setTab('p3')">
+        <span class="prio-icon">🧪</span>
+        <div>
+          <div class="prio-title">3순위: 기초 연구 단계</div>
+          <div class="prio-desc">세포실험(시험관)이나 동물실험에서 가능성이 확인됐지만, 아직 인간 임상 데이터는 부족한 단계. 연구 초기 단계임을 유념하세요.</div>
+          <div class="prio-count" style="color:var(--orange)">해당: 약 100개+</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY SPOTLIGHT -->
+  <section class="section" id="communitySection">
+    <div class="section-title">
+      ⭐ 커뮤니티 주목 약물
+      <span class="badge">조티펜스·펜벤다졸 커뮤니티 언급 약물</span>
+    </div>
+    <div class="community-grid">
+      <div class="community-cat">
+        <h3>🔴 직접적인 암 억제 / 대사 방해</h3>
+        <div class="community-drug-list">
+          <span class="community-drug in-db" onclick="searchDrug('Fenbendazole')">Fenbendazole <small>(펜벤다졸)</small></span>
+          <span class="community-drug in-db" onclick="searchDrug('Ivermectin')">Ivermectin <small>(이버멕틴)</small></span>
+          <span class="community-drug in-db" onclick="searchDrug('Artesunate')">Artesunate <small>(아르테수네이트)</small></span>
+          <span class="community-drug in-db" onclick="searchDrug('Disulfiram')">Disulfiram <small>(디설피람)</small></span>
+          <span class="community-drug in-db" onclick="searchDrug('Itraconazole')">Itraconazole <small>(이트라코나졸)</small></span>
+          <span class="community-drug in-db" onclick="searchDrug('Doxycycline')">Doxycycline <small>(독시사이클린)</small></span>
+          <span class="community-drug in-db" onclick="searchDrug('Azithromycin')">Azithromycin <small>(아지스로마이신)</small></span>
+          <span class="community-drug not-db">Thalidomide <small>(탈리도마이드)*</small></span>
+          <span class="community-drug in-db" onclick="searchDrug('Celecoxib')">Celecoxib <small>(셀레콕시브)</small></span>
+          <span class="community-drug in-db" onclick="searchDrug('Niclosamide')">Niclosamide <small>(니클로사미드)</small></span>
+          <span class="community-drug not-db">Pyrvinium <small>(피르비늄)*</small></span>
+          <span class="community-drug in-db" onclick="searchDrug('Mebendazole')">Mebendazole <small>(메벤다졸)</small></span>
+          <span class="community-drug in-db" onclick="searchDrug('Albendazole')">Albendazole <small>(알벤다졸)</small></span>
+        </div>
+        <p class="db-note">* 표시: ReDO_DB에 별도 등재되어 있지 않거나 별명으로 등재</p>
+      </div>
+      <div class="community-cat">
+        <h3>🟠 대사 관여 / 면역 조절 / 주요 프로토콜</h3>
+        <div class="community-drug-list">
+          <span class="community-drug in-db" onclick="searchDrug('Cholecalciferol')">Vitamin D3 <small>(콜레칼시페롤)</small></span>
+          <span class="community-drug in-db" onclick="searchDrug('Metformin')">Metformin <small>(메트포르민)</small></span>
+          <span class="community-drug in-db" onclick="searchDrug('Simvastatin')">Statin류 <small>(심바스타틴 등)</small></span>
+          <span class="community-drug in-db" onclick="searchDrug('Melatonin')">Melatonin <small>(멜라토닌)</small></span>
+          <span class="community-drug in-db" onclick="searchDrug('Cimetidine')">Cimetidine <small>(시메티딘)</small></span>
+          <span class="community-drug in-db" onclick="searchDrug('Propranolol')">Propranolol <small>(프로프라놀올)</small></span>
+          <span class="community-drug in-db" onclick="searchDrug('Sirolimus')">Sirolimus/Rapamycin <small>(라파마이신)</small></span>
+          <span class="community-drug not-db">Cyproheptadine <small>(세라펩타아제)*</small></span>
+          <span class="community-drug not-db">Methionine <small>(메티오니나아제)*</small></span>
+          <span class="community-drug in-db" onclick="searchDrug('Naltrexone')">Naltrexone <small>(날트렉손)</small></span>
+          <span class="community-drug in-db" onclick="searchDrug('Cannabidiol')">CBD <small>(카나비디올)</small></span>
+          <span class="community-drug in-db" onclick="searchDrug('Omeprazole')">Omeprazole <small>(오메프라졸)</small></span>
+        </div>
+      </div>
+      <div class="community-cat">
+        <h3>🟢 면역 증강 / 보조 요법</h3>
+        <div class="community-drug-list">
+          <span class="community-drug in-db" onclick="searchDrug('Omega 3')">Omega-3 <small>(오메가-3)</small></span>
+          <span class="community-drug in-db" onclick="searchDrug('Ascorbic acid')">Vitamin C <small>(고용량)</small></span>
+          <span class="community-drug in-db" onclick="searchDrug('Melatonin')">Melatonin <small>(멜라토닌)</small></span>
+          <span class="community-drug not-db">Curcumin <small>(커큐민)*</small></span>
+          <span class="community-drug not-db">Berberine <small>(베르베린)*</small></span>
+          <span class="community-drug not-db">EGCG <small>(녹차추출물)*</small></span>
+          <span class="community-drug not-db">Resveratrol <small>(레스베라트롤)*</small></span>
+          <span class="community-drug not-db">MSM*</span>
+          <span class="community-drug not-db">Quercetin <small>(케르세틴)*</small></span>
+          <span class="community-drug not-db">Bromelain <small>(브로멜라인)*</small></span>
+          <span class="community-drug not-db">MCP <small>(변형감귤펙틴)*</small></span>
+          <span class="community-drug not-db">TUDCA*</span>
+          <span class="community-drug not-db">Probiotics <small>(프로바이오틱스)*</small></span>
+        </div>
+        <p class="db-note">* ReDO_DB는 처방 가능한 약물 중심 DB로, 보충제·천연물은 등재 범위 외일 수 있습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN TABLE SECTION -->
+  <section class="section" id="tableSection">
+    <div class="section-title">
+      📋 전체 약물 목록
+      <span class="badge" id="tabLabel">전체 373개</span>
+    </div>
+
+    <!-- Priority Tabs -->
+    <div class="priority-tabs no-print">
+      <button class="tab-btn" data-tab="community" onclick="setTab('community')">⭐ 커뮤니티 약물</button>
+      <button class="tab-btn" data-tab="p1" onclick="setTab('p1')">🏆 1순위 (황금기준)</button>
+      <button class="tab-btn" data-tab="p2" onclick="setTab('p2')">🔬 2순위 (임상+인간)</button>
+      <button class="tab-btn" data-tab="p3" onclick="setTab('p3')">🧪 3순위 (기초연구)</button>
+      <button class="tab-btn active" data-tab="all" onclick="setTab('all')">📋 전체</button>
+    </div>
+
+    <!-- Search -->
+    <div class="search-bar no-print">
+      <div class="search-input-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="약물명, 동의어, 용도 검색..." oninput="filterTable()">
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+        <span class="filter-label">필터:</span>
+        <div class="filter-group">
+          <button class="filter-btn" id="f-who" onclick="toggleFilter('who')">WHO 필수의약품</button>
+          <button class="filter-btn" id="f-offpatent" onclick="toggleFilter('offpatent')">특허 만료</button>
+          <button class="filter-btn" id="f-trials" onclick="toggleFilter('trials')">임상시험 있음</button>
+          <button class="filter-btn" id="f-human" onclick="toggleFilter('human')">인간 데이터</button>
+          <button class="filter-btn" id="f-reset" onclick="resetFilters()" style="color:var(--red);border-color:var(--red)">초기화</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <div class="table-info">
+        <span>클릭하면 상세 정보(분자 타깃, 링크)를 볼 수 있습니다</span>
+        <span class="result-count" id="resultCount">373개 표시 중</span>
+      </div>
+      <div class="table-scroll">
+        <table id="mainTable">
+          <thead>
+            <tr>
+              <th>약물명 (Drug)</th>
+              <th>동의어</th>
+              <th class="hide-mobile">원래 용도</th>
+              <th title="WHO 필수의약품 등재 여부">WHO</th>
+              <th title="특허 만료 여부 (저렴 구입 가능)">특허만료</th>
+              <th title="근거 수준: 세포·동물·증례·관찰·임상·인간 (●=있음)">근거 수준</th>
+              <th title="6점 만점 종합 점수">점수</th>
+              <th class="hide-mobile">업데이트</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+        <div class="empty-msg" id="emptyMsg" style="display:none">검색 결과가 없습니다.</div>
+      </div>
+      <div class="ev-legend no-print">
+        <strong>근거 수준:</strong>
+        <span class="ev-legend-item"><span class="ev-dot vitro on"></span> 세포실험(In vitro)</span>
+        <span class="ev-legend-item"><span class="ev-dot vivo on"></span> 동물실험(In vivo)</span>
+        <span class="ev-legend-item"><span class="ev-dot cases on"></span> 증례보고(Cases)</span>
+        <span class="ev-legend-item"><span class="ev-dot obs on"></span> 관찰연구(Obs.)</span>
+        <span class="ev-legend-item"><span class="ev-dot trials on"></span> 임상시험(Trials)</span>
+        <span class="ev-legend-item"><span class="ev-dot human on"></span> 인간데이터(Human)</span>
+        <span class="ev-legend-item"><span class="ev-dot off"></span> 없음</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOURCE NOTE -->
+  <div style="text-align:center;font-size:0.75rem;color:var(--text3);margin-top:20px;padding-bottom:30px;">
+    데이터 출처: <a href="https://data.tp53.org.uk/redo_db.php" target="_blank" style="color:var(--accent)">ReDO_DB (George Pantziarka TP53 Trust)</a> · 
+    원문 인용: Pantziarka et al. (2018) ecancer 12 886 · 
+    본 페이지는 비상업적 교육 목적으로 제작되었습니다.
+  </div>
+
+</main>
+
+<script>
+// ── DATA ──
+const DRUGS = [
+  ["Abacavir","1592U89","Anti-retroviral","Yes","Yes","Yes","No","Yes","No","Yes","Yes","pol; gag-pol","2021-10-25","https://www.drugbank.ca/drugs/DB01048","https://pubchem.ncbi.nlm.nih.gov/compound/136470-78-5","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Abacavir+OR+1592U89)+AND+cancer"],
+  ["Acarbose","","Diabetes","No","Yes","No","Yes","No","No","Yes","Yes","MGAM; SI; AMY2A; GAA","2022-08-09","https://www.drugbank.ca/drugs/DB00284","https://pubchem.ncbi.nlm.nih.gov/compound/56180-94-0","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Acarbose)+AND+cancer"],
+  ["Acetaminophen","Paracetamol","Analgesia","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","PTGS2; SLC6A4; SLC6A2; PTGS1; PTGES3; TRPV1","2017-07-13","https://www.drugbank.ca/drugs/DB00316","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Acetaminophen+OR+Paracetamol)+AND+cancer"],
+  ["Acetazolamide","","Glaucoma, diuretic, epilepsy","Yes","Yes","Yes","Yes","No","No","Yes","Yes","CA1; CA2; CA4; CA12; CA14; CA3; CA7; AQP1","2017-07-12","https://www.drugbank.ca/drugs/DB00819","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Acetazolamide)+AND+cancer"],
+  ["Acetylsalicylic Acid","Aspirin","Analgesia, anti-inflammatory, heart prophylaxis","Yes","Yes","Yes","Yes","No","Yes","Yes","Yes","PTGS1; HMGCR; PTGS2; AKR1C1; PRKAA1; TP53; MYC","2017-08-23","https://www.drugbank.ca/drugs/DB00945","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Acetylsalicylic+Acid+OR+Aspirin)+AND+cancer"],
+  ["Adapalene","","Acne","No","Yes","Yes","Yes","No","No","No","No","RARB; RARG; RXRB; RXRG; RXRA","2020-02-05","https://www.drugbank.ca/drugs/DB00210","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Adapalene)+AND+cancer"],
+  ["Ademetionine","AdoMet, S-Adenosylmethionine","Liver disease","No","Yes","Yes","Yes","No","No","Yes","Yes","COMT; GNMT; AMD1; MAT2A","2018-09-19","https://www.drugbank.ca/drugs/DB00118","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Ademetionine)+AND+cancer"],
+  ["Agomelatine","","Insomnia","No","No","Yes","No","No","No","No","No","HTR2C; MTNR1A; MTNR1B","2017-07-13","https://www.drugbank.ca/drugs/DB06594","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Agomelatine)+AND+cancer"],
+  ["Albendazole","","Parasitic infection","Yes","Yes","Yes","Yes","Yes","No","Yes","Yes","TUBA1A; TUBB4B","2021-07-23","https://www.drugbank.ca/drugs/DB00518","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Albendazole)+AND+cancer"],
+  ["Alendronic Acid","Alendronate","Osteoporosis","No","Yes","Yes","Yes","Yes","No","Yes","Yes","FDPS; PTPN4; ATP6V1A","2018-03-12","https://www.drugbank.ca/drugs/DB00630","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Alendronic+Acid)+AND+cancer"],
+  ["Aliskiren","","Essential hypertension","No","Yes","Yes","No","No","No","No","No","REN","2021-08-02","","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Aliskiren)+AND+cancer"],
+  ["Allopurinol","","Gout","Yes","Yes","Yes","Yes","No","No","Yes","Yes","XDH","2017-07-14","https://www.drugbank.ca/drugs/DB00437","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Allopurinol)+AND+cancer"],
+  ["Alpha-Lipoic Acid","Thioctic Acid, Lipoic Acid","Diabetic neuropathy","No","Yes","Yes","Yes","Yes","No","Yes","Yes","LIPT1; SLC5A6; LIAS","2017-07-14","https://www.drugbank.ca/drugs/DB00166","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Alpha-Lipoic+Acid)+AND+cancer"],
+  ["Amantadine","","Parkinson's Disease, Influenza A","No","Yes","Yes","No","No","No","No","No","GRIN3A; DRD2; CHRNA7","2017-07-18","https://www.drugbank.ca/drugs/DB00915","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Amantadine)+AND+cancer"],
+  ["Ambroxol","","Excessive mucus","No","Yes","Yes","Yes","No","No","No","No","","2021-01-19","https://www.drugbank.ca/drugs/DB06742","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Ambroxol)+AND+cancer"],
+  ["Amiloride","","Congestive heart failure, hypertension","Yes","Yes","Yes","Yes","No","No","No","No","SCNN1A; SCNN1B; PLAU","2017-07-18","https://www.drugbank.ca/drugs/DB00594","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Amiloride)+AND+cancer"],
+  ["Aminophylline","","Asthma, chronic bronchitis","No","Yes","Yes","Yes","No","No","Yes","Yes","PDE3A; ADORA1; HDAC2","2020-02-17","https://www.drugbank.ca/drugs/DB01223","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Aminophylline)+AND+cancer"],
+  ["Amiodarone","","Ventricular tachycardia/fibrillation","Yes","Yes","Yes","Yes","No","No","Yes","Yes","KCNH2; ADRB1; PPARG; PPARA","2017-07-19","https://www.drugbank.ca/drugs/DB01118","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Amiodarone)+AND+cancer"],
+  ["Amitriptyline","","Depression","Yes","Yes","Yes","Yes","No","No","No","No","SLC6A2; SLC6A4; HTR2A; NTRK1; NTRK2","2017-08-07","https://www.drugbank.ca/drugs/DB00321","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Amitriptyline)+AND+cancer"],
+  ["Amlodipine","","Hypertension","Yes","Yes","Yes","Yes","No","No","No","No","CACNA1C; SMPD1","2017-08-07","https://www.drugbank.ca/drugs/DB00381","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Amlodipine)+AND+cancer"],
+  ["Amodiaquine","","Malaria","Yes","Yes","Yes","No","No","No","No","No","HNMT","2017-08-07","https://www.drugbank.ca/drugs/DB00613","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Amodiaquine)+AND+cancer"],
+  ["Anakinra","","RA, NOMID, CAPS","No","Yes","Yes","Yes","Yes","No","Yes","Yes","IL1R1","2021-08-02","https://www.drugbank.ca/drugs/DB00026","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Anakinra)+AND+cancer"],
+  ["Aprepitant","","Nausea, vomiting","Yes","Yes","Yes","Yes","No","No","Yes","Yes","TACR1","2021-08-02","https://www.drugbank.ca/drugs/DB00673","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Aprepitant)+AND+cancer"],
+  ["Aripiprazole","","Bipolar disorder, depression, autism","Yes","Yes","Yes","Yes","No","No","No","No","DRD2; HTR2A; HTR1A","2021-02-01","https://www.drugbank.ca/drugs/DB01238","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Aripiprazole)+AND+cancer"],
+  ["Artesunate","","Malaria","Yes","Yes","Yes","Yes","Yes","No","Yes","Yes","EXP-1","2017-08-21","https://www.drugbank.ca/drugs/DB09274","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Artesunate)+AND+cancer"],
+  ["Ascorbic acid","Ascorbate, Vitamin C","Scurvy","Yes","Yes","Yes","Yes","Yes","No","Yes","Yes","SLC23A2; EGLN1; EGLN2; ALKBH2","2017-08-09","https://www.drugbank.ca/drugs/DB00126","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Ascorbic+acid+OR+Vitamin+C)+AND+cancer"],
+  ["Atenolol","","Hypertension, angina","Yes","Yes","Yes","No","No","No","No","No","ADRB1; ADRB2","2017-08-21","https://www.drugbank.ca/drugs/DB00335","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Atenolol)+AND+cancer"],
+  ["Atorvastatin","","Coronary heart disease","Yes","Yes","Yes","Yes","No","Yes","Yes","Yes","HMGCR; DPP4; AHR; HDAC2","2017-08-21","https://www.drugbank.ca/drugs/DB01076","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Atorvastatin)+AND+cancer"],
+  ["Atovaquone","","Pneumocystis carinii pneumonia","No","Yes","Yes","Yes","No","Yes","Yes","Yes","MT-CYB; DHODH","2017-08-21","https://www.drugbank.ca/drugs/DB01117","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Atovaquone)+AND+cancer"],
+  ["Auranofin","","RA (류마티스 관절염)","No","Yes","Yes","Yes","No","No","Yes","Yes","ESRRA; ESRRB; PRDX5; IKBKB","2017-08-23","https://www.drugbank.ca/drugs/DB00995","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Auranofin)+AND+cancer"],
+  ["Azithromycin","","Bacterial infection, CAP, PID","Yes","Yes","Yes","Yes","No","No","Yes","Yes","PADI4","2017-08-23","https://www.drugbank.ca/drugs/DB00207","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Azithromycin)+AND+cancer"],
+  ["Benzatropine","Benztropine","Parkinson's Disease","No","Yes","Yes","Yes","No","No","No","No","CHRM1; SLC6A3","2018-03-12","https://www.drugbank.ca/drugs/DB00245","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Benzatropine)+AND+cancer"],
+  ["Bezafibrate","","Hyperlipidemia","No","Yes","Yes","Yes","No","No","Yes","Yes","PPARD; PPARG; PPARA","2017-08-24","https://www.drugbank.ca/drugs/DB01393","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Bezafibrate)+AND+cancer"],
+  ["Bosentan","","PAH (폐동맥 고혈압)","No","Yes","Yes","Yes","No","No","Yes","Yes","EDNRB; EDNRA","2017-08-24","https://www.drugbank.ca/drugs/DB00559","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Bosentan)+AND+cancer"],
+  ["Bromocriptine","","Parkinson's Disease, hyperprolactinemia","Yes","Yes","Yes","Yes","No","No","Yes","Yes","DRD2; DRD3; HTR1D","2017-08-24","https://www.drugbank.ca/drugs/DB01200","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Bromocriptine)+AND+cancer"],
+  ["Bumetanide","","Edema","Yes","Yes","Yes","Yes","No","No","Yes","Yes","SLC12A1; SLC12A2; CFTR","2021-10-25","https://www.drugbank.ca/drugs/DB00887","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Bumetanide)+AND+cancer"],
+  ["Bupivacaine","","Anesthetic","Yes","Yes","Yes","Yes","No","No","Yes","Yes","SCN10A; PTGER1","2022-10-18","https://www.drugbank.ca/drugs/DB00297","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Bupivacaine)+AND+cancer"],
+  ["Cabergoline","","Hyperprolactinemia","Yes","Yes","Yes","Yes","No","No","Yes","Yes","DRD2; HTR2B; DRD3","2017-08-23","https://www.drugbank.ca/drugs/DB00248","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Cabergoline)+AND+cancer"],
+  ["Caffeine","","Newborn apnea","No","Yes","Yes","Yes","Yes","Yes","Yes","Yes","ADORA1; ADORA2A; PIK3CA; ATM","2021-08-03","https://www.drugbank.ca/drugs/DB00201","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Caffeine)+AND+cancer"],
+  ["Calcipotriol","Vitamin D3","Psoriasis","Yes","Yes","Yes","Yes","Yes","No","Yes","Yes","VDR","2019-03-21","https://www.drugbank.ca/drugs/DB02300","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Calcipotriol)+AND+cancer"],
+  ["Calcitriol","Vitamin D3","Vitamin D deficiency","Yes","Yes","Yes","Yes","Yes","No","Yes","Yes","VDR; HOXA10","2017-08-23","https://www.drugbank.ca/drugs/DB00136","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Calcitriol)+AND+cancer"],
+  ["Canagliflozin","","Diabetes","Yes","No","Yes","Yes","No","No","Yes","Yes","SLC5A2","2021-08-09","https://www.drugbank.ca/drugs/DB08907","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Canagliflozin)+AND+cancer"],
+  ["Candesartan","","Hypertension","No","Yes","Yes","Yes","No","No","Yes","Yes","AGTR1","2017-08-23","https://www.drugbank.ca/drugs/DB13919","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Candesartan)+AND+cancer"],
+  ["Cannabidiol","CBD","Seizures (Lennox-Gastaut, Dravet)","No","Yes","Yes","Yes","Yes","No","Yes","Yes","CNR1; CNR2; PPARG; TRPV1; IDO1","2021-11-24","https://www.drugbank.ca/drugs/DB09061","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Cannabidiol)+AND+cancer"],
+  ["Captopril","","Hypertension","No","Yes","Yes","Yes","No","No","Yes","Yes","ACE; MMP2; MMP9","2017-08-25","https://www.drugbank.ca/drugs/DB01197","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Captopril)+AND+cancer"],
+  ["Carvedilol","","Hypertension","Yes","Yes","Yes","Yes","No","Yes","Yes","Yes","ADRB1; ADRA1A; VEGFA; HIF1A","2021-02-27","https://www.drugbank.ca/drugs/DB01136","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Carvedilol)+AND+cancer"],
+  ["Celecoxib","","OA, RA, acute pain","No","Yes","Yes","Yes","Yes","Yes","Yes","Yes","PTGS2; STAT3; NEU1","2021-08-03","https://www.drugbank.ca/drugs/DB00482","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Celecoxib)+AND+cancer"],
+  ["Chloroquine","","Malaria, Amebiasis","Yes","Yes","Yes","Yes","Yes","No","Yes","Yes","ACKR1; TNF; TLR9; HMGB1","2021-08-06","https://www.drugbank.ca/drugs/DB00608","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Chloroquine)+AND+cancer"],
+  ["Chlorpromazine","","Psychotic disorders, nausea","Yes","Yes","Yes","Yes","No","No","Yes","Yes","DRD2; HTR2A; ADRA1A; SMPD1","2017-08-25","https://www.drugbank.ca/drugs/DB00477","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Chlorpromazine)+AND+cancer"],
+  ["Cholecalciferol","Colecalciferol, Vitamin D3","Vitamin D deficiency","Yes","Yes","Yes","Yes","Yes","No","Yes","Yes","VDR","2017-08-25","https://www.drugbank.ca/drugs/DB00169","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Cholecalciferol)+AND+cancer"],
+  ["Cidofovir","","CMV-retinitis in AIDS","No","Yes","Yes","Yes","Yes","No","Yes","Yes","UL54","2021-08-06","https://www.drugbank.ca/drugs/DB00369","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Cidofovir)+AND+cancer"],
+  ["Cimetidine","","Duodenal/gastric ulcers, GERD","No","Yes","Yes","Yes","Yes","No","Yes","Yes","HRH2","2017-08-31","https://www.drugbank.ca/drugs/DB00501","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Cimetidine)+AND+cancer"],
+  ["Ciprofloxacin","","Antibiotic","Yes","Yes","Yes","Yes","No","No","Yes","Yes","gyrA; TOP2A; KCNH2","2017-09-21","https://www.drugbank.ca/drugs/DB00537","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Ciprofloxacin)+AND+cancer"],
+  ["Citalopram","","Depression","Yes","Yes","Yes","Yes","No","No","Yes","Yes","SLC6A4; HRH1","2017-08-31","https://www.drugbank.ca/drugs/DB00215","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Citalopram)+AND+cancer"],
+  ["Clarithromycin","","Bacterial infections","Yes","Yes","Yes","Yes","Yes","No","Yes","Yes","rplJ; KCNH2","2017-08-31","https://www.drugbank.ca/drugs/DB01211","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Clarithromycin)+AND+cancer"],
+  ["Clofazimine","","Leprosy","Yes","Yes","Yes","Yes","No","No","Yes","Yes","PPARG; KCNA3","2019-03-19","https://www.drugbank.ca/drugs/DB00845","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Clofazimine)+AND+cancer"],
+  ["Colchicine","","Gout","No","Yes","Yes","Yes","No","No","Yes","Yes","TUBB","2017-08-31","https://www.drugbank.ca/drugs/DB01394","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Colchicine)+AND+cancer"],
+  ["Cyclosporine","Cyclosporin","Graft versus host disease","No","Yes","Yes","Yes","Yes","No","Yes","Yes","CAMLG; PPP3CA; PPIA","2021-02-01","https://www.drugbank.ca/drugs/DB00091","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Cyclosporine)+AND+cancer"],
+  ["Cyproheptadine","","Allergies","No","Yes","Yes","Yes","Yes","Yes","Yes","Yes","HRH1; HTR2A; HTR2C","2020-02-17","https://www.drugbank.ca/drugs/DB00434","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Cyproheptadine)+AND+cancer"],
+  ["Dalteparin","","DVT prophylaxis, unstable angina","Yes","Yes","Yes","Yes","Yes","No","Yes","Yes","SERPINC1; VEGFA; SELP","2017-08-31","https://www.drugbank.ca/drugs/DB06779","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Dalteparin)+AND+cancer"],
+  ["Dapsone","","Dermatitis herpetiformis, leprosy","Yes","Yes","Yes","Yes","No","No","Yes","Yes","folP2; folP1","2017-09-01","https://www.drugbank.ca/drugs/DB00250","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Dapsone)+AND+cancer"],
+  ["Dapagliflozin","","Diabetes","Yes","No","Yes","Yes","Yes","No","Yes","Yes","SLC5A2","2022-02-09","https://www.drugbank.ca/drugs/DB06292","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Dapagliflozin)+AND+cancer"],
+  ["Deferasirox","","Chronic iron overload","Yes","Yes","Yes","Yes","No","No","Yes","Yes","","2021-08-10","https://www.drugbank.ca/drugs/DB01609","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Deferasirox)+AND+cancer"],
+  ["Deferoxamine","Desferrioxamine","Acute iron intoxication","Yes","Yes","Yes","Yes","No","No","Yes","Yes","APP","2017-09-01","https://www.drugbank.ca/drugs/DB00746","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Deferoxamine)+AND+cancer"],
+  ["Desmopressin","","Diabetes Insipidus, hemophilia A","Yes","Yes","Yes","Yes","No","No","Yes","Yes","AVPR2; AVPR1A","2017-09-01","https://www.drugbank.ca/drugs/DB00035","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Desmopressin)+AND+cancer"],
+  ["Diclofenac","","OA, RA, AS","No","Yes","Yes","Yes","Yes","No","Yes","Yes","PTGS2; PTGS1","2017-09-01","https://www.drugbank.ca/drugs/DB00586","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Diclofenac)+AND+cancer"],
+  ["Digoxin","","Heart failure, atrial fibrillation","Yes","Yes","Yes","Yes","No","No","Yes","Yes","ATP1A2; ATP1A3; SLCO4C1","2017-09-01","https://www.drugbank.ca/drugs/DB00390","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Digoxin)+AND+cancer"],
+  ["Dimethyl Fumarate","","Psoriasis, Multiple Sclerosis","No","Yes","Yes","Yes","No","No","Yes","Yes","KEAP1; RELA","2017-09-01","https://www.drugbank.ca/drugs/DB08908","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Dimethyl+Fumarate)+AND+cancer"],
+  ["Dipyridamole","","Thromboembolism Prophylaxis","No","Yes","Yes","Yes","No","No","Yes","Yes","PDE10A; PDE5A; ADA","2017-09-01","https://www.drugbank.ca/drugs/DB00975","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Dipyridamole)+AND+cancer"],
+  ["Disulfiram","Antabuse","Chronic alcoholism","No","Yes","Yes","Yes","Yes","No","Yes","Yes","DBH; ALDH3A2; ALDH2","2021-08-06","https://www.drugbank.ca/drugs/DB00822","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Disulfiram+OR+Antabuse)+AND+cancer"],
+  ["Donepezil","","Alzheimer's Disease","No","Yes","Yes","Yes","No","No","Yes","Yes","ACHE; HTR2A; IL1B; NFKB2","2017-10-17","https://www.drugbank.ca/drugs/DB00843","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Donepezil)+AND+cancer"],
+  ["Doxycycline","","Respiratory/urinary tract/ophthalmic infection","Yes","Yes","Yes","Yes","Yes","No","Yes","Yes","","2017-10-17","https://www.drugbank.ca/drugs/DB00254","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Doxycycline)+AND+cancer"],
+  ["Dutasteride","","Benign prostatic hyperplasia","No","Yes","Yes","Yes","Yes","No","Yes","Yes","SRD5A1; SRD5A3; SRD5A2","2018-08-14","https://www.drugbank.ca/drugs/DB01126","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Dutasteride)+AND+cancer"],
+  ["Efavirenz","","Anti-retroviral","Yes","Yes","Yes","Yes","No","No","Yes","Yes","gag-pol; pol","2017-10-17","https://www.drugbank.ca/drugs/DB00625","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Efavirenz)+AND+cancer"],
+  ["Enalapril","","Hypertension","Yes","Yes","Yes","Yes","No","No","Yes","Yes","ACE","2017-10-26","https://www.drugbank.ca/drugs/DB00584","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Enalapril)+AND+cancer"],
+  ["Enoxaparin","","Prophylaxis of venous thromboembolism","Yes","Yes","Yes","Yes","No","No","Yes","Yes","SERPINC1; F10; F2","2017-10-26","https://www.drugbank.ca/drugs/DB01225","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Enoxaparin)+AND+cancer"],
+  ["Esomeprazole","","Antacid","No","Yes","Yes","Yes","Yes","Yes","Yes","Yes","ATP4A; ATP4B; DDAH1","2017-10-26","https://www.drugbank.ca/drugs/DB00736","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Esomeprazole)+AND+cancer"],
+  ["Etodolac","","Analgesia","No","Yes","Yes","Yes","Yes","No","Yes","Yes","PTGS2; PTGS1; RXRA","2017-10-26","https://www.drugbank.ca/drugs/DB00749","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Etodolac)+AND+cancer"],
+  ["Ezetimibe","","Familial hypercholesterolemia","No","Yes","Yes","Yes","No","No","Yes","Yes","NPC1L1; SOAT1","2025-12-17","https://www.drugbank.ca/drugs/DB00973","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Ezetimibe)+AND+cancer"],
+  ["Famotidine","","Antacid","No","Yes","Yes","Yes","No","No","Yes","Yes","HRH2","2017-10-26","https://www.drugbank.ca/drugs/DB00927","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Famotidine)+AND+cancer"],
+  ["Fenofibrate","","Hyperlipidemia","No","Yes","Yes","Yes","Yes","No","Yes","Yes","PPARA; NR1I2; MMP25","2017-10-26","https://www.drugbank.ca/drugs/DB01039","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Fenofibrate)+AND+cancer"],
+  ["Finasteride","","Benign prostatic hyperplasia","No","Yes","Yes","Yes","Yes","Yes","Yes","Yes","SRD5A2; SRD5A3; SRD5A1","2018-08-14","https://www.drugbank.ca/drugs/DB01216","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Finasteride)+AND+cancer"],
+  ["Fingolimod","","Multiple Sclerosis","No","Yes","Yes","Yes","No","No","Yes","Yes","DRD3; SPHK1; S1PR1; HDAC1","2021-08-06","https://www.drugbank.ca/drugs/DB08868","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Fingolimod)+AND+cancer"],
+  ["Flubendazole","","Parasitic infection","No","Yes","Yes","Yes","No","No","No","No","","2017-10-30","https://www.drugbank.ca/drugs/DB08974","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Flubendazole)+AND+cancer"],
+  ["Flucytosine","5-Fluorocytosine","Candida and/or Cryptococcus","Yes","Yes","Yes","Yes","No","No","Yes","Yes","TMP1; DNMT1","2018-06-27","https://www.drugbank.ca/drugs/DB01099","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Flucytosine)+AND+cancer"],
+  ["Fluoxetine","Prozac","Depression","Yes","Yes","Yes","Yes","No","No","No","No","SLC6A4; HTR2C; KCNH2","2017-10-30","https://www.drugbank.ca/drugs/DB00472","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Fluoxetine+OR+Prozac)+AND+cancer"],
+  ["Fluphenazine","","Psychotic disorders","Yes","Yes","Yes","Yes","No","No","Yes","Yes","DRD2; DRD1; AR; HTR2A","2019-05-01","https://www.drugbank.ca/drugs/DB00623","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Fluphenazine)+AND+cancer"],
+  ["Flurbiprofen","","Analgesia","No","Yes","Yes","Yes","No","Yes","Yes","Yes","PTGS2; PTGS1","2018-08-09","https://www.drugbank.ca/drugs/DB00712","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Flurbiprofen)+AND+cancer"],
+  ["Fluvastatin","","Hyperlipidemia","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","HMGCR; HDAC2","2017-10-31","https://www.drugbank.ca/drugs/DB01095","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Fluvastatin)+AND+cancer"],
+  ["Ganciclovir","","Anti-viral","No","Yes","Yes","Yes","Yes","No","Yes","Yes","TK","2018-06-28","https://www.drugbank.ca/drugs/DB01004","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Ganciclovir)+AND+cancer"],
+  ["Griseofulvin","","Fungal infections","Yes","Yes","Yes","Yes","Yes","No","No","Yes","KRT12","2017-11-02","https://www.drugbank.ca/drugs/DB00400","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Griseofulvin)+AND+cancer"],
+  ["Hydroxychloroquine","","Malaria","Yes","Yes","Yes","Yes","Yes","No","Yes","Yes","TLR7; TLR9; ACE2","2018-01-04","https://www.drugbank.ca/drugs/DB01611","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Hydroxychloroquine)+AND+cancer"],
+  ["Hydralazine","","Hypertension","Yes","Yes","Yes","Yes","No","No","Yes","Yes","AOC3; HIF1A; P4HA1","2017-11-07","https://www.drugbank.ca/drugs/DB01275","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Hydralazine)+AND+cancer"],
+  ["Ibuprofen","","Analgesia","Yes","Yes","Yes","Yes","No","No","Yes","Yes","PTGS2; CXCR2; BCL2; PPARG","2017-11-07","https://www.drugbank.ca/drugs/DB01050","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Ibuprofen)+AND+cancer"],
+  ["Indomethacin","Indometacin","Analgesia","No","Yes","Yes","Yes","Yes","No","Yes","Yes","PTGS2; PLA2G2A; PPARG","2017-11-20","https://www.drugbank.ca/drugs/DB00328","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Indomethacin)+AND+cancer"],
+  ["Itraconazole","","Fungal infections","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","ERG11","2017-11-20","https://www.drugbank.ca/drugs/DB01167","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Itraconazole)+AND+cancer"],
+  ["Ivermectin","","Parasitic infection","Yes","Yes","Yes","Yes","No","No","Yes","Yes","glc-2; glc-1","2017-06-09","https://www.drugbank.ca/drugs/DB00602","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Ivermectin)+AND+cancer"],
+  ["Ketamine","","Anesthetic","Yes","Yes","Yes","Yes","No","No","Yes","Yes","GRIN3A; NOS1; TACR1; DRD2","2018-08-09","https://www.drugbank.ca/drugs/DB01221","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Ketamine)+AND+cancer"],
+  ["Ketoconazole","","Fungal infections","No","Yes","Yes","Yes","Yes","Yes","Yes","Yes","CYP17A1; AR; NR1I2","2017-11-27","https://www.drugbank.ca/drugs/DB01026","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Ketoconazole)+AND+cancer"],
+  ["Ketorolac","","Post-operative analgesia","No","Yes","Yes","Yes","Yes","Yes","Yes","Yes","PTGS2; PTGS1","2017-11-29","https://www.drugbank.ca/drugs/DB00465","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Ketorolac)+AND+cancer"],
+  ["Lansoprazole","","Antacid","No","Yes","Yes","Yes","No","Yes","Yes","Yes","ATP4A; MAPT","2021-08-09","https://www.drugbank.ca/drugs/DB00448","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Lansoprazole)+AND+cancer"],
+  ["Leflunomide","","Arthritis","No","Yes","Yes","Yes","No","No","Yes","Yes","DHODH; AHR; PTK2B","2020-02-17","https://www.drugbank.ca/drugs/DB01097","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Leflunomide)+AND+cancer"],
+  ["Levamisole","","Parasitic infection","Yes","Yes","Yes","Yes","Yes","No","Yes","Yes","CHRNA3; ALPL","2019-01-22","https://www.drugbank.ca/drugs/DB00848","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Levamisole)+AND+cancer"],
+  ["Levetiracetam","","Epilepsy","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","HTR3A; CACNA1B; SV2A","2021-08-17","https://www.drugbank.ca/drugs/DB01202","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Levetiracetam)+AND+cancer"],
+  ["Levonorgestrel","","Contraceptive","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","PGR; SRD5A1; ESR1; AR","2018-08-09","https://www.drugbank.ca/drugs/DB00367","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Levonorgestrel)+AND+cancer"],
+  ["Lidocaine","","Anesthetic","Yes","Yes","Yes","Yes","No","No","Yes","Yes","SCN11A; SCN9A; EGFR","2017-12-06","https://www.drugbank.ca/drugs/DB00281","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Lidocaine)+AND+cancer"],
+  ["Liothyronine","","Hypothyroidism","No","Yes","Yes","Yes","Yes","Yes","Yes","Yes","THRA; THRB; PCNA","2020-11-18","https://www.drugbank.ca/drugs/DB00279","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Liothyronine)+AND+cancer"],
+  ["Lithium","","Bipolar disorders","No","Yes","Yes","Yes","Yes","No","Yes","Yes","","2017-12-06","","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Lithium)+AND+cancer"],
+  ["Lopinavir","","Anti-retroviral","Yes","Yes","Yes","Yes","No","No","Yes","Yes","pol","2018-01-29","https://www.drugbank.ca/drugs/DB01601","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Lopinavir)+AND+cancer"],
+  ["Losartan","","Hypertension","Yes","Yes","Yes","Yes","No","Yes","Yes","Yes","EPOR; AGTR1","2021-08-09","https://www.drugbank.ca/drugs/DB00678","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Losartan)+AND+cancer"],
+  ["Lovastatin","","Hyperlipidemia","Yes","Yes","Yes","Yes","Yes","No","Yes","Yes","HMGCR; ITGAL; HDAC2","2017-12-11","https://www.drugbank.ca/drugs/DB00227","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Lovastatin)+AND+cancer"],
+  ["Maraviroc","","Anti-retroviral","No","Yes","Yes","Yes","No","No","Yes","Yes","CCR5","2023-08-03","https://www.drugbank.ca/drugs/DB04835","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Maraviroc)+AND+cancer"],
+  ["Mebendazole","","Parasitic infection","Yes","Yes","Yes","Yes","Yes","No","Yes","Yes","TUBA1A; TUBB4B","2021-08-09","https://www.drugbank.ca/drugs/DB00643","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Mebendazole)+AND+cancer"],
+  ["Mefloquine","","Malaria","Yes","Yes","Yes","Yes","No","No","Yes","Yes","ADORA2A","2021-08-09","https://www.drugbank.ca/drugs/DB00358","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Mefloquine)+AND+cancer"],
+  ["Melatonin","","Insomnia","No","Yes","Yes","Yes","Yes","No","Yes","Yes","MTNR1A; MTNR1B; ESR1; MPO","2017-12-13","https://www.drugbank.ca/drugs/DB01065","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Melatonin)+AND+cancer"],
+  ["Mesalazine","Mesalamine, 5-ASA","Inflammatory bowel disease","Yes","Yes","Yes","Yes","No","No","Yes","Yes","PTGS2; ALOX5; PPARG; NFKB1","2021-08-18","https://www.drugbank.ca/drugs/DB00244","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Mesalazine)+AND+cancer"],
+  ["Metformin","","Diabetes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","SLC47A1; ACACB; PRKAB1; GPD1","2017-12-15","https://www.drugbank.ca/drugs/DB00331","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Metformin)+AND+cancer"],
+  ["Metronidazole","","Bacterial infection","Yes","Yes","Yes","Yes","No","No","Yes","Yes","rdxA","2020-09-07","https://www.drugbank.ca/drugs/DB00916","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Metronidazole)+AND+cancer"],
+  ["Miconazole","","Fungal infections","Yes","Yes","Yes","Yes","No","No","Yes","Yes","ERG11; NOS3; NOS2","2019-08-13","https://www.drugbank.ca/drugs/DB01110","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Miconazole)+AND+cancer"],
+  ["Mifepristone","","Abortifacient","No","Yes","Yes","Yes","Yes","No","Yes","Yes","PGR; NR3C1; KLK3","2017-12-19","https://www.drugbank.ca/drugs/DB00834","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Mifepristone)+AND+cancer"],
+  ["Miltefosine","Hexadecylphosphocholine","Leishmaniasis","Yes","Yes","Yes","Yes","Yes","No","Yes","Yes","PLA2G1B; ABCB1","2020-02-17","https://www.drugbank.ca/drugs/DB09031","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Miltefosine)+AND+cancer"],
+  ["Minocycline","","Antibiotic","No","Yes","Yes","Yes","No","No","Yes","Yes","IL1B; MMP9; VEGFA; CASP3","2017-12-20","https://www.drugbank.ca/drugs/DB01017","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Minocycline)+AND+cancer"],
+  ["Mycophenolate","Mycophenolic acid","Immunosuppressant","No","Yes","Yes","Yes","Yes","No","Yes","Yes","IMPDH2; IMPDH1","2021-08-09","https://www.drugbank.ca/drugs/DB01024","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Mycophenolate)+AND+cancer"],
+  ["Naltrexone","","Opioid receptor antagonist","Yes","Yes","Yes","Yes","Yes","No","Yes","Yes","OPRM1; OPRK1; OPRD1; SIGMAR1","2018-01-03","https://www.drugbank.ca/drugs/DB00704","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Naltrexone)+AND+cancer"],
+  ["Naproxen","","Analgesia","No","Yes","Yes","Yes","Yes","No","Yes","Yes","PTGS1; PTGS2","2018-01-03","https://www.drugbank.ca/drugs/DB00788","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Naproxen)+AND+cancer"],
+  ["Nelfinavir","","Anti-retroviral","No","Yes","Yes","Yes","Yes","No","Yes","Yes","HIV-1 protease","2021-08-09","https://www.drugbank.ca/drugs/DB00220","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Nelfinavir)+AND+cancer"],
+  ["Niclosamide","","Parasitic infection","Yes","Yes","Yes","Yes","No","No","Yes","Yes","","2021-08-09","https://www.drugbank.ca/drugs/DB06803","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Niclosamide)+AND+cancer"],
+  ["Nicotinamide","Niacinamide","Niacin Deficiency, Skin cancer prevention","Yes","Yes","Yes","Yes","No","No","Yes","Yes","PARP1; SIRT5; LDHA","2018-03-01","https://www.drugbank.ca/drugs/DB02701","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Nicotinamide)+AND+cancer"],
+  ["Nifedipine","","Hypertension","Yes","Yes","Yes","Yes","Yes","No","Yes","Yes","CACNA1C; NR1I2","2018-01-03","https://www.drugbank.ca/drugs/DB01115","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Nifedipine)+AND+cancer"],
+  ["Nifurtimox","","Chagas disease","Yes","No","Yes","Yes","Yes","No","Yes","Yes","","2018-01-03","https://www.drugbank.ca/drugs/DB11820","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Nifurtimox)+AND+cancer"],
+  ["Nitroglycerin","Glyceryl trinitrate","Nitro-vasodilator","Yes","Yes","Yes","Yes","Yes","No","Yes","Yes","EGFR; GUCY1A1","2018-01-04","https://www.drugbank.ca/drugs/DB00727","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Nitroglycerin)+AND+cancer"],
+  ["Nitazoxanide","","Anti-protozoal","No","Yes","Yes","Yes","No","No","Yes","Yes","por","2021-08-09","https://www.drugbank.ca/drugs/DB00507","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Nitazoxanide)+AND+cancer"],
+  ["Nitroxoline","","Antibiotic","No","Yes","Yes","Yes","No","No","Yes","Yes","METAP2","2018-01-04","https://www.drugbank.ca/drugs/DB01422","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Nitroxoline)+AND+cancer"],
+  ["Noscapine","","Anti-tussive (기침약)","No","Yes","Yes","Yes","No","No","Yes","Yes","SIGMAR1","2018-01-04","https://www.drugbank.ca/drugs/DB06174","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Noscapine)+AND+cancer"],
+  ["Omega 3","EPA/DHA, Fish Oil","Hyperlipidemia","No","No","Yes","Yes","Yes","Yes","Yes","Yes","PTGS2; FFAR4; PPARA; PPARG","2018-01-31","https://www.drugbank.ca/drugs/DB13961","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Omega+3+OR+Fish+Oil)+AND+cancer"],
+  ["Omeprazole","","Antacid","Yes","Yes","Yes","Yes","Yes","No","Yes","Yes","ATP4A; ATP4B; AHR","2018-01-08","https://www.drugbank.ca/drugs/DB00338","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Omeprazole)+AND+cancer"],
+  ["Pamidronic Acid","Pamidronate","Osteoporosis","No","Yes","Yes","Yes","Yes","No","Yes","Yes","FDPS; GGPS1; CASP3","2018-02-06","https://www.drugbank.ca/drugs/DB00282","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Pamidronic+Acid)+AND+cancer"],
+  ["Pantoprazole","","Antacid","No","Yes","Yes","Yes","Yes","Yes","Yes","Yes","ATP4A; ATP4B; DDAH1","2018-01-10","https://www.drugbank.ca/drugs/DB00213","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Pantoprazole)+AND+cancer"],
+  ["Pentamidine","","Parasitic infection","Yes","Yes","Yes","Yes","No","No","Yes","Yes","TPSAB1; TRDMT1","2018-01-11","https://www.drugbank.ca/drugs/DB00738","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Pentamidine)+AND+cancer"],
+  ["Pentoxifylline","","Peripheral artery disease","No","Yes","Yes","Yes","No","No","Yes","Yes","ADORA2A; TNF; NT5E","2018-01-15","https://www.drugbank.ca/drugs/DB00806","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Pentoxifylline)+AND+cancer"],
+  ["Phenelzine","","Depression","No","Yes","Yes","Yes","No","No","Yes","Yes","MAOA; MAOB; AOC3","2020-03-04","https://www.drugbank.ca/drugs/DB00780","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Phenelzine)+AND+cancer"],
+  ["Phenylbutyrate","Glycerol Phenylbutyrate","Urea cycle disorders","No","Yes","Yes","Yes","Yes","No","Yes","Yes","","2023-08-03","https://www.drugbank.ca/drugs/DB08909","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Phenylbutyrate)+AND+cancer"],
+  ["Phenytoin","","Epilepsy","Yes","Yes","Yes","Yes","No","No","Yes","Yes","SCN5A; SCN1A; KCNH2; CACNA1C","2021-08-09","https://www.drugbank.ca/drugs/DB00252","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Phenytoin)+AND+cancer"],
+  ["Pioglitazone","","Diabetes","No","Yes","Yes","Yes","Yes","No","Yes","Yes","PPARG; MAOB","2018-01-18","https://www.drugbank.ca/drugs/DB01132","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Pioglitazone)+AND+cancer"],
+  ["Pirfenidone","","Anti-fibrotic","No","Yes","Yes","Yes","No","No","Yes","Yes","TGFB1","2023-08-03","https://www.drugbank.ca/drugs/DB04951","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Pirfenidone)+AND+cancer"],
+  ["Piroxicam","","Analgesia","No","Yes","Yes","Yes","Yes","No","Yes","Yes","PTGS2; PTGS1","2018-05-22","https://www.drugbank.ca/drugs/DB00554","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Piroxicam)+AND+cancer"],
+  ["Plerixafor","AMD3100","Autologous HSCT","No","Yes","Yes","Yes","Yes","No","Yes","Yes","CXCR4","2021-08-09","https://www.drugbank.ca/drugs/DB06809","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Plerixafor)+AND+cancer"],
+  ["Pravastatin","","Hyperlipidemia","Yes","Yes","Yes","Yes","No","Yes","Yes","Yes","HMGCR; HDAC2","2018-01-22","https://www.drugbank.ca/drugs/DB00175","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Pravastatin)+AND+cancer"],
+  ["Prochlorperazine","","Psychotic disorders","No","Yes","Yes","Yes","No","No","Yes","Yes","DRD2; HRH1; ADRA1A","2018-02-15","https://www.drugbank.ca/drugs/DB00433","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Prochlorperazine)+AND+cancer"],
+  ["Propofol","","Anesthetic","Yes","Yes","Yes","Yes","No","Yes","Yes","Yes","GABRB2; GABRB3; GABRA1","2021-02-10","https://www.drugbank.ca/drugs/DB00818","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Propofol)+AND+cancer"],
+  ["Propranolol","","Hypertension","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","ADRB1; ADRB2; ADRB3; HTR1A","2018-01-22","https://www.drugbank.ca/drugs/DB00571","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Propranolol)+AND+cancer"],
+  ["Pyrimethamine","","Parasitic infection","Yes","Yes","Yes","Yes","Yes","No","Yes","Yes","DHFR; FOLR1; HEXB","2021-08-10","https://www.drugbank.ca/drugs/DB00205","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Pyrimethamine)+AND+cancer"],
+  ["Quetiapine","","Psychotic disorders","Yes","Yes","Yes","No","No","No","No","No","HTR2A; DRD2; HRH1","2018-01-23","https://www.drugbank.ca/drugs/DB01224","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Quetiapine)+AND+cancer"],
+  ["Rabeprazole","","Antacid","No","Yes","Yes","Yes","No","No","Yes","Yes","ATP4A","2018-01-25","https://www.drugbank.ca/drugs/DB01129","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Rabeprazole)+AND+cancer"],
+  ["Raloxifene","","Osteoporosis","No","Yes","Yes","Yes","No","Yes","Yes","Yes","ESR1; ESR2; TFF1","2020-11-23","https://www.drugbank.ca/drugs/DB00481","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Raloxifene)+AND+cancer"],
+  ["Ranitidine","","Antacid","Yes","Yes","Yes","Yes","Yes","No","Yes","Yes","HRH2; ACHE","2017-11-02","https://www.drugbank.ca/drugs/DB00863","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Ranitidine)+AND+cancer"],
+  ["Ribavirin","","Anti-viral","No","Yes","Yes","Yes","Yes","No","Yes","Yes","IMPDH1; IMPDH2","2017-06-16","https://www.drugbank.ca/drugs/DB00811","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Ribavirin)+AND+cancer"],
+  ["Riluzole","","ALS (루게릭병)","No","Yes","Yes","Yes","No","No","Yes","Yes","SCN5A; SLC7A11","2018-01-29","https://www.drugbank.ca/drugs/DB00740","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Riluzole)+AND+cancer"],
+  ["Ritonavir","","Anti-retroviral","No","Yes","Yes","Yes","Yes","No","Yes","Yes","gag-pol; pol; NR1I2","2021-08-10","https://www.drugbank.ca/drugs/DB00503","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Ritonavir)+AND+cancer"],
+  ["Roflumilast","","COPD","No","Yes","Yes","Yes","No","No","Yes","Yes","PDE4A","2021-08-10","https://www.drugbank.ca/drugs/DB01656","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Roflumilast)+AND+cancer"],
+  ["Rosuvastatin","","Hyperlipidemia","No","Yes","Yes","Yes","No","No","Yes","Yes","HMGCR; ITGAL","2018-01-30","https://www.drugbank.ca/drugs/DB01098","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Rosuvastatin)+AND+cancer"],
+  ["Sertraline","","Depression","No","Yes","Yes","Yes","No","No","Yes","Yes","SLC6A4; PGRMC1","2018-01-29","https://www.drugbank.ca/drugs/DB01104","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Sertraline)+AND+cancer"],
+  ["Sildenafil","","Erectile dysfunction, PAH","No","Yes","Yes","Yes","Yes","No","Yes","Yes","PDE5A; SERPING1; CD274","2018-01-29","https://www.drugbank.ca/drugs/DB00203","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Sildenafil)+AND+cancer"],
+  ["Simvastatin","","Hyperlipidemia","No","Yes","Yes","Yes","No","Yes","Yes","Yes","HMGCR; ITGAL; HDAC2","2018-01-30","https://www.drugbank.ca/drugs/DB00641","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Simvastatin)+AND+cancer"],
+  ["Sirolimus","Rapamycin","Inhibit organ transplant rejection","No","Yes","Yes","Yes","Yes","No","Yes","Yes","MTOR","2018-01-31","https://www.drugbank.ca/drugs/DB00877","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Sirolimus+OR+Rapamycin)+AND+cancer"],
+  ["Sitagliptin","","Diabetes","No","No","Yes","Yes","No","Yes","Yes","Yes","DPP4","2021-01-19","https://www.drugbank.ca/drugs/DB01261","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Sitagliptin)+AND+cancer"],
+  ["Spironolactone","","Congestive cardiac failure, hypertension","No","Yes","Yes","Yes","No","No","Yes","Yes","NR3C2; NR3C1; AR; PGR; ESR1","2017-11-09","https://www.drugbank.ca/drugs/DB00421","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Spironolactone)+AND+cancer"],
+  ["Sulfasalazine","","Rheumatoid arthritis; ulcerative colitis","No","Yes","Yes","Yes","Yes","No","Yes","Yes","ABCG2; RELB; ALOX5; SLC7A11; NFKB1","2017-11-09","https://www.drugbank.ca/drugs/DB00795","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Sulfasalazine)+AND+cancer"],
+  ["Sulindac","","OA, RA, ankylosing spondylitis","No","Yes","Yes","Yes","No","Yes","Yes","Yes","PTGS2; AKR1B1; PPARD","2017-11-09","https://www.drugbank.ca/drugs/DB00605","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Sulindac)+AND+cancer"],
+  ["Suramin","","African sleeping sickness","No","No","Yes","Yes","Yes","No","Yes","Yes","HPSE; P2RY2; SIRT5","2019-03-19","https://www.drugbank.ca/drugs/DB04786","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Suramin)+AND+cancer"],
+  ["Tadalafil","","Erectile dysfunction, PAH","No","Yes","Yes","Yes","No","No","Yes","Yes","PDE5A; PDE11A","2017-11-09","https://www.drugbank.ca/drugs/DB00820","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Tadalafil)+AND+cancer"],
+  ["Telmisartan","","Hypertension","No","Yes","Yes","Yes","No","Yes","No","Yes","PPARG; AGTR1","2017-11-09","https://www.drugbank.ca/drugs/DB00966","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Telmisartan)+AND+cancer"],
+  ["Terbinafine","","Fungal infections","No","Yes","Yes","Yes","No","No","Yes","Yes","ERG1; SQLE","2017-11-09","https://www.drugbank.ca/drugs/DB00857","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Terbinafine)+AND+cancer"],
+  ["Thioridazine","","Psychotic disorders","No","Yes","Yes","Yes","Yes","No","Yes","Yes","DRD2; DRD1; ADRA1A; KCNH2","2021-08-09","https://www.drugbank.ca/drugs/DB00679","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Thioridazine)+AND+cancer"],
+  ["Ticagrelor","","Prevention of atherothrombotic events","No","Yes","Yes","Yes","No","No","Yes","Yes","P2RY12","2021-08-09","https://www.drugbank.ca/drugs/DB08816","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Ticagrelor)+AND+cancer"],
+  ["Timolol","","Hypertension, migraine","No","Yes","Yes","Yes","Yes","Yes","Yes","Yes","ADRB1; ADRB2","2021-08-09","https://www.drugbank.ca/drugs/DB00373","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Timolol)+AND+cancer"],
+  ["Tinzaparin","","Prophylaxis of venous thromboembolism","No","Yes","Yes","Yes","No","No","Yes","Yes","SERPINC1; ITGA4; CXCL12","2023-04-05","https://www.drugbank.ca/drugs/DB06822","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Tinzaparin)+AND+cancer"],
+  ["Tocilizumab","","Rheumatoid arthritis","No","Yes","Yes","Yes","No","No","Yes","Yes","IL6R","2021-08-10","https://www.drugbank.ca/drugs/DB06273","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Tocilizumab)+AND+cancer"],
+  ["Tofacitinib","","Rheumatoid arthritis","No","No","Yes","Yes","Yes","No","Yes","Yes","JAK1; JAK2; JAK3; TYK2","2021-08-10","https://www.drugbank.ca/drugs/DB08895","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Tofacitinib)+AND+cancer"],
+  ["Tranexamic Acid","","Blood loss - fibrinolysis","No","Yes","Yes","Yes","Yes","No","Yes","Yes","PLG","2017-11-03","https://www.drugbank.ca/drugs/DB00302","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Tranexamic+Acid)+AND+cancer"],
+  ["Tranylcypromine","","Depression","No","Yes","Yes","Yes","No","No","Yes","Yes","MAOB; MAOA","2021-08-13","https://www.drugbank.ca/drugs/DB00752","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Tranylcypromine)+AND+cancer"],
+  ["Trifluoperazine","","Psychotic disorders","No","Yes","Yes","Yes","No","No","Yes","Yes","DRD2; CALM1; S100A4","2021-08-17","https://www.drugbank.ca/drugs/DB00831","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Trifluoperazine)+AND+cancer"],
+  ["Trimetazidine","","Angina pectoris","No","Yes","Yes","Yes","No","No","Yes","Yes","ACAA2","2018-08-09","https://www.drugbank.ca/drugs/DB09069","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Trimetazidine)+AND+cancer"],
+  ["Ursodeoxycholic Acid","UDCA, Ursodiol","Gallstones, primary biliary cirrhosis","No","Yes","Yes","Yes","No","Yes","Yes","Yes","AKR1C2; NR1H4","2019-08-28","https://www.drugbank.ca/drugs/DB01586","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Ursodeoxycholic+Acid)+AND+cancer"],
+  ["Valproic Acid","Valproate","Epilepsy","No","Yes","Yes","Yes","Yes","Yes","Yes","Yes","HDAC9; HDAC2; PPARA; PPARG; HDAC1; CD274","2017-11-03","https://www.drugbank.ca/drugs/DB00313","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Valproic+Acid+OR+Valproate)+AND+cancer"],
+  ["Verapamil","","Hypertension, angina","No","Yes","Yes","Yes","Yes","Yes","Yes","Yes","CACNA1C; KCNH2; ABCB1","2021-08-09","https://www.drugbank.ca/drugs/DB00661","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Verapamil)+AND+cancer"],
+  ["Verteporfin","","Age-related macular degeneration","No","No","Yes","Yes","Yes","No","Yes","Yes","","2018-08-09","https://www.drugbank.ca/drugs/DB00460","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Verteporfin)+AND+cancer"],
+  ["Warfarin","","Prophylaxis of venous thrombosis","No","Yes","Yes","Yes","No","Yes","Yes","Yes","VKORC1; NR1I2","2018-01-04","https://www.drugbank.ca/drugs/DB00682","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Warfarin)+AND+cancer"],
+  ["Zafirlukast","","Asthma","No","Yes","Yes","Yes","No","No","Yes","Yes","CYSLTR1","2023-07-19","https://www.drugbank.ca/drugs/DB00549","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Zafirlukast)+AND+cancer"],
+  ["Zidovudine","Azidothymidine","Anti-retroviral","No","Yes","Yes","Yes","Yes","No","Yes","Yes","FLT3; TERT","2018-02-22","https://www.drugbank.ca/drugs/DB00495","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Zidovudine)+AND+cancer"],
+  ["Zileuton","","Asthma prophylaxis","No","Yes","Yes","Yes","No","No","Yes","Yes","ALOX5","2019-01-22","https://www.drugbank.ca/drugs/DB00744","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Zileuton)+AND+cancer"],
+  ["Zoledronic Acid","Zoledronate","Osteoporosis, bone metastases","No","Yes","Yes","Yes","Yes","Yes","Yes","Yes","GGPS1; FDPS","2017-11-03","https://www.drugbank.ca/drugs/DB00399","","https://www.ncbi.nlm.nih.gov/pubmed/?term=(Zoledronic+Acid+OR+Zoledronate)+AND+cancer"],
+];
+
+// Target descriptions (Korean)
+const TARGET_DESC = {
+  "MTOR": "mTOR — 세포 성장/증식 핵심 조절자",
+  "HMGCR": "HMGCR — 콜레스테롤 합성 효소 (스타틴 타깃)",
+  "HDAC1": "HDAC1 — 히스톤 탈아세틸화효소, 유전자 발현 조절",
+  "HDAC2": "HDAC2 — 히스톤 탈아세틸화효소",
+  "PTGS2": "PTGS2/COX-2 — 염증·종양 촉진 효소",
+  "PTGS1": "PTGS1/COX-1 — 혈소판 응집, 위 점막 보호",
+  "VDR": "VDR — 비타민D 수용체, 세포분화 조절",
+  "PPARG": "PPARG — 지방 대사·항염증 전사인자",
+  "PPARA": "PPARA — 지방산 산화 조절 전사인자",
+  "VEGFA": "VEGFA — 혈관신생 핵심 성장인자",
+  "HIF1A": "HIF1A — 저산소 반응 전사인자 (종양 생존)",
+  "DRD2": "DRD2 — 도파민 수용체 D2",
+  "EGFR": "EGFR — 상피세포 성장인자 수용체",
+  "CXCR4": "CXCR4 — 케모카인 수용체 (전이 관련)",
+  "AR": "AR — 안드로겐 수용체 (전립선암 관련)",
+  "ESR1": "ESR1 — 에스트로겐 수용체 α (유방암 관련)",
+  "MMP2": "MMP2 — 기질금속단백질분해효소 (전이 관련)",
+  "MMP9": "MMP9 — 기질금속단백질분해효소 (전이·혈관신생)",
+  "ABCB1": "ABCB1/P-gp — 다약제 내성 펌프",
+  "ABCG2": "ABCG2/BCRP — 다약제 내성 펌프",
+  "SLC7A11": "SLC7A11/xCT — 시스틴/글루타메이트 수송체 (페롭토시스)",
+  "IDO1": "IDO1 — 면역억제 효소 (트립토판 분해)",
+  "DHODH": "DHODH — 피리미딘 합성 효소",
+  "IMPDH1": "IMPDH1 — 퓨린 합성 효소",
+  "IMPDH2": "IMPDH2 — 퓨린 합성 효소",
+  "ALDH2": "ALDH2 — 알데히드 탈수소효소",
+  "PARP1": "PARP1 — DNA 손상 복구 효소",
+};
+
+// Community drugs list
+const COMMUNITY_DRUGS = [
+  "Fenbendazole","Ivermectin","Artesunate","Disulfiram","Itraconazole",
+  "Doxycycline","Azithromycin","Celecoxib","Niclosamide","Mebendazole",
+  "Albendazole","Cholecalciferol","Metformin","Simvastatin","Atorvastatin",
+  "Lovastatin","Pravastatin","Fluvastatin","Rosuvastatin","Melatonin",
+  "Cimetidine","Propranolol","Sirolimus","Naltrexone","Cannabidiol",
+  "Omeprazole","Omega 3","Ascorbic acid"
+];
+
+// ── INDEX ── col: 0=drug,1=syn,2=ind,3=who,4=offpat,5=vitro,6=vivo,7=cases,8=obs,9=trials,10=human,11=targets,12=date,13=drugbank,14=pubchem,15=pubmed
+
+function calcScore(d){
+  return [d[5],d[6],d[7],d[8],d[9],d[10]].filter(v=>v==="Yes").length;
+}
+function isCommunity(d){
+  return COMMUNITY_DRUGS.some(c=>d[0].toLowerCase().includes(c.toLowerCase())||c.toLowerCase().includes(d[0].toLowerCase()));
+}
+function isP1(d){ return d[3]==="Yes"&&d[4]==="Yes"&&d[9]==="Yes"&&d[10]==="Yes"; }
+function isP2(d){ return d[9]==="Yes"&&d[10]==="Yes"; }
+
+// ── STATE ──
+let currentTab = "all";
+let activeFilters = {};
+let searchTerm = "";
+
+function setTab(tab){
+  currentTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab===tab));
+  const labels = {community:"⭐ 커뮤니티 약물", p1:"🏆 1순위 (황금기준)", p2:"🔬 2순위 (임상+인간)", p3:"🧪 3순위 (기초연구)", all:"전체"};
+  document.getElementById('tabLabel').textContent = labels[tab] || "전체";
+  if(tab==="community") document.getElementById('communitySection').scrollIntoView({behavior:'smooth'});
+  else document.getElementById('tableSection').scrollIntoView({behavior:'smooth'});
+  renderTable();
+}
+
+function toggleFilter(f){
+  activeFilters[f] = !activeFilters[f];
+  document.getElementById('f-'+f).classList.toggle('active', !!activeFilters[f]);
+  renderTable();
+}
+function resetFilters(){
+  activeFilters = {};
+  ['who','offpatent','trials','human'].forEach(f=>{
+    document.getElementById('f-'+f).classList.remove('active');
+  });
+  document.getElementById('searchInput').value='';
+  searchTerm='';
+  renderTable();
+}
+function filterTable(){
+  searchTerm = document.getElementById('searchInput').value.toLowerCase();
+  renderTable();
+}
+function searchDrug(name){
+  document.getElementById('searchInput').value = name;
+  searchTerm = name.toLowerCase();
+  currentTab = 'all';
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab==='all'));
+  renderTable();
+  document.getElementById('tableSection').scrollIntoView({behavior:'smooth'});
+}
+
+function highlight(text, term){
+  if(!term) return text;
+  const re = new RegExp('('+term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')', 'gi');
+  return text.replace(re,'<mark>$1</mark>');
+}
+
+function renderTable(){
+  const tbody = document.getElementById('tableBody');
+  let rows = [];
+  let data = [...DRUGS];
+
+  // Tab filter
+  if(currentTab==="community") data = data.filter(d=>isCommunity(d));
+  else if(currentTab==="p1") data = data.filter(d=>isP1(d));
+  else if(currentTab==="p2") data = data.filter(d=>isP2(d));
+  else if(currentTab==="p3") data = data.filter(d=>!isP2(d));
+
+  // Active filters
+  if(activeFilters.who) data=data.filter(d=>d[3]==="Yes");
+  if(activeFilters.offpatent) data=data.filter(d=>d[4]==="Yes");
+  if(activeFilters.trials) data=data.filter(d=>d[9]==="Yes");
+  if(activeFilters.human) data=data.filter(d=>d[10]==="Yes");
+
+  // Search
+  if(searchTerm){
+    data=data.filter(d=>
+      d[0].toLowerCase().includes(searchTerm)||
+      d[1].toLowerCase().includes(searchTerm)||
+      d[2].toLowerCase().includes(searchTerm)||
+      d[11].toLowerCase().includes(searchTerm)
+    );
+  }
+
+  document.getElementById('resultCount').textContent = data.length+'개 표시 중';
+  document.getElementById('emptyMsg').style.display = data.length===0?'block':'none';
+
+  const st = searchTerm;
+  const html = data.map((d,idx)=>{
+    const score = calcScore(d);
+    const comm = isCommunity(d);
+    const p1 = isP1(d);
+    const p2 = isP2(d);
+    const scoreWidth = Math.round((score/6)*100);
+    const rowId = 'row-'+d[0].replace(/[^a-zA-Z0-9]/g,'_');
+    const detailId = 'detail-'+d[0].replace(/[^a-zA-Z0-9]/g,'_');
+
+    // Priority label
+    let prioLabel = '';
+    if(comm) prioLabel += '<span class="prio-label" style="background:#cffafe;color:#0e7490">⭐ 커뮤니티</span>';
+    if(p1) prioLabel += '<span class="prio-label prio-gold">🏆 1순위</span>';
+    else if(p2) prioLabel += '<span class="prio-label prio-green">🔬 2순위</span>';
+    else prioLabel += '<span class="prio-label prio-orange">🧪 3순위</span>';
+
+    // Evidence dots
+    const dots = [
+      {cls:'vitro', val:d[5], tip:'세포실험'},
+      {cls:'vivo', val:d[6], tip:'동물실험'},
+      {cls:'cases', val:d[7], tip:'증례보고'},
+      {cls:'obs', val:d[8], tip:'관찰연구'},
+      {cls:'trials', val:d[9], tip:'임상시험'},
+      {cls:'human', val:d[10], tip:'인간데이터'},
+    ].map(e=>`<span class="ev-dot ${e.cls} ${e.val==='Yes'?'on':'off'}" title="${e.tip}"></span>`).join('');
+
+    // Targets
+    const targetList = d[11] ? d[11].split(';').map(t=>t.trim()).filter(Boolean) : [];
+    const targetsHtml = targetList.map(t=>{
+      const desc = TARGET_DESC[t.trim()] || t.trim();
+      return `<span class="target-tag" title="${desc}">${t.trim()}</span>`;
+    }).join('');
+
+    // Links
+    let linksHtml = '';
+    if(d[15]) linksHtml += `<a href="${d[15]}" target="_blank" class="detail-link link-pubmed">📄 PubMed 논문</a>`;
+    if(d[13]) linksHtml += `<a href="${d[13]}" target="_blank" class="detail-link link-drugbank">💊 DrugBank</a>`;
+    if(d[14]) linksHtml += `<a href="${d[14]}" target="_blank" class="detail-link link-pubchem">🔬 PubChem</a>`;
+
+    const whoBadge = d[3]==="Yes"?'<span class="tag tag-yes">✓ WHO</span>':d[3]==="N/A"?'<span class="tag tag-na">N/A</span>':'<span class="tag tag-no">-</span>';
+    const patentBadge = d[4]==="Yes"?'<span class="tag tag-yes">✓ 만료</span>':d[4]==="No"?'<span class="tag tag-no">미만료</span>':'<span class="tag tag-na">불명</span>';
+
+    const nameHtml = highlight(d[0], st);
+    const synHtml = highlight(d[1]||'-', st);
+    const indHtml = highlight(d[2], st);
+
+    return `
+    <tr id="${rowId}" class="${comm?'community-row':''}" onclick="toggleDetail('${detailId}','${rowId}')">
+      <td>
+        <div class="drug-name">${nameHtml}${prioLabel}</div>
+      </td>
+      <td><span class="drug-synonym">${synHtml}</span></td>
+      <td class="hide-mobile"><span class="indication">${indHtml}</span></td>
+      <td>${whoBadge}</td>
+      <td>${patentBadge}</td>
+      <td><div class="ev-dots" title="세포/동물/증례/관찰/임상/인간">${dots}</div></td>
+      <td>
+        <div class="score-wrap">
+          <div class="score-bar"><div class="score-fill score-${score}" style="width:${scoreWidth}%"></div></div>
+          <span class="score-num">${score}/6</span>
+        </div>
+      </td>
+      <td class="hide-mobile" style="font-size:0.72rem;color:var(--text3)">${d[12]}</td>
+    </tr>
+    <tr class="detail-row" id="${detailId}">
+      <td colspan="8">
+        <div class="detail-content">
+          <div class="detail-grid">
+            <div class="detail-block">
+              <h4>원래 용도 (Indication)</h4>
+              <p>${d[2]}</p>
+              ${d[1]?`<p style="margin-top:5px;color:var(--text3);font-size:0.75rem">동의어: ${d[1]}</p>`:''}
+            </div>
+            <div class="detail-block">
+              <h4>근거 수준 (Evidence)</h4>
+              <p>
+                ${d[5]==='Yes'?'<span class="tag tag-yes">✓ 세포실험(In vitro)</span>':'<span class="tag tag-no">✗ 세포실험</span>'}
+                ${d[6]==='Yes'?'<span class="tag tag-yes">✓ 동물실험(In vivo)</span>':'<span class="tag tag-no">✗ 동물실험</span>'}
+                ${d[7]==='Yes'?'<span class="tag tag-yes" style="background:#fef3c7;color:#92400e">✓ 증례보고</span>':'<span class="tag tag-no">✗ 증례보고</span>'}
+                ${d[8]==='Yes'?'<span class="tag tag-yes" style="background:#d1fae5;color:#065f46">✓ 관찰연구</span>':'<span class="tag tag-no">✗ 관찰연구</span>'}
+                ${d[9]==='Yes'?'<span class="tag tag-yes" style="background:#fee2e2;color:#991b1b">✓ 임상시험</span>':'<span class="tag tag-no">✗ 임상시험</span>'}
+                ${d[10]==='Yes'?'<span class="tag tag-yes" style="background:#dbeafe;color:#1e40af">✓ 인간 데이터</span>':'<span class="tag tag-no">✗ 인간 데이터</span>'}
+              </p>
+            </div>
+            ${targetList.length>0?`
+            <div class="detail-block" style="grid-column: 1/-1;">
+              <h4>분자 타깃 (Molecular Targets) — 마우스오버로 설명 확인</h4>
+              <div class="targets-list">${targetsHtml}</div>
+            </div>`:
+            `<div class="detail-block"><h4>분자 타깃</h4><p style="color:var(--text3)">정보 없음</p></div>`
+            }
+          </div>
+          ${linksHtml?`<div class="detail-links">${linksHtml}</div>`:''}
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+
+  tbody.innerHTML = html;
+}
+
+function toggleDetail(detailId, rowId){
+  const detail = document.getElementById(detailId);
+  if(!detail) return;
+  const isOpen = detail.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.detail-row.open').forEach(r=>r.classList.remove('open'));
+  if(!isOpen) detail.classList.add('open');
+}
+
+// Init
+renderTable();
+</script>
+</body>
+</html>

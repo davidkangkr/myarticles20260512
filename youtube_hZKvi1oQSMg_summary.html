@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>동물 구충제 암 치료 논란 — 영상 분석과 환자 주도 임상의 길</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1a1a1a;
+    --text-secondary: #4a4a4a;
+    --border: #e0e0e0;
+    --accent: #2c5f7c;
+    --accent-light: #e8f1f8;
+    --highlight: #fff8e1;
+    --warning: #fff3e0;
+    --danger: #fce4ec;
+    --shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+    margin: 0;
+    padding: 0;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem;
+  }
+
+  header {
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .header-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+  }
+  .header-meta span { display: inline-flex; align-items: center; gap: 0.25rem; }
+  .badge {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: var(--accent-light);
+    color: var(--accent);
+  }
+
+  h1 { font-size: 1.75rem; margin: 0.5rem 0 0; line-height: 1.4; }
+  h2 {
+    font-size: 1.35rem;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--border);
+    color: var(--accent);
+  }
+  h3 {
+    font-size: 1.1rem;
+    margin: 1.5rem 0 0.5rem;
+    color: var(--text-secondary);
+  }
+
+  .toc {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    border-radius: 4px;
+  }
+  .toc h2 { margin-top: 0; border: none; color: var(--accent); font-size: 1.1rem; }
+  .toc ul { margin: 0.5rem 0 0; padding-left: 1.2rem; }
+  .toc li { margin: 0.35rem 0; }
+  .toc a { font-size: 0.95rem; }
+
+  .timeline {
+    position: relative;
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.3rem;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+  .timeline-item {
+    position: relative;
+    margin: 1.25rem 0;
+    padding-left: 1.25rem;
+  }
+  .timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -1.45rem;
+    top: 0.55rem;
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    border: 2px solid var(--bg);
+  }
+  .timeline-time {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+  .timeline-title {
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin: 0 0 0.35rem;
+    color: var(--text);
+  }
+  .timeline-body {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    background: #eee;
+    color: #555;
+    margin-right: 0.25rem;
+  }
+
+  .highlight-box {
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    border-radius: 6px;
+    border-left: 4px solid var(--accent);
+    background: var(--accent-light);
+  }
+  .highlight-box.warning {
+    background: var(--warning);
+    border-left-color: #f57c00;
+  }
+  .highlight-box.danger {
+    background: var(--danger);
+    border-left-color: #c62828;
+  }
+  .highlight-box h3 { margin-top: 0; margin-bottom: 0.5rem; color: #1a1a1a; font-size: 1rem; }
+  .highlight-box p, .highlight-box li { margin: 0.35rem 0; font-size: 0.95rem; }
+
+  ul.plain { padding-left: 1.25rem; }
+  ul.plain li { margin: 0.4rem 0; }
+
+  .question-box {
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+    border-radius: 6px;
+    background: #fafafa;
+    border: 2px solid var(--border);
+  }
+  .question-box h3 {
+    margin-top: 0;
+    color: var(--accent);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .question-box h3::before {
+    content: "?";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  .divider {
+    border: 0;
+    border-top: 1px dashed var(--border);
+    margin: 2.5rem 0;
+  }
+
+  footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--border);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 640px) {
+    body { font-size: 15px; }
+    h1 { font-size: 1.4rem; }
+    h2 { font-size: 1.2rem; }
+    .timeline { padding-left: 1.1rem; }
+    .timeline-item { padding-left: 1rem; }
+    .container { padding: 1rem 0.9rem; }
+  }
+
+  @media print {
+    @page { margin: 1.2cm; }
+    body { font-size: 11pt; color: #000; background: #fff; }
+    .container { max-width: 100%; padding: 0; }
+    a { color: #000; text-decoration: underline; }
+    a[href]:after {
+      content: " (" attr(href) ")";
+      font-size: 0.8em;
+      word-break: break-all;
+    }
+    h1, h2, h3 { page-break-after: avoid; orphans: 3; widows: 3; }
+    .timeline-item, .highlight-box, .question-box, .toc { page-break-inside: avoid; }
+    footer { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="header-meta">
+      <span><span class="badge">다큐/리포트</span> <span class="badge">한국어</span></span>
+      <span>자막: 1,004 segments</span>
+      <span>약 52분</span>
+      <span>원본: https://youtu.be/hZKvi1oQSMg</span>
+    </div>
+    <h1>동물 구충제 암 치료 논란 — 영상 분석과 환자 주도 임상의 길</h1>
+  </header>
+
+  <div class="toc">
+    <h2>목차</h2>
+    <ul>
+      <li><a href="#timeline">타임라인 요약</a></li>
+      <li><a href="#facts">핵심 사실</a></li>
+      <li><a href="#why-patients">환자들은 왜 이 약들을 복용하는가?</a></li>
+      <li><a href="#who-for">이 영상은 과연 누구를 위한 것인가?</a></li>
+      <li><a href="#conclusion">영상의 결론이 실제로 의미하는 것</a></li>
+      <li><a href="#community-path">환자 주도 임상 커뮤니티의 길</a></li>
+      <li><a href="#actions">관련 링크</a></li>
+    </ul>
+  </div>
+
+  <main>
+    <section id="timeline">
+      <h2>타임라인 요약</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="timeline-time">0 ~ 5분</span>
+          <div class="timeline-title">서론: 절박한 환자들의 선택</div>
+          <div class="timeline-body">
+            할머니의 사례 소개. 아들의 권유로 <strong>팬벤다졸</strong>을 복용한 뒤 식사량 증가(45kg→48kg). 10년 전 육종 완치 판정을 받았으나 재발, 응급실에 5일 입원. 항암제·방사선 효과 없어 거의 한 달 반 동안 집에 누워 있었음.
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-time">5 ~ 10분</span>
+          <div class="timeline-title">논란의 시작</div>
+          <div class="timeline-body">
+            개그맨 <strong>김철민</strong>씨 “온몸에 퍼진 암이 3개월 만에 사라졌다” 주장. 국내 암 환자들 사이 급속 확산. <strong>8만 명 이상</strong> 청와대 청원. 식약처가 “검증되지 않은 동물용 구충제 복용 말라” 경고.
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-time">10 ~ 15분</span>
+          <div class="timeline-title">논문 수준과 한계</div>
+          <div class="timeline-body">
+            건양대 최종권 교수: “팬벤다졸 효과 단정 짓기 어렵다. 암 대부분이 이미 없어졌기 때문에”. 팬벤다졸 관련 논문 7편 중 <span class="tag">4편 효과O</span> <span class="tag">2편 효과X</span> <span class="tag">1편 종양촉진</span>. <strong>사람 대상 임상은 전혀 없음.</strong>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-time">15 ~ 20분</span>
+          <div class="timeline-title">온라인 확산과 불법 거래</div>
+          <div class="timeline-body">
+            동물용→사람용 구충제 혼동. 아토피·비염·당뇨에도 효과라는 소문. 약국·도매상 <strong>품절 상태</strong>; 한 환자가 <strong>50인분</strong>을 한번에 구입.
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-time">20 ~ 30분</span>
+          <div class="timeline-title">알벤다졸과 메벤다졸의 기전</div>
+          <div class="timeline-body">
+            김창덕 교수(알벤다졸): 세포 수준 <strong>소포체 스트레스</strong> 효과. 홍용길 교수(메벤다졸): <strong>혈관 생성 억제</strong> 기전 확인. 두 교수 모두 “세포 수준만 효과. 환자에게 권하지 않는다. 더 많은 임상 데이터 필요”라고 강조.
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-time">30 ~ 45분</span>
+          <div class="timeline-title">해외 사례: 영국과 미국</div>
+          <div class="timeline-body">
+            미국 존스 호킨스병원 인터뷰 거절 → 화상 전환. 미국 <strong>NCI</strong>가 연구 자금 지원. 영국 클리닉에서 <strong>메벤다졸을 프로토콜 아래 처방</strong>하지만, 의사는 “항암 효과 단정 말하기 어렵다”고 공개.
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-time">45 ~ 52분</span>
+          <div class="timeline-title">한국의 현실: 불법 거래와 경고</div>
+          <div class="timeline-body">
+            베트남산 구충제 <strong>주택가 불법 거래</strong> 취재. 약사: “인터넷에서 암 치료 약물 수십 종 거래. 이버멕틴·니클로사마이드·디스토마드 등 <strong>복합 복용 위험</strong>”. 교수: “과다 복용 시 치명적 간 손상 가능”.
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-time">엔딩</span>
+          <div class="timeline-title">전문가 메시지</div>
+          <div class="timeline-body">“환자와 의사는 한 팀입니다. 인터넷·매스컴보다 <strong>의료진 전문가를 믿어야 합니다.</strong> 희망은 과학 위에서 더 강합니다.”</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <section id="facts">
+      <h2>핵심 사실</h2>
+      <div class="highlight-box">
+        <h3>약물별 연구 상태</h3>
+        <ul class="plain">
+          <li><strong>팬벤다졸</strong>: 논문 7편 (효과 4, 무효 2, 촉진 1). <em>사람 임상 0편. 특허 만료.</em></li>
+          <li><strong>알벤다졸</strong>: 세포 수준 소포체 스트레스 효과. 인간 임상 데이터 없음.</li>
+          <li><strong>메벤다졸</strong>: 126편 논문, 혈관 생성 억제. 영국 프로토콜 하 제한적 임상. 특허 만료.</li>
+          <li><strong>이버멕틴</strong>: 코로나 이후 항암 연구 소규모 증가. 특허 만료.</li>
+        </ul>
+      </div>
+
+      <div class="highlight-box warning">
+        <h3>의료진 공통 경고</h3>
+        <ul class="plain">
+          <li>구충제 과다 복용 시 <strong>치명적 간 손상</strong> 가능</li>
+          <li>여러 약물 <strong>복합 복용</strong> 시 상호작용 위험</li>
+          <li>기초 실험 효과를 인간 임상으로 직행하는 것은 <strong>윤리적으로 불가능</strong></li>
+          <li><strong>사람 대상 임상이 없다</strong> → 효과를 단정할 수 없다</li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <section id="why-patients">
+      <h2>환자들은 왜 이 약들을 복용하는가?</h2>
+
+      <p>영상은 이 질문에 명확한 답을 보여줍니다. 환자들이 복용하는 이유는 세 가지로 압축됩니다.</p>
+
+      <div class="highlight-box danger">
+        <h3>1. 의사의 선고 — “대안이 없다”</h3>
+        <p>“길게는 1년, 짧게는 몇 달 살 것이라는 의사 말을 들은” 환자들에게는, 기존 항암제가 듣지 않는 상황에서 <strong>시도할 수 있는 모든 것</strong>이 구충제입니다. 의학적 근거보다는 <strong>생존 본능</strong>이 우선합니다.</p>
+      </div>
+
+      <div class="highlight-box">
+        <h3>2. 온라인 커뮤니티와 확산 — “누군가는 살았다”</h3>
+        <p>김철민씨의 주장, 온라인 비교표, “이 구충제가 특정 암에 더 잘 듣는다”는 소문. 정보의 진위와 관계없이 <strong>절박한 환자들에게는 선택지가 하나 늘어난 것</strong>과 같습니다.</p>
+      </div>
+
+      <div class="highlight-box">
+        <h3>3. 제도권의 거부감 — “우리를 믿으세요”가 오히려 반발을 산다</h3>
+        <p>식약처의 “복용하지 마라” 경고는 환자들에게 <strong>“당신들은 우리를 이해하지 못한다”</strong>는 메시지로 읽혔습니다. 이미 항암제로도 버티지 못하는 그들에게 “더 이상 시도하지 마라”는 말은 <strong>죽음을 순응하라는 말</strong>처럼 들렸을 것입니다.</p>
+      </div>
+
+      <div class="question-box">
+        <h3>여기서 생기는 질문</h3>
+        <p>환자들이 위험을 무릅쓰고 구충제를 찾는 이유는, <strong>“그들이 과학을 모르기 때문”</strong>일까요? 아니면 <strong>“기존 의료 체계가 그들을 구하지 못했기 때문”</strong>일까요?</p>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <section id="who-for">
+      <h2>이 영상은 과연 누구를 위한 것인가?</h2>
+
+      <p>이 영상의 메시지를 따라가다 보면, 자연스럽게 “도대체 이 기획은 누구를 위해 만들어졌는가?” 라는 질문에 도달합니다.</p>
+
+      <h3>표면적인 대상: 일반인·환자·시청자</h3>
+      <p>영상은 구충제의 위험성을 경고하고, 의료진을 신뢰하라고 말합니다. 겉보기에는 <strong>“환자들을 보호하기 위한 공익적 다큐멘터리”</strong>처럼 보입니다.</p>
+
+      <h3>하지만 주목해야 할 점</h3>
+      <ul class="plain">
+        <li>영상은 환자들의 <strong>절박한 목소리</strong>를 아주 생생하게 담고 있습니다.</li>
+        <li>의사들의 반대 의견 역시 <strong>“임상 데이터가 없다”는 하나의 논리</strong>로 반복됩니다.</li>
+        <li>영상은 <strong>“왜 이 약들이 연구되지 않는가?”</strong>라는 근본적인 질문을 <strong>회피</strong>합니다.</li>
+      </ul>
+
+      <div class="question-box">
+        <h3>만약 이 영상이 정말로 환자들을 보호하는 것이 목적이었다면?</h3>
+        <p>그들은 “임상 데이터가 없다”는 말 대신, <strong>“데이터가 없는 이유는 연구가 거의 이루어지지 않았기 때문이며, 그 책임은 의료계와 제도에도 있다”</strong>라고 말했을 수 있습니다. 하지만 그렇게 말하지 않았습니다.</p>
+      </div>
+
+      <h3>게스트로 등장한 의료진의 입장</h3>
+      <p>이 영상에 나온 의사들은 일관되게 “효과를 단정할 수 없다” “데이터가 더 필요하다” “권하지 않는다”고 말합니다. 그들은 <strong>현재의 증거 수준으로는 이 약물들을 항암제로 인정할 수 없다</strong>는 입장을 대변합니다.</p>
+
+      <div class="highlight-box warning">
+        <h3>이 영상이 실제로 전달하는 메시지</h3>
+        <p>이 영상의 결론은 단순히 “구충제를 먹지 마라”가 아닙니다. 진짜 메시지는 <strong>“우리(주류 의료진)는 이 약물들을 아직 연구하지 않을 것이며, 연구할 동기도 부족하다. 그러니 너희 환자들은 우리를 믿고 기다려라”</strong>입니다.</p>
+      </div>
+
+      <div class="question-box">
+        <h3>그렇다면 이 영상은 누구를 위한 것인가?</h3>
+        <p>이 영상은 <strong>환자들의 안전을 우선으로 한 공익 다큐</strong>일까요?<br>
+        아니면 <strong>주류 의료진의 입장을 대변하여, 환자들의 자율적 시도를 '위험한 광기'로 규정함으로써 제도권의 방관을 정당화</strong>하는 커뮤니케이션일까요?</p>
+        <p style="margin-top:0.75rem;">이 질문에 답하는 것은, <strong>당신이 이 영상을 누구와 함께 보는가</strong>에 달려 있습니다.</p>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <section id="conclusion">
+      <h2>영상의 결론이 실제로 의미하는 것</h2>
+
+      <p>엔딩에서 의사가 남긴 메시지를 다시 봅시다.</p>
+
+      <blockquote>
+        “환자와 의사는 한 팀이에요. 가족하고는 조금 한 단계가 멀겠지만 어떻게 생각하면 환자와 전문가 그룹이 한 팀이 돼서 그 환자의 병을 적으로 생각해서 지금 치료하는 과정이거든요. 그러면 누구를 믿어야 될까 생각을 하면 우리 팀 안에 전문가 입장에서 그리고 무기를 가지고 있는 의료진 선생님들을 믿으셔야 되는데 이상하게 이렇게 인터넷이나 매스컴이나 누군가가 얘기하는 거는 그렇게 편하게 들으시고 쉽게 생각을 하세요. 그러면서 전문가 의견에 대해서는 서운하다는 얘기만 하시는데 저는 거꾸로 그게 더 서운하다는 생각이 들거든요. 저희가 아침 저녁으로 노력하는 이유는 제가 자려고 제가 저희 식구들이 좋아지려고 하는게 아니고 저희 환자들이 조금이라도 좋아지면 그 좋아지길 기대하면서 치료를 하는 거거든요.</blockquote>
+
+      <h3>이 말의 이면</h3>
+      <ul class="plain">
+        <li><strong>“우리 팀 안에 전문가를 믿어야 한다”</strong> = 우리가 연구하지 않으니, 너희도 시도하지 마라.</li>
+        <li><strong>“인터넷·매스컴을 쉽게 믿는다”</strong> = 환자들의 판단을 경시한다.</li>
+        <li><strong>“우리가 아침 저녁으로 노력하는 이유”</strong> = 우리는 최선을 다하고 있으니, 결과가 나오기를 기다려라.</li>
+      </ul>
+
+      <div class="highlight-box danger">
+        <h3>감춰진 논리</h3>
+        <p>이 메시지는 <strong>“의료진은 이미 최선을 다하고 있으니, 환자들은 그들의 판단에 맡기고 자신들의 시도를 멈추라”</strong>는 논리입니다. 하지만 앞서 본 현실은 다음과 같았습니다:</p>
+        <ul class="plain">
+          <li>특허가 만료된 약 → 펀딩이 안 나옴 → 연구가 진행되지 않음 → 데이터가 없음 → “위험하다”고 경고 → 더 연구하지 않음. <strong>이것은 악순환입니다.</strong></li>
+          <li>의료진이 “환자를 위해 최선을 다한다”고 말하지만, <strong>그들이 연구하지 않는 분야에서 환자들은 구조 없이 방치</strong>됩니다.</li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <section id="community-path">
+      <h2>환자 주도 임상 커뮤니티의 길</h2>
+
+      <p>이 영상은 의도치 않게, <strong>“왜 환자 주도 임상이 필요한가”</strong>에 대한 답을 스스로 제공하고 있습니다.</p>
+
+      <h3>프롤로그: 이 영상이 당신에게 주는 유산</h3>
+      <ul class="plain">
+        <li>팬벤다졸·메벤다졸·알벤다졸·이버멕틴의 <strong>현재 연구 상태와 위험성</strong>을 정확히 파악할 수 있었습니다.</li>
+        <li>한국에서 벌어지고 있는 <strong>불법 거래·과다 복용·복합 약물 사용</strong>의 실태를 확인했습니다.</li>
+        <li>주류 의료진의 <strong>표준화된 반응 패턴</strong>을 이해했습니다: “데이터 부족” → “권하지 않음” → “연구할 동기 없음”.</li>
+      </ul>
+
+      <h3>1장: 문제 정의 — 악순환의 구조</h3>
+      <p>이 영상은 다음과 같은 악순환을 보여줍니다:</p>
+      <blockquote>
+        특허 만료 약물 → 제약사 펀딩 없음 → 교수 연구 동기 부족 → 데이터 부족 → “위험하다” 경고 → 더 연구 안 됨 → 데이터 계속 부족.
+      </blockquote>
+      <p>이 순환에서 <strong>가장 약한 고리</strong>는 “데이터 부족”입니다. 데이터가 없다는 것은 “아무도 조사하지 않았다”는 뜻이기도 하기 때문입니다.</p>
+
+      <h3>2장: 대안 — 환자 주도 데이터 수집</h3>
+      <p>환자 주도 임상시험 커뮤니티는 이 악순환을 깨는 <strong>유일한 실현 가능한 대안</strong>입니다.</p>
+
+      <div class="highlight-box">
+        <h3>왜 환자 주도인가?</h3>
+        <ul class="plain">
+          <li><strong>동기가 다릅니다:</strong> 생존이 걸려 있으니, 10년 걸리는 임상에 기다릴 수 없습니다.</li>
+          <li><strong>접근성이 다릅니다:</strong> 제도권이 연구하지 않는 약물도, 실제로 복용하는 환자들의 데이터는 존재합니다.</li>
+          <li><strong>기술이 가능하게 합니다:</strong> 이전에는 불가능했던 익명화 데이터 수집·분석이 이제는 가능합니다.</li>
+        </ul>
+      </div>
+
+      <h3>3장: 우리가 풀어야 할 숙제</h3>
+      <p>주류 의료진이 이 영상에서 보여준 반응은 결코 틀린 것만은 아닙니다. 실제로 위험은 존재합니다. 우리가 해야 할 일은 다음과 같습니다.</p>
+
+      <div class="highlight-box warning">
+        <h3>안전성 확보 — 커뮤니티가 가장 먼저 답해야 할 질문</h3>
+        <ul class="plain">
+          <li>간수치(LFT), 신장기능 등 <strong>최소한의 생체지표</strong>를 어떻게 추적할 것인가?</li>
+          <li>용량 표준화: 어떤 암 종에서, 어떤 용량이 안전한가?</li>
+          <li>동반 약물 상호작용: 이버멕틴, 니클로사마이드 등과의 병용 금기</li>
+        </ul>
+      </div>
+
+      <div class="highlight-box">
+        <h3>데이터 품질 — “개인 경험담”을 “집단 증거”로</h3>
+        <ul class="plain">
+          <li>표준화된 데이터 수집 양식: 암 종, 병기, 약물, 용량, 경과, 부작용</li>
+          <li><strong>생존자 편향</strong> 교정: “효과 있었다”는 사람만 남는 구조를 어떻게 피할 것인가?</li>
+          <li>익명화된 공개 데이터 저장소 구축</li>
+        </ul>
+      </div>
+
+      <h3>4장: 장기 비전 — 주류 의료진과의 대화</h3>
+      <p>우리의 최종 목표는 주류 의료진을 반대하는 것이 아닙니다. 오히려 그들에게 <strong>“이제는 믿을 만한 데이터가 있습니다”</strong>라고 보여주는 것입니다.</p>
+      <ul class="plain">
+        <li>커뮤니티 데이터가 정식 <strong>조기임상(1상)</strong> 설계의 기반 자료로 인정받는 단계</li>
+        <li><strong>Drug Repositioning</strong> 연구자들과의 협력</li>
+        <li>환자들이 스스로 증거를 생성하는 <strong>환자 주도 연구(Patient-Led Research)</strong> 패러다임 정착</li>
+      </ul>
+
+      <div class="question-box">
+        <h3>마지막 질문</h3>
+        <p>이 영상이 끝에서 “의료진을 믿으라”고 말할 때, 그 “의료진”에는 <strong>환자들이 직접 만드는 증거를 포함한 진화된 의료진</strong>도 포함되어야 하지 않을까요?</p>
+        <p style="margin-top:0.75rem;">우리는 그 진화를 시작할 수 있습니다.</p>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <section id="actions">
+      <h2>관련 링크</h2>
+      <div class="action">
+        <a href="https://youtu.be/hZKvi1oQSMg" target="_blank">원본 영상 보기</a>
+        <a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" class="secondary">PubMed — 약물별 논문 검색</a>
+        <a href="https://api.semanticscholar.org/graph/v1/paper/search?query=mebendazole+cancer&fields=title,year,authors,venue,abstract" target="_blank" class="secondary">Semantic Scholar</a>
+        <a href="https://clinicaltrials.gov/" target="_blank" class="secondary">ClinicalTrials.gov</a>
+      </div>
+    </section>
+
+    <footer>
+      본 문서는 자동 생성된 자막과 LLM 분석을 바탕으로 작성되었으며, 정확한 수치는 원본 영상 및 공식 자료를 참고하세요.<br>
+      이 분석은 영상의 한 축적 해석이며, 제작자의 공식 입장이 아닙니다.<br>
+      생성일: <script>document.write(new Date().toLocaleDateString('ko-KR'))</script>
+    </footer>
+  </main>
+</div>
+</body>
+</html>

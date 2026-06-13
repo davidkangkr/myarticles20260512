@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+<title>다라손라십이 열어준 길, 용도변경 약물이 완성할 희망</title>
+<meta name="description" content="췌장암 환자 커뮤니티를 위한 통합적 시각 — 다라손라십의 의미, 경구용 분자접착제 메커니즘, 그리고 세 가지 층위의 다중경로 병용 전략">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #2d5a3d;
+  --primary-dark: #1e3d29;
+  --primary-light: #4a7a5c;
+  --accent: #c8a45c;
+  --accent-light: #e0c88a;
+  --bg: #f7f3ed;
+  --bg-card: #ffffff;
+  --text: #2c2418;
+  --text-light: #6b5d4a;
+  --text-muted: #9a8c7a;
+  --divider: #e0d8cc;
+  --layer1: #e8f0e4;
+  --layer2: #f0ece0;
+  --layer3: #f5efe8;
+  --layer1-border: #2d5a3d;
+  --layer2-border: #b8a87a;
+  --layer3-border: #c4a88a;
+  --shadow: 0 2px 12px rgba(44,36,24,0.08);
+  --shadow-lg: 0 8px 32px rgba(44,36,24,0.12);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --max-w: 720px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Noto Sans KR',-apple-system,BlinkMacSystemFont,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.8;font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+.container{max-width:var(--max-w);margin:0 auto;padding:0 20px}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(247,243,237,0.92);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--divider);
+}
+.nav-inner{
+  max-width:var(--max-w);margin:0 auto;padding:0 20px;
+  display:flex;align-items:center;justify-content:space-between;
+  height:60px;
+}
+.nav-logo{font-size:18px;font-weight:700;color:var(--primary);letter-spacing:-0.3px}
+.nav-links{display:flex;gap:4px}
+.nav-links a{
+  text-decoration:none;color:var(--text-light);font-size:13px;font-weight:500;
+  padding:6px 10px;border-radius:6px;transition:all 0.2s;white-space:nowrap;
+}
+.nav-links a:hover,.nav-links a:focus{color:var(--primary);background:rgba(45,90,61,0.08)}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--text)}
+.hamburger svg{width:24px;height:24px}
+@media(max-width:640px){
+  .nav-links{display:none;position:absolute;top:60px;left:0;right:0;
+    background:rgba(247,243,237,0.98);backdrop-filter:blur(12px);
+    flex-direction:column;padding:8px 20px 16px;border-bottom:1px solid var(--divider);
+    box-shadow:var(--shadow);gap:2px}
+  .nav-links.open{display:flex}
+  .nav-links a{font-size:15px;padding:10px 12px}
+  .hamburger{display:block}
+}
+
+/* ── HERO ── */
+.hero{
+  padding:80px 0 60px;position:relative;overflow:hidden;
+  background:linear-gradient(165deg,#2d5a3d 0%,#1e3d29 40%,#2d5a3d 100%);
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 20% 50%,rgba(200,164,92,0.15) 0%,transparent 60%),
+              radial-gradient(ellipse at 80% 20%,rgba(255,255,255,0.05) 0%,transparent 50%);
+  pointer-events:none;
+}
+.hero-grain{position:absolute;inset:0;opacity:0.06;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events:none;
+}
+.hero .container{position:relative;z-index:1}
+.hero-badge{
+  display:inline-block;padding:4px 14px;border-radius:20px;
+  background:rgba(200,164,92,0.2);color:var(--accent-light);
+  font-size:12px;font-weight:500;letter-spacing:0.5px;margin-bottom:20px;
+  border:1px solid rgba(200,164,92,0.25);
+}
+.hero h1{
+  font-size:clamp(26px,5.5vw,38px);font-weight:700;color:#fff;
+  line-height:1.4;letter-spacing:-0.5px;margin-bottom:16px;
+  font-family:'Noto Serif KR',serif;
+}
+.hero h1 em{color:var(--accent);font-style:normal}
+.hero-sub{
+  font-size:clamp(15px,3vw,17px);color:rgba(255,255,255,0.8);
+  font-weight:400;line-height:1.7;margin-bottom:28px;
+}
+.hero-stat{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 20px;border-radius:var(--radius-sm);
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);
+  color:rgba(255,255,255,0.85);font-size:14px;backdrop-filter:blur(4px);
+}
+.hero-stat strong{color:var(--accent);font-weight:700}
+@media(max-width:480px){
+  .hero{padding:60px 0 48px}
+}
+
+/* ── SECTION COMMON ── */
+section{padding:60px 0}
+section+h2{border-top:1px solid var(--divider)}
+.section-label{
+  display:inline-block;padding:3px 12px;border-radius:4px;
+  font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  margin-bottom:12px;
+}
+.section-heading{
+  font-size:clamp(22px,4vw,30px);font-weight:700;color:var(--primary-dark);
+  line-height:1.35;margin-bottom:8px;font-family:'Noto Serif KR',serif;
+}
+.section-heading .highlight{color:var(--accent)}
+.section-sub{
+  font-size:15px;color:var(--text-light);margin-bottom:32px;line-height:1.7;
+}
+.section-divider{width:48px;height:3px;background:var(--accent);border-radius:2px;margin-bottom:24px}
+
+/* ── SECTION 1 ── */
+.pros-cons{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px}
+@media(max-width:500px){.pros-cons{grid-template-columns:1fr}}
+.pros-cons-card{
+  padding:24px;border-radius:var(--radius);border:1px solid var(--divider);
+  background:var(--bg-card);box-shadow:var(--shadow);
+}
+.pros-cons-card .icon{font-size:28px;margin-bottom:8px;display:block}
+.pros-cons-card h4{font-size:16px;font-weight:700;margin-bottom:8px}
+.pros-cons-card ul{list-style:none;padding:0}
+.pros-cons-card ul li{
+  padding:4px 0;font-size:14px;color:var(--text-light);line-height:1.6;
+  padding-left:16px;position:relative;
+}
+.pros-cons-card ul li::before{content:'·';position:absolute;left:2px;font-weight:700;color:var(--primary)}
+
+/* Data highlight cards */
+.data-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;
+}
+@media(max-width:500px){.data-grid{grid-template-columns:repeat(2,1fr)}}
+.data-card{
+  background:var(--bg-card);border-radius:var(--radius-sm);padding:16px 12px;
+  text-align:center;border:1px solid var(--divider);box-shadow:var(--shadow);
+}
+.data-card .value{
+  font-size:clamp(20px,4vw,26px);font-weight:700;color:var(--primary);
+  line-height:1.2;
+}
+.data-card .value.gold{color:var(--accent)}
+.data-card .label{font-size:12px;color:var(--text-light);margin-top:4px;line-height:1.4}
+.data-card .sub{font-size:11px;color:var(--text-muted);margin-top:2px}
+
+/* ── SECTION 2: MECHANISM ── */
+.mech-steps{display:flex;flex-direction:column;gap:16px;margin:24px 0}
+.mech-step{
+  display:grid;grid-template-columns:44px 1fr;gap:16px;
+  padding:20px;border-radius:var(--radius);background:var(--bg-card);
+  border:1px solid var(--divider);box-shadow:var(--shadow);
+  transition:transform 0.2s;
+}
+.mech-step:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.mech-num{
+  width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--primary-light));
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:700;flex-shrink:0;
+}
+.mech-step h4{font-size:16px;font-weight:700;color:var(--primary-dark);margin-bottom:4px}
+.mech-step p{font-size:14px;color:var(--text-light);line-height:1.7}
+.mech-insight{
+  margin-top:8px;padding:16px 20px;border-radius:var(--radius);
+  background:linear-gradient(135deg,rgba(200,164,92,0.08),rgba(200,164,92,0.03));
+  border-left:3px solid var(--accent);font-size:14px;color:var(--text-light);line-height:1.7;
+}
+
+/* ── SECTION 3: RESISTANCE ── */
+.resistance-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+@media(max-width:500px){.resistance-grid{grid-template-columns:1fr}}
+.resistance-card{
+  padding:20px;border-radius:var(--radius);background:var(--bg-card);
+  border:1px solid var(--divider);box-shadow:var(--shadow);
+}
+.resistance-card .r-num{
+  display:inline-block;width:28px;height:28px;border-radius:50%;
+  background:var(--accent);color:#fff;text-align:center;
+  line-height:28px;font-size:13px;font-weight:700;margin-bottom:8px;
+}
+.resistance-card h4{font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px}
+.resistance-card p{font-size:13px;color:var(--text-light);line-height:1.6}
+
+/* ── SECTION 4: THREE LAYERS ── */
+.layer-tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.layer-tab{
+  padding:10px 20px;border-radius:var(--radius-sm);border:2px solid var(--divider);
+  background:var(--bg);cursor:pointer;font-size:14px;font-weight:500;
+  color:var(--text-light);transition:all 0.2s;font-family:inherit;
+}
+.layer-tab:hover{border-color:var(--primary-light);color:var(--primary)}
+.layer-tab.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.layer-content{display:none}
+.layer-content.active{display:block;animation:fadeUp 0.3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.layer-badge{
+  display:inline-block;padding:4px 14px;border-radius:20px;
+  font-size:12px;font-weight:600;margin-bottom:16px;
+}
+.layer-badge.l1{background:var(--layer1);color:var(--layer1-border);border:1px solid rgba(45,90,61,0.2)}
+.layer-badge.l2{background:var(--layer2);color:#5a4e28;border:1px solid rgba(184,168,122,0.3)}
+.layer-badge.l3{background:var(--layer3);color:#6a4e38;border:1px solid rgba(196,168,138,0.3)}
+.layer-intro{font-size:14px;color:var(--text-light);margin-bottom:20px;line-height:1.7}
+.drug-grid{display:grid;gap:12px}
+.drug-card{
+  display:grid;grid-template-columns:1fr 2fr;border-radius:var(--radius);
+  border:1px solid var(--divider);overflow:hidden;box-shadow:var(--shadow);
+  transition:transform 0.15s;
+}
+.drug-card:hover{transform:translateY(-1px)}
+.drug-card.layer1-card{border-left:3px solid var(--layer1-border)}
+.drug-card.layer2-card{border-left:3px solid var(--layer2-border)}
+.drug-card.layer3-card{border-left:3px solid var(--layer3-border)}
+.drug-name{
+  padding:14px 16px;background:var(--bg);display:flex;flex-direction:column;
+  justify-content:center;
+}
+.drug-name .ko{font-size:15px;font-weight:700;color:var(--text)}
+.drug-name .en{font-size:12px;color:var(--text-muted);font-weight:400}
+.drug-desc{
+  padding:14px 16px;background:var(--bg-card);
+  font-size:13px;color:var(--text-light);line-height:1.6;
+  display:flex;align-items:center;
+}
+@media(max-width:480px){
+  .drug-card{grid-template-columns:1fr}
+  .drug-name{padding:12px 16px 4px;background:var(--bg-card)}
+  .drug-desc{padding:4px 16px 12px}
+}
+
+/* ── LAYER 3 (supplements) compact ── */
+.suppl-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.suppl-list{grid-template-columns:1fr}}
+.suppl-item{
+  padding:14px 16px;border-radius:var(--radius-sm);background:var(--bg-card);
+  border:1px solid var(--divider);box-shadow:var(--shadow);
+  font-size:14px;
+}
+.suppl-item strong{display:block;font-size:14px;color:var(--text);margin-bottom:2px}
+.suppl-item span{font-size:12px;color:var(--text-light);line-height:1.5;display:block}
+
+/* ── SECTION 5: EXPERT CONVERGENCE ── */
+.expert-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
+@media(max-width:480px){.expert-grid{grid-template-columns:1fr}}
+.expert-card{
+  padding:16px;border-radius:var(--radius-sm);background:var(--bg-card);
+  border:1px solid var(--divider);box-shadow:var(--shadow);
+  font-size:13px;color:var(--text-light);line-height:1.6;
+}
+.expert-card strong{color:var(--text);font-size:14px}
+.convergence-box{
+  padding:24px;border-radius:var(--radius);
+  background:linear-gradient(135deg,rgba(45,90,61,0.05),rgba(200,164,92,0.05));
+  border:1px solid var(--divider);margin-top:16px;
+  text-align:center;font-size:15px;color:var(--text-light);line-height:1.8;
+}
+.convergence-box em{color:var(--primary);font-style:normal;font-weight:600}
+.freq-visual{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+@media(max-width:480px){.freq-visual{grid-template-columns:1fr}}
+.freq-item{display:flex;align-items:center;gap:12px}
+.freq-item .label{font-size:14px;font-weight:500;min-width:120px;color:var(--text)}
+.freq-item .bar-wrap{flex:1;height:24px;background:var(--divider);border-radius:12px;overflow:hidden}
+.freq-item .bar{height:100%;border-radius:12px;display:flex;align-items:center;padding-left:10px;
+  font-size:11px;font-weight:700;color:#fff;transition:width 0.6s ease}
+.bar-8{background:linear-gradient(90deg,var(--primary),var(--primary-light));width:73%}
+.bar-7{background:linear-gradient(90deg,var(--primary-light),#6b9a7c);width:64%}
+.bar-6{background:linear-gradient(90deg,#6b9a7c,#8ab894);width:55%}
+.bar-5{background:linear-gradient(90deg,#8ab894,#a8ccb0);width:45%}
+
+/* ── SECTION 6: HOPE ── */
+.hope-section{background:linear-gradient(180deg,var(--bg),rgba(200,164,92,0.05),var(--bg))}
+.hope-cards{display:grid;gap:20px;margin:24px 0}
+.hope-card{
+  padding:28px;border-radius:var(--radius);background:var(--bg-card);
+  border:1px solid var(--divider);box-shadow:var(--shadow);
+  text-align:center;
+}
+.hope-card .icon-big{font-size:40px;margin-bottom:12px;display:block}
+.hope-card h4{font-size:17px;font-weight:700;color:var(--primary-dark);margin-bottom:8px}
+.hope-card p{font-size:14px;color:var(--text-light);line-height:1.7}
+.hope-quote{
+  padding:32px 24px;border-radius:var(--radius);margin:24px 0;
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff;text-align:center;
+}
+.hope-quote blockquote{
+  font-size:clamp(18px,3.5vw,22px);font-weight:500;line-height:1.6;
+  font-family:'Noto Serif KR',serif;
+}
+.hope-quote cite{display:block;margin-top:12px;font-size:14px;font-weight:300;opacity:0.8;font-style:normal}
+
+/* ── FOOTER ── */
+footer{
+  padding:48px 0 32px;border-top:1px solid var(--divider);
+  font-size:13px;color:var(--text-muted);line-height:1.8;
+}
+footer strong{color:var(--text-light)}
+footer .ref-list{list-style:none;padding:0;margin:16px 0;columns:2;column-gap:24px}
+@media(max-width:480px){footer .ref-list{columns:1}}
+footer .ref-list li{padding:2px 0;font-size:12px;break-inside:avoid}
+.disclaimer{
+  padding:16px 20px;border-radius:var(--radius-sm);
+  background:rgba(200,164,92,0.08);border:1px solid rgba(200,164,92,0.2);
+  font-size:13px;color:var(--text-light);line-height:1.7;margin:16px 0;
+}
+
+/* ── PRINT ── */
+@media print{
+  body{background:#fff;color:#000;font-size:11pt;line-height:1.6}
+  nav{display:none!important}
+  .hero{background:#fff!important;color:#000!important;padding:20px 0!important}
+  .hero h1{color:#000!important}
+  .hero h1 em{color:#2d5a3d!important}
+  .hero-sub{color:#333!important}
+  .hero-stat{border:1px solid #ccc;background:#f9f9f9;color:#333!important}
+  .hero-stat strong{color:#2d5a3d!important}
+  section{padding:20px 0!important;page-break-inside:avoid}
+  .data-card,.pros-cons-card,.mech-step,.resistance-card,.drug-card,
+  .suppl-item,.expert-card,.hope-card{border:1px solid #ddd!important;box-shadow:none!important;break-inside:avoid}
+  .hope-quote{background:#2d5a3d!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .freq-item .bar,.layer-tab.active{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .section-divider{background:#999!important}
+  .nav,.hamburger,.layer-tab:not(.active){display:none!important}
+  .layer-content{display:block!important}
+  .container{padding:0!important;max-width:100%!important}
+  .hope-quote blockquote{color:#fff!important}
+  .disclaimer{border:1px solid #ccc!important}
+  .accent{color:var(--primary)!important}
+  @page{margin:1.5cm}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+<div class="nav-inner">
+  <div class="nav-logo">◈ 다중경로</div>
+  <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="메뉴">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+  <div class="nav-links">
+    <a href="#s1">다라손라십</a>
+    <a href="#s2">경구 메커니즘</a>
+    <a href="#s3">한계</a>
+    <a href="#s4">병용 전략</a>
+    <a href="#s5">전문가 동의</a>
+    <a href="#s6">희망</a>
+  </div>
+</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+<div class="hero-grain"></div>
+<div class="container">
+  <div class="hero-badge">환자 주도 통합 리포트</div>
+  <h1>다라손라십이 열어준 길,<br><em>용도변경 약물</em>이 완성할 희망</h1>
+  <p class="hero-sub">
+    췌장암 환자 커뮤니티를 위한 통합적 시각.<br>
+    하나의 분자에서 다중 경로로, 수동적 치료에서 능동적 전략으로.
+  </p>
+  <div class="hero-stat">
+    <span>📊 RASolute-302 · 중앙 OS <strong>13.2개월</strong> · HR <strong>0.40</strong></span>
+  </div>
+</div>
+</section>
+
+<!-- SECTION 1 -->
+<section id="s1">
+<div class="container">
+  <div class="section-label" style="color:var(--primary);background:rgba(45,90,61,0.08)">01 · 균형 잡힌 시각</div>
+  <h2 class="section-heading">다라손라십, 그 의미와 <span class="highlight">균형 잡힌 평가</span></h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">
+    다라손라십(Daraxonrasib, RMC-6236)은 40년간 'undruggable'이라 불리던 KRAS를 표적으로 한
+    최초의 성공적인 3상 약물입니다. 세포 내 샤페론 단백질인 Cyclophilin A를 활용한
+    삼중복합체(tri-complex) 형성이라는 독창적 메커니즘으로, 췌장암 치료의 새로운 지평을 열었습니다.
+    그러나 환자 관점에서 균형 잡힌 시각으로 바라볼 필요가 있습니다.
+  </p>
+
+  <div class="data-grid">
+    <div class="data-card">
+      <div class="value">13.2<span style="font-size:14px">개월</span></div>
+      <div class="label">중앙 전체 생존기간 (OS)</div>
+      <div class="sub">대조군 6.7개월</div>
+    </div>
+    <div class="data-card">
+      <div class="value gold">0.40</div>
+      <div class="label">사망 위험비 (HR)</div>
+      <div class="sub">췌장암 3상 역사적 최저</div>
+    </div>
+    <div class="data-card">
+      <div class="value">31.6<span style="font-size:14px">%</span></div>
+      <div class="label">객관적 반응률 (ORR)</div>
+      <div class="sub">68.4%는 반응 없음</div>
+    </div>
+    <div class="data-card">
+      <div class="value gold">1.2<span style="font-size:14px">%</span></div>
+      <div class="label">치료 중단율</div>
+      <div class="sub">대조군 11.2% 대비 획기적</div>
+    </div>
+  </div>
+
+  <div class="pros-cons">
+    <div class="pros-cons-card">
+      <span class="icon">🌱</span>
+      <h4 style="color:var(--primary)">과학적 의의</h4>
+      <ul>
+        <li>40년 난제 KRAS 표적 성공</li>
+        <li>경구용 분자접착제 최초 입증</li>
+        <li>삶의 질 개선 (통증 악화 9.2 vs 3.8개월)</li>
+        <li>치료 중단율 1.2% — 우수한 내약성</li>
+        <li>FOLFIRINOX 1차 치료보다 우수한 OS</li>
+      </ul>
+    </div>
+    <div class="pros-cons-card">
+      <span class="icon">⚖️</span>
+      <h4 style="color:var(--accent)">인지해야 할 한계</h4>
+      <ul>
+        <li>ORR 31.6% — 대다수 환자 반응 없음</li>
+        <li>단일경로 차단 → 내성 진화 필연적</li>
+        <li>대조군 설계 논란 (젬시타빈 재투여)</li>
+        <li>비맹검 설계로 인한 PRO 편향 가능성</li>
+        <li>예상되는 고약가 → 재정적 접근성 제한</li>
+      </ul>
+    </div>
+  </div>
+  <p style="font-size:14px;color:var(--text-light);text-align:center;font-style:italic">
+    "40년 난제를 깬 과학적 이정표이나, 이것은 끝이 아니라 시작이다"
+  </p>
+</div>
+</section>
+
+<!-- SECTION 2: MECHANISM -->
+<section id="s2" style="background:rgba(45,90,61,0.03)">
+<div class="container">
+  <div class="section-label" style="color:var(--accent);background:rgba(200,164,92,0.12)">02 · 핵심 이해</div>
+  <h2 class="section-heading">어떻게 경구용 약물이<br><span class="highlight">효과를 낼 수 있을까?</span></h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">
+    다라손라십은 기존의 '키-자물쇠(lock-and-key)' 방식의 약물과 완전히 다릅니다.
+    분자량 1000 이상의 macrocyclic 분자임에도 경구 투여가 가능하며,
+    세포 내부에서 독창적인 방식으로 암의 성장 신호를 차단합니다.
+  </p>
+
+  <div class="mech-steps">
+    <div class="mech-step">
+      <div class="mech-num">1</div>
+      <div>
+        <h4>경구 흡수 — Beyond Rule of Five</h4>
+        <p>다라손라십은 전통적 경구약물 기준(Lipinski's Rule of Five)을 완전히 벗어난 대형 macrocyclic 분자(MW &gt; 1000)입니다. 자연물질 Sanglifehrin A에서 유래하여, 최적화된 구조 덕분에 경구 투여 후 위장관에서 흡수되어 혈류를 통해 전신으로 분포됩니다. 이는 "큰 분자도 잘 만들면 경구 복용이 가능하다"는 중요한 교훈을 줍니다.</p>
+      </div>
+    </div>
+    <div class="mech-step">
+      <div class="mech-num">2</div>
+      <div>
+        <h4>세포 내부 침투 — Cyclophilin A와의 만남</h4>
+        <p>혈류를 따라 암세포에 도달한 다라손라십은 세포막을 통과하여 세포질 안으로 들어갑니다. 그곳에서 <strong>Cyclophilin A(CypA)</strong>라는 샤페론 단백질을 만납니다. CypA는 정상 세포에서 단백질 접힘을 돕는 일상적인 단백질이지만, 다라손라십은 이 CypA를 '접착제'처럼 활용합니다.</p>
+      </div>
+    </div>
+    <div class="mech-step">
+      <div class="mech-num">3</div>
+      <div>
+        <h4>삼중복합체(Tri-complex) 형성</h4>
+        <p>다라손라십과 CypA가 결합하면, 이 복합체는 새로운 결합 표면(neomorphic interface)을 만들어냅니다. 이 표면은 마치 퍼즐 조각처럼 <strong>RAS-GTP(활성형 RAS)</strong> 단백질에 강력하게 결합합니다. 즉, <strong>약물 + CypA + RAS</strong>가 함께 달라붙는 삼중복합체를 형성하는 것입니다.</p>
+      </div>
+    </div>
+    <div class="mech-step">
+      <div class="mech-num">4</div>
+      <div>
+        <h4>신호 차단 — 암세포 성장 정지</h4>
+        <p>삼중복합체가 형성되면 RAS는 더 이상 하위 신호전달체계(MAPK, PI3K/AKT 등)를 활성화할 수 없게 됩니다. 암세포의 '성장 엔진'이 물리적으로 차단되는 것입니다. 다라손라십은 다양한 KRAS 변이형(G12D, G12V, G12R 등)뿐 아니라 야생형 RAS까지 차단할 수 있어, 광범위한 환자군에 적용 가능합니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mech-insight">
+    <strong>🌟 이것이 의미하는 것:</strong><br>
+    이 메커니즘은 단순한 효소 억제제가 아니라 <strong>분자접착제(Molecular Glue)</strong>라는 완전히 새로운 패러다임입니다.
+    약물이 숙주 단백질(CypA)을 리크루팅해서 새로운 기능을 만들어냅니다. 이는 기존 용도변경 약물들 중에도
+    아직 발견되지 않은 분자접착제 메커니즘이 숨어 있을 가능성을 시사합니다.
+    또한 <strong>1일 1회 경구 복용</strong>이라는 점은 환자가 집에서 장기적으로 유지요법을 할 수 있다는 의미로,
+    단순한 편의성을 넘어 치료 패러다임 자체를 바꿉니다.
+  </div>
+</div>
+</section>
+
+<!-- SECTION 3: WHY COMBINATION -->
+<section id="s3">
+<div class="container">
+  <div class="section-label" style="color:var(--primary);background:rgba(45,90,61,0.08)">03 · 필연적 한계</div>
+  <h2 class="section-heading">단일 경로 차단의 한계 —<br><span class="highlight">왜 병용이 필요한가?</span></h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">
+    다라손라십이 RAS 신호를 강력하게 차단하더라도, 암세포는 생존을 위해 다양한 우회로를 활성화합니다.
+    이것이 단일 표적 치료의 근본적 한계이며, 동시에 다중 경로 병용 전략이 필요한 이유입니다.
+  </p>
+
+  <div class="resistance-grid">
+    <div class="resistance-card">
+      <div class="r-num">1</div>
+      <h4>CypA 및 입체 장해 변이</h4>
+      <p>다라손라십이 CypA와 결합하여 삼중복합체를 완성하는 핵심 경첩 부위를 일그러뜨리는 미스센스 돌연변이를 암세포가 신속히 구축합니다.</p>
+    </div>
+    <div class="resistance-card">
+      <div class="r-num">2</div>
+      <h4>KRAS 유전자 증폭</h4>
+      <p>종양 내부의 mutant KRAS 유전자 복제수를 대폭 증폭시켜, 투여된 약물의 결합 역치 농도를 정량적으로 무력화합니다.</p>
+    </div>
+    <div class="resistance-card">
+      <div class="r-num">3</div>
+      <h4>BRAF 이량체 활성화</h4>
+      <p>상위 RAS가 차단되어도 하류 신호를 강제로 구동하기 위해 RAF 이량체를 조립, MAPK 경로를 재활성화합니다.</p>
+    </div>
+    <div class="resistance-card">
+      <div class="r-num">4</div>
+      <h4>대체 RTK/PI3K 경로</h4>
+      <p>HER2 수용체 발현을 극단적으로 높이고 PIK3CA 변이 및 MYC 증폭을 유도하여 평행 신호전달 체계를 활성화합니다.</p>
+    </div>
+  </div>
+
+  <div class="mech-insight" style="border-left-color:var(--primary)">
+    <strong>🔑 핵심 통찰:</strong><br>
+    놀랍게도 다라손라십은 <strong>T-세포 의존성</strong>을 보이며, 면역관문억제제와의 병용에서 더 깊은 반응을 보인다는 전임상 데이터가 있습니다.
+    이는 단일 약물보다 조합 전략이 더 강력하다는 용도변경 커뮤니티의 오랜 믿음을 간접적으로 증명합니다.
+    <br><br>
+    <strong style="font-size:15px">"단일 표적의 한계는 필연적이며, 다중 경로 병용이 해답이다"</strong>
+  </div>
+</div>
+</section>
+
+<!-- SECTION 4: THREE LAYERS -->
+<section id="s4" style="background:rgba(45,90,61,0.03)">
+<div class="container">
+  <div class="section-label" style="color:var(--accent);background:rgba(200,164,92,0.12)">04 · 통합 전략</div>
+  <h2 class="section-heading">세 가지 층위로 보는<br><span class="highlight">다중 경로 병용 전략</span></h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">
+    단일 경로 차단의 한계를 극복하기 위해, 전 세계 전문가들이 제시하는 용도변경 약물들을
+    <strong>세 가지 전략적 층위</strong>로 정리했습니다. 각 층위는 서로 다른 기전으로 암을 공격하며,
+    함께 사용될 때 시너지를 냅니다.
+  </p>
+
+  <!-- TABS -->
+  <div class="layer-tabs" id="layerTabs">
+    <button class="layer-tab active" data-layer="1">⚔️ 층위 1 · 직접 공격</button>
+    <button class="layer-tab" data-layer="2">🌍 층위 2 · 환경 조절</button>
+    <button class="layer-tab" data-layer="3">🛡️ 층위 3 · 면역 회복</button>
+  </div>
+
+  <!-- LAYER 1 -->
+  <div class="layer-content active" id="layer1">
+    <div class="layer-badge l1">⚔️ 층위 1 · 직접적인 암 억제 — 암세포를 직접 공격한다</div>
+    <p class="layer-intro">이 약물들은 암세포의 필수 생존 경로를 직접 차단하거나 파괴합니다. 다라손라십도 이 층위에 속하며, 다른 용도변경 약물들은 각각 다른 기전으로 암을 공격합니다.</p>
+    <div class="drug-grid">
+      <div class="drug-card layer1-card">
+        <div class="drug-name"><span class="ko">다라손라십</span><span class="en">Daraxonrasib</span></div>
+        <div class="drug-desc">RAS(ON) 삼중복합체 차단 · RAS 경로 · ⚡ 핵심 표적</div>
+      </div>
+      <div class="drug-card layer1-card">
+        <div class="drug-name"><span class="ko">펜벤다졸 · 메벤다졸</span><span class="en">Fenbendazole · Mebendazole</span></div>
+        <div class="drug-desc">미세소관 억제, Hedgehog 신호 차단, GLUT 수송체 저해 · 세포분열 + 대사</div>
+      </div>
+      <div class="drug-card layer1-card">
+        <div class="drug-name"><span class="ko">이버멕틴</span><span class="en">Ivermectin</span></div>
+        <div class="drug-desc">Cl- 이온 통로 결합, 세포막 전위 파괴 · 화학요법 저항성 차단</div>
+      </div>
+      <div class="drug-card layer1-card">
+        <div class="drug-name"><span class="ko">아르테미시닌</span><span class="en">Artemisinin</span></div>
+        <div class="drug-desc">Ferroptosis 유도, 암 줄기세포 표적 · 산화 스트레스</div>
+      </div>
+      <div class="drug-card layer1-card">
+        <div class="drug-name"><span class="ko">디설피람</span><span class="en">Disulfiram</span></div>
+        <div class="drug-desc">ALDH 억제, 프로테아좀 억제, 구리 의존성 세포사멸 · 대사 + 단백질 분해</div>
+      </div>
+      <div class="drug-card layer1-card">
+        <div class="drug-name"><span class="ko">이트라코나졸</span><span class="en">Itraconazole</span></div>
+        <div class="drug-desc">Hedgehog 억제, mTOR 억제, 혈관신생 차단 · 신호전달 + 혈관</div>
+      </div>
+      <div class="drug-card layer1-card">
+        <div class="drug-name"><span class="ko">니클로사미드</span><span class="en">Niclosamide</span></div>
+        <div class="drug-desc">Wnt 신호 억제, 미토콘드리아 탈분극 · 신호전달 + 에너지 대사</div>
+      </div>
+      <div class="drug-card layer1-card">
+        <div class="drug-name"><span class="ko">독시사이클린</span><span class="en">Doxycycline</span></div>
+        <div class="drug-desc">미토콘드리아 단백질 합성 억제 · 미토콘드리아 기능 마비</div>
+      </div>
+      <div class="drug-card layer1-card">
+        <div class="drug-name"><span class="ko">셀레콕시브</span><span class="en">Celecoxib</span></div>
+        <div class="drug-desc">COX-2 억제, 항염증, 암세포 성장 신호 차단 · 염증 + 증식</div>
+      </div>
+      <div class="drug-card layer1-card">
+        <div class="drug-name"><span class="ko">탈리도마이드</span><span class="en">Thalidomide</span></div>
+        <div class="drug-desc">면역조절, 혈관신생 억제, TNF-α 감소 · 면역 + 혈관</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAYER 2 -->
+  <div class="layer-content" id="layer2">
+    <div class="layer-badge l2">🌍 층위 2 · 암 미세환경 조절 — 암이 살아가는 터전을 바꾼다</div>
+    <p class="layer-intro">이 약물들은 암세포를 직접 죽이기보다는, 암이 자라고 퍼지는 환경 자체를 바꿉니다. 암의 대사 경로를 재프로그래밍하고, 면역 미세환경을 개선합니다.</p>
+    <div class="drug-grid">
+      <div class="drug-card layer2-card">
+        <div class="drug-name"><span class="ko">메트포르민</span><span class="en">Metformin</span></div>
+        <div class="drug-desc">AMPK 활성화 → mTOR 억제, 미토콘드리아 OXPHOS 차단 · <strong>8/11 프로토콜 채택</strong></div>
+      </div>
+      <div class="drug-card layer2-card">
+        <div class="drug-name"><span class="ko">스타틴</span><span class="en">Atorvastatin · Simvastatin</span></div>
+        <div class="drug-desc">HMG-CoA 환원효소 억제 → RAS 세포막 전위 차단 · <strong>7/11 프로토콜 채택</strong></div>
+      </div>
+      <div class="drug-card layer2-card">
+        <div class="drug-name"><span class="ko">비타민 D3</span><span class="en">Vitamin D3</span></div>
+        <div class="drug-desc">VDR 활성화, 면역조절, 세포 분화 촉진 · 미세환경 개선</div>
+      </div>
+      <div class="drug-card layer2-card">
+        <div class="drug-name"><span class="ko">프로프라놀롤</span><span class="en">Propranolol</span></div>
+        <div class="drug-desc">베타-아드레날린 수용체 차단 · 스트레스 신호 → 암 전이 억제</div>
+      </div>
+      <div class="drug-card layer2-card">
+        <div class="drug-name"><span class="ko">시메티딘</span><span class="en">Cimetidine</span></div>
+        <div class="drug-desc">H2 수용체 차단, 면역조절, T세포 활성화 · 항암 면역 증강</div>
+      </div>
+      <div class="drug-card layer2-card">
+        <div class="drug-name"><span class="ko">라파마이신</span><span class="en">Rapamycin · Sirolimus</span></div>
+        <div class="drug-desc">mTOR 억제 (FKBP12 분자접착제) · <strong>또 다른 분자접착제!</strong></div>
+      </div>
+      <div class="drug-card layer2-card">
+        <div class="drug-name"><span class="ko">저용량 날트렉손</span><span class="en">Low-Dose Naltrexone</span></div>
+        <div class="drug-desc">오피오이드 수용체 길항 조절 → 면역세포 활성화 · 면역조절</div>
+      </div>
+      <div class="drug-card layer2-card">
+        <div class="drug-name"><span class="ko">CBD 오일</span><span class="en">Cannabidiol</span></div>
+        <div class="drug-desc">칸나비노이드 수용체 조절, 염증 억제, 세포자멸사 유도</div>
+      </div>
+      <div class="drug-card layer2-card">
+        <div class="drug-name"><span class="ko">파리카시톨</span><span class="en">Paricalcitol</span></div>
+        <div class="drug-desc">VDR 리간드, 췌장암 기질(Stroma) 리모델링, CAF 비활성화, CD8+ T세포 침윤 유도 · <strong>★ Nature Cancer 임상</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAYER 3 -->
+  <div class="layer-content" id="layer3">
+    <div class="layer-badge l3">🛡️ 층위 3 · 면역 증강 + 몸 상태 회복 — 환자가 싸울 수 있게 한다</div>
+    <p class="layer-intro">이 물질들은 직접적인 항암 효과보다는, 환자의 면역 시스템을 강화하고 전신 상태를 개선하여 암과 싸울 수 있는 몸을 만듭니다. 모든 프로토콜에서 빠지지 않고 등장하는 기초 지원군입니다.</p>
+    <div class="suppl-list">
+      <div class="suppl-item"><strong>커큐민</strong><span>NF-κB 억제, 항염증, 항산화</span></div>
+      <div class="suppl-item"><strong>베르베린</strong><span>AMPK 활성화, 미토콘드리아 조절</span></div>
+      <div class="suppl-item"><strong>EGCG (녹차)</strong><span>항산화, PI3K/AKT/mTOR 억제</span></div>
+      <div class="suppl-item"><strong>레스베라트롤</strong><span>SIRT1 활성화, 항노화, 항염증</span></div>
+      <div class="suppl-item"><strong>오메가-3 (DHA)</strong><span>항염증, 세포막 유동성 개선</span></div>
+      <div class="suppl-item"><strong>MSM</strong><span>유기황 공급, 항산화, 염증 완화</span></div>
+      <div class="suppl-item"><strong>아쉬아간다</strong><span>Adaptogen, 스트레스 감소, 활력</span></div>
+      <div class="suppl-item"><strong>케르세틴</strong><span>항산화, 자가포식 유도, 항염증</span></div>
+      <div class="suppl-item"><strong>브로멜라인</strong><span>항염증, 면역조절, 단백질 소화</span></div>
+      <div class="suppl-item"><strong>MCP</strong><span>갈렉틴-3 차단, 항전이, 면역증강</span></div>
+      <div class="suppl-item"><strong>TUDCA</strong><span>간 보호, 소포체 스트레스 감소</span></div>
+      <div class="suppl-item"><strong>버섯 추출물</strong><span>베타글루칸, 면역증강 (영지 · 아가리쿠스 · 칠면조꼬리)</span></div>
+      <div class="suppl-item"><strong>마누카꿀</strong><span>항균, 항염증, 상처 치유</span></div>
+      <div class="suppl-item"><strong>프로바이오틱스</strong><span>마이크로바이옴 건강, 면역조절</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- SECTION 5: EXPERT CONVERGENCE -->
+<section id="s5">
+<div class="container">
+  <div class="section-label" style="color:var(--primary);background:rgba(45,90,61,0.08)">05 · 증거의 수렴</div>
+  <h2 class="section-heading">전 세계 전문가들이<br><span class="highlight">동의하는 다중경로 접근법</span></h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">
+    서로 다른 이론과 배경을 가진 11명의 글로벌 전문가들이 제시하는 프로토콜을 분석한 결과,
+    놀라운 공통점이 발견되었습니다. 이론은 달라도 <strong>핵심 약물은 같습니다.</strong>
+  </p>
+
+  <div class="freq-visual">
+    <div class="freq-item">
+      <span class="label">메트포르민</span>
+      <div class="bar-wrap"><div class="bar bar-8">8/11</div></div>
+    </div>
+    <div class="freq-item">
+      <span class="label">펜벤다졸/메벤다졸</span>
+      <div class="bar-wrap"><div class="bar bar-8">8/11</div></div>
+    </div>
+    <div class="freq-item">
+      <span class="label">스타틴류</span>
+      <div class="bar-wrap"><div class="bar bar-7">7/11</div></div>
+    </div>
+    <div class="freq-item">
+      <span class="label">커큐민</span>
+      <div class="bar-wrap"><div class="bar bar-7">7/11</div></div>
+    </div>
+    <div class="freq-item">
+      <span class="label">베르베린</span>
+      <div class="bar-wrap"><div class="bar bar-6">6/11</div></div>
+    </div>
+    <div class="freq-item">
+      <span class="label">멜라토닌</span>
+      <div class="bar-wrap"><div class="bar bar-5">5/11</div></div>
+    </div>
+  </div>
+
+  <div class="expert-grid">
+    <div class="expert-card"><strong>조 티펜스</strong><br>펜벤다졸, CBD, 커큐민, 베르베린, TUDCA, 버섯</div>
+    <div class="expert-card"><strong>커트 마이클 그레이든</strong><br>아르테미시닌, 펜벤다졸, 시메티딘, TUDCA, MSM</div>
+    <div class="expert-card"><strong>폴 마릭 (FLCCC)</strong><br>메트포르민, 스타틴, 메벤다졸, 이버멕틴, 디설피람, 프로프라놀롤</div>
+    <div class="expert-card"><strong>마크 린턴</strong><br>메트포르민, 메벤다졸, 스타틴, 이트라코나졸, 독시사이클린</div>
+    <div class="expert-card"><strong>하다 마사토</strong><br>탈리도마이드, 셀레콕시브, MCP, 발프로산</div>
+    <div class="expert-card"><strong>윌리엄 &amp; 케네스</strong><br>메트포르민, 디설피람, 스타틴, 메벤다졸, 라파마이신</div>
+    <div class="expert-card"><strong>다니엘 토마스</strong><br>메트포르민, 커큐민, 베르베린, 스타틴, 피페롱구민</div>
+    <div class="expert-card"><strong>제프리 닥</strong><br>아르테미시닌, IVC, 페롭토시스 순환, TUDCA</div>
+    <div class="expert-card"><strong>제이슨 R. 윌리엄스</strong><br>스타틴, 메트포르민, 메벤다졸, CBD, 미페프리스톤</div>
+    <div class="expert-card"><strong>마크 로젠버그</strong><br>메트포르민, DCA, 멜라토닌, EGCG, 살리노마이신</div>
+    <div class="expert-card"><strong>닐 맥키니</strong><br>LDN, 비타민A, 케르세틴, 커큐민, 버섯류</div>
+  </div>
+
+  <div class="convergence-box">
+    <em>서로 다른 이론, 같은 결론</em><br>
+    "암은 단일 경로의 문제가 아니라 다중 경로의 네트워크 질환이다.<br>
+    따라서 치료도 다중 표적을 동시에 공략해야 한다."
+  </div>
+</div>
+</section>
+
+<!-- SECTION 6: HOPE -->
+<section id="s6" class="hope-section">
+<div class="container">
+  <div class="section-label" style="color:var(--accent);background:rgba(200,164,92,0.12)">06 · 희망과 용기</div>
+  <h2 class="section-heading">이것이 의미하는 것 —<br><span class="highlight">희망과 용기의 메시지</span></h2>
+  <div class="section-divider"></div>
+
+  <div class="hope-cards">
+    <div class="hope-card">
+      <span class="icon-big">🔬</span>
+      <h4>분자접착제 패러다임의 탄생</h4>
+      <p>다라손라십은 경구용 분자접착제가 <strong>가능하다</strong>는 것을 증명했습니다. 이는 암 치료의 패러다임을 바꿀 잠재력이 있습니다. 그리고 이 패러다임은 제약회사만의 전유물이 아닙니다. 이미 시장에 나와 있는 수천 개의 약물 중에서, 아직 발견되지 않은 분자접착제 메커니즘이 숨어 있을 수 있습니다. 사이클로스포린-CypA, 시롤리무스-FKBP12처럼 말입니다.</p>
+    </div>
+    <div class="hope-card">
+      <span class="icon-big">🌿</span>
+      <h4>"이미 있는 약물"로 할 수 있는 일</h4>
+      <p>메트포르민, 스타틴, 펜벤다졸, 디설피람 — 이 약물들은 이미 수십 년간 인체에서 안전성이 입증되었고, 전 세계 어디서나 구할 수 있으며, 가격도 저렴합니다. 특허가 만료된 제네릭 약물들이기에 누구나 접근할 수 있습니다. 11명의 글로벌 전문가들이 각자 다른 이론적 배경에서 출발했지만, <strong>결국 같은 약물들을 추천하고 있다는 사실</strong>은 이 접근법에 과학적 신뢰성을 더합니다.</p>
+    </div>
+    <div class="hope-card">
+      <span class="icon-big">👥</span>
+      <h4>여러분은 용기 있는 개척자입니다</h4>
+      <p>자신의 몸으로 실험하고, 데이터를 기록하고, 커뮤니티와 공유하는 환자 주도 연구는 <strong>N-of-1이라는 과학적으로 인정된 방법론</strong>입니다. 제약회사가 할 수 없는 일 — 즉, 개별 환자의 유전자 변이, 대사 상태, 생활 방식에 맞춘 개인 맞춤형 병용 프로토콜을 찾는 일 — 을 여러분이 하고 있습니다. 이것은 결코 '대안'이 아니라 <strong>의학의 미래</strong>입니다.</p>
+    </div>
+  </div>
+
+  <div class="hope-quote">
+    <blockquote>
+      "단일경로가 아니라 다중경로,<br>
+      하나의 약물이 아니라 함께,<br>
+      수동적 치료가 아니라 능동적 전략으로.<br>
+      여러분은 이미 그 길을 걷고 있습니다."
+    </blockquote>
+    <cite>— 환자 주도 용도변경 약물 커뮤니티의 시각</cite>
+  </div>
+
+  <p style="text-align:center;font-size:15px;color:var(--text-light);line-height:1.8;margin-top:16px">
+    <strong style="color:var(--primary)">이제 여러분의 이야기가 다음 이정표입니다.</strong><br>
+    자신의 프로토콜을 기록하고, 결과를 커뮤니티와 공유하세요.<br>
+    하나의 소중한 N-of-1 증례가 또 다른 환자에게 희망이 됩니다.
+  </p>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="container">
+
+  <div class="hope-card" style="text-align:left;margin-bottom:24px">
+    <span class="icon-big" style="font-size:28px">📚</span>
+    <h4 style="font-size:15px">핵심 참고문헌</h4>
+    <ul class="ref-list">
+      <li>RASolute-302: NEJM (2026) DOI: 10.1056/NEJMoa2605555</li>
+      <li>Daraxonrasib 기전: Singh M, Cancer Res 2025; Cregg J, J Med Chem 2025</li>
+      <li>T-세포 의존성: Cancer Discovery 2025 (PMC12319402)</li>
+      <li>ASCO 2026 Plenary: Dr. Brian Wolpin, Dana-Farber</li>
+      <li>PanCAN 성명: pancan.org (June 2026)</li>
+      <li>NAPOLI-1: Wang-Gillam, Lancet 2016</li>
+      <li>CONKO-003: Oettle, JCO 2014</li>
+      <li>PRODIGE 4/ACCORD 11: Conroy, NEJM 2011</li>
+      <li>MPACT: Von Hoff, NEJM 2013</li>
+      <li>폴 마릭 FLCCC 프로토콜</li>
+      <li>제프리 닥 "Cracking Cancer Tool Kit"</li>
+      <li>조 티펜스 프로토콜</li>
+      <li>제이슨 R. 윌리엄스 면역요법</li>
+      <li>마크 린턴 "암 해결법"</li>
+      <li>하다 마사토 임상 사례집</li>
+      <li>닐 맥키니 "자연 요법 종양학"</li>
+      <li>마크 로젠버그 pH 조작 요법</li>
+      <li>다니엘 토마스 암 치료 제언</li>
+      <li>파리카시톨: Nature Cancer 2026</li>
+      <li>Metformin 항암: Pollak MN, Cancer Disc 2012</li>
+      <li>Mebendazole 항암: Nygren P, Acta Oncologica 2013</li>
+      <li>Disulfiram: Skrott Z, Nature 2017</li>
+      <li>Statin RAS 전위: Khwaja A, Nature 1997</li>
+      <li>Rapamycin FKBP12: Brown EJ, Nature 1994</li>
+      <li>Cyclosporine CypA: Handschumacher, Science 1984</li>
+      <li>RASolute-303 (NCT07491445)</li>
+      <li>RASolute-304 (NCT07252232)</li>
+      <li>환자 커뮤니티 N-of-1 방법론</li>
+    </ul>
+  </div>
+
+  <div class="disclaimer">
+    <strong>⚠️ 중요 면책사항</strong><br>
+    이 문서는 환자 주도 용도변경 약물 커뮤니티의 시각에서 작성된 정보 제공 목적의 자료입니다.
+    특정 치료법을 권장하거나 비판하기 위한 것이 아닙니다. 여기에 포함된 모든 정보는
+    의학적 조언을 대체하지 않습니다. 모든 치료 결정은 반드시 담당 의사와의 상담을 통해
+    이루어져야 하며, 용도변경 약물 사용은 의사의 처방과 감독 하에 이루어져야 합니다.
+    저희 커뮤니티는 개별 치료 결정에 대해 어떠한 책임도 지지 않습니다.
+  </div>
+
+  <p style="text-align:center;margin-top:24px;font-size:12px">
+    © 2026 · 환자 주도 용도변경 약물 커뮤니티 ·<br>
+    생성일: 2026-06-13 · 참고자료: 네이버 블로그, ASCO 2026, NEJM, FLCCC 외
+  </p>
+</div>
+</footer>
+
+<script>
+/* Hamburger close on link click */
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.remove('open');
+  });
+});
+
+/* Layer tabs */
+const tabs = document.querySelectorAll('.layer-tab');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    document.querySelectorAll('.layer-content').forEach(c => c.classList.remove('active'));
+    document.getElementById('layer' + tab.dataset.layer).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

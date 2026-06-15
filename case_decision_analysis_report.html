@@ -1,0 +1,690 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0,user-scalable=yes">
+<title>Case Decision Analysis — EGFR NSCLC 4th Stage · 43 Months</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #faf8f5;
+  --card: #fffdf9;
+  --ink: #1c1914;
+  --ink-mid: #4a443c;
+  --ink-light: #8a8278;
+  --accent-navy: #1e3a5f;
+  --accent-navy-light: #e8eef5;
+  --accent-amber: #b8702a;
+  --accent-amber-bg: #fdf5ea;
+  --accent-red: #b5343a;
+  --accent-red-bg: #fef3f2;
+  --accent-teal: #2d6e6a;
+  --accent-teal-bg: #ebf5f4;
+  --accent-blue: #2b5f8a;
+  --accent-blue-bg: #eef4fa;
+  --accent-sage: #4d704d;
+  --accent-sage-bg: #edf5ed;
+  --line: #e5ded4;
+  --line-light: #f0ebe2;
+  --line-strong: #c5bdb0;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-card: 0 2px 12px rgba(0,0,0,0.05);
+  --radius-sm: 6px;
+  --radius: 12px;
+  --radius-lg: 18px;
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:17px;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.8;
+  -webkit-font-smoothing:antialiased;
+}
+
+.wrap{max-width:720px;margin:0 auto;padding:0 18px}
+
+/* ── Hero ── */
+.hero{
+  background:#faf8f5;
+  border-bottom:4px solid var(--accent-navy);
+  padding:36px 0 28px;margin-bottom:20px;
+}
+.hero .tag{
+  display:inline-block;background:var(--accent-navy);color:#fff;
+  font-size:0.7rem;font-weight:600;padding:3px 10px;border-radius:3px;
+  letter-spacing:0.8px;margin-bottom:12px;text-transform:uppercase;
+}
+.hero h1{font-size:clamp(1.2rem,4.5vw,1.65rem);font-weight:800;letter-spacing:-0.025em;line-height:1.35;margin-bottom:6px;color:var(--accent-navy)}
+.hero .sub{font-size:0.85rem;color:var(--ink-mid);font-weight:400;margin-bottom:16px;line-height:1.5}
+.hero .pills{display:flex;flex-wrap:wrap;gap:5px}
+.hero .pills span{
+  background:var(--card);border:1px solid var(--line);
+  padding:4px 12px;border-radius:20px;font-size:0.72rem;font-weight:500;color:var(--ink-mid);
+}
+
+/* ── Section Card ── */
+.card{
+  background:var(--card);border-radius:var(--radius-lg);
+  padding:22px 20px;margin-bottom:16px;
+  box-shadow:var(--shadow-card);border:1px solid var(--line);
+}
+.card h2{
+  font-family:'Noto Serif KR','Noto Sans KR',serif;
+  font-size:1.05rem;font-weight:700;color:var(--accent-navy);
+  margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--line-light);
+  display:flex;align-items:center;gap:10px;letter-spacing:-0.01em;
+}
+.card h3{font-size:0.92rem;font-weight:700;color:#2a2a3a;margin:16px 0 8px}
+.card h3:first-of-type{margin-top:0}
+.card p{font-size:0.88rem;margin-bottom:8px;line-height:1.85;color:var(--ink-mid)}
+.card p strong{color:var(--ink)}
+
+/* ── Badge ── */
+.badge-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:28px;height:28px;background:var(--accent-navy);color:#fff;
+  border-radius:50%;font-size:0.72rem;font-weight:700;flex-shrink:0;
+  font-family:'Noto Sans KR',sans-serif;
+}
+
+/* ── KPI ── */
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:12px 0}
+.kpi{
+  background:#f8f5f0;padding:16px 12px;border-radius:var(--radius-sm);text-align:center;
+  border:1px solid var(--line);
+}
+.kpi .num{font-size:1.5rem;font-weight:800;color:var(--accent-navy);line-height:1.2}
+.kpi .lbl{font-size:0.72rem;color:var(--ink-light);margin-top:2px;line-height:1.3}
+
+/* ── Blockquote ── */
+.bq{
+  display:block;padding:14px 16px;margin:12px 0;border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  font-size:0.85rem;line-height:1.8;background:#faf8f5;border:1px solid var(--line-light);border-left-width:4px;
+}
+.bq .src{display:block;font-size:0.72rem;margin-top:6px;color:var(--ink-light);font-weight:500}
+.bq.urgent{border-left-color:var(--accent-red);background:var(--accent-red-bg)}
+.bq.info{border-left-color:var(--accent-amber);background:var(--accent-amber-bg)}
+.bq.hope{border-left-color:var(--accent-teal);background:var(--accent-teal-bg)}
+.bq.note{border-left-color:var(--accent-blue);background:var(--accent-blue-bg)}
+.bq.empower{border-left-color:var(--accent-sage);background:var(--accent-sage-bg)}
+.bq.key{border-left-color:var(--accent-navy);background:var(--accent-navy-light)}
+
+/* ── Decision Card ── */
+.dc{
+  border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px 16px;margin:14px 0;background:#fffdf8;
+  position:relative;overflow:hidden;
+}
+.dc::after{
+  content:'';position:absolute;top:0;left:0;width:4px;height:100%;border-radius:4px 0 0 4px;
+}
+.dc.l1::after{background:var(--accent-red)}
+.dc.l2::after{background:var(--accent-amber)}
+.dc.l3::after{background:var(--accent-navy)}
+.dc.l4::after{background:var(--accent-teal)}
+.dc.l5::after{background:var(--accent-sage)}
+.dc .line-tag{
+  display:inline-block;font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:3px;margin-bottom:8px;
+}
+.dc.l1 .line-tag{background:var(--accent-red-bg);color:var(--accent-red)}
+.dc.l2 .line-tag{background:var(--accent-amber-bg);color:var(--accent-amber)}
+.dc.l3 .line-tag{background:var(--accent-blue-bg);color:var(--accent-navy)}
+.dc.l4 .line-tag{background:var(--accent-teal-bg);color:var(--accent-teal)}
+.dc.l5 .line-tag{background:var(--accent-sage-bg);color:var(--accent-sage)}
+.dc .rx-name{font-size:0.95rem;font-weight:700;color:var(--ink);margin-bottom:2px}
+.dc .rx-date{font-size:0.75rem;color:var(--ink-light);margin-bottom:10px}
+.dc .dc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.dc .dc-item{background:#faf8f5;padding:8px 10px;border-radius:var(--radius-sm);border:1px solid var(--line-light)}
+.dc .dc-item .dc-lbl{font-size:0.68rem;color:var(--ink-light);font-weight:500;text-transform:uppercase;letter-spacing:0.3px}
+.dc .dc-item .dc-val{font-size:0.82rem;font-weight:700;color:var(--ink)}
+.dc .dc-item .dc-val.tight{color:var(--accent-red)}
+.dc .dc-item .dc-val.ok{color:var(--accent-teal)}
+.dc .dc-item .dc-val.warn{color:var(--accent-amber)}
+.dc .dc-quote{font-size:0.82rem;line-height:1.75;color:var(--ink-mid);margin-top:6px;padding-top:8px;border-top:1px dashed var(--line)}
+.dc .dc-quote em{font-size:0.73rem;color:var(--ink-light);font-style:normal}
+
+/* ── Info Gap Meter ── */
+.gap-meter{display:flex;align-items:center;gap:8px;margin:4px 0}
+.gap-meter .bar{flex:1;height:8px;background:var(--line-light);border-radius:4px;overflow:hidden}
+.gap-meter .bar .fill{height:100%;border-radius:4px}
+.gap-meter .bar .fill.high{background:var(--accent-red)}
+.gap-meter .bar .fill.med{background:var(--accent-amber)}
+.gap-meter .bar .fill.low{background:var(--accent-teal)}
+.gap-meter .label{font-size:0.7rem;font-weight:600;min-width:36px;text-align:right}
+
+/* ── Timeline ── */
+.tl{position:relative;padding-left:24px;margin:16px 0}
+.tl::before{content:'';position:absolute;left:8px;top:4px;bottom:4px;width:2px;background:var(--line);border-radius:1px}
+.tl-item{position:relative;margin-bottom:14px;padding-left:8px}
+.tl-item::before{
+  content:'';position:absolute;left:-20px;top:6px;width:10px;height:10px;
+  border-radius:50%;border:2px solid var(--accent-navy);background:#fff;
+}
+.tl-item .tl-date{font-size:0.68rem;color:var(--ink-light);font-weight:600;letter-spacing:0.3px}
+.tl-item .tl-drug{font-size:0.88rem;font-weight:700;color:var(--ink)}
+.tl-item .tl-pfs{font-size:0.75rem;color:var(--ink-mid);margin-top:2px}
+
+/* ── Why Box ── */
+.why-box{
+  background:var(--accent-amber-bg);border:2px solid var(--accent-amber);border-radius:var(--radius-lg);
+  padding:20px;margin:16px 0;
+}
+.why-box h3{font-size:0.95rem;font-weight:800;color:var(--accent-amber);margin-bottom:10px}
+.why-box .reason{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px}
+.why-box .reason .r-num{
+  min-width:28px;height:28px;background:var(--accent-amber);color:#fff;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:0.75rem;font-weight:800;flex-shrink:0;
+}
+.why-box .reason p{font-size:0.84rem;color:var(--ink-mid);line-height:1.7;margin:0}
+
+/* ── Highlight Box (light bg) ── */
+.hl-box{
+  background:var(--accent-navy-light);border:2px solid var(--accent-navy);border-radius:var(--radius-lg);
+  padding:20px;margin:16px 0;
+}
+.hl-box h3{font-size:0.95rem;font-weight:800;color:var(--accent-navy);margin-bottom:10px}
+.hl-box p{color:var(--ink-mid);font-size:0.86rem;line-height:1.8;margin-bottom:8px}
+.hl-box p:last-child{margin-bottom:0}
+.hl-box strong{color:var(--accent-navy)}
+.hl-box em{color:var(--accent-teal);font-style:normal}
+
+/* ── Key emphasis box ── */
+.key-box{
+  background:#fff;border:2px solid var(--accent-red);border-left:8px solid var(--accent-red);
+  border-radius:var(--radius);padding:18px 16px;margin:16px 0;
+}
+.key-box p{font-size:0.86rem;line-height:1.8;color:var(--ink-mid);margin-bottom:6px}
+.key-box p:last-child{margin-bottom:0}
+.key-box strong{color:var(--accent-red)}
+
+/* ── Table ── */
+.tw{overflow-x:auto;margin:10px 0 14px;-webkit-overflow-scrolling:touch}
+.tb{width:100%;border-collapse:collapse;font-size:0.8rem;min-width:440px}
+.tb th{background:var(--line-light);color:var(--accent-navy);padding:8px 10px;text-align:left;font-weight:600;font-size:0.73rem;border-bottom:2px solid var(--line-strong);white-space:nowrap}
+.tb td{padding:7px 10px;border-bottom:1px solid var(--line-light);font-size:0.8rem;vertical-align:top}
+.tb tr.row-red{background:var(--accent-red-bg)}
+.tb tr.row-amber{background:var(--accent-amber-bg)}
+.tb tr.row-teal{background:var(--accent-teal-bg)}
+.tb tr.row-blue{background:var(--accent-blue-bg)}
+.tb tr.row-navy{background:var(--accent-navy-light)}
+.tag-sm{display:inline-block;padding:1px 7px;border-radius:10px;font-size:0.66rem;font-weight:600}
+.tag-red{background:var(--accent-red-bg);color:var(--accent-red)}
+.tag-amber{background:var(--accent-amber-bg);color:var(--accent-amber)}
+.tag-teal{background:var(--accent-teal-bg);color:var(--accent-teal)}
+.tag-blue{background:var(--accent-blue-bg);color:var(--accent-blue)}
+.tag-sage{background:var(--accent-sage-bg);color:var(--accent-sage)}
+.tag-navy{background:var(--accent-navy-light);color:var(--accent-navy)}
+
+/* ── Date highlight ── */
+.date-highlight{
+  display:inline-flex;align-items:center;gap:6px;background:var(--accent-teal-bg);
+  padding:6px 14px;border-radius:20px;font-size:0.8rem;font-weight:700;color:var(--accent-teal);
+}
+
+/* ── Emoji row ── */
+.emoji-row{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0}
+.emoji-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:16px;font-size:0.75rem;font-weight:500;border:1px solid var(--line);background:#fff}
+
+/* ── Mutation callout ── */
+.mut-card{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;
+}
+.mut-card .mut{
+  padding:14px;border-radius:var(--radius-sm);border:2px solid;
+}
+.mut-card .mut.original{border-color:var(--accent-red);background:var(--accent-red-bg)}
+.mut-card .mut.acquired{border-color:var(--accent-teal);background:var(--accent-teal-bg)}
+.mut-card .mut h4{font-size:0.82rem;font-weight:700;margin-bottom:4px}
+.mut-card .mut.original h4{color:var(--accent-red)}
+.mut-card .mut.acquired h4{color:var(--accent-teal)}
+.mut-card .mut p{font-size:0.78rem;line-height:1.6;margin:0;color:var(--ink-mid)}
+
+/* ── Footer ── */
+.footer{text-align:center;color:var(--ink-light);font-size:0.72rem;padding:20px 0 36px;line-height:1.9}
+
+@media(max-width:480px){
+  .wrap{padding:0 10px}
+  .card{padding:16px 12px;border-radius:var(--radius)}
+  .hero{padding:26px 0 20px}
+  .kpi-row{grid-template-columns:repeat(2,1fr);gap:5px}
+  .kpi{padding:10px 8px}
+  .kpi .num{font-size:1.25rem}
+  .dc{padding:14px 12px}
+  .dc .dc-grid{grid-template-columns:1fr;gap:6px}
+  .bq{padding:10px 12px;font-size:0.8rem}
+  .tb{font-size:0.72rem;min-width:360px}
+  .tb th,.tb td{padding:5px 6px}
+  .why-box,.hl-box,.key-box{padding:14px}
+  .mut-card{grid-template-columns:1fr}
+}
+
+@keyframes fadeUp {
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.card{animation:fadeUp 0.5s ease-out both}
+.card:nth-child(1){animation-delay:0s}
+.card:nth-child(2){animation-delay:0.06s}
+.card:nth-child(3){animation-delay:0.12s}
+.card:nth-child(4){animation-delay:0.18s}
+.card:nth-child(5){animation-delay:0.24s}
+.card:nth-child(6){animation-delay:0.30s}
+.card:nth-child(7){animation-delay:0.36s}
+
+@media print{
+  body{background:#fff;font-size:10pt}
+  .hero{border-bottom:2px solid #1e3a5f;padding:16px 0 10px}
+  .card{box-shadow:none;border:1px solid #ccc;break-inside:avoid;padding:12px 14px;margin-bottom:10px}
+  .dc{border:1px solid #ccc;break-inside:avoid}
+  .kpi{border:1px solid #ccc;background:#f5f5f5!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .bq,.hl-box,.why-box,.key-box{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .dc::after{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .badge-num{background:#1e3a5f!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th{background:#e8eef5!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  @page{margin:1cm 0.6cm}
+  h2,h3{break-after:avoid}
+  .tw{overflow:visible}
+  .tb{min-width:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<header class="hero">
+<div class="wrap">
+  <div class="tag">DE-IDENTIFIED · CASE DECISION ANALYSIS</div>
+  <h1>EGFR 변이 폐선암 4기 — 43개월 치료 결정 분석</h1>
+  <p class="sub">5개 치료 라인 · 정보 비대칭 · 시스템의 사각지대 · "왜 환자는 선택할 수 없었는가"</p>
+  <div class="pills">
+    <span>🫁 EGFR E19 del + TP53 + PIK3CA</span>
+    <span>🧠 뇌전이 (다발성)</span>
+    <span>💊 5 treatment lines</span>
+    <span>📋 71 posts analyzed</span>
+  </div>
+</div>
+</header>
+
+<div class="wrap">
+
+<!-- ═══ 0. WHY THIS CASE MATTERS ═══ -->
+<div class="card">
+  <h2><span class="badge-num">0</span> 이 사례를 분석하는 의미</h2>
+
+  <p>이 분석은 <strong>한 환자의 치료 여정을 '의사결정의 질'이라는 렌즈로 재구성</strong>한 것입니다. 표면적으로 이 사례는 표준 치료의 성공 사례처럼 보입니다 — 4기 진단 후 43개월 생존, 5개 치료 라인 소화, MK-2870 임상에서 중앙값 2배의 반응. 그러나 결정의 순간들을 하나씩 들여다보면, 다른 그림이 드러납니다.</p>
+
+  <p><strong>환자와 보호자는 단 한 번도 "선택"한 적이 없습니다.</strong> 의사가 제시한 유일한 경로를 "따랐을" 뿐입니다. 1차부터 5차까지, 비교할 수 있는 복수의 대안이 제시된 적은 단 한 번도 없었습니다. 있었던 것은 "이 약을 쓰시죠"였고, 환자는 "네"라고 답했습니다. 그것이 유일한 길이었기 때문입니다.</p>
+
+  <div class="hl-box">
+    <h3>🔑 이 분석의 핵심 질문</h3>
+    <p><strong>왜 환자와 보호자는 "잠깐만요, 생각해볼게요"라고 말할 수 없었는가?</strong></p>
+    <p>그 이유는 개인의 소극성이나 의사의 권위주의가 아닙니다. <strong>치료 매뉴얼(가이드라인) 자체가 '비교·검토'를 구조적으로 허용하지 않도록 설계되어 있기 때문입니다.</strong> 매뉴얼은 속도를 최우선시하고, 각 분기점마다 선택지를 하나로 수렴시키며, 광범위 유전자 검사(Guardant360 등)를 표준 진단 패널에 포함하지 않음으로써 정보 비대칭을 제도화합니다.</p>
+    <p>이것은 <em>개인 의사의 실패가 아니라 시스템의 실패</em>입니다. 아래 분석은 그 구조적 메커니즘을 5개 치료 결정 시점에서 추적합니다.</p>
+  </div>
+</div>
+
+<!-- ═══ 1. GUARDANT360 TIMING GAP — WHY NOT IN 2022.11? ═══ -->
+<div class="card">
+  <h2><span class="badge-num">1</span> Guardant360은 왜 2022.11에 하지 않았는가? — 20개월의 정보 공백</h2>
+
+  <p>이 사례에서 가장 결정적인 <strong>시스템 실패</strong>는 광범위 NGS(Guardant360, 74개 유전자)가 진단 당시가 아니라 <strong>3개 치료 라인이 모두 실패한 후인 2024년 7월</strong>에야 시행되었다는 점입니다. 이 20개월의 공백이 모든 치료 결정을 정보 부재 상태로 만들었습니다.</p>
+
+  <h3>검사 시점별 비교</h3>
+  <div class="tw">
+  <table class="tb">
+    <tr><th>시점</th><th>검사 종류</th><th>검사 대상</th><th>발견된 변이</th><th>보험</th></tr>
+    <tr class="row-amber"><td><strong>2022.11</strong><br>진단 시</td><td>PCR/FISH 기반<br>기본 패널</td><td>EGFR, ALK, ROS1,<br>PD-L1 (4종)</td><td>EGFR E19 del ✅<br>PIK3CA ✅ (검출됐으나<br>임상적 의미 미전달)</td><td><span class="tag-amber">급여</span></td></tr>
+    <tr class="row-amber"><td><strong>2023.07</strong><br>1차 내성 후</td><td>코바스(cobas)<br>혈액 검사</td><td>T790M<br>(단일 유전자)</td><td>T790M ✅</td><td><span class="tag-amber">급여</span></td></tr>
+    <tr class="row-red"><td><strong>2024.07</strong><br>3차 내성 후</td><td><strong>Guardant360</strong><br>차세대 염기서열분석</td><td><strong>74개 유전자</strong></td><td>EGFR E19 del ✅<br><strong>TP53 최초 발견 🚨</strong><br>PIK3CA (재확인)</td><td><span class="tag-red">비급여</span><br>(~200-300만원)</td></tr>
+  </table>
+  </div>
+
+  <div class="key-box">
+    <p><strong>🚨 핵심 사실 #1: TP53은 "새로 생긴" 변이가 아닙니다.</strong> TP53은 진단 당시부터 존재하던 clonal 변이입니다. 단지 2022년 11월의 표준 진단 패널(EGFR/ALK/ROS1/PD-L1)에 <strong>TP53이 포함되지 않아</strong> 20개월 동안 발견되지 못했을 뿐입니다. 이 환자의 치료 전략은 <strong>핵심 예후 인자를 모른 채</strong> 1~3차까지 진행되었습니다.</p>
+    <p><strong>🚨 핵심 사실 #2: PIK3CA는 2022.11에 검출되었지만, 보호자는 2024.07까지 몰랐습니다.</strong> 2024년 7월 25일 가던트 결과 게시글에서 보호자는 "22.11월…EGFR E19 del, PIK3CA 변이 검출"이라고 처음 언급합니다. 즉 PIK3CA는 진단 시 이미 검출되어 있었으나, 그 임상적 의미(추가적 TKI 내성 촉진)가 보호자에게 전달되지 않았습니다.</p>
+  </div>
+
+  <h3>왜 2022.11에는 Guardant360을 하지 않았는가? — 시스템의 4중 장벽</h3>
+
+  <div class="why-box">
+    <div class="reason">
+      <div class="r-num">1</div>
+      <p><strong>가이드라인이 요구하지 않았기 때문</strong><br>
+      2022년 한국 폐암 진단 가이드라인은 EGFR, ALK, ROS1, PD-L1의 4종 검사만을 필수로 규정했습니다. 광범위 NGS(50~500종)는 <strong>'권고'도 '필수'도 아니었습니다.</strong> 의사가 가이드라인대로 진료했다면, Guardant360을 처방할 의무 자체가 없었습니다. 이 가이드라인은 2024년이 되어서야 NCCN에서 "광범위 NGS strongly recommended"로 상향되었습니다.</p>
+    </div>
+    <div class="reason">
+      <div class="r-num">2</div>
+      <p><strong>비급여 장벽 — 의사도 권유를 주저하게 만드는 구조</strong><br>
+      Guardant360은 200~300만원의 비급여 검사입니다. 한국 의료 현장에서 의사가 비급여 검사를 권유하는 것은 민감한 문제입니다 — 환자가 "왜 이렇게 비싼 검사를 꼭 해야 하냐"고 묻는다면, 당시 가이드라인으로는 "TP53 동반변이가 있으면 TKI 단독요법의 효과가 떨어질 수 있습니다"라는 근거를 제시하기 어려웠습니다. 그 근거가 축적된 것은 2023~2024년입니다.</p>
+    </div>
+    <div class="reason">
+      <div class="r-num">3</div>
+      <p><strong>치료 전략에 미칠 영향이 불분명했기 때문</strong><br>
+      2022년 기준으로 "TP53 변이가 있으면 1차 치료를 바꿔야 한다"는 임상 근거는 <strong>아직 가이드라인에 통합되지 않은 상태</strong>였습니다. FLAURA2(1차 타그리소+항암 병용의 우월성)는 2023년 ESMO에서 발표되었습니다. 즉, 2022년 11월 시점에 TP53을 알았다고 해도, 의사가 할 수 있는 공식적 대응은 제한적이었을 것입니다. <strong>이것은 개인 의사의 한계가 아니라, 가이드라인 업데이트 속도와 암 진행 속도의 근본적 격차입니다.</strong></p>
+    </div>
+    <div class="reason">
+      <div class="r-num">4</div>
+      <p><strong>2024.07에야 Guardant360을 한 이유 — 더 이상 선택지가 없었기 때문</strong><br>
+      2022.11과 2024.07 사이에 달라진 것은 단 하나입니다: <strong>3개 라인(아파티닙→타그리소→타그리소+항암)이 모두 실패하고, 표준 치료 매뉴얼이 바닥난 상태.</strong> "다음 약이 없다"는 상황이 되어서야, 혹시 모를 새로운 표적을 찾기 위해 광범위 NGS가 시행되었습니다. <strong>이것은 '선제적 정밀의료'가 아니라 '궁지에 몰린 후의 탐색'이었습니다.</strong></p>
+    </div>
+  </div>
+
+  <h3>원래 변이 vs 후천 변이</h3>
+  <div class="mut-card">
+    <div class="mut original">
+      <h4>🧬 처음부터 있던 변이 (Clonal)</h4>
+      <p><strong>EGFR E19 del</strong> — 진단 시 발견. 주요 driver mutation.<br>
+      <strong>TP53</strong> — 진단 시 존재했으나 2024.07에야 발견. TKI 반응기간 단축의 주범 (HR 1.5-1.9).<br>
+      <strong>PIK3CA</strong> — 진단 시 발견됐으나 보호자에게 정보 전달 안 됨. TKI 내성 촉진.</p>
+    </div>
+    <div class="mut acquired">
+      <h4>🦠 치료 중 생긴 변이 (Acquired)</h4>
+      <p><strong>T790M</strong> — <strong>유일한 후천성 변이.</strong> 아파티닙(1차) 치료 중 발생. 2023.07 코바스 검사로 확인. 이 변이의 출현으로 타그리소(3세대 TKI) 처방이 가능해짐. EGFR T790M은 1/2세대 TKI 내성의 가장 흔한 기전.</p>
+    </div>
+  </div>
+
+  <bq class="urgent"><strong>시스템적 함의:</strong> 체세포변이(somatic mutation) 이론에 기반한 현대 폐암 치료는 <strong>"모든 변이를 알아야 최적의 전략을 세울 수 있다"</strong>는 전제 위에 서 있습니다. 그러나 진단 시점의 표준 검사 패널은 EGFR/ALK/ROS1/PD-L1 4종에 불과했습니다. TP53처럼 예후에 결정적 영향을 미치는 변이가 표준 패널 밖에 있다면, 그것은 개인 의사의 실수가 아니라 <strong>가이드라인이라는 시스템이 구조적으로 정보 공백을 내장하고 있는 것</strong>입니다. 이 환자의 20개월 정보 공백은 그 시스템적 사각지대의 정확한 증거입니다.<span class="src">— 출처: Guardant360 결과 게시글 (2024.07.25), 초기 진단 게시글 (2022.11.09)</span></bq>
+</div>
+
+<!-- ═══ 2. FULL TIMELINE ═══ -->
+<div class="card">
+  <h2><span class="badge-num">2</span> 전체 치료 타임라인</h2>
+  <div class="tl">
+    <div class="tl-item"><div class="tl-date">2022.11.09 진단</div><div class="tl-drug">34세 남성 · 비소세포폐선암 4기 · 뇌다발전이 · 뼈전이</div></div>
+    <div class="tl-item"><div class="tl-date">2022.11.09 → 2023.06.29 · PFS 7개월</div><div class="tl-drug"><strong>1차: 아파티닙 (지오트립) — 2세대 EGFR TKI</strong></div><div class="tl-pfs">진단 당일 결정(1.5시간). 경제적 제약(실손無)으로 3세대 대신 2세대 선택</div></div>
+    <div class="tl-item"><div class="tl-date">2023.07.10 → 2023.11.09 · PFS 2개월</div><div class="tl-drug"><strong>2차: 오시머티닙 (타그리소) — 3세대 EGFR TKI</strong></div><div class="tl-pfs">T790M+ 확인돼 타그리소로 전환. TP53 변이(미발견)로 극단적 조기 내성</div></div>
+    <div class="tl-item"><div class="tl-date">2023.11.10 → 2024.07.15 · PFS 12개월</div><div class="tl-drug"><strong>3차: 타그리소 + 알림타 + 카보플라틴 (병용요법)</strong></div><div class="tl-pfs">입원 중 CT 확인 → 다음날 항암 시작. 의사의 FLAURA2 선제 도입</div></div>
+    <div class="tl-item"><div class="tl-date">2025.01.16 → 2026.06.11 · PFS 17.5개월</div><div class="tl-drug"><strong>4차: MK-2870 (TROP2 ADC) 임상시험 · 세브란스</strong></div><div class="tl-pfs">35차 완료. 임상 중앙값(8.3개월)의 2배 초과</div></div>
+    <div class="tl-item"><div class="tl-date">2026.06 ~ 현재 · 결정 중</div><div class="tl-drug"><strong>5차: 젬자+카보 vs 도세탁셀+사이람자 vs 넬마스토바트 임상</strong></div><div class="tl-pfs">보호자 최초로 의사 판단에 이의 제기. 삼성서울병원 상담 병행 중</div></div>
+  </div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="num">7</div><div class="lbl">1차 PFS (월)</div></div>
+    <div class="kpi"><div class="num">2</div><div class="lbl">2차 PFS (월)</div></div>
+    <div class="kpi"><div class="num">12</div><div class="lbl">3차 PFS (월)</div></div>
+    <div class="kpi"><div class="num">17.5</div><div class="lbl">4차 PFS (월)</div></div>
+  </div>
+</div>
+
+<!-- ═══ 3. MK-2870 KEY DATES ═══ -->
+<div class="card">
+  <h2><span class="badge-num">3</span> MK-2870 (TROP2 ADC) 임상시험 — 주요 일자</h2>
+  <div class="kpi-row">
+    <div class="kpi"><div class="num">12.23</div><div class="lbl">2024년<br>임상 신청</div></div>
+    <div class="kpi"><div class="num">01.09</div><div class="lbl">2025년<br>혈액 NGS 결과</div></div>
+    <div class="kpi"><div class="num">01.15</div><div class="lbl">2025년<br>신약군 배정</div></div>
+    <div class="kpi"><div class="num">01.16</div><div class="lbl">2025년<br><strong>첫 투약</strong></div></div>
+  </div>
+  <div class="date-highlight">✅ MK-2870 첫 투약: <strong>2025년 1월 16일</strong> · 35차 완료 (17.5개월) · 2026.06 임상 종료 권고</div>
+  <p style="margin-top:10px">2024년 12월 23일 세브란스 교수가 임상 신청을 제안, 보호자가 동의하여 당일 신청. 신청부터 첫 투약까지 <strong>24일 소요</strong> — 그러나 이 기간은 결정을 위한 시간이 아니라 <strong>임상시험 심사 및 무작위 배정을 기다린 대기 시간</strong>입니다. 환자/보호자는 이 기간 동안 어떤 치료를 받을지 선택하거나 통제할 수 없었습니다.</p>
+</div>
+
+<!-- ═══ 4. DECISION CARDS ═══ -->
+<div class="card">
+  <h2><span class="badge-num">4</span> 5개 치료 라인 — 의사결정 단서 분석</h2>
+  <p>각 치료 결정 시점의 <strong>정보 비대칭, 실제 결정 시간(대기 시간과 구분), 감정 상태, 제시된 vs 실질적 선택지</strong>를 분석합니다.</p>
+
+  <!-- 1차 -->
+  <div class="dc l1">
+    <span class="line-tag">1차 치료 · 2022.11.09</span>
+    <div class="rx-name">아파티닙 (지오트립) — 2세대 EGFR TKI</div>
+    <div class="rx-date">PFS 7개월 · TP53/PIK3CA 인지 못함</div>
+    <div class="dc-grid">
+      <div class="dc-item"><div class="dc-lbl">정보 비대칭</div><div class="dc-val tight">🔴 매우 높음</div></div>
+      <div class="dc-item"><div class="dc-lbl">실질 결정 시간</div><div class="dc-val tight">약 1.5시간 (당일)</div></div>
+      <div class="dc-item"><div class="dc-lbl">제시된 '선택지'</div><div class="dc-val warn">고대병원 vs 세브란스 (병원 선택만)</div></div>
+      <div class="dc-item"><div class="dc-lbl">실질적 선택권</div><div class="dc-val tight">없었음 (경제적 제약이 결정)</div></div>
+    </div>
+    <div class="dc-quote">"오늘까지 결정해달라고 하시네요…도와주세요" <em>(2022.11.09 10:18, 카페 긴급 질문)</em></div>
+    <div class="dc-quote">"실비가 안되어 아파티닙으로…하기로 했어요" <em>(2022.11.09 11:56 — 경제적 제약이 유일한 결정 인자)</em></div>
+    <div class="emoji-row">
+      <span class="emoji-chip">😰 두려움</span><span class="emoji-chip">⏰ 당일 압박</span><span class="emoji-chip">🤷 정보 없음</span><span class="emoji-chip">💸 경제적 제약</span>
+    </div>
+  </div>
+
+  <!-- 2차 -->
+  <div class="dc l2">
+    <span class="line-tag">2차 치료 · 2023.07.10</span>
+    <div class="rx-name">오시머티닙 (타그리소) — 3세대 EGFR TKI</div>
+    <div class="rx-date">PFS 2개월 · TP53/PIK3CA 여전히 모름</div>
+    <div class="dc-grid">
+      <div class="dc-item"><div class="dc-lbl">정보 비대칭</div><div class="dc-val tight">🔴 높음</div></div>
+      <div class="dc-item"><div class="dc-lbl">실질 결정 시간</div><div class="dc-val">검사 대기 11일 (결정은 즉시)</div></div>
+      <div class="dc-item"><div class="dc-lbl">제시된 '선택지'</div><div class="dc-val">타그리소 단독 (T790M+ → 유일 경로)</div></div>
+      <div class="dc-item"><div class="dc-lbl">실질적 선택권</div><div class="dc-val tight">없었음 (선택지 자체가 1개)</div></div>
+    </div>
+    <div class="dc-quote">"우려했던 내성이 왔네요…멍 하네요..." <em>(2023.06.29, 내성 판정 당일)</em></div>
+    <div class="dc-quote">"10명중에 1~2명 효과가 없다던데 왜 하필 그게 저희일까요?" <em>(2023.09.06 — TP53을 몰랐기에 원인을 납득할 수 없었음)</em></div>
+    <div class="emoji-row">
+      <span class="emoji-chip">😶 충격</span><span class="emoji-chip">❓ 원인 불명</span><span class="emoji-chip">➡️ 경로 1개</span><span class="emoji-chip">😢 속상함</span>
+    </div>
+  </div>
+
+  <!-- 3차 -->
+  <div class="dc l3">
+    <span class="line-tag">3차 치료 · 2023.11.09</span>
+    <div class="rx-name">타그리소 + 알림타 + 카보플라틴 — TKI+항암 병용</div>
+    <div class="rx-date">PFS 12개월 · 입원 중 응급 · TP53/PIK3CA 모름</div>
+    <div class="dc-grid">
+      <div class="dc-item"><div class="dc-lbl">정보 비대칭</div><div class="dc-val tight">🔴 매우 높음 (입원 중)</div></div>
+      <div class="dc-item"><div class="dc-lbl">실질 결정 시간</div><div class="dc-val tight">0일 (의사 결정, 환자 통보)</div></div>
+      <div class="dc-item"><div class="dc-lbl">제시된 '선택지'</div><div class="dc-val">알림타+카보 (단일 경로, 설명 부재)</div></div>
+      <div class="dc-item"><div class="dc-lbl">실질적 선택권</div><div class="dc-val tight">없었음 (입원 응급, 정보 부재)</div></div>
+    </div>
+    <div class="dc-quote">"전이가 빨라 내일 당장 알림타 카보 시작하기로 했어요…조직검사 따로 하잔 이야기는 없으신데.. 뭐가 뭔지 모르겠네요" <em>(2023.11.09, 입원 중 면담 직후 — 선택이 아니라 통보였음)</em></div>
+    <div class="emoji-row">
+      <span class="emoji-chip">😵 혼란</span><span class="emoji-chip">🏥 입원 중</span><span class="emoji-chip">📢 통보형</span><span class="emoji-chip">😔 죄책감</span>
+    </div>
+  </div>
+
+  <!-- 4차 -->
+  <div class="dc l4">
+    <span class="line-tag">4차 치료 · 2025.01.16</span>
+    <div class="rx-name">MK-2870 (TROP2 ADC) — 임상시험</div>
+    <div class="rx-date">PFS 17.5개월 · TP53 인지함 · 그러나 선택권은 없었음</div>
+    <div class="dc-grid">
+      <div class="dc-item"><div class="dc-lbl">정보 비대칭</div><div class="dc-val ok">🟢 낮아짐 (TP53 인지)</div></div>
+      <div class="dc-item"><div class="dc-lbl">실질 결정 시간</div><div class="dc-val warn">없었음 (24일 = 대기 시간)</div></div>
+      <div class="dc-item"><div class="dc-lbl">제시된 '선택지'</div><div class="dc-val">교수: "MK2870 임상 신청하자" → 동의</div></div>
+      <div class="dc-item"><div class="dc-lbl">실질적 선택권</div><div class="dc-val tight">없었음 (신약군/대조군 = 무작위)</div></div>
+    </div>
+    <div class="dc-quote">"교수님께서 MK2870 임상 신청 하자고 하셔서 <strong>바로</strong> 신청했어요" <em>(2024.12.23 — 결정은 즉시, 이후 24일은 심사 대기)</em></div>
+    <div class="dc-quote">"탈락되거나 2군으로 될 경우…도세탁셀 + 사이람자 중에서" <em>(2024.12.23 — Plan B는 있었으나, 이것도 의사가 제시한 단일 대안)</em></div>
+    <div class="emoji-row">
+      <span class="emoji-chip">🔍 정보 탐색</span><span class="emoji-chip">⏳ 대기 24일</span><span class="emoji-chip">🎲 무작위 배정</span><span class="emoji-chip">😊 배정 기쁨</span>
+    </div>
+  </div>
+
+  <!-- 5차 -->
+  <div class="dc l5">
+    <span class="line-tag">5차 치료 · 2026.06 (결정 중)</span>
+    <div class="rx-name">젬자+카보 vs 도세탁셀+사이람자 vs 넬마스토바트 임상</div>
+    <div class="rx-date">진행 중 · 최초로 의사 판단에 의문 제기</div>
+    <div class="dc-grid">
+      <div class="dc-item"><div class="dc-lbl">정보 비대칭</div><div class="dc-val ok">🟢 가장 낮음</div></div>
+      <div class="dc-item"><div class="dc-lbl">현재 상태</div><div class="dc-val ok">보호자가 결정 유예 중</div></div>
+      <div class="dc-item"><div class="dc-lbl">제시된 '선택지'</div><div class="dc-val warn">젬자+카보 or 도세탁셀+사이람자</div></div>
+      <div class="dc-item"><div class="dc-lbl">보호자 독자 탐색</div><div class="dc-val ok">넬마스토바트 임상 (삼성)</div></div>
+    </div>
+    <div class="dc-quote">"이 부분이 <strong>이해가 되지 않습니다</strong>.. CT도 변화 없고 항생제로 많이 좋아졌는데 암증상이라 판단 하신 부분이 무엇일까요" <em>(2026.06.11 — <strong>43개월 만에 처음으로 의사 판단에 이의 제기</strong>)</em></div>
+    <div class="dc-quote">"증상이 빠른거 같으니 최대한 빠르게 치료를 시작해야 할 것 같다고 하심" <em>(2026.06.11 — 5차에서도 변함없는 '빨리 결정하라'는 압박. 이번에는 보호자가 저항 중)</em></div>
+    <div class="emoji-row">
+      <span class="emoji-chip">🤔 의문 제기</span><span class="emoji-chip">🔬 임상 탐색</span><span class="emoji-chip">⚖️ 갈등</span><span class="emoji-chip">💪 최초 저항</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 5. DECISION TIME ═══ -->
+<div class="card">
+  <h2><span class="badge-num">5</span> 의사결정 시간 비교 — 결정 vs 대기</h2>
+  <div class="tw">
+  <table class="tb">
+    <tr><th>라인</th><th>총 소요</th><th>실질 결정 시간</th><th>성격</th><th>선택권</th><th>보호자 태도</th></tr>
+    <tr class="row-red"><td><strong>1차</strong></td><td>1.5시간</td><td><strong>1.5시간</strong></td><td>당일 결정 압박</td><td>❌ 없음</td><td>"도와주세요"</td></tr>
+    <tr class="row-amber"><td><strong>2차</strong></td><td>11일</td><td><strong>즉시</strong> (T790M+ 확인 즉시 처방)</td><td>검사 대기 + 결과=처방</td><td>❌ 없음 (선택지 1개)</td><td>"멍하네요"</td></tr>
+    <tr class="row-red"><td><strong>3차</strong></td><td>1일</td><td><strong>0일</strong> (의사 결정, 환자 통보)</td><td>입원 응급 통보</td><td>❌ 없음</td><td>"죄송하네요"</td></tr>
+    <tr class="row-navy"><td><strong>4차</strong></td><td>24일</td><td><strong>즉시 동의 + 24일 대기</strong></td><td>⏳ 임상 심사 대기 (결정 아님)</td><td>❌ 없음 (무작위 배정)</td><td>"바로 신청했어요"</td></tr>
+    <tr class="row-teal"><td><strong>5차</strong></td><td>진행 중</td><td><strong>보호자가 의사 압박에 저항 중</strong></td><td>⚡ 최초의 결정 유예</td><td>🟡 탐색 중</td><td>"이해가 안 됩니다"</td></tr>
+  </table>
+  </div>
+
+  <bq class="key"><strong>결정적 발견:</strong> 1~4차 모든 라인에서 환자/보호자는 <strong>실질적 선택권이 없었습니다.</strong> 1차는 당일 압박 + 경제적 제약이 선택지를 결정했고, 2차는 선택지 자체가 1개였으며, 3차는 입원 중 통보였고, 4차는 무작위 배정이었습니다. <strong>"선택했다"</strong>라고 말할 수 있는 결정은 단 한 번도 없었고, 있었던 것은 <strong>"의사가 제안한 유일한 경로를 따랐다"</strong>뿐입니다. 5차에서 보호자가 처음으로 저항하고 있는 것은, 43개월간의 경험과 정보 축적이 있었기 때문에 가능한 일이었습니다.<span class="src">— 치료 라인별 의사결정 패턴 분석 (의사결정_단서_분석.md)</span></bq>
+</div>
+
+<!-- ═══ 6. WHY NO TIME ═══ -->
+<div class="card">
+  <h2><span class="badge-num">6</span> "잠깐만요, 생각 좀 해볼게요" — 왜 말할 수 없었는가?</h2>
+  <p>5개의 치료 전환 중 <strong>모든 경우에</strong> 의사는 "빨리 해야 한다"고 말했습니다. 환자/보호자가 "생각해볼 시간을 달라"고 말한 것은 <strong>5차(2026.06)가 처음</strong>입니다. 그 이유를 분석합니다.</p>
+
+  <div class="why-box">
+    <h3>🧩 4가지 구조적 원인</h3>
+
+    <div class="reason">
+      <div class="r-num">1</div>
+      <p><strong>매뉴얼이 '속도'를 최우선 가치로 설계했기 때문</strong><br>
+      암 치료 가이드라인은 "진단 즉시 치료 시작"을 원칙으로 합니다. 뇌전이·4기 환자에게 "시간 지체 = 예후 악화"라는 전제가 모든 결정을 지배합니다. 의사들이 이 매뉴얼을 충실히 따르는 한, 환자에게 숙고할 시간을 주는 것은 <strong>매뉴얼을 위반하는 행위</strong>가 됩니다.<br>
+      <em style="font-size:0.78rem;color:#888">→ 1차: "뇌에 다발성 전이가 있고 상태가 심각하여 시간 지체하는게 위험할 수 있다" (2022.11.09)<br>
+      → 3차: "전이가 빨라 내일 당장 시작하기로 했어요" (2023.11.09)<br>
+      → 5차: "증상이 빠른거 같으니 최대한 빠르게 치료를 시작해야" (2026.06.11)</em></p>
+    </div>
+
+    <div class="reason">
+      <div class="r-num">2</div>
+      <p><strong>매뉴얼이 제시하는 선택지 자체가 하나뿐이기 때문</strong><br>
+      T790M+ → 타그리소. EGFR+ → TKI 단독. 이 조건문들은 매뉴얼이 허용하는 유일한 경로입니다. "비교할 선택지"가 존재하지 않는데 "생각할 시간"은 무의미합니다. <strong>"선택"이라는 단어는 복수의 대안이 있을 때만 의미가 있습니다.</strong> 1~4차에서 환자에게 주어진 것은 선택이 아니라 "확인" — 의사의 제안에 "네"라고 말할 기회였습니다.</p>
+    </div>
+
+    <div class="reason">
+      <div class="r-num">3</div>
+      <p><strong>입원·응급 상황은 결정 유예를 물리적으로 불가능하게 만들기 때문</strong><br>
+      3차 결정은 입원 중 CT 확인 → 다음날 항암 시작으로 이어졌습니다. 이런 상황에서 "다음 주에 알려주세요"는 현실적 옵션이 아닙니다. <strong>그러나 문제는: 왜 입원하기 전까지 다음 치료에 대한 논의가 없었는가?</strong> "내성이 올 것이므로 미리 계획을 세워두자"라는 선제적 논의가 진료의 일부였다면, 입원 중 응급 결정은 피할 수 있었을 것입니다.</p>
+    </div>
+
+    <div class="reason">
+      <div class="r-num">4</div>
+      <p><strong>환자/보호자가 '물어야 할 질문'을 알지 못하기 때문</strong><br>
+      1~3차 시점에서 보호자는 TP53/PIK3CA의 존재조차 몰랐습니다. "다른 치료 옵션은 없나요?", "임상시험은 없나요?", "왜 이 치료를 선택하셨나요?" — 이런 질문을 하려면 <strong>무엇을 물어야 하는지 먼저 알아야 합니다.</strong> 정보가 없으면 질문도 없고, 질문이 없으면 대안도 없습니다. 보호자가 4차에서 비로소 "혹시 몰라 혈액 NGS 요청"을 한 것은, 20개월의 경험을 통해 <strong>무엇을 모르는지 알게 되었기 때문</strong>입니다.</p>
+    </div>
+  </div>
+
+  <bq class="empower"><strong>구조적 결론:</strong> "잠깐만요"라고 말할 수 없었던 것은 개인의 잘못이 아닙니다. (1) 매뉴얼이 속도를 최우선시하고, (2) 선택지가 구조적으로 1개로 수렴되며, (3) 응급 상황이 선제적 논의를 대체하고, (4) 정보 비대칭이 질문 자체를 불가능하게 만들기 때문입니다. <strong>이 4가지 조건은 모두 개인이 아니라 시스템이 만들어낸 것입니다.</strong><span class="src">— 치료 라인별 의사결정 패턴 분석</span></bq>
+</div>
+
+<!-- ═══ 7. EMOTIONAL TRAJECTORY ═══ -->
+<div class="card">
+  <h2><span class="badge-num">7</span> 감정 궤적 — 43개월간의 보호자 마음</h2>
+  <p>71개 게시글에서 추적한 보호자의 감정 변화. <strong>전환점은 TP53 인지(2024.07)와 MK-2870 신약 배정(2025.01.15)</strong>이었습니다.</p>
+
+  <div class="tw">
+  <table class="tb">
+    <tr><th>시기</th><th>주요 감정</th><th>대표 인용</th></tr>
+    <tr class="row-red"><td><strong>1차</strong><br>2022.11</td><td>😰 두려움 · 조급함</td><td>"도와주세요…제발 잘 듣기를"</td></tr>
+    <tr class="row-amber"><td><strong>2차 결정</strong><br>2023.06~07</td><td>😶 충격 → 희망</td><td>"멍하네요" → "타그리소 유전자가 나와서 기뻤는데"</td></tr>
+    <tr class="row-red"><td><strong>2차 실패</strong><br>2023.09</td><td>😢 깊은 절망</td><td>"억장이 무너지는 것 같아요…눈물 펑펑 쏟았어요"</td></tr>
+    <tr class="row-amber"><td><strong>3차</strong><br>2023.11</td><td>😵 혼란 · 죄책감</td><td>"뭐가 뭔지 모르겠네요…죄송하네요"</td></tr>
+    <tr class="row-navy"><td><strong>4차 대기</strong><br>2024.12</td><td>🔍 정보 탐색 · 불안</td><td>"혹시 몰라 혈액 ngs 요청…삼성서울병원도 심층상담"</td></tr>
+    <tr class="row-teal"><td><strong>4차 배정</strong><br>2025.01.15</td><td>😊 안도 · 큰 기쁨</td><td>"신약으로 배정되어서 너무 기뻐요!!"</td></tr>
+    <tr class="row-blue"><td><strong>5차</strong><br>2026.06</td><td>💪 의문 · 결의</td><td>"이해가 되지 않습니다…남편 살리고 싶은데"</td></tr>
+  </table>
+  </div>
+
+  <bq class="note"><strong>OpenEvidence comment:</strong> Caregiver's progressive shift from passive acceptance to active questioning represents "adaptive coping and increased self-efficacy." While direct evidence linking caregiver engagement to survival is limited, indirect pathways — clinical trial access, second opinion utilization (10-40% treatment plan changes), psychological support improving adherence — are well-documented. The emotional turning point in this case correlates with <strong>acquisition of genetic information (TP53 awareness) that enabled the caregiver to ask previously unformulated questions.</strong></bq>
+</div>
+
+<!-- ═══ 8. CAREGIVER EVOLUTION ═══ -->
+<div class="card">
+  <h2><span class="badge-num">8</span> 보호자 역할의 진화</h2>
+  <div class="tw">
+  <table class="tb">
+    <tr><th>시기</th><th>보호자 행동</th><th>정보 수준</th><th>역할</th></tr>
+    <tr class="row-red"><td><strong>1차</strong></td><td>카페 긴급 질문, 세브란스 예약 선접수</td><td>EGFR만 앎</td><td><span class="tag-red">도움 요청자</span></td></tr>
+    <tr class="row-amber"><td><strong>2차</strong></td><td>내성 전부터 미리 다음 치료 정보 수집</td><td>T790M 앎, TP53 모름</td><td><span class="tag-amber">정보 수집자</span></td></tr>
+    <tr class="row-amber"><td><strong>3차</strong></td><td>면역항암제 급여 기준 자체 확인</td><td>TP53 모름</td><td><span class="tag-red">수동적 수용자</span></td></tr>
+    <tr class="row-navy"><td><strong>4차</strong></td><td><strong>혈액 NGS 직접 요청, 삼성 상담 예약, 논문 검색</strong></td><td><strong>TP53 인지</strong></td><td><span class="tag-navy">능동적 탐색자</span></td></tr>
+    <tr class="row-teal"><td><strong>5차</strong></td><td><strong>의사 판단에 이의 제기, 삼성 임상 탐색, 전문가 네트워크 가동</strong></td><td>모든 변이 인지</td><td><span class="tag-teal">의사결정 주체</span></td></tr>
+  </table>
+  </div>
+</div>
+
+<!-- ═══ 9. SYSTEM FAILURE + OPEN EVIDENCE ═══ -->
+<div class="card">
+  <h2><span class="badge-num">9</span> 이것은 시스템의 실패다 — OpenEvidence 종합 평가</h2>
+
+  <div class="hl-box">
+    <h3>📊 OpenEvidence 2nd Opinion — 가이드라인 준수 평가 (8/10)</h3>
+    <p><strong>OpenEvidence 총평:</strong> <em>"Deviation from preferred option but clinically reasonable given financial constraints. Lines 3-4 demonstrate excellent, evidence-informed decisions exceeding standard guidelines. The 20-month delay in comprehensive NGS testing represents a systemic gap, not an individual error."</em></p>
+    <p>의사는 주어진 가이드라인 안에서 최선을 다했습니다. 3차(FLAURA2 선제 도입)와 4차(MK-2870 임상 연결)는 가이드라인을 초월한 탁월한 임상 판단이었습니다. <strong>문제는 의사의 역량이 아니라, 1~2차 시점에 가이드라인이 TP53 검사와 초기 병용요법을 표준으로 채택하지 않았다는 점입니다.</strong></p>
+  </div>
+
+  <h3>생존기간 — 통계적 기대값의 2~3배</h3>
+  <div class="tw">
+  <table class="tb">
+    <tr><th>환자군</th><th>기대 중앙 OS</th><th>이 사례</th><th>배율</th></tr>
+    <tr class="row-red"><td><strong>EGFR + TP53 + PIK3CA + 뇌전이</strong></td><td><strong>12~20개월 (추정)</strong></td><td rowspan="3" style="vertical-align:middle;text-align:center;font-weight:800;color:var(--accent-navy);font-size:1.1rem">43개월+</td><td><strong>2.2~3.6배</strong></td></tr>
+    <tr class="row-amber"><td>EGFR + TP53 + 뇌전이</td><td>16~24개월</td><td>1.8~2.7배</td></tr>
+    <tr><td>EGFR + 뇌전이 (전체 평균)</td><td>21~38개월</td><td>1.1~2.0배</td></tr>
+  </table>
+  </div>
+
+  <h3>라인별 PFS — 기대값과 실제</h3>
+  <div class="tw">
+  <table class="tb">
+    <tr><th>라인</th><th>실제 PFS</th><th>TP53+ 기대 PFS</th><th>일반 기대 PFS</th><th>평가</th></tr>
+    <tr class="row-amber"><td>1차 아파티닙</td><td>7개월</td><td>7.8~9.6개월</td><td>18~20개월</td><td><span class="tag-amber">기대범위 하단</span></td></tr>
+    <tr class="row-red"><td>2차 타그리소</td><td><strong>2개월</strong></td><td>6~12개월</td><td>10.1개월</td><td><span class="tag-red">극단적 outlier</span></td></tr>
+    <tr class="row-navy"><td>3차 병용</td><td><strong>12개월</strong></td><td>18.0개월</td><td>4~5개월</td><td><span class="tag-navy">TP53+ 양호</span></td></tr>
+    <tr class="row-teal"><td>4차 MK-2870</td><td><strong>17.5개월</strong></td><td>8.3개월 (Phase3)</td><td>3~6개월</td><td><span class="tag-teal">중앙값 2배</span></td></tr>
+  </table>
+  </div>
+
+  <bq class="key"><strong>OpenEvidence comment on TP53 impact:</strong> "TP53 co-mutation independently reduces PFS (HR 1.51-1.88) and OS (HR 1.64-1.92) in EGFR-mutant NSCLC. In this patient, TP53 was present from diagnosis but only identified after 3 lines of therapy. Earlier identification might have prompted upfront combination therapy (FLAURA2 strategy), which would have been superior to sequential TKI monotherapy. However, in November 2022, FLAURA2 data were not yet published, so upfront combination was not standard practice. This case illustrates <strong>the critical gap between evidence generation (2023) and guideline integration (2024-2025).</strong>"</bq>
+
+  <h3>시스템 실패의 5가지 축</h3>
+  <div class="why-box">
+    <div class="reason">
+      <div class="r-num">1</div>
+      <p><strong>진단 패널의 협소함</strong> — 표준 검사가 EGFR/ALK/ROS1/PD-L1 4종에 국한되어 TP53, PIK3CA 등 핵심 동반변이를 20개월간 놓침.</p>
+    </div>
+    <div class="reason">
+      <div class="r-num">2</div>
+      <p><strong>순차적 단독요법의 구조적 한계</strong> — "한 약제가 실패할 때까지 기다렸다가 다음 약제로"라는 설계는 TP53+ 환자에게 TKI 2회 실패라는 되풀이되는 사이클을 강제.</p>
+    </div>
+    <div class="reason">
+      <div class="r-num">3</div>
+      <p><strong>가이드라인 업데이트 속도 vs 암 진행 속도의 격차</strong> — FLAURA2 데이터(2023 ESMO)가 표준 진료에 통합되기까지 1~2년이 소요되는 동안 환자는 계속 진행.</p>
+    </div>
+    <div class="reason">
+      <div class="r-num">4</div>
+      <p><strong>임상시험 정보의 비대칭</strong> — 임상시험은 '매뉴얼 밖'에 존재하며, 환자의 접근은 의사 개인의 정보력과 네트워크에 전적으로 의존.</p>
+    </div>
+    <div class="reason">
+      <div class="r-num">5</div>
+      <p><strong>경제적 제약에 대한 제도적 묵인</strong> — 가이드라인은 약제의 효과만을 평가하고 가격을 고려하지 않지만, 환자는 현실에서 가격 때문에 1차 치료제를 변경해야 함.</p>
+    </div>
+  </div>
+
+  <div class="hl-box" style="margin-top:16px">
+    <h3>🔑 최종 결론: 시스템의 사각지대에 도달한 탐험가</h3>
+    <p>이 사례는 <strong>표준 치료의 성공 사례인 동시에, 표준 치료의 구조적 한계를 증언하는 기록입니다.</strong></p>
+    <p>43개월 생존은 TP53+PIK3CA+뇌전이 환자 기준 통계적 기대값의 2~3배입니다. 이는 3~4차에서 가이드라인을 초월한 의사의 임상 판단과, 후반부로 갈수록 적극적으로 변한 보호자의 정보 탐색이 만들어낸 결과입니다.</p>
+    <p>그러나 이 성과는 <strong>'개인의 역량'에 의존한 것</strong>이지, <strong>'시스템의 설계'가 보장한 것이 아닙니다.</strong> 만약 의사가 FLAURA2 데이터를 몰랐더라면? 보호자가 삼성서울병원 상담을 예약하지 않았더라면? MK-2870 임상이 그 병원에 열려 있지 않았더라면? 이 모든 조건은 <strong>우연과 개인 역량에 맡겨져 있었습니다.</strong></p>
+    <p><em>이 보호자는 매뉴얼을 충실히 따라서 매뉴얼의 마지막 페이지까지 도착했습니다. 그리고 매뉴얼이 말했습니다: "여기까지입니다." 이제 보호자는 매뉴얼 바깥에서 스스로 길을 찾고 있습니다. 이것이 이 사례가 시스템에 던지는 질문입니다.</em></p>
+  </div>
+</div>
+
+<div class="footer">
+  Analysis date: 2026.06.15 · Fully de-identified<br>
+  Data source: 71 Naver Cafe posts (2022.11 ~ 2026.06)<br>
+  References: <em>의사결정_단서_분석.md</em> · <em>결정의_순간_분석.md</em> · <em>medical_context_review.md</em><br>
+  2nd Opinion: OpenEvidence.com AI-based clinical evidence assessment<br>
+  Framework: Right to Try · Drug Repurposing · Systemic Gap Analysis
+</div>
+
+</div>
+</body>
+</html>

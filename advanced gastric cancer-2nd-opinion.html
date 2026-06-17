@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
+<title>2차 의견 요약 — 위암 치료 방향</title>
+<style>
+  :root{
+    --paper:#FAF7F2;
+    --ink:#2B2420;
+    --ink-soft:#5C534B;
+    --line:#E3DACB;
+    --rust:#B5562F;
+    --rust-soft:#F1DFD3;
+    --sage:#5C7A5E;
+    --sage-soft:#E3EBE0;
+    --gold:#C99A3D;
+    --gold-soft:#F6ECD4;
+    --card:#FFFFFF;
+    --shadow: 0 2px 14px rgba(43,36,32,0.07);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family: "Pretendard","Apple SD Gothic Neo","Noto Sans KR",-apple-system,sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:60px;
+  }
+
+  .wrap{
+    max-width:640px;
+    margin:0 auto;
+    padding:0 18px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    background: linear-gradient(165deg, #3E332B 0%, #2B2420 100%);
+    color:#F3ECE2;
+    padding:34px 18px 30px;
+    position:relative;
+    overflow:hidden;
+  }
+  header::after{
+    content:"";
+    position:absolute;
+    right:-60px; top:-60px;
+    width:220px; height:220px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(201,154,61,0.18), transparent 70%);
+  }
+  .header-inner{max-width:640px; margin:0 auto; position:relative; z-index:1;}
+  .eyebrow{
+    font-size:13px;
+    letter-spacing:0.08em;
+    color:#D9B97A;
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  h1{
+    font-size:25px;
+    line-height:1.4;
+    margin:0 0 12px;
+    font-weight:800;
+    letter-spacing:-0.01em;
+  }
+  .header-sub{
+    font-size:14.5px;
+    color:#CFC4B5;
+    margin:0;
+  }
+  .meta-row{
+    display:flex;
+    gap:10px;
+    margin-top:18px;
+    flex-wrap:wrap;
+  }
+  .meta-chip{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.16);
+    border-radius:20px;
+    padding:6px 13px;
+    font-size:12.5px;
+    color:#EFE7DA;
+  }
+
+  /* ---------- Section generic ---------- */
+  section{margin-top:30px;}
+  .section-label{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    font-weight:700;
+    color:var(--rust);
+    letter-spacing:0.03em;
+    margin-bottom:12px;
+  }
+  .section-label .dot{
+    width:7px;height:7px;border-radius:50%;
+    background:var(--rust);
+    flex-shrink:0;
+  }
+
+  /* ---------- Disclaimer ---------- */
+  .disclaimer{
+    background:var(--gold-soft);
+    border:1px solid #E8D49C;
+    border-radius:14px;
+    padding:16px 16px;
+    font-size:13.5px;
+    color:#6B5530;
+    margin-top:18px;
+  }
+  .disclaimer b{color:#5C461F;}
+
+  /* ---------- Roadmap (flow) ---------- */
+  .flow-card{
+    background:var(--card);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    padding:20px 16px 22px;
+    border:1px solid var(--line);
+  }
+  .flow-title{
+    font-size:16px;
+    font-weight:700;
+    margin:0 0 4px;
+  }
+  .flow-desc{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin:0 0 16px;
+  }
+  svg{display:block; width:100%; height:auto;}
+
+  /* ---------- Lab snapshot ---------- */
+  .lab-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  .lab-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:14px 14px 13px;
+    box-shadow:var(--shadow);
+  }
+  .lab-name{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin:0 0 6px;
+    font-weight:600;
+  }
+  .lab-value{
+    font-size:21px;
+    font-weight:800;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .lab-value.low{color:var(--rust);}
+  .lab-value.ok{color:var(--sage);}
+  .lab-ref{
+    font-size:11.5px;
+    color:#9C9085;
+    margin-top:4px;
+  }
+  .lab-bar-track{
+    margin-top:9px;
+    height:6px;
+    border-radius:4px;
+    background:#EFE9E0;
+    position:relative;
+    overflow:hidden;
+  }
+  .lab-bar-fill{
+    height:100%;
+    border-radius:4px;
+  }
+
+  /* ---------- Question cards ---------- */
+  .q-card{
+    background:var(--card);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    border:1px solid var(--line);
+    margin-bottom:16px;
+    overflow:hidden;
+  }
+  .q-head{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    padding:18px 18px 14px;
+    border-bottom:1px solid var(--line);
+  }
+  .q-num{
+    flex-shrink:0;
+    width:34px;height:34px;
+    border-radius:50%;
+    background:var(--rust-soft);
+    color:var(--rust);
+    font-weight:800;
+    font-size:15px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .q-title{
+    font-size:16.5px;
+    font-weight:700;
+    margin:4px 0 0;
+    line-height:1.45;
+  }
+  .q-body{padding:16px 18px 18px;}
+  .q-body p{margin:0 0 12px; font-size:14.5px;}
+  .q-body p:last-child{margin-bottom:0;}
+
+  .key-answer{
+    background:var(--sage-soft);
+    border-left:4px solid var(--sage);
+    border-radius:10px;
+    padding:13px 14px;
+    font-size:14.5px;
+    font-weight:600;
+    color:#324633;
+    margin-bottom:14px;
+  }
+
+  .sub-label{
+    font-size:12.5px;
+    font-weight:700;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    margin:14px 0 6px;
+  }
+
+  ul.plain{
+    margin:0 0 12px;
+    padding-left:0;
+    list-style:none;
+  }
+  ul.plain li{
+    position:relative;
+    padding-left:18px;
+    margin-bottom:8px;
+    font-size:14.5px;
+  }
+  ul.plain li::before{
+    content:"";
+    position:absolute;
+    left:2px; top:8px;
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--gold);
+  }
+
+  .path-box{
+    display:flex;
+    gap:10px;
+    margin-top:14px;
+  }
+  .path{
+    flex:1;
+    border-radius:12px;
+    padding:13px 13px;
+    font-size:13px;
+  }
+  .path.green{background:var(--sage-soft); border:1px solid #C7D9C5;}
+  .path.amber{background:#FBE9DD; border:1px solid #EFC8AA;}
+  .path-label{
+    font-weight:800;
+    font-size:13px;
+    margin-bottom:6px;
+    display:block;
+  }
+  .path.green .path-label{color:#3E5C40;}
+  .path.amber .path-label{color:#9C4A1E;}
+
+  .evidence-note{
+    margin-top:14px;
+    padding-top:12px;
+    border-top:1px dashed var(--line);
+    font-size:12.5px;
+    color:#9C9085;
+  }
+
+  /* ---------- chemo branch note ---------- */
+  .branch-note{
+    background:#EFE6F2;
+    border:1px solid #D9C2E0;
+    border-radius:14px;
+    padding:15px 16px;
+    font-size:13.5px;
+    color:#5A3D63;
+    margin-top:18px;
+  }
+  .branch-note b{color:#43294B;}
+  .branch-note .branch-row{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+  }
+  .branch-pill{
+    flex:1;
+    border-radius:10px;
+    padding:9px 11px;
+    font-size:12.5px;
+    line-height:1.5;
+  }
+  .branch-pill.m0{background:var(--sage-soft); border:1px solid #C7D9C5; color:#324633;}
+  .branch-pill.m1{background:#EFE6F2; border:1px solid #D9C2E0; color:#43294B;}
+  .branch-pill b{display:block; font-size:12px; margin-bottom:3px;}
+
+  /* ---------- biomarker ask box ---------- */
+  .ask-box{
+    background:var(--card);
+    border:1.5px dashed var(--rust);
+    border-radius:14px;
+    padding:15px 16px;
+    margin-top:14px;
+  }
+  .ask-box .ask-label{
+    font-size:12.5px;
+    font-weight:800;
+    color:var(--rust);
+    margin:0 0 8px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .ask-box .quote{
+    background:var(--rust-soft);
+    border-radius:10px;
+    padding:10px 12px;
+    font-size:14px;
+    font-weight:700;
+    color:#7A3315;
+    margin-bottom:8px;
+  }
+  .ask-box p{margin:0; font-size:13.5px; color:var(--ink-soft);}
+
+  /* ---------- biomarker table ---------- */
+  .bio-grid{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-top:14px;
+  }
+  .bio-card{
+    background:#FBF9F5;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:12px 14px;
+  }
+  .bio-name{
+    font-weight:800;
+    font-size:13.5px;
+    color:var(--ink);
+    margin:0 0 4px;
+  }
+  .bio-desc{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin:0;
+  }
+
+  /* ---------- drug schedule table ---------- */
+  .sched-card{
+    background:#FBF9F5;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:13px 14px;
+    margin-bottom:10px;
+  }
+  .sched-name{
+    font-weight:800;
+    font-size:14px;
+    color:var(--rust);
+    margin:0 0 6px;
+  }
+  .sched-detail{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin:0;
+  }
+
+  /* ---------- side effect tags ---------- */
+  .tag-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin-top:8px;
+  }
+  .tag{
+    background:var(--gold-soft);
+    border:1px solid #E8D49C;
+    color:#6B5530;
+    font-size:12px;
+    font-weight:600;
+    padding:5px 11px;
+    border-radius:20px;
+  }
+
+  /* ---------- glossary ---------- */
+  .glossary{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:18px 18px 6px;
+    box-shadow:var(--shadow);
+  }
+  .term{
+    padding:12px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .term:last-child{border-bottom:none;}
+  .term-name{
+    font-weight:700;
+    font-size:14.5px;
+    color:var(--rust);
+    margin:0 0 4px;
+  }
+  .term-def{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin:0;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    margin-top:34px;
+    padding:18px 0 6px;
+    text-align:center;
+    font-size:12px;
+    color:#A89C8E;
+  }
+
+  @media (max-width:380px){
+    h1{font-size:22px;}
+    .lab-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="eyebrow">OPENEVIDENCE 2차 의견 · 의료진 참고용 요약</div>
+    <h1>위암 치료 방향, 전문가들은 이렇게 봅니다</h1>
+    <p class="header-sub">담당 선생님(K땡땡 선생님)이 세우신 계획을 의학 논문과 가이드라인으로 다시 한번 확인해본 내용입니다.</p>
+    <div class="meta-row">
+      <span class="meta-chip">73세 · 남성</span>
+      <span class="meta-chip">진행성 위암 (T4a)</span>
+      <span class="meta-chip">PET CT 결과 대기 중</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="disclaimer">
+    <b>꼭 읽어주세요.</b> 이 내용은 의학 논문 검색 도구(OpenEvidence)가 정리해준 참고 자료입니다. 진단이나 처방이 아니며, 실제 치료 결정은 반드시 담당 의료진과 상의해서 정하셔야 합니다. 여기 나온 내용은 "병원에서 세운 계획이 의학적으로 근거가 있는 방향인지" 확인하는 데 도움을 드리려는 것입니다.
+  </div>
+
+  <!-- ROADMAP -->
+  <section>
+    <div class="section-label"><span class="dot"></span>지금부터 어떻게 되나요</div>
+    <div class="flow-card">
+      <p class="flow-title">PET CT 결과에 따라 두 갈래 길</p>
+      <p class="flow-desc">전이가 없으면 수술, 전이가 있으면 항암치료를 먼저 시작합니다. 지금은 그 결과를 기다리며 몸 상태를 끌어올리는 단계입니다.</p>
+
+      <svg viewBox="0 0 560 360" xmlns="http://www.w3.org/2000/svg">
+        <!-- now box -->
+        <rect x="170" y="10" width="220" height="56" rx="14" fill="#2B2420"/>
+        <text x="280" y="33" text-anchor="middle" font-size="13" font-weight="700" fill="#F3ECE2" font-family="Pretendard, sans-serif">지금: 입원 중</text>
+        <text x="280" y="52" text-anchor="middle" font-size="11.5" fill="#CFC4B5" font-family="Pretendard, sans-serif">영양 공급 · 철분 주사 · 위 감압</text>
+
+        <!-- arrow down -->
+        <line x1="280" y1="66" x2="280" y2="96" stroke="#C9A063" stroke-width="2.5"/>
+        <polygon points="280,104 274,92 286,92" fill="#C9A063"/>
+
+        <!-- PET CT box -->
+        <rect x="190" y="106" width="180" height="50" rx="14" fill="#F6ECD4" stroke="#D9B97A" stroke-width="1.5"/>
+        <text x="280" y="135" text-anchor="middle" font-size="13" font-weight="700" fill="#6B5530" font-family="Pretendard, sans-serif">PET CT 검사 결과</text>
+
+        <!-- split lines -->
+        <line x1="280" y1="156" x2="280" y2="172" stroke="#C9A063" stroke-width="2"/>
+        <line x1="280" y1="172" x2="140" y2="172" stroke="#C9A063" stroke-width="2"/>
+        <line x1="280" y1="172" x2="420" y2="172" stroke="#C9A063" stroke-width="2"/>
+        <line x1="140" y1="172" x2="140" y2="194" stroke="#C9A063" stroke-width="2"/>
+        <line x1="420" y1="172" x2="420" y2="194" stroke="#C9A063" stroke-width="2"/>
+        <polygon points="140,202 134,190 146,190" fill="#C9A063"/>
+        <polygon points="420,202 414,190 426,190" fill="#C9A063"/>
+
+        <!-- left: M0 -->
+        <rect x="40" y="204" width="200" height="48" rx="12" fill="#E3EBE0" stroke="#A9C4A6" stroke-width="1.5"/>
+        <text x="140" y="226" text-anchor="middle" font-size="12.5" font-weight="700" fill="#324633" font-family="Pretendard, sans-serif">전이 없음 (M0)</text>
+        <text x="140" y="242" text-anchor="middle" font-size="11" fill="#4B6049" font-family="Pretendard, sans-serif">→ 수술을 우선 고려</text>
+
+        <!-- right: M1 -->
+        <rect x="320" y="204" width="200" height="48" rx="12" fill="#FBE9DD" stroke="#EFC8AA" stroke-width="1.5"/>
+        <text x="420" y="226" text-anchor="middle" font-size="12.5" font-weight="700" fill="#9C4A1E" font-family="Pretendard, sans-serif">전이 있음 (M1)</text>
+        <text x="420" y="242" text-anchor="middle" font-size="11" fill="#A8552A" font-family="Pretendard, sans-serif">→ 항암치료 먼저</text>
+
+        <!-- continue arrows -->
+        <line x1="140" y1="252" x2="140" y2="270" stroke="#A9C4A6" stroke-width="2"/>
+        <polygon points="140,278 134,266 146,266" fill="#A9C4A6"/>
+        <line x1="420" y1="252" x2="420" y2="270" stroke="#EFC8AA" stroke-width="2"/>
+        <polygon points="420,278 414,266 426,266" fill="#EFC8AA"/>
+
+        <rect x="30" y="280" width="220" height="58" rx="12" fill="#FFFFFF" stroke="#A9C4A6" stroke-width="1.5"/>
+        <text x="140" y="302" text-anchor="middle" font-size="12" font-weight="700" fill="#324633" font-family="Pretendard, sans-serif">위 절제 수술</text>
+        <text x="140" y="318" text-anchor="middle" font-size="10.5" fill="#5C7A5E" font-family="Pretendard, sans-serif">(체력 회복 후 진행)</text>
+
+        <rect x="310" y="280" width="220" height="58" rx="12" fill="#FFFFFF" stroke="#EFC8AA" stroke-width="1.5"/>
+        <text x="420" y="298" text-anchor="middle" font-size="12" font-weight="700" fill="#9C4A1E" font-family="Pretendard, sans-serif">항암치료 + 필요시</text>
+        <text x="420" y="314" text-anchor="middle" font-size="10.5" fill="#A8552A" font-family="Pretendard, sans-serif">우회 수술(GJ)로 식사길 확보</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- LABS -->
+  <section>
+    <div class="section-label"><span class="dot"></span>지금 가장 중요한 수치 — 빈혈</div>
+    <div class="lab-grid">
+      <div class="lab-card">
+        <p class="lab-name">헤모글로빈 (Hb)</p>
+        <p class="lab-value low">8.7</p>
+        <p class="lab-ref">정상 13~17 g/dL</p>
+        <div class="lab-bar-track"><div class="lab-bar-fill" style="width:51%; background:var(--rust);"></div></div>
+      </div>
+      <div class="lab-card">
+        <p class="lab-name">저장 철분 (페리틴)</p>
+        <p class="lab-value low">12.9</p>
+        <p class="lab-ref">정상 30~400 ng/mL</p>
+        <div class="lab-bar-track"><div class="lab-bar-fill" style="width:8%; background:var(--rust);"></div></div>
+      </div>
+      <div class="lab-card">
+        <p class="lab-name">비타민 B12</p>
+        <p class="lab-value ok">805</p>
+        <p class="lab-ref">정상 197~771 pg/mL</p>
+        <div class="lab-bar-track"><div class="lab-bar-fill" style="width:100%; background:var(--sage);"></div></div>
+      </div>
+      <div class="lab-card">
+        <p class="lab-name">엽산</p>
+        <p class="lab-value ok">14.3</p>
+        <p class="lab-ref">정상 5~19 ng/mL</p>
+        <div class="lab-bar-track"><div class="lab-bar-fill" style="width:68%; background:var(--sage);"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUESTIONS -->
+  <section>
+    <div class="section-label"><span class="dot"></span>전문가들의 답변 (질문 4가지)</div>
+
+    <!-- Q1 -->
+    <div class="q-card">
+      <div class="q-head">
+        <div class="q-num">1</div>
+        <h3 class="q-title">수술을 먼저 할까요, 항암치료를 먼저 할까요?</h3>
+      </div>
+      <div class="q-body">
+        <div class="key-answer">결론: 전이가 없다면 "수술을 먼저" 하는 쪽이 더 많은 연구에서 지지를 받습니다. 다만 의견이 완전히 일치하진 않아서, 병원의 종합 판단이 중요합니다.</div>
+
+        <p>위암 중에서도 지금 환자분처럼 "반지세포암(암세포가 약하게 퍼지는 형태)"이 있는 경우, 항암치료를 먼저 할지 수술을 먼저 할지는 연구마다 결과가 다릅니다.</p>
+
+        <p class="sub-label">수술을 먼저 하는 것을 지지하는 연구</p>
+        <ul class="plain">
+          <li>144명을 비교한 연구에서, 수술을 먼저 한 환자들의 5년 생존율(64.7%)이 항암을 먼저 한 환자들(50%)보다 더 높게 나왔습니다.</li>
+          <li>978명을 분석한 또 다른 큰 연구에서도, 항암을 먼저 한다고 해서 생존율이 더 좋아지지는 않았습니다.</li>
+        </ul>
+
+        <p class="sub-label">항암을 먼저 하는 것을 지지하는 연구</p>
+        <ul class="plain">
+          <li>독일에서 310명을 본 연구에서는 정반대로, 항암치료를 먼저 한 환자들이 평균 28.5개월을 더 사신 반면, 수술만 한 환자들은 14.9개월에 그쳤습니다.</li>
+        </ul>
+
+        <div class="path-box">
+          <div class="path green">
+            <span class="path-label">전이 없을 때 (M0)</span>
+            지금처럼 음식이 안 내려가고 체력이 떨어진 상태라면, 가능하면 "수술을 먼저" 하는 쪽이 실질적으로 더 안전하다고 볼 수 있습니다.
+          </div>
+          <div class="path amber">
+            <span class="path-label">전이 있을 때 (M1)</span>
+            전신 항암치료를 먼저 하고, 필요하면 음식이 지나갈 수 있게 우회로(위공장문합술)를 만들어줍니다.
+          </div>
+        </div>
+
+        <div class="evidence-note">참고 논문 4편 (World J Gastroenterol, Cancers, Ann Surg Oncol, Lancet)</div>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-card">
+      <div class="q-head">
+        <div class="q-num">2</div>
+        <h3 class="q-title">빈혈이 심한데, 어떻게 관리해야 하나요?</h3>
+      </div>
+      <div class="q-body">
+        <div class="key-answer">결론: 지금 맞고 있는 "정맥 철분 주사(페린젝트)"가 정확히 맞는 방향입니다. 알약보다 주사가 훨씬 효과적이고 빠릅니다.</div>
+
+        <p>헤모글로빈 8.7, 페리틴 12.9는 몸속 철분 창고가 거의 비어있다는 뜻입니다. 큰 수술이나 항암치료를 견디려면 이 수치를 먼저 끌어올리는 게 중요합니다.</p>
+
+        <p class="sub-label">왜 알약 철분제보다 주사가 좋을까요</p>
+        <ul class="plain">
+          <li>수술이 1~2주 앞으로 다가온 상황에서는 알약으로 철분을 흡수하는 속도가 너무 느립니다.</li>
+          <li>정맥 주사는 한 번만 맞아도 헤모글로빈을 효과적으로 올려줍니다.</li>
+          <li>178명을 관찰한 연구에서, 수술 2주 전보다 더 일찍 주사를 맞은 환자들이 헤모글로빈이 더 많이 올랐습니다 (평균 1.13 상승). 치료받은 환자 중 4명 중 1명은 수술 당일에 더 이상 빈혈 상태가 아니었습니다.</li>
+        </ul>
+
+        <p class="sub-label">지금 상황에서 권장되는 것</p>
+        <ul class="plain">
+          <li>정맥 철분 주사(페린젝트)를 계속 진행 — 이미 하고 계신 그대로입니다.</li>
+          <li>수치가 충분히 오르지 않거나 수술 날짜가 임박하면 수혈을 고려할 수 있습니다.</li>
+          <li>일반적으로 헤모글로빈이 7~8 미만일 때 수혈을 고려하지만, 심장 질환이 있으면 더 일찍 고려하기도 합니다.</li>
+        </ul>
+
+        <div class="evidence-note">참고: JAMA 2019 (Frankfurt 합의), 미국심장학회 2024 가이드라인, Acta Anaesthesiol Scand 2024, Lancet (PREVENTT 연구) 2020</div>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-card">
+      <div class="q-head">
+        <div class="q-num">3</div>
+        <h3 class="q-title">심장 부정맥 약(릭시아나)은 수술 전 어떻게 하나요?</h3>
+      </div>
+      <div class="q-body">
+        <div class="key-answer">결론: 위 수술은 출혈 위험이 높은 수술이라서, 수술 2~3일 전부터 릭시아나(항응고제) 복용을 잠시 멈춰야 합니다.</div>
+
+        <p>현재 심방세동(부정맥)으로 릭시아나를 드시고 계신데, 이 약은 피가 굳지 않게 하는 약이라 수술 중 출혈을 늘릴 수 있습니다.</p>
+
+        <ul class="plain">
+          <li><b>언제 멈추나:</b> 보통 수술 2~3일 전부터 중단합니다.</li>
+          <li><b>중단 중 다른 약으로 대체(브릿징)는?</b> 부정맥 환자에게는 일반적으로 권장하지 않습니다 — 출혈 위험만 늘어나고 뇌졸중 예방 효과는 크지 않기 때문입니다.</li>
+          <li><b>언제 다시 시작하나:</b> 수술 후 출혈이 멈춘 게 확인되면 보통 24~72시간 안에 다시 시작합니다.</li>
+        </ul>
+
+        <p>이 부분은 외과, 심장내과, 마취과가 함께 상의해서 환자분께 맞는 정확한 일정을 정하게 됩니다. 지금 미리 알아두시면 면담 때 "릭시아나는 언제부터 끊나요?"라고 여쭤보시기 좋습니다.</p>
+
+        <div class="evidence-note">참고: 미국심장학회(ACC/AHA) 2024 수술 전후 가이드라인</div>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="q-card">
+      <div class="q-head">
+        <div class="q-num">4</div>
+        <h3 class="q-title">지금 암 단계(T4a)는 수술이 가능한 단계인가요?</h3>
+      </div>
+      <div class="q-body">
+        <div class="key-answer">결론: T4a는 일반적으로 수술이 가능한 단계입니다. 대장 쪽 막(가로결장간막)까지 침범했을 가능성(T4b)도 있지만, 그래도 함께 절제하는 수술이 가능한 경우가 많습니다.</div>
+
+        <p class="sub-label">쉽게 설명하면</p>
+        <ul class="plain">
+          <li><b>T4a</b> = 암이 위 바깥쪽 막(장막)까지 뚫고 나온 상태. 수술로 절제 가능한 경우가 대부분입니다.</li>
+          <li><b>T4b</b> = 암이 위 옆에 있는 다른 장기(대장, 췌장 등)까지 닿은 상태. 그 부분을 함께 잘라낼 수 있다면 여전히 수술이 가능합니다.</li>
+        </ul>
+
+        <p class="sub-label">수술 가능 여부를 결정하는 요소</p>
+        <ul class="plain">
+          <li>암이 닿은 다른 장기가 어디인지</li>
+          <li>그 부분을 함께 깨끗하게 잘라낼 수 있는지</li>
+          <li>다른 곳으로 전이가 없는지 (PET CT로 확인)</li>
+          <li>환자분이 큰 수술을 견딜 체력이 있는지</li>
+        </ul>
+
+        <p>반지세포암은 다른 위암보다 예후가 다소 좋지 않은 편이지만, 수술로 깨끗하게 절제(R0)가 된 경우 5년 생존율이 50~65%까지 보고된 연구도 있습니다. 나이(70세 이상), 암의 깊이, 림프절 전이 정도가 예후에 영향을 줍니다.</p>
+
+        <div class="evidence-note">참고: World J Gastroenterol 2020, Ann Surg Oncol 2018</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHEMO SECTION -->
+  <section>
+    <div class="section-label"><span class="dot"></span>항암치료를 하게 된다면</div>
+
+    <div class="branch-note">
+      <b>먼저 확인하세요 — 이 내용은 "전이가 있을 때(M1)"를 가정한 답변입니다.</b><br>
+      PET CT 결과가 아직 안 나온 상태라서, OpenEvidence에 "전이가 확인되면 항암을 어떻게 하나요"라고 가정해서 물어본 답변입니다. 결과에 따라 적용 여부가 달라집니다.
+      <div class="branch-row">
+        <div class="branch-pill m0"><b>전이 없음 (M0)</b>이 섹션 대신, "수술 후 보조항암치료(adjuvant)는 어떻게 하나요"를 따로 여쭤보시는 게 더 정확합니다.</div>
+        <div class="branch-pill m1"><b>전이 있음 (M1)</b>아래 내용이 그대로 적용됩니다. 전신 항암치료가 주된 치료가 됩니다.</div>
+      </div>
+    </div>
+
+    <div class="ask-box">
+      <p class="ask-label">🔎 면담 때 꼭 여쭤보세요</p>
+      <p class="quote">"바이오마커 검사도 하나요?"</p>
+      <p>HER2, PD-L1, MSI, CLDN18.2라는 4가지 검사 결과에 따라 항암제 조합이 크게 달라집니다. 이 게시물 검사 기록에는 이 검사들이 시행되었는지 나와 있지 않아서, 항암을 시작하기 전 병원에 직접 확인하시는 게 중요합니다.</p>
+    </div>
+
+    <!-- biomarker explainer -->
+    <div class="q-card" style="margin-top:16px;">
+      <div class="q-head">
+        <div class="q-num">A</div>
+        <h3 class="q-title">항암제 종류는 "바이오마커 검사" 결과로 정해집니다</h3>
+      </div>
+      <div class="q-body">
+        <div class="key-answer">결론: 암 조직을 검사해서 4가지 표지자(HER2, PD-L1, MSI, CLDN18.2) 중 무엇이 양성인지에 따라 기본 항암제에 추가하는 약이 달라집니다. 같은 위암이라도 사람마다 처방이 다른 이유입니다.</div>
+
+        <p>기본 뼈대는 거의 같습니다 — "5-FU 계열 항암제(5-FU 또는 카페시타빈) + 백금 항암제(주로 옥살리플라틴)". 여기에 검사 결과에 따라 약을 하나 더 추가하는 방식입니다.</p>
+
+        <div class="bio-grid">
+          <div class="bio-card">
+            <p class="bio-name">HER2 (전체 위암의 15~25%)</p>
+            <p class="bio-desc">양성이면 표적치료제 <b>트라스투주맙</b>을 기본 항암제에 추가합니다. PD-L1도 양성이면 <b>펨브롤리주맙</b>까지 함께 추가하는 것이 최신 표준 치료입니다.</p>
+          </div>
+          <div class="bio-card">
+            <p class="bio-name">PD-L1 (면역항암제 반응 지표)</p>
+            <p class="bio-desc">양성(CPS 1 이상)이면 면역항암제(<b>펨브롤리주맙, 니볼루맙</b> 등)를 기본 항암제에 추가합니다.</p>
+          </div>
+          <div class="bio-card">
+            <p class="bio-name">MSI-High / dMMR</p>
+            <p class="bio-desc">양성이면 면역항암제 단독 치료만으로도 우선 고려되는 경우가 있습니다 (PD-L1 결과와 상관없이 적용).</p>
+          </div>
+          <div class="bio-card">
+            <p class="bio-name">CLDN18.2 (클로딘18.2)</p>
+            <p class="bio-desc">비교적 최근에 나온 표지자로, 양성이면 <b>졸베툭시맙</b>이라는 신약을 추가할 수 있습니다.</p>
+          </div>
+          <div class="bio-card">
+            <p class="bio-name">4가지 모두 음성인 경우</p>
+            <p class="bio-desc">기본 항암제 조합(옥살리플라틴 + 5-FU 계열, 흔히 "폴폭스" 또는 "캡옥스"라고 부름)만으로 치료합니다.</p>
+          </div>
+        </div>
+
+        <p style="margin-top:14px;">참고로, 반지세포암(지금 환자분의 암 종류)이라는 이유만으로 약이 달라지지는 않습니다. 가이드라인은 암의 모양(조직형)보다 이 4가지 바이오마커 결과를 기준으로 약을 정하라고 안내하고 있습니다.</p>
+
+        <div class="evidence-note">참고: JAMA 2026, NCCN 위암 가이드라인(2026.6 개정), Lancet Oncology 2025</div>
+      </div>
+    </div>
+
+    <!-- elderly/frail dosing -->
+    <div class="q-card">
+      <div class="q-head">
+        <div class="q-num">B</div>
+        <h3 class="q-title">73세, 체력이 약한 지금 상태엔 어떤 강도로 하나요?</h3>
+      </div>
+      <div class="q-body">
+        <div class="key-answer">결론: 독한 3제 병합 항암(예: FLOT)보다, 약을 줄인 2제 병합 항암이 권장됩니다. 효과는 비슷하면서 부작용은 훨씬 적습니다.</div>
+
+        <p>고령이거나 체력(영양 상태, 빈혈 등)이 약한 환자를 대상으로 한 연구(GO-2 임상연구)에서, 항암제 용량을 줄인 치료가 표준 용량 치료와 "암이 진행하지 않는 기간"은 비슷하면서, 환자와 의료진 모두에게 훨씬 견디기 쉬운 치료였다는 결과가 나왔습니다.</p>
+
+        <p class="sub-label">지금 환자분 상태(체중 44kg, 헤모글로빈 8.7)에 권장되는 방향</p>
+        <ul class="plain">
+          <li>옥살리플라틴 + 5-FU 계열, 용량을 줄인 2제 병합이 우선 고려됩니다.</li>
+          <li>백금 항암제 중에는 옥살리플라틴이 시스플라틴보다 안전합니다 (혈전, 신장 부담이 더 적음).</li>
+          <li>독한 3제 병합(FLOT, DCF 등)은 부작용이 이득보다 클 수 있어 피하는 것이 일반적입니다.</li>
+          <li>표적치료제(트라스투주맙)나 면역항암제는 고령 환자에게도 비교적 안전한 편이라, 바이오마커가 양성이면 적극적으로 고려됩니다.</li>
+        </ul>
+
+        <div class="evidence-note">참고: GO-2 임상연구(Lancet 2020), Journal of Geriatric Oncology 2024, Cancer Treatment Reviews 2021</div>
+      </div>
+    </div>
+
+    <!-- schedule -->
+    <div class="q-card">
+      <div class="q-head">
+        <div class="q-num">C</div>
+        <h3 class="q-title">한다면 얼마나 자주, 얼마나 오래 맞나요?</h3>
+      </div>
+      <div class="q-body">
+        <div class="key-answer">결론: 보통 2주 또는 3주 간격으로 통원 또는 입원해서 주사를 맞으며, 효과가 있는 동안 평균 4~6개월 정도 지속합니다.</div>
+
+        <div class="sched-card">
+          <p class="sched-name">폴폭스 (FOLFOX) — 2주마다 1회</p>
+          <p class="sched-detail">옥살리플라틴 + 류코보린 + 5-FU를 하루 동안 맞고, 이후 이틀 정도 5-FU가 천천히 들어가는 휴대용 펌프를 달고 갑니다.</p>
+        </div>
+        <div class="sched-card">
+          <p class="sched-name">캡옥스 / 졸옥스 (CAPOX, XELOX) — 3주마다 1회</p>
+          <p class="sched-detail">옥살리플라틴 주사를 하루 맞고, 이후 2주간 카페시타빈(경구 항암제)을 하루 두 번 집에서 복용합니다.</p>
+        </div>
+        <div class="sched-card">
+          <p class="sched-name">표적치료제 / 면역항암제 추가 시</p>
+          <p class="sched-detail">트라스투주맙은 3주마다, 펨브롤리주맙은 3주 또는 6주마다, 니볼루맙은 2~4주마다 함께 맞는 방식입니다.</p>
+        </div>
+
+        <p class="sub-label">전체 기간</p>
+        <ul class="plain">
+          <li>정해진 기간이 있는 게 아니라, "효과가 있고 부작용이 견딜 만한 동안" 계속합니다.</li>
+          <li>임상연구에서 평균적으로 약 4~6개월(2주 간격이면 8~12회, 3주 간격이면 6~8회) 정도 지속했습니다.</li>
+          <li>최신 약제 조합 기준으로 평균 생존 기간은 14~20개월로 보고되고 있습니다.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- side effects -->
+    <div class="q-card">
+      <div class="q-head">
+        <div class="q-num">D</div>
+        <h3 class="q-title">부작용은 무엇을 조심해야 하나요?</h3>
+      </div>
+      <div class="q-body">
+        <div class="key-answer">결론: 손발 저림, 메스꺼움, 설사, 백혈구·혈소판 감소가 흔합니다. 영양 상태와 빈혈 관리, 백혈구 수치 관리가 함께 필요합니다.</div>
+
+        <p class="sub-label">옥살리플라틴 (백금 항암제)</p>
+        <div class="tag-row">
+          <span class="tag">손발 저림</span>
+          <span class="tag">설사</span>
+          <span class="tag">메스꺼움</span>
+          <span class="tag">백혈구·혈소판 감소</span>
+        </div>
+
+        <p class="sub-label">5-FU / 카페시타빈</p>
+        <div class="tag-row">
+          <span class="tag">입안 염증</span>
+          <span class="tag">설사</span>
+          <span class="tag">손발 갈라짐(카페시타빈)</span>
+        </div>
+
+        <p class="sub-label">면역항암제 추가 시</p>
+        <div class="tag-row">
+          <span class="tag">갑상선 기능 이상</span>
+          <span class="tag">대장염</span>
+          <span class="tag">폐렴(드묾)</span>
+          <span class="tag">피부 발진</span>
+        </div>
+
+        <p class="sub-label">지금 환자분 상황에서 특히 신경 써야 할 부분</p>
+        <ul class="plain">
+          <li><b>영양:</b> 위 출구가 막혀있고 체중이 44kg까지 줄어든 상태라, 우회 수술(GJ) 후 공장루(jejunostomy)를 통한 영양 공급이나 TPN(고농도 영양 수액)이 병행될 가능성이 높습니다.</li>
+          <li><b>빈혈:</b> 헤모글로빈 8.7로 이미 낮은 상태이므로, 항암 중에도 수혈이나 철분 치료가 함께 필요할 수 있습니다.</li>
+          <li><b>백혈구 감소 예방:</b> 고령이고 체력이 약한 점을 고려해, 백혈구를 올려주는 주사(G-CSF)를 예방 차원에서 미리 맞는 경우가 많습니다.</li>
+          <li><b>갑상선약(부광메티마졸) 관련:</b> 메티마졸 자체도 드물게 백혈구를 줄일 수 있어, 항암 중에는 혈액 수치를 더 자주 확인하게 됩니다.</li>
+          <li><b>릭시아나(항응고제) 관련:</b> 항암제와 직접적인 약물 상호작용은 없지만, 항암으로 혈소판이 떨어지면 출혈 위험이 커지므로, 혈소판이 5만 미만으로 떨어지면 릭시아나를 잠시 멈추거나 다른 주사 항응고제로 바꾸는 것을 고려하게 됩니다.</li>
+        </ul>
+
+        <div class="evidence-note">참고: NCCN 가이드라인, Cochrane Database 2017, Lancet 2025</div>
+      </div>
+    </div>
+
+    <!-- timing after surgery -->
+    <div class="q-card">
+      <div class="q-head">
+        <div class="q-num">E</div>
+        <h3 class="q-title">우회 수술(GJ)을 했다면 항암은 언제부터 시작하나요?</h3>
+      </div>
+      <div class="q-body">
+        <div class="key-answer">결론: 보통 수술 후 3~4주 정도 회복한 다음 시작합니다. 상처가 잘 아물고 영양 상태가 받쳐줄 때까지 기다리는 것이 안전합니다.</div>
+
+        <ul class="plain">
+          <li>회복이 순조로우면 2~3주 만에 시작하는 경우도 있습니다.</li>
+          <li>합병증(봉합 부위가 새거나 감염 등)이 있거나 영양 상태가 충분히 회복되지 않으면 4주 이상 늦춰질 수 있습니다.</li>
+          <li>외과, 종양내과, 영양팀이 함께 회복 상태를 보면서 시작 시점을 정하게 됩니다.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- GLOSSARY -->
+  <section>
+    <div class="section-label"><span class="dot"></span>어려운 용어 풀이</div>
+    <div class="glossary">
+      <div class="term">
+        <p class="term-name">PET CT</p>
+        <p class="term-def">몸 전체를 찍어서 암이 다른 장기로 퍼졌는지(전이) 확인하는 검사입니다.</p>
+      </div>
+      <div class="term">
+        <p class="term-name">T4a / T4b</p>
+        <p class="term-def">암이 위벽을 얼마나 깊이 뚫고 나갔는지를 나타내는 단계입니다. 숫자가 클수록 깊이 침범한 상태입니다.</p>
+      </div>
+      <div class="term">
+        <p class="term-name">반지세포암 (Signet ring cell)</p>
+        <p class="term-def">암세포 모양이 반지처럼 생긴 종류로, 서로 잘 뭉쳐있지 않아 주변으로 퍼지기 쉬운 특징이 있습니다.</p>
+      </div>
+      <div class="term">
+        <p class="term-name">위공장문합술 (GJ bypass)</p>
+        <p class="term-def">위 출구가 막혔을 때, 음식이 지나갈 수 있는 새로운 길을 만들어주는 수술입니다.</p>
+      </div>
+      <div class="term">
+        <p class="term-name">정맥 철분 주사 (페린젝트)</p>
+        <p class="term-def">철분을 알약이 아니라 혈관에 직접 주사로 넣어주는 치료로, 빈혈을 빠르게 개선합니다.</p>
+      </div>
+      <div class="term">
+        <p class="term-name">바이오마커 검사 (HER2, PD-L1, MSI, CLDN18.2)</p>
+        <p class="term-def">암 조직을 분석해서 어떤 표적치료제·면역항암제가 잘 맞을지 미리 확인하는 검사입니다. 결과에 따라 항암제 조합이 달라집니다.</p>
+      </div>
+      <div class="term">
+        <p class="term-name">폴폭스 / 캡옥스 (FOLFOX / CAPOX)</p>
+        <p class="term-def">위암 항암치료의 기본 조합입니다. 옥살리플라틴(백금 항암제)과 5-FU 계열 약을 함께 쓰는 표준 치료의 이름입니다.</p>
+      </div>
+      <div class="term">
+        <p class="term-name">표적치료제 / 면역항암제</p>
+        <p class="term-def">표적치료제(예: 트라스투주맙)는 암세포의 특정 부위만 골라 공격하는 약이고, 면역항암제(예: 펨브롤리주맙)는 내 몸의 면역세포가 암을 더 잘 찾아내도록 돕는 약입니다. 둘 다 바이오마커 결과가 양성일 때 사용합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    OpenEvidence 검색 결과를 바탕으로 쉬운 말로 재정리한 참고 자료입니다.<br>
+    최종 치료 결정은 반드시 담당 의료진과 상의해 주세요.
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
+<title>4차 의견 — OpenEvidence vs OpenCancer.ai 비교</title>
+<style>
+  :root{
+    --paper:#F7F4F8;
+    --ink:#2A2233;
+    --ink-soft:#5E5468;
+    --line:#E2D9E8;
+    --plum:#7A3E8C;
+    --plum-soft:#EEE0F2;
+    --blue:#2E5C8A;
+    --blue-soft:#DCE7F3;
+    --teal:#1F6F66;
+    --teal-soft:#DCEEEA;
+    --gold:#C98A2C;
+    --gold-soft:#FBEFDA;
+    --card:#FFFFFF;
+    --shadow: 0 2px 14px rgba(42,34,51,0.07);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family: "Pretendard","Apple SD Gothic Neo","Noto Sans KR",-apple-system,sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:60px;
+  }
+
+  .wrap{max-width:700px; margin:0 auto; padding:0 18px;}
+
+  /* ---------- Header ---------- */
+  header{
+    background: linear-gradient(165deg, #2E2138 0%, #1E1626 100%);
+    color:#F2ECF5;
+    padding:34px 18px 30px;
+    position:relative;
+    overflow:hidden;
+  }
+  header::after{
+    content:"";
+    position:absolute;
+    right:-60px; top:-60px;
+    width:220px; height:220px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(201,138,44,0.18), transparent 70%);
+  }
+  .header-inner{max-width:700px; margin:0 auto; position:relative; z-index:1;}
+  .eyebrow{
+    font-size:13px; letter-spacing:0.08em;
+    color:#CB9CDB; font-weight:600; margin-bottom:10px;
+  }
+  h1{font-size:24px; line-height:1.4; margin:0 0 12px; font-weight:800; letter-spacing:-0.01em;}
+  .header-sub{font-size:14.5px; color:#D6CADC; margin:0;}
+  .meta-row{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap;}
+  .meta-chip{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.16);
+    border-radius:20px; padding:6px 13px; font-size:12.5px; color:#EFE7F2;
+  }
+  .source-legend{
+    display:flex; gap:10px; margin-top:16px; flex-wrap:wrap;
+  }
+  .src-pill{
+    display:flex; align-items:center; gap:6px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.14);
+    border-radius:20px; padding:6px 12px; font-size:12px; font-weight:700; color:#F2ECF5;
+  }
+  .src-dot{width:9px; height:9px; border-radius:50%; flex-shrink:0;}
+  .src-dot.oe{background:#5FA3DB;}
+  .src-dot.oc{background:#3FB39E;}
+
+  /* ---------- Section generic ---------- */
+  section{margin-top:30px;}
+  .section-label{
+    display:flex; align-items:center; gap:8px;
+    font-size:13px; font-weight:700; color:var(--plum);
+    letter-spacing:0.03em; margin-bottom:12px;
+  }
+  .section-label .dot{width:7px; height:7px; border-radius:50%; background:var(--plum); flex-shrink:0;}
+  .section-sub{font-size:13px; color:var(--ink-soft); margin:-6px 0 14px;}
+
+  /* ---------- Disclaimer ---------- */
+  .disclaimer{
+    background:var(--gold-soft);
+    border:1px solid #ECD3A0;
+    border-radius:14px; padding:16px 16px;
+    font-size:13.5px; color:#6B4D1B; margin-top:18px;
+  }
+  .disclaimer b{color:#553C13;}
+
+  .method-banner{
+    background:var(--plum-soft);
+    border:1px solid #DCC0E5;
+    border-radius:14px; padding:15px 16px;
+    font-size:14px; color:#4A2456; margin-top:14px; font-weight:600;
+  }
+  .method-banner span{
+    display:inline-block; background:var(--plum); color:#fff;
+    font-size:11.5px; font-weight:800; padding:3px 9px; border-radius:8px;
+    margin-right:8px; letter-spacing:0.02em;
+  }
+
+  /* ---------- Legend chips reused inline ---------- */
+  .agree-badge, .diff-badge{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:11.5px; font-weight:800;
+    padding:4px 10px; border-radius:8px;
+  }
+  .agree-badge{background:var(--teal-soft); color:#16433C;}
+  .diff-badge{background:#FBE4D6; color:#8A3B17;}
+  .agree-badge::before{content:"●"; color:var(--teal); font-size:9px;}
+  .diff-badge::before{content:"●"; color:#C9622C; font-size:9px;}
+
+  /* ---------- Comparison cards ---------- */
+  .cmp-card{
+    background:var(--card);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    border:1px solid var(--line);
+    margin-bottom:16px;
+    overflow:hidden;
+  }
+  .cmp-head{
+    display:flex; align-items:flex-start; gap:12px;
+    padding:18px 18px 14px;
+    border-bottom:1px solid var(--line);
+  }
+  .cmp-num{
+    flex-shrink:0; width:34px; height:34px; border-radius:50%;
+    background:var(--plum-soft); color:var(--plum);
+    font-weight:800; font-size:15px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .cmp-title{font-size:16.5px; font-weight:700; margin:4px 0 0; line-height:1.45;}
+  .cmp-body{padding:16px 18px 18px;}
+  .cmp-body p{margin:0 0 12px; font-size:14.5px;}
+  .cmp-body p:last-child{margin-bottom:0;}
+
+  .verdict-row{margin-bottom:14px;}
+
+  /* two-column source comparison */
+  .src-grid{
+    display:flex; gap:10px; margin-top:4px; margin-bottom:14px;
+  }
+  .src-col{
+    flex:1; border-radius:12px; padding:12px 13px; font-size:13px;
+  }
+  .src-col.oe{background:var(--blue-soft); border:1px solid #C7D8EC;}
+  .src-col.oc{background:var(--teal-soft); border:1px solid #B9DDD3;}
+  .src-col-label{
+    display:flex; align-items:center; gap:6px;
+    font-weight:800; font-size:12px; margin-bottom:7px;
+  }
+  .src-col-label .src-dot{width:8px; height:8px; border-radius:50%;}
+  .src-col.oe .src-col-label{color:#1B3A52;}
+  .src-col.oc .src-col-label{color:#16433C;}
+  .src-col.oe .src-dot{background:#2E5C8A;}
+  .src-col.oc .src-dot{background:#1F6F66;}
+  .src-col p{margin:0; font-size:13px; line-height:1.55;}
+
+  .sub-label{
+    font-size:12.5px; font-weight:700; color:var(--ink-soft);
+    text-transform:uppercase; letter-spacing:0.04em; margin:14px 0 6px;
+  }
+
+  ul.plain{margin:0 0 12px; padding-left:0; list-style:none;}
+  ul.plain li{position:relative; padding-left:18px; margin-bottom:8px; font-size:14.5px;}
+  ul.plain li::before{
+    content:""; position:absolute; left:2px; top:8px;
+    width:6px; height:6px; border-radius:50%; background:var(--gold);
+  }
+
+  .evidence-note{
+    margin-top:14px; padding-top:12px;
+    border-top:1px dashed var(--line);
+    font-size:12.5px; color:#8B8195;
+  }
+
+  /* ---------- summary table ---------- */
+  .summary-table{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .summary-row{
+    display:flex; align-items:flex-start; gap:10px;
+    padding:13px 16px;
+    border-bottom:1px solid var(--line);
+    font-size:13.5px;
+  }
+  .summary-row:last-child{border-bottom:none;}
+  .summary-topic{flex:0 0 110px; font-weight:700; color:var(--plum); font-size:13px; padding-top:2px;}
+  .summary-verdict{flex:1;}
+
+  /* ---------- flow / diagram card ---------- */
+  .flow-card{
+    background:var(--card);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    padding:20px 16px 22px;
+    border:1px solid var(--line);
+  }
+  .flow-title{font-size:16px; font-weight:700; margin:0 0 4px;}
+  .flow-desc{font-size:13.5px; color:var(--ink-soft); margin:0 0 16px;}
+  svg{display:block; width:100%; height:auto;}
+
+  /* ---------- TOC ---------- */
+  .toc{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    padding:14px 16px;
+    margin-top:18px;
+  }
+  .toc-title{font-size:12.5px; font-weight:800; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.04em; margin:0 0 10px;}
+  .toc-list{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:7px;}
+  .toc-list a{display:flex; gap:8px; align-items:baseline; font-size:13.5px; color:var(--ink); text-decoration:none;}
+  .toc-list a .toc-tag{flex-shrink:0; font-size:10.5px; font-weight:800; padding:2px 7px; border-radius:6px; background:var(--plum-soft); color:var(--plum);}
+
+  /* ---------- glossary ---------- */
+  .glossary{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:18px 18px 6px;
+    box-shadow:var(--shadow);
+  }
+  .term{padding:12px 0; border-bottom:1px solid var(--line);}
+  .term:last-child{border-bottom:none;}
+  .term-name{font-weight:700; font-size:14.5px; color:var(--plum); margin:0 0 4px;}
+  .term-def{font-size:13.5px; color:var(--ink-soft); margin:0;}
+
+  /* ---------- Footer ---------- */
+  footer{margin-top:34px; padding:18px 0 6px; text-align:center; font-size:12px; color:#9890A0;}
+
+  /* ---------- Print ---------- */
+  @media print{
+    body{background:#fff; padding-bottom:0;}
+    .wrap{max-width:100%; padding:0 8mm;}
+    header{
+      background:#1E1626 !important;
+      -webkit-print-color-adjust:exact; print-color-adjust:exact;
+      padding:18px 10px 16px;
+    }
+    header::after{display:none;}
+    .cmp-card, .flow-card, .glossary, .toc, .summary-table{
+      box-shadow:none; border:1px solid #D8CEDE; break-inside:avoid;
+    }
+    .cmp-card{margin-bottom:10px;}
+    section{margin-top:16px;}
+    .disclaimer, .method-banner{break-inside:avoid;}
+    .src-grid{break-inside:avoid;}
+    a{color:inherit; text-decoration:none;}
+    .src-col, .agree-badge, .diff-badge, .summary-row{
+      -webkit-print-color-adjust:exact; print-color-adjust:exact;
+    }
+  }
+
+  @media (max-width:380px){
+    h1{font-size:21px;}
+    .src-grid{flex-direction:column;}
+    .summary-row{flex-direction:column; gap:4px;}
+    .summary-topic{flex:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="eyebrow">4차 의견 · 교차비교 요약</div>
+    <h1>두 번째 의견(OpenEvidence)과 세 번째 의견(OpenCancer.ai), 어디가 같고 어디가 다를까요</h1>
+    <p class="header-sub">같은 질문을 두 개의 다른 의학 논문 검색 도구에 물어봤습니다. 결론이 같은 부분은 더 믿을 수 있는 부분이고, 다른 부분은 직접 의료진에게 확인이 필요한 지점입니다.</p>
+    <div class="meta-row">
+      <span class="meta-chip">73세 · 남성</span>
+      <span class="meta-chip">반지세포암 · T4a/T4b</span>
+      <span class="meta-chip">PET CT 결과 대기 중</span>
+    </div>
+    <div class="source-legend">
+      <span class="src-pill"><span class="src-dot oe"></span>2차 의견 — OpenEvidence</span>
+      <span class="src-pill"><span class="src-dot oc"></span>3차 의견 — OpenCancer.ai</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="disclaimer">
+    <b>꼭 읽어주세요.</b> 이 문서는 두 개의 서로 다른 의학 논문 검색 도구(OpenEvidence, OpenCancer.ai)가 같은 질문에 답한 내용을 비교 정리한 참고 자료입니다. 진단이나 처방이 아니며, 실제 치료 결정은 반드시 담당 의료진과 상의해서 정하셔야 합니다.
+  </div>
+
+  <div class="method-banner">
+    <span>방법</span>2차·3차 의견에서 다룬 11개 주제(치료 순서, 빈혈, 항응고제, 수술가능성, 항암제 종류, 일정, 고령 환자 강도조절, 검사, 부작용, 약물상호작용, 수술 후 시작시점)를 항목별로 맞대어 비교했습니다. 완전히 일치하면 <span class="agree-badge">일치</span>, 강조점이나 권고가 다르면 <span class="diff-badge">차이</span>로 표시했습니다.
+  </div>
+
+  <!-- TOC -->
+  <div class="toc">
+    <p class="toc-title">바로 가기</p>
+    <ul class="toc-list">
+      <li><a href="#sec-summary"><span class="toc-tag">한눈에</span>11개 주제 비교 한눈에 보기</a></li>
+      <li><a href="#sec-detail"><span class="toc-tag">상세</span>항목별 자세히 비교</a></li>
+      <li><a href="#sec-glossary"><span class="toc-tag">용어</span>어려운 용어 풀이</a></li>
+    </ul>
+  </div>
+
+  <!-- METHOD FLOW DIAGRAM -->
+  <section>
+    <div class="section-label"><span class="dot"></span>이 문서를 만든 방법</div>
+    <div class="flow-card">
+      <p class="flow-title">같은 환자 정보 → 두 곳에 같은 질문 → 답변 대조</p>
+      <p class="flow-desc">동일한 환자 정보와 질문지를 OpenEvidence와 OpenCancer.ai 두 곳에 각각 입력하고, 돌아온 답변을 항목별로 맞대어 비교했습니다.</p>
+
+      <svg viewBox="0 0 560 230" xmlns="http://www.w3.org/2000/svg">
+        <rect x="170" y="10" width="220" height="46" rx="14" fill="#1E1626"/>
+        <text x="280" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="#F2ECF5" font-family="Pretendard, sans-serif">같은 환자 정보 + 같은 질문</text>
+
+        <line x1="280" y1="56" x2="280" y2="78" stroke="#C98A2C" stroke-width="2.5"/>
+        <line x1="280" y1="78" x2="140" y2="78" stroke="#C98A2C" stroke-width="2"/>
+        <line x1="280" y1="78" x2="420" y2="78" stroke="#C98A2C" stroke-width="2"/>
+        <line x1="140" y1="78" x2="140" y2="96" stroke="#C98A2C" stroke-width="2"/>
+        <line x1="420" y1="78" x2="420" y2="96" stroke="#C98A2C" stroke-width="2"/>
+        <polygon points="140,104 134,92 146,92" fill="#C98A2C"/>
+        <polygon points="420,104 414,92 426,92" fill="#C98A2C"/>
+
+        <rect x="40" y="106" width="200" height="48" rx="12" fill="#DCE7F3" stroke="#C7D8EC" stroke-width="1.5"/>
+        <text x="140" y="128" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1B3A52" font-family="Pretendard, sans-serif">OpenEvidence</text>
+        <text x="140" y="144" text-anchor="middle" font-size="10.5" fill="#2E5C8A" font-family="Pretendard, sans-serif">→ 2차 의견</text>
+
+        <rect x="320" y="106" width="200" height="48" rx="12" fill="#DCEEEA" stroke="#B9DDD3" stroke-width="1.5"/>
+        <text x="420" y="128" text-anchor="middle" font-size="12.5" font-weight="700" fill="#16433C" font-family="Pretendard, sans-serif">OpenCancer.ai</text>
+        <text x="420" y="144" text-anchor="middle" font-size="10.5" fill="#1F6F66" font-family="Pretendard, sans-serif">→ 3차 의견</text>
+
+        <line x1="140" y1="154" x2="140" y2="172" stroke="#C7D8EC" stroke-width="2"/>
+        <line x1="420" y1="154" x2="420" y2="172" stroke="#B9DDD3" stroke-width="2"/>
+        <line x1="140" y1="172" x2="280" y2="172" stroke="#C9B8D2" stroke-width="2"/>
+        <line x1="420" y1="172" x2="280" y2="172" stroke="#C9B8D2" stroke-width="2"/>
+        <line x1="280" y1="172" x2="280" y2="186" stroke="#C9B8D2" stroke-width="2"/>
+        <polygon points="280,194 274,182 286,182" fill="#C9B8D2"/>
+
+        <rect x="120" y="196" width="320" height="30" rx="10" fill="#EEE0F2" stroke="#DCC0E5" stroke-width="1.5"/>
+        <text x="280" y="216" text-anchor="middle" font-size="12.5" font-weight="700" fill="#4A2456" font-family="Pretendard, sans-serif">4차 의견 — 항목별 비교</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- SUMMARY TABLE -->
+  <section id="sec-summary">
+    <div class="section-label"><span class="dot"></span>11개 주제 비교 한눈에 보기</div>
+    <div class="summary-table">
+      <div class="summary-row">
+        <div class="summary-topic">치료 순서</div>
+        <div class="summary-verdict"><span class="diff-badge">차이</span> OpenEvidence는 연구마다 결론이 갈린다고 설명(수술 먼저 지지 2편, 항암 먼저 지지 1편). OpenCancer.ai는 "M0면 선행항암 후 수술"을 표준으로 더 단정적으로 제시.</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-topic">M1일 때 방향</div>
+        <div class="summary-verdict"><span class="agree-badge">일치</span> 두 곳 모두 전이가 있으면 항암치료가 중심이 되고, 필요시 우회수술(GJ)로 증상만 완화한다고 동일하게 설명.</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-topic">빈혈 관리</div>
+        <div class="summary-verdict"><span class="agree-badge">일치</span> 정맥 철분 주사(페린젝트)가 적절한 방향이며, 알약보다 빠르고 효과적이라는 점에 두 곳 모두 동의.</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-topic">목표 헤모글로빈</div>
+        <div class="summary-verdict"><span class="diff-badge">차이</span> OpenEvidence는 수술 전 목표를 "9~10 이상"으로 제시. OpenCancer.ai는 "8 이상이면 항암 시작 가능, 10 이상이 더 이상적"이라는 약간 더 유연한 기준을 제시.</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-topic">릭시아나(항응고제)</div>
+        <div class="summary-verdict"><span class="diff-badge">차이</span> 중단 시점에 대해 OpenEvidence는 "수술 2~3일 전"으로, OpenCancer.ai는 "24~48시간 전"으로 약간 다르게 제시. 브릿징은 둘 다 불필요하다는 데 동의.</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-topic">T4a/T4b 수술가능성</div>
+        <div class="summary-verdict"><span class="agree-badge">일치</span> 침범 장기를 함께 절제할 수 있고 전이가 없다면 수술이 가능하다는 점, 반지세포암이 수술을 막는 이유는 아니라는 점에 동의.</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-topic">항암제 기본 조합</div>
+        <div class="summary-verdict"><span class="agree-badge">일치</span> FLOT·FOLFOX·XELOX·SOX 4가지가 표준이라는 점, 고령·저체중 환자는 FOLFOX나 감량 요법이 우선된다는 점에 동의.</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-topic">바이오마커 표적치료</div>
+        <div class="summary-verdict"><span class="agree-badge">일치</span> HER2 양성→허셉틴, PD-L1/MSI-H 양성→면역항암제, CLDN18.2 양성→졸베툭시맙 추가라는 원칙이 동일.</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-topic">투여 일정</div>
+        <div class="summary-verdict"><span class="diff-badge">차이</span> OpenCancer.ai는 "6~8회(3~4개월) 후 영상검사"로 구체적 사이클 수를 제시. OpenEvidence는 "효과가 있는 동안 평균 4~6개월" 식으로 조금 더 범위를 넓게 제시.</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-topic">부작용 관리</div>
+        <div class="summary-verdict"><span class="agree-badge">일치</span> 메스꺼움·손발저림·백혈구감소가 흔하다는 점, 발열 시 즉시 병원에 알려야 한다는 점, 영양·빈혈 관리가 함께 필요하다는 점에 동의.</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-topic">우회수술 후 항암 시작</div>
+        <div class="summary-verdict"><span class="diff-badge">차이</span> OpenCancer.ai는 "2~3주 후 시작 가능"으로 더 빠르게 제시. OpenEvidence는 "보통 3~4주, 회복이 빠르면 2~3주"로 조금 더 신중한 범위를 제시.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAILED COMPARISON -->
+  <section id="sec-detail">
+    <div class="section-label"><span class="dot"></span>항목별 자세히 비교</div>
+
+    <!-- 1 -->
+    <div class="cmp-card">
+      <div class="cmp-head">
+        <div class="cmp-num">1</div>
+        <h3 class="cmp-title">수술을 먼저 할까요, 항암치료를 먼저 할까요?</h3>
+      </div>
+      <div class="cmp-body">
+        <div class="verdict-row"><span class="diff-badge">차이 — 근거 해석의 폭이 다름</span></div>
+        <div class="src-grid">
+          <div class="src-col oe">
+            <p class="src-col-label"><span class="src-dot"></span>OpenEvidence</p>
+            <p>연구마다 결과가 다르다는 점을 강조합니다. 수술 먼저를 지지하는 연구 2편(5년 생존율 64.7% vs 50%, 978명 분석)과 항암 먼저를 지지하는 연구 1편(생존기간 28.5개월 vs 14.9개월)을 모두 제시하며, "병원의 종합 판단이 중요하다"고 결론.</p>
+          </div>
+          <div class="src-col oc">
+            <p class="src-col-label"><span class="src-dot"></span>OpenCancer.ai</p>
+            <p>NCCN 가이드라인을 기준으로 더 단정적으로 답합니다. "M0이고 절제 가능하면 선행항암 후 수술이 표준"이라고 제시하며, 개별 연구 수치보다는 가이드라인 프레임워크 중심으로 설명.</p>
+          </div>
+        </div>
+        <p>두 곳 모두 "M1이면 항암이 중심, 우회수술만 고려"라는 결론은 같습니다. 다만 M0일 때 "수술이 먼저냐 항암이 먼저냐"에 대한 확신의 정도가 다릅니다. OpenEvidence는 근거가 엇갈린다는 점을 더 솔직하게 보여주고, OpenCancer.ai는 최신 가이드라인의 권고를 더 명확하게 제시하는 경향이 있습니다.</p>
+        <div class="evidence-note">실제로 물어볼 질문: "저처럼 반지세포암이고 영양 상태가 안 좋은 경우, 우리 병원에서는 수술과 항암 중 어느 쪽을 먼저 고려하시나요? 그 이유는요?"</div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="cmp-card">
+      <div class="cmp-head">
+        <div class="cmp-num">2</div>
+        <h3 class="cmp-title">빈혈은 어떻게 관리해야 하나요?</h3>
+      </div>
+      <div class="cmp-body">
+        <div class="verdict-row"><span class="agree-badge">일치 — 방향은 같고, 목표 수치만 약간 다름</span></div>
+        <div class="src-grid">
+          <div class="src-col oe">
+            <p class="src-col-label"><span class="src-dot"></span>OpenEvidence</p>
+            <p>정맥 철분 주사가 알약보다 효과적이라는 근거로 178명 연구(헤모글로빈 평균 1.13 상승, 4명 중 1명은 수술 당일 빈혈 해소)를 제시. 수술 전 목표는 "9~10 이상" 권장.</p>
+          </div>
+          <div class="src-col oc">
+            <p class="src-col-label"><span class="src-dot"></span>OpenCancer.ai</p>
+            <p>같은 결론(정맥 철분 주사가 더 빠르고 효과적)이지만, 항암치료를 기준으로 본 목표 수치는 "8 이상이면 시작 가능, 10 이상이 더 이상적"로 조금 더 유연하게 제시.</p>
+          </div>
+        </div>
+        <p>두 답변 모두 "지금 하고 있는 정맥 철분 주사(페린젝트)가 맞는 방향"이라는 결론은 동일합니다. 차이는 목표 숫자의 엄격함 정도인데, 이는 수술 전 기준(더 엄격)과 항암치료 전 기준(조금 더 유연)을 각각 더 강조했기 때문으로 보입니다.</p>
+        <div class="evidence-note">실제로 물어볼 질문: "지금 철분 주사로 목표하시는 헤모글로빈 수치가 얼마인가요? 그 수치에 못 미치면 수혈도 고려하시나요?"</div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="cmp-card">
+      <div class="cmp-head">
+        <div class="cmp-num">3</div>
+        <h3 class="cmp-title">릭시아나(항응고제)는 수술 전 어떻게 하나요?</h3>
+      </div>
+      <div class="cmp-body">
+        <div class="verdict-row"><span class="diff-badge">차이 — 중단 시점의 숫자가 다름</span></div>
+        <div class="src-grid">
+          <div class="src-col oe">
+            <p class="src-col-label"><span class="src-dot"></span>OpenEvidence</p>
+            <p>수술 2~3일 전부터 중단, 출혈이 멈춘 게 확인되면 24~72시간 안에 재시작. 브릿징(다른 약 대체)은 부정맥 환자에게 일반적으로 권장하지 않음.</p>
+          </div>
+          <div class="src-col oc">
+            <p class="src-col-label"><span class="src-dot"></span>OpenCancer.ai</p>
+            <p>수술 24~48시간 전부터 중단, 24~48시간 안에 재시작(수술 범위가 크면 더 늦춰질 수 있음). 브릿징도 마찬가지로 권장하지 않음.</p>
+          </div>
+        </div>
+        <p>두 답변 모두 큰 방향(중단 → 수술 → 재시작, 브릿징 불필요)은 같습니다. 다만 정확한 시간(2~3일 vs 24~48시간)에 차이가 있는데, 이는 신장 기능과 개별 출혈 위험도에 따라 병원마다 조금씩 다르게 적용하는 부분이라 실제로는 의료진이 환자분의 신장 기능 수치를 보고 정확한 날짜를 정하게 됩니다.</p>
+        <div class="evidence-note">실제로 물어볼 질문: "제 신장 기능을 기준으로, 릭시아나를 정확히 언제부터 끊고 언제 다시 시작하나요?"</div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="cmp-card">
+      <div class="cmp-head">
+        <div class="cmp-num">4</div>
+        <h3 class="cmp-title">T4a/T4b는 수술이 가능한 단계인가요?</h3>
+      </div>
+      <div class="cmp-body">
+        <div class="verdict-row"><span class="agree-badge">일치</span></div>
+        <div class="src-grid">
+          <div class="src-col oe">
+            <p class="src-col-label"><span class="src-dot"></span>OpenEvidence</p>
+            <p>T4a는 대부분 절제 가능, T4b도 침범 부위를 함께 잘라낼 수 있으면 가능. R0 절제 시 5년 생존율 50~65%까지 보고된 연구도 있다고 제시.</p>
+          </div>
+          <div class="src-col oc">
+            <p class="src-col-label"><span class="src-dot"></span>OpenCancer.ai</p>
+            <p>같은 결론. 다만 생존율 수치는 T4 전체를 기준으로 "수술만 20~30% vs 수술+항암 35~45%"로 제시해 비교 기준이 약간 다름.</p>
+          </div>
+        </div>
+        <p>"전이가 없고 절제가 가능하면 T4a/T4b도 수술 대상"이라는 핵심 결론은 동일합니다. 인용한 생존율 수치가 서로 다른 논문·기준에서 나온 것이라 숫자 자체를 직접 비교하기보다, 두 곳 모두 "수술+항암 병행이 수술 단독보다 낫다"는 방향성에 동의한다는 점이 중요합니다.</p>
+        <div class="evidence-note">실제로 물어볼 질문: "저의 경우 R0(깨끗한 절제)가 가능할 것으로 보시나요? 가능하다면 예상되는 생존율 범위는 어느 정도인가요?"</div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="cmp-card">
+      <div class="cmp-head">
+        <div class="cmp-num">5</div>
+        <h3 class="cmp-title">(M1 가정) 어떤 항암제를 쓰게 되나요?</h3>
+      </div>
+      <div class="cmp-body">
+        <div class="verdict-row"><span class="agree-badge">일치</span></div>
+        <div class="src-grid">
+          <div class="src-col oe">
+            <p class="src-col-label"><span class="src-dot"></span>OpenEvidence</p>
+            <p>기본 뼈대는 "5-FU 계열 + 옥살리플라틴"이며, 고령·저체력 환자는 용량을 줄인 2제 병합이 우선. 바이오마커 양성 시 표적치료제 추가.</p>
+          </div>
+          <div class="src-col oc">
+            <p class="src-col-label"><span class="src-dot"></span>OpenCancer.ai</p>
+            <p>FLOT·FOLFOX·XELOX·SOX 4가지 표준 조합을 더 구체적으로 나열하고, 라무시루맙 병합이라는 추가 옵션까지 소개. 고령 환자는 FOLFOX나 감량 FLOT 우선이라는 결론은 동일.</p>
+          </div>
+        </div>
+        <p>약을 고르는 원칙(바이오마커 검사 결과 기준, 고령·저체력이면 강도를 낮춤)은 완전히 일치합니다. OpenCancer.ai가 약 조합의 이름과 옵션을 조금 더 폭넓게(라무시루맙 포함) 제시한다는 점이 차이입니다.</p>
+        <div class="evidence-note">실제로 물어볼 질문: "만약 전이가 확인되면, 저에게는 FOLFOX와 FLOT 중 어느 쪽으로 시작하실 계획이신가요?"</div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="cmp-card">
+      <div class="cmp-head">
+        <div class="cmp-num">6</div>
+        <h3 class="cmp-title">(M1 가정) 항암치료 일정과 기간은 어떻게 되나요?</h3>
+      </div>
+      <div class="cmp-body">
+        <div class="verdict-row"><span class="diff-badge">차이 — 표현 방식의 차이</span></div>
+        <div class="src-grid">
+          <div class="src-col oe">
+            <p class="src-col-label"><span class="src-dot"></span>OpenEvidence</p>
+            <p>"정해진 기간이 있는 게 아니라 효과가 있는 동안 계속"하며 평균 4~6개월(2주 간격이면 8~12회) 지속한다고, 다소 유연하게 설명.</p>
+          </div>
+          <div class="src-col oc">
+            <p class="src-col-label"><span class="src-dot"></span>OpenCancer.ai</p>
+            <p>"6~8회(3~4개월) 후 영상검사로 재평가, 효과가 좋으면 2~4회 추가(총 8~12회)"로 더 구조화된 체크포인트를 제시.</p>
+          </div>
+        </div>
+        <p>총 투여 횟수(8~12회 전후)와 "효과를 봐가며 결정한다"는 원칙은 결국 같은 내용입니다. 다만 OpenCancer.ai가 "6~8회 후 영상검사"라는 명확한 재평가 시점을 더 강조해서, 환자분과 가족이 일정을 가늠하기에는 조금 더 구체적입니다.</p>
+        <div class="evidence-note">실제로 물어볼 질문: "몇 번 정도 맞은 뒤 CT로 효과를 확인하게 되나요? 그 결과에 따라 다음 결정은 어떻게 되나요?"</div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="cmp-card">
+      <div class="cmp-head">
+        <div class="cmp-num">7</div>
+        <h3 class="cmp-title">(M1 가정) 우회수술(GJ) 후 항암치료는 언제부터 시작하나요?</h3>
+      </div>
+      <div class="cmp-body">
+        <div class="verdict-row"><span class="diff-badge">차이 — 신중함의 정도가 다름</span></div>
+        <div class="src-grid">
+          <div class="src-col oe">
+            <p class="src-col-label"><span class="src-dot"></span>OpenEvidence</p>
+            <p>보통 3~4주 회복 후 시작. 회복이 순조로우면 2~3주도 가능하지만, 합병증이 있으면 4주 이상 늦춰질 수 있다고 더 신중한 범위를 제시.</p>
+          </div>
+          <div class="src-col oc">
+            <p class="src-col-label"><span class="src-dot"></span>OpenCancer.ai</p>
+            <p>회복되고 영양 상태가 좋아지면 보통 2~3주 후 시작 가능하다고, 조금 더 짧은 기준을 우선 제시.</p>
+          </div>
+        </div>
+        <p>"회복 상태를 보고 결정한다"는 원칙은 같지만, 기본으로 제시하는 기간이 OpenEvidence는 3~4주, OpenCancer.ai는 2~3주로 다소 차이가 있습니다. 실제로는 합병증 여부와 영양 회복 속도에 따라 달라지는 부분이라, 두 범위(2~4주) 안에서 담당 의료진이 판단하게 될 가능성이 높습니다.</p>
+        <div class="evidence-note">실제로 물어볼 질문: "우회수술을 한다면, 항암치료 시작 시점을 정할 때 가장 중요하게 보는 지표가 무엇인가요?"</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GLOSSARY -->
+  <section id="sec-glossary">
+    <div class="section-label"><span class="dot"></span>어려운 용어 풀이</div>
+    <div class="glossary">
+      <div class="term">
+        <p class="term-name">OpenEvidence / OpenCancer.ai</p>
+        <p class="term-def">둘 다 의학 논문과 가이드라인을 검색해 답해주는 AI 기반 도구입니다. 검색하는 논문 데이터베이스나 요약 방식이 달라 같은 질문에도 강조점이 조금씩 다를 수 있습니다.</p>
+      </div>
+      <div class="term">
+        <p class="term-name">일치 / 차이</p>
+        <p class="term-def">"일치"는 두 도구의 핵심 결론과 권고 방향이 같다는 뜻이고, "차이"는 결론의 방향은 비슷하더라도 구체적인 숫자나 강조하는 근거가 다르다는 뜻입니다. 둘 다 틀렸다는 의미는 아닙니다.</p>
+      </div>
+      <div class="term">
+        <p class="term-name">R0 절제</p>
+        <p class="term-def">암을 수술로 제거할 때, 잘라낸 경계(절단면)에 암세포가 전혀 남지 않은 "깨끗한 절제"를 의미합니다.</p>
+      </div>
+      <div class="term">
+        <p class="term-name">브릿징 (Bridging)</p>
+        <p class="term-def">항응고제를 잠시 끊는 동안, 효과가 더 짧은 다른 주사형 항응고제로 임시로 바꿔주는 것을 말합니다.</p>
+      </div>
+      <div class="term">
+        <p class="term-name">가이드라인 (NCCN · ASCO)</p>
+        <p class="term-def">전문가들이 여러 연구 결과를 종합해서 만든 "표준 치료 권고안"입니다. 개별 연구 1편보다 더 폭넓은 근거를 반영합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    OpenEvidence(2차 의견)와 OpenCancer.ai(3차 의견) 검색 결과를 항목별로 대조해 정리한 참고 자료입니다.<br>
+    최종 치료 결정은 반드시 담당 의료진과 상의해 주세요.
+  </footer>
+
+</div>
+</body>
+</html>

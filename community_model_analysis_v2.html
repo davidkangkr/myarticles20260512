@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 시대 환자 중심 커뮤니티 모델 분석</title>
+<style>
+/* ── reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── tokens ── */
+:root {
+  --ink: #1a1a18;
+  --ink-2: #3d3d39;
+  --ink-3: #6b6b65;
+  --ink-4: #9b9b93;
+  --paper: #faf9f6;
+  --rule: #e2e0d8;
+  --accent-r: #c0392b;   /* danger / 문제 */
+  --accent-o: #b35c00;   /* warning */
+  --accent-g: #1a5c38;   /* success */
+  --accent-b: #1a4d7a;   /* info */
+  --accent-p: #3d3478;   /* purple */
+  --bg-r: #fdf2f1;
+  --bg-o: #fdf5ec;
+  --bg-g: #f0f7f3;
+  --bg-b: #eef4fb;
+  --font-display: 'Noto Serif KR', Georgia, serif;
+  --font-body: 'Noto Sans KR', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* ── base ── */
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-body);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.75;
+}
+
+/* ── Google Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@600&display=swap');
+
+/* ── layout ── */
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+/* ── divider ── */
+hr { border: none; border-top: 0.5px solid var(--rule); margin: 2.5rem 0; }
+hr.thick { border-top: 1.5px solid var(--ink); }
+
+/* ── eyebrow ── */
+.ey {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: .35rem;
+}
+
+/* ── headings ── */
+.h-page {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 5vw, 1.9rem);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
+  margin-bottom: .6rem;
+}
+.h-section {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  padding-left: .75rem;
+  margin-bottom: 1rem;
+}
+.h-section.r { border-left: 3px solid var(--accent-r); }
+.h-section.o { border-left: 3px solid var(--accent-o); }
+.h-section.g { border-left: 3px solid var(--accent-g); }
+.h-section.b { border-left: 3px solid var(--accent-b); }
+
+/* ── lead prose ── */
+.lead {
+  font-size: 14px;
+  color: var(--ink-3);
+  line-height: 1.85;
+  margin-bottom: 1.75rem;
+}
+
+/* ── cards ── */
+.card {
+  background: #fff;
+  border: 0.5px solid var(--rule);
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  margin-bottom: .75rem;
+}
+.card.r { border-left: 3px solid var(--accent-r); }
+.card.o { border-left: 3px solid var(--accent-o); }
+.card.g { border-left: 3px solid var(--accent-g); }
+.card.b { border-left: 3px solid var(--accent-b); }
+
+.ct {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: .35rem;
+}
+.cb {
+  font-size: 13.5px;
+  color: var(--ink-3);
+  line-height: 1.8;
+}
+
+/* ── badge ── */
+.badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: .45rem;
+}
+.badge.r  { background: var(--bg-r); color: var(--accent-r); }
+.badge.o  { background: var(--bg-o); color: var(--accent-o); }
+.badge.g  { background: var(--bg-g); color: var(--accent-g); }
+.badge.b  { background: var(--bg-b); color: var(--accent-b); }
+
+/* ── bullet rows ── */
+.rows { margin-top: .5rem; }
+.row-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: .55rem;
+  font-size: 13.5px;
+  color: var(--ink-3);
+  line-height: 1.75;
+}
+.dot {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-top: 7px;
+}
+.dot.r { background: var(--accent-r); }
+.dot.o { background: var(--accent-o); }
+.dot.g { background: var(--accent-g); }
+
+/* ── table ── */
+.tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: .75rem 0; }
+table {
+  width: 100%;
+  min-width: 540px;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+th {
+  text-align: left;
+  padding: .55rem .75rem;
+  border-bottom: 1px solid var(--ink);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+td {
+  padding: .6rem .75rem;
+  border-bottom: 0.5px solid var(--rule);
+  color: var(--ink-3);
+  vertical-align: top;
+  line-height: 1.7;
+}
+td strong { font-weight: 700; color: var(--ink-2); }
+td .sub { font-size: 11px; color: var(--ink-4); display: block; margin-top: 1px; }
+tr:last-child td { border-bottom: none; }
+
+/* ── metric grid ── */
+.mgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  gap: 10px;
+  margin: 1rem 0 1.5rem;
+}
+.mc {
+  background: #fff;
+  border: 0.5px solid var(--rule);
+  border-radius: 8px;
+  padding: .875rem 1rem;
+}
+.ml {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: 5px;
+}
+.mv {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+/* ── conclusion box ── */
+.conclusion {
+  background: var(--bg-o);
+  border: 0.5px solid #e8c98a;
+  border-left: 4px solid var(--accent-o);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin-top: 1.5rem;
+}
+.conclusion-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-o);
+  margin-bottom: .75rem;
+}
+.conclusion p {
+  font-size: 13.5px;
+  color: var(--ink-2);
+  line-height: 1.9;
+  margin-bottom: .75rem;
+}
+.conclusion p:last-child { margin-bottom: 0; }
+em { font-style: normal; font-weight: 700; color: var(--ink); }
+
+/* ── section gap ── */
+.section { margin-bottom: 2rem; }
+
+/* ── footer ── */
+.footer {
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+  border-top: 0.5px solid var(--rule);
+  font-size: 11.5px;
+  color: var(--ink-4);
+  text-align: center;
+}
+
+/* ══════════════════════════════════
+   PRINT STYLES
+══════════════════════════════════ */
+@media print {
+  @page {
+    size: A4;
+    margin: 18mm 20mm 20mm;
+  }
+  @page :first { margin-top: 22mm; }
+
+  html { font-size: 14px; }
+  body { background: #fff; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .page { max-width: 100%; padding: 0; }
+
+  /* no page break inside cards / rows */
+  .card, .mc, .conclusion, .row-item { break-inside: avoid; }
+
+  /* section breaks */
+  .section { break-inside: avoid-page; }
+  hr.thick + .section { break-before: auto; }
+
+  /* keep table together if it fits, scroll wrapper not needed */
+  .tbl-wrap { overflow: visible; }
+  table { min-width: 0; font-size: 11px; }
+  th, td { padding: .4rem .6rem; }
+
+  /* colors hold for print */
+  .card.r { border-left: 3px solid #c0392b !important; }
+  .card.o { border-left: 3px solid #b35c00 !important; }
+  .card.g { border-left: 3px solid #1a5c38 !important; }
+  .card.b { border-left: 3px solid #1a4d7a !important; }
+
+  .badge.r { background: #fdf2f1 !important; color: #c0392b !important; }
+  .badge.o { background: #fdf5ec !important; color: #b35c00 !important; }
+  .badge.g { background: #f0f7f3 !important; color: #1a5c38 !important; }
+  .badge.b { background: #eef4fb !important; color: #1a4d7a !important; }
+
+  .conclusion { background: #fdf5ec !important; }
+  .mc { background: #f8f8f6 !important; }
+
+  /* hide scrollbar hint */
+  .tbl-scroll-hint { display: none; }
+
+  a { text-decoration: none; color: inherit; }
+}
+
+/* ══════════════════════════════════
+   MOBILE OVERRIDES  (≤ 600px)
+══════════════════════════════════ */
+@media (max-width: 600px) {
+  .page { padding: 1.5rem 1rem 3rem; }
+  .h-page { font-size: 1.35rem; }
+  .lead { font-size: 13.5px; }
+  .cb, .row-item { font-size: 13px; }
+  .mgrid { grid-template-columns: 1fr 1fr; }
+  .conclusion { padding: 1rem 1.1rem; }
+  .conclusion p { font-size: 13px; }
+
+  /* table: horizontal scroll with hint */
+  .tbl-wrap {
+    position: relative;
+    border: 0.5px solid var(--rule);
+    border-radius: 8px;
+  }
+  .tbl-scroll-hint {
+    display: block;
+    font-size: 11px;
+    color: var(--ink-4);
+    text-align: right;
+    padding: 4px 8px 0;
+    margin-bottom: -4px;
+  }
+  table { font-size: 12px; }
+  th, td { padding: .5rem .65rem; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">AI 시대 환자 중심 커뮤니티 모델 분석</h2>
+
+  <!-- ── 헤더 ── -->
+  <div class="ey">전략 분석 보고서</div>
+  <h1 class="h-page">AI 시대, 환자 중심 커뮤니티의<br>진화 방향</h1>
+  <p class="lead">네이버 카페의 구조적 한계를 해부하고, 해외에서 이미 진행 중인 대안 모델들을 분석하며, 용도 변경 약물(repurposed drugs) 기반 환자 커뮤니티가 나아가야 할 방향을 제시합니다.</p>
+
+  <hr class="thick">
+
+  <!-- ── 섹션 1: 문제 진단 ── -->
+  <div class="section">
+    <div class="ey">문제 진단 1</div>
+    <div class="h-section r">네이버 카페의 구조적 7가지 실패</div>
+
+    <div class="card r">
+      <div class="badge r">권력 구조</div>
+      <div class="ct">매니저의 무제한 권력 — 견제 없는 독재</div>
+      <div class="cb">카페 개설자 1인이 강퇴·삭제·정보 통제 전권을 가집니다. 회원수가 수만 명이 되어도 거버넌스 구조가 전혀 바뀌지 않습니다. 구충카페 사태가 보여준 것처럼, 권력은 금전적 이익 추구나 개인 신념 강요로 쉽게 전환됩니다.</div>
+    </div>
+
+    <div class="card r">
+      <div class="badge r">정보 구조</div>
+      <div class="ct">게시글 기반 — 지식이 쌓이지 않고 흘러가는 구조</div>
+      <div class="cb">최신 글이 위로 올라오는 타임라인 구조는 귀중한 임상 경험이 시간이 지나면 매몰됩니다. 검색해도 단편 게시글들만 나오고, 체계적인 데이터 축적이 불가능합니다. 환자가 같은 질문을 반복하고, 같은 실수를 반복합니다.</div>
+    </div>
+
+    <div class="card r">
+      <div class="badge r">비즈니스 모델</div>
+      <div class="ct">네이버의 수익 구조 — 체류 시간이 곧 광고 수익</div>
+      <div class="cb">네이버는 광고 대행 회사입니다. 사용자가 오래 머물수록 광고 단가가 오릅니다. 따라서 플랫폼 설계가 '정보의 효율적 습득'이 아닌 '체류 시간 극대화'를 향해 있습니다. 정보를 쉽게 찾을 수 있게 만들 인센티브가 없습니다.</div>
+    </div>
+
+    <div class="card r">
+      <div class="badge r">지속 가능성</div>
+      <div class="ct">자원봉사 강요 — 번아웃과 권력화의 악순환</div>
+      <div class="cb">카페 운영은 무급 봉사입니다. 그러나 수만 명 커뮤니티를 운영하는 것은 사실상 풀타임 업무입니다. 결국 두 결과 중 하나로 귀결됩니다: (1) 운영자 번아웃으로 카페 방치·붕괴, 또는 (2) 암묵적 금전 보상 추구(공구, 협찬, 카페 매매). 둘 다 커뮤니티를 망칩니다.</div>
+    </div>
+
+    <div class="card o">
+      <div class="badge o">사용자 행동</div>
+      <div class="ct">모바일 80~90% — 감정이 속도를 이김</div>
+      <div class="cb">댓글 81개, 조회 467회가 몇 시간 안에 쌓입니다. 모바일에서 즉각적으로 반응하는 구조는 감정적 편 가르기를 가속화합니다. 깊은 분석보다 '공감 버튼' '강퇴' '편 들기'가 지배합니다. 이것이 에코체임버를 만듭니다.</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ── 섹션 2: 해외 사례 ── -->
+  <div class="section">
+    <div class="ey">해외 사례 분석</div>
+    <div class="h-section b">영어권에서 이미 일어나고 있는 변화</div>
+
+    <p class="tbl-scroll-hint">← 좌우로 스크롤</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>플랫폼·모델</th>
+            <th>핵심 혁신</th>
+            <th>한계</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>PatientsLikeMe</strong><span class="sub">2006~, 83만 회원</span></td>
+            <td>환자가 직접 증상·치료·부작용을 구조화된 데이터로 입력. 게시글이 아닌 데이터베이스. 제약사와 협력해 실제 연구에 활용.</td>
+            <td>2019년 UnitedHealth 인수 → 데이터 수익화 우려. 기업 신뢰 문제 발생.</td>
+          </tr>
+          <tr>
+            <td><strong>Reddit r/cancer 등</strong><span class="sub">분산 거버넌스</span></td>
+            <td>복수 모더레이터 제도. 매니저 1인 독재 없음. 투표 기반 콘텐츠 품질 관리. 2025년 헬스 콘텐츠 조회 115억 뷰.</td>
+            <td>여전히 게시글 기반. 구조화된 임상 데이터 축적 불가. 허위정보 판별 어려움.</td>
+          </tr>
+          <tr>
+            <td><strong>Care Oncology Clinic</strong><span class="sub">UK · 커뮤니티→임상연구</span></td>
+            <td>환자 자가보고를 실제 임상 데이터로 전환. 메트포르민+독시사이클린+메벤다졸로 뇌종양 생존기간 15→27개월. 커뮤니티 후기가 논문이 됨.</td>
+            <td>의료기관 필요. 접근성 제한. 비용 발생.</td>
+          </tr>
+          <tr>
+            <td><strong>Anticancer Research 코호트</strong><span class="sub">2026 · 원격진료+데이터</span></td>
+            <td>미국 원격진료 플랫폼 통해 이버맥틴+메벤다졸 오프라벨 처방 197명 전향적 코호트 구축. 표준화 디지털 설문으로 6개월 추적. 동료심사 논문 출판.</td>
+            <td>규제 불확실성. 미국 한정. 한국 재현 어려움.</td>
+          </tr>
+          <tr>
+            <td><strong>Discord 기반 커뮤니티</strong><span class="sub">실시간+구조화</span></td>
+            <td>채널 분리(#후기 #논문 #질문 #프로토콜). 역할(Role) 기반 권한 분산. 봇으로 정보 자동 정리. 실시간 + 비동기 모두 지원.</td>
+            <td>중년·노년 접근성 낮음. 한국 사용자 적음.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ── 섹션 3: 핵심 통찰 ── -->
+  <div class="section">
+    <div class="ey">핵심 통찰</div>
+    <div class="h-section g">진짜 문제: 형태가 아니라 인센티브 구조</div>
+
+    <div class="card g">
+      <div class="ct">해외 성공 모델의 공통점</div>
+      <div class="rows">
+        <div class="row-item"><div class="dot g"></div><div>게시글(Post)이 아니라 <em>구조화된 데이터(Structured Data)</em>를 수집합니다. 후기가 데이터베이스가 됩니다.</div></div>
+        <div class="row-item"><div class="dot g"></div><div>운영자 봉사에 의존하지 않고 <em>지속 가능한 수익 모델</em>이 있습니다. (제약사 데이터 파트너십, 원격진료 수수료, 연구 보조금)</div></div>
+        <div class="row-item"><div class="dot g"></div><div>1인 독재가 아니라 <em>분산 거버넌스</em>로 권력 남용을 구조적으로 방지합니다.</div></div>
+        <div class="row-item"><div class="dot g"></div><div>AI가 정보를 <em>분류·검증·요약</em>하는 역할을 맡아, 사람이 판단하고 AI가 정리합니다.</div></div>
+        <div class="row-item"><div class="dot g"></div><div>커뮤니티 경험이 <em>실제 임상 연구로 연결</em>됩니다. 후기가 논문이 되는 파이프라인.</div></div>
+      </div>
+    </div>
+
+    <div class="card r">
+      <div class="ct">한국 네이버 카페가 구조적으로 할 수 없는 것</div>
+      <div class="rows">
+        <div class="row-item"><div class="dot r"></div><div>환자 데이터를 표준화된 형식으로 수집·비교하는 것</div></div>
+        <div class="row-item"><div class="dot r"></div><div>매니저 권력을 분산시키는 것 (네이버 정책이 허용 안 함)</div></div>
+        <div class="row-item"><div class="dot r"></div><div>AI가 정보를 자동 정리·검증하는 것</div></div>
+        <div class="row-item"><div class="dot r"></div><div>운영자에게 적정한 보상을 주는 것 (광고 외 수익화 불가)</div></div>
+        <div class="row-item"><div class="dot r"></div><div>커뮤니티 데이터를 연구 기관과 연결하는 것</div></div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ── 섹션 4: 미래 방향 ── -->
+  <div class="section">
+    <div class="ey">미래 방향</div>
+    <div class="h-section" style="border-left:3px solid var(--ink-3);color:var(--ink)">용도 변경 약물 환자 커뮤니티가 가져야 할 특징</div>
+
+    <div class="mgrid">
+      <div class="mc"><div class="ml">거버넌스</div><div class="mv">다중 관리자<br>+ 투명한 규칙</div></div>
+      <div class="mc"><div class="ml">정보 구조</div><div class="mv">구조화 데이터<br>+ AI 요약</div></div>
+      <div class="mc"><div class="ml">수익 모델</div><div class="mv">연구 파트너십<br>+ 원격진료</div></div>
+      <div class="mc"><div class="ml">검증 층위</div><div class="mv">의료인 자문단<br>+ 논문 연결</div></div>
+    </div>
+
+    <div class="conclusion">
+      <div class="conclusion-title">핵심 결론</div>
+      <p>네이버 카페의 문제는 <em>플랫폼이 낡은 것이 아니라, 인센티브 구조 자체가 잘못 설계된 것</em>입니다. 자원봉사 기반 + 매니저 독재 + 광고 수익 구조는, 반드시 권력 남용 또는 붕괴로 끝납니다. 이번 구충카페 사태는 예외가 아니라 이 구조의 필연적 결과입니다.</p>
+      <p>해외에서 성공한 모델들(PatientsLikeMe, Care Oncology, Anticancer Research 코호트)이 보여주는 방향은 하나입니다: <em>환자의 경험을 '후기'가 아닌 '데이터'로 바꾸고, 그 데이터로 지속 가능한 가치를 만드는 것.</em> AI는 이 과정에서 정보를 정리·검증·요약하는 역할을 맡습니다. 사람은 경험을 제공하고, AI는 그것을 지식으로 바꿉니다.</p>
+      <p>중요한 것은, 이것이 단순히 '더 좋은 카페'를 만드는 것이 아닙니다. 임상 근거가 부족한 영역에서 환자들이 스스로 데이터를 생산하고, 그것이 실제 연구로 연결되는 <em>환자 주도형 실사용 데이터(RWD) 생태계</em>가 목표여야 합니다.</p>
+    </div>
+  </div>
+
+  <div class="footer">전략 분석 보고서 · AI 시대 환자 중심 커뮤니티</div>
+</div>
+</body>
+</html>

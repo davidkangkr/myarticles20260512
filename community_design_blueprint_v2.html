@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>환자 가족 중심 커뮤니티 설계 청사진</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:   #1a1a18;
+  --ink-2: #3d3d39;
+  --ink-3: #6b6b65;
+  --ink-4: #9b9b93;
+  --paper: #faf9f6;
+  --rule:  #e2e0d8;
+
+  --teal:   #0F6E56; --teal-bg:   #E1F5EE; --teal-mid: #1D9E75;
+  --purple: #3C3489; --purple-bg: #EEEDFE; --purple-mid: #7F77DD;
+  --amber:  #633806; --amber-bg:  #FAEEDA; --amber-mid: #BA7517;
+  --coral:  #712B13; --coral-bg:  #FAECE7; --coral-mid: #D85A30;
+  --green-bg: #EAF3DE; --green-dk: #27500A;
+}
+
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Noto Sans KR', system-ui, -apple-system, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.75;
+}
+
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+hr { border: none; border-top: 0.5px solid var(--rule); margin: 2.25rem 0; }
+hr.thick { border-top: 1.5px solid var(--ink); }
+
+/* ── labels ── */
+.ey {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: .35rem;
+}
+
+/* ── headings ── */
+.h-page {
+  font-family: 'Noto Serif KR', Georgia, serif;
+  font-size: clamp(1.35rem, 5vw, 1.85rem);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
+  margin-bottom: .55rem;
+}
+.h-section {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--ink);
+  padding-left: .75rem;
+  margin-bottom: 1rem;
+  border-left: 3px solid var(--rule);
+}
+.h-section.teal   { border-left-color: var(--teal-mid); }
+.h-section.purple { border-left-color: var(--purple-mid); }
+.h-section.amber  { border-left-color: var(--amber-mid); }
+.h-section.coral  { border-left-color: var(--coral-mid); }
+
+.lead {
+  font-size: 14px;
+  color: var(--ink-3);
+  line-height: 1.85;
+  margin-bottom: 1.75rem;
+}
+
+/* ── badge ── */
+.badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 2px 9px;
+  border-radius: 4px;
+  margin-bottom: .45rem;
+}
+.badge.teal   { background: var(--teal-bg);   color: var(--teal); }
+.badge.purple { background: var(--purple-bg); color: var(--purple); }
+.badge.amber  { background: var(--amber-bg);  color: var(--amber); }
+.badge.coral  { background: var(--coral-bg);  color: var(--coral); }
+
+/* ── metric grid ── */
+.mgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  gap: 10px;
+  margin: 1rem 0;
+}
+.mc {
+  background: #fff;
+  border: 0.5px solid var(--rule);
+  border-radius: 8px;
+  padding: .875rem 1rem;
+}
+.ml {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: 5px;
+}
+.mv {
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.45;
+}
+
+/* ── card ── */
+.card {
+  background: #fff;
+  border: 0.5px solid var(--rule);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: .75rem;
+}
+.card.coral  { border-left: 3px solid var(--coral-mid); }
+.card.purple { border-left: 3px solid var(--purple-mid); }
+.card.amber  { border-left: 3px solid var(--amber-mid); }
+
+.card-row {
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+  margin-bottom: .6rem;
+  padding-bottom: .6rem;
+  border-bottom: 0.5px solid var(--rule);
+}
+.card-row:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+
+.icon-dot {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+.icon-dot.purple { background: var(--purple-bg); color: var(--purple); }
+.icon-dot.amber  { background: var(--amber-bg);  color: var(--amber); }
+.icon-dot.teal   { background: var(--teal-bg);   color: var(--teal); }
+.icon-dot.coral  { background: var(--coral-bg);  color: var(--coral); }
+
+.ct { font-size: 13.5px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+.cb { font-size: 13px; color: var(--ink-3); line-height: 1.75; }
+
+/* ── layer ── */
+.layer {
+  display: flex;
+  align-items: stretch;
+  border: 0.5px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: .65rem;
+}
+.layer-label {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  padding: .75rem .45rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  border-right: 0.5px solid var(--rule);
+}
+.layer-body { padding: .9rem 1.1rem; flex: 1; }
+.layer-title { font-size: 13.5px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.layer-desc  { font-size: 13px; color: var(--ink-3); line-height: 1.7; }
+
+.pill-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.pill {
+  font-size: 11.5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 0.5px solid var(--rule);
+  color: var(--ink-3);
+  background: var(--paper);
+}
+
+/* ── phase strip ── */
+.phase {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 0.5px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1rem 0;
+}
+.ph {
+  padding: .9rem 1rem;
+  border-right: 0.5px solid var(--rule);
+}
+.ph:last-child { border-right: none; }
+.ph-label { font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-4); margin-bottom: 4px; }
+.ph-title { font-size: 13.5px; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
+.ph-desc  { font-size: 12px; color: var(--ink-3); line-height: 1.6; }
+
+/* ── insight box ── */
+.insight {
+  background: var(--amber-bg);
+  border: 0.5px solid #e8c98a;
+  border-left: 3px solid var(--amber-mid);
+  border-radius: 8px;
+  padding: 1.1rem 1.25rem;
+  margin-top: 1.25rem;
+}
+.insight-title { font-size: 13px; font-weight: 700; color: var(--amber); margin-bottom: .45rem; }
+.insight-body  { font-size: 13px; color: var(--ink-2); line-height: 1.8; }
+
+/* ── emphasis ── */
+em { font-style: normal; font-weight: 700; color: var(--ink); }
+
+/* ── action buttons ── */
+.btn-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.5rem; }
+.btn {
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  padding: 7px 16px;
+  border-radius: 6px;
+  border: 0.5px solid var(--rule);
+  background: #fff;
+  color: var(--ink-2);
+  font-weight: 500;
+}
+.btn:hover { background: var(--paper); border-color: var(--ink-3); }
+
+/* ── footer ── */
+.footer {
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+  border-top: 0.5px solid var(--rule);
+  font-size: 11.5px;
+  color: var(--ink-4);
+  text-align: center;
+}
+
+/* ══ MOBILE (≤600px) ══ */
+@media (max-width: 600px) {
+  .page { padding: 1.5rem 1rem 3rem; }
+  .lead  { font-size: 13.5px; }
+  .cb    { font-size: 13px; }
+  .mgrid { grid-template-columns: 1fr 1fr; }
+
+  .phase {
+    grid-template-columns: 1fr;
+  }
+  .ph {
+    border-right: none;
+    border-bottom: 0.5px solid var(--rule);
+  }
+  .ph:last-child { border-bottom: none; }
+
+  .layer { flex-direction: column; }
+  .layer-label {
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    min-width: unset;
+    padding: .4rem .85rem;
+    border-right: none;
+    border-bottom: 0.5px solid var(--rule);
+    justify-content: flex-start;
+  }
+
+  .btn-row { flex-direction: column; }
+  .btn { width: 100%; text-align: left; }
+}
+
+/* ══ PRINT ══ */
+@media print {
+  @page { size: A4; margin: 18mm 20mm 20mm; }
+  @page :first { margin-top: 22mm; }
+
+  html { font-size: 13.5px; }
+  body { background: #fff; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { max-width: 100%; padding: 0; }
+
+  .card, .layer, .mc, .ph, .insight { break-inside: avoid; }
+  .phase { break-inside: avoid; }
+
+  .layer { flex-direction: row !important; }
+  .layer-label {
+    writing-mode: vertical-rl !important;
+    text-orientation: mixed !important;
+    border-right: 0.5px solid var(--rule) !important;
+    border-bottom: none !important;
+    padding: .75rem .45rem !important;
+  }
+
+  .btn-row { display: none; }
+  a { text-decoration: none; color: inherit; }
+
+  .card.coral  { border-left: 3px solid #D85A30 !important; }
+  .card.purple { border-left: 3px solid #7F77DD !important; }
+  .card.amber  { border-left: 3px solid #BA7517 !important; }
+
+  .badge.teal   { background: #E1F5EE !important; color: #0F6E56 !important; }
+  .badge.purple { background: #EEEDFE !important; color: #3C3489 !important; }
+  .badge.amber  { background: #FAEEDA !important; color: #633806 !important; }
+  .badge.coral  { background: #FAECE7 !important; color: #712B13 !important; }
+
+  .insight { background: #FAEEDA !important; }
+  .mc { background: #f8f8f6 !important; }
+
+  .h-section.teal   { border-left-color: #1D9E75 !important; }
+  .h-section.purple { border-left-color: #7F77DD !important; }
+  .h-section.amber  { border-left-color: #BA7517 !important; }
+  .h-section.coral  { border-left-color: #D85A30 !important; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── 헤더 ── -->
+  <div class="ey">커뮤니티 설계 청사진 v1.0</div>
+  <h1 class="h-page">환자 가족을 위한<br>용도 변경 약물 정보 플랫폼</h1>
+  <p class="lead">팀 주도, 소규모 시작, 지속 가능한 보상 구조 우선 — 이 세 가지 제약을 핵심 설계 원칙으로 삼습니다.</p>
+
+  <hr class="thick">
+
+  <!-- ── 원칙 0 ── -->
+  <div class="ey">설계 원칙 0 — 가장 중요한 질문부터</div>
+  <div class="h-section coral">왜 보호자·가족인가 — 이것이 모든 설계를 바꿉니다</div>
+
+  <div class="mgrid">
+    <div class="mc"><div class="ml">정보 탐색 주체</div><div class="mv">환자보다 보호자가 더 적극적으로 검색</div></div>
+    <div class="mc"><div class="ml">심리 상태</div><div class="mv">환자: 지침·지쳐 있음<br>보호자: 불안·행동 욕구</div></div>
+    <div class="mc"><div class="ml">결정 구조</div><div class="mv">최종 결정은 환자<br>정보 수집은 보호자</div></div>
+    <div class="mc"><div class="ml">커뮤니티 행동</div><div class="mv">보호자가 댓글·공유·재방문을 더 많이 함</div></div>
+  </div>
+
+  <div class="card coral">
+    <div class="ct">설계 함의: 정보의 "번역" 레이어가 핵심입니다</div>
+    <div class="cb">보호자는 논문을 읽을 시간도, 의학 지식도 부족합니다. 하지만 판단은 해야 합니다. 따라서 이 플랫폼의 핵심 가치는 <em>"복잡한 임상 정보를 가족이 이해할 수 있는 언어로 번역하는 것"</em>입니다. AI가 이 역할을 담당합니다.</div>
+  </div>
+
+  <hr>
+
+  <!-- ── 원칙 1 ── -->
+  <div class="ey">설계 원칙 1</div>
+  <div class="h-section teal">구조: 게시글이 아닌 데이터베이스로</div>
+
+  <div class="layer">
+    <div class="layer-label" style="background:var(--teal-bg);color:var(--teal)">사용자 입력</div>
+    <div class="layer-body">
+      <div class="layer-title">구조화된 경험 기록 — "후기"가 아닌 "케이스"</div>
+      <div class="layer-desc">자유 서술 대신 표준 입력 폼으로 수집합니다. 암종, 병기, 사용 약물, 용량, 병용 치료, 기간, 관찰된 변화, 부작용을 각각 필드로 받습니다. 게시글처럼 시간 속에 매몰되지 않습니다.</div>
+      <div class="pill-row">
+        <span class="pill">암종</span><span class="pill">병기</span><span class="pill">약물명 + 용량</span><span class="pill">병용 여부</span><span class="pill">기간</span><span class="pill">관찰된 변화</span><span class="pill">부작용</span><span class="pill">현재 상태</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="layer">
+    <div class="layer-label" style="background:var(--purple-bg);color:var(--purple)">AI 처리</div>
+    <div class="layer-body">
+      <div class="layer-title">AI가 케이스를 자동 분류·요약·검증</div>
+      <div class="layer-desc">입력된 케이스를 AI가 읽고 유사 케이스 군집화, 관련 논문 연결, 허위·위험 정보 플래그 지정을 자동 수행합니다. 운영팀이 일일이 검토하지 않아도 됩니다. 이것이 자원봉사 의존을 끊는 핵심입니다.</div>
+      <div class="pill-row">
+        <span class="pill">유사 케이스 묶기</span><span class="pill">논문 자동 연결</span><span class="pill">위험 정보 플래그</span><span class="pill">요약 생성</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="layer">
+    <div class="layer-label" style="background:var(--green-bg);color:var(--green-dk)">가족 출력</div>
+    <div class="layer-body">
+      <div class="layer-title">보호자가 실제로 쓸 수 있는 형태로 제공</div>
+      <div class="layer-desc">"우리 엄마와 비슷한 케이스 12건"처럼 필터링된 결과를 보여줍니다. 전문 용어는 AI가 쉬운 말로 번역하고, 담당의와 상담할 때 쓸 수 있는 질문 목록도 자동 생성합니다.</div>
+      <div class="pill-row">
+        <span class="pill">유사 케이스 필터</span><span class="pill">용어 번역</span><span class="pill">의사 상담용 질문 생성</span><span class="pill">프로토콜 요약</span>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ── 원칙 2 ── -->
+  <div class="ey">설계 원칙 2</div>
+  <div class="h-section purple">거버넌스: 매니저 독재를 구조적으로 불가능하게</div>
+
+  <div class="card purple">
+    <div class="badge purple">역할 분리</div>
+
+    <div class="card-row">
+      <div class="icon-dot purple">자</div>
+      <div>
+        <div class="ct">의학 자문단 (Medical Advisory)</div>
+        <div class="cb">의사·약사·연구자 2~3인. 콘텐츠 위험도 판정 최종 권한. 무급이지만 논문 공동 저자 자격 제공으로 인센티브 설계.</div>
+      </div>
+    </div>
+
+    <div class="card-row">
+      <div class="icon-dot purple">팀</div>
+      <div>
+        <div class="ct">운영팀 (Core Team)</div>
+        <div class="cb">플랫폼 운영, 커뮤니티 관리, 비즈니스 개발. 명확한 보상 구조. 강퇴 권한은 정해진 규칙 기반으로만 작동 — 개인 재량 불가.</div>
+      </div>
+    </div>
+
+    <div class="card-row">
+      <div class="icon-dot purple">기</div>
+      <div>
+        <div class="ct">경험자 서포터 (Verified Contributor)</div>
+        <div class="cb">6개월 이상 케이스를 공유한 회원에게 부여. 신규 가입자 온보딩 지원. 플랫폼 수익 일부로 소정의 크레딧 제공.</div>
+      </div>
+    </div>
+
+    <div class="card-row">
+      <div class="icon-dot coral">원</div>
+      <div>
+        <div class="ct">핵심 원칙: 어떤 단일 주체도 단독으로 콘텐츠를 삭제하거나 회원을 강퇴할 수 없음</div>
+        <div class="cb">2인 이상 합의 또는 명문화된 규칙 위반 시에만 조치 가능. 이 규칙 자체는 공개 문서로 고정됩니다.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ── 원칙 3 ── -->
+  <div class="ey">설계 원칙 3 — 가장 중요</div>
+  <div class="h-section amber">수익 모델: 자원봉사 없이 돌아가는 구조</div>
+
+  <div class="card amber">
+    <div class="badge amber">단계별 수익화</div>
+
+    <div class="card-row">
+      <div class="icon-dot amber">1</div>
+      <div>
+        <div class="ct">1단계: 프리미엄 정보 접근 (월 구독)</div>
+        <div class="cb">기본 케이스 검색은 무료. AI 기반 유사 케이스 분석, 의사 상담용 자료 자동 생성, 프로토콜 비교표는 월 구독(₩9,900~19,900). 가족이 환자를 위해 기꺼이 지불하는 영역입니다.</div>
+      </div>
+    </div>
+
+    <div class="card-row">
+      <div class="icon-dot amber">2</div>
+      <div>
+        <div class="ct">2단계: 연구 기관과의 데이터 파트너십</div>
+        <div class="cb">익명화된 케이스 데이터를 대학 연구팀·임상시험 기관에 제공. PatientsLikeMe가 증명한 모델. 회원 동의 기반, 데이터 수익의 30%는 커뮤니티 운영비로 환원.</div>
+      </div>
+    </div>
+
+    <div class="card-row">
+      <div class="icon-dot amber">3</div>
+      <div>
+        <div class="ct">3단계: 통합 기능 의료 상담 연결 (원격진료)</div>
+        <div class="cb">플랫폼 내에서 통합 기능 의학 전문의와 상담 예약 연결. 소개 수수료 모델. 무분별한 약 권고가 아닌 의료인과의 연결로 안전성 확보.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-title">핵심 인사이트: "보호자 지갑"은 열려 있습니다</div>
+    <div class="insight-body">암 환자 가족은 이미 정보 비용에 돈을 씁니다. 유튜브 프리미엄, 책 구매, 사설 상담 등. 문제는 신뢰할 수 있는 곳이 없다는 것입니다. 월 1~2만 원의 구독은 신뢰와 구조화된 정보를 제공한다면 충분히 지불 의사가 있는 금액입니다.</div>
+  </div>
+
+  <hr>
+
+  <!-- ── 로드맵 ── -->
+  <div class="ey">로드맵</div>
+  <div class="h-section">3단계 출시 전략</div>
+
+  <div class="phase">
+    <div class="ph">
+      <div class="ph-label">0~3개월</div>
+      <div class="ph-title">MVP</div>
+      <div class="ph-desc">케이스 입력 폼 + AI 요약. 50~100케이스 수작업 수집. 소규모 팀 운영. 무료.</div>
+    </div>
+    <div class="ph">
+      <div class="ph-label">3~9개월</div>
+      <div class="ph-title">커뮤니티</div>
+      <div class="ph-desc">검색·필터 기능. 구독 출시. 의학 자문단 1인 합류. 500케이스 목표.</div>
+    </div>
+    <div class="ph">
+      <div class="ph-label">9개월~</div>
+      <div class="ph-title">연구 연결</div>
+      <div class="ph-desc">데이터 파트너십 첫 계약. 원격진료 연결. 케이스 2,000건 이상.</div>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn" onclick="sendPrompt('플랫폼 기술 스택과 실제 구현 방법을 알려줘. 특히 AI 케이스 분석 기능을 어떻게 만드는지 구체적으로.')">기술 스택 설계 보기 ↗</button>
+    <button class="btn" onclick="sendPrompt('수익 모델을 더 구체적으로 설계해줘. 구독 가격, 파트너십 계약 구조, 초기 3개월 수익 예상까지.')">수익 모델 상세 설계 ↗</button>
+  </div>
+
+  <div class="footer">커뮤니티 설계 청사진 v1.0 · 환자 가족 중심 용도 변경 약물 정보 플랫폼</div>
+
+</div>
+</body>
+</html>

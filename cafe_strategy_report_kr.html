@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>기존 카페 분석 & 새 카페 런칭 전략</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    background: #f5f5f5;
+    color: #1a1a1a;
+    line-height: 1.6;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 16px; }
+
+  .section-title {
+    font-size: 20px; font-weight: 800; color: #fff;
+    background: #111; padding: 12px 16px; border-radius: 10px;
+    margin: 28px 0 14px; letter-spacing: -0.01em;
+  }
+  .section-title:first-child { margin-top: 0; }
+  .section-title.red { background: #9a3b14; }
+  .subsection-title {
+    font-size: 14px; font-weight: 700; color: #111;
+    margin: 16px 0 10px; padding-bottom: 6px; border-bottom: 2px solid #111;
+  }
+
+  .kpi-row {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 8px; margin-bottom: 14px;
+  }
+  .kpi {
+    background: #fff; border: 1px solid #e5e7eb; border-radius: 10px;
+    padding: 10px 12px; text-align: center;
+  }
+  .kl { font-size: 11px; color: #666; margin-bottom: 2px; }
+  .kv { font-size: 18px; font-weight: 700; color: #111; }
+  .ks { font-size: 10px; color: #888; margin-top: 2px; }
+  .highlight { color: #D85A30; font-weight: 700; }
+
+  .card {
+    background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;
+    padding: 14px 16px; margin-bottom: 12px;
+  }
+  .card-head {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 10px; flex-wrap: wrap;
+  }
+  .chip {
+    font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px;
+    letter-spacing: .02em; white-space: nowrap;
+  }
+  .chip-red { background: #FAECE7; color: #912613; }
+  .chip-blue { background: #E6F1FB; color: #0D4A87; }
+  .chip-green { background: #E1F5EE; color: #085041; }
+  .chip-purple { background: #EEEDFE; color: #3B2FA8; }
+  .chip-orange { background: #FEF4E6; color: #7A3D06; }
+  .card-title { font-size: 14px; font-weight: 600; color: #111; }
+  .card-body { font-size: 13px; color: #444; line-height: 1.75; }
+  .card-body li { margin-left: 18px; margin-bottom: 4px; }
+  .card-body strong { color: #111; font-weight: 600; }
+  .card-body ul { margin-top: 8px; }
+  .annotation {
+    display: flex; gap: 10px; padding: 12px 14px; background: #f3f4f6;
+    border-radius: 10px; font-size: 13px; color: #444; line-height: 1.6;
+    align-items: flex-start; margin-top: 10px;
+  }
+  .annotation strong { color: #111; font-weight: 600; }
+  .ann-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  .bar-row {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 6px; font-size: 13px;
+  }
+  .bar-label { width: 100px; text-align: right; color: #555; flex-shrink: 0; font-size: 12px; }
+  .bar-bg {
+    flex: 1; background: #f3f4f6; border-radius: 4px; height: 22px; overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%; border-radius: 4px; display: flex; align-items: center;
+    padding-left: 8px; font-size: 12px; font-weight: 600;
+  }
+  .bar-val { width: 70px; color: #666; font-size: 12px; flex-shrink: 0; }
+
+  .post-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 10px 0; border-bottom: 1px solid #f0f0f0;
+  }
+  .post-item:last-child { border-bottom: none; }
+  .post-num {
+    font-size: 12px; color: #999; width: 22px; flex-shrink: 0;
+    padding-top: 1px; font-weight: 600;
+  }
+  .post-body { flex: 1; }
+  .post-title { font-size: 14px; color: #111; font-weight: 600; margin-bottom: 3px; }
+  .post-title a { color: inherit; text-decoration: none; border-bottom: 1px solid #bbb; }
+  .post-title a:hover { color: #D85A30; border-bottom-color: #D85A30; }
+  @media print {
+    .post-title a { text-decoration: none; border-bottom: none; color: #111; }
+  }
+  .post-meta { font-size: 12px; color: #666; }
+
+  .two-col {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px;
+  }
+  .vs-left, .vs-right {
+    border-radius: 10px; padding: 12px 14px; font-size: 13px; line-height: 1.7;
+  }
+  .vs-left { background: #FAECE7; color: #6B1A0D; }
+  .vs-right { background: #E1F5EE; color: #064030; }
+  .vs-title { font-weight: 700; margin-bottom: 6px; font-size: 13px; }
+
+  .week-row {
+    display: flex; gap: 10px; margin-bottom: 10px; align-items: flex-start;
+  }
+  .week-badge {
+    width: 42px; height: 42px; border-radius: 50%; background: #f3f4f6;
+    border: 1px solid #e5e7eb; display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: #111; flex-shrink: 0;
+  }
+  .week-tasks { flex: 1; font-size: 13px; color: #444; line-height: 1.7; }
+  .week-tasks strong { color: #111; font-weight: 600; display: block; margin-bottom: 3px; }
+
+  .divider { border: none; border-top: 1px solid #e5e7eb; margin: 18px 0; }
+
+  .chart-box {
+    background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;
+    padding: 14px 16px; margin-bottom: 14px;
+  }
+  .chart-title {
+    font-size: 13px; font-weight: 700; color: #111; margin-bottom: 10px;
+  }
+  .chart-wrap { position: relative; width: 100%; height: 260px; }
+  .chart-wrap.tall { height: 340px; }
+
+  .insight-box {
+    background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px;
+    padding: 12px 14px; font-size: 13px; color: #444; margin-top: 10px; line-height: 1.6;
+  }
+  .insight-box strong { color: #111; font-weight: 600; }
+
+  .swot-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  }
+  .swot-box {
+    background: #fff; border: 1px solid #e5e7eb; border-radius: 10px;
+    padding: 12px 14px; font-size: 13px; line-height: 1.7;
+  }
+  .swot-title { font-weight: 700; font-size: 13px; margin-bottom: 6px; color: #111; }
+  .swot-s { background: #E1F5EE; }
+  .swot-w { background: #FAECE7; }
+  .swot-o { background: #E6F1FB; }
+  .swot-t { background: #EEEDFE; color: #3B2FA8; }
+
+  .table-row {
+    display: flex; gap: 8px; padding: 9px 0; border-bottom: 1px solid #f0f0f0;
+    font-size: 12px; align-items: center; flex-wrap: wrap;
+  }
+  .table-row:last-child { border-bottom: none; }
+  .table-head {
+    font-weight: 700; color: #111; background: #f9fafb;
+    padding: 8px 0; border-bottom: 2px solid #111;
+  }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 12px; }
+    .two-col { grid-template-columns: 1fr; }
+    .kpi-row { grid-template-columns: 1fr 1fr; }
+    .kv { font-size: 16px; }
+    .section-title { font-size: 17px; }
+    .card { padding: 12px 13px; }
+    .post-title { font-size: 13px; }
+    .chart-wrap { height: 220px; }
+    .swot-grid { grid-template-columns: 1fr; }
+  }
+
+  @media print {
+    body { background: #fff; }
+    .wrap { max-width: 100%; padding: 0; margin: 0; }
+    .section-title { color: #fff; border-radius: 0; border-bottom: 2px solid #000; }
+    .card { border: 1px solid #ccc; background: #fff; }
+    .chip { border: 1px solid currentColor; }
+    .two-col { break-inside: avoid; }
+    .section-title { break-after: avoid; }
+    .chart-box { break-inside: avoid; }
+    @page { margin: 12mm; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div style="background:#111;color:#fff;padding:18px 20px;border-radius:12px;margin-bottom:20px">
+    <div style="font-size:22px;font-weight:800;letter-spacing:-0.02em">기존 카페 분석 &amp; 새 카페 런칭 전략</div>
+    <div style="font-size:13px;color:#aaa;margin-top:6px">데이터 기반 커뮤니티 전략 보고서 — 네이버 카페 parabest (22,983건) 분석 결과</div>
+  </div>
+
+  <!-- EXECUTIVE SUMMARY -->
+  <div class="section-title">요약</div>
+  <div class="card">
+    <div class="card-body" style="font-size:14px;color:#111;line-height:1.85">
+      7년간 누적된 22,983건의 게시글과 4,865명의 작성자 데이터를 분석한 결과, <strong>화창한오후 1인이 Top200 게시글의 18.5%(37건)를 독점</strong>하는 심각한 기여자 집중 위험이 발견되었다. 반면 <strong>암환자 후기·간청소/신장청소 게시판</strong>은 평균 800회 이상의 조회수를 기록하며 검색 유입의 핵심 가치 자산으로 부상하고 있으나, 자유게시판 71%의 저가 게시물에 의해 정보 아키텍처가 왜곡되고 있다. 기존 카페는 이버멕틴 정보 억압과 상업화 전환으로 검색 공백을 자발적으로 만들고 있으며, 이는 <strong>"비상업 + 정보 개방 + 운영진 합의제"</strong>를 표방하는 신규 카페의 시장 진입 기회가 된다. 우선순위 전략은 전문 게시판을 기본 탐색 구조로 재배치하고, 기여자 다각화를 90일 내에 실현하는 것이다.
+    </div>
+  </div>
+
+  <!-- ========== 기존 카페 분석 ========== -->
+  <div class="section-title">▍ 기존 카페 분석</div>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="kl">전체 게시글</div><div class="kv">22,983</div><div class="ks">7년 6개월</div></div>
+    <div class="kpi"><div class="kl">평균 조회수</div><div class="kv">424회</div><div class="ks">중간값 330회</div></div>
+    <div class="kpi"><div class="kl">최고 조회수</div><div class="kv highlight">25,000</div><div class="ks">입문 가이드</div></div>
+    <div class="kpi"><div class="kl">고유 작성자</div><div class="kv">4,865명</div><div class="ks">파레토 집중</div></div>
+    <div class="kpi"><div class="kl">상위 0.1%</div><div class="kv highlight">22건</div><div class="ks">5,000회 이상</div></div>
+  </div>
+
+  <!-- SWOT Overview -->
+  <div class="swot-grid">
+    <div class="swot-box swot-s">
+      <div class="swot-title">✅ Strengths</div>
+      7년간의 지속적 유입(누적 970만 조회), 높은 검색 유입(평균 424회), 전문 게시판(암환자 827회, 일반질환 732회)의 높은 정보 밀도, 화창한오후 등 강력한 영향력 보유
+    </div>
+    <div class="swot-box swot-w">
+      <div class="swot-title">❌ Weaknesses</div>
+      화창한오후 1인이 18.5% 독점(편향 위험), 자유게시판 71% 저가 범람, 게시판 20개+ 분산, 강퇴·운영 불투명, 수집 누락·날짜 버그
+    </div>
+    <div class="swot-box swot-o">
+      <div class="swot-title">🎯 Opportunities</div>
+      상업화로 인한 검색 공백(이버멕틴·알벤다졸), 전문 게시판 확대 잠재력, 48명의 핵심 기여자 이주 가능성, 투명성 원하는 회원 수요
+    </div>
+    <div class="swot-box swot-t">
+      <div class="swot-title">⚠️ Threats</div>
+      매니저의 법적 대응 가능성, 단일 기여자 의존 재발, 플랫폼 정책 변경, 운영진 합의제 → 의사결정 지연
+    </div>
+  </div>
+
+  <div class="subsection-title">1. 핵심 강점 (Strengths)</div>
+  <div class="card">
+    <div class="card-body">
+      <ul>
+        <li><strong>검증된 주제 수요:</strong> 7년 6개월간 22,983건 게시글, 9,736,822회 누적 조회수 — 구충제·기생충 관련 정보에 대한 장기적이고 지속적인 사용자 수요가 데이터로 입증됨.</li>
+        <li><strong>바이럴 콘텐츠 생산 능력:</strong> Top200 평균 3,450회, 최고 25,000회 입문 가이드 — 적절한 제목과 본문 길이(2,000자 이상)로 네이버 검색에서 강력한 유입 통로로 작동하는 구조가 이미 검증됨.</li>
+        <li><strong>전문 게시판의 높은 참여:</strong> 암환자 후기 평균 827회, 간청소/신장청소 813회 — 특정 의학적 목적을 가진 고등급 사용자가 높은 참여율을 보이며, 이는 정보 신뢰도의 핵심 지표.</li>
+        <li><strong>풍부한 현장 경험 데이터:</strong> 부작용 사례, 복합 후기(8종 복합), 진단 경험 등 실제 치료 경험이 방대하게 축적되어 있어, 단순 정보 제공을 넘어 경험 공유의 가치를 가짐.</li>
+        <li><strong>검색 인프라 구축 용이성:</strong> "이버멕틴 복용법", "알벤다졸 후기" 등 핵심 키워드가 이미 사용자 습관화되어 있어, 새 카페도 오픈 2~4주 내 카페탭 노출 가능성이 높음.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="subsection-title">2. 핵심 약점 (Weaknesses)</div>
+  <div class="card">
+    <div class="card-body">
+      <ul>
+        <li><strong>콘텐츠 왜곡 (Value Inversion):</strong> 자유게시판이 71%의 물량을 차지하지만 평균 조회수는 452회에 불과. 반면 암환자 후기(827회)는 0.6%만 존재. 저가 정보가 고가 정보를 압도하는 구조.</li>
+        <li><strong>기여자 독점:</strong> 화창한오후 1인이 587건(2.6%)으로 Top200의 18.5%(37건) 독점. 라이블리는 전체 2위(495건)인데도 Top200 0건 — 활동량과 영향력이 비례하지 않는 불균형.</li>
+        <li><strong>게시판 파편화:</strong> 20개 이상의 게시판이 신규 회원에게 진입 장벽을 만들고, 정보를 산재시켜 검색 발견성을 떨어뜨림.</li>
+        <li><strong>데이터 신뢰성 손상:</strong> 날짜 포맷 버그(HH:MM 기록), 페이지별 -1~-30건 누락 — 정보의 정확성에 대한 회원의 신뢰를 점진적으로 침식.</li>
+        <li><strong>운영 철학의 급진적 전환:</strong> 이버멕틴 부정, 개똥쑥·오일 판매 유도 — 기존 가치를 지지하던 핵심 회원(하늘의별 등)을 강퇴하면서 공동체 정체성이 와해되고 있음.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="subsection-title">3. 시장 기회 (Opportunities)</div>
+  <div class="card">
+    <div class="card-body">
+      <ul>
+        <li><strong>자발적 검색 공백:</strong> 기존 카페가 이버멕틴 검색 키워드를 포기하는 중. 네이버에서 "이버멕틴 복용법"을 검색하는 사용자는 여전히 많으나, 만족할 만한 결과가 줄어들고 있음.</li>
+        <li><strong>전문 게시판의 미개발 잠재력:</strong> 암환자 후기(134건)와 일반질환 후기(920건)는 각각 827회·732회의 높은 평균 조회수를 기록. 이를 10배 확대하면 카페 전체의 평균 조회수가 600회대로 상승 가능.</li>
+        <li><strong>이동 가능한 핵심 기여자:</strong> Top200 작성자 48명은 이미 기존 카페의 규제(이버멕틴 부정)에 반발하고 있으며, 개별 접촉만으로도 이주 가능성이 높음.</li>
+        <li><strong>투명성에 대한 수요:</strong> 부작용 은폐와 상업화에 반대하는 회원들이Dark에서 대안 공간을 요구하는 목소리가 이미 존재 (강퇴 회원 데이터).</li>
+        <li><strong>알벤다졸·펜벤다졸 성장세:</strong> 2024년 알벤다졸 581건(최고), 2025-2026 펜벤다졸 재상승 — 기존 카페가 이 트렌드를 따라가지 못하면 새 카페가 자연스럽게 해당 검색 시장을 장악 가능.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="subsection-title">4. 위험 요소 (Risks)</div>
+  <div class="card">
+    <div class="table-row table-head">
+      <div style="flex:2;font-weight:700">위험</div>
+      <div style="flex:1;text-align:center;font-weight:700">가능성</div>
+      <div style="flex:1;text-align:center;font-weight:700">영향도</div>
+      <div style="flex:3;font-weight:700">대응 방안</div>
+    </div>
+    <div class="table-row">
+      <div style="flex:2">단일 기여자(화창한오후) 의존 재발</div>
+      <div style="flex:1;text-align:center"><span class="chip chip-red">상</span></div>
+      <div style="flex:1;text-align:center"><span class="chip chip-red">상</span></div>
+      <div style="flex:3">오픈 전 Top10 작성자 3명 이상 확보, 기여자 다각화 보너스 제도 도입</div>
+    </div>
+    <div class="table-row">
+      <div style="flex:2">기존 매니저의 법적 대응</div>
+      <div style="flex:1;text-align:center"><span class="chip chip-orange">중</span></div>
+      <div style="flex:1;text-align:center"><span class="chip chip-red">상</span></div>
+      <div style="flex:3">비상업 원칙 명문화, 회원 개별 초대 방식(카페 차원의 집단 유출 아님), 명예훼손 소지 발언 금지</div>
+    </div>
+    <div class="table-row">
+      <div style="flex:2">검색 노출 지연으로 인한 초기 정체</div>
+      <div style="flex:1;text-align:center"><span class="chip chip-orange">중</span></div>
+      <div style="flex:1;text-align:center"><span class="chip chip-orange">중</span></div>
+      <div style="flex:3">오픈 전 7개 필독 게시글 완성, Top200 제목 패턴 복사, 이버멕틴/알벤다졸 키워드 집중 공략</div>
+    </div>
+    <div class="table-row">
+      <div style="flex:2">운영진 합의제 → 의사결정 지연</div>
+      <div style="flex:1;text-align:center"><span class="chip chip-orange">중</span></div>
+      <div style="flex:1;text-align:center"><span class="chip chip-orange">중</span></div>
+      <div style="flex:3">긴급 상황(스팸·상업글)은 1인 조치 가능토록 규정, 평시 3인 합의, 회원 투표로 운영 방향 결정</div>
+    </div>
+    <div class="table-row">
+      <div style="flex:2">상업·스팸 게시글 집중으로 신뢰 손실</div>
+      <div style="flex:1;text-align:center"><span class="chip chip-red">상</span></div>
+      <div style="flex:1;text-align:center"><span class="chip chip-orange">중</span></div>
+      <div style="flex:3">오픈 첫날부터 AI+수동 필터링, 판매글 키워드 자동 탐지, 24시간 내 삭제 SLA 공개</div>
+    </div>
+  </div>
+
+  <!-- CHARTS: Existing Cafe Analysis -->
+  <div class="section-title" style="margin-top:10px">▍ 주요 지표 시각화</div>
+
+  <div class="chart-box">
+    <div class="chart-title">📊 게시판별 게시글 수 vs 평균 조회수</div>
+    <div class="chart-wrap">
+      <canvas id="chart-boards"></canvas>
+    </div>
+    <div class="insight-box"><strong>인사이트:</strong> 자유게시판이 71%의 물량을 차지하지만(451회), 전문 게시판(암환자 827회, 일반질환 732회)이 3배 이상의 조회수를 기록. 정보 아키텍처 재설계 필요성을 보여줌.</div>
+  </div>
+
+  <div class="chart-box">
+    <div class="chart-title">📈 연도별 게시글 수 & 평균 조회수 추이 (2019–2026)</div>
+    <div class="chart-wrap">
+      <canvas id="chart-years"></canvas>
+    </div>
+    <div class="insight-box"><strong>인사이트:</strong> 2022년 코로나 대안 치료제 논의로 +272% 폭발(+2,100건)했으나, 이후 평균 조회수는 꾸준히 하락(683→304). 양적 성장이 질적 성장으로 전환되지 못하고 있음.</div>
+  </div>
+
+  <div class="chart-box">
+    <div class="chart-title">✍️ 작성자 게시글 수 Top 10 (파레토 집중)</div>
+    <div class="chart-wrap tall">
+      <canvas id="chart-authors"></canvas>
+    </div>
+    <div class="insight-box"><strong>인사이트:</strong> 화창한오후 1명(587건)이 전체의 2.6%를 생산하지만 Top200의 18.5%를 독점. 상위 10명의 집중도가 지나치게 높아 이탈 시 커뮤니티 콘텐츠가 대량 소실될 위험이 있음.</div>
+  </div>
+
+  <div class="chart-box">
+    <div class="chart-title">💊 구충제별 게시글 언급 추이 (연도별)</div>
+    <div class="chart-wrap tall">
+      <canvas id="chart-drugs"></canvas>
+    </div>
+    <div class="insight-box"><strong>인사이트:</strong> 이버멕틴은 2022년 정점(329건) 후 감소세, 알벤다졸은 2024년 최고(285건)로 성장. 펜벤다졸은 2025~2026 재상승(32→26건). 기존 카페가 이버멕틴을 억압하면 알벤다졸·펜벤다졸 검색 시 빈자리가 생김.</div>
+  </div>
+
+  <div class="subsection-title">5. Top 10 게시글 (실제 제목)</div>
+  <div class="card">
+    <div class="post-item"><div class="post-num" style="color:#D85A30;font-weight:700">1</div><div class="post-body"><a class="post-title" href="https://cafe.naver.com/parabest/318" target="_blank" rel="noopener">구충제 입문시 참고사항_처음 시작에 도움되는 글</a><div class="post-meta">25,000회 | 화창한오후 | 2020.02.17</div></div></div>
+    <div class="post-item"><div class="post-num" style="color:#111;font-weight:700">2</div><div class="post-body"><a class="post-title" href="https://cafe.naver.com/parabest/7773" target="_blank" rel="noopener">구충제별 특성 및 복용시 유의점 키포인트(스마트폰용)</a><div class="post-meta">12,000회 | 로난 | 2022.08.10</div></div></div>
+    <div class="post-item"><div class="post-num" style="color:#111;font-weight:700">3</div><div class="post-body"><a class="post-title" href="https://cafe.naver.com/parabest/912" target="_blank" rel="noopener">기생충 바이블</a><div class="post-meta">12,000회 | 해맑은 | 2020.06.25</div></div></div>
+    <div class="post-item"><div class="post-num" style="color:#111;font-weight:700">4</div><div class="post-body"><a class="post-title" href="https://cafe.naver.com/parabest/224" target="_blank" rel="noopener">악 미치겠다. 내 눈에 사는 기생충 발견.</a><div class="post-meta">8,563회 | 화창한오후 | 2020.02.01</div></div></div>
+    <div class="post-item"><div class="post-num" style="color:#111;font-weight:700">5</div><div class="post-body"><a class="post-title" href="https://cafe.naver.com/parabest/3179" target="_blank" rel="noopener">스파르가눠(sparganosis) 진단받은 환자입니다</a><div class="post-meta">7,846회 | 디케이 | 2021.11.24</div></div></div>
+    <div class="post-item"><div class="post-num" style="color:#111;font-weight:700">6</div><div class="post-body"><a class="post-title" href="https://cafe.naver.com/parabest/174" target="_blank" rel="noopener">[오후생각] 구충제. 대란의 시작</a><div class="post-meta">7,500회 | 화창한오후 | 2020.01.17</div></div></div>
+    <div class="post-item"><div class="post-num" style="color:#111;font-weight:700">7</div><div class="post-body"><a class="post-title" href="https://cafe.naver.com/parabest/24966" target="_blank" rel="noopener">이버멕틴/알벤다졸의 올바른 복용법</a><div class="post-meta">7,432회 | ROGION | 2025.05.07</div></div></div>
+    <div class="post-item"><div class="post-num" style="color:#111;font-weight:700">8</div><div class="post-body"><a class="post-title" href="https://cafe.naver.com/parabest/26415" target="_blank" rel="noopener">구충 8개월 차 후기 (8종 복합 복용 경험)</a><div class="post-meta">7,259회 | 하늘의별 | 2025.07.29</div></div></div>
+    <div class="post-item"><div class="post-num" style="color:#111;font-weight:700">9</div><div class="post-body"><a class="post-title" href="https://cafe.naver.com/parabest/3054" target="_blank" rel="noopener">나는 왜 이렇게 구충제에 빠져 들었을까</a><div class="post-meta">7,068회 | 화창한오후 | 2021.10.27</div></div></div>
+    <div class="post-item"><div class="post-num" style="color:#111;font-weight:700">10</div><div class="post-body"><a class="post-title" href="https://cafe.naver.com/parabest/85" target="_blank" rel="noopener">구충제별 정리</a><div class="post-meta">6,672회 | 화창한오후 | 2019.12.20</div></div></div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ========== 새 카페 전략 ========== -->
+  <div class="section-title red">▍ 새 카페 런칭 전략 — iverlove</div>
+
+  <div class="subsection-title">5. 핵심 전략 원칙</div>
+  <div class="card">
+    <div class="card-body">
+      <div style="margin-bottom:10px"><strong style="color:#D85A30">원칙 1 비상업:</strong> "우리는 어떤 것도 팔지 않습니다." — 판매 링크·상업 게시글은 경고 없이 즉시 삭제. 개똥쑥·오일·건강보조제 판매 유도 원천 금지.</div>
+      <div style="margin-bottom:10px"><strong style="color:#D85A30">원칙 2 정보 개방:</strong> 이버멕틴·알벤다졸·디스토시드 모든 구충제의 후기와 정보를 자유롭게 공유. 부작용 사례도 성공 사례와 동등하게 다룸.</div>
+      <div style="margin-bottom:10px"><strong style="color:#D85A30">원칙 3 운영진 합의제:</strong> 운영진 3인 이상 합의로 운영. 1인의 결정으로 회원을 강퇴하지 않으며, 강퇴·삭제 시 회원 공지로 투명성 확보.</div>
+    </div>
+  </div>
+
+  <div class="subsection-title">6. MVP 4주 실행 플랜</div>
+
+  <div class="card">
+    <div class="card-body" style="padding:0">
+      <div class="week-row"><div class="week-badge">1주</div><div class="week-tasks"><strong>기반 세팅 + 핵심 멤버 이주</strong>필독 7개 게시글 완성 → 창립 선언문 공지 → 하늘의별 등 핵심 기여자 초대 → 강퇴당한 회원 개별 메시지 → 카페명 최종 결정</div></div>
+      <div class="week-row"><div class="week-badge">2주</div><div class="week-tasks"><strong>콘텐츠 폭발 + 첫 유입</strong>핵심 멤버 각자 대표 후기 1편씩 작성 → 질문 게시글 24시간 내 답변 보장 → 카카오 오픈채팅 연동 → 기존 카페 최근 활동 감소 회원 타겟 유입</div></div>
+      <div class="week-row"><div class="week-badge">3주</div><div class="week-tasks"><strong>검색 노출 시작</strong>이버멕틴·알벤다졸 키워드 제목 게시글 10편 이상 → 네이버 검색 카페탭 노출 확인 → 가입인사 글 개별 환영 댓글 → 첫 "이달의 회복 후기" 기획</div></div>
+      <div class="week-row"><div class="week-badge">4주</div><div class="week-tasks"><strong>자생 구조 완성</strong>회원 500명 달성 확인 → 운영진 3인 공식 발표 → 운영 원칙 회원 투표 확정 → 월간 통계 공개 → 창립 1개월 기념 이벤트</div></div>
+    </div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="kl">1주 목표</div><div class="kv">100명</div><div class="ks">강퇴·이탈 회원</div></div>
+    <div class="kpi"><div class="kl">1개월 목표</div><div class="kv">500명</div><div class="ks">검색 유입 시작</div></div>
+    <div class="kpi"><div class="kl">3개월 목표</div><div class="kv">2,000명</div><div class="ks">자생적 성장 궤도</div></div>
+  </div>
+
+  <div class="subsection-title">7. 성공 지표</div>
+  <div class="card">
+    <div class="table-row table-head">
+      <div style="flex:2;font-weight:700">지표</div>
+      <div style="flex:1;text-align:center;font-weight:700">목표</div>
+      <div style="flex:2;font-weight:700">측정 방법</div>
+      <div style="flex:2;font-weight:700">판단 기준</div>
+    </div>
+    <div class="table-row">
+      <div style="flex:2">회원 수</div>
+      <div style="flex:1;text-align:center">1주 100 / 1개월 500 / 3개월 2,000</div>
+      <div style="flex:2">카페 관리자 통계</div>
+      <div style="flex:2">목표 도달 시 다음 단계(운영진 공식 발표)로 진행</div>
+    </div>
+    <div class="table-row">
+      <div style="flex:2">의무 7개 게시글 조회수</div>
+      <div style="flex:1;text-align:center">월 합계 3,000+</div>
+      <div style="flex:2">Google Analytics / 카페 내장 통계</div>
+      <div style="flex:2">각 게시글 평균 400+ → 검색 유입 정상 신호</div>
+    </div>
+    <div class="table-row">
+      <div style="flex:2">일 평균 답변 시간</div>
+      <div style="flex:1;text-align:center">&lt; 24시간</div>
+      <div style="flex:2">운영진 답변 시간 로그</div>
+      <div style="flex:2">24시간 초과 시 "응답 없음" 게시글 감소</div>
+    </div>
+    <div class="table-row">
+      <div style="flex:2">Top200 집중도 (Herfindahl)</div>
+      <div style="flex:1;text-align:center">&lt; 0.05</div>
+      <div style="flex:2">상위 기여자 10명의 Top200 점유율 합산</div>
+      <div style="flex:2">기존 0.18(화창한오후 독점) → 0.05 미만</div>
+    </div>
+    <div class="table-row">
+      <div style="flex:2">회원 신뢰도 점수</div>
+      <div style="flex:1;text-align:center">≥ 4.0 / 5.0</div>
+      <div style="flex:2">분기별 익명 서베이</div>
+      <div style="flex:2">운영 투명성·정보 공정성·커뮤니티 안전성 항목 평가</div>
+    </div>
+  </div>
+
+  <div class="subsection-title">8. 창립 선언문 (초안)</div>
+  <div class="card">
+    <div class="card-body" style="font-size:14px;line-height:1.9;color:#111;background:#f9fafb;padding:14px;border-radius:8px">
+      "이 카페는 구충 경험을 나누는 공간입니다.<br>
+      <strong>우리는 어떤 것도 팔지 않습니다.</strong><br>
+      이버멕틴, 알벤다졸, 디스토시드 — 모든 구충제의 후기와 정보를 자유롭게 나눕니다.<br>
+      성공 사례만큼 부작용 사례도 중요하게 다룹니다.<br>
+      의료 결정의 최종 책임은 각자와 담당 의사에게 있습니다.<br>
+      <strong>운영진 3인이 합의로 카페를 운영하며, 1인의 결정으로 회원을 강퇴하지 않습니다.</strong>"
+    </div>
+  </div>
+
+  <div class="subsection-title">9. 절대 원칙 (타협 불가)</div>
+  <div class="card">
+    <div class="card-body">
+      <ul>
+        <li><strong>판매 링크 포함 게시글</strong> — 경고 없이 즉시 삭제</li>
+        <li><strong>"○○ 사세요"류 추천</strong> — 작성자 경고 후 재발시 강퇴</li>
+        <li><strong>특정 제품 독점 홍보</strong> — 개똥쑥·오일·건강보조제 판매 유도 원천 금지</li>
+        <li><strong>운영진 1인 독단 결정</strong> — 무조건 3인 합의 (긴급 상황 제외)</li>
+        <li><strong>식약처 금지 물질 홍보</strong> — 즉시 삭제 + 회원 경고</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const gridC = 'rgba(0,0,0,0.06)';
+  const tickC = '#666';
+  const baseOpts = {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: true, labels: { font: { size: 11 }, boxWidth: 12 } } },
+    scales: {
+      x: { grid: { color: gridC }, ticks: { color: tickC, font: { size: 10 } } },
+      y: { grid: { color: gridC }, ticks: { color: tickC, font: { size: 10 } } }
+    }
+  };
+
+  // Chart 1: Boards
+  new Chart(document.getElementById('chart-boards'), {
+    type: 'bar',
+    data: {
+      labels: ['자유게시판','가입인사','일반질환 후기','구충제 정보','기생충 정보','유튜브 링크','암환자 후기','간청소/신장청소'],
+      datasets: [
+        { label: '게시글 수', data: [16312,3466,920,804,376,176,134,94], backgroundColor: '#378ADD', yAxisID: 'y' },
+        { label: '평균 조회수', data: [451,89,731,471,648,342,826,813], type: 'line', borderColor: '#D85A30', backgroundColor: '#D85A30', pointBackgroundColor: '#D85A30', borderWidth: 2, pointRadius: 3, yAxisID: 'y1' }
+      ]
+    },
+    options: {
+      ...baseOpts,
+      scales: {
+        x: { grid: { color: gridC }, ticks: { color: tickC, font: { size: 10 } } },
+        y: { position: 'left', grid: { color: gridC }, ticks: { color: tickC, font: { size: 10 } } },
+        y1: { position: 'right', grid: { display: false }, ticks: { color: '#D85A30', font: { size: 10 } } }
+      }
+    }
+  });
+
+  // Chart 2: Yearly
+  new Chart(document.getElementById('chart-years'), {
+    type: 'bar',
+    data: {
+      labels: ['2019','2020','2021','2022','2023','2024','2025','2026'],
+      datasets: [
+        { label: '게시글 수', data: [105,1196,1174,4363,3802,5270,5073,1987], backgroundColor: '#378ADD', yAxisID: 'y' },
+        { label: '평균 조회수', data: [683,580,473,426,414,437,407,304], type: 'line', borderColor: '#E24B4A', backgroundColor: '#E24B4A', pointBackgroundColor: '#E24B4A', borderWidth: 2, pointRadius: 3, yAxisID: 'y1' }
+      ]
+    },
+    options: {
+      ...baseOpts,
+      scales: {
+        x: { grid: { color: gridC }, ticks: { color: tickC, font: { size: 10 } } },
+        y: { position: 'left', grid: { color: gridC }, ticks: { color: tickC, font: { size: 10 } } },
+        y1: { position: 'right', grid: { display: false }, ticks: { color: '#E24B4A', font: { size: 10 } } }
+      }
+    }
+  });
+
+  // Chart 3: Authors
+  new Chart(document.getElementById('chart-authors'), {
+    type: 'bar',
+    data: {
+      labels: ['화창한오후','라이블리','분홍앵초','토투루','상대원','중라ㅇ','골드애플','정대칭','빙그르르르르르르','이제는함께'],
+      datasets: [{
+        label: '게시글 수',
+        data: [587,495,371,239,191,184,141,122,117,115],
+        backgroundColor: (ctx) => ctx.dataIndex === 0 ? '#D85A30' : ctx.dataIndex < 3 ? '#378ADD' : '#888780'
+      }]
+    },
+    options: {
+      ...baseOpts, indexAxis: 'y',
+      scales: {
+        x: { grid: { color: gridC }, ticks: { color: tickC, font: { size: 10 } } },
+        y: { grid: { color: gridC }, ticks: { color: tickC, font: { size: 10 } } }
+      }
+    }
+  });
+
+  // Chart 4: Drugs
+  new Chart(document.getElementById('chart-drugs'), {
+    type: 'line',
+    data: {
+      labels: ['2019','2020','2021','2022','2023','2024','2025','2026'],
+      datasets: [
+        { label: '이버멕틴', data: [4,93,103,329,185,249,253,90], borderColor: '#378ADD', backgroundColor: 'rgba(55,138,221,0.1)', pointBackgroundColor: '#378ADD', fill: false, tension: 0.3 },
+        { label: '알벤다졸', data: [9,111,46,186,173,285,224,61], borderColor: '#1D9E75', backgroundColor: 'rgba(29,158,117,0.1)', pointBackgroundColor: '#1D9E75', fill: false, tension: 0.3 },
+        { label: '펜벤다졸', data: [2,12,6,7,27,13,32,26], borderColor: '#BA7517', backgroundColor: 'transparent', pointBackgroundColor: '#BA7517', fill: false, tension: 0.3 },
+        { label: '디스토시드', data: [5,28,49,127,118,144,115,30], borderColor: '#D85A30', backgroundColor: 'transparent', pointBackgroundColor: '#D85A30', fill: false, tension: 0.3, borderDash: [5,3] },
+        { label: '니타조사나이드', data: [0,21,14,22,23,45,44,13], borderColor: '#7F77DD', backgroundColor: 'transparent', pointBackgroundColor: '#7F77DD', fill: false, tension: 0.3 }
+      ]
+    },
+    options: {
+      ...baseOpts,
+      scales: {
+        x: { grid: { color: gridC }, ticks: { color: tickC, font: { size: 10 } } },
+        y: { grid: { color: gridC }, ticks: { color: tickC, font: { size: 10 } }, title: { display: true, text: '언급 건수', color: tickC, font: { size: 11 } } }
+      }
+    }
+  });
+</script>
+</body>
+</html>

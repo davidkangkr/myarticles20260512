@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>항기생충제의 항암 약물 재창출 타임라인</title>
+<style>
+  :root{
+    --ink:#1a2026;
+    --ink-soft:#46535f;
+    --ink-faint:#7a8893;
+    --paper:#f6f4ef;
+    --card:#ffffff;
+    --line:#d9d4c8;
+    --pre:#2e7d5b;      /* preclinical green */
+    --pre-bg:#e6f2ec;
+    --clin:#2b5fad;     /* clinical blue */
+    --clin-bg:#e6edf8;
+    --disc:#c0392b;     /* discontinued red */
+    --disc-bg:#fbe9e7;
+    --accent:#b8741a;   /* amber accent */
+    --fen:#2e7d5b;
+    --shadow:0 1px 3px rgba(26,32,38,.06),0 6px 20px rgba(26,32,38,.05);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    padding:0 0 4rem;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 18px}
+
+  /* ---------- header ---------- */
+  header{
+    padding:3rem 0 2rem;
+    border-bottom:2px solid var(--ink);
+    margin-bottom:2rem;
+  }
+  .eyebrow{
+    font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--accent);font-weight:700;margin-bottom:.9rem;
+  }
+  h1{
+    font-size:clamp(1.55rem,5.5vw,2.4rem);
+    line-height:1.18;font-weight:800;letter-spacing:-.01em;
+    margin-bottom:.9rem;
+  }
+  .sub{color:var(--ink-soft);font-size:.98rem;max-width:54ch}
+  .source{
+    margin-top:1.3rem;font-size:.78rem;color:var(--ink-faint);
+    border-left:3px solid var(--line);padding-left:.85rem;line-height:1.5;
+  }
+  .source a{color:var(--clin);word-break:break-all}
+
+  /* ---------- legend ---------- */
+  .legend{
+    display:flex;flex-wrap:wrap;gap:.5rem;margin:1.8rem 0 2.5rem;
+  }
+  .chip{
+    display:inline-flex;align-items:center;gap:.45rem;
+    font-size:.8rem;font-weight:600;padding:.4rem .8rem;border-radius:999px;
+    border:1px solid var(--line);background:var(--card);
+  }
+  .dot{width:10px;height:10px;border-radius:50%;flex:none}
+  .dot.pre{background:var(--pre)}
+  .dot.clin{background:var(--clin)}
+  .dot.disc{background:var(--disc)}
+
+  /* ---------- stat band ---------- */
+  .stats{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);border-radius:14px;
+    overflow:hidden;margin-bottom:2.8rem;
+  }
+  .stat{background:var(--card);padding:1.1rem .8rem;text-align:center}
+  .stat .num{font-size:1.7rem;font-weight:800;line-height:1}
+  .stat .num.pre{color:var(--pre)}
+  .stat .num.clin{color:var(--clin)}
+  .stat .num.disc{color:var(--disc)}
+  .stat .lbl{font-size:.7rem;color:var(--ink-faint);margin-top:.35rem;letter-spacing:.02em}
+
+  /* ---------- timeline ---------- */
+  .timeline{position:relative;padding-left:0}
+  .rail{
+    position:absolute;left:23px;top:8px;bottom:8px;width:2px;
+    background:linear-gradient(var(--clin),var(--pre));
+    opacity:.35;
+  }
+  .node{position:relative;padding:0 0 1.4rem 64px;}
+  .marker{
+    position:absolute;left:0;top:2px;width:48px;height:48px;
+    border-radius:50%;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    background:var(--card);border:2.5px solid var(--line);
+    font-size:.66rem;font-weight:800;color:var(--ink-soft);
+    box-shadow:var(--shadow);z-index:2;
+  }
+  .marker.pre{border-color:var(--pre);color:var(--pre);background:var(--pre-bg)}
+  .marker.clin{border-color:var(--clin);color:var(--clin);background:var(--clin-bg)}
+  .marker.disc{border-color:var(--disc);color:var(--disc);background:var(--disc-bg)}
+  .marker .yr-lbl{font-size:.5rem;font-weight:600;opacity:.7;letter-spacing:.02em}
+
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    box-shadow:var(--shadow);overflow:hidden;
+  }
+  .card-head{
+    display:flex;align-items:flex-start;justify-content:space-between;
+    gap:.6rem;padding:1rem 1.1rem .7rem;cursor:pointer;
+    user-select:none;-webkit-tap-highlight-color:transparent;
+  }
+  .card-head:hover{background:#fafaf7}
+  .name{font-size:1.08rem;font-weight:800;line-height:1.25}
+  .brand{font-size:.78rem;color:var(--ink-faint);font-weight:500;margin-top:.1rem}
+  .stage-tag{
+    font-size:.68rem;font-weight:700;padding:.28rem .6rem;border-radius:999px;
+    white-space:nowrap;flex:none;letter-spacing:.02em;
+  }
+  .stage-tag.pre{background:var(--pre-bg);color:var(--pre)}
+  .stage-tag.clin{background:var(--clin-bg);color:var(--clin)}
+  .stage-tag.disc{background:var(--disc-bg);color:var(--disc)}
+
+  .chev{
+    flex:none;width:18px;height:18px;margin-top:.2rem;color:var(--ink-faint);
+    transition:transform .25s ease;
+  }
+  details[open] .chev{transform:rotate(90deg)}
+  details summary{list-style:none}
+  details summary::-webkit-details-marker{display:none}
+
+  .body{
+    padding:0 1.1rem 1.1rem;font-size:.9rem;color:var(--ink-soft);
+    border-top:1px solid var(--line);margin-top:.2rem;padding-top:.9rem;
+  }
+  .body p{margin-bottom:.6rem}
+  .body .row{
+    display:flex;gap:.6rem;padding:.3rem 0;border-bottom:1px dashed var(--line);
+    font-size:.84rem;
+  }
+  .body .row:last-of-type{border-bottom:none}
+  .body .yr{font-weight:700;color:var(--ink);flex:none;min-width:78px}
+  .body .note{
+    margin-top:.7rem;padding:.7rem .8rem;border-radius:9px;
+    background:var(--pre-bg);font-size:.82rem;color:var(--ink);line-height:1.55;
+  }
+  .body .note.amber{background:#f7efe2}
+  .body .note b{color:var(--ink)}
+  mark{background:#fdf0c8;padding:.05em .2em;border-radius:3px}
+
+  /* ---------- fenbendazole highlight ---------- */
+  .node.flagship .card{border:2px solid var(--fen);box-shadow:0 4px 24px rgba(46,125,91,.15)}
+  .node.flagship .marker{transform:scale(1.08)}
+
+  /* ---------- synthesis ---------- */
+  .synthesis{
+    margin-top:2.5rem;padding:1.6rem 1.4rem;border-radius:16px;
+    background:var(--ink);color:#e9ece8;
+  }
+  .synthesis h2{font-size:1.15rem;margin-bottom:1rem;color:#fff}
+  .synthesis .pt{margin-bottom:1rem;font-size:.9rem;line-height:1.6;color:#cfd6d1}
+  .synthesis .pt:last-child{margin-bottom:0}
+  .synthesis .pt b{color:#fff}
+  .synthesis .pt .k{
+    display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.08em;
+    color:var(--accent);text-transform:uppercase;margin-bottom:.2rem;
+  }
+
+  /* ---------- caveat ---------- */
+  .caveat{
+    margin-top:1.8rem;font-size:.8rem;color:var(--ink-faint);
+    border:1px dashed var(--line);border-radius:12px;padding:1.1rem 1.2rem;
+    line-height:1.6;background:var(--card);
+  }
+  .caveat b{color:var(--ink-soft)}
+
+  footer{
+    margin-top:2.5rem;padding-top:1.4rem;border-top:1px solid var(--line);
+    font-size:.74rem;color:var(--ink-faint);text-align:center;line-height:1.6;
+  }
+
+  .print-tip{
+    text-align:center;margin:1.5rem 0 0;font-size:.78rem;color:var(--ink-faint);
+  }
+  .print-btn{
+    display:inline-block;margin-top:.5rem;font:inherit;font-size:.82rem;
+    font-weight:600;color:var(--clin);background:var(--card);
+    border:1px solid var(--line);border-radius:999px;padding:.5rem 1.2rem;
+    cursor:pointer;
+  }
+  .print-btn:hover{background:#fafaf7}
+
+  @media (prefers-reduced-motion:reduce){
+    .chev{transition:none}
+  }
+
+  /* ---------- print ---------- */
+  @media print{
+    body{background:#fff;padding:0;font-size:11px}
+    .wrap{max-width:100%}
+    .print-tip,.print-btn{display:none}
+    details{open:true}
+    .body{display:block !important}
+    details:not([open]) .body{display:block !important}
+    .card,.synthesis,.caveat,.stats{box-shadow:none}
+    .synthesis{background:#fff;color:#000;border:1.5px solid #000}
+    .synthesis h2,.synthesis .pt,.synthesis .pt b{color:#000}
+    .synthesis .pt .k{color:#000}
+    .node{page-break-inside:avoid}
+    .marker{box-shadow:none}
+    header{padding-top:1rem}
+    a{color:#000;text-decoration:underline}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">약물 재창출 · Drug Repurposing</div>
+    <h1>항기생충제의<br>항암 연구 타임라인</h1>
+    <p class="sub">구충제 10종이 언제 항암 후보로 주목받았고, 지금 어느 단계에 있는가. 발견 연도순으로 따라가며 펜벤다졸의 위치를 가늠합니다.</p>
+    <div class="source">
+      출처 · Al-Zoubi RM 외. <i>Antiparasitic agents in oncology: Innovative mechanisms, emerging evidence and clinical potential in cancer treatment.</i> European Journal of Medicinal Chemistry 2026;316:118987.<br>
+      <a href="https://doi.org/10.1016/j.ejmech.2026.118987">https://doi.org/10.1016/j.ejmech.2026.118987</a>
+    </div>
+  </header>
+
+  <div class="legend">
+    <span class="chip"><span class="dot clin"></span>임상시험 진행·완료</span>
+    <span class="chip"><span class="dot pre"></span>전임상 단계</span>
+    <span class="chip"><span class="dot disc"></span>인체 사용 중단</span>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="num clin">7</div><div class="lbl">임상 진입</div></div>
+    <div class="stat"><div class="num pre">3</div><div class="lbl">전임상 정체</div></div>
+    <div class="stat"><div class="num disc">1</div><div class="lbl">사용 중단</div></div>
+  </div>
+
+  <div class="timeline">
+    <div class="rail"></div>
+
+    <!-- 1976 Levamisole -->
+    <div class="node">
+      <div class="marker disc"><span class="yr-lbl">발견</span>1976</div>
+      <div class="card">
+        <details>
+          <summary class="card-head">
+            <div>
+              <div class="name">레바미솔</div>
+              <div class="brand">Levamisole · Ergamisol®</div>
+            </div>
+            <span class="stage-tag disc">중단</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+          </summary>
+          <div class="body">
+            <div class="row"><span class="yr">1990–95</span><span>대장암 Phase III 완료(NCT00002593). 5-FU 병용 보조요법으로 임상적 유익성 입증.</span></div>
+            <div class="row"><span class="yr">1999</span><span>FDA가 일상적 인체 사용에서 철회.</span></div>
+            <div class="row"><span class="yr">2004–13</span><span>추적·장기 결과 분석 보고.</span></div>
+            <div class="row"><span class="yr">2010s–23</span><span>탐색적 다약물 재창출 연구에 포함(NCT02366884).</span></div>
+            <div class="note amber">타임라인에서 <b>유일하게 '중단'으로 분류</b>된 약물. 한때 대장암 표준 보조요법이었으나 부작용(무과립구증 등)으로 퇴출되었습니다.</div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 1989 Suramin -->
+    <div class="node">
+      <div class="marker clin"><span class="yr-lbl">발견</span>1989</div>
+      <div class="card">
+        <details>
+          <summary class="card-head">
+            <div>
+              <div class="name">수라민</div>
+              <div class="brand">Suramin · Germanin®</div>
+            </div>
+            <span class="stage-tag clin">Phase I/II</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+          </summary>
+          <div class="body">
+            <div class="row"><span class="yr">2002</span><span>고형암 Phase I/II 완료(NCT00003038). 안전성·용량·화학감작 평가.</span></div>
+            <div class="row"><span class="yr">2008</span><span>호르몬 불응성 전립선암 Phase III, 제한적 유익성, 승인 없음.</span></div>
+            <div class="row"><span class="yr">2016</span><span>폐암(NCT01671332)·신장암(NCT00083109) Phase II, 주로 병용.</span></div>
+            <div class="row"><span class="yr">2016–현재</span><span>임상 개발 대체로 쇠퇴. 최근 후기 시험·치료 도입 없음.</span></div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 1994 Mebendazole -->
+    <div class="node">
+      <div class="marker clin"><span class="yr-lbl">발견</span>1994</div>
+      <div class="card">
+        <details>
+          <summary class="card-head">
+            <div>
+              <div class="name">메벤다졸</div>
+              <div class="brand">Mebendazole · Vermox® · 벤즈이미다졸</div>
+            </div>
+            <span class="stage-tag clin">Phase I/II</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+          </summary>
+          <div class="body">
+            <div class="row"><span class="yr">2008–11</span><span>진행성 고형암 Phase I 완료. 허용 가능한 안전성, 완만한 활성.</span></div>
+            <div class="row"><span class="yr">2011–현재</span><span>Phase II 진행(NCT02366884). 다약물 재창출·병용 프레임워크.</span></div>
+            <div class="row"><span class="yr">—</span><span>Phase III 시험 보고 없음.</span></div>
+            <div class="note">펜벤다졸의 <b>인체 승인 유사 약물(analogue)</b>. 교모세포종 등에서 가장 임상이 진전된 벤즈이미다졸입니다.</div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 1995 Artesunate -->
+    <div class="node">
+      <div class="marker clin"><span class="yr-lbl">발견</span>1995</div>
+      <div class="card">
+        <details>
+          <summary class="card-head">
+            <div>
+              <div class="name">아르테수네이트</div>
+              <div class="brand">Artesunate · Amivas® · 항말라리아제</div>
+            </div>
+            <span class="stage-tag clin">Phase I–III</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+          </summary>
+          <div class="body">
+            <div class="row"><span class="yr">2013–22</span><span>고형암 Phase I/II 완료. 양호한 안전성, 제한적 효능.</span></div>
+            <div class="row"><span class="yr">2020</span><span>위장관(GI) Phase I/II 종료(NCT03628079).</span></div>
+            <div class="row"><span class="yr">2019–현재</span><span>대장암 Phase III 진행 중(NCT03925662).</span></div>
+            <div class="note amber">10종 중 <b>Phase III에 도달한 드문 사례</b>입니다.</div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 1995 Ivermectin -->
+    <div class="node">
+      <div class="marker clin"><span class="yr-lbl">발견</span>1995</div>
+      <div class="card">
+        <details>
+          <summary class="card-head">
+            <div>
+              <div class="name">이버멕틴</div>
+              <div class="brand">Ivermectin · Stromectol®</div>
+            </div>
+            <span class="stage-tag clin">Phase I/II</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+          </summary>
+          <div class="body">
+            <div class="row"><span class="yr">2008</span><span>아르테수네이트 병용 유방암 Phase I 완료(NCT00764036).</span></div>
+            <div class="row"><span class="yr">2014–현재</span><span>고형암(NCT02263950)·대장암(NCT04098744)·HPV 관련 신생물 Phase I/II.</span></div>
+            <div class="row"><span class="yr">—</span><span>Phase III 없음. 임상 근거는 초기 단계.</span></div>
+            <div class="note amber"><b>주의</b> · 이버멕틴은 P-당단백질(P-gp)이 혈뇌장벽 통과를 막아줍니다. 이 방어가 무너지면 신경독성 위험이 커지므로, DMSO 같은 흡수 촉진제와의 병용은 위험합니다.</div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 2001 Albendazole -->
+    <div class="node">
+      <div class="marker clin"><span class="yr-lbl">발견</span>2001</div>
+      <div class="card">
+        <details>
+          <summary class="card-head">
+            <div>
+              <div class="name">알벤다졸</div>
+              <div class="brand">Albendazole · 벤즈이미다졸</div>
+            </div>
+            <span class="stage-tag clin">Phase I/II</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+          </summary>
+          <div class="body">
+            <div class="row"><span class="yr">2023–현재</span><span>전이성 삼중음성유방암(TNBC) Phase I/II(NCT05318469).</span></div>
+            <div class="row"><span class="yr">2026–27</span><span>Phase II 면역요법 병용 시험 계획(NCT07487805).</span></div>
+            <div class="note">펜벤다졸과 가장 가까운 <b>구조적 친척</b> 중 하나. 사이클로덱스트린 포접 연구도 활발합니다.</div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 2004 Pyrvinium -->
+    <div class="node">
+      <div class="marker clin"><span class="yr-lbl">발견</span>2004</div>
+      <div class="card">
+        <details>
+          <summary class="card-head">
+            <div>
+              <div class="name">피르비늄 파모에이트</div>
+              <div class="brand">Pyrvinium Pamoate · Povan®</div>
+            </div>
+            <span class="stage-tag clin">Phase I/II</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+          </summary>
+          <div class="body">
+            <div class="row"><span class="yr">2021–현재</span><span>췌장암 Phase I, 안전성·실행가능성 평가(NCT05055323).</span></div>
+            <div class="row"><span class="yr">2025</span><span>위 전암성 병변 Phase II 예정.</span></div>
+            <div class="row"><span class="yr">—</span><span>초기 단계 평가에 한정(NCT06782048). Phase III 없음.</span></div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 2009 Niclosamide -->
+    <div class="node">
+      <div class="marker clin"><span class="yr-lbl">발견</span>2009</div>
+      <div class="card">
+        <details>
+          <summary class="card-head">
+            <div>
+              <div class="name">니클로사마이드</div>
+              <div class="brand">Niclosamide · Yomesan®</div>
+            </div>
+            <span class="stage-tag clin">Phase I/II</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+          </summary>
+          <div class="body">
+            <div class="row"><span class="yr">2015–22</span><span>전립선암 Phase I(NCT03123978), 허용 가능한 안전성.</span></div>
+            <div class="row"><span class="yr">2016–현재</span><span>대장암(NCT02519582)·용종증(NCT04296851) Phase II, 결과 가변적.</span></div>
+            <div class="row"><span class="yr">활성</span><span>AML 등 병용 시험 지속(NCT05188170).</span></div>
+            <div class="note">수용해도 1.6 mg/L의 난용성 약물. <b>β-사이클로덱스트린 포접</b> 시도의 대표 대상이며, 펜벤다졸보다는 용해도가 높습니다.</div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 2010 Flubendazole -->
+    <div class="node">
+      <div class="marker pre"><span class="yr-lbl">발견</span>2010</div>
+      <div class="card">
+        <details>
+          <summary class="card-head">
+            <div>
+              <div class="name">플루벤다졸</div>
+              <div class="brand">Flubendazole · Fluvermal® · 벤즈이미다졸</div>
+            </div>
+            <span class="stage-tag pre">전임상</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+          </summary>
+          <div class="body">
+            <p><b>전임상 근거 (2025)</b></p>
+            <p>미세소관 불안정화로 세포자멸사·자가포식 유도. STAT3 / NF-κB / PI3K-Akt 경로 억제. 저마이크로몰(~0.1–1 µM)에서 강력한 활성과 강한 in vivo 효능.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 2012 Praziquantel -->
+    <div class="node">
+      <div class="marker pre"><span class="yr-lbl">발견</span>2012</div>
+      <div class="card">
+        <details>
+          <summary class="card-head">
+            <div>
+              <div class="name">프라지콴텔</div>
+              <div class="brand">Praziquantel · Biltricide®</div>
+            </div>
+            <span class="stage-tag pre">전임상</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+          </summary>
+          <div class="body">
+            <p><b>전임상 근거 (2012)</b></p>
+            <p>단일 제제로는 내재적 세포독성이 최소. 파클리탁셀과 시너지(combination index &lt; 1). XIAP 하향조절을 통한 G2/M 정지·카스파아제 의존성 세포자멸사 유도.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- 2018 Fenbendazole (flagship) -->
+    <div class="node flagship">
+      <div class="marker pre"><span class="yr-lbl">발견</span>2018</div>
+      <div class="card">
+        <details open>
+          <summary class="card-head">
+            <div>
+              <div class="name">펜벤다졸</div>
+              <div class="brand">Fenbendazole · Panacur® · 벤즈이미다졸</div>
+            </div>
+            <span class="stage-tag pre">전임상</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+          </summary>
+          <div class="body">
+            <p><b>전임상 근거 (2021)</b></p>
+            <p>미세소관 불안정화. 해당과정(glycolysis) 억제(GLUT1 표적)와 p53 신호 활성화. 세포자멸사·산화 스트레스 경로 유도. in vitro에서 1 µM 시 약 50% 억제, in vivo 항종양 효능 확인.</p>
+            <div class="note">이 타임라인에서 <mark>가장 최근(2018)에 항암 효과가 발견된 약물</mark>이며, <b>여전히 전임상 단계</b>입니다. 같은 벤즈이미다졸인 메벤다졸·알벤다졸이 이미 임상에 진입한 것과 대조됩니다. 펜벤다졸은 현재까지 <b>인체 임상시험 0건</b>이고 FDA·EMA 승인이 없습니다.</div>
+          </div>
+        </details>
+      </div>
+    </div>
+
+  </div><!-- /timeline -->
+
+  <div class="synthesis">
+    <h2>한눈에 보는 네 가지 핵심</h2>
+    <div class="pt"><span class="k">01 · 벤즈이미다졸의 위치</span>메벤다졸(1994)·알벤다졸(2001)·플루벤다졸(2010)·펜벤다졸(2018)이 핵심 축입니다. <b>발견이 늦을수록 임상 진전도가 낮은 경향</b>이 뚜렷하며, 펜벤다졸이 가장 후발 주자입니다.</div>
+    <div class="pt"><span class="k">02 · 임상 진입의 분기</span>메벤다졸·알벤다졸은 인체 시험에 진입했지만, <b>펜벤다졸·플루벤다졸·프라지콴텔은 동물·세포 수준에 머뭅니다.</b> 같은 계열이라도 인체 데이터 유무가 갈립니다.</div>
+    <div class="pt"><span class="k">03 · Phase III의 희소성</span>10종 중 Phase III에 도달한 것은 레바미솔(과거·중단)과 아르테수네이트(진행 중)뿐. <b>'전임상 유망 → 임상 확증'의 간극</b>이 이 분야 전반의 과제입니다.</div>
+    <div class="pt"><span class="k">04 · 발견 연도 ≠ 임상 단계</span>원 안 숫자는 항암 효과가 처음 관찰된 해일 뿐입니다. 펜벤다졸은 2018년 발견이지만 전임상이고, 레바미솔은 1976년 발견이지만 이미 Phase III를 거쳐 중단되었습니다.</div>
+  </div>
+
+  <div class="caveat">
+    <b>읽는 분께</b> · 이 타임라인은 "항암 재창출 후보"로서의 <b>연구 현황</b>을 보여줄 뿐, 어떤 약물의 인체 항암 효능을 입증하지 않습니다. 특히 전임상 단계(펜벤다졸 포함) 약물은 인체 효능·안전성이 확립되지 않았습니다. NCT 번호·연도·단계는 원 논문 그래픽 초록 기재 내용이며, 개별 임상시험의 현재 상태는 ClinicalTrials.gov에서 별도 확인이 필요합니다.
+  </div>
+
+  <div class="print-tip">
+    종이로 보관하시려면<br>
+    <button class="print-btn" onclick="window.print()">인쇄 / PDF로 저장</button>
+  </div>
+
+  <footer>
+    카드를 누르면 상세 내용이 펼쳐집니다 · 인쇄 시 모든 항목이 자동으로 펼쳐집니다<br>
+    출처 · European Journal of Medicinal Chemistry 2026;316:118987
+  </footer>
+
+</div>
+</body>
+</html>

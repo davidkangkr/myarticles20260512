@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FriendsofHippocrates — 살아있는 아카이브</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{font-size:16px;-webkit-text-size-adjust:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+    background:#f8fafc;color:#1e293b;line-height:1.8;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1{font-size:1.5rem;font-weight:800;letter-spacing:-0.5px}
+  h2{font-size:1.2rem;font-weight:700;margin-bottom:12px;color:#0f172a}
+  h3{font-size:1rem;font-weight:700;margin-bottom:8px;color:#1e293b}
+  p{margin-bottom:12px;font-size:0.92rem;color:#475569}
+  .small{font-size:0.8rem;color:#64748b}
+  .container{max-width:720px;margin:0 auto;padding:20px 18px}
+
+  .report-header{
+    background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);
+    color:#f1f5f9;padding:40px 20px 32px;text-align:center;
+  }
+  .report-header h1{margin-bottom:6px}
+  .report-header .subtitle{font-size:0.9rem;color:#94a3b8}
+  .report-header .meta{font-size:0.75rem;color:#64748b;margin-top:12px}
+
+  .card{
+    background:#fff;border-radius:12px;padding:24px 20px;margin:18px 0;
+    box-shadow:0 1px 3px rgba(0,0,0,0.05),0 1px 2px rgba(0,0,0,0.06);
+    border:1px solid #e2e8f0;
+  }
+  .card-header{
+    display:flex;align-items:center;gap:10px;margin-bottom:18px;
+    padding-bottom:12px;border-bottom:2px solid #e2e8f0;
+  }
+  .card-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:30px;height:30px;border-radius:8px;color:#fff;
+    font-size:0.85rem;font-weight:700;flex-shrink:0;
+  }
+  .card-num.navy{background:#1e40af}
+  .card-num.teal{background:#0f766e}
+  .card-num.purple{background:#7c3aed}
+  .card-num.amber{background:#b45309}
+  .card-num.red{background:#dc2626}
+  .card-num.slate{background:#475569}
+
+  .kpi-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:14px 0}
+  .kpi{padding:14px 12px;border-radius:10px;color:#fff;text-align:center}
+  .kpi .kpi-label{font-size:0.7rem;opacity:0.85;margin-bottom:4px}
+  .kpi .kpi-value{font-size:1.3rem;font-weight:800}
+  .kpi .kpi-sub{font-size:0.68rem;opacity:0.7;margin-top:2px}
+  .kpi.blue{background:#2563eb}
+  .kpi.green{background:#059669}
+  .kpi.teal{background:#0d9488}
+
+  .bar-chart{display:flex;align-items:end;gap:6px;height:180px;padding:4px 0;margin:12px 0}
+  .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:end;height:100%}
+  .bar-val{font-size:0.7rem;font-weight:700;color:#475569;margin-bottom:3px}
+  .bar-fill{border-radius:4px 4px 0 0;width:100%;max-width:50px;min-height:4px}
+  .bar-label{font-size:0.7rem;color:#64748b;margin-top:6px;text-align:center;white-space:nowrap}
+  .bar-fill.blue{background:linear-gradient(180deg,#3b82f6,#2563eb)}
+
+  .hbar{margin:6px 0;display:flex;align-items:center;gap:8px}
+  .hbar-label{width:130px;text-align:right;font-size:0.78rem;color:#334155;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0}
+  .hbar-track{flex:1;background:#e2e8f0;border-radius:4px;height:20px;overflow:hidden;position:relative;min-width:40px}
+  .hbar-fill{position:absolute;left:0;top:0;height:100%;border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;font-size:0.68rem;font-weight:700;color:#fff}
+  .hbar-fill.blue{background:#2563eb}
+  .hbar-fill.amber{background:#d97706}
+  .hbar-fill.green{background:#059669}
+  .hbar-fill.purple{background:#7c3aed}
+  .hbar-fill.red{background:#dc2626}
+
+  .donut-wrap{display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center;margin:16px 0}
+  .donut{width:180px;height:180px;border-radius:50%;position:relative;flex-shrink:0}
+  .donut-hole{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:90px;height:90px;border-radius:50%;background:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:0.8rem;font-weight:800;color:#475569;text-align:center;
+  }
+  .donut-legend{font-size:0.78rem;line-height:2}
+  .legend-dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:middle}
+
+  .flow-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin:16px 0}
+  .flow-box{
+    padding:10px 14px;border-radius:8px;font-size:0.78rem;font-weight:600;text-align:center;
+    border:2px solid #cbd5e1;background:#fff;min-width:80px;
+  }
+  .flow-box.src{background:#dbeafe;border-color:#3b82f6;color:#1e40af}
+  .flow-box.dst{background:#d1fae5;border-color:#10b981;color:#065f46}
+  .flow-arrow{font-size:1.2rem;color:#94a3b8;font-weight:700}
+
+  table{width:100%;border-collapse:collapse;font-size:0.82rem;margin:10px 0}
+  th{background:#1e293b;color:#f8fafc;padding:8px 10px;text-align:left;font-weight:600;font-size:0.75rem;white-space:nowrap}
+  td{padding:7px 10px;border-bottom:1px solid #e2e8f0}
+  tr:nth-child(even) td{background:#f8fafc}
+  .up{color:#059669;font-weight:700}
+  .down{color:#dc2626;font-weight:700}
+
+  .tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:0.68rem;font-weight:700}
+  .tag.rise{background:#d1fae5;color:#065f46}
+  .tag.fall{background:#fee2e2;color:#991b1b}
+  .tag.new{background:#dbeafe;color:#1e40af}
+  .tag.gone{background:#e2e8f0;color:#64748b}
+
+  .callout{
+    padding:14px 16px;border-radius:8px;border-left:4px solid;margin:14px 0;
+    font-size:0.86rem;line-height:1.7;
+  }
+  .callout.info{background:#eff6ff;border-left-color:#3b82f6}
+  .callout.warn{background:#fffbeb;border-left-color:#f59e0b}
+  .callout.good{background:#f0fdf4;border-left-color:#10b981}
+  .callout.dark{background:#f1f5f9;border-left-color:#475569}
+
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:10px 0}
+  .two-col > div{min-width:0}
+
+  .timeline{position:relative;padding-left:20px;margin:14px 0}
+  .timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#e2e8f0}
+  .tl-item{position:relative;margin-bottom:16px;padding-left:16px}
+  .tl-item::before{
+    content:'';position:absolute;left:-15px;top:6px;
+    width:12px;height:12px;border-radius:50%;background:#3b82f6;
+    border:2px solid #fff;box-shadow:0 0 0 2px #3b82f6;
+  }
+  .tl-item h4{font-size:0.88rem;font-weight:700;color:#1e293b}
+  .tl-item p{font-size:0.8rem;color:#64748b;margin-bottom:4px}
+
+  @media(max-width:540px){
+    .kpi-row{grid-template-columns:1fr 1fr}
+    .two-col{grid-template-columns:1fr}
+    .container{padding:12px 10px}
+    .card{padding:18px 14px}
+    .hbar-label{width:90px;font-size:0.72rem}
+    .bar-chart{height:140px}
+    .donut{width:140px;height:140px}
+    .donut-hole{width:70px;height:70px;font-size:0.7rem}
+    h1{font-size:1.25rem}
+    .flow-row{gap:4px}
+    .flow-box{padding:8px 10px;font-size:0.72rem;min-width:60px}
+  }
+
+  @media print{
+    body{background:#fff;font-size:11px}
+    .container{max-width:100%;padding:0 12px}
+    .card{box-shadow:none;border:1px solid #cbd5e1;break-inside:avoid;page-break-inside:avoid;margin:12px 0;padding:16px 14px}
+    .report-header{background:#0f172a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:24px 16px}
+    .kpi,.bar-fill,.donut,.card-num{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .bar-chart{height:140px}
+    table{font-size:0.7rem}
+    th,td{padding:4px 6px}
+    .callout{font-size:0.75rem}
+    @page{margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<header class="report-header">
+  <h1>☕ FriendsofHippocrates</h1>
+  <p class="subtitle">살아있는 아카이브 — 검색 키워드 분석 &amp; 전략 인사이트</p>
+  <p class="meta">분석 기간: 2026년 1월 ~ 6월 · 데이터: 네이버 카페 월간 통계 18개 파일 · 생성일: 2026년 7월 1일</p>
+</header>
+
+<div class="container">
+
+<!-- ===== 1: 이 카페는 무엇이었고, 무엇이 되고 있는가 ===== -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num navy">1</span>
+    <h2 style="margin:0">이 카페는 무엇이었고, 무엇이 되고 있는가</h2>
+  </div>
+
+  <p>
+    <strong>FriendsofHippocrates</strong>는 원래 <strong>용도변경 약물(drug repurposing)을 활용한 환자 중심형 암 임상시험 커뮤니티</strong>로 출발했습니다. 2019~2021년 사이에 환자와 가족들이 이버멕틴, 펜벤다졸, 메벤다졸 같은 기존 약물을 암 치료에 활용한 실제 경험을 공유하던 공간이었습니다.
+  </p>
+
+  <div class="callout dark">
+    <strong>현재 이 카페는 더 이상 활발한 커뮤니티가 아닙니다.</strong> 새 게시글과 댓글 소통은 거의 사라졌습니다. 하지만 데이터가 보여주는 사실은 이것입니다: <strong>살아있는 아카이브</strong>로 변모했다는 점입니다. 매달 수천 명이 검색을 통해 과거 게시글을 찾아 읽고 있습니다. 대화는 멈췄지만, 지식은 여전히 일하고 있습니다.
+  </div>
+
+  <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin:16px 0">
+    <div class="flow-box src">2019–2021<br>활발한 커뮤니티<br><span class="small">게시글·댓글·토론</span></div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-box" style="background:#fef3c7;border-color:#f59e0b;color:#92400e">2022–2025<br>점진적 둔화<br><span class="small">신규 글 감소</span></div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-box dst">2026<br>살아있는 아카이브<br><span class="small">월 약 4,900명 방문<br>과거 글이 여전히 환자들에게 도달</span></div>
+  </div>
+</div>
+
+<!-- ===== 2: 검색유입 vs 카페내검색 개념 설명 ===== -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num teal">2</span>
+    <h2 style="margin:0">두 종류의 방문자 — 검색 키워드 이해하기</h2>
+  </div>
+
+  <p>
+    네이버 카페 통계는 두 종류의 검색 키워드 데이터를 제공합니다. 이 차이를 이해하는 것이 이 보고서 전체를 읽는 열쇠입니다.
+  </p>
+
+  <div style="text-align:center;margin:18px 0;padding:16px;background:#f8fafc;border-radius:10px">
+    <div style="display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap">
+      <div class="flow-box src" style="min-width:120px">
+        <div style="font-size:1.3rem">🌐</div>
+        <strong>검색유입</strong><br>
+        <span class="small">외부에서 유입</span>
+      </div>
+      <span style="font-weight:700;color:#94a3b8;font-size:1.3rem">→</span>
+      <div style="padding:10px 14px;border-radius:8px;background:#fff;border:2px dashed #cbd5e1;font-size:0.78rem;text-align:center">
+        <strong>네이버·구글 검색</strong><br>
+        <span class="small">"이버멕틴 암 치료"<br>"펜벤다졸 항암"<br>"췌장암 구충제"</span>
+      </div>
+      <span style="font-weight:700;color:#94a3b8;font-size:1.3rem">→</span>
+      <div class="flow-box dst" style="min-width:120px">
+        <div style="font-size:1.3rem">📄</div>
+        <strong>과거 게시글</strong><br>
+        <span class="small">클릭해서 읽음</span>
+      </div>
+    </div>
+    <p style="margin-top:12px;font-size:0.8rem;color:#64748b">
+      <strong>검색유입</strong> = 누군가 네이버·구글에 건강 관련 검색어를 입력 → 검색 결과에 카페의 과거 게시글이 노출 → 클릭해서 읽음.<br>
+      이들은 <strong>처음 방문한 외부인</strong>입니다. 과거에 작성된 글을 검색을 통해 발견한 사람들입니다.
+    </p>
+
+    <div style="border-top:1px solid #e2e8f0;margin:14px 0"></div>
+
+    <div style="display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap">
+      <div class="flow-box" style="background:#fef3c7;border-color:#f59e0b;color:#92400e;min-width:120px">
+        <div style="font-size:1.3rem">🔍</div>
+        <strong>카페 내 검색</strong><br>
+        <span class="small">카페 내부 검색창</span>
+      </div>
+      <span style="font-weight:700;color:#94a3b8;font-size:1.3rem">→</span>
+      <div style="padding:10px 14px;border-radius:8px;background:#fff;border:2px dashed #cbd5e1;font-size:0.78rem;text-align:center">
+        <strong>카페 검색창에 입력</strong><br>
+        <span class="small">"의무기록지"<br>"파라캅"<br>"이버멕틴 후기"</span>
+      </div>
+      <span style="font-weight:700;color:#94a3b8;font-size:1.3rem">→</span>
+      <div class="flow-box dst" style="min-width:120px">
+        <div style="font-size:1.3rem">📖</div>
+        <strong>과거 글 재탐색</strong><br>
+        <span class="small">기억하는 글 다시 찾기</span>
+      </div>
+    </div>
+    <p style="margin-top:12px;font-size:0.8rem;color:#64748b">
+      <strong>카페 내 검색</strong> = 이미 카페에 들어와 있는 사람이 카페 내부 검색창에 특정 단어를 입력.<br>
+      이들은 <strong>과거 회원</strong>이거나 이전에 방문했던 사람들이 "그 글이 어디 있었지?" 하며 다시 찾는 경우입니다.
+    </p>
+  </div>
+
+  <div class="callout info">
+    <strong>이 구분이 중요한 이유:</strong> 검색유입은 <em>새로운 사람들</em>이 무엇을 절실히 알고 싶어 하는지 보여줍니다. 카페 내 검색은 <em>기존 회원</em>들이 무엇을 계속 다시 찾아보는지 보여줍니다. 둘을 함께 보면 이 아카이브의 <strong>현관문</strong>과 <strong>열람실</strong>이 모두 드러납니다.
+  </div>
+</div>
+
+<!-- ===== 3: 6개월 트래픽 추이 ===== -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num purple">3</span>
+    <h2 style="margin:0">6개월 트래픽 — 아카이브는 살아있다</h2>
+  </div>
+
+  <p>
+    2026년 1월부터 6월까지 이 카페는 <strong>검색유입 24,179회</strong>, <strong>카페 내 검색 5,257회</strong>를 기록했습니다. 합쳐서 <strong>월 평균 약 4,900회</strong>의 방문이 발생한 셈입니다. 새 글이 거의 올라오지 않는 공간이라는 점을 고려하면 주목할 만한 수치입니다.
+  </p>
+
+  <h3 style="margin-top:16px">월별 통합 트래픽</h3>
+  <div class="bar-chart">
+    <div class="bar-col">
+      <div class="bar-val">4,341</div>
+      <div class="bar-fill blue" style="height:139px"></div>
+      <div class="bar-label">1월</div>
+    </div>
+    <div class="bar-col">
+      <div class="bar-val">4,440</div>
+      <div class="bar-fill blue" style="height:142px"></div>
+      <div class="bar-label">2월</div>
+    </div>
+    <div class="bar-col">
+      <div class="bar-val">5,446</div>
+      <div class="bar-fill blue" style="height:174px"></div>
+      <div class="bar-label">3월</div>
+    </div>
+    <div class="bar-col">
+      <div class="bar-val">5,455</div>
+      <div class="bar-fill blue" style="height:175px"></div>
+      <div class="bar-label">4월</div>
+    </div>
+    <div class="bar-col">
+      <div class="bar-val">4,735</div>
+      <div class="bar-fill blue" style="height:152px"></div>
+      <div class="bar-label">5월</div>
+    </div>
+    <div class="bar-col">
+      <div class="bar-val">5,019</div>
+      <div class="bar-fill blue" style="height:161px"></div>
+      <div class="bar-label">6월</div>
+    </div>
+  </div>
+  <p class="small" style="text-align:center">막대 = 검색유입 + 카페내검색 합계. 3~4월 피크, 5월 소폭 감소, 6월 반등.</p>
+
+  <div class="kpi-row" style="margin-top:16px">
+    <div class="kpi blue">
+      <div class="kpi-label">총 검색유입</div>
+      <div class="kpi-value">24,179</div>
+      <div class="kpi-sub">6개월 합계</div>
+    </div>
+    <div class="kpi green">
+      <div class="kpi-label">총 카페 내 검색</div>
+      <div class="kpi-value">5,257</div>
+      <div class="kpi-sub">6개월 합계</div>
+    </div>
+    <div class="kpi teal">
+      <div class="kpi-label">월 평균 방문</div>
+      <div class="kpi-value">~4,900</div>
+      <div class="kpi-sub">통합 기준</div>
+    </div>
+  </div>
+
+  <table style="margin-top:14px">
+    <tr><th>월</th><th>검색유입</th><th>전월대비</th><th>카페 내 검색</th><th>전월대비</th><th>합계</th></tr>
+    <tr><td><strong>1월</strong></td><td>3,559</td><td>-</td><td>782</td><td>-</td><td><strong>4,341</strong></td></tr>
+    <tr><td><strong>2월</strong></td><td>3,597</td><td class="up">+1.1%</td><td>843</td><td class="up">+7.8%</td><td><strong>4,440</strong></td></tr>
+    <tr><td><strong>3월</strong></td><td>4,418</td><td class="up">+22.8%</td><td>1,028</td><td class="up">+21.9%</td><td><strong>5,446</strong></td></tr>
+    <tr><td><strong>4월</strong></td><td>4,631</td><td class="up">+4.8%</td><td>824</td><td class="down">-19.8%</td><td><strong>5,455</strong></td></tr>
+    <tr><td><strong>5월</strong></td><td>3,966</td><td class="down">-14.4%</td><td>769</td><td class="down">-6.7%</td><td><strong>4,735</strong></td></tr>
+    <tr><td><strong>6월</strong></td><td>4,008</td><td class="up">+1.1%</td><td>1,011</td><td class="up">+31.5%</td><td><strong>5,019</strong></td></tr>
+  </table>
+
+  <div class="callout info" style="margin-top:14px">
+    <strong>주목할 점:</strong> 5월에 두 채널 모두 감소했지만, 6월에 강하게 반등했습니다. 특히 <strong>카페 내 검색이 +31.5%</strong>로 급증했습니다. 특정 건강 이슈나 외부 사건이 과거 회원들의 재방문을 촉발한 것으로 보입니다.
+  </div>
+</div>
+
+<!-- ===== 4: 검색 의도 분석 ===== -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num amber">4</span>
+    <h2 style="margin:0">사람들은 무엇을 검색하는가 — 의도 분석</h2>
+  </div>
+
+  <p>
+    집계된 모든 키워드를 다섯 가지 의도 범주로 분류했습니다. 사람들이 이 카페를 찾거나 재탐색할 때 실제로 무엇을 찾고 있는지를 보여줍니다.
+  </p>
+
+  <div class="two-col">
+    <div>
+      <h3 style="text-align:center;font-size:0.88rem">🌐 검색유입<br><span class="small">"새로운 방문자가 찾는 것"</span></h3>
+      <div class="donut-wrap">
+        <div class="donut" style="background:conic-gradient(#3b82f6 0% 57.0%, #ef4444 57.0% 74.2%, #10b981 74.2% 83.4%, #f59e0b 83.4% 88.0%, #94a3b8 88.0% 100%)">
+          <div class="donut-hole">57%<br><span class="small">약물</span></div>
+        </div>
+      </div>
+      <div class="donut-legend">
+        <div><span class="legend-dot" style="background:#3b82f6"></span> 약물 검색: <strong>57.0%</strong> (2,742회)</div>
+        <div><span class="legend-dot" style="background:#ef4444"></span> 암 종류별: <strong>17.2%</strong> (826회)</div>
+        <div><span class="legend-dot" style="background:#10b981"></span> 천연물·보조제: <strong>9.2%</strong> (444회)</div>
+        <div><span class="legend-dot" style="background:#f59e0b"></span> 복용법·구입·임상: <strong>4.6%</strong> (219회)</div>
+        <div><span class="legend-dot" style="background:#94a3b8"></span> 기타: <strong>12.0%</strong> (579회)</div>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="text-align:center;font-size:0.88rem">🔍 카페 내 검색<br><span class="small">"기존 회원이 다시 찾는 것"</span></h3>
+      <div class="donut-wrap">
+        <div class="donut" style="background:conic-gradient(#3b82f6 0% 51.2%, #ef4444 51.2% 68.7%, #10b981 68.7% 74.8%, #f59e0b 74.8% 76.8%, #94a3b8 76.8% 100%)">
+          <div class="donut-hole">51%<br><span class="small">약물</span></div>
+        </div>
+      </div>
+      <div class="donut-legend">
+        <div><span class="legend-dot" style="background:#3b82f6"></span> 약물 검색: <strong>51.2%</strong> (1,111회)</div>
+        <div><span class="legend-dot" style="background:#ef4444"></span> 암 종류별: <strong>17.5%</strong> (380회)</div>
+        <div><span class="legend-dot" style="background:#10b981"></span> 천연물·보조제: <strong>6.1%</strong> (132회)</div>
+        <div><span class="legend-dot" style="background:#f59e0b"></span> 복용법·구입·임상: <strong>2.0%</strong> (44회)</div>
+        <div><span class="legend-dot" style="background:#94a3b8"></span> 기타: <strong>23.2%</strong> (504회)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout dark" style="margin-top:16px">
+    <strong>압도적인 1위 의도는 약물 정보입니다.</strong> 이버멕틴, 펜벤다졸, 메벤다졸, 니클로사마이드, 이트라코나졸 같은 구체적인 약물명을 이미 알고 검색창에 입력하는 패턴입니다. 이들은 <em>"이 약이 우리 가족 암에 효과가 있을까?"</em>라는 질문을 품고 있습니다.
+  </div>
+
+  <!-- 약물 검색 TOP5 -->
+  <h3 style="margin-top:18px">🔬 약물 검색 TOP 5 (6개월 합계)</h3>
+  <div class="two-col">
+    <div>
+      <p style="font-weight:700;font-size:0.8rem;color:#64748b;margin-bottom:8px">검색유입 (외부)</p>
+      <div class="hbar"><span class="hbar-label">이버멕틴</span><div class="hbar-track"><div class="hbar-fill blue" style="width:100%">635</div></div></div>
+      <div class="hbar"><span class="hbar-label">펜벤다졸</span><div class="hbar-track"><div class="hbar-fill amber" style="width:51%">324</div></div></div>
+      <div class="hbar"><span class="hbar-label">니클로사마이드</span><div class="hbar-track"><div class="hbar-fill green" style="width:22%">135</div></div></div>
+      <div class="hbar"><span class="hbar-label">이트라코나졸</span><div class="hbar-track"><div class="hbar-fill purple" style="width:17%">106</div></div></div>
+      <div class="hbar"><span class="hbar-label">이버멕틴 직구</span><div class="hbar-track"><div class="hbar-fill red" style="width:16%">101</div></div></div>
+    </div>
+    <div>
+      <p style="font-weight:700;font-size:0.8rem;color:#64748b;margin-bottom:8px">카페 내 검색 (내부)</p>
+      <div class="hbar"><span class="hbar-label">이버멕틴</span><div class="hbar-track"><div class="hbar-fill blue" style="width:100%">185</div></div></div>
+      <div class="hbar"><span class="hbar-label">펜벤다졸</span><div class="hbar-track"><div class="hbar-fill amber" style="width:65%">120</div></div></div>
+      <div class="hbar"><span class="hbar-label">니클로사마이드</span><div class="hbar-track"><div class="hbar-fill green" style="width:60%">111</div></div></div>
+      <div class="hbar"><span class="hbar-label">이트라코나졸</span><div class="hbar-track"><div class="hbar-fill purple" style="width:42%">78</div></div></div>
+      <div class="hbar"><span class="hbar-label">파나쿠어</span><div class="hbar-track"><div class="hbar-fill red" style="width:28%">51</div></div></div>
+    </div>
+  </div>
+
+  <!-- 암 종류별 TOP5 -->
+  <h3 style="margin-top:18px">🏥 암 종류별 검색 TOP 5</h3>
+  <div class="two-col">
+    <div>
+      <p style="font-weight:700;font-size:0.8rem;color:#64748b;margin-bottom:8px">검색유입 (외부)</p>
+      <div class="hbar"><span class="hbar-label">췌장암</span><div class="hbar-track"><div class="hbar-fill blue" style="width:100%">188</div></div></div>
+      <div class="hbar"><span class="hbar-label">이철우 암</span><div class="hbar-track"><div class="hbar-fill amber" style="width:94%">177</div></div></div>
+      <div class="hbar"><span class="hbar-label">유방암</span><div class="hbar-track"><div class="hbar-fill green" style="width:33%">62</div></div></div>
+      <div class="hbar"><span class="hbar-label">췌장</span><div class="hbar-track"><div class="hbar-fill purple" style="width:22%">42</div></div></div>
+      <div class="hbar"><span class="hbar-label">폐암</span><div class="hbar-track"><div class="hbar-fill red" style="width:20%">38</div></div></div>
+    </div>
+    <div>
+      <p style="font-weight:700;font-size:0.8rem;color:#64748b;margin-bottom:8px">카페 내 검색 (내부)</p>
+      <div class="hbar"><span class="hbar-label">유방암</span><div class="hbar-track"><div class="hbar-fill blue" style="width:100%">82</div></div></div>
+      <div class="hbar"><span class="hbar-label">육종</span><div class="hbar-track"><div class="hbar-fill amber" style="width:66%">54</div></div></div>
+      <div class="hbar"><span class="hbar-label">폐암</span><div class="hbar-track"><div class="hbar-fill green" style="width:62%">51</div></div></div>
+      <div class="hbar"><span class="hbar-label">췌장암</span><div class="hbar-track"><div class="hbar-fill purple" style="width:62%">51</div></div></div>
+      <div class="hbar"><span class="hbar-label">췌장</span><div class="hbar-track"><div class="hbar-fill red" style="width:44%">36</div></div></div>
+    </div>
+  </div>
+
+  <div class="callout warn" style="margin-top:16px">
+    <strong>⚠ 중요한 한계 — '기타'의 존재:</strong> 위 의도 분류는 네이버가 개별 집계하는 검색유입 75개, 카페 내 검색 85개 키워드만을 분석한 것입니다. 그러나 <strong>검색유입의 약 80%</strong>, <strong>카페 내 검색의 약 60%</strong>가 '기타'로 묶여 집계되지 않습니다. "엄마 췌장암 4기 이버멕틴 복용 후기" 같은 개인 맞춤형 검색어들입니다. 즉, 표면에 보이는 키워드는 빙산의 일각에 불과합니다.
+  </div>
+</div>
+
+<!-- ===== 5: 상승/하락 트렌드 ===== -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num red">5</span>
+    <h2 style="margin:0">무엇이 뜨고, 무엇이 지는가 — 6개월 변화</h2>
+  </div>
+
+  <p>
+    1~3월(전반기)과 4~6월(후반기)를 비교하면 검색 관심사의 뚜렷한 이동이 보입니다.
+  </p>
+
+  <div class="two-col">
+    <div>
+      <h3 style="color:#059669;font-size:0.9rem">🔥 급증 — 최근 3개월간 새롭게 등장하거나 급성장</h3>
+
+      <div style="margin:10px 0">
+        <p style="font-weight:700;font-size:0.78rem;color:#64748b">검색유입 (외부)</p>
+        <table style="font-size:0.76rem">
+          <tr><th>키워드</th><th>1~3월</th><th>4~6월</th><th>상태</th></tr>
+          <tr><td>개똥쑥</td><td>0</td><td>98</td><td><span class="tag new">신규</span></td></tr>
+          <tr><td>이버멕틴 암</td><td>0</td><td>72</td><td><span class="tag new">신규</span></td></tr>
+          <tr><td>브로콜리 새싹</td><td>0</td><td>68</td><td><span class="tag new">신규</span></td></tr>
+          <tr><td>운모</td><td>0</td><td>47</td><td><span class="tag new">신규</span></td></tr>
+          <tr><td>"펜벤" "1년"</td><td>0</td><td>41</td><td><span class="tag new">신규</span></td></tr>
+          <tr><td>메벤다졸</td><td>0</td><td>32</td><td><span class="tag new">신규</span></td></tr>
+          <tr><td>파라캅</td><td>0</td><td>32</td><td><span class="tag new">신규</span></td></tr>
+        </table>
+      </div>
+
+      <div style="margin:10px 0">
+        <p style="font-weight:700;font-size:0.78rem;color:#64748b">카페 내 검색 (내부)</p>
+        <table style="font-size:0.76rem">
+          <tr><th>키워드</th><th>1~3월</th><th>4~6월</th><th>상태</th></tr>
+          <tr><td>개똥쑥</td><td>0</td><td>79</td><td><span class="tag new">신규</span></td></tr>
+          <tr><td>파라캅</td><td>0</td><td>31</td><td><span class="tag new">신규</span></td></tr>
+          <tr><td>피라맥스</td><td>0</td><td>29</td><td><span class="tag new">신규</span></td></tr>
+          <tr><td>비타민C</td><td>0</td><td>25</td><td><span class="tag new">신규</span></td></tr>
+          <tr><td>펜벤</td><td>0</td><td>22</td><td><span class="tag new">신규</span></td></tr>
+          <tr><td>헤라</td><td>0</td><td>22</td><td><span class="tag new">신규</span></td></tr>
+          <tr><td>교모세포종</td><td>0</td><td>16</td><td><span class="tag new">신규</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="color:#dc2626;font-size:0.9rem">❄️ 감소 — 한때 인기 있었으나 사라지거나 급감</h3>
+
+      <div style="margin:10px 0">
+        <p style="font-weight:700;font-size:0.78rem;color:#64748b">검색유입 (외부)</p>
+        <table style="font-size:0.76rem">
+          <tr><th>키워드</th><th>1~3월</th><th>4~6월</th><th>상태</th></tr>
+          <tr><td>이철우 암</td><td>126</td><td>51</td><td><span class="tag fall">-60%</span></td></tr>
+          <tr><td>소 생간</td><td>95</td><td>0</td><td><span class="tag gone">소멸</span></td></tr>
+          <tr><td>니타조사나이드 후기</td><td>57</td><td>0</td><td><span class="tag gone">소멸</span></td></tr>
+          <tr><td>플라이패치</td><td>53</td><td>0</td><td><span class="tag gone">소멸</span></td></tr>
+          <tr><td>투드카</td><td>53</td><td>0</td><td><span class="tag gone">소멸</span></td></tr>
+          <tr><td>오프라벨드럭</td><td>33</td><td>0</td><td><span class="tag gone">소멸</span></td></tr>
+        </table>
+      </div>
+
+      <div style="margin:10px 0">
+        <p style="font-weight:700;font-size:0.78rem;color:#64748b">카페 내 검색 (내부)</p>
+        <table style="font-size:0.76rem">
+          <tr><th>키워드</th><th>1~3월</th><th>4~6월</th><th>상태</th></tr>
+          <tr><td>펜벤다졸</td><td>73</td><td>47</td><td><span class="tag fall">-36%</span></td></tr>
+          <tr><td>유방암</td><td>61</td><td>21</td><td><span class="tag fall">-66%</span></td></tr>
+          <tr><td>니타조사나이드 후기</td><td>44</td><td>0</td><td><span class="tag gone">소멸</span></td></tr>
+          <tr><td>이버멕틴 구충제</td><td>36</td><td>0</td><td><span class="tag gone">소멸</span></td></tr>
+          <tr><td>알벤다졸</td><td>36</td><td>0</td><td><span class="tag gone">소멸</span></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:18px">📅 6월에 처음 등장한 키워드</h3>
+  <p>1~5월에는 전혀 검색되지 않다가 6월에 갑자기 나타난 키워드들입니다. 새로운 관심사나 외부 이슈를 반영합니다.</p>
+
+  <table>
+    <tr><th>경로</th><th>6월 신규 키워드 (조회수)</th></tr>
+    <tr>
+      <td><strong>검색유입</strong></td>
+      <td>
+        <span class="tag new">이버멕틴 직구 101</span>
+        <span class="tag new">췌장암 42</span>
+        <span class="tag new">폐암 38</span>
+        <span class="tag new">자궁근종 27</span>
+        <span class="tag new">이버멕틴+메벤다졸 20</span>
+        <span class="tag new">암환자 구충제 복용법 32</span>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>카페 내 검색</strong></td>
+      <td>
+        <span class="tag new">이버멕틴 68</span>
+        <span class="tag new">췌장암 41</span>
+        <span class="tag new">의무기록지 33</span>
+        <span class="tag new">자궁근종 27</span>
+        <span class="tag new">니타조사나이드 25</span>
+        <span class="tag new">구충제 18</span>
+      </td>
+    </tr>
+  </table>
+
+  <div class="callout info" style="margin-top:14px">
+    <strong>트렌드 변화 요약:</strong> 6월은 <strong>구체적인 암 진단명</strong>(췌장암, 폐암, 자궁근종)과 <strong>약물 구입 경로</strong>(이버멕틴 직구 101회)에 대한 검색이 두드러집니다. 펜벤다졸 관심은 감소하고 이버멕틴+메벤다졸 조합이 상승 중입니다. 천연물(개똥쑥, 브로콜리 새싹)은 꾸준한 성장세입니다. 전반적으로 <strong>더 구체적인 암 종류</strong>와 <strong>더 실용적인 구입 정보</strong> 쪽으로 검색이 진화하고 있습니다.
+  </div>
+</div>
+
+<!-- ===== 6: 인사이트 ===== -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num slate">6</span>
+    <h2 style="margin:0">이 데이터가 카페 관계자에게 말해주는 것</h2>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <h4>1. 카페는 죽지 않았습니다 — 도서관으로 진화했습니다</h4>
+      <p><strong>매달 약 4,900명</strong>이 이 카페의 과거 게시글을 읽고 있습니다. 2019~2021년에 작성된 글이 2026년 지금도 환자와 가족들에게 발견되고 있습니다. 커뮤니티로서의 소통은 멈췄지만, 참고자료 아카이브로서의 생명력은 여전히 살아있습니다.</p>
+    </div>
+
+    <div class="tl-item">
+      <h4>2. 사람들이 가장 절실하게 원하는 것: 약물 정보</h4>
+      <p><strong>추적된 검색 의도의 57%</strong>가 구체적인 약물명입니다. 이버멕틴(635회), 펜벤다졸(324회), 니클로사마이드(135회), 이트라코나졸(106회), 메벤다졸. 이 검색어들 뒤에는 <em>"이 약이 우리 가족 암에 효과가 있을까?"</em>라는 절박한 질문이 있습니다. 이 카페의 게시글은 그 질문에 대한 답변이 되고 있습니다.</p>
+    </div>
+
+    <div class="tl-item">
+      <h4>3. 암 종류별 검색이 급증하고 있습니다 — 특히 6월</h4>
+      <p>췌장암(188회), 자궁근종(27회), 폐암(38회), 교모세포종(23회)이 뚜렷한 검색 주제로 부상했습니다. 사람들은 <strong>이미 진단을 받은 상태</strong>에서 구체적인 정보를 찾아 이 카페에 도달하고 있습니다. 현재는 검색 알고리즘이 보여주는 아무 글로나 유입되지만, 암 종류별로 콘텐츠를 정리하면 훨씬 더 유용한 아카이브가 될 수 있습니다.</p>
+    </div>
+
+    <div class="tl-item">
+      <h4>4. 천연물은 조용하지만 꾸준한 제3의 축입니다</h4>
+      <p>개똥쑥(98회, 2026년 완전 신규), 브로콜리 새싹(68회), 소 생간(95회→6월 소멸), 운모(47회). 약물 검색과 나란히 <strong>보완대체요법</strong>에 대한 관심도 존재합니다. 방문자들은 약물만 찾는 것이 아니라 <strong>선택지를 찾고 있습니다</strong>.</p>
+    </div>
+
+    <div class="tl-item">
+      <h4>5. 아카이브에는 사서가 없습니다</h4>
+      <p>검색유입은 사람들이 <strong>우연히</strong> 게시글을 발견한다는 뜻입니다. 카페 내 검색은 회원들이 예전 글을 <strong>기억해서</strong> 다시 찾는다는 뜻입니다. 두 패턴 모두 수동적입니다. 약물별·암 종류별·프로토콜별로 글을 연결해주는 <strong>색인</strong>이 없다는 뜻이기도 합니다. "이런 정보를 찾는 분들은 여기로"라는 큐레이션이 없습니다.</p>
+    </div>
+
+    <div class="tl-item">
+      <h4>6. 구입 경로 검색은 민감하지만 현실입니다</h4>
+      <p>"이버멕틴 직구"가 6월에 101회로 갑자기 등장했습니다. "구입처", "동물용" 같은 검색어도 있습니다. 약물에 대한 정보를 찾은 사람들이 다음 단계로 <strong>어디서 구할 수 있는지</strong>를 찾기 시작한 것입니다. 민감한 주제이지만, 데이터는 이것이 실제 수요임을 명확히 보여줍니다.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 7: 실천 제안 ===== -->
+<div class="card">
+  <div class="card-header">
+    <span class="card-num green" style="background:#059669">→</span>
+    <h2 style="margin:0">지금 할 수 있는 가장 작은 실천</h2>
+  </div>
+
+  <div class="callout good">
+    <strong>큐레이션 색인 게시글 하나를 만들어 고정하세요.</strong>
+  </div>
+
+  <p>
+    사람들이 실제로 검색하는 키워드를 바탕으로, 기존에 있는 최고의 게시글들을 네 갈래로 정리하는 것입니다:
+  </p>
+
+  <table>
+    <tr><th>섹션</th><th>내용</th><th>근거 (실제 검색 수요)</th></tr>
+    <tr>
+      <td><strong>약물별 가이드</strong></td>
+      <td>이버멕틴·펜벤다졸·메벤다졸·니클로사마이드·이트라코나졸 — 약물당 최고 게시글 1~2개 링크</td>
+      <td>전체 추적 키워드의 57%</td>
+    </tr>
+    <tr>
+      <td><strong>암 종류별 정보</strong></td>
+      <td>췌장암·유방암·폐암·교모세포종·자궁근종 관련 프로토콜 토론글 링크</td>
+      <td>췌장암 188회, 유방암 62회, 폐암 38회 (상승 중)</td>
+    </tr>
+    <tr>
+      <td><strong>천연물·보조요법</strong></td>
+      <td>개똥쑥·브로콜리 새싹·비타민C·운모 — 경험담과 연구 요약</td>
+      <td>개똥쑥 98회 (2026년 신규), 브로콜리 새싹 68회</td>
+    </tr>
+    <tr>
+      <td><strong>자주 묻는 질문</strong></td>
+      <td>구입 방법·용량 참고자료·혈액검사 모니터링·부작용 대처</td>
+      <td>직구 101회, 의무기록지 33회, 보건소 혈액검사</td>
+    </tr>
+  </table>
+
+  <div class="callout dark" style="margin-top:14px;text-align:center">
+    <strong>색인 게시글 하나. 네 개의 섹션. 기존에 있는 최고의 글들을 링크.</strong><br>
+    새로운 글을 쓸 필요도 없습니다. 이미 있는 자산을<br>
+    사람들이 이미 찾고 있는 방식으로 정리하기만 하면 됩니다.
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="card" style="background:#f1f5f9;border-color:#cbd5e1">
+  <h3 style="margin-bottom:8px">분석 노트</h3>
+  <p class="small" style="margin-bottom:4px">
+    <strong>데이터 출처:</strong> 2026년 7월 1일 네이버 카페 FriendsofHippocrates에서 다운로드한 월간 통계 18개 파일 (게시글순위·유입분석: 검색유입 + 카페 내 검색).
+  </p>
+  <p class="small" style="margin-bottom:4px">
+    <strong>한계:</strong> 네이버는 검색유입의 약 35%, 카페 내 검색의 약 41%만 개별 키워드로 집계합니다. 나머지 트래픽은 '기타'로 묶여 분석에서 제외됩니다. 게시글 조회수에는 중복 조회가 포함될 수 있습니다. 이 보고서는 아카이브 소비 분석이지 커뮤니티 활성화 분석이 아닙니다.
+  </p>
+  <p class="small" style="margin-bottom:4px">
+    <strong>방법론:</strong> 키워드는 패턴 매칭으로 의도 범주에 분류했습니다. 모멘텀은 1~3월 합계 대비 4~6월 합계 비율로 계산했습니다. '급증' = 1.5배 이상 또는 신규 등장. '감소' = 0.5배 이하 또는 소멸.
+  </p>
+  <p class="small">
+    생성일: 2026년 7월 1일 · Python 3 + openpyxl · 모든 시각화는 CSS/HTML만 사용 (JavaScript 불필요).
+  </p>
+</div>
+
+</div>
+
+<footer style="text-align:center;padding:28px 16px;font-size:0.75rem;color:#94a3b8">
+  FriendsofHippocrates — 살아있는 아카이브 · 검색 키워드 분석 · 2026년 1월~6월
+</footer>
+
+</body>
+</html>

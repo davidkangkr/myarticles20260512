@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FriendsofHippocrates 6개월 통계 분석 (2026.01-06)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: #f5f5f5;
+    color: #1f2937;
+    line-height: 1.7;
+    padding: 0 0 40px 0;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px 16px; }
+  header {
+    background: #0f172a;
+    color: #f1f5f9;
+    padding: 28px 20px;
+  }
+  header h1 { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.3px; }
+  header p { font-size: 0.85rem; color: #94a3b8; margin-top: 4px; }
+  .section {
+    background: #ffffff;
+    border-radius: 6px;
+    padding: 22px 20px;
+    margin: 16px 0;
+    break-inside: avoid;
+  }
+  .section-header {
+    background: #1e40af;
+    color: #ffffff;
+    padding: 12px 16px;
+    margin: -22px -20px 18px -20px;
+    border-radius: 6px 6px 0 0;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  .section-header.teal { background: #0f766e; }
+  .section-header.slate { background: #334155; }
+  .section-header.amber { background: #b45309; }
+  .section-header.indigo { background: #4f46e5; }
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 10px 0;
+  }
+  .kpi-box { border-radius: 6px; padding: 14px 16px; color: #ffffff; }
+  .kpi-box.blue { background: #2563eb; }
+  .kpi-box.green { background: #059669; }
+  .kpi-box.red { background: #b91c1c; }
+  .kpi-box.teal { background: #0d9488; }
+  .kpi-box .label { font-size: 0.78rem; opacity: 0.88; }
+  .kpi-box .value { font-size: 1.35rem; font-weight: 700; margin-top: 2px; }
+  .kpi-box .sub { font-size: 0.75rem; opacity: 0.8; margin-top: 2px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.82rem; }
+  th { background: #1e293b; color: #f8fafc; padding: 8px 10px; text-align: left; font-weight: 600; }
+  td { padding: 7px 10px; border-bottom: 1px solid #e2e8f0; }
+  tr:nth-child(even) td { background: #f8fafc; }
+  .up { color: #16a34a; font-weight: 600; }
+  .down { color: #dc2626; font-weight: 600; }
+  .insight {
+    background: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    padding: 12px 14px;
+    margin: 12px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.86rem;
+  }
+  .insight.blue-box { background: #eff6ff; border-left-color: #2563eb; }
+  .insight.green-box { background: #f0fdf4; border-left-color: #16a34a; }
+  .insight.red-box { background: #fef2f2; border-left-color: #dc2626; }
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    margin-right: 4px;
+  }
+  .tag.green { background: #d1fae5; color: #065f46; }
+  .tag.red { background: #fee2e2; color: #991b1b; }
+  .tag.blue { background: #dbeafe; color: #1e40af; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .title-cell {
+    font-size: 0.78rem;
+    line-height: 1.5;
+    word-break: keep-all;
+  }
+  @media (max-width: 640px) {
+    .kpi-grid, .two-col { grid-template-columns: 1fr; }
+    .container { padding: 12px 10px; }
+    header { padding: 20px 14px; }
+    header h1 { font-size: 1.1rem; }
+  }
+  @media print {
+    body { background: #fff; }
+    .section { break-inside: avoid; page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container" style="padding:0;">
+    <h1>FriendsofHippocrates 6개월 통계 분석</h1>
+    <p>2026년 1월 ~ 6월 | 게시글순위·유입분석 통합 리포트 | 분석일: 2026.07.01</p>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- 종합 KPI -->
+  <div class="section">
+    <div class="section-header">종합 핵심 지표 (6개월)</div>
+    <div class="kpi-grid">
+      <div class="kpi-box blue">
+        <div class="label">게시글 TOP10 조회수 합 (1월→6월)</div>
+        <div class="value">2,292 → 3,940회</div>
+        <div class="sub">6개월 최고: 6월 (+72% over 1월)</div>
+      </div>
+      <div class="kpi-box green">
+        <div class="label">카페 내 검색 총량 (1월→6월)</div>
+        <div class="value">782 → 1,011회</div>
+        <div class="sub">6월 최고치, +29.3%</div>
+      </div>
+      <div class="kpi-box teal">
+        <div class="label">전체 유입 합계 (최고월)</div>
+        <div class="value">5,455회</div>
+        <div class="sub">3~4월 피크, 5월 감소, 6월 반등</div>
+      </div>
+      <div class="kpi-box red">
+        <div class="label">핵심 키워드 변화</div>
+        <div class="value">이버멕틴 1위</div>
+        <div class="sub">3~6월 연속 검색유입 1위, 카페내검색 6월 최상</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 검색어와 게시글의 불일치 -->
+  <div class="section">
+    <div class="section-header amber">주의: 검색어와 게시글 제목은 일치하지 않을 수 있음</div>
+    <p style="font-size:0.88rem;color:#475569;margin-bottom:8px;">
+      아래 TOP 게시글 목록만 보면 주제를 오해하기 쉽습니다. 같은 키워드로 들어온 사용자가 다른 게시글을 보는 게 normal 이기 때문입니다.
+    </p>
+    <ul style="font-size:0.86rem;color:#334155;margin-left:18px;line-height:1.8;">
+      <li><strong>검색 intent ≠ 실제 게시글 제목</strong>: "구충제 후기"를 검색한 사용자가 "이버멕틴+메벤다졸 임상결과" 게시글을 클릭할 수 있음. 피해 사례/후기를 찾고, 그 글 안에 이버멕틴 내용이 있기 때문.</li>
+      <li><strong>카페내 검색은 재탐색</strong>: 이미 읽은 글을 다시 찾거나, 특정 단어(의무기록지, 니타조사나이드 등)를关键词으로 재검색하는 것.</li>
+      <li><strong>60% "기타" 분류</strong>: 개인 맞춤 검색이 대부분이라 집계되지 않아, 표면에 보이는 키워드와 실제 사용자 니즈 사이에 큰 갭이 있음.</li>
+      <li><strong>네이버 노출 로직</strong>: 외부 검색에서는 네이버가 게시글 제목+내용을 전체적으로 색인해서 보여주므로, 검색어와 제목이 반드시 일치하지 않음.</li>
+    </ul>
+  </div>
+
+  <!-- 월별 유입 총량 추이 -->
+  <div class="section">
+    <div class="section-header indigo">1. 월별 유입 총량 추이</div>
+    <p style="font-size:0.88rem;color:#475569;margin-bottom:10px;">검색유입과 카페내검색의 6개월 흐름입니다.</p>
+    <table>
+      <tr>
+        <th>월</th><th>검색유입</th><th>카페내검색</th><th>합계</th><th>전월대비</th>
+      </tr>
+      <tr><td>1월</td><td>3,559</td><td>782</td><td><strong>4,341</strong></td><td class="down">-</td></tr>
+      <tr><td>2월</td><td>3,597</td><td>843</td><td><strong>4,440</strong></td><td class="up">+2.3%</td></tr>
+      <tr><td>3월</td><td>4,418</td><td>1,028</td><td><strong>5,446</strong></td><td class="up">+22.7%</td></tr>
+      <tr><td>4월</td><td>4,631</td><td>824</td><td><strong>5,455</strong></td><td class="up">+0.2%</td></tr>
+      <tr><td>5월</td><td>3,966</td><td>769</td><td><strong>4,735</strong></td><td class="down">-13.2%</td></tr>
+      <tr><td>6월</td><td>4,008</td><td>1,011</td><td><strong>5,019</strong></td><td class="up">+6.0%</td></tr>
+    </table>
+    <div class="insight blue-box">
+      <strong>[인사이트 1] 3~4월 피크 → 5월 조정 → 6월 둔화 회복</strong><br>
+      전체 유입은 3~4월에 가장 높았고, 5월에 감소했다가 6월에 반등(카페내검색 +31%). 검색유입은 거의 정체하지만, 카페내 재방문/재검색이 늘어나는 패턴.
+    </div>
+  </div>
+
+  <!-- 조회수 TOP5 6개월 변화 -->
+  <div class="section">
+    <div class="section-header">2. 조회수 TOP5 6개월 변화 (실제 게시글 제목)</div>
+    <p style="font-size:0.88rem;color:#475569;margin-bottom:10px;">월별로 가장 많이 조회된 게시글의 실제 제목입니다.</p>
+    <table>
+      <tr><th>월</th><th>1위</th><th>2위</th><th>3위</th></tr>
+      <tr>
+        <td>1월</td>
+        <td class="title-cell">[293회] 요드(포비돈 요드), 살균제의 왕</td>
+        <td class="title-cell">[263회] 삭제된 게시글 입니다.</td>
+        <td class="title-cell">[245회] [해외 논문] 깜짝 놀랄 만한 2026년 논문 - 위장된 암: 몸속 기생충 Cancer in disguise: a parasite within</td>
+      </tr>
+      <tr>
+        <td>2월</td>
+        <td class="title-cell">[314회] [충격] 펜벤다졸 화학 계열과 암: 50년 동안 30건의 특허 목록들 - 그들은 다 알고 있었다.</td>
+        <td class="title-cell">[262회] 벌에 쏘이면 암이 사라진다.60분만에 전멸한 유방암 세포</td>
+        <td class="title-cell">[260회] 삭제된 게시글 입니다.</td>
+      </tr>
+      <tr>
+        <td>3월</td>
+        <td class="title-cell">[296회] 재발 걱정 때문에 이뮤코텔 알아보고 있어요</td>
+        <td class="title-cell">[231회] 멜라토닌은 암세포를 정상세포로 재 프로그래밍한다. 필히 보충해야 하는 이유</td>
+        <td class="title-cell">[212회] 비타민 K2 메가도스 폭탄으로 암세포 3일만에 사멸</td>
+      </tr>
+      <tr>
+        <td>4월</td>
+        <td class="title-cell">[418회] 삭제된 게시글 입니다.</td>
+        <td class="title-cell">[278회] 50일짜리 구충항암_프로토콜 문서(본인동의후 올립니다)</td>
+        <td class="title-cell">[273회] 삭제된 게시글 입니다.</td>
+      </tr>
+      <tr>
+        <td>5월</td>
+        <td class="title-cell">[293회] [강추] 조티펜스님에 관한 모든 것들을 다시 깔끔하게 정리함. 간단 버전과 자세한 버전으로 구성. 많이 공유해주세요</td>
+        <td class="title-cell">[286회] [국내논문] 2023년 제주대학교 주홍구 교수의 펜벤다졸 항암 실험 논문에 대한 저의 잘못된 해석, 사과 드립니다.</td>
+        <td class="title-cell">[265회] 여름배추김치레시피</td>
+      </tr>
+      <tr>
+        <td>6월</td>
+        <td class="title-cell">[686회] 삭제된 게시글 입니다.</td>
+        <td class="title-cell">[577회] 구충제 후기 카페 피해 사례 접수 중입니다</td>
+        <td class="title-cell">[522회] 암 환자에서 이버멕틴 및 메벤다졸의 실제 임상 결과</td>
+      </tr>
+    </table>
+    <div class="insight">
+      <strong>[인사이트 2] TOP 게시글 주제의 3단계 변화</strong><br>
+      1~3월: 기능성 약물(요드, 펜벤다졸, 멜라토닌, 이뮤코텔, 비타민K2)<br>
+      4~5월: 프로토콜 정리(구충항암 프로토콜, 조티펜스, 펜벤다졸 논문)<br>
+      6월: <strong>부작용/피해 경험</strong> → 구충제 실패 후 대안(이버멕틴+메벤다졸)으로 전환
+    </div>
+  </div>
+
+  <!-- 검색유입 핵심 키워드 -->
+  <div class="section">
+    <div class="section-header teal">3. 검색유입 핵심 키워드 6개월 추이</div>
+    <p style="font-size:0.88rem;color:#475569;margin-bottom:10px;">외부 검색(네이버 통합/카페검색 등)에서 카페로 유입된 검색어의 변화입니다.</p>
+
+    <table>
+      <tr><th>키워드</th><th>1월</th><th>2월</th><th>3월</th><th>4월</th><th>5월</th><th>6월</th><th>추이</th></tr>
+      <tr>
+        <td><span class="tag green">핵심</span> 이버멕틴</td>
+        <td>31</td><td>122</td><td>109</td><td>119</td><td>108</td><td>146</td>
+        <td class="up">3월 정착, 6월 최고</td>
+      </tr>
+      <tr>
+        <td>펜벤다졸</td>
+        <td>25</td><td>61</td><td>67</td><td>88</td><td>50</td><td>33</td>
+        <td class="down">4월 피크 후 하락</td>
+      </tr>
+      <tr>
+        <td><span class="tag blue">신규</span> 이버멕틴 직구</td>
+        <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>101</td>
+        <td class="up">6월 급증</td>
+      </tr>
+      <tr>
+        <td>암찾사</td>
+        <td>53</td><td>0</td><td>0</td><td>57</td><td>30</td><td>48</td>
+        <td>불규칙</td>
+      </tr>
+      <tr>
+        <td><span class="tag green">신규</span> 췌장암</td>
+        <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>42</td>
+        <td class="up">6월 신규</td>
+      </tr>
+      <tr>
+        <td><span class="tag green">신규</span> 폐암</td>
+        <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>38</td>
+        <td class="up">6월 신규</td>
+      </tr>
+      <tr>
+        <td>니타조사나이드</td>
+        <td>0</td><td>0</td><td>38</td><td>42</td><td>0</td><td>37</td>
+        <td>3~4월, 6월 재등장</td>
+      </tr>
+      <tr>
+        <td><span class="tag green">신규</span> 브로콜리 새싹</td>
+        <td>0</td><td>0</td><td>0</td><td>37</td><td>0</td><td>31</td>
+        <td>4월, 6월</td>
+      </tr>
+      <tr>
+        <td><span class="tag green">신규</span> 자궁근종</td>
+        <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>27</td>
+        <td class="up">6월 신규</td>
+      </tr>
+      <tr>
+        <td><span class="tag red">소멸</span> 이트라코나졸</td>
+        <td>0</td><td>0</td><td>27</td><td>32</td><td>47</td><td>0</td>
+        <td class="down">5월 마지막</td>
+      </tr>
+      <tr>
+        <td><span class="tag red">소멸</span> 보건소 혈액검사</td>
+        <td>0</td><td>23</td><td>22</td><td>70</td><td>46</td><td>0</td>
+        <td class="down">5월 마지막</td>
+      </tr>
+      <tr>
+        <td><span class="tag red">소멸</span> 디스토시드</td>
+        <td>0</td><td>0</td><td>50</td><td>0</td><td>50</td><td>0</td>
+        <td class="down">5월 마지막</td>
+      </tr>
+    </table>
+
+    <div class="insight green-box">
+      <strong>[인사이트 3] 이버멕틴은 3월부터 압도적 1위로 정착</strong><br>
+      2월(122회)에 첫 등장한 이버멕틴은 3~6월 연속 검색유입 1위. 6월에는 '이버멕틴 직구'가 별도로 등장(101회)하여 약물 자체 + 구매경로까지 검색하는 실사용자 수요가 증가.
+    </div>
+  </div>
+
+  <!-- 카페내 검색 핵심 키워드 -->
+  <div class="section">
+    <div class="section-header slate">4. 카페 내 검색 핵심 키워드 6개월 추이</div>
+    <p style="font-size:0.88rem;color:#475569;margin-bottom:10px;">카페 회원들이 내부에서 검색한 실제 관심사입니다.</p>
+
+    <table>
+      <tr><th>키워드</th><th>1월</th><th>2월</th><th>3월</th><th>4월</th><th>5월</th><th>6월</th><th>추이</th></tr>
+      <tr>
+        <td><span class="tag green">핵심</span> 이버멕틴</td>
+        <td>15</td><td>49</td><td>24</td><td>14</td><td>15</td><td>68</td>
+        <td class="up">6월 급증</td>
+      </tr>
+      <tr>
+        <td>펜벤다졸</td>
+        <td>12</td><td>29</td><td>32</td><td>30</td><td>17</td><td>0</td>
+        <td class="down">6월 소멸</td>
+      </tr>
+      <tr>
+        <td>개똥쑥</td>
+        <td>0</td><td>0</td><td>0</td><td>42</td><td>17</td><td>20</td>
+        <td>4월 최고</td>
+      </tr>
+      <tr>
+        <td><span class="tag green">신규</span> 췌장암</td>
+        <td>0</td><td>10</td><td>0</td><td>0</td><td>0</td><td>41</td>
+        <td class="up">6월 급증</td>
+      </tr>
+      <tr>
+        <td><span class="tag green">신규</span> 의무기록지</td>
+        <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>33</td>
+        <td class="up">6월 신규</td>
+      </tr>
+      <tr>
+        <td>니타조사나이드</td>
+        <td>0</td><td>0</td><td>24</td><td>0</td><td>0</td><td>25</td>
+        <td>3월, 6월</td>
+      </tr>
+      <tr>
+        <td><span class="tag green">신규</span> 자궁근종</td>
+        <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>27</td>
+        <td class="up">6월 신규</td>
+      </tr>
+      <tr>
+        <td><span class="tag red">소멸</span> 이트라코나졸</td>
+        <td>0</td><td>0</td><td>24</td><td>10</td><td>44</td><td>0</td>
+        <td class="down">5월 마지막</td>
+      </tr>
+      <tr>
+        <td><span class="tag red">소멸</span> 피라맥스</td>
+        <td>0</td><td>0</td><td>0</td><td>0</td><td>29</td><td>0</td>
+        <td class="down">5월 마지막</td>
+      </tr>
+      <tr>
+        <td><span class="tag red">소멸</span> 멜라토닌</td>
+        <td>0</td><td>0</td><td>0</td><td>0</td><td>27</td><td>0</td>
+        <td class="down">5월 마지막</td>
+      </tr>
+    </table>
+
+    <div class="insight blue-box">
+      <strong>[인사이트 4] 5~6월: 약물검색에서 암/치료정보로 패턴이동</strong><br>
+      1~3월: 이버멕틴, 펜벤다졸, 이트라코나졸 등 구충제/약물 검색이 주류.<br>
+      4월: 개똥쑥(아르테미시닌) 등 천연물 검색 증가.<br>
+      5~6월: 이트라코나졸·피라맥스·멜라토닌 소멸 → 췌장암, 자궁근종, 의무기록지 등 <strong>실제 치료 사례와 진단 자료</strong>로 수요 이동. 게시판 내에서 이미 방문한 회원들이 직접 정보를 찾는 패턴이 구체화.
+    </div>
+  </div>
+
+  <!-- 이버멕틴 vs 펜벤다졸 -->
+  <div class="section">
+    <div class="section-header">5. 이버멕틴 vs 펜벤다졸 — 완전한 교체</div>
+    <p style="font-size:0.88rem;color:#475569;margin-bottom:10px;">6개월 동안 가장 큰 의미 변화는 두 약물 키워드의 교체입니다.</p>
+
+    <div class="two-col">
+      <div>
+        <p style="font-weight:700;font-size:0.85rem;margin-bottom:6px;">펜벤다졸 (외부 검색유입)</p>
+        <table>
+          <tr><th>월</th><th>조회수</th></tr>
+          <tr><td>1월</td><td>25</td></tr>
+          <tr><td>2월</td><td>61</td></tr>
+          <tr><td>3월</td><td>67</td></tr>
+          <tr><td>4월</td><td>88 (피크)</td></tr>
+          <tr><td>5월</td><td>50</td></tr>
+          <tr><td>6월</td><td>33</td></tr>
+        </table>
+        <p style="font-size:0.78rem;color:#dc2626;margin-top:8px;">4월(88) 이후 지속 하락, 6월 33회</p>
+      </div>
+      <div>
+        <p style="font-weight:700;font-size:0.85rem;margin-bottom:6px;">이버멕틴 (외부 검색유입)</p>
+        <table>
+          <tr><th>월</th><th>조회수</th></tr>
+          <tr><td>1월</td><td>31</td></tr>
+          <tr><td>2월</td><td>122</td></tr>
+          <tr><td>3월</td><td>109</td></tr>
+          <tr><td>4월</td><td>119</td></tr>
+          <tr><td>5월</td><td>108</td></tr>
+          <tr><td>6월</td><td>146 (최고)</td></tr>
+        </table>
+        <p style="font-size:0.78rem;color:#16a34a;margin-top:8px;">2월 정착 후 6월 최고치 경신</p>
+      </div>
+    </div>
+
+    <div class="insight red-box">
+      <strong>[Tipping Point] 4~5월 사이 교체 완료</strong><br>
+      4월: 펜벤다졸(88) < 이버멕틴(119) — 두 약물 모두 존재.<br>
+      5월: 펜벤다졸(50) < 이버멕틴(108) — 격차 2배.<br>
+      6월: 펜벤다졸(33) < 이버멕틴(146) — 격차 4.4배.<br>
+      이 시점부터 카페 콘텐츠 생태계가 펜벤다졸 중심에서 이버멕틴+메벤다졸 조합으로 완전히 이동한 것으로 보임.
+    </div>
+  </div>
+
+  <!-- 게시판·작성자 집중도 -->
+  <div class="section">
+    <div class="section-header">6. 게시판·작성자 집중도</div>
+
+    <table>
+      <tr>
+        <th>월</th>
+        <th>1위 게시판</th>
+        <th>자유게시판 대표 글</th>
+        <th>정보 공유 대표 글</th>
+        <th>TOP 작성자</th>
+      </tr>
+      <tr><td>1월</td><td>자유게시판</td><td class="title-cell">요드(포비돈 요드)</td><td class="title-cell">[해외 논문] 깜짝 놀랄 만한 2026년 논문</td><td>브레이크쓰루우</td></tr>
+      <tr><td>2월</td><td>자유게시판</td><td class="title-cell">벌에 쏘이면 암이 사라진다</td><td class="title-cell">[충격] 펜벤다졸 화학 계열과 암</td><td>브레이크쓰루우</td></tr>
+      <tr><td>3월</td><td>정보 공유 ↑</td><td class="title-cell">재발 걱정 때문에 이뮤코텔</td><td class="title-cell">멜라토닌은 암세포를 재프로그래밍</td><td>브레이크쓰로우</td></tr>
+      <tr><td>4월</td><td>정보 공유 ↑↑</td><td class="title-cell">삭제된 게시글</td><td class="title-cell">50일짜리 구충항암_프로토콜 문서</td><td>브레이크쓰루우</td></tr>
+      <tr><td>5월</td><td>자유게시판</td><td class="title-cell">여름배추김치레시피</td><td class="title-cell">조티펜스님 정리</td><td>브레이크쓰루우 / 꿈많은사람2</td></tr>
+      <tr><td>6월</td><td>정보 공유 1위</td><td class="title-cell">구충제 피해 사례 접수</td><td class="title-cell">암 환자에서 이버멕틴 및 메벤다졸의 실제 임상 결과</td><td>브레이크쓰루우 (+76%) / 꿈많은사람2 (+100%)</td></tr>
+    </table>
+
+    <div class="insight">
+      <strong>[인사이트 5] 정보 공유 게시판의 6월 독주</strong><br>
+      6월에 정보 공유 게시판이 조회수 5,368회로 자유게시판(5,111회)을 제치고 1위 등극. 브레이크쓰루우(17→30개), 꿈많은사람2(12→24개) 두 작성자가 모든 상위 랭킹을 석권하며 커뮤니티 영향력 집중 현상이 뚜렷.
+    </div>
+  </div>
+
+  <!-- 종합 인사이트 -->
+  <div class="section">
+    <div class="section-header">종합 인사이트</div>
+
+    <div class="insight blue-box">
+      <strong>1) 콘텐츠 생태계의 3단계 진화</strong><br>
+      1~3월: 기능성 약물(요드, 펜벤다졸, 멜라토닌, 이뮤코텔) 중심.<br>
+      4~5월: 프로토콜 정리/커뮤니티 내 체계화(조티펜스, 구충항암 프로토콜).<br>
+      6월: <strong>구충제 피해 경험 → 이버멕틴/메벤다졸 대안</strong>으로 전환.<br>
+      이 단계별 전환은 사용자 집단의 성숙도 변화와 일치.
+    </div>
+
+    <div class="insight green-box">
+      <strong>2) 이버멕틴의 완전한 헤게모니</strong><br>
+      3월부터 검색유입 1위로 정착한 이버멕틴은 6월에 직구 검색까지 분화(101회). 카페내검색도 6월에 68회로 급증. 외부 유입 → 내부 검색 → 재방문이라는 선순환이 구축되고 있음.
+    </div>
+
+    <div class="insight">
+      <strong>3) 암 유형별 세분화 수요 급증</strong><br>
+      6월에 췌장암(42), 폐암(38), 자궁근종(27) 등 구체 암 유형 검색이 신규 등장. '구충제 만능'에서 '병별 맞춤 치료 정보'로 수요가 이동하는 패턴. 카페가 특정 약물 커뮤니티에서 종양 유형별 정보 허브로 진화하고 있음.
+    </div>
+
+    <div class="insight">
+      <strong>4) 검색 '기타(분류불가)' 비중</strong><br>
+      6월 현재: 검색유입 65.1%, 카페내검색 59.3%. 개인이 처한 구체 상황(병기, 병원, 증상, 약물조합)을 검색하는 비중이 매우 높음. 키워드 분류를 강화하면 핵심 약물/질병 키워드의 실제 비중이 더 명확히 드러날 것.
+    </div>
+
+    <div class="insight red-box">
+      <strong>5) 펜벤다졸/보충제 붕괴 패턴</strong><br>
+      펜벤다졸(4월 88회 → 6월 33회), 이트라코나졸(5월 47회 → 6월 0회), 디스토시드(5월 50회 → 6월 0회), 보건소 혈액검사(5월 46회 → 6월 0회) 등 일부 키워드가 6월 완전히 소멸. 과도한 기대를 한 사용자들의 이탈 또는 주제 전환을 방증.
+    </div>
+  </div>
+
+</div>
+
+<footer style="text-align:center;padding:20px;font-size:0.78rem;color:#94a3b8;">
+  분석 대상: 카페통스트 게시글순위·유입분석 (월간) | 기간: 2026.01 ~ 2026.06 | 생성일: 2026.07.01
+</footer>
+
+</body>
+</html>

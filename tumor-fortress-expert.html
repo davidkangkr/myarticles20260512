@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>종양 미세환경 요새의 해체 — 용도변경 약물 방법론</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=Noto+Serif+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e1014;--panel:#161a20;--panel-2:#1b2029;--line:#2a313d;--line-soft:#212734;
+    --ink:#e7eaef;--ink-soft:#a3acba;--ink-faint:#6d7683;
+    --cyan:#4dd6c4;    /* 기전 */
+    --amber:#e0a458;   /* 근거 */
+    --violet:#9d8cff;  /* 도구 */
+    --rose:#ef6f6f;    /* 경계/한계 */
+    --green:#67c98c;   /* 확립/안전 */
+    --mono:'JetBrains Mono',monospace;--serif:'Noto Serif KR',serif;--sans:'IBM Plex Sans KR',sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16.5px;
+    line-height:1.8;letter-spacing:-.005em;word-break:keep-all;
+    background-image:radial-gradient(900px 500px at 12% -5%,rgba(77,214,196,.06),transparent 60%),
+      radial-gradient(900px 500px at 92% 0%,rgba(157,140,255,.06),transparent 55%);background-attachment:fixed;}
+  .wrap{max-width:840px;margin:0 auto;padding:0 24px 120px;}
+
+  header.masthead{padding:62px 0 40px;border-bottom:1px solid var(--line);}
+  .kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--cyan);margin-bottom:22px;display:flex;align-items:center;gap:12px;}
+  .kicker::before{content:"";width:26px;height:1px;background:var(--cyan);display:inline-block;}
+  h1.title{font-family:var(--serif);font-weight:600;font-size:37px;line-height:1.38;margin:0 0 20px;letter-spacing:-.02em;}
+  h1.title em{font-style:normal;color:var(--cyan);}
+  .standfirst{font-size:18px;line-height:1.85;color:var(--ink-soft);max-width:68ch;margin:0;}
+  .standfirst strong{color:var(--ink);font-weight:600;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px 8px;margin-top:26px;font-family:var(--mono);font-size:12px;}
+  .chip{border:1px solid var(--line);border-radius:6px;padding:5px 11px;color:var(--ink-faint);background:var(--panel);}
+  .chip b{color:var(--ink-soft);font-weight:500;}
+
+  section{padding:44px 0;border-bottom:1px solid var(--line-soft);}
+  .sec-index{font-family:var(--mono);font-size:12.5px;color:var(--ink-faint);letter-spacing:.12em;margin-bottom:14px;}
+  h2{font-family:var(--serif);font-weight:600;font-size:27px;line-height:1.4;margin:0 0 8px;letter-spacing:-.01em;}
+  h2 .n{color:var(--cyan);font-family:var(--mono);font-size:19px;margin-right:12px;}
+  .dek{color:var(--ink-soft);font-size:16px;margin:0 0 24px;max-width:70ch;}
+  p{margin:0 0 18px;max-width:72ch;}
+  p strong{font-weight:600;color:#fff;}
+  .term{color:var(--cyan);font-weight:500;} .em-amber{color:var(--amber);font-weight:500;}
+  .em-violet{color:var(--violet);font-weight:500;} .em-rose{color:var(--rose);font-weight:500;}
+
+  .thesis{background:linear-gradient(180deg,var(--panel),var(--panel-2));border:1px solid var(--line);
+    border-left:3px solid var(--cyan);border-radius:12px;padding:26px 28px;margin:8px 0 4px;}
+  .thesis p{margin:0;font-size:18px;font-family:var(--serif);line-height:1.85;color:var(--ink);max-width:none;}
+  .thesis .hl{color:var(--cyan);}
+
+  .contrast{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:22px 0 6px;}
+  .cbox{border:1px solid var(--line);border-radius:12px;padding:20px 20px 18px;background:var(--panel);}
+  .cbox.new{border-color:rgba(77,214,196,.4);background:linear-gradient(180deg,var(--panel),rgba(77,214,196,.05));}
+  .cbox h4{margin:0 0 12px;font-size:13px;font-family:var(--mono);letter-spacing:.1em;text-transform:uppercase;}
+  .cbox.old h4{color:var(--ink-faint);} .cbox.new h4{color:var(--cyan);}
+  .cbox ul{margin:0;padding:0;list-style:none;}
+  .cbox li{font-size:15px;padding:7px 0 7px 20px;position:relative;color:var(--ink-soft);line-height:1.6;}
+  .cbox li::before{content:"—";position:absolute;left:0;color:var(--ink-faint);}
+  .cbox.new li::before{content:"›";color:var(--cyan);font-weight:700;} .cbox.new li{color:var(--ink);}
+
+  .why{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px 26px;margin:20px 0;}
+  .why h3{margin:0 0 14px;font-size:15px;color:var(--amber);font-family:var(--mono);letter-spacing:.04em;}
+  .why p{font-size:15.5px;color:var(--ink-soft);margin:0 0 12px;} .why p:last-child{margin:0;}
+  .why code{font-family:var(--mono);font-size:13.5px;background:#0b0e12;border:1px solid var(--line);
+    padding:2px 7px;border-radius:5px;color:var(--cyan);}
+
+  /* 악순환 루프 다이어그램 */
+  .cycle{margin:18px 0 4px;border:1px solid var(--line);border-radius:12px;background:#0b0e12;padding:22px 20px;}
+  .cycle-title{font-family:var(--mono);font-size:12px;color:var(--cyan);letter-spacing:.06em;margin-bottom:16px;}
+  .cycle-flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;}
+  .cy-node{border:1px solid var(--line);border-radius:8px;padding:9px 13px;font-size:13.5px;
+    background:var(--panel);color:var(--ink);font-family:var(--mono);}
+  .cy-node .mol{color:var(--cyan);}
+  .cy-arr{color:var(--amber);font-family:var(--mono);font-size:15px;}
+  .cy-loop{color:var(--rose);font-family:var(--mono);font-size:12px;margin-top:12px;text-align:right;}
+
+  /* 도구 파이프라인 */
+  .toolgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0 4px;}
+  .toolcard{border:1px solid var(--line);border-radius:10px;padding:16px 18px;background:var(--panel);}
+  .toolcard .tn{font-family:var(--mono);font-size:13px;color:var(--violet);margin-bottom:6px;}
+  .toolcard .td{font-size:14px;color:var(--ink-soft);line-height:1.6;}
+  .pipeline{margin:24px 0 6px;}
+  .pl-row{display:flex;flex-wrap:wrap;}
+  .pl-node{flex:1 1 0;min-width:150px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:15px;position:relative;}
+  .pl-node+.pl-node{margin-left:26px;}
+  .pl-node+.pl-node::before{content:"→";position:absolute;left:-22px;top:50%;transform:translateY(-50%);color:var(--violet);font-size:18px;font-family:var(--mono);}
+  .pl-node .tool{font-family:var(--mono);font-size:11.5px;color:var(--violet);letter-spacing:.05em;margin-bottom:7px;}
+  .pl-node .role{font-size:14.5px;color:var(--ink);font-weight:500;line-height:1.5;margin-bottom:5px;}
+  .pl-node .out{font-size:13px;color:var(--ink-faint);line-height:1.5;}
+  @media(max-width:680px){.pl-node+.pl-node{margin-left:0;margin-top:26px;}
+    .pl-node+.pl-node::before{content:"↓";left:50%;top:-22px;transform:translateX(-50%);}}
+  @media(max-width:560px){.toolgrid{grid-template-columns:1fr;}.contrast{grid-template-columns:1fr;}}
+
+  /* 워크플로우 */
+  .wf-banner{font-family:var(--mono);font-size:12px;color:var(--amber);letter-spacing:.05em;
+    border:1px dashed var(--amber);border-radius:8px;padding:9px 14px;display:inline-block;margin-bottom:22px;
+    background:rgba(224,164,88,.06);}
+  .stage{display:grid;grid-template-columns:64px 1fr;gap:0 20px;}
+  .stage .rail{display:flex;flex-direction:column;align-items:center;}
+  .stage .snum{width:44px;height:44px;border-radius:50%;border:1px solid var(--cyan);color:var(--cyan);
+    display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:16px;
+    background:rgba(77,214,196,.07);flex:0 0 auto;}
+  .stage .conn{width:1px;flex:1;background:var(--line);margin:6px 0;min-height:18px;}
+  .stage:last-child .conn{display:none;}
+  .stage .content{padding-bottom:26px;}
+  .stage .st-title{font-size:17px;font-weight:600;color:#fff;margin:8px 0 4px;}
+  .stage .st-title .phase{font-family:var(--mono);font-size:11.5px;color:var(--cyan);display:block;letter-spacing:.08em;margin-bottom:3px;font-weight:500;}
+  .stage .st-desc{font-size:15px;color:var(--ink-soft);margin:0 0 12px;line-height:1.7;}
+  .stage .st-desc b{color:var(--ink);font-weight:600;}
+  .mini-prompt{background:#0b0e12;border:1px solid var(--line);border-left:2px solid var(--cyan);
+    border-radius:8px;padding:12px 15px;font-family:var(--serif);font-size:14.5px;line-height:1.75;color:var(--ink);margin:0;}
+  .mini-prompt .cons{color:var(--amber);}
+  .st-check{font-size:13px;color:var(--ink-faint);margin-top:9px;} .st-check b{color:var(--amber);font-weight:600;}
+
+  /* 약물 지도 (추가 섹션) */
+  .drugmap{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0 6px;}
+  @media(max-width:620px){.drugmap{grid-template-columns:1fr;}}
+  .dm-col{border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--panel);}
+  .dm-col.fib{border-top:3px solid var(--amber);}
+  .dm-col.hif{border-top:3px solid var(--cyan);}
+  .dm-col h4{margin:0 0 4px;font-size:16px;color:#fff;font-family:var(--serif);font-weight:600;}
+  .dm-col .axis{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;margin-bottom:14px;}
+  .dm-col.fib .axis{color:var(--amber);} .dm-col.hif .axis{color:var(--cyan);}
+  .dm-item{border-top:1px solid var(--line-soft);padding:11px 0;}
+  .dm-item:first-of-type{border-top:none;}
+  .dm-item .dname{font-weight:600;font-size:14.5px;color:var(--ink);}
+  .dm-item .dtarget{font-family:var(--mono);font-size:12px;color:var(--ink-faint);margin:2px 0 3px;}
+  .dm-item .dnote{font-size:13.5px;color:var(--ink-soft);line-height:1.55;}
+  .dm-tier{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:700;padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:middle;}
+  .tier-c{background:rgba(224,164,88,.15);color:var(--amber);}
+  .tier-d{background:rgba(239,111,111,.15);color:var(--rose);}
+
+  .evtable{width:100%;border-collapse:collapse;margin:18px 0 6px;font-size:14px;}
+  .evtable th,.evtable td{border:1px solid var(--line);padding:11px 13px;text-align:left;vertical-align:top;}
+  .evtable th{background:var(--panel-2);font-family:var(--mono);font-size:12px;letter-spacing:.05em;color:var(--ink-soft);font-weight:500;}
+  .evtable td{color:var(--ink-soft);line-height:1.55;}
+  .evtable .tier{font-family:var(--mono);font-weight:700;}
+  .t-a{color:var(--green);}.t-b{color:var(--cyan);}.t-c{color:var(--amber);}.t-d{color:var(--rose);}
+  .evtable td b{color:var(--ink);font-weight:600;}
+
+  .locked{background:var(--panel);border:1px dashed var(--ink-faint);border-radius:10px;padding:16px 20px;
+    margin:20px 0;font-size:14.5px;color:var(--ink-soft);line-height:1.7;}
+  .locked b{color:var(--ink);}
+
+  .limits{background:linear-gradient(180deg,var(--panel),rgba(239,111,111,.05));border:1px solid rgba(239,111,111,.3);
+    border-left:3px solid var(--rose);border-radius:12px;padding:24px 26px;margin:6px 0;}
+  .limits h3{margin:0 0 14px;color:var(--rose);font-size:17px;font-family:var(--serif);font-weight:600;}
+  .limits ul{margin:0;padding:0;list-style:none;}
+  .limits li{padding:9px 0 9px 26px;position:relative;font-size:15px;color:var(--ink-soft);line-height:1.65;border-bottom:1px solid var(--line-soft);}
+  .limits li:last-child{border-bottom:none;}
+  .limits li::before{content:"✕";position:absolute;left:0;color:var(--rose);font-size:13px;top:11px;}
+  .limits li b{color:var(--ink);font-weight:600;}
+
+  .closing{padding:48px 0 8px;}
+  .closing .big{font-family:var(--serif);font-size:24px;line-height:1.6;font-weight:500;margin:0 0 16px;max-width:66ch;}
+  .closing .big .hl{color:var(--cyan);}
+  .closing p{color:var(--ink-soft);font-size:16px;}
+  footer{margin-top:40px;padding-top:26px;border-top:1px solid var(--line);font-family:var(--mono);
+    font-size:12px;color:var(--ink-faint);line-height:1.9;letter-spacing:.03em;}
+
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}html{scroll-behavior:auto;}}
+  @media(max-width:560px){body{font-size:16px;}h1.title{font-size:29px;}h2{font-size:23px;}
+    .wrap{padding:0 18px 100px;}.stage{grid-template-columns:48px 1fr;gap:0 14px;}
+    .stage .snum{width:38px;height:38px;font-size:14px;}.evtable{font-size:13px;}.evtable th,.evtable td{padding:9px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="kicker">Tumor Microenvironment · Repurposing Methodology</div>
+    <h1 class="title">종양 미세환경 '요새'의 해체<br><em>용도변경 약물로 방어막을 겨냥하는 방법론</em></h1>
+    <p class="standfirst">
+      고형암 치료 실패의 진짜 병목은 대개 암세포 자체가 아니라, 세포가 스스로 쌓는
+      <strong>미세환경 요새</strong> — 치밀한 섬유화 방패(desmoplasia)와 저산소 코어(hypoxia)다.
+      "굶겨 죽이기"가 흔히 실패하는 이유가 여기 있다. 이 글은 그 요새를
+      <strong>정상화(normalization)</strong>하여 기존 치료와 면역을 재가동시키는
+      용도변경 약물 접근을, 기전에서 임상 질문까지 재현 가능한 방법론으로 정리한다.
+    </p>
+    <div class="meta-row">
+      <span class="chip"><b>원문</b> Justus R. Hope (2편 통합)</span>
+      <span class="chip"><b>도구</b> Grounded LLM · MCP · Literature API</span>
+      <span class="chip"><b>예시</b> EGCG (illustrative)</span>
+    </div>
+  </header>
+
+  <!-- 논지 -->
+  <section>
+    <div class="sec-index reveal">00 / THESIS</div>
+    <div class="thesis reveal">
+      <p>고형암의 <span class="hl">치료 저항은 세포가 아니라 구조</span>에서 온다.
+      전체 고형암의 약 75–80%가 <span class="hl">desmoplasia + hypoxia</span>의 협력적 방어에 의존한다.
+      따라서 용도변경 약물의 표적은 "암세포 죽이기"가 아니라
+      <span class="hl">요새의 벽을 허물어(정상화) 약·방사선·면역이 도달하게 만드는 것</span>이다.</p>
+    </div>
+  </section>
+
+  <!-- 패러다임 -->
+  <section>
+    <div class="sec-index reveal">01 / PARADIGM</div>
+    <h2 class="reveal"><span class="n">01</span>세포를 죽이기 vs 요새를 해체하기</h2>
+    <p class="dek reveal">종양학은 오랫동안 "세포를 독으로 죽이는" 데 집중했다. 그러나 방패가 두꺼우면
+    독은 표적에 닿지 못한다. 병목의 재정의가 필요하다.</p>
+    <div class="contrast">
+      <div class="cbox old reveal">
+        <h4>구 · 세포 표적 패러다임</h4>
+        <ul>
+          <li>세포독성 약제로 암세포 직접 공격</li>
+          <li>미세환경은 부수적 배경으로 간주</li>
+          <li>방패가 두꺼울수록 약물 도달 실패</li>
+          <li>"영양 차단(굶기기)"도 요새 앞에서 무력</li>
+        </ul>
+      </div>
+      <div class="cbox new reveal">
+        <h4>신 · 미세환경 정상화 패러다임</h4>
+        <ul>
+          <li>섬유화·저산소 방패를 먼저 해체</li>
+          <li>미세환경을 일차 표적으로 재정의</li>
+          <li>혈류·산소 회복 → 기존 치료 재가동</li>
+          <li>물리적으로 갇힌 T세포의 침투 회복</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 기전 -->
+  <section>
+    <div class="sec-index reveal">02 / MECHANISM</div>
+    <h2 class="reveal"><span class="n">02</span>왜 요새가 치명적인가 — 메카노트랜스덕션 악순환</h2>
+    <p class="dek reveal">desmoplasia와 hypoxia는 독립 사건이 아니라 서로를 증폭하는
+    <span class="term">자기강화 루프</span>다. 이 루프의 완성이 곧 임상적 치명성이다.</p>
+
+    <div class="why reveal">
+      <h3>// 섬유화 방패(desmoplastic shield)</h3>
+      <p>암은 fibroblast를 <b>암연관섬유아세포(CAF)</b>로 전환시켜 collagen과 hyaluronan을 과다 생성하게 한다.
+      결과는 두 가지 봉쇄다 — 대분자 항암제의 <strong>물리적 확산 차단</strong>, 그리고 cytotoxic T세포가
+      바깥 섬유대에 <strong>물리적으로 포획</strong>되어 종양핵에 도달하지 못하는 <span class="term">면역 배제</span>.</p>
+    </div>
+    <div class="why reveal">
+      <h3>// 저산소 코어(hypoxia)와 HIF-1α</h3>
+      <p>방패의 기계적 압력이 모세혈관을 붕괴시켜 관류를 차단 → 산소 결핍. 암세포는 <code>HIF-1α</code>를
+      안정화해 무산소 생존으로 대사를 재프로그래밍하고, 침습·전이·면역회피를 촉진한다.
+      또한 radiation은 산소 의존적(ROS 생성)이므로 <strong>저산소는 방사선 저항을 부른다</strong>.</p>
+    </div>
+
+    <div class="cycle reveal">
+      <div class="cycle-title">// 자기강화 루프 (mechanotransduction feedback)</div>
+      <div class="cycle-flow">
+        <span class="cy-node">섬유화 <span class="mol">↑ stiffness</span></span>
+        <span class="cy-arr">→</span>
+        <span class="cy-node">혈관붕괴 <span class="mol">hypoxia</span></span>
+        <span class="cy-arr">→</span>
+        <span class="cy-node"><span class="mol">HIF-1α</span> 안정화</span>
+        <span class="cy-arr">→</span>
+        <span class="cy-node"><span class="mol">LOX</span> ↑ (collagen 가교)</span>
+        <span class="cy-arr">→</span>
+        <span class="cy-node">기질 <span class="mol">↑ 강직</span></span>
+      </div>
+      <div class="cy-loop">↺ 루프 폐환 → PDAC·DSRCT 등 "약·방사선·면역을 튕겨내는 바위"</div>
+    </div>
+  </section>
+
+  <!-- 도구 계층 -->
+  <section>
+    <div class="sec-index reveal">03 / GROUNDING</div>
+    <h2 class="reveal"><span class="n">03</span>근거 연결형 파이프라인</h2>
+    <p class="dek reveal">후보 약물의 환각을 줄이는 근본 방법은 프롬프트 기교가 아니라
+    <span class="em-violet">외부 근거원에 응답을 강제로 묶는 것</span>(retrieval-grounding)이다.</p>
+    <div class="toolgrid">
+      <div class="toolcard reveal"><div class="tn">PubMed / Semantic Scholar (MCP)</div>
+        <div class="td">질의를 실제 문헌 검색으로 치환. "기억"이 아니라 검색 결과에 근거해 답하도록 강제하고 PMID를 회수.</div></div>
+      <div class="toolcard reveal"><div class="tn">ClinicalTrials.gov API</div>
+        <div class="td">약물–적응증 조합의 시험 존재·상태·결과를 사실로 확정. "있다/없다"를 환각 없이 판정.</div></div>
+      <div class="toolcard reveal"><div class="tn">Paperclip · 전문 분석</div>
+        <div class="td">초록이 아닌 본문·표·수치까지 읽어 설계·효과크기·편향을 추출. 근거 등급 입력값 생성.</div></div>
+      <div class="toolcard reveal"><div class="tn">opencancer.ai · Co-scientist류</div>
+        <div class="td">가설 생성–비판–순위화를 반자동화. 출력은 <b>가설</b>이지 결론이 아님을 전제.</div></div>
+    </div>
+    <div class="pipeline reveal">
+      <div class="pl-row">
+        <div class="pl-node"><div class="tool">TARGET</div><div class="role">기전·분자 타깃 특정</div><div class="out">교과서·리뷰 근거</div></div>
+        <div class="pl-node"><div class="tool">RETRIEVE</div><div class="role">문헌·시험 검색</div><div class="out">PMID · NCT 회수</div></div>
+        <div class="pl-node"><div class="tool">APPRAISE</div><div class="role">근거 등급 평가</div><div class="out">설계·효과크기·편향</div></div>
+        <div class="pl-node"><div class="tool">TRANSLATE</div><div class="role">임상 질문화</div><div class="out">주치의 논의 항목</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 워크플로우 -->
+  <section>
+    <div class="sec-index reveal">04 / WORKED EXAMPLE</div>
+    <h2 class="reveal"><span class="n">04</span>실제 워크플로우 — EGCG</h2>
+    <span class="wf-banner reveal">⚠ EGCG는 방법론 예시일 뿐, 치료 권고가 아님 — illustrative candidate</span>
+    <p class="dek reveal">Justus 님의 원문 데이터(산둥 EGCG 시험)를 축으로, 하나의 후보를
+    <span class="term">기전 → 개별화 → 검증 → 환원</span>의 6단계로 전개한다.</p>
+
+    <div class="stages">
+      <div class="stage reveal"><div class="rail"><div class="snum">1</div><div class="conn"></div></div>
+        <div class="content"><div class="st-title"><span class="phase">MECHANISM · 기전 특정</span>후보의 분자 작용점을 고정</div>
+          <p class="st-desc">EGCG(예시)의 확립된 표적: <b>NF-κB 핵전위 억제, JAK2/STAT1 억제를 통한 PD-L1 축 차단,
+          HIF-1α 분해 촉진(항산화)</b>. 요새의 두 벽(섬유화·저산소)과 면역회피에 동시에 걸친다.</p>
+          <p class="mini-prompt">"EGCG(예시)의 확립된 항암 관련 기전을 분자 수준에서 정리해줘 — NF-κB, JAK/STAT–PD-L1, HIF-1α 축 중심으로.
+          <span class="cons">교과서·리뷰 근거로만, 각 주장에 대표 문헌을 붙여서.</span>"</p>
+          <div class="st-check"><b>검증 게이트:</b> 표적이 다수 리뷰에서 일관 지지되는가?</div></div></div>
+
+      <div class="stage reveal"><div class="rail"><div class="snum">2</div><div class="conn"></div></div>
+        <div class="content"><div class="st-title"><span class="phase">VULNERABILITY LINK · 취약성 연결</span>타깃을 요새 표현형에 정렬</div>
+          <p class="st-desc">그 표적이 어느 <b>미세환경 표현형</b>에서 가장 유효한가: 방사선 유발 염증(IFN-γ→PD-L1)이 강한 흉부 종양,
+          NF-κB 의존 증식(식도), 저산소 구동 아형. 여기서부터 반드시 출처를 강제한다.</p>
+          <p class="mini-prompt">"NF-κB·PD-L1·HIF-1α 축이 두드러진 <span class="cons">암종/미세환경 아형을 문헌 근거(PMID)와 함께</span> 나열하고,
+          <span class="cons">근거 없는 추정은 '추정'으로 명시.</span>"</p>
+          <div class="st-check"><b>검증 게이트:</b> 특정 아형에 국한되는가, 범용 주장인가?</div></div></div>
+
+      <div class="stage reveal"><div class="rail"><div class="snum">3</div><div class="conn"></div></div>
+        <div class="content"><div class="st-title"><span class="phase">STRATIFY · 개별화</span>나의 요새 프로파일로 좁힌다 (핵심)</div>
+          <p class="st-desc">범용 챗봇과 갈라지는 지점. <b>내 종양의 desmoplasia/hypoxia 정도, 조직형, PD-L1 상태,
+          방사선 병용 여부</b>를 입력해 후보–환자 정렬을 수행한다. 일반론이 아니라 '이 요새에서'의 확률을 묻는다.</p>
+          <p class="mini-prompt">"내 종양은 [조직형/부위/방사선 병용/가능하면 PD-L1·섬유화 정도]다.
+          앞의 EGCG 기전이 <span class="cons">이 프로파일에서 특히 성립/약화하는지</span>, 바이오마커 관점에서 평가하고 <span class="cons">문헌 근거</span>를 붙여줘."</p>
+          <div class="st-check"><b>검증 게이트:</b> 개별 프로파일이 가설을 강화하는가 약화하는가? — 약화도 유효한 결론</div></div></div>
+
+      <div class="stage reveal"><div class="rail"><div class="snum">4</div><div class="conn"></div></div>
+        <div class="content"><div class="st-title"><span class="phase">RETRIEVE · 실증 회수</span>실제 데이터를 사실로 확정</div>
+          <p class="st-desc">가설이 아니라 실증을 회수한다. 산둥 시험 실제 값: 식도암 <b>ORR 86.3%</b>,
+          폐암(SCLC) <b>ORR 84.6%</b> vs 대조 50% (P=0.045). 단, 이들은 소규모 Phase II다.</p>
+          <p class="mini-prompt">"[해당 암종]+EGCG(예시)의 <span class="cons">전임상·임상 근거를 PubMed/ClinicalTrials에서 검색</span>해 설계·규모·결과를 표로.
+          <span class="cons">검색에 없으면 '근거 없음'으로 명시하고 지어내지 마.</span>"</p>
+          <div class="st-check"><b>검증 게이트:</b> 각 항목에 PMID/NCT가 실재하는가? 규모·대조군은?</div></div></div>
+
+      <div class="stage reveal"><div class="rail"><div class="snum">5</div><div class="conn"></div></div>
+        <div class="content"><div class="st-title"><span class="phase">APPRAISE · 근거 등급화</span>회수한 근거의 무게를 잰다</div>
+          <p class="st-desc">존재 여부가 아니라 <b>질</b>이 핵심. 산둥 데이터는 인상적 ORR에도 불구하고
+          소규모·단일기관·짧은 통계력이며, OS 유의차는 없었다(SCLC 재발). 관찰형 지표엔 <b>불멸시간 편향</b> 경계.</p>
+          <table class="evtable">
+            <thead><tr><th>등급</th><th>유형</th><th>이 사례에서</th></tr></thead>
+            <tbody>
+              <tr><td class="tier t-a">A</td><td>전향 RCT·메타분석</td><td>해당 없음 (아직)</td></tr>
+              <tr><td class="tier t-b">B</td><td>잘 설계된 관찰·소규모 RCT</td><td><b>산둥 폐암 3-arm 무작위</b> — 방향성 지지, 규모 한계</td></tr>
+              <tr><td class="tier t-c">C</td><td>후향·단일기관·소표본</td><td><b>ORR 수치</b> 대부분 여기 — 탐색적</td></tr>
+              <tr><td class="tier t-d">D</td><td>전임상·in vitro</td><td>NF-κB·PD-L1 기전 근거</td></tr>
+            </tbody>
+          </table>
+          <p class="mini-prompt" style="margin-top:14px;">"각 근거를 <span class="cons">설계·규모·효과크기·주요 편향(특히 불멸시간·소표본)</span> 기준으로 A–D 등급화하고 이유를 한 줄씩."</p>
+        </div></div>
+
+      <div class="stage reveal"><div class="rail"><div class="snum">6</div><div class="conn"></div></div>
+        <div class="content"><div class="st-title"><span class="phase">TRANSLATE · 임상 환원</span>주치의와 논의할 형태로 되돌린다</div>
+          <p class="st-desc">모든 사슬은 <b>임상 의사결정 테이블</b>로 환원되어 끝난다. 기전 근거·개별화 논리·근거 등급·
+          남은 불확실성·병용/상호작용·모니터링을 구조화된 질문지로 만든다.</p>
+          <p class="mini-prompt">"지금까지의 기전·개별화·근거등급을 종합해 <span class="cons">주치의에게 물을 구조화된 질문 목록</span>으로 —
+          기대 근거, 방사선/항암 병용 위험, 모니터링 지표, 중단 기준 포함."</p>
+          <div class="st-check"><b>종착점:</b> 출력은 '결정'이 아니라 '더 나은 질문'. 결정권은 임상의에게.</div></div></div>
+    </div>
+  </section>
+
+  <!-- 05 약물 지도 (추가 섹션) -->
+  <section>
+    <div class="sec-index reveal">05 / DRUG MAP</div>
+    <h2 class="reveal"><span class="n">05</span>공략 축별 약물 지도 — 어느 벽을 겨냥하는가</h2>
+    <p class="dek reveal">Justus 님이 특히 강조한 부분. 요새는 두 벽으로 되어 있으므로, 후보 약물도
+    <span class="em-amber">항섬유화(바깥 벽)</span>와 <span class="term">항-HIF(저산소 코어)</span> 두 축으로 나뉜다.
+    아래는 원문에 언급된 후보들이며 <strong>모두 예시</strong>다. 현재 근거는 대부분 전임상~탐색적(C–D) 수준이다.</p>
+
+    <div class="drugmap">
+      <div class="dm-col fib reveal">
+        <h4>🧱 항섬유화 축</h4>
+        <div class="axis">// ANTI-FIBROTIC — 바깥 섬유 벽 해체</div>
+        <div class="dm-item"><div class="dname">Losartan <span class="dm-tier tier-c">C</span></div>
+          <div class="dtarget">TGF-β 신호 차단 (ARB 혈압약)</div>
+          <div class="dnote">CAF의 collagen 생성을 늦춰 기질을 이완, 눌린 혈관 재개통(전임상).</div></div>
+        <div class="dm-item"><div class="dname">Curcumin / Sulforaphane <span class="dm-tier tier-d">D</span></div>
+          <div class="dtarget">TGF-β 경로 억제 (천연물)</div>
+          <div class="dnote">실험실 수준에서 흉터 조직 침착 억제 가능성.</div></div>
+        <div class="dm-item"><div class="dname">Pegvorhyaluronidase alfa</div>
+          <div class="dtarget">hyaluronan 효소적 분해</div>
+          <div class="dnote">방패의 '접착제'를 녹여 간질압 저하, 약물 침투 개선(개발·시험 중).</div></div>
+      </div>
+
+      <div class="dm-col hif reveal">
+        <h4>💨 항-HIF 축</h4>
+        <div class="axis">// ANTI-HIF — 저산소 생존 스위치 차단</div>
+        <div class="dm-item"><div class="dname">Metformin <span class="dm-tier tier-c">C</span></div>
+          <div class="dtarget">세포 산소소비 ↓ → HIF-1α 안정화 ↓</div>
+          <div class="dnote">대사 재편으로 저산소 스위치 완화(용도변경 대표 후보).</div></div>
+        <div class="dm-item"><div class="dname">Mebendazole / Acriflavine <span class="dm-tier tier-d">D</span></div>
+          <div class="dtarget">HIF-1α 직접 결합·억제 (구충/항균제)</div>
+          <div class="dnote">실험실에서 HIF 활성화 차단(전임상 단계).</div></div>
+        <div class="dm-item"><div class="dname">고용량 Vitamin C / EGCG <span class="dm-tier tier-c">C</span></div>
+          <div class="dtarget">HIF-1α 분해 촉진 (항산화)</div>
+          <div class="dnote">루프 개시 전 HIF 단백 분해를 유도. EGCG는 산둥 임상 신호(위 워크플로우).</div></div>
+      </div>
+    </div>
+
+    <div class="locked reveal">
+      🔒 원문에는 가장 치명적인 <b>췌장암(PDAC)</b>에서 "큰 생존 신호"를 보였다는 세 번째 용도변경 약이 이어지나,
+      <b>약물명과 상세는 유료 구독(Justus R. Hope 원문)에서 공개</b>된다. 본 문서는 공개된 범위만 다루며,
+      확정되지 않은 약물명은 추정하지 않는다.
+    </div>
+  </section>
+
+  <!-- 한계 -->
+  <section>
+    <div class="sec-index reveal">06 / LIMITS</div>
+    <h2 class="reveal"><span class="n">06</span>이 방법론이 대체하지 못하는 것</h2>
+    <p class="dek reveal">전문가일수록 도구의 경계를 정확히 안다. 아래는 이 접근이 <span class="em-rose">구조적으로</span> 해결 못 하는 것들이다.</p>
+    <div class="limits reveal">
+      <ul>
+        <li><b>인과의 확정.</b> 높은 ORR도 개별 환자의 생존 이득을 증명하지 못한다 — 산둥 데이터에서 OS 유의차는 없었다.</li>
+        <li><b>규모·통계력.</b> 소규모·단일기관 Phase II의 신호는 확증이 아니라 가설이다.</li>
+        <li><b>개별 반응 예측.</b> 요새 프로파일 정렬은 확률을 높일 뿐, 특정 개인의 반응·독성을 결정하지 않는다.</li>
+        <li><b>병용·안전성의 실시간 판단.</b> 항산화제–방사선/항암 병용의 상호작용은 임상의의 실시간 평가가 필요하다.</li>
+        <li><b>페이월 너머의 정보.</b> 췌장암 후보 등 원문 유료 구간은 공개 근거가 아니므로 추정하지 않는다.</li>
+        <li><b>최종 결정.</b> 복용·병용·중단은 이 문서의 범위 밖이며 오직 주치의와의 협의에 속한다.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="closing reveal">
+    <p class="big">"굶겨 죽이기"가 실패하는 자리에서, 발상을 바꾼다 —
+    <span class="hl">세포가 아니라 요새를 겨냥</span>하고, 값싼 구약(舊藥)으로 그 벽을 정상화해
+    기존 치료와 면역을 다시 불러들인다.</p>
+    <p>단, 모든 가능성은 근거 위에서만 유효하다. 기전을 특정하고, 요새 프로파일로 개별화하고,
+    실증을 회수해 등급을 매기고, 임상 질문으로 환원한다 — 그것이 이 도구의 최대 사용법이다.</p>
+  </div>
+
+  <footer>
+    환자 주도형 암 임상시험 커뮤니티 · 용도변경 약물 연구<br>
+    SOURCE · Justus R. Hope, "Three Cancer Studies You Weren't Supposed to Notice" &amp; "Why Starving Cancer Doesn't (Usually) Work"<br>
+    METHODOLOGY NOTE · All drugs illustrative · Not medical advice · Decisions belong to the treating physician
+  </footer>
+
+</div>
+<script>
+  (function(){
+    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var items=document.querySelectorAll('.reveal');
+    if(reduce||!('IntersectionObserver' in window)){items.forEach(function(el){el.classList.add('in');});return;}
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -6% 0px'});
+    items.forEach(function(el){io.observe(el);});
+  })();
+</script>
+</body>
+</html>

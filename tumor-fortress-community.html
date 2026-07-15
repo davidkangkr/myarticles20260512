@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>암이라는 '성(城)' — 왜 약이 성 안으로 못 들어갈까</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#241f1a;
+    --ink-soft:#4f473e;
+    --paper:#f6f1e7;
+    --card:#fffdf7;
+    --line:#e4dcc9;
+    --wall:#a9762f;      /* 성벽 - 흙갈색 */
+    --wall-bg:#f0e5d0;
+    --breath:#4f8a86;    /* 산소/숨 - 청록 */
+    --breath-bg:#e2efec;
+    --hope:#3f8e5a;      /* 희망/약 - 초록 */
+    --hope-bg:#e6f2e8;
+    --warn:#b5502f;      /* 주의 - 주황벽돌 */
+    --warn-bg:#f7e8df;
+    --shadow:0 3px 14px rgba(60,45,20,.07);
+  }
+  *{box-sizing:border-box;-webkit-text-size-adjust:100%;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:'Noto Sans KR',sans-serif;font-size:19px;line-height:1.9;
+    letter-spacing:-.01em;word-break:keep-all;
+  }
+  .wrap{max-width:660px;margin:0 auto;padding:0 20px 100px;}
+
+  header.cover{padding:56px 0 40px;text-align:center;border-bottom:2px solid var(--line);}
+  .eyebrow{display:inline-block;font-size:15px;font-weight:700;color:var(--wall);
+    background:var(--wall-bg);padding:7px 16px;border-radius:999px;margin-bottom:22px;}
+  .cover h1{font-family:'Gowun Batang',serif;font-weight:700;font-size:33px;line-height:1.45;
+    margin:0 0 16px;letter-spacing:-.02em;}
+  .cover .sub{font-size:18px;color:var(--ink-soft);margin:0;}
+  .cover .byline{font-size:15px;color:#8d8474;margin-top:20px;}
+
+  section{padding:36px 0;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  h2{font-family:'Gowun Batang',serif;font-size:27px;line-height:1.45;margin:0 0 14px;font-weight:700;}
+  h2 .ei{font-size:20px;color:var(--wall);display:block;margin-bottom:2px;}
+  p{margin:0 0 18px;}
+  strong{font-weight:700;}
+  .hl{background:linear-gradient(transparent 55%, #ffe6a3 55%);padding:0 2px;font-weight:700;}
+  .lead{color:var(--ink-soft);font-size:17px;}
+
+  .quote{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--wall);
+    border-radius:14px;padding:22px 24px;margin:26px 0;box-shadow:var(--shadow);}
+  .quote p{margin:0;font-size:20px;font-family:'Gowun Batang',serif;color:var(--ink);line-height:1.7;}
+
+  /* 성벽 비유 카드 */
+  .castle{margin:26px 0 10px;}
+  .layer{border-radius:16px;padding:22px 22px 20px;margin-bottom:15px;border:1px solid var(--line);
+    box-shadow:var(--shadow);position:relative;}
+  .layer .tag{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:700;
+    padding:6px 14px;border-radius:999px;margin-bottom:12px;background:#fff;}
+  .layer h3{margin:0 0 8px;font-size:21px;font-family:'Gowun Batang',serif;}
+  .layer p{margin:0;font-size:17px;color:var(--ink-soft);}
+  .layer .icon{font-size:19px;}
+  .l-wall{background:var(--wall-bg);} .l-wall .tag{color:var(--wall);}
+  .l-breath{background:var(--breath-bg);} .l-breath .tag{color:var(--breath);}
+
+  /* 악순환 루프 */
+  .loop{background:#241f1a;color:#f6f1e7;border-radius:16px;padding:24px 24px 20px;margin:20px 0;}
+  .loop .lt{font-family:'Gowun Batang',serif;font-size:19px;color:#ffd98a;margin:0 0 16px;font-weight:700;}
+  .loop-steps{display:flex;flex-direction:column;gap:0;}
+  .loop-step{display:flex;align-items:flex-start;gap:13px;padding:7px 0;}
+  .loop-step .ln{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:rgba(255,217,138,.16);
+    color:#ffd98a;font-weight:900;font-size:15px;display:flex;align-items:center;justify-content:center;margin-top:2px;}
+  .loop-step .lp{font-size:16px;line-height:1.6;color:#efe8da;}
+  .loop-step .lp b{color:#fff;}
+  .loop-arrow{text-align:center;color:#ffd98a;font-size:18px;margin:2px 0 2px 14px;line-height:1;}
+  .loop .caption{margin:16px 0 0;font-size:15px;color:#c9c0b0;line-height:1.7;}
+
+  /* 희망 약물 카드 */
+  .drugs{display:flex;flex-direction:column;gap:12px;margin:22px 0 6px;}
+  .drug{background:var(--hope-bg);border:1px solid #cfe3d3;border-radius:13px;padding:16px 18px;}
+  .drug .dn{font-weight:700;font-size:17px;color:var(--hope);margin-bottom:4px;}
+  .drug .dd{font-size:16px;color:var(--ink-soft);margin:0;}
+  .ex-note{font-size:14px;color:#8d8474;margin-top:6px;}
+
+  /* 실제 이야기(EGCG) 강조 박스 */
+  .story{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 24px 20px;
+    margin:22px 0;box-shadow:var(--shadow);}
+  .story .st-label{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;
+    color:var(--hope);background:var(--hope-bg);padding:5px 13px;border-radius:999px;margin-bottom:14px;}
+  .story h3{margin:0 0 12px;font-size:20px;font-family:'Gowun Batang',serif;}
+  .bignum{display:flex;gap:14px;flex-wrap:wrap;margin:16px 0;}
+  .bignum .bn{flex:1 1 200px;background:var(--paper);border-radius:12px;padding:16px;text-align:center;
+    border:1px solid var(--line);}
+  .bignum .bn .v{font-size:30px;font-weight:900;color:var(--hope);font-family:'Gowun Batang',serif;line-height:1.2;}
+  .bignum .bn .k{font-size:15px;color:var(--ink-soft);margin-top:4px;}
+
+  /* 안전 경계 */
+  .safe{background:var(--warn-bg);border:1px solid #e6c3af;border-left:6px solid var(--warn);
+    border-radius:16px;padding:24px 24px;margin:8px 0 0;}
+  .safe h2{color:var(--warn);}
+  .safe .big{font-size:20px;font-weight:700;color:var(--warn);margin:4px 0 14px;
+    font-family:'Gowun Batang',serif;line-height:1.6;}
+  .safe p{margin:0 0 14px;}
+  .safe p:last-child{margin:0;}
+
+  /* 유료 안내 */
+  .locked{background:#f0ece2;border:1px dashed #c9bfa8;border-radius:12px;padding:18px 20px;margin:20px 0;
+    font-size:16px;color:var(--ink-soft);line-height:1.7;}
+  .locked b{color:var(--ink);}
+
+  .closing{text-align:center;padding:40px 10px 8px;}
+  .closing .line{font-family:'Gowun Batang',serif;font-size:22px;line-height:1.6;margin:0 0 12px;}
+  .closing .hl2{color:var(--hope);font-weight:700;}
+  .foot{text-align:center;font-size:14px;color:#9a917d;padding-top:30px;margin-top:32px;
+    border-top:1px solid var(--line);line-height:1.8;}
+  .foot .src{color:#b0a790;}
+
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}html{scroll-behavior:auto;}}
+  @media(max-width:400px){body{font-size:18px;}.cover h1{font-size:28px;}h2{font-size:24px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="cover">
+    <span class="eyebrow">환자 주도형 암 커뮤니티 · 쉽게 읽는 이야기</span>
+    <h1>암이라는 '성(城)'<br>왜 좋은 약도<br>성 안으로 못 들어갈까</h1>
+    <p class="sub">단단한 성벽을 허무는 이야기</p>
+    <p class="byline">원문: Justus R. Hope 님의 글 두 편을 쉽게 풀어 옮김</p>
+  </header>
+
+  <!-- 1. 공감 도입 -->
+  <section>
+    <div class="quote reveal">
+      <p>“좋은 치료를 다 받는데도,<br>왜 어떤 암은 그렇게 버티는 걸까요?”</p>
+    </div>
+    <p class="reveal">많은 환우와 보호자들이 품는 물음입니다. 표준 치료도 받고, 약도 쓰고, 방사선도 하는데
+    어떤 암은 좀처럼 물러서지 않습니다. 그럴 때 흔히 "내 몸이 약해서" "운이 없어서"라고 자책하기 쉽습니다.</p>
+    <p class="reveal"><span class="hl">그런데 약이 안 듣는 게 아니라, 약이 '성 안으로 들어가지 못해서'일 수 있습니다.</span>
+    오늘 이야기는 바로 그 '성벽'에 관한 것입니다. 원리를 알면, 왜 어떤 치료가 어렵고
+    어떤 새로운 시도가 나오는지 훨씬 잘 이해됩니다.</p>
+  </section>
+
+  <!-- 2. 성과 성벽 비유 -->
+  <section>
+    <h2 class="reveal"><span class="ei">하나의 그림으로</span>암은 '벽 뒤에 숨은 성'입니다</h2>
+    <p class="lead reveal">Justus 님이 전하려는 핵심은 이렇습니다. 암세포는 그냥 빨리 자라기만 하는 게 아니라,
+    <strong>스스로 주위에 단단한 성벽을 쌓아 올립니다.</strong> 그 성벽이 두 겹입니다.</p>
+
+    <div class="castle">
+      <div class="layer l-wall reveal">
+        <span class="tag"><span class="icon">🧱</span>바깥 성벽</span>
+        <h3>굳은 흉터 조직 (섬유화 방패)</h3>
+        <p>암은 주변 세포를 꼬드겨, 상처가 아물 때 생기는 질긴 흉터 같은 조직을 자기 둘레에 잔뜩 쌓습니다.
+        이 벽이 너무 두껍고 촘촘해서, <strong>혈관을 타고 온 약도, 면역세포도 성 안으로 뚫고 들어가지 못합니다.</strong></p>
+      </div>
+      <div class="layer l-breath reveal">
+        <span class="tag"><span class="icon">💨</span>성 안의 공기</span>
+        <h3>숨 막히는 산소 부족 (저산소증)</h3>
+        <p>벽이 두꺼워지면 성으로 가는 가느다란 혈관이 눌려 막힙니다. 피가 안 통하니 산소도 없습니다.
+        그런데 놀랍게도 <strong>암세포는 이 숨 막히는 상태에서 오히려 더 사납고 끈질기게 변합니다.</strong>
+        게다가 방사선은 산소가 있어야 잘 듣는데, 산소가 없으니 방사선도 힘을 못 씁니다.</p>
+      </div>
+    </div>
+
+    <div class="loop reveal">
+      <p class="lt">🔁 그리고 이 둘은 서로를 키웁니다 (악순환)</p>
+      <div class="loop-steps">
+        <div class="loop-step"><span class="ln">1</span><span class="lp"><b>성벽</b>이 두꺼워진다</span></div>
+        <div class="loop-arrow">↓</div>
+        <div class="loop-step"><span class="ln">2</span><span class="lp">혈관이 눌려 <b>산소가 부족</b>해진다</span></div>
+        <div class="loop-arrow">↓</div>
+        <div class="loop-step"><span class="ln">3</span><span class="lp">산소가 없으면 암이 <b>벽을 더 두껍게</b> 만든다</span></div>
+        <div class="loop-arrow">↓</div>
+        <div class="loop-step"><span class="ln">↺</span><span class="lp">다시 1번으로… <b>점점 더 단단한 요새</b>가 된다</span></div>
+      </div>
+      <p class="caption">이 악순환이 완성되면 종양은 약도, 방사선도, 면역세포도 튕겨내는
+      '숨 막히는 바위'가 됩니다. 췌장암처럼 유독 치료가 어려운 암들이 바로 이 경우입니다.</p>
+    </div>
+  </section>
+
+  <!-- 3. 굶겨도 안 죽는 이유 -->
+  <section>
+    <h2 class="reveal"><span class="ei">Justus 님의 반전</span>"굶겨 죽이기"가 잘 안 되는 이유</h2>
+    <p class="reveal">암이 포도당 같은 영양을 먹고 자란다는 이야기를 듣고, "그럼 영양을 끊어서
+    암을 굶기면 되지 않나?" 생각하기 쉽습니다. 실제로 많은 분들이 이 방법에 기대를 겁니다.</p>
+    <p class="reveal">하지만 Justus 님은 이렇게 말합니다. <span class="hl">굶기는 방법이 대개 잘 안 되는 건,
+    진짜 문제가 '먹이'가 아니라 이 '요새'이기 때문입니다.</span> 성벽과 산소 부족이라는 방어막을
+    그대로 둔 채 영양만 조절해서는, 이미 그 환경에 적응해 더 사나워진 암을 이기기 어렵습니다.</p>
+    <p class="reveal">그래서 발상을 바꿉니다. <strong>암세포를 직접 굶기거나 독으로 죽이려 하기보다,
+    먼저 '성벽을 허물어' 약과 면역세포가 성 안으로 들어갈 길을 내주자</strong>는 것입니다.</p>
+  </section>
+
+  <!-- 4. 희망의 실마리 -->
+  <section>
+    <h2 class="reveal"><span class="ei">희망의 실마리</span>성벽을 무르게 한다고 알려진 약들</h2>
+    <p class="lead reveal">여기서 Justus 님이 특히 전하고 싶어한 이야기가 나옵니다.
+    <strong>이미 다른 병에 오래 쓰여 온 값싸고 익숙한 약들</strong> 중에, 이 성벽을 무르게 하거나
+    산소 부족의 악순환을 늦출 '가능성'이 연구되고 있는 것들이 있습니다. (아래는 모두 <strong>예시</strong>이며, 치료 권고가 아닙니다.)</p>
+
+    <div class="drugs">
+      <div class="drug reveal">
+        <div class="dn">🧱 바깥 성벽을 무르게 (항섬유화)</div>
+        <p class="dd">혈압약의 하나인 <strong>로사르탄</strong>, 강황의 <strong>커큐민</strong> 같은 것들이
+        흉터 조직을 만드는 신호를 늦춘다고 연구되고 있습니다.</p>
+      </div>
+      <div class="drug reveal">
+        <div class="dn">💨 산소 부족의 악순환을 늦추기 (항-저산소)</div>
+        <p class="dd">당뇨약 <strong>메트포르민</strong>, 구충제 <strong>메벤다졸</strong>, 고용량 <strong>비타민 C</strong>,
+        그리고 녹차 성분 <strong>EGCG</strong> 등이 이 방향으로 연구되고 있습니다.</p>
+      </div>
+    </div>
+    <p class="ex-note reveal">※ 위 약들은 "이런 방향의 가능성이 연구되고 있다"는 예시입니다.
+    아직 확정된 표준 치료가 아니며, 사람마다 다르게 적용됩니다.</p>
+
+    <!-- EGCG 실제 이야기 -->
+    <div class="story reveal">
+      <span class="st-label">🍵 실제로 있었던 이야기</span>
+      <h3>녹차 성분(EGCG)이 방사선과 만났을 때</h3>
+      <p>중국 산둥의 연구팀이, 방사선 치료를 받는 환자들에게 녹차 성분(EGCG)을 함께 써 봤습니다.
+      원래 목적은 방사선으로 생기는 <strong>식도 통증을 줄이는 것</strong>이었습니다.
+      그런데 뜻밖에도, 종양이 <strong>크게 줄어드는 신호</strong>가 함께 나타났습니다.</p>
+      <div class="bignum">
+        <div class="bn"><div class="v">86.3%</div><div class="k">식도암에서<br>종양이 반응한 비율</div></div>
+        <div class="bn"><div class="v">84.6%</div><div class="k">폐암(소세포)에서<br>종양이 반응한 비율</div></div>
+      </div>
+      <p style="margin:0;">서로 다른 두 암에서 비슷하게 높은 반응이 나온 것입니다.
+      다만 Justus 님은 정직하게 덧붙입니다 — <strong>초기 반응은 놀라웠지만, 장기 생존까지 크게 늘렸는지는
+      연구 규모가 작아 아직 단정할 수 없다</strong>고요. 그래서 "가능성"이지 "확정"은 아닙니다.</p>
+    </div>
+
+    <div class="locked reveal">
+      🔒 <b>세 번째 연구 — 췌장암 이야기</b><br>
+      Justus 님의 원문에는 가장 치명적인 췌장암에서 "큰 생존 신호"를 보였다는 세 번째 용도변경 약 이야기가 이어집니다.
+      다만 그 약의 <b>이름과 자세한 내용은 유료 구독(원문)에서 공개</b>됩니다. 더 알고 싶으신 분은
+      Justus R. Hope 님의 원문 구독으로 확인하실 수 있습니다.
+    </div>
+  </section>
+
+  <!-- 5. 안전 경계 -->
+  <section>
+    <div class="safe reveal">
+      <h2>꼭 기억해 주세요</h2>
+      <p class="big">이 약들은 아직 '가능성' 단계입니다.<br>먹을지 말지의 최종 결정은<br>반드시 주치의와 함께 하세요.</p>
+      <p>여기 나온 약들은 "이런 방향이 연구되고 있다"는 <strong>예시</strong>일 뿐, "이걸 드세요"라는 권고가 아닙니다.
+      용도변경 약은 다른 약과의 상호작용, 몸 상태, 암의 종류에 따라 득이 될 수도 해가 될 수도 있습니다.</p>
+      <p>가장 좋은 사용법은 이겁니다 — 이 글로 <strong>'원리'를 이해하신 뒤, 그것을 바탕으로 주치의에게
+      더 좋은 질문을 드리는 것.</strong> 결정은 늘 의료진과 함께입니다.</p>
+    </div>
+  </section>
+
+  <div class="closing reveal">
+    <p class="line">암을 이기는 첫걸음은<br><span class="hl2">'성벽'이 있다는 걸 아는 것</span>에서 시작됩니다.</p>
+    <p class="line" style="font-size:18px;color:var(--ink-soft);">원리를 알고 → 가능성을 이해하고<br>→ (근거 위에서) 주치의와 함께 나아갑니다.</p>
+  </div>
+
+  <div class="foot">
+    환자 주도형 암 임상시험 커뮤니티 · 함께 배우고 함께 나아갑니다<br>
+    <span class="src">원문: Justus R. Hope, "Three Cancer Studies You Weren't Supposed to Notice" &amp;
+    "Why Starving Cancer Doesn't (Usually) Work" — 쉽게 풀어 옮김</span>
+  </div>
+
+</div>
+<script>
+  (function(){
+    var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var items=document.querySelectorAll('.reveal');
+    if(reduce||!('IntersectionObserver' in window)){items.forEach(function(el){el.classList.add('in');});return;}
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+    items.forEach(function(el){io.observe(el);});
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>가속과 제동 — 하사비스의 프런티어 AI 프레임워크</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" as="style" crossorigin
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<style>
+  :root{
+    --bg:#0a0e17;
+    --panel:#121a2b;
+    --panel2:#1a2438;
+    --line:#28324a;
+    --text:#e9edf7;
+    --text-dim:#93a1c0;
+    --warn:#ff6a3d;      /* 제동/위험 */
+    --safe:#33d6ac;      /* 기회/성장 */
+    --data:#5ec8ff;      /* 기술/데이터 */
+    --gold:#ffc94d;      /* 강조/의무 */
+    --mono:'SF Mono','IBM Plex Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 15% 0%, rgba(94,200,255,0.07), transparent 40%),
+      radial-gradient(circle at 85% 15%, rgba(255,106,61,0.06), transparent 45%),
+      var(--bg);
+    color:var(--text);
+    font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .progress{
+    position:fixed; top:0; left:0; height:3px; width:0%;
+    background:linear-gradient(90deg,var(--data),var(--warn));
+    z-index:999; transition:width .1s linear;
+  }
+  section, header.hero{
+    max-width:640px;
+    margin:0 auto;
+    padding:56px 22px;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.14em;
+    color:var(--text-dim);
+    text-transform:uppercase;
+    margin-bottom:14px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .eyebrow::before{
+    content:''; width:16px; height:1px; background:var(--text-dim);
+  }
+  h1,h2,h3{ font-weight:800; letter-spacing:-0.02em; margin:0 0 14px; }
+  h2{ font-size:24px; }
+  p{ color:var(--text-dim); margin:0 0 16px; font-size:15.5px; }
+  strong{ color:var(--text); font-weight:700; }
+  .fade{ opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease; }
+  .fade.in{ opacity:1; transform:none; }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    padding-top:40px;
+    text-align:center;
+    max-width:640px;
+  }
+  .gauge-wrap{ display:flex; justify-content:center; margin-bottom:8px; }
+  .hero h1{
+    font-size:32px;
+    line-height:1.32;
+    margin-top:8px;
+  }
+  .hero .accent{ color:var(--warn); }
+  .hero p.sub{ font-size:16px; color:var(--text-dim); max-width:480px; margin:14px auto 22px; }
+  .meta-row{
+    display:flex; justify-content:center; gap:10px; flex-wrap:wrap;
+    font-family:var(--mono); font-size:12px; color:var(--text-dim);
+  }
+  .meta-chip{
+    border:1px solid var(--line); border-radius:20px; padding:6px 12px;
+    background:var(--panel);
+  }
+
+  /* ---------- CARDS ---------- */
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:20px;
+  }
+  .grid2{ display:grid; grid-template-columns:1fr; gap:14px; }
+  @media(min-width:560px){ .grid2{ grid-template-columns:1fr 1fr; } }
+
+  .card.opportunity{ border-color:rgba(51,214,172,0.35); }
+  .card.risk{ border-color:rgba(255,106,61,0.35); }
+  .card-tag{
+    font-family:var(--mono); font-size:11px; letter-spacing:.08em;
+    padding:3px 9px; border-radius:20px; display:inline-block; margin-bottom:10px;
+  }
+  .tag-safe{ background:rgba(51,214,172,0.15); color:var(--safe); }
+  .tag-warn{ background:rgba(255,106,61,0.15); color:var(--warn); }
+  .tag-data{ background:rgba(94,200,255,0.15); color:var(--data); }
+  .tag-gold{ background:rgba(255,201,77,0.15); color:var(--gold); }
+
+  ul.plain{ margin:0; padding:0; list-style:none; }
+  ul.plain li{
+    color:var(--text-dim); font-size:14.5px; padding-left:18px; position:relative; margin-bottom:8px;
+  }
+  ul.plain li::before{
+    content:'—'; position:absolute; left:0; color:var(--text-dim);
+  }
+
+  /* ---------- CHART ---------- */
+  .chart-box{ background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px 14px 8px; }
+  .chart-caption{ font-family:var(--mono); font-size:11px; color:var(--text-dim); text-align:right; margin-top:6px; }
+
+  /* ---------- FLOW ---------- */
+  .flow{ display:flex; flex-direction:column; gap:0; }
+  .flow-step{
+    background:var(--panel2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 18px; position:relative;
+  }
+  .flow-num{
+    font-family:var(--mono); font-size:12px; color:var(--data);
+    border:1px solid rgba(94,200,255,0.4); border-radius:50%;
+    width:26px; height:26px; display:flex; align-items:center; justify-content:center;
+    margin-bottom:10px;
+  }
+  .flow-arrow{
+    display:flex; justify-content:center; padding:6px 0;
+    color:var(--line); font-size:18px;
+  }
+  .flow-step h3{ font-size:15.5px; margin-bottom:6px; }
+  .flow-step p{ font-size:14px; margin-bottom:0; }
+  .flow-step.branch{ border-color:var(--gold); }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{ position:relative; padding-left:26px; }
+  .timeline::before{
+    content:''; position:absolute; left:6px; top:4px; bottom:4px; width:2px;
+    background:linear-gradient(var(--data), var(--warn));
+  }
+  .t-item{ position:relative; margin-bottom:22px; }
+  .t-item::before{
+    content:''; position:absolute; left:-26px; top:3px; width:10px; height:10px;
+    border-radius:50%; background:var(--bg); border:2px solid var(--data);
+  }
+  .t-item.warn::before{ border-color:var(--warn); }
+  .t-date{ font-family:var(--mono); font-size:12px; color:var(--text-dim); margin-bottom:3px; }
+  .t-title{ font-size:15px; font-weight:700; margin-bottom:3px; }
+  .t-desc{ font-size:13.5px; color:var(--text-dim); }
+
+  /* ---------- BRAKE / SIGNATURE REPEAT ---------- */
+  .brake-section{
+    background:radial-gradient(circle at 50% 0%, rgba(255,106,61,0.10), transparent 60%);
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .mini-gauge{ display:flex; justify-content:center; margin:6px 0 18px; }
+  .scope-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+  .scope-pill{
+    font-family:var(--mono); font-size:12px; padding:6px 12px; border-radius:20px;
+    background:var(--panel2); border:1px solid var(--line); color:var(--text-dim);
+  }
+  .scope-pill.in{ border-color:var(--warn); color:var(--warn); }
+  .scope-pill.out{ border-color:var(--safe); color:var(--safe); }
+
+  /* ---------- COMPARISON ---------- */
+  .compare{ display:grid; grid-template-columns:1fr; gap:12px; }
+  @media(min-width:560px){ .compare{ grid-template-columns:1fr 1fr; } }
+  .compare .card h3{ font-size:15px; }
+  .vs-badge{
+    text-align:center; font-family:var(--mono); font-size:12px; color:var(--text-dim);
+    margin:6px 0;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    max-width:640px; margin:0 auto; padding:40px 22px 60px;
+    border-top:1px solid var(--line);
+    font-size:13px; color:var(--text-dim);
+  }
+  footer a{ color:var(--data); }
+  .closing-q{
+    background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px;
+    margin-bottom:18px;
+  }
+  .closing-q p{ font-size:15px; color:var(--text); margin-bottom:0; }
+
+  hr.divider{ border:none; border-top:1px solid var(--line); margin:40px 0 0; }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progressBar"></div>
+
+<header class="hero">
+  <div class="gauge-wrap">
+    <svg width="220" height="130" viewBox="0 0 220 130">
+      <defs>
+        <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#33d6ac"/>
+          <stop offset="55%" stop-color="#ffc94d"/>
+          <stop offset="100%" stop-color="#ff6a3d"/>
+        </linearGradient>
+      </defs>
+      <path d="M 20 110 A 90 90 0 0 1 200 110" fill="none" stroke="#28324a" stroke-width="14" stroke-linecap="round"/>
+      <path d="M 20 110 A 90 90 0 0 1 200 110" fill="none" stroke="url(#gaugeGrad)" stroke-width="14" stroke-linecap="round"
+        stroke-dasharray="283" stroke-dashoffset="283" id="gaugeArc"/>
+      <line x1="110" y1="110" x2="110" y2="35" stroke="#e9edf7" stroke-width="3" stroke-linecap="round"
+        id="gaugeNeedle" transform="rotate(-70 110 110)"/>
+      <circle cx="110" cy="110" r="7" fill="#e9edf7"/>
+      <text x="30" y="126" font-family="SF Mono, monospace" font-size="9" fill="#93a1c0">안전</text>
+      <text x="180" y="126" font-family="SF Mono, monospace" font-size="9" fill="#93a1c0" text-anchor="end">가속</text>
+    </svg>
+  </div>
+  <div class="eyebrow" style="justify-content:center;">2026.07.14 · 데미스 하사비스 칼럼 해설</div>
+  <h1>가속을 외쳐온 사람이,<br>이번엔 <span class="accent">브레이크</span>를 설계했다</h1>
+  <p class="sub">
+    구글 딥마인드 CEO 데미스 하사비스가 공개한 글 "A Framework for Frontier AI and the Dawning of a New Age"를
+    누구나 이해할 수 있도록 그림과 도표로 풀었습니다.
+  </p>
+  <div class="meta-row">
+    <span class="meta-chip">원문 발행일 2026.07.14</span>
+    <span class="meta-chip">읽는 시간 약 6분</span>
+  </div>
+</header>
+
+<main>
+
+<section id="who" class="fade">
+  <div class="eyebrow">이 사람이 왜 중요한가</div>
+  <h2>매번 같은 말을 반복해온 사람</h2>
+  <p>
+    데미스 하사비스는 지난 1년 넘게 여러 자리에서 비슷한 이야기를 해왔습니다.
+    "AGI(인간 수준의 범용 인공지능)가 몇 년 안에 온다", "이건 인터넷이나 스마트폰 같은 기술이 아니라
+    전기나 불의 발견에 맞먹는 사건이다"라는 식입니다. 이번 칼럼이 특별한 이유는
+    <strong>전망이 아니라 형식</strong>이 달라졌기 때문입니다. 처음으로 시기 선언, 위험 목록, 규제 기구 설계,
+    의무화 절차, 국제 확산 계획까지 한 문서에 담아 정책 제안서의 꼴을 갖췄습니다.
+  </p>
+  <div class="card">
+    <div class="card-tag tag-data">발언 타임라인</div>
+    <div class="timeline" style="margin-top:6px;">
+      <div class="t-item">
+        <div class="t-date">2025년 6월</div>
+        <div class="t-title">"AGI는 풍요의 시대를 연다"</div>
+        <div class="t-desc">AGI가 만드는 생산성을 보편적 고소득으로 나눠야 한다고 언급</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2026년 4월</div>
+        <div class="t-title">산업혁명 대비 "10배 충격, 10배 속도"</div>
+        <div class="t-desc">20VC 팟캐스트에서 변화 규모를 수치로 표현. 5년 내 도래 가능성이 높다고 언급</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2026년 5월</div>
+        <div class="t-title">"특이점의 초입에 서 있다"</div>
+        <div class="t-desc">구글 I/O 무대에서 동일한 표현 재사용</div>
+      </div>
+      <div class="t-item warn">
+        <div class="t-date">2026년 7월 14일</div>
+        <div class="t-title">규제 기구 설계안 공개</div>
+        <div class="t-desc">전망을 넘어 실제 정책 제안서 형태로 발표</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="vision" class="fade">
+  <div class="eyebrow">그가 그리는 두 가지 미래</div>
+  <h2>풍요와 위험, 같은 기술의 양면</h2>
+  <p>칼럼의 절반은 기대, 절반은 경고입니다. 하사비스는 이 둘을 분리하지 않고 나란히 놓습니다.</p>
+  <div class="grid2">
+    <div class="card opportunity">
+      <div class="card-tag tag-safe">기회</div>
+      <h3>자원 제약이 사라지는 시대</h3>
+      <ul class="plain">
+        <li>신약 개발 속도 향상</li>
+        <li>청정에너지 기술 확보</li>
+        <li>신소재 개발 가속</li>
+        <li>"자원이 더는 진보의 제약이 아닌" 시대 전망</li>
+      </ul>
+    </div>
+    <div class="card risk">
+      <div class="card-tag tag-warn">경고</div>
+      <h3>이해가 진전을 못 따라간다</h3>
+      <ul class="plain">
+        <li>상업 경쟁 + 지정학 경쟁이 겹친 레이스</li>
+        <li>사이버보안 위협은 이미 현실화</li>
+        <li>핵·바이오 리스크로 확산 가능성</li>
+        <li>재귀적 자기개선 에이전트 통제 필요성</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="data" class="fade">
+  <div class="eyebrow">체감이 아니라 측정치</div>
+  <h2>AI가 혼자 해내는 작업, 계속 길어지고 있다</h2>
+  <p>
+    하사비스만의 주장이 아닙니다. AI 평가기관 METR의 측정에 따르면, AI가 사람의 개입 없이
+    끝까지 완료할 수 있는 작업의 길이는 약 7개월(124일)마다 두 배로 늘어나는 추세를 보입니다.
+    2023년에는 몇 분 단위 작업이 한계였다면, 지금은 시간 단위 작업까지 넘어섰습니다.
+  </p>
+  <div class="chart-box">
+    <svg viewBox="0 0 320 170" width="100%">
+      <line x1="30" y1="10" x2="30" y2="140" stroke="#28324a" stroke-width="1"/>
+      <line x1="30" y1="140" x2="305" y2="140" stroke="#28324a" stroke-width="1"/>
+      <text x="8" y="145" font-family="SF Mono" font-size="8" fill="#93a1c0">분</text>
+      <text x="4" y="80" font-family="SF Mono" font-size="8" fill="#93a1c0">시간</text>
+      <text x="0" y="20" font-family="SF Mono" font-size="8" fill="#93a1c0">일+</text>
+      <path d="M 40 132 C 90 128, 130 118, 160 95 C 200 65, 230 42, 295 18"
+        fill="none" stroke="#5ec8ff" stroke-width="2.5"/>
+      <circle cx="40" cy="132" r="3.5" fill="#5ec8ff"/>
+      <circle cx="120" cy="122" r="3.5" fill="#5ec8ff"/>
+      <circle cx="190" cy="70" r="3.5" fill="#5ec8ff"/>
+      <circle cx="295" cy="18" r="4" fill="#ffc94d"/>
+      <text x="40" y="155" font-family="SF Mono" font-size="8" fill="#93a1c0" text-anchor="middle">2023</text>
+      <text x="120" y="155" font-family="SF Mono" font-size="8" fill="#93a1c0" text-anchor="middle">2024</text>
+      <text x="190" y="155" font-family="SF Mono" font-size="8" fill="#93a1c0" text-anchor="middle">2025</text>
+      <text x="295" y="155" font-family="SF Mono" font-size="8" fill="#93a1c0" text-anchor="middle">2026</text>
+    </svg>
+    <div class="chart-caption">개념도 · 출처: METR 자율작업 완료 시간 측정 (약 124일마다 2배)</div>
+  </div>
+</section>
+
+<section id="solution" class="fade">
+  <div class="eyebrow">그가 내놓은 해법</div>
+  <h2>모델은 증권업계의 FINRA</h2>
+  <p>
+    하사비스가 제안하는 건 <strong>미국 주도의 "프런티어 AI 표준기구"</strong>입니다.
+    참고 모델은 증권사를 자율 규제하는 민간기구 FINRA입니다. 정부가 직접 통제하는 대신,
+    업계 자금으로 운영되는 민관 파트너십을 만들자는 구상입니다.
+  </p>
+  <div class="compare">
+    <div class="card">
+      <div class="card-tag tag-data">기존 모델</div>
+      <h3>FINRA (증권업계)</h3>
+      <ul class="plain">
+        <li>SEC 감독 아래 운영</li>
+        <li>3,300여 개 증권사 자율 규제</li>
+        <li>회원사 회비·제재금으로 자금 조달</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-tag tag-gold">하사비스 제안</div>
+      <h3>프런티어 AI 표준기구</h3>
+      <ul class="plain">
+        <li>연방정부 감독 아래 운영</li>
+        <li>세계 최고 인재·컴퓨팅 확보 규모</li>
+        <li>자금 대부분 업계 부담</li>
+        <li>이사회에 독립 전문가 + 오픈소스 대표 포함</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="howitworks" class="fade">
+  <div class="eyebrow">실제로 어떻게 작동하나</div>
+  <h2>자율에서 시작해, 결국 의무가 되는 절차</h2>
+  <div class="flow">
+    <div class="flow-step">
+      <div class="flow-num">1</div>
+      <h3>벤치마크 테스트</h3>
+      <p>모델이 정해진 성능 문턱을 넘는지 평가. 사이버·바이오 같은 고위험 능력, 가드레일 우회 시도, 기만 징후까지 함께 점검</p>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">
+      <div class="flow-num">2</div>
+      <h3>"프런티어 랩" 지정</h3>
+      <p>문턱을 넘으면 해당 조직은 프런티어 랩으로 지정. 모델카드 공개, 사이버보안 강화, 핵심 인력 심사, 안전연구 자원 배정 의무 발생</p>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step branch">
+      <div class="flow-num">3</div>
+      <h3>배포 30일 전 사전 공유 (자율)</h3>
+      <p>모델을 시장에 내놓기 전, 기구에 먼저 공유해 평가받는 단계. 지금은 자율 참여 방식</p>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">
+      <div class="flow-num">4</div>
+      <h3>검증되면 의무 단계로 전환</h3>
+      <p>평가 체계가 검증되고 나면, 미국 시장 배포를 위해 반드시 통과해야 하는 절차로 격상</p>
+    </div>
+  </div>
+  <p style="margin-top:16px; font-size:13.5px;">
+    ※ 벤치마크는 분기마다 갱신되고, 포화된 지표는 폐기됩니다. 장기적으로는 랩과 독립된 비공개 시험을
+    기구가 직접 설계해 "과적합"(시험에만 맞춰 대비하는 것)을 막는 방향입니다.
+  </p>
+</section>
+
+<section id="brake" class="brake-section fade">
+  <div class="eyebrow">가장 눈에 띄는 조항</div>
+  <h2>"필요하면, 다 같이 속도를 늦춘다"</h2>
+  <div class="mini-gauge">
+    <svg width="150" height="90" viewBox="0 0 220 130">
+      <path d="M 20 110 A 90 90 0 0 1 200 110" fill="none" stroke="#28324a" stroke-width="14" stroke-linecap="round"/>
+      <path d="M 20 110 A 90 90 0 0 1 200 110" fill="none" stroke="#ff6a3d" stroke-width="14" stroke-linecap="round"
+        stroke-dasharray="283" stroke-dashoffset="90"/>
+      <line x1="110" y1="110" x2="110" y2="35" stroke="#e9edf7" stroke-width="3" stroke-linecap="round"
+        transform="rotate(30 110 110)"/>
+      <circle cx="110" cy="110" r="7" fill="#e9edf7"/>
+    </svg>
+  </div>
+  <p>
+    칼럼에서 가장 구체적이고 급진적인 대목입니다. 상황이 심각하다고 판단되면, 표준기구가
+    <strong>여러 프런티어 랩의 개발 속도를 함께 늦추도록 조율</strong>할 수 있다고 명시했습니다.
+    경쟁사끼리 "같이 브레이크를 밟는" 조항이 문서에 들어간 겁니다.
+  </p>
+  <div class="card">
+    <h3 style="font-size:14.5px; margin-bottom:10px;">적용 범위</h3>
+    <div class="scope-row">
+      <span class="scope-pill in">국적 무관</span>
+      <span class="scope-pill in">오픈소스 모델 포함</span>
+      <span class="scope-pill in">클로즈드 모델 포함</span>
+      <span class="scope-pill out">스타트업 면제</span>
+      <span class="scope-pill out">학계 모델 면제</span>
+    </div>
+  </div>
+</section>
+
+<section id="criticism" class="fade">
+  <div class="eyebrow">그럼에도 남는 질문</div>
+  <h2>업계가 업계를 심판할 수 있는가</h2>
+  <p>
+    반론도 이미 나와 있습니다. 참고 모델인 FINRA 자체가 오랫동안 "규제 포획"(규제 대상이
+    규제 기구를 좌우하는 현상) 논란을 받아온 기구입니다. 업계 자금으로 운영되는 조직이
+    업계를 실제로 제재할 수 있느냐는 의문이 그대로 남습니다.
+  </p>
+  <div class="card">
+    <ul class="plain">
+      <li>벤치마크 문턱을 초기 현직 프런티어 랩들과 협의해 정하면, 후발 주자에게는 진입장벽이 될 수 있음</li>
+      <li>"프런티어 랩" 지정 자체가 상당한 명예로 여겨질 거라는 언급은, 규제라기보다 브랜드에 가까워질 우려를 키움</li>
+    </ul>
+  </div>
+  <p style="margin-top:14px;">
+    실제로 이보다 앞서, 앤트로픽은 2025년 7월 연 매출 1억 달러 또는 설비투자 10억 달러
+    이상인 대형 개발사에만 안전 프레임워크 공개를 요구하는 투명성 제안을 낸 바 있습니다.
+    랩이 스스로 규제 설계도를 내놓는 흐름은 이번이 처음이 아닙니다.
+  </p>
+</section>
+
+<section id="context" class="fade">
+  <div class="eyebrow">더 넓은 그림</div>
+  <h2>이미 움직이고 있던 판 위에 던져진 제안</h2>
+  <p>미국에서는 이미 비슷한 장치들이 여러 갈래로 만들어지는 중입니다. 하사비스의 제안은 이 논쟁 한복판에 업계 쪽 설계안을 얹은 것에 가깝습니다.</p>
+  <div class="card">
+    <div class="timeline">
+      <div class="t-item">
+        <div class="t-date">2026년 6월 초</div>
+        <div class="t-title">백악관 행정명령</div>
+        <div class="t-desc">프런티어 개발사가 공개 전 모델을 연방정부와 자발적으로 공유하는 틀 마련</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">2026년 6월 4일</div>
+        <div class="t-title">초당적 하원 법안 초안 (269쪽)</div>
+        <div class="t-desc">상무부 산하 CAISI를 정식 기구화, 2027년부터 연 1억 달러 배정, 반년마다 독립 검증기관 감사, 관련 주법 효력 3년간 정지</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">이미 진행 중</div>
+        <div class="t-title">캘리포니아 · 뉴욕 · 일리노이</div>
+        <div class="t-desc">주(州) 차원의 프런티어 AI 규제법 제정, 연방 단일 기준 필요성 논쟁 중</div>
+      </div>
+      <div class="t-item warn">
+        <div class="t-date">2026년 7월 13일</div>
+        <div class="t-title">경제학자 200여 명 성명</div>
+        <div class="t-desc">노벨상 수상자 16명 포함. AI가 10년 안에 급격히 강력해질 수 있으니 지금부터 연구·제도 준비를 시작하자고 촉구</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="closing" class="fade">
+  <div class="eyebrow">칼럼이 던지는 마지막 질문</div>
+  <h2>제도 바깥의 질문들, 이제 사회의 몫</h2>
+  <div class="closing-q">
+    <p>포스트 스카시티(자원 제약이 사라진) 세계에 맞는 경제 모델은 무엇인가?</p>
+  </div>
+  <div class="closing-q">
+    <p>우리는 어떤 가치로 살아갈 것인가? 의미와 목적은 어디서 오는가?</p>
+  </div>
+  <div class="closing-q">
+    <p>인간의 조건 자체가 어떻게 변화할 것인가?</p>
+  </div>
+  <p>
+    하사비스는 이 질문의 답을 기술자에게만 맡겨서는 안 되고, 사회 전체가 함께 정해야 한다고
+    적었습니다. 표준기구를 세우고 평가 체계를 검증하는 데는 몇 년이 걸립니다. 그가 스스로
+    말하는 AGI 도착까지도 몇 년입니다. <strong>규칙과 모델, 어느 쪽이 먼저 도착하느냐</strong>가
+    다음 국면을 정할 것으로 보입니다.
+  </p>
+</section>
+
+</main>
+
+<hr class="divider">
+<footer>
+  <p>
+    원문: 데미스 하사비스, "A Framework for Frontier AI and the Dawning of a New Age" (2026.7.14 공개).<br>
+    이 페이지는 원문의 핵심 내용을 일반 독자를 위해 재구성·요약한 비공식 해설 자료입니다.
+    정확한 원문 표현과 세부 내용은 하사비스의 원문을 참고하시기 바랍니다.
+  </p>
+  <p>더 많은 사람들과 이 문제를 함께 고민하고 싶은 분들을 위해 만들었습니다. 자유롭게 공유해주세요.</p>
+</footer>
+
+<script>
+  // 스크롤 진행바
+  const bar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    bar.style.width = pct + '%';
+  });
+
+  // 스크롤 페이드인
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+  // 히어로 게이지 애니메이션
+  window.addEventListener('load', () => {
+    const arc = document.getElementById('gaugeArc');
+    const needle = document.getElementById('gaugeNeedle');
+    setTimeout(() => {
+      arc.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(.2,.8,.2,1)';
+      arc.style.strokeDashoffset = '90';
+      needle.style.transition = 'transform 1.4s cubic-bezier(.2,.8,.2,1)';
+      needle.setAttribute('transform','rotate(30 110 110)');
+    }, 300);
+  });
+</script>
+
+</body>
+</html>

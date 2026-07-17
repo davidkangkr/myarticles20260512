@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aaron 이야기 — 갈림길에서 무엇을 물어야 했나</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF7F0; --paper2:#FFFDF9; --ink:#2E2A24; --ink-soft:#5A5248;
+    --line:#E5DCCC; --green:#2F7A4F; --green-bg:#EAF5EE; --yellow:#9A6B00;
+    --yellow-bg:#FCF3DC; --red:#A63A2E; --red-bg:#FBEAE7; --accent:#B4694A;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Noto Sans KR",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:19px; line-height:1.85; word-break:keep-all;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:0 22px 90px;}
+  h1,h2,h3{font-family:"Noto Serif KR",serif; line-height:1.45; letter-spacing:-.01em;}
+
+  /* Header */
+  header{padding:60px 0 34px; border-bottom:2px solid var(--line);}
+  .kicker{font-size:15px; color:var(--accent); font-weight:700; letter-spacing:.08em; margin-bottom:14px;}
+  h1{font-size:33px; margin:0 0 18px;}
+  .lede{font-size:19px; color:var(--ink-soft); margin:0;}
+
+  /* Blocks */
+  section{padding:44px 0; border-bottom:1px solid var(--line);}
+  h2{font-size:26px; margin:0 0 8px;}
+  .sub{color:var(--ink-soft); font-size:16px; margin:0 0 22px;}
+  p{margin:0 0 18px;}
+  strong{font-weight:700;}
+
+  .quote{
+    background:var(--paper2); border-left:5px solid var(--accent);
+    padding:20px 22px; border-radius:0 12px 12px 0; margin:0 0 24px;
+    font-family:"Noto Serif KR",serif; font-size:19px; color:var(--ink);
+  }
+  .quote .who{display:block; margin-top:10px; font-family:"Noto Sans KR",sans-serif;
+    font-size:15px; color:var(--ink-soft);}
+
+  /* Traffic light */
+  .lights{display:flex; flex-direction:column; gap:16px; margin:26px 0 6px;}
+  .light{border-radius:16px; padding:22px 22px 18px; border:2px solid;}
+  .light h3{margin:0 0 6px; font-size:21px;}
+  .light .tag{font-size:15px; font-weight:700; margin-bottom:10px; display:block;}
+  .light p{margin:0 0 10px; font-size:18px;}
+  .light ul{margin:8px 0 0; padding-left:22px;}
+  .light li{margin-bottom:8px;}
+  .g{background:var(--green-bg); border-color:#BEE0CC;} .g h3,.g .tag{color:var(--green);}
+  .y{background:var(--yellow-bg); border-color:#EBD9A6;} .y h3,.y .tag{color:var(--yellow);}
+  .r{background:var(--red-bg); border-color:#F0C6BE;} .r h3,.r .tag{color:var(--red);}
+
+  /* Ask box */
+  .askbox{
+    background:var(--paper2); border:2px dashed var(--accent); border-radius:14px;
+    padding:20px 22px; margin:0 0 16px; position:relative;
+  }
+  .askbox::before{
+    content:"“"; font-family:"Noto Serif KR",serif; font-size:56px; color:var(--accent);
+    opacity:.28; position:absolute; top:2px; left:14px; line-height:1;
+  }
+  .askbox p{margin:0 0 6px; padding-left:26px; font-size:19px; font-family:"Noto Serif KR",serif;}
+  .askbox .why{padding-left:26px; font-size:15px; color:var(--ink-soft); margin:8px 0 0;
+    font-family:"Noto Sans KR",sans-serif;}
+  .copyhint{font-size:15px; color:var(--ink-soft); margin:0 0 20px;}
+
+  /* Timeline */
+  .tl{list-style:none; margin:24px 0 0; padding:0; border-left:3px solid var(--line); padding-left:24px;}
+  .tl li{position:relative; margin-bottom:24px;}
+  .tl li::before{
+    content:""; position:absolute; left:-32px; top:11px; width:13px; height:13px;
+    border-radius:50%; background:var(--accent); border:3px solid var(--paper);
+  }
+  .tl .when{font-size:15px; color:var(--accent); font-weight:700; display:block;}
+  .tl .what{font-size:18px;}
+  .tl li.big::before{background:var(--red); width:17px; height:17px; left:-34px;}
+
+  .callout{
+    background:#F3EDE1; border-radius:16px; padding:26px 24px; margin:26px 0;
+    border:1px solid var(--line);
+  }
+  .callout p:last-child{margin-bottom:0;}
+  .big-line{font-family:"Noto Serif KR",serif; font-size:22px; line-height:1.65; margin:0 0 14px;}
+
+  .safety{
+    background:#FFF; border:3px solid var(--red); border-radius:18px; padding:26px 24px; margin:34px 0 0;
+  }
+  .safety h2{color:var(--red); margin-top:0;}
+  .safety ul{padding-left:22px; margin:0;}
+  .safety li{margin-bottom:12px;}
+
+  footer{padding:44px 0 0; text-align:center; color:var(--ink-soft); font-size:16px;}
+  .warm{font-family:"Noto Serif KR",serif; font-size:21px; color:var(--ink); margin-bottom:20px;}
+  .disc{font-size:14px; line-height:1.7; background:var(--paper2); border:1px solid var(--line);
+    border-radius:12px; padding:18px; text-align:left; margin-top:26px;}
+
+  a{color:var(--accent);}
+  a:focus-visible, .askbox:focus-visible{outline:3px solid var(--accent); outline-offset:3px;}
+
+  /* Motion */
+  .rv{opacity:0; transform:translateY(14px); transition:opacity .5s ease, transform .5s ease;}
+  .rv.in{opacity:1; transform:none;}
+  @media (prefers-reduced-motion: reduce){
+    .rv{opacity:1 !important; transform:none !important; transition:none !important;}
+  }
+  @media (max-width:520px){
+    body{font-size:18px;}
+    h1{font-size:27px;} h2{font-size:23px;}
+    .wrap{padding:0 16px 70px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="rv">
+  <div class="kicker">실제 사례로 배우기 · 초보자용</div>
+  <h1>Aaron의 이야기<br>— 갈림길에서 무엇을 물어야 했나</h1>
+  <p class="lede">이 글은 우리 커뮤니티의 한 회원(Aaron)이 2026년 2월 구강암 진단을 받고
+  7월 항암·방사선 치료를 마치기까지, 직접 올린 글과 댓글을 그대로 따라가며 정리한 것입니다.
+  <strong>따라 하시라고 만든 글이 아닙니다.</strong> 같은 갈림길에 섰을 때
+  <strong>주치의에게 무엇을 물어야 할지</strong> 함께 찾아보려고 만들었습니다.</p>
+</header>
+
+<section class="rv">
+  <h2>먼저, 그 마음부터</h2>
+  <p class="sub">진단받던 날 Aaron이 쓴 글입니다.</p>
+  <div class="quote">
+    “볼 안쪽에 편평세포암 진단을 받았습니다. 전이 검사를 한다고 하고,
+    아마 수술로 잘라내고 이식을 하게 될 거라고 합니다.
+    <strong>정말 겁이 납니다.</strong> 조언이든 응원이든, 뭐라도 해주실 분 계신가요?”
+    <span class="who">— Aaron, 2026년 2월</span>
+  </div>
+  <p>무섭다고 쓰는 건 나약해서가 아닙니다. 두려움은 <strong>고장이 아니라 신호</strong>입니다.
+  몸이 “이건 큰일이야, 정신 차리고 잘 알아보자”라고 말해주는 것이지요.</p>
+  <p>다만 그 두려움 속에서 한 가지 어려운 일이 벌어집니다.
+  겁이 날수록 사람들은 <strong>“무엇을 해야 하나요?”</strong>라고 묻게 되고,
+  그러면 사방에서 서로 다른 답이 쏟아집니다. Aaron의 그 글에도
+  <strong>80개 가까운 댓글</strong>이 달렸습니다. 서로 반대되는 이야기도 많았습니다.</p>
+  <p>이 글이 하려는 일은 그 답들 중에 정답을 고르는 게 아닙니다.
+  <strong>질문을 바꾸는 연습</strong>입니다.</p>
+</section>
+
+<section class="rv">
+  <h2>Aaron에게 무슨 일이 있었나</h2>
+  <p class="sub">본인이 직접 올린 글에서 확인되는 것만 적었습니다.</p>
+  <ul class="tl">
+    <li>
+      <span class="when">2026년 1월</span>
+      <span class="what">볼 안쪽이 6개월째 아프고 점점 커졌습니다. 이 닦기도 힘들 만큼요.</span>
+    </li>
+    <li>
+      <span class="when">2026년 2월</span>
+      <span class="what"><strong>편평세포암 진단.</strong> 이미 몇 해 전부터 펜벤다졸을 복용 중이었고,
+      진단 후 용량을 더 늘리기로 합니다.</span>
+    </li>
+    <li>
+      <span class="when">2026년 3~4월</span>
+      <span class="what">CT·PET 검사. “지옥 같은 악몽”이라고 쓴 날, 잠 못 이루고 새벽 바다에 나가 일출을 봅니다.</span>
+    </li>
+    <li>
+      <span class="when">2026년 4월 20일</span>
+      <span class="what"><strong>수술.</strong> 종양을 잘라내고, 볼을 다시 만들고(재건 수술),
+      목의 림프절을 함께 제거했습니다.</span>
+    </li>
+    <li class="big">
+      <span class="when">2026년 5월 1일 — 가장 큰 갈림길</span>
+      <span class="what">수술로 떼어낸 조직을 검사해 보니 <strong>림프절에 암이 있었고, 그 껍질을 뚫고 나온 상태</strong>였습니다.
+      의료진은 항암과 방사선을 권했습니다. Aaron은 커뮤니티에 물었습니다.
+      <strong>“이거 꼭 해야 하나요? 하고 싶지 않습니다.”</strong></span>
+    </li>
+    <li>
+      <span class="when">2026년 5월 12일</span>
+      <span class="what"><strong>Aaron은 항암·방사선을 받기로 결정합니다.</strong> 그리고 술을 완전히 끊겠다고 선언합니다.</span>
+    </li>
+    <li>
+      <span class="when">2026년 5~6월</span>
+      <span class="what">방사선 마스크가 무서워 공황이 왔고, 딸꾹질이 멎지 않았고, 입안이 헐어 비명을 질렀습니다.
+      그 사이 술을 끊은 덕에 <strong>간 수치가 정상으로 돌아왔다</strong>는 연락을 받습니다.</span>
+    </li>
+    <li class="big">
+      <span class="when">2026년 7월 17일</span>
+      <span class="what"><strong>치료 종료의 종을 울립니다.</strong> 이제 재활과 부기 관리를 하며
+      “암의 흔적이 없다”는 검사 결과를 기다립니다.</span>
+    </li>
+  </ul>
+</section>
+
+<section class="rv">
+  <h2>이 이야기의 핵심 한 문장</h2>
+  <div class="callout">
+    <p class="big-line">Aaron이 직접 쓴 말입니다.</p>
+    <div class="quote" style="margin-bottom:16px;">
+      “종양의 위치가 위치라 말하고 씹을 때마다 자극이 되었고, 그래서 원래도 공격적인 이 암이 더 빨리 퍼졌습니다.
+      <strong>프로토콜만으로는 종양이 자라는 속도를 도저히 따라잡을 수 없었습니다.</strong>
+      그래서 저는 <strong>다 던지기로</strong> 했습니다 — 프로토콜에 <strong>더해서</strong> 수술·항암·방사선까지.”
+      <span class="who">— Aaron, 2026년 7월 17일</span>
+    </div>
+    <p>이 문장을 꼭 기억해 주세요. 이 사례는 <strong>“펜벤다졸이 암을 나았다”는 이야기가 아닙니다.</strong>
+    Aaron은 보조적인 시도들을 하면서 <strong>동시에 수술과 항암과 방사선을 모두 받았습니다.</strong>
+    그리고 본인이 직접, 보조적인 것만으로는 부족했다고 적었습니다.</p>
+    <p>그래서 우리는 이 사례에서 <strong>“무엇이 나았는지” 알 수 없습니다.</strong>
+    여러 가지를 한꺼번에 했으니까요. 알 수 없는 걸 안다고 말하지 않는 것, 그게 정직한 태도입니다.</p>
+  </div>
+</section>
+
+<section class="rv">
+  <h2>기억할 그림 하나: 신호등</h2>
+  <p class="sub">Aaron의 여정에 나온 것들을 세 가지 색으로 나눠 보았습니다.</p>
+  <p>쏟아지는 정보 앞에서 길을 잃지 않는 방법은, 모든 걸 외우는 게 아니라
+  <strong>“이건 어느 색인가?”</strong> 하나만 묻는 것입니다.</p>
+
+  <div class="lights">
+    <div class="light g">
+      <span class="tag">🟢 초록 — 오늘 바로 도움이 되고, 근거도 비교적 탄탄한 것</span>
+      <h3>몸이 편해지는 일들</h3>
+      <p>Aaron이 나눈 팁 중에서 <strong>가장 쓸모 있었고 근거도 있는</strong> 것들은
+      암을 없애는 이야기가 아니라 <strong>덜 아프게 지내는 이야기</strong>였습니다.</p>
+      <ul>
+        <li><strong>입안 곰팡이 감염(아구창) 치료.</strong> Aaron은 이것이
+        “통증과 삶의 질 모두에서 가장 큰 전환점”이었다고 했습니다. 마취 가글조차 못 삼킬 만큼 아팠는데,
+        항진균제 치료를 받고 나서야 양치를 할 수 있게 되었습니다.
+        <em>이건 실제로 근거가 있습니다 — 머리·목에 방사선을 받는 분의 약 40%가 입안 곰팡이 감염을 겪고,
+        약으로 치료가 잘 됩니다.</em></li>
+        <li><strong>피부 화상 관리.</strong> 목·얼굴의 방사선 화상에 연고와 로션이 큰 도움이 되었다고 합니다.
+        어떤 연고를 쓸지는 <strong>꼭 방사선 치료팀과 상의하세요</strong> — 바르는 시점이 중요합니다.</li>
+        <li><strong>스무디.</strong> 삼키기 힘들 때 차가운 음료로 영양을 채웠습니다. 목도 얼얼하게 해주고요.</li>
+        <li><strong>금주.</strong> Aaron은 술을 끊은 뒤 회복이 눈에 띄게 달라졌다고 했고,
+        실제로 <strong>간 수치가 정상으로 돌아왔습니다.</strong> 이건 그의 기록에서
+        숫자로 확인된 몇 안 되는 변화입니다.</li>
+      </ul>
+    </div>
+
+    <div class="light y">
+      <span class="tag">🟡 노랑 — 궁금하면 물어보되, 혼자 판단하지 않을 것</span>
+      <h3>“해도 되나요?”라고 물어야 하는 것들</h3>
+      <p>보조적으로 무언가를 드시고 계시거나 드시려 한다면, 그 자체를 나무랄 일은 아닙니다.
+      다만 <strong>숨기지 말고 알리는 것</strong>이 안전합니다.</p>
+      <ul>
+        <li><strong>수술 전에는 멈춰야 할 수 있습니다.</strong> Aaron도 커뮤니티에서
+        “수술 며칠 전에는 다 끊어야 한다”는 조언을 받았습니다. 출혈 위험 때문입니다.
+        이건 <strong>반드시 수술팀에게 직접 확인</strong>하세요.</li>
+        <li><strong>간이 힘들어질 수 있습니다.</strong> Aaron이 쓰던 것 중에는
+        <strong>간 손상 사례가 실제로 보고된 것</strong>이 있습니다.
+        간 수치 검사를 정기적으로 받고, <strong>결과는 의료팀과 함께 보세요.</strong></li>
+        <li><strong>먹는 것들끼리 부딪칠 수 있습니다.</strong> 특히 항암·방사선 중에는요.
+        약사님이나 주치의께 <strong>드시는 것 전부를 한 번에 보여드리는 것</strong>이 가장 빠릅니다.</li>
+      </ul>
+    </div>
+
+    <div class="light r">
+      <span class="tag">🔴 빨강 — 혼자 결정하면 위험한 것</span>
+      <h3>여기서는 꼭 멈춰 주세요</h3>
+      <ul>
+        <li><strong>표준치료를 미루거나 건너뛰는 결정.</strong>
+        Aaron이 “항암·방사선 꼭 해야 하냐”고 물었을 때, 커뮤니티의 많은 분들이
+        <strong>“안 해도 된다”, “직감을 믿어라”</strong>라고 답했습니다.
+        <strong>Aaron은 그 조언을 따르지 않았습니다.</strong> 그리고 그것이
+        이 이야기에서 가장 중요한 대목입니다. 그의 상황(림프절 껍질을 뚫고 나온 암)에서
+        수술 후 항암·방사선은 <strong>표준적으로 권고되는 치료</strong>입니다.</li>
+        <li><strong>아주 많은 양의 멜라토닌.</strong> 잠잘 때 먹는 양의 수백 배를 쓰는 이야기가 나옵니다.
+        이건 <strong>안전이 확인된 범위가 아닙니다.</strong> 게다가 방사선 치료와 함께 쓴
+        무작위 시험에서는 <strong>생존에 도움이 되지 않았습니다.</strong> 반드시 의료진과 상의하세요.</li>
+        <li><strong>“의사에게 말하지 마라”는 조언.</strong> 이런 댓글이 실제로 여러 개 있었습니다.
+        마음은 이해가 됩니다. 하지만 <strong>의료진이 모르면 지켜줄 수도 없습니다.</strong>
+        의사와 부딪히는 게 힘들다면, 숨기는 대신 <strong>병원을 바꾸거나 다른 의견을 구하는 편</strong>이 안전합니다.</li>
+        <li><strong>“장에 독소가 몇 킬로씩 쌓여 있다”는 이야기.</strong> 이건
+        <strong>몸에 대한 사실이 아닙니다.</strong> 근거가 없습니다.</li>
+        <li><strong>“힘든 건 좋아지는 과정(명현반응)”이라는 설명.</strong>
+        정말로 몸에 문제가 생긴 신호일 수 있습니다. 아프면 <strong>참지 말고 알리세요.</strong></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="rv">
+  <h2>이렇게 물어보세요</h2>
+  <p class="sub">그대로 복사해서, 진료실에서 읽으셔도 됩니다.</p>
+  <p class="copyhint">아래 문장들은 <strong>약을 권하는 말이 아닙니다.</strong>
+  전부 <strong>주치의에게 확인하는 질문</strong>입니다. 종이에 적어 가셔도 좋고,
+  휴대폰으로 보여드려도 좋습니다. 물어보는 건 실례가 아닙니다. 제 몸에 대한 일이니까요.</p>
+
+  <div class="askbox">
+    <p>“제 병기와 종양 위치에서, 표준치료를 미루면 어떤 위험이 있나요?
+    미룬 만큼 결과가 나빠질 수 있는 건가요?”</p>
+    <p class="why">→ Aaron이 5월에 섰던 바로 그 갈림길의 질문입니다.
+    “할까요 말까요”가 아니라 <strong>“미루면 무엇을 잃나요”</strong>로 물으면 더 정확한 답이 옵니다.</p>
+  </div>
+
+  <div class="askbox">
+    <p>“수술 후 조직검사 결과에서, 항암이나 방사선을 권하시는 이유가 정확히 무엇인가요?
+    그 근거를 제가 볼 수 있게 설명해 주실 수 있나요?”</p>
+    <p class="why">→ 이유를 알면 마음이 정해집니다. Aaron도 결국 이유를 알고 나서 결정했습니다.</p>
+  </div>
+
+  <div class="askbox">
+    <p>“입안이 너무 아파서 물도 삼키기 힘듭니다.
+    <strong>곰팡이 감염(칸디다) 때문일 수도 있나요? 검사를 받아볼 수 있을까요?</strong>”</p>
+    <p class="why">→ Aaron이 “가장 큰 전환점”이라고 한 것이 바로 이 검사였습니다.
+    아파서 못 먹는 것과, 치료 가능한 감염이 겹친 것은 다릅니다.</p>
+  </div>
+
+  <div class="askbox">
+    <p>“방사선 마스크가 너무 무섭고 숨이 막힙니다.
+    <strong>불안을 줄이는 약을 미리 쓸 수 있을까요?</strong>”</p>
+    <p class="why">→ Aaron은 마스크 제작 중 공황이 와서 중단했습니다.
+    이건 참을 일이 아니라 <strong>말하면 도와줄 수 있는 일</strong>입니다.</p>
+  </div>
+
+  <div class="askbox">
+    <p>“제가 지금 이것들을 먹고 있습니다. <em>(전부 보여드리기)</em>
+    <strong>지금 받는 치료와 부딪히는 게 있을까요? 수술 전에 끊어야 하는 게 있나요?</strong>”</p>
+    <p class="why">→ 가장 중요한 질문일 수 있습니다. 숨기는 것보다 보여드리는 게 나를 지킵니다.</p>
+  </div>
+
+  <div class="askbox">
+    <p>“간 수치를 정기적으로 확인하고 싶습니다. <strong>어떤 검사를 언제 받으면 될까요?
+    결과는 함께 봐주실 수 있나요?</strong>”</p>
+    <p class="why">→ 검사를 챙기는 건 아주 좋은 일입니다. 다만 <strong>해석은 혼자 하지 마세요.</strong></p>
+  </div>
+
+  <div class="askbox">
+    <p>“선생님 설명이 잘 이해되지 않습니다. <strong>다른 병원의 의견도 한 번 들어봐도 될까요?</strong>”</p>
+    <p class="why">→ 이건 배신이 아닙니다. 환자의 정당한 권리이고, 좋은 의사는 화내지 않습니다.</p>
+  </div>
+</section>
+
+<section class="rv">
+  <h2>오늘, 이것부터 해보세요</h2>
+  <p class="sub">부담 없는 첫걸음 하나면 충분합니다.</p>
+  <div class="callout">
+    <p class="big-line">📝 종이 한 장에 이렇게 적어 보세요.</p>
+    <p><strong>왼쪽에는</strong> 내가 지금 먹고 있는 것 전부를 적습니다. 약, 영양제, 차, 뭐든지요.<br>
+    <strong>오른쪽에는</strong> 다음 진료 때 물어볼 질문 <strong>딱 세 개</strong>만 적습니다.
+    위 질문들 중에서 골라도 좋습니다.</p>
+    <p>그리고 그 종이를 다음 진료 때 가져가세요. 그게 전부입니다.</p>
+    <p>많은 분들이 진료실에 들어가면 머리가 하얘져서 묻고 싶던 걸 다 잊고 나옵니다.
+    종이 한 장이 그걸 막아줍니다. <strong>이 글이 드리고 싶은 건 정답이 아니라, 그 종이 한 장입니다.</strong></p>
+  </div>
+</section>
+
+<section class="rv" style="border-bottom:none; padding-bottom:10px;">
+  <div class="safety">
+    <h2>꼭 지켜주셨으면 하는 선</h2>
+    <ul>
+      <li><strong>무엇을 먹을지, 무엇을 끊을지, 무엇을 함께 쓸지 —
+      최종 결정은 반드시 주치의와 함께 하세요.</strong> 이 글도, 인터넷의 어떤 글도,
+      AI도 그 결정을 대신할 수 없습니다.</li>
+      <li>이 글에는 <strong>용량이나 복용법이 일부러 적혀 있지 않습니다.</strong>
+      그건 이 글이 할 일이 아니기 때문입니다.</li>
+      <li>Aaron의 이야기는 <strong>한 사람의 이야기</strong>입니다. 그리고 그는
+      <strong>표준치료를 다 받았습니다.</strong> 같은 병명이라도 사람마다 다릅니다.</li>
+      <li>이 글의 쓸모는 <strong>결정을 내려주는 것이 아니라, 더 나은 질문을 손에 쥐어드리는 것</strong>입니다.</li>
+    </ul>
+  </div>
+</section>
+
+<footer class="rv">
+  <p class="warm">겁이 나는 건 당연합니다.<br>
+  다만 그 두려움을 혼자 안고 계시지는 마세요.<br>
+  묻는 사람이 이깁니다.</p>
+  <div class="disc">
+    <strong>이 문서에 대하여.</strong>
+    이 글은 한 페이스북 커뮤니티에 2025년 4월부터 2026년 7월까지 올라온
+    Aaron 본인의 게시글과 그에 달린 댓글, 그리고 그룹의 표준 프로토콜 문서를 원본 그대로 읽고 재구성한 것입니다.
+    <strong>개인정보 보호를 위해 성(family name)과 댓글 작성자의 실명은 모두 생략했습니다.</strong>
+    원본에서 확인되지 않는 내용은 지어내지 않았습니다.
+    이 문서는 <strong>의학적 조언이 아니며</strong>, 특정 약물이나 제품을 권하지 않습니다.
+    언급된 약물은 <strong>사례에 등장했다는 의미의 예시(illustrative)</strong>일 뿐입니다.
+    더 깊이 있는 근거 자료를 원하시면 <a href="aaron-case-expert.html">전문가용 문서</a>를 함께 보세요.
+  </div>
+</footer>
+
+</div>
+<script>
+(function(){
+  var els = document.querySelectorAll('.rv');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function showAll(){ for(var i=0;i<els.length;i++){ els[i].classList.add('in'); } }
+  if(reduce || !('IntersectionObserver' in window)){ showAll(); return; }
+  try{
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:0.05});
+    for(var i=0;i<els.length;i++){ io.observe(els[i]); }
+  }catch(err){ showAll(); }
+})();
+</script>
+</body>
+</html>

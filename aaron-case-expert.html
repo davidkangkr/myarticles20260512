@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aaron 사례 심층분석 — 병행 의사결정의 해부</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0C0E13; --panel:#12151C; --panel2:#171B24; --line:#252A36;
+    --text:#DFE3EA; --muted:#8C95A6; --dim:#5F6879;
+    --mech:#3ED0D6;    /* 기전 = cyan */
+    --evid:#E5A93C;    /* 근거 = amber */
+    --tool:#A98BF5;    /* 도구 = violet */
+    --limit:#F0637A;   /* 한계·경계 = rose */
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:"Noto Sans KR",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:16px; line-height:1.8; font-weight:300; word-break:keep-all;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px 100px;}
+  h1,h2,h3,h4{font-family:"Noto Serif KR",serif; font-weight:600; line-height:1.4; letter-spacing:-.01em;}
+  .mono{font-family:"IBM Plex Mono",monospace;}
+  strong{font-weight:700; color:#FFF;}
+  em{color:var(--muted); font-style:normal;}
+  a{color:var(--mech); text-decoration:none; border-bottom:1px solid rgba(62,208,214,.3);}
+  a:hover{border-bottom-color:var(--mech);}
+  a:focus-visible{outline:2px solid var(--mech); outline-offset:3px;}
+
+  header{padding:70px 0 40px; border-bottom:1px solid var(--line);}
+  .eyebrow{font-family:"IBM Plex Mono",monospace; font-size:12px; letter-spacing:.14em;
+    color:var(--dim); text-transform:uppercase; margin-bottom:18px;}
+  h1{font-size:38px; margin:0 0 20px;}
+  .deck{font-size:17px; color:var(--muted); max-width:70ch; margin:0;}
+
+  section{padding:56px 0; border-bottom:1px solid var(--line);}
+  .sidx{font-family:"IBM Plex Mono",monospace; font-size:12px; letter-spacing:.14em;
+    color:var(--dim); margin-bottom:12px;}
+  h2{font-size:27px; margin:0 0 10px;}
+  h3{font-size:19px; margin:32px 0 10px;}
+  .sdeck{color:var(--muted); font-size:16px; margin:0 0 26px; max-width:72ch;}
+  p{margin:0 0 16px; max-width:74ch;}
+
+  /* Thesis */
+  .thesis{
+    background:linear-gradient(180deg, #141922 0%, #10141B 100%);
+    border:1px solid var(--line); border-left:4px solid var(--evid);
+    border-radius:0 12px 12px 0; padding:32px 30px; margin:34px 0 0;
+  }
+  .thesis .lbl{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.16em;
+    color:var(--evid); margin-bottom:14px;}
+  .thesis p{font-family:"Noto Serif KR",serif; font-size:21px; line-height:1.7; color:#FFF; margin:0; font-weight:600;}
+
+  /* Paradigm */
+  .para{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:26px 0 0;}
+  .pcard{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:22px;}
+  .pcard.old{border-top:3px solid var(--limit);}
+  .pcard.new{border-top:3px solid var(--mech);}
+  .pcard h4{margin:0 0 10px; font-size:16px;}
+  .pcard.old h4{color:var(--limit);} .pcard.new h4{color:var(--mech);}
+  .pcard p{font-size:15px; color:var(--muted); margin:0;}
+
+  /* Timeline rail */
+  .rail{border-left:2px solid var(--line); padding-left:26px; margin:26px 0 0;}
+  .ev{position:relative; margin-bottom:22px;}
+  .ev::before{content:""; position:absolute; left:-33px; top:9px; width:10px; height:10px;
+    border-radius:50%; background:var(--dim); border:2px solid var(--bg);}
+  .ev.key::before{background:var(--evid); width:14px; height:14px; left:-35px;
+    box-shadow:0 0 0 4px rgba(229,169,60,.14);}
+  .ev .d{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--dim); letter-spacing:.06em;}
+  .ev.key .d{color:var(--evid);}
+  .ev .t{font-size:15px; color:var(--text);}
+  .ev .t .q{color:var(--muted); font-style:italic;}
+
+  /* Tables */
+  .tscroll{overflow-x:auto; margin:22px 0 0; border:1px solid var(--line); border-radius:12px;}
+  table{width:100%; border-collapse:collapse; min-width:660px; background:var(--panel);}
+  th{background:var(--panel2); text-align:left; padding:13px 14px; font-size:11px;
+    font-family:"IBM Plex Mono",monospace; letter-spacing:.1em; color:var(--muted);
+    text-transform:uppercase; border-bottom:1px solid var(--line); white-space:nowrap;}
+  td{padding:13px 14px; font-size:14px; border-bottom:1px solid var(--line); vertical-align:top; color:var(--text);}
+  tbody tr:last-child td{border-bottom:none;}
+  .grade{font-family:"IBM Plex Mono",monospace; font-weight:600; font-size:13px;
+    padding:2px 9px; border-radius:5px; display:inline-block; white-space:nowrap;
+    text-align:center; line-height:1.45;}
+  th:nth-child(2), td:nth-child(2){width:104px;}
+  .gA{background:rgba(62,208,214,.14); color:var(--mech); border:1px solid rgba(62,208,214,.35);}
+  .gB{background:rgba(120,200,140,.12); color:#7BC98C; border:1px solid rgba(120,200,140,.32);}
+  .gC{background:rgba(229,169,60,.12); color:var(--evid); border:1px solid rgba(229,169,60,.32);}
+  .gD{background:rgba(240,99,122,.12); color:var(--limit); border:1px solid rgba(240,99,122,.32);}
+  .gX{background:rgba(140,149,166,.12); color:var(--muted); border:1px solid rgba(140,149,166,.3);}
+  .cite{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--dim);}
+  .cite a{color:var(--dim); border-bottom-color:rgba(140,149,166,.25);}
+  .cite a:hover{color:var(--mech);}
+
+  /* Flags */
+  .flag{background:rgba(240,99,122,.06); border:1px solid rgba(240,99,122,.3);
+    border-left:3px solid var(--limit); border-radius:0 10px 10px 0; padding:18px 20px; margin:0 0 14px;}
+  .flag h4{margin:0 0 8px; font-size:16px; color:var(--limit);}
+  .flag p{font-size:14.5px; color:var(--muted); margin:0 0 8px;}
+  .flag p:last-child{margin:0;}
+  .flag .src{font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--dim);}
+
+  /* Pipeline */
+  .pipe{display:flex; flex-wrap:wrap; gap:10px; align-items:stretch; margin:24px 0 0;}
+  .node{flex:1 1 150px; background:var(--panel); border:1px solid var(--line);
+    border-radius:10px; padding:16px 14px; position:relative;}
+  .node .n{font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.1em; margin-bottom:8px;}
+  .node .h{font-size:14.5px; font-weight:500; color:#FFF; margin-bottom:6px;}
+  .node .b{font-size:12.5px; color:var(--muted); line-height:1.6;}
+  .n1{border-top:2px solid var(--mech);} .n1 .n{color:var(--mech);}
+  .n2{border-top:2px solid var(--evid);} .n2 .n{color:var(--evid);}
+  .n3{border-top:2px solid var(--tool);} .n3 .n{color:var(--tool);}
+  .n4{border-top:2px solid var(--limit);} .n4 .n{color:var(--limit);}
+  .arrow{align-self:center; color:var(--dim); font-size:16px; flex:0 0 auto;}
+  @media (max-width:760px){ .arrow{display:none;} }
+
+  /* Steps */
+  .step{background:var(--panel); border:1px solid var(--line); border-radius:12px;
+    padding:22px 22px 18px; margin:0 0 14px;}
+  .step .sn{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.12em;
+    color:var(--tool); margin-bottom:8px;}
+  .step h4{margin:0 0 10px; font-size:17px;}
+  .step p{font-size:14.5px; color:var(--muted); margin:0 0 12px;}
+  pre{background:#0A0C11; border:1px solid var(--line); border-radius:8px;
+    padding:15px; overflow-x:auto; margin:0 0 12px;}
+  code{font-family:"IBM Plex Mono",monospace; font-size:12.5px; color:#C9D1DC; line-height:1.75; white-space:pre-wrap;}
+  code .c{color:var(--evid);}   /* constraint */
+  code .g{color:var(--mech);}   /* gate */
+  .gate{font-size:13px; color:var(--muted); border-top:1px dashed var(--line); padding-top:11px; margin:0;}
+  .gate b{color:var(--mech); font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.1em;}
+
+  .callout{background:var(--panel2); border:1px solid var(--line); border-radius:12px;
+    padding:24px; margin:24px 0 0;}
+  .callout p:last-child{margin-bottom:0;}
+  .callout.warn{border-color:rgba(240,99,122,.4); background:rgba(240,99,122,.05);}
+
+  ol.limits, ul.plain{padding-left:20px; margin:18px 0 0;}
+  ol.limits li, ul.plain li{margin-bottom:14px; color:var(--muted); font-size:15px; max-width:74ch;}
+  ol.limits li b, ul.plain li b{color:var(--text);}
+
+  .boundary{border:2px solid var(--limit); border-radius:14px; padding:26px; margin:34px 0 0;
+    background:rgba(240,99,122,.05);}
+  .boundary h3{margin:0 0 12px; color:var(--limit); font-size:19px;}
+
+  footer{padding:50px 0 0; color:var(--muted); font-size:14px;}
+  .close{font-family:"Noto Serif KR",serif; font-size:20px; color:var(--text);
+    line-height:1.7; margin:0 0 26px; max-width:66ch;}
+  .meta{font-size:12.5px; color:var(--dim); line-height:1.8; border-top:1px solid var(--line); padding-top:22px;}
+
+  .rv{opacity:0; transform:translateY(12px); transition:opacity .45s ease, transform .45s ease;}
+  .rv.in{opacity:1; transform:none;}
+  @media (prefers-reduced-motion: reduce){
+    .rv{opacity:1 !important; transform:none !important; transition:none !important;}
+  }
+  @media (max-width:640px){
+    h1{font-size:28px;} h2{font-size:22px;} body{font-size:15px;}
+    .para{grid-template-columns:1fr;}
+    .wrap{padding:0 16px 70px;}
+    .thesis p{font-size:18px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="rv">
+  <div class="eyebrow">CASE ANALYSIS / REGISTER B — METHODOLOGY</div>
+  <h1>Aaron 사례 심층분석<br>— 병행 의사결정의 해부</h1>
+  <p class="deck">2025-04 ~ 2026-07, 한 페이스북 커뮤니티에 축적된 단일 환자의 22개 게시글·664건 댓글과
+  그룹 표준 프로토콜 문서를 원자료로 삼아, Stage 4a 구강 편평세포암(SCC) 사례를
+  <strong>효능 서사가 아닌 의사결정 구조</strong>로 재구성한다.
+  본 문서의 목적은 이 사례가 무엇을 증명하는지가 아니라,
+  <strong>이 사례가 구조적으로 무엇을 증명할 수 없는지</strong>를 명확히 하는 데 있다.</p>
+
+  <div class="thesis">
+    <div class="lbl">THESIS</div>
+    <p>이 사례의 교훈은 단일 성분의 효능이 아니라, <strong>표준치료를 축으로 한 병행 의사결정</strong>과
+    그것을 검증하는 프레임에 있다. 환자 본인이 “프로토콜만으로는 종양 성장을 따라잡지 못했다”고
+    명시적으로 기록했다는 사실이, 이 코퍼스에서 가장 강한 단일 증거다.</p>
+  </div>
+</header>
+
+<section class="rv">
+  <div class="sidx">01 / REFRAME</div>
+  <h2>패러다임 대비 — 이 사례를 어떻게 읽을 것인가</h2>
+  <p class="sdeck">동일한 코퍼스가 두 가지 방식으로 읽힌다. 하나는 커뮤니티에서 흔히 유통되는 독법이고,
+  다른 하나는 이 문서가 택하는 독법이다.</p>
+  <div class="para">
+    <div class="pcard old">
+      <h4>구(舊) 독법 — “성공 사례”</h4>
+      <p>“프로토콜을 하던 사람이 4기 암을 이겨내고 종을 울렸다.”
+      → 성분에 인과를 귀속하고, 결과를 프로토콜의 검증으로 간주한다.
+      표준치료는 서사의 배경으로 밀려나거나 “독”으로 프레이밍된다.
+      <strong>교란변수를 결론으로 착각한 독법.</strong></p>
+    </div>
+    <div class="pcard new">
+      <h4>신(新) 독법 — “의사결정 궤적”</h4>
+      <p>“한 환자가 커뮤니티의 지배적 조언과 반대되는 결정을 내렸고, 그 결정의 근거를
+      스스로 기록해 두었다.” → 관심 대상은 성분이 아니라 <strong>5/1 → 5/12 사이에 일어난
+      선호 역전(preference reversal)</strong>과 그 정당화 구조다.
+      이 사례의 재현 가능한 자산은 물질이 아니라 <strong>판단</strong>이다.</p>
+    </div>
+  </div>
+  <div class="callout">
+    <p><strong>왜 이 구분이 결정적인가.</strong> 구 독법에서 Aaron은 프로토콜의 광고가 된다.
+    그러나 원자료를 끝까지 읽으면 정반대의 결론이 나온다 — Aaron은 진단 시점에 이미
+    <strong>수년간 펜벤다졸을 복용 중이던 사용자</strong>였다(2025-04 게시글에서 2년 복용 이력 서술).
+    즉 이 사례는 프로토콜 <em>실패 후</em> 표준치료로 전환한 궤적이지,
+    프로토콜 <em>성공</em>의 궤적이 아니다. 이 사실은 서사에서 가장 쉽게 누락되는 부분이다.</p>
+  </div>
+</section>
+
+<section class="rv">
+  <div class="sidx">02 / CHRONOLOGY</div>
+  <h2>타임라인 — 원자료에서 확인되는 것만</h2>
+  <p class="sdeck">파일명 날짜(YYYYMMDD) 기준 정렬. 인용은 본인 게시글에서 발췌·번역했다.
+  확인되지 않는 구간은 공백으로 둔다.</p>
+  <div class="rail">
+    <div class="ev">
+      <span class="d">2025-04-27 · 진단 −10개월</span>
+      <div class="t">암이 아닌 만성 증상(모겔론스 자칭)에 대해 <strong>펜벤다졸 2년 복용 후기</strong> 게시.
+      생명과학 R&D 13년 경력 자칭. 커뮤니티 내 신뢰 자본이 이 시점에 형성됨.
+      <span class="q">Herx 반응 여부 질문에 “Tons(엄청 많았다)”라고 답함.</span></div>
+    </div>
+    <div class="ev">
+      <span class="d">2025-07-07 · 진단 −7개월</span>
+      <div class="t"><strong>“가상의(hypothetical) 얼굴 4기 SCC”</strong>에 대한 사후관리 질문 게시.
+      <span class="q">— 진단 7개월 전 시점의 이 “가상” 질문은 회고적으로 재해석의 여지가 있으나, 원자료만으로는 판단 불가.</span></div>
+    </div>
+    <div class="ev">
+      <span class="d">2026-01-11 · 진단 −6주</span>
+      <div class="t">볼 점막 백반증/마찰성 각화증이 6개월간 악화. 통증으로 구강위생 불가.
+      <span class="q">“병원·치과에 갈 때마다 찢어지고 더 커지는 느낌”</span></div>
+    </div>
+    <div class="ev key">
+      <span class="d">2026-02-25 · 진단</span>
+      <div class="t"><strong>볼 점막 SCC 진단 공개.</strong> 펜벤 1000mg+ 증량 의사 표명.
+      댓글 80건: 풀프로토콜 준수 권유, 유료 상담 권유, H₂O₂ 도포, DMSO, black salve, essiac tea 등 다수 유입.
+      <span class="q">“정말 겁이 납니다.”</span></div>
+    </div>
+    <div class="ev">
+      <span class="d">2026-03-05 / 03-11 / 03-16 / 03-21</span>
+      <div class="t">운영 질문 국면: 수술 상담 전 중단 여부(→ “수술 5일 전 전부 중단”),
+      세라펩타제·MCP 브랜드/병용, 펜벤 흡수를 위한 전유(全乳) 섭취(→ 운영자가 IGF-1 근거로 반대).</div>
+    </div>
+    <div class="ev">
+      <span class="d">2026-03-25 / 04-03</span>
+      <div class="t">CT·PET 시행. 수술 4/20 확정. <span class="q">“지옥 같은 악몽 속의 불금.
+      잠 못 이룬 밤 끝에 해변에서 일출을 봤다. 내 종양만큼 미워해 본 게 없다.”</span></div>
+    </div>
+    <div class="ev key">
+      <span class="d">2026-04-20 · 수술</span>
+      <div class="t"><strong>종양 절제 + estlander flap 재건 + 경부 림프절 절제.</strong>
+      입원 36시간. 4/24 배액관 제거.</div>
+    </div>
+    <div class="ev key">
+      <span class="d">2026-05-01 · 결정 지점 ①</span>
+      <div class="t"><strong>병리 결과: 절제 림프절 약 30개 중 1개 양성, 피막외침범(ENE) 확인.</strong>
+      종양내과가 항암·방사선 권고. 게시글 제목이 곧 질문이다:
+      <span class="q">“이거 반드시 해야 하나요? 방사선도 항암도 하기 싫습니다.”</span><br>
+      → 댓글 61건의 지배적 방향은 <strong>만류</strong>였다(“직감을 믿어라”, “종양과 림프절을 다 떼었으면 할 이유 없다”,
+      “나는 후회한다”). 소수만이 “다 하라”고 답했다.</div>
+    </div>
+    <div class="ev key">
+      <span class="d">2026-05-12 · 결정 지점 ② — 선호 역전</span>
+      <div class="t"><strong>Aaron은 만류를 따르지 않고 항암·방사선을 “ASAP” 시작하기로 결정.</strong>
+      동시에 금주·금약물의 영구화를 선언. <span class="q">“이 짐승을 잡는 데 도움을 준 이 그룹,
+      Happy Healing Store, 그리고 마이애미 암 연구소에 감사한다.”</span>
+      — 감사의 목록에 <strong>커뮤니티와 암센터가 나란히 놓인다.</strong> 이것이 병행 프레임의 원자료적 증거다.</div>
+    </div>
+    <div class="ev">
+      <span class="d">2026-05-16 / 05-20</span>
+      <div class="t">방사선 마스크 매핑 중 <strong>공황발작으로 중단</strong>, 항불안제 처방 후 재시도.
+      고용량 멜라토닌 사용법 질문 → 커뮤니티가 300mg 권유.</div>
+    </div>
+    <div class="ev">
+      <span class="d">2026-06-03</span>
+      <div class="t">항암·방사선 개시 후 지속성 딸꾹질. 별도로,
+      <strong>금주 후 간효소 수치가 완전히 정상화</strong>되었다는 주치의 연락 보고.</div>
+    </div>
+    <div class="ev key">
+      <span class="d">2026-06-12 · 인식론적 분기점</span>
+      <div class="t">방사선 종양의가 300mg 멜라토닌을 반대(“항산화제가 암세포를 죽여야 할 활성산소를 상쇄한다”).
+      Aaron은 <strong>서면으로 인용 문헌(citations)을 요구</strong>했고, 의사는 수 분간 고성으로 반응.
+      <span class="q">“내가 찾은 연구는 전부 고용량 멜라토닌에 낙관적이다. 내가 놓친 인용이 있나?”</span><br>
+      → 댓글의 지배적 조언: <strong>“의사에게 말하지 마라.”</strong> (§05에서 이 장면을 해부한다.)</div>
+    </div>
+    <div class="ev key">
+      <span class="d">2026-07-17 · 종료</span>
+      <div class="t"><strong>Bell ringing.</strong> 병리 서술: Stage 4a SCC, 우측 하부 볼 점막, 림프절 1개 전이 + ENE.
+      시스플라틴 6회 + 방사선 30회 완료. 물리치료·림프부종 관리로 전환, NED 목표로 스캔 대기.
+      <span class="q">“프로토콜만으로는 종양 성장 속도를 도저히 따라잡을 수 없었다. 그래서 다 던지기로 했다 —
+      프로토콜에 <strong>더해</strong> 전통적 치료까지.”</span></div>
+    </div>
+  </div>
+  <div class="callout warn">
+    <p><strong>원자료의 내적 불일치(기록해 둠).</strong> 병기 서술이 시점에 따라 다르다 —
+    4/21·5/12 게시글은 <span class="mono">stage 3</span>, 7/17 게시글은 <span class="mono">Stage 4a</span>로 적었다.
+    AJCC 8판에서 ENE(+)는 N3b로 상향되어 Stage IVA가 되므로 <strong>최종 서술이 병리와 정합적</strong>이며,
+    초기 서술은 수술 직후 임상 병기였을 개연성이 높다. 다만 <strong>원자료가 이를 명시하지 않으므로 추정으로 남긴다.</strong>
+    이런 종류의 흔들림은 자기보고 코퍼스의 구조적 한계이며, §07의 근거로 사용된다.</p>
+    <p class="mono" style="font-size:12px; color:var(--dim);">※ 코퍼스 내 <span style="color:var(--muted);">20250627</span> 파일의 본문(방사선 화상 서술)은
+    진단 8개월 전 시점이므로 Aaron의 것일 수 없다 → 타인 게시글로 분류, 타임라인에서 제외했다.</p>
+  </div>
+</section>
+
+<section class="rv">
+  <div class="sidx">03 / DECISION</div>
+  <h2>결정 지점의 해부 — 무엇이 판단을 갈랐나</h2>
+  <p class="sdeck">이 사례에서 재현 가능한 자산은 5/1과 5/12 사이의 11일이다.
+  같은 사람이, 같은 커뮤니티 안에서, 지배적 조언과 반대로 움직였다.</p>
+
+  <h3>5/1의 조언 지형</h3>
+  <p>61개 댓글의 분포는 명확했다. 다수는 만류였고, 그 근거는 세 유형으로 수렴한다:
+  <strong>(a) 해부학적 오해</strong>(“종양과 림프절을 다 떼었으니 남은 암이 없다” — ENE의 의미를 다루지 않음),
+  <strong>(b) 인식론적 권위 이전</strong>(“직감을 믿어라”, “유료 상담을 받아라”),
+  <strong>(c) 후회 서사</strong>(“나는 항암을 했고 청력과 삶을 잃었다, 하지 말았어야 했다”).
+  유형 (c)는 정서적으로 가장 강력하지만 <strong>생존자 편향의 교과서적 사례</strong>다 —
+  치료를 거부하고 사망한 사람은 그 스레드에 댓글을 달 수 없다.</p>
+  <p>주목할 점: 그룹 운영자 역시 <em>“종양과 림프절에 실제로 암이 남아 있지 않다면 항암·방사선을 할 이유가 없다고 본다”</em>는
+  취지로 답했다. Aaron은 같은 스레드에서 <strong>ENE가 있어서 공격적 치료를 권하는 것</strong>이라고
+  두 차례 명시적으로 정정했으나, 조언의 방향은 바뀌지 않았다.</p>
+
+  <h3>임상적 사실관계</h3>
+  <div class="callout">
+    <p>절제된 두경부 SCC에서 <strong>병리학적 ENE는 보조 항암방사선(adjuvant CRT)의 표준 적응증</strong>이다.
+    JAMA Otolaryngol Head Neck Surg의 해당 코호트 연구는 서두에서 이를 명시한다:
+    <em>“The standard of care for pathologic ENE is adjuvant chemoradiation therapy.”</em>
+    <span class="cite">(<a href="https://pubmed.ncbi.nlm.nih.gov/32790830/" target="_blank" rel="noopener">PMID 32790830</a>)</span></p>
+    <p>정직하게 덧붙이면, 근거는 단순하지 않다. 같은 연구는 pN2a·HPV 음성 하위군에서
+    방사선 단독 대비 항암 추가의 생존 이득을 확인하지 못했고(HR 0.98),
+    구강 SCC 코호트 연구도 CCRT가 국소제어는 개선하나 OS·DFS는 유의하게 개선하지 못했다고 보고한다
+    <span class="cite">(<a href="https://pubmed.ncbi.nlm.nih.gov/31926824/" target="_blank" rel="noopener">PMID 31926824</a>)</span>.
+    <strong>즉 “항암을 추가할지”는 종양내과와 논쟁할 수 있는 진짜 질문이다.</strong>
+    그러나 그 논쟁은 <strong>“보조 치료를 할 것인가 말 것인가”가 아니라 “보조 치료의 구성”에 관한 것</strong>이며,
+    5/1 스레드의 조언은 그 구분을 하지 못했다.</p>
+    <p>또한 <strong>시간이 변수</strong>다. 고위험 구강 SCC에서 수술–방사선 종료까지의
+    treatment package time이 길어지면 OS·DFS가 악화된다
+    <span class="cite">(<a href="https://pubmed.ncbi.nlm.nih.gov/40635979/" target="_blank" rel="noopener">PMID 40635979</a>)</span>.
+    <strong>“일단 프로토콜을 몇 달 더 해보고 재평가하자”는 조언에는 비용이 붙어 있으며, 그 비용은 스레드에서 한 번도 언급되지 않았다.</strong></p>
+  </div>
+
+  <h3>Aaron을 움직인 것</h3>
+  <p>본인 서술을 따르면 결정 근거는 <strong>커뮤니티 내부의 논증이 아니라 자기 관찰</strong>이었다:
+  종양의 위치상 말하고 씹는 모든 동작이 자극이 되어 성장이 가속되었고,
+  <strong>프로토콜을 이미 하고 있었음에도 그 속도를 따라잡지 못했다</strong>는 관찰.
+  즉 그는 <strong>자신에게서 얻은 반증(disconfirming evidence)</strong>에 반응했다.
+  이것이 이 사례에서 가장 이식 가능한 행동이다 — 믿음을 버린 게 아니라, <strong>믿음이 예측에 실패한 것을 인정했다.</strong></p>
+</section>
+
+<section class="rv">
+  <div class="sidx">04 / EVIDENCE</div>
+  <h2>성분별 근거 등급표</h2>
+  <p class="sdeck">그룹 표준 프로토콜(Full Protocol 2024, 14p / Quick Start)의 구성 성분과,
+  Aaron이 실제로 사용·언급한 항목을 등급화했다. 조회일: 2026-07-17, PubMed·ClinicalTrials.gov 실제 질의 결과 기준.
+  <strong>등급은 “해당 암종에서 사람 대상 임상 이득”을 기준으로 한다.</strong></p>
+  <p style="font-size:13.5px; color:var(--dim);">
+    <span class="grade gA">A</span> RCT/메타분석 &nbsp;
+    <span class="grade gB">B</span> 계통적 고찰·다수 임상연구 &nbsp;
+    <span class="grade gC">C</span> 소규모·간접·혼재 &nbsp;
+    <span class="grade gD">D</span> 전임상/증례 &nbsp;
+    <span class="grade gX">—</span> 근거 없음
+  </p>
+  <div class="tscroll">
+    <table>
+      <thead>
+        <tr><th>항목</th><th>등급</th><th>실제 근거 상태 (조회 결과)</th><th>인용</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>펜벤다졸</strong><br><span class="cite">프로토콜의 축</span></td>
+          <td><span class="grade gD">D</span></td>
+          <td><strong>ClinicalTrials.gov 등록 중재연구 0건.</strong> 사람 대상 RCT 없음.
+          근거는 전적으로 세포·동물 수준 — 유방암 세포 pyroptosis/HK2 억제, 마우스 A549 이종이식에서 병용 종양 억제 등.
+          인체 항암 효능은 <strong>미검증</strong>. 프로토콜 PDF가 서술하는 기전(미세소관·GLUT·p53)은
+          전임상 기전 가설이며 임상 이득과 동의어가 아니다.</td>
+          <td class="cite"><a href="https://pubmed.ncbi.nlm.nih.gov/40756987/" target="_blank" rel="noopener">40756987</a>,
+          <a href="https://pubmed.ncbi.nlm.nih.gov/40799435/" target="_blank" rel="noopener">40799435</a></td>
+        </tr>
+        <tr>
+          <td><strong>펜벤다졸 — 안전성</strong><br><span class="cite">별도 항목으로 분리</span></td>
+          <td><span class="grade gD">위해 근거<br>B</span></td>
+          <td><strong>효능보다 위해의 근거가 더 강하다.</strong> NIH LiverTox에 독립 항목으로 등재
+          (“혈청효소 상승과 임상적으로 명백한 급성 간손상을 유발할 수 있다”).
+          자가복용 후 <strong>중증 약물유발 간손상(DILI) 증례가 반복 보고</strong>됨 —
+          조직학적으로 확인된 67세 여성 간세포성 손상; RUCAM 8점(probable) 47세 전이성 대장암 환자;
+          RUCAM 9점(highly probable) 65세 전립선암 환자(ALT 1764 U/L, T.bili 12.9);
+          2g/일 복용 후 담즙정체 증례. <strong>모든 증례에서 중단 후 회복.</strong></td>
+          <td class="cite"><a href="https://pubmed.ncbi.nlm.nih.gov/42081641/" target="_blank" rel="noopener">42081641</a>,
+          <a href="https://pubmed.ncbi.nlm.nih.gov/38706451/" target="_blank" rel="noopener">38706451</a>,
+          <a href="https://pubmed.ncbi.nlm.nih.gov/41608149/" target="_blank" rel="noopener">41608149</a>,
+          <a href="https://pubmed.ncbi.nlm.nih.gov/42299164/" target="_blank" rel="noopener">42299164</a>,
+          <a href="https://pubmed.ncbi.nlm.nih.gov/41097960/" target="_blank" rel="noopener">41097960</a></td>
+        </tr>
+        <tr>
+          <td><strong>고용량 멜라토닌</strong><br><span class="cite">전신, 300–1000mg</span></td>
+          <td><span class="grade gD">D</span></td>
+          <td><strong>이 표에서 가장 중요한 칸.</strong> 방사선 병용 <strong>무작위 2상(RTOG 0119)</strong>에서
+          멜라토닌 20mg + 방사선은 역사적 대조군 대비 <strong>생존 이득이 없었다</strong>
+          (중앙생존 3.4 / 2.8개월 vs 대조 4.1개월). 결론은 명시적이다:
+          <em>“High-dose melatonin did not show any beneficial effect.”</em>
+          300–1000mg 용량대의 항암 이득을 지지하는 사람 대상 RCT는 <strong>없다.</strong>
+          프로토콜이 인용하는 Shallenberger·Loh는 RCT가 아니다.</td>
+          <td class="cite"><a href="https://pubmed.ncbi.nlm.nih.gov/17418968/" target="_blank" rel="noopener">17418968</a></td>
+        </tr>
+        <tr>
+          <td><strong>멜라토닌 — 국소 구강젤</strong><br><span class="cite">※ 위 항목과 구별할 것</span></td>
+          <td><span class="grade gC">C</span></td>
+          <td>3% 멜라토닌 구강젤 무작위·이중맹검 2상에서, 시스플라틴 병용 방사선 환자의
+          중증 구강점막염 발생(44 vs 78%)과 지속기간이 유의하게 감소.
+          <strong>단, 이는 국소 젤이며 전신 300mg 캡슐과 다른 개입이다.</strong> 3상 확인 필요.
+          — <em>커뮤니티에서 두 개가 “멜라토닌”으로 뭉뚱그려지는 것이 전형적 오류다.</em></td>
+          <td class="cite"><a href="https://pubmed.ncbi.nlm.nih.gov/33738704/" target="_blank" rel="noopener">33738704</a></td>
+        </tr>
+        <tr>
+          <td><strong>항진균제</strong> (플루코나졸·니스타틴)<br><span class="cite">Aaron의 자체 팁</span></td>
+          <td><span class="grade gB">A–B</span></td>
+          <td><strong>Aaron이 나눈 팁 중 근거가 가장 강한 항목이며, 프로토콜에는 없는 항목이다.</strong>
+          계통적 고찰: 암치료 중 임상적 구강진균감염 유병률 39.1%, 두경부 방사선·항암이 각각 독립적 위험인자.
+          <strong>전신 항진균제 예방 시 유병률 1.9%로 감소</strong>(국소 제제는 열등).
+          Aaron의 서술(“가장 큰 전환점, 이것 없었으면 경관영양이 필요했을 것”)과 정합적.</td>
+          <td class="cite"><a href="https://pubmed.ncbi.nlm.nih.gov/20449755/" target="_blank" rel="noopener">20449755</a>,
+          <a href="https://pubmed.ncbi.nlm.nih.gov/25908051/" target="_blank" rel="noopener">25908051</a></td>
+        </tr>
+        <tr>
+          <td><strong>보조 항암방사선</strong> (ENE 양성)<br><span class="cite">비교 기준선</span></td>
+          <td><span class="grade gA">A–B</span></td>
+          <td>병리학적 ENE에서 보조 CRT는 표준치료. 단, 항암 추가의 OS 이득은 하위군에 따라 불확실
+          (pN2a HPV− 코호트 HR 0.98). <strong>치료 지연은 실측 비용을 동반</strong>(package time > 104일에서 OS·DFS 악화).</td>
+          <td class="cite"><a href="https://pubmed.ncbi.nlm.nih.gov/32790830/" target="_blank" rel="noopener">32790830</a>,
+          <a href="https://pubmed.ncbi.nlm.nih.gov/31926824/" target="_blank" rel="noopener">31926824</a>,
+          <a href="https://pubmed.ncbi.nlm.nih.gov/40635979/" target="_blank" rel="noopener">40635979</a></td>
+        </tr>
+        <tr>
+          <td>세라펩타제 / MCP</td>
+          <td><span class="grade gD">D</span></td>
+          <td>프로토콜은 “죽은 세포 제거·디톡스 반응 완화”를 목적으로 제시하나,
+          해당 적응증에 대한 사람 대상 임상 근거는 없다. MCP는 소규모 초기 연구 수준.
+          <strong>프로토콜이 부여하는 역할(“fenben이 죽인 세포의 단백질을 암이 먹지 못하게 함”)은 검증된 기전이 아니다.</strong>
+          항응고제 병용 시 세라펩타제 회피 지침은 합리적 방향.</td>
+          <td class="cite">—</td>
+        </tr>
+        <tr>
+          <td>커큐민</td>
+          <td><span class="grade gC">C–D</span></td>
+          <td>다수의 전임상 기전 근거와 초기 임상. 생체이용률이 구조적 제약.
+          암 결과지표(생존)에 대한 확정적 RCT 근거 없음.</td>
+          <td class="cite">—</td>
+        </tr>
+        <tr>
+          <td>오메가-3</td>
+          <td><span class="grade gC">B–C</span></td>
+          <td>암 악액질·영양 상태 등 <strong>지지요법 맥락</strong>에서는 상대적으로 근거가 있으나,
+          항종양 효과의 근거는 아니다. 목적을 혼동하지 말 것.</td>
+          <td class="cite">—</td>
+        </tr>
+        <tr>
+          <td>약용버섯 (베타글루칸)</td>
+          <td><span class="grade gC">C–D</span></td>
+          <td>일부 지역(동아시아)의 보조요법 임상이 있으나 이질적. 표준치료 대체 근거 아님.</td>
+          <td class="cite">—</td>
+        </tr>
+        <tr>
+          <td>프로바이오틱스</td>
+          <td><span class="grade gC">B–C</span></td>
+          <td>항암·방사선 유발 설사·점막염 등 <strong>지지요법 맥락</strong>에서 근거 축적 중.
+          프로토콜이 서술하는 “암세포 성장·세포자멸 조절” 프레임은 과잉 확장.
+          <strong>중증 면역저하 환자에서는 균혈증 위험이 보고되므로 의료팀 확인 필요.</strong></td>
+          <td class="cite">—</td>
+        </tr>
+        <tr>
+          <td>CBD / CBG</td>
+          <td><span class="grade gD">D</span></td>
+          <td>전임상 근거. 항암 효능 임상 근거 없음. <strong>CYP450 상호작용을 통한
+          항암제 농도 변화 가능성이 실질적 위험이며, 프로토콜은 이를 다루지 않는다.</strong></td>
+          <td class="cite">—</td>
+        </tr>
+        <tr>
+          <td>TUDCA</td>
+          <td><span class="grade gC">C</span></td>
+          <td>담즙산으로서 간 지표 개선 근거는 존재. <strong>프로토콜 내 실제 기능은 항암이 아니라
+          “펜벤다졸 간독성의 완충”에 가깝다</strong> — 이 배치 자체가 펜벤다졸 간독성의 실재를
+          프로토콜이 암묵적으로 인정하고 있음을 시사한다.</td>
+          <td class="cite">—</td>
+        </tr>
+        <tr>
+          <td><strong>MagCleanse / “장내 독소 폐기물”</strong></td>
+          <td><span class="grade gX">근거<br>없음</span></td>
+          <td><strong>“평균 성인의 장에 5–20파운드의 갇힌 독성 폐기물이 있다”(Full Protocol 14p)는
+          생리학적 근거가 없는 통설이다.</strong> 해부·생리학적으로 성립하지 않는다.
+          이 주장이 공식 프로토콜 문서에 포함되어 있다는 사실은,
+          <strong>문서 전체의 주장에 동일한 검증을 적용해야 할 이유</strong>가 된다.</td>
+          <td class="cite">—</td>
+        </tr>
+        <tr>
+          <td>크라톰 / 다미아나 <span class="cite">(2026-03-12)</span></td>
+          <td><span class="grade gD">D</span></td>
+          <td>Aaron이 “트라마돌/오피오이드보다 강하다”고 서술. 크라톰은 <strong>μ-오피오이드 작용제이며
+          의존·간독성·CYP 상호작용 보고가 있다.</strong> 오피오이드 병용 시 위험이 중첩된다.
+          “천연이므로 오피오이드보다 안전”은 성립하지 않는 추론.</td>
+          <td class="cite">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout warn">
+    <p><strong>이 표에서 읽어야 할 비대칭.</strong> 표를 세로로 훑으면 하나의 패턴이 드러난다 —
+    <strong>이 사례에서 근거 등급이 가장 높은 개입(항진균제, 보조 CRT)은 모두 프로토콜 바깥에 있고,
+    프로토콜의 중심 성분들은 모두 D 등급에 몰려 있다.</strong>
+    그리고 Aaron 본인이 “삶의 질의 가장 큰 전환점”이라 부른 것은 펜벤다졸이 아니라 <strong>항진균제</strong>였다.
+    이것은 해석이 아니라 그의 문장이다.</p>
+  </div>
+</section>
+
+<section class="rv">
+  <div class="sidx">05 / EPISTEMICS</div>
+  <h2>6/12 장면의 해부 — 옳은 질문, 틀린 결론</h2>
+  <p class="sdeck">이 코퍼스에서 방법론적으로 가장 풍부한 장면이며, 양쪽 모두가 부분적으로 틀렸다.</p>
+
+  <h3>Aaron이 옳았던 것</h3>
+  <p>그는 의사의 주장에 대해 <strong>서면으로 인용 문헌을 요구했다.</strong>
+  이것은 흠잡을 데 없는 인식론적 행동이다. 한 댓글이 정확히 지적했듯이,
+  <em>“인용을 제시하지 못한다면 그의 말을 확고히 뒷받침하는 근거는 없는 것”</em>이다.
+  의사의 고성은 그 자체로 논증의 실패다.</p>
+
+  <h3>의사가 (부분적으로) 옳았던 것</h3>
+  <p>“항산화제가 방사선의 활성산소 매개 세포사를 상쇄할 수 있다”는 우려는
+  <strong>날조된 이야기가 아니라 방사선종양학에서 오래된 실재하는 논쟁</strong>이다.
+  다만 그 근거 역시 결정적이지 않으며, 의사는 그것을 인용으로 제시했어야 했다.</p>
+
+  <h3>양쪽 다 놓친 것 — 그리고 이것이 핵심이다</h3>
+  <div class="callout warn">
+    <p>Aaron은 이렇게 썼다: <em>“내가 찾은 모든 연구는 방사선 중 고용량 멜라토닌에 낙관적이다.”</em></p>
+    <p><strong>이 문장이 이 코퍼스 전체에서 가장 교훈적인 한 줄이다.</strong>
+    실제로 조회하면, 방사선과 고용량 멜라토닌을 함께 시험한 <strong>무작위 배정 연구가 존재한다.</strong>
+    RTOG 0119다. 그리고 결과는 <strong>이득 없음</strong>이었다
+    <span class="cite">(<a href="https://pubmed.ncbi.nlm.nih.gov/17418968/" target="_blank" rel="noopener">PMID 17418968</a>)</span>.</p>
+    <p>즉 Aaron의 검색은 낙관적인 결과만 돌려주고 있었다. 이것은 그가 게을러서가 아니다.
+    <strong>커뮤니티가 공유하는 링크, 그룹이 인용하는 저자, 검색 엔진의 개인화 —
+    이 모든 것이 확증 편향을 자동화하는 파이프라인</strong>이기 때문이다.
+    그는 근거를 요구할 만큼 훈련되어 있었지만, <strong>자신의 검색이 이미 필터링되어 있다는 사실</strong>은 점검하지 않았다.</p>
+    <p><strong>따라서 이 장면의 교훈은 “의사를 이겨라”도 “의사에게 복종하라”도 아니다.</strong>
+    <em>“내 주장을 반증하는 연구를 나는 찾아보았는가?”</em> — 이 질문 하나가 방법론의 전부다.
+    그리고 커뮤니티의 지배적 답변(“의사에게 말하지 마라”)은 이 질문을 영원히 봉인한다.</p>
+  </div>
+
+  <h3>“말하지 마라”의 실제 비용</h3>
+  <p>은폐를 권하는 조언은 감정적으로는 이해 가능하지만, 임상적으로는 <strong>측정 가능한 해를 만든다.</strong>
+  근거는 이 사례군 안에 있다 — 앞의 DILI 증례 중 하나는 면역항암제를 투여받던 환자였고,
+  펜벤다졸로 인한 간손상이 <strong>면역 매개 간염으로 오인될 뻔했다.</strong>
+  복용 사실이 밝혀지지 않았다면 결과는 <strong>불필요한 스테로이드 면역억제와 면역항암제의 영구 중단</strong>이었을 것이다.
+  복용 사실을 알렸기 때문에 중단 후 회복했고, <strong>면역항암제를 안전하게 재개할 수 있었다</strong>
+  <span class="cite">(<a href="https://pubmed.ncbi.nlm.nih.gov/41608149/" target="_blank" rel="noopener">PMID 41608149</a>)</span>.</p>
+  <p><strong>즉 “의사에게 말하지 마라”는 조언은 프로토콜을 지키는 것이 아니라, 프로토콜을 하는 사람을 위험에 빠뜨린다.</strong>
+  의사와의 갈등이 문제라면 해법은 은폐가 아니라 <strong>의사의 교체 또는 2차 의견</strong>이다.</p>
+</section>
+
+<section class="rv">
+  <div class="sidx">06 / PIPELINE</div>
+  <h2>검증 사슬 — 주장에서 임상 환원까지</h2>
+  <p class="sdeck">6/12 장면이 드러낸 실패는 도구로 교정 가능하다.
+  아래는 커뮤니티의 주장 하나를 grounded 파이프라인에 통과시키는 구조다.</p>
+  <div class="pipe">
+    <div class="node n1">
+      <div class="n">01 · MECHANISM</div>
+      <div class="h">기전 특정</div>
+      <div class="b">주장을 검증 가능한 명제로 환원.
+      “좋다”가 아니라 “어떤 경로로, 어떤 아형에서, 어떤 지표를 움직이는가”.</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node n2">
+      <div class="n">02 · RETRIEVAL</div>
+      <div class="h">실증 회수 <span style="color:var(--evid)">+ 반증 회수</span></div>
+      <div class="b">PubMed·Europe PMC MCP로 질의. <strong>핵심: 지지 문헌과 반증 문헌을 각각 별도 질의로 회수.</strong>
+      Aaron이 빠뜨린 단계가 정확히 이것이다.</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node n3">
+      <div class="n">03 · TRIALS</div>
+      <div class="h">등록 시험 조회</div>
+      <div class="b">ClinicalTrials.gov API. <strong>등록 시험 0건은 그 자체로 강력한 정보다</strong> —
+      펜벤다졸이 여기에 해당한다.</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node n2">
+      <div class="n">04 · GRADING</div>
+      <div class="h">근거 등급화</div>
+      <div class="b">§04의 A–D 척도. <strong>효능과 위해를 별도 등급으로 매길 것</strong>
+      (펜벤다졸: 효능 D / 위해 B).</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="node n4">
+      <div class="n">05 · CLINICAL</div>
+      <div class="h">임상 환원</div>
+      <div class="b">산출물은 <strong>결정이 아니라 주치의에게 가져갈 질문</strong>.
+      여기서 파이프라인은 끝나고, 사람이 시작된다.</div>
+    </div>
+  </div>
+
+  <h3>워크플로우 예시 — 6/12의 주장을 실제로 통과시키기</h3>
+
+  <div class="step">
+    <div class="sn">STEP 01 — 기전 특정</div>
+    <h4>주장을 반증 가능한 형태로 다시 쓴다</h4>
+    <p>원 주장: “방사선 중 고용량 멜라토닌은 좋다.” → 검증 불가. 다시 쓰면:</p>
+    <pre><code>명제: 두경부 SCC 환자에서 근치적/보조적 방사선 중
+      전신 고용량 멜라토닌(≥300mg)은
+      <span class="c">[결과지표: 전체생존 또는 종양반응]</span>을 개선한다.
+
+<span class="c">제약</span>: - "점막염 완화"와 "생존 개선"을 하나의 명제로 묶지 말 것
+       - 국소 젤과 전신 캡슐을 같은 개입으로 취급하지 말 것
+       - 기전 논문(항산화·p53)을 임상 이득의 증거로 세지 말 것</code></pre>
+    <p class="gate"><b>GATE</b> &nbsp;명제가 “무엇이 관찰되면 이 주장이 틀린 것인가”에 답하지 못하면 되돌아간다.</p>
+  </div>
+
+  <div class="step">
+    <div class="sn">STEP 02 — 실증 <span style="color:var(--evid)">및 반증</span> 회수</div>
+    <h4>지지 문헌과 반증 문헌을 대칭적으로 찾는다</h4>
+    <pre><code>질의 A (지지): melatonin radiotherapy cancer benefit
+질의 B <span class="c">(반증 — 필수)</span>: high-dose melatonin radiotherapy randomized trial
+질의 C <span class="c">(반증 — 필수)</span>: melatonin cancer negative trial no benefit
+
+<span class="c">제약</span>: - 질의 B·C를 생략하면 이 파이프라인은 확증 편향 생성기가 된다
+       - 커뮤니티가 공유한 링크에서 출발하지 말 것 (표본이 이미 오염됨)
+       - 리뷰·논평이 아니라 <span class="g">1차 시험</span>을 찾을 것</code></pre>
+    <p class="gate"><b>GATE</b> &nbsp;반증 질의가 <strong>0건을 반환할 때만</strong> 다음 단계로 간다.
+    본 사례에서는 <strong>RTOG 0119가 반환되었고, 게이트는 여기서 닫힌다.</strong></p>
+  </div>
+
+  <div class="step">
+    <div class="sn">STEP 03 — 등록 시험 조회</div>
+    <h4>“왜 시험이 없는가”를 정보로 취급한다</h4>
+    <pre><code>ClinicalTrials.gov :: intervention = "fenbendazole"
+→ <span class="c">totalCount: 0</span>
+
+해석 <span class="c">(주의: 아래 둘을 구분할 것)</span>
+  (a) 특허 없는 약이라 자금이 없다        ← 커뮤니티의 지배적 설명
+  (b) 전임상 신호가 임상 진입 문턱에 못 미친다  ← 동등하게 가능한 설명
+
+<span class="g">둘 다 참일 수 있고, 데이터는 둘을 구별해 주지 않는다.</span>
+확실한 것 하나: 40년의 수의학 사용 이력은
+인체 항암 효능의 근거가 <span class="c">아니다</span>.</code></pre>
+    <p class="gate"><b>GATE</b> &nbsp;(a)를 (b)의 반박으로 사용하고 있다면 멈춘다. 그건 논증이 아니라 서사다.</p>
+  </div>
+
+  <div class="step">
+    <div class="sn">STEP 04 — 등급화</div>
+    <h4>효능과 위해를 분리해 매긴다</h4>
+    <pre><code>고용량 멜라토닌(전신)
+  효능 등급: <span class="c">D</span>  ← RCT에서 이득 없음 (PMID 17418968)
+  위해 등급: <span class="c">불명</span> ← 300–1000mg 장기 안전성 데이터 부재
+                     (수면 용량의 60–200배; "안전역"이 아니라 "미지")
+
+<span class="g">"부작용 보고가 없다"와 "안전하다"는 다른 문장이다.</span>
+전자는 대개 <span class="c">아무도 체계적으로 보지 않았다</span>는 뜻이다.</code></pre>
+    <p class="gate"><b>GATE</b> &nbsp;안전성 근거의 <strong>부재</strong>를 안전성의 <strong>증거</strong>로 쓰고 있지 않은지 확인한다.
+    Full Protocol의 “치사량을 찾을 수 없었다”가 정확히 이 오류다.</p>
+  </div>
+
+  <div class="step">
+    <div class="sn">STEP 05 — 임상 환원</div>
+    <h4>산출물은 결정이 아니라 질문이다</h4>
+    <pre><code>주치의에게 가져갈 형태:
+
+"방사선 중 고용량 멜라토닌을 고려했습니다. 찾아보니
+ RTOG 0119에서 생존 이득이 없었고(PMID 17418968),
+ 제가 기대했던 이득은 <span class="g">국소 구강젤</span> 연구(PMID 33738704)로
+ 전신 캡슐과는 다른 개입이었습니다.
+
+ <span class="c">질문 1</span>: 제 방사선 계획에서 항산화 보충이 우려되는 지점이 있습니까?
+ <span class="c">질문 2</span>: 점막염 목적이라면 이 병원에서 쓸 수 있는 근거 있는 선택지는?
+ <span class="c">질문 3</span>: 제가 복용 중인 것들 중 지금 중단해야 할 것이 있습니까?"</code></pre>
+    <p class="gate"><b>GATE</b> &nbsp;산출물에 “그래서 무엇을 먹겠다”가 들어 있으면 실패다.
+    파이프라인의 역할은 <strong>진료실에서의 대화 품질을 높이는 것</strong>이지 진료를 대체하는 것이 아니다.</p>
+  </div>
+</section>
+
+<section class="rv">
+  <div class="sidx">07 / CAUSALITY</div>
+  <h2>이 사례로 인과를 주장할 수 없는 이유</h2>
+  <p class="sdeck">Aaron은 회복 중이다. 그것은 사실이다.
+  그러나 <strong>“무엇이 그를 회복시켰는가”에 이 코퍼스는 답할 수 없다.</strong> 이유를 열거한다.</p>
+  <ol class="limits">
+    <li><b>결정적 교란 — 병행 설계.</b> 그는 수술·시스플라틴 6회·방사선 30회를 모두 받았다.
+    ENE 양성 절제 SCC에서 이 조합은 표준치료다. <strong>기대되는 회복이 관찰되었을 때,
+    동시에 투여된 다른 것에 공을 돌릴 근거는 0이다.</strong> 이것 하나로 인과 주장은 종결된다.</li>
+    <li><b>N=1.</b> 대조군이 없다. “프로토콜을 안 했으면 어땠을까”라는 반사실은 관찰 불가능하다.</li>
+    <li><b>선택 편향.</b> 이 커뮤니티에 사례로 남는 사람은 <strong>글을 쓸 수 있을 만큼 살아 있고,
+    쓸 의지가 있는 사람</strong>이다. 5/1 스레드에서 “항암을 거부하라”고 조언한 사람들의 표본은
+    구조적으로 <strong>그 조언을 따르고 사망한 사람을 포함하지 못한다.</strong></li>
+    <li><b>생존자 편향의 이중 적용.</b> Aaron 자신도, 그에게 조언한 “4년 NED” 회원들도 모두
+    생존자다. 그리고 그 회원들 역시 대부분 <strong>표준치료를 받았다</strong> —
+    한 회원은 방사선 28회와 항암 6회를 받고 4년 NED라고 명시적으로 썼다.
+    <strong>커뮤니티가 인용하는 성공 사례들의 상당수가 실은 표준치료의 성공 사례다.</strong></li>
+    <li><b>불멸시간 편향.</b> 프로토콜을 “충분히 오래” 한 사람만이 후기를 남길 수 있다.
+    프로토콜 시작과 결과 관찰 사이의 생존 시간이 프로토콜의 공로로 계상된다.</li>
+    <li><b>자기보고의 한계.</b> 병기 서술이 시점마다 달랐고(§02), 복용 내역·용량·기간은
+    어떤 시점에도 체계적으로 기록되지 않았다. 병리 보고서 원문은 게시되지 않았다.</li>
+    <li><b>결과 미확정.</b> <strong>2026-07-17 시점에 NED는 확인되지 않았다.</strong> 스캔 대기 중이다.
+    이 사례는 완결된 사례가 아니라 <strong>진행 중인 사례</strong>이며,
+    그럼에도 이미 “성공 사례”로 유통될 조건을 갖추었다. 이 시차 자체가 관찰 대상이다.</li>
+    <li><b>역방향 증거의 존재.</b> 인과를 논한다면, 이 코퍼스가 지지하는 가장 강한 인과 진술은
+    친(親)프로토콜이 아니라 그 반대다 — <strong>“프로토콜을 수년간 복용 중이던 사람에게
+    Stage 4a SCC가 발생했고, 프로토콜 하에서 종양이 계속 성장했다.”</strong>
+    이것은 Aaron 자신의 서술이다. 정직하게 말하면 이 역시 N=1이며 예방 실패의 증거로도 쓸 수 없다.
+    <strong>같은 이유로 성공의 증거로도 쓸 수 없다.</strong> 대칭은 양방향이다.</li>
+  </ol>
+</section>
+
+<section class="rv">
+  <div class="sidx">08 / LIMITS</div>
+  <h2>한계 — 이 분석이 구조적으로 답할 수 없는 것</h2>
+  <p class="sdeck">방법론 문서는 자신의 실패 조건을 명시해야 한다.</p>
+  <ul class="plain">
+    <li><b>원자료의 불완전성.</b> 코퍼스는 CSV 22개 + 최신 txt로, 스크래핑 산출물이다.
+    이미지·첨부·삭제된 댓글은 포함되지 않았고, 댓글 다수가 중복 수록되어 있으며,
+    작성자 필드가 없어 <strong>일부 발화의 화자 귀속은 문맥 추정에 의존한다.</strong>
+    Aaron의 발화로 표기한 것 중 일부는 추정이 섞여 있을 수 있다.</li>
+    <li><b>등급표의 해상도.</b> §04의 등급은 조회일(2026-07-17) 기준 스냅샷이며,
+    각 성분의 계통적 고찰을 수행한 결과가 아니라 <strong>표적 질의의 결과</strong>다.
+    등급이 “—”인 항목은 “근거가 없다”가 아니라 <strong>“이 조회에서 결정적 임상 근거를 찾지 못했다”</strong>로 읽어야 한다.</li>
+    <li><b>이 문서는 개별화를 수행하지 않는다.</b> HPV 상태(Aaron은 음성으로 서술), 절제연,
+    양성 림프절 수, 신기능, 병용약물 — 실제 의사결정을 좌우하는 변수 대부분이 원자료에 없다.
+    <strong>같은 “ENE 양성 SCC”라도 결정은 갈린다.</strong></li>
+    <li><b>동기를 판정하지 않는다.</b> 이 문서는 커뮤니티 운영자·제품 판매처·유료 상담의
+    이해관계 구조를 관찰했으나(특정 판매처가 프로토콜 문서와 게시글 전반에 반복 등장),
+    <strong>그것이 조언의 진정성을 훼손하는지에 대해서는 판단하지 않는다.</strong>
+    다만 독자가 그 구조를 <strong>인지한 상태로</strong> 조언을 읽기를 권한다.</li>
+    <li><b>커뮤니티의 실제 가치를 측정하지 못한다.</b> 이 분석은 근거 등급에 집중하므로,
+    이 코퍼스에서 가장 반복적으로 관찰되는 것 — 새벽 3시 반에 지구 반대편에서 기도한다는 댓글,
+    공황에 대한 공감, 마스크 공포를 아는 사람들 — 을 <strong>등급표에 넣을 수 없다.</strong>
+    그것이 등급이 없다는 이유로 가치가 없다는 뜻은 아니다.
+    <strong>이 커뮤니티가 실제로 잘하는 일은 약을 고르는 일이 아니라 사람을 버티게 하는 일이며,
+    그 둘을 혼동하는 것이 이 코퍼스의 핵심 병리다.</strong></li>
+  </ul>
+  <div class="boundary">
+    <h3>안전 경계선 (반복)</h3>
+    <p style="color:var(--text);">복용·병용·중단의 <strong>최종 결정은 반드시 주치의</strong>와 함께 이루어져야 한다.
+    본 문서는 특정 약물·제품을 권고하지 않으며, 언급된 모든 약물은
+    <strong>사례에 등장했다는 의미의 예시(illustrative)</strong>일 뿐이다.
+    본 문서는 <strong>용량·적정 스케줄을 복용 지시로 재현하지 않는다</strong> —
+    프로토콜 수치를 인용한 대목조차 비판적 검토의 대상으로 다루었을 뿐 지시가 아니다.
+    문서와 AI가 만들 수 있는 것은 <strong>결정이 아니라 더 나은 질문</strong>이다.</p>
+  </div>
+</section>
+
+<footer class="rv">
+  <p class="close">이 사례에서 이식 가능한 것은 펜벤다졸이 아니다.
+  <strong>자신의 믿음이 예측에 실패했을 때 그것을 기록한 한 사람의 정직함</strong>이다.
+  Aaron은 프로토콜을 하고 있었고, 종양은 자랐고, 그는 그 사실을 적었고, 방향을 바꿨다.
+  커뮤니티가 그에게 준 최고의 것은 조언이 아니라 버틸 힘이었고,
+  그를 살린 판단은 그 조언에 반하는 것이었다.<br><br>
+  <strong>같은 사례를, 초보자에게는 물어볼 질문으로 쥐어 주고, 전문가에게는 검증 가능한 방법으로 넘긴다.</strong></p>
+  <div class="meta">
+    <strong>소스 및 방법.</strong>
+    원자료 — 2025-04-27 ~ 2026-06-12 게시글 CSV 22개(계층형 댓글 664행, utf-8-sig 파싱),
+    2026-07-17 최신 게시글 텍스트, 게시글 URL 인덱스 24건,
+    <em>Full Protocol (2024)</em> 14p 및 <em>Fenben Protocol (Simple Start)</em> 1p(이미지 PDF, 렌더링 판독).
+    타임라인은 파일명 날짜 기준으로 정렬·병합했고, 최신 텍스트를 말미에 부착했다.<br>
+    근거 검증 — PubMed 및 ClinicalTrials.gov 실제 질의(조회일 2026-07-17). 인용은 PMID 링크로 명시했다.<br>
+    <strong>개인정보 — 성(family name)을 생략했으며, 댓글 작성자·운영자의 실명은 전부 삭제하고 역할로만 표기했다.
+    게시글 URL은 포함하지 않았다.</strong><br>
+    원자료에서 확인되지 않는 내용은 생성하지 않았고, 공백은 공백으로 두었다.<br>
+    <span style="color:var(--muted);">동일 사례의 초보자용 문서: <a href="aaron-case-community.html">aaron-case-community.html</a></span>
+  </div>
+</footer>
+
+</div>
+<script>
+(function(){
+  var els = document.querySelectorAll('.rv');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function showAll(){ for(var i=0;i<els.length;i++){ els[i].classList.add('in'); } }
+  if(reduce || !('IntersectionObserver' in window)){ showAll(); return; }
+  try{
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:0.04});
+    for(var i=0;i<els.length;i++){ io.observe(els[i]); }
+  }catch(err){ showAll(); }
+})();
+</script>
+</body>
+</html>

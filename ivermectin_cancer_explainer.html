@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이버멕틴과 암 : 쉽게 이해하기</title>
+<style>
+  :root{
+    --navy:#12305c;
+    --navy-deep:#0b1f3d;
+    --teal:#0f8f8a;
+    --teal-light:#e6f7f6;
+    --orange:#e07a3e;
+    --gray:#5b6472;
+    --bg:#f7f8fa;
+    --card:#ffffff;
+    --warn-bg:#fff4e5;
+    --warn-border:#e07a3e;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+    background:var(--bg);
+    color:#1c2430;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:0 0 60px;}
+  header{
+    background:linear-gradient(135deg,var(--navy-deep),var(--navy));
+    color:white;
+    padding:36px 20px 28px;
+    text-align:left;
+  }
+  header .eyebrow{
+    font-size:13px;
+    letter-spacing:.06em;
+    color:#a9c1e6;
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  header h1{
+    font-size:26px;
+    line-height:1.35;
+    margin:0 0 12px;
+    font-weight:800;
+  }
+  header p.sub{
+    font-size:15px;
+    color:#d7e2f3;
+    margin:0;
+  }
+  section{padding:26px 20px;}
+  h2{
+    font-size:19px;
+    color:var(--navy-deep);
+    border-left:5px solid var(--teal);
+    padding-left:10px;
+    margin:0 0 16px;
+  }
+  h3{font-size:16px;color:var(--navy);margin:20px 0 8px;}
+  p{font-size:15.5px;color:#333;margin:0 0 14px;}
+  .card{
+    background:var(--card);
+    border-radius:14px;
+    padding:20px;
+    box-shadow:0 2px 10px rgba(20,30,60,.06);
+    margin-bottom:18px;
+  }
+  .disclaimer{
+    background:var(--warn-bg);
+    border:1.5px solid var(--warn-border);
+    border-radius:14px;
+    padding:18px 18px 16px;
+    margin:0 20px 8px;
+  }
+  .disclaimer h3{
+    margin:0 0 8px;
+    color:#a1541c;
+    font-size:15.5px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .disclaimer p{font-size:14px;color:#5c3b1e;margin:0 0 8px;}
+  .disclaimer p:last-child{margin-bottom:0;}
+
+  /* Warburg simple diagram */
+  .flow{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin:16px 0;
+  }
+  .flow-step{
+    background:var(--teal-light);
+    border-radius:10px;
+    padding:12px 14px;
+    font-size:14.5px;
+    color:#0b4d49;
+    border-left:4px solid var(--teal);
+  }
+  .flow-arrow{
+    text-align:center;
+    color:var(--teal);
+    font-size:18px;
+    margin:-4px 0;
+  }
+
+  /* Ranking bars */
+  .cancer-list{display:flex;flex-direction:column;gap:12px;}
+  .cancer-item{
+    background:var(--card);
+    border-radius:12px;
+    padding:14px 16px;
+    box-shadow:0 1px 6px rgba(20,30,60,.06);
+  }
+  .cancer-item .row1{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:8px;
+  }
+  .cancer-item .rank{
+    display:inline-block;
+    width:24px;height:24px;
+    background:var(--navy);
+    color:white;
+    border-radius:50%;
+    text-align:center;
+    line-height:24px;
+    font-size:12.5px;
+    font-weight:700;
+    margin-left:8px;
+  }
+  .cancer-item .name{font-weight:700;font-size:15px;color:var(--navy-deep);}
+  .cancer-item .surv{font-size:12.5px;color:var(--gray);}
+  .bar-row{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;color:var(--gray);}
+  .bar-label{width:64px;flex-shrink:0;}
+  .bar-bg{flex:1;background:#eef0f3;border-radius:6px;height:9px;overflow:hidden;}
+  .bar-fill{height:100%;border-radius:6px;}
+  .bar-fill.d{background:var(--navy);}
+  .bar-fill.h{background:var(--orange);}
+  .bar-fill.i{background:var(--teal);}
+
+  /* Mechanism cards */
+  .mech-grid{display:flex;flex-direction:column;gap:14px;}
+  .mech-card{
+    background:var(--card);
+    border-radius:14px;
+    padding:18px;
+    box-shadow:0 2px 10px rgba(20,30,60,.06);
+    border-top:4px solid var(--teal);
+  }
+  .mech-card h4{
+    margin:0 0 6px;
+    font-size:15.5px;
+    color:var(--navy-deep);
+    display:flex;
+    gap:8px;
+    align-items:center;
+  }
+  .mech-num{
+    display:inline-flex;
+    width:26px;height:26px;
+    background:var(--teal);
+    color:white;
+    border-radius:50%;
+    align-items:center;
+    justify-content:center;
+    font-size:13px;
+    font-weight:700;
+    flex-shrink:0;
+  }
+  .mech-card p{font-size:14px;margin:0;color:#444;}
+
+  /* Diagram: shield */
+  .shield-diagram{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+    margin:18px 0;
+  }
+  .shield-layer{
+    width:100%;
+    text-align:center;
+    padding:12px;
+    border-radius:10px;
+    font-size:13.5px;
+    font-weight:600;
+  }
+  .shield-outer{background:#dfe6f0;color:var(--navy-deep);}
+  .shield-mid{background:#c3d3e8;color:var(--navy-deep);width:88%;}
+  .shield-core{background:var(--navy);color:white;width:70%;}
+  .shield-arrow-in{color:var(--orange);font-size:13px;text-align:center;margin:2px 0;font-weight:700;}
+
+  footer{
+    text-align:center;
+    padding:24px 20px 40px;
+    font-size:12.5px;
+    color:var(--gray);
+  }
+  .toc{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    padding:16px 20px 4px;
+  }
+  .toc a{
+    font-size:12.5px;
+    background:white;
+    border:1px solid #dde3ea;
+    border-radius:20px;
+    padding:6px 12px;
+    color:var(--navy);
+    text-decoration:none;
+  }
+  .source-note{font-size:12px;color:var(--gray);margin-top:6px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">치명적 암 연구 · 알기 쉬운 설명 · 2026.07</div>
+  <h1>이버멕틴은 정말 암을 공격할 수 있을까?</h1>
+  <p class="sub">"10대 치명적 암" 연구를 일반인의 눈높이에서 풀어봅니다</p>
+</header>
+
+<div class="disclaimer">
+  <h3>⚠️ 먼저 꼭 읽어주세요</h3>
+  <p>이 페이지는 한 온라인 칼럼(Justus R. Hope, Independent Medical Alliance)의 주장을 <b>이해하기 쉽게 정리</b>한 것이며, 확립된 암 치료 지침이 아닙니다.</p>
+  <p>여기 소개된 메커니즘 대부분은 <b>세포실험·동물실험(전임상) 단계</b>이며, 일부만 초기 단계(Phase I/II) 인체 임상시험이 진행 중입니다. 사람에게서 효과와 안전성이 확정된 것이 아닙니다.</p>
+  <p>암 진단을 받으신 분은 이 내용을 이유로 <b>표준 치료(수술·항암·방사선 등)를 미루거나 임의로 이버멕틴을 복용하지 마시고</b>, 반드시 담당 전문의와 상의하시기 바랍니다.</p>
+</div>
+
+<div class="toc">
+  <a href="#intro">① 왜 이 암들은 무서운가</a>
+  <a href="#ranking">② 10대 암 비교</a>
+  <a href="#shield">③ 방어막의 정체</a>
+  <a href="#mechanism">④ 이버멕틴의 3가지 공격</a>
+  <a href="#summary">⑤ 정리</a>
+</div>
+
+<section id="intro">
+  <h2>① 암세포는 왜 이렇게 지독할까?</h2>
+  <p>암세포는 일반 세포와 다르게 산소가 충분해도 <b>포도당을 발효시켜</b> 에너지를 만듭니다. 이를 <b>바르부르크 효과(Warburg Effect)</b>라고 부릅니다.</p>
+
+  <div class="flow">
+    <div class="flow-step">🍬 암세포가 포도당을 급하게 태워 산(acid)을 만듦</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">🔥 주변 조직에 염증과 저산소(저산소증) 환경 조성</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">🧱 암 관련 섬유세포(CAF)가 콜라겐 벽을 쌓아 "방어막" 형성</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step">🛡️ 방어막이 면역세포(T세포)를 물리적으로 차단 → 면역 회피</div>
+  </div>
+
+  <p>연구진은 이 <b>방어막(섬유화 구조) + 저산소 신호(HIF) + 면역 회피</b>라는 세 가지 조합이, 가장 치명적인 10대 암의 공통 분모라고 설명합니다.</p>
+</section>
+
+<section id="ranking">
+  <h2>② 10대 치명적 암, 방어막 세기 비교</h2>
+  <p>아래는 방어막(섬유화)·저산소 신호(HIF)·면역 회피 정도를 상대적으로 비교한 것입니다. 막대가 길수록 해당 특성이 강합니다.</p>
+
+  <div class="cancer-list">
+
+    <div class="cancer-item">
+      <div class="row1"><span class="name">1. 췌장암 (PDAC)<span class="rank">1</span></span><span class="surv">5년 생존율 ~13%</span></div>
+      <div class="bar-row"><span class="bar-label">방어막</span><div class="bar-bg"><div class="bar-fill d" style="width:98%"></div></div></div>
+      <div class="bar-row"><span class="bar-label">저산소</span><div class="bar-bg"><div class="bar-fill h" style="width:95%"></div></div></div>
+      <div class="bar-row"><span class="bar-label">면역회피</span><div class="bar-bg"><div class="bar-fill i" style="width:98%"></div></div></div>
+    </div>
+
+    <div class="cancer-item">
+      <div class="row1"><span class="name">2. 중피종 <span class="rank">2</span></span><span class="surv">5년 생존율 ~15%</span></div>
+      <div class="bar-row"><span class="bar-label">방어막</span><div class="bar-bg"><div class="bar-fill d" style="width:80%"></div></div></div>
+      <div class="bar-row"><span class="bar-label">저산소</span><div class="bar-bg"><div class="bar-fill h" style="width:75%"></div></div></div>
+      <div class="bar-row"><span class="bar-label">면역회피</span><div class="bar-bg"><div class="bar-fill i" style="width:80%"></div></div></div>
+    </div>
+
+    <div class="cancer-item">
+      <div class="row1"><span class="name">3. 담낭·담관암 <span class="rank">3</span></span><span class="surv">5년 생존율 ~20%</span></div>
+      <div class="bar-row"><span class="bar-label">방어막</span><div class="bar-bg"><div class="bar-fill d" style="width:78%"></div></div></div>
+      <div class="bar-row"><span class="bar-label">저산소</span><div class="bar-bg"><div class="bar-fill h" style="width:72%"></div></div></div>
+      <div class="bar-row"><span class="bar-label">면역회피</span><div class="bar-bg"><div class="bar-fill i" style="width:78%"></div></div></div>
+    </div>
+
+    <div class="cancer-item">
+      <div class="row1"><span class="name">4. 간세포암 (HCC) <span class="rank">4</span></span><span class="surv">5년 생존율 ~22%</span></div>
+      <div class="bar-row"><span class="bar-label">방어막</span><div class="bar-bg"><div class="bar-fill d" style="width:35%"></div></div></div>
+      <div class="bar-row"><span class="bar-label">저산소</span><div class="bar-bg"><div class="bar-fill h" style="width:78%"></div></div></div>
+      <div class="bar-row"><span class="bar-label">면역회피</span><div class="bar-bg"><div class="bar-fill i" style="width:70%"></div></div></div>
+    </div>
+
+    <div class="cancer-item">
+      <div class="row1"><span class="name">5. 식도암 <span class="rank">5</span></span><span class="surv">5년 생존율 ~22%</span></div>
+      <div class="bar-row"><span class="bar-label">방어막</span><div class="bar-bg"><div class="bar-fill d" style="width:55%"></div></div></div>
+      <div class="bar-row"><span class="bar-label">저산소</span><div class="bar-bg"><div class="bar-fill h" style="width:70%"></div></div></div>
+      <div class="bar-row"><span class="bar-label">면역회피</span><div class="bar-bg"><div class="bar-fill i" style="width:72%"></div></div></div>
+    </div>
+
+    <div class="cancer-item">
+      <div class="row1"><span class="name">6. 급성골수성백혈병 (AML) <span class="rank">6</span></span><span class="surv">5년 생존율 ~32%</span></div>
+      <div class="bar-row"><span class="bar-label">방어막</span><div class="bar-bg"><div class="bar-fill d" style="width:5%"></div></div></div>
+      <div class="bar-row"><span class="bar-label">저산소</span><div class="bar-bg"><div class="bar-fill h" style="width:60%"></div></div></div>
+      <div class="bar-row"><span class="bar-label">면역회피</span><div class="bar-bg"><div class="bar-fill i" style="width:68%"></div></div></div>
+    </div>
+
+    <div class="cancer-item">
+      <div class="row1"><span class="name">7. 교모세포종 (뇌암, GBM) <span class="rank">7</span></span><span class="surv">5년 생존율 ~34%</span></div>
+      <div class="bar-row"><span class="bar-label">방어막</span><div class="bar-bg"><div class="bar-fill d" style="width:5%"></div></div></div>
+      <div class="bar-row"><span class="bar-label">저산소</span><div class="bar-bg"><div class="bar-fill h" style="width:95%"></div></div></div>
+      <div class="bar-row"><span class="bar-label">면역회피</span><div class="bar-bg"><div class="bar-fill i" style="width:98%"></div></div></div>
+    </div>
+
+    <div class="cancer-item">
+      <div class="row1"><span class="name">8. 위암 <span class="rank">8</span></span><span class="surv">5년 생존율 ~36%</span></div>
+      <div class="bar-row"><span class="bar-label">방어막</span><div class="bar-bg"><div class="bar-fill d" style="width:70%"></div></div></div>
+      <div class="bar-row"><span class="bar-label">저산소</span><div class="bar-bg"><div class="bar-fill h" style="width:68%"></div></div></div>
+      <div class="bar-row"><span class="bar-label">면역회피</span><div class="bar-bg"><div class="bar-fill i" style="width:70%"></div></div></div>
+    </div>
+
+    <div class="cancer-item">
+      <div class="row1"><span class="name">9. 소세포폐암 (SCLC) <span class="rank">9</span></span><span class="surv">5년 생존율 ~35%</span></div>
+      <div class="bar-row"><span class="bar-label">방어막</span><div class="bar-bg"><div class="bar-fill d" style="width:10%"></div></div></div>
+      <div class="bar-row"><span class="bar-label">저산소</span><div class="bar-bg"><div class="bar-fill h" style="width:65%"></div></div></div>
+      <div class="bar-row"><span class="bar-label">면역회피</span><div class="bar-bg"><div class="bar-fill i" style="width:72%"></div></div></div>
+    </div>
+
+    <div class="cancer-item">
+      <div class="row1"><span class="name">10. 난소암 <span class="rank">10</span></span><span class="surv">5년 생존율 ~55%</span></div>
+      <div class="bar-row"><span class="bar-label">방어막</span><div class="bar-bg"><div class="bar-fill d" style="width:50%"></div></div></div>
+      <div class="bar-row"><span class="bar-label">저산소</span><div class="bar-bg"><div class="bar-fill h" style="width:60%"></div></div></div>
+      <div class="bar-row"><span class="bar-label">면역회피</span><div class="bar-bg"><div class="bar-fill i" style="width:65%"></div></div></div>
+    </div>
+
+  </div>
+  <p class="source-note">※ 막대 길이는 원문 표의 정성적 등급(낮음~매우높음)을 시각적으로 환산한 것으로, 정밀한 수치 데이터가 아닙니다.</p>
+</section>
+
+<section id="shield">
+  <h2>③ "방어막"이 없어 보이는 암도 사실은 방어막이 있다</h2>
+  <p>뇌암(GBM)과 백혈병(AML)은 전통적인 콜라겐 방어막이 없습니다. 하지만 최근 연구는 이들도 <b>화학적 방식의 방어막</b>을 만든다는 사실을 보여줍니다.</p>
+
+  <div class="card">
+    <h3>🧠 뇌암 (GBM) — 화학 방어막</h3>
+    <p>뇌에는 원래 섬유세포가 없다고 여겨졌지만, 최근 연구는 <b>교종 관련 섬유세포(GAF)</b>를 발견했습니다. 이 세포들은 물리적 벽 대신 신호물질을 뿌려 대식세포를 면역억제형(M2)으로 바꾸고, T세포를 지치게 만듭니다.</p>
+  </div>
+
+  <div class="card">
+    <h3>🩸 백혈병 (AML) — 골수 속 안전가옥</h3>
+    <p>백혈병 세포는 골수의 정상 세포를 <b>암 관련 섬유세포(CAF)</b>로 바꿔, 항암제로부터 자신을 보호하는 "안전가옥"을 만든다고 설명합니다.</p>
+  </div>
+
+  <div class="shield-diagram">
+    <div class="shield-layer shield-outer">면역세포(T세포)가 접근 시도</div>
+    <div class="shield-arrow-in">✕ 차단</div>
+    <div class="shield-layer shield-mid">콜라겐/화학적 방어막 (CAF·GAF)</div>
+    <div class="shield-arrow-in">✕ 차단</div>
+    <div class="shield-layer shield-core">암세포 핵심부 (저산소·증식)</div>
+  </div>
+</section>
+
+<section id="mechanism">
+  <h2>④ 이버멕틴이 주장하는 3가지 공격 경로</h2>
+  <p>원문은 이버멕틴(Ivermectin, 노벨상 수상 항기생충제)이 여러 경로에서 동시에 작용한다고 주장합니다. <b>대부분 세포·동물 실험 근거</b>이며, 사람에게 그대로 적용된다고 확정된 것은 아닙니다.</p>
+
+  <div class="mech-grid">
+    <div class="mech-card">
+      <h4><span class="mech-num">1</span>방어막 허물기</h4>
+      <p>Wnt와 TGF-β라는 두 신호 경로를 억제해, 섬유세포가 콜라겐 방어막을 계속 쌓지 못하게 한다는 주장입니다. 동시에 저산소 신호(HIF-1α)가 세포핵으로 들어가는 것을 막는다고 설명합니다.</p>
+    </div>
+    <div class="mech-card">
+      <h4><span class="mech-num">2</span>면역계 깨우기</h4>
+      <p>암세포가 죽을 때 "면역원성 세포사(ICD)"라는 특수한 방식으로 죽도록 유도해, 마치 경보를 울리듯 면역세포를 불러모은다는 개념입니다. 이를 통해 "차가운" 종양을 "뜨거운" 종양으로 바꾼다고 설명합니다.</p>
+    </div>
+    <div class="mech-card">
+      <h4><span class="mech-num">3</span>기존 치료 돕기</h4>
+      <p>항암제를 세포 밖으로 퍼내는 펌프(P-당단백질)의 작용을 줄여 항암제 내성을 낮추고, 면역관문억제제(PD-1 항체 등)가 효과를 내기 위해 필요한 "종양 속 T세포"를 늘려준다는 주장입니다. 유방암 모델에서 병용 효과가 보고되었고, 삼중음성 유방암 대상 초기(Phase I/II) 병용 임상시험이 진행 중이라고 언급됩니다.</p>
+    </div>
+  </div>
+</section>
+
+<section id="summary">
+  <h2>⑤ 정리 — 무엇을 기억해야 할까</h2>
+  <div class="card">
+    <p>① 치명적인 암들은 <b>콜라겐 방어막(또는 화학적 방어막)</b>으로 면역세포를 막고, <b>저산소 신호</b>로 성장을 촉진합니다.</p>
+    <p>② 저자들은 이버멕틴이 이 방어막·저산소 신호·면역 회피를 <b>동시에 공략</b>할 가능성을 제시합니다.</p>
+    <p>③ 그러나 이는 대부분 <b>실험실·동물 연구 단계</b>이며, 일부만 초기 인체 임상시험이 진행 중입니다. 사람에게서의 효과와 안전한 용법·용량은 아직 확립되지 않았습니다.</p>
+    <p><b>결론: 흥미로운 가설이지만, 검증된 치료법이 아닙니다.</b> 암 환자와 가족은 이 내용을 참고자료로 삼아 담당 의료진과 함께 논의하되, 표준 치료를 대체하는 근거로 사용해서는 안 됩니다.</p>
+  </div>
+</section>
+
+<footer>
+  원문: "Why Ivermectin Blasts the 10 Deadliest Cancers" (Justus R. Hope, Independent Medical Alliance, 2026.07.19)를 일반 독자를 위해 요약·재구성함.<br>
+  이 페이지는 의학적 조언이 아니며, 정보 공유 및 커뮤니티 토론 목적으로 제작되었습니다.
+</footer>
+
+</div>
+</body>
+</html>

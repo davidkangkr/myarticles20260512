@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>구강 미생물과 췌장암 — 환자 주도 임상 커뮤니티 가이드</title>
+<style>
+  :root{
+    --bg:#faf8f4; --card:#ffffff; --ink:#2b2b2b; --sub:#6b6b6b;
+    --teal:#0f5e5e; --teal-soft:#e3efee; --gold:#b45309; --gold-soft:#fdf0dc;
+    --sage:#5b7f5b; --sage-soft:#e9f0e6; --red:#b91c1c; --red-soft:#fdecec;
+    --green:#1a7a1a; --green-soft:#e5f6e5; --line:#e5dfd3;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+    font-size:17px; line-height:1.68; padding:0 0 60px 0;
+  }
+  .wrap{max-width:740px; margin:0 auto; padding:0 16px;}
+  header{
+    background:linear-gradient(135deg,#0f5e5e 0%,#146b6b 50%,#5b7f5b 100%);
+    color:#fff; padding:36px 16px 28px; text-align:center;
+  }
+  header .tag{display:inline-block; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
+    border-radius:999px; padding:4px 14px; font-size:13px; margin-bottom:12px; letter-spacing:.3px;}
+  header h1{font-size:24px; line-height:1.4; font-weight:800; margin-bottom:10px;}
+  header p{font-size:15px; opacity:.93; line-height:1.55;}
+  .meta{background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px 16px;
+    font-size:14px; color:var(--sub); margin-top:14px; text-align:left; box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .meta b{color:var(--ink);}
+  section{margin-top:34px;}
+  h2{font-size:21px; font-weight:800; color:var(--teal); margin-bottom:6px; display:flex; align-items:center; gap:8px; line-height:1.3;}
+  h2 .no{background:var(--teal); color:#fff; border-radius:8px; font-size:14px; min-width:28px; height:28px;
+    display:inline-flex; align-items:center; justify-content:center; padding:0 6px; flex:none;}
+  .lead{color:var(--sub); font-size:15px; margin-bottom:14px;}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px 18px;
+    box-shadow:0 1px 4px rgba(0,0,0,.05); margin-bottom:14px;}
+  .card h3{font-size:17px; font-weight:800; margin-bottom:8px;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  @media(max-width:560px){ .grid2{grid-template-columns:1fr;} }
+  .kcard{background:var(--card); border:1px solid var(--line); border-left:5px solid var(--teal);
+    border-radius:12px; padding:14px 15px; box-shadow:0 1px 4px rgba(0,0,0,.05);}
+  .kcard.gold{border-left-color:var(--gold);}
+  .kcard.red{border-left-color:var(--red);}
+  .kcard.green{border-left-color:var(--green);}
+  .kcard .kt{font-size:13px; font-weight:800; letter-spacing:.4px; color:var(--teal); margin-bottom:4px;}
+  .kcard.gold .kt{color:var(--gold);}
+  .kcard.red .kt{color:var(--red);}
+  .kcard.green .kt{color:var(--green);}
+  .kcard p{font-size:15px;}
+  .figbox{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px; text-align:center;
+    box-shadow:0 1px 4px rgba(0,0,0,.05); margin:14px 0;}
+  .figbox svg{max-width:100%; height:auto;}
+  .figcap{font-size:13.5px; color:var(--sub); margin-top:8px; line-height:1.55; text-align:left;}
+  .figcap b{color:var(--ink);}
+  .callout{border-radius:12px; padding:14px 16px; font-size:15px; margin:14px 0;}
+  .callout.teal{background:var(--teal-soft); border-left:5px solid var(--teal);}
+  .callout.gold{background:var(--gold-soft); border-left:5px solid var(--gold);}
+  .callout.red{background:var(--red-soft); border-left:5px solid var(--red);}
+  .callout.sage{background:var(--sage-soft); border-left:5px solid var(--sage);}
+  .callout b{font-size:15px;}
+  .callout p{margin-top:6px;}
+  .researcher{background:#f6f4ee; border:1px dashed #c9bfa8; border-radius:12px; padding:14px 16px;
+    font-size:14.5px; margin:14px 0;}
+  .researcher .rt{font-size:13px; font-weight:800; color:var(--gold); letter-spacing:.4px; margin-bottom:6px;}
+  .researcher table{font-size:13.5px;}
+  .flow{display:flex; flex-direction:column; gap:0; align-items:stretch; margin:14px 0;}
+  .fnode{background:var(--card); border:2px solid var(--teal); border-radius:12px; padding:12px 14px; font-size:15px; position:relative;}
+  .fnode b{color:var(--teal);}
+  .fnode.gold{border-color:var(--gold);}
+  .fnode.gold b{color:var(--gold);}
+  .farrow{text-align:center; color:var(--teal); font-size:20px; line-height:1.1; padding:2px 0;}
+  table{width:100%; border-collapse:collapse; font-size:14.5px; background:var(--card);
+    border:1px solid var(--line); border-radius:12px; overflow:hidden; margin:12px 0;}
+  th{background:var(--teal); color:#fff; text-align:left; padding:9px 12px; font-size:14px;}
+  td{border-top:1px solid var(--line); padding:9px 12px; vertical-align:top;}
+  tr:nth-child(even) td{background:#fbfaf7;}
+  .foot{background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px 18px; font-size:14px;
+    color:var(--sub); margin-top:34px;}
+  .foot b{color:var(--ink);}
+  .btn-link{display:inline-block; background:var(--teal); color:#fff; text-decoration:none; border-radius:10px;
+    padding:10px 18px; font-size:15px; font-weight:700; margin-top:10px;}
+  a{color:var(--teal);}
+  ul,ol{margin:8px 0 8px 22px;}
+  li{margin:6px 0;}
+  .pill{display:inline-block; border-radius:999px; padding:2px 10px; font-size:12.5px; font-weight:700;}
+  .pill.v{background:var(--green-soft); color:var(--green);}
+  .pill.u{background:var(--gold-soft); color:var(--gold);}
+  .up{color:var(--red); font-weight:700;}
+  .down{color:var(--green); font-weight:700;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="tag">🦠 구강 미생물 & 췌장암 · JAMA Oncology 2025</span>
+    <h1>입 속 세균·곰팡이가<br>췌장암을 예고한다</h1>
+    <p>환자 주도 임상 커뮤니티용 가이드<br>— 미생물-암 연구를 읽고 활용하는 법</p>
+    <div class="meta">
+      <b>원문:</b> Oral Bacterial and Fungal Microbiome and Subsequent Risk for Pancreatic Cancer<br>
+      <b>저자:</b> Meng · Wu · Kwak · Wang · Usyk · Freedman · Huang · Um · Gonda · Oberstein · Li · Hayes · Ahn (NYU)<br>
+      <b>저널:</b> JAMA Oncology · 2025-09-18 · DOI: 10.1001/jamaoncol.2025.3377
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- ============ 1. 30초 요약 ============ -->
+<section>
+  <h2><span class="no">1</span> 30초 요약</h2>
+  <div class="grid2">
+    <div class="kcard red">
+      <div class="kt">😵 문제</div>
+      <p>췌장암은 <b>5년 생존율 13%</b>로 매우 치명적. 그런데 알려진 원인(흡연·비만·췌장염·유전)은 전체의 <b>30% 미만</b>만 설명합니다.</p>
+    </div>
+    <div class="kcard">
+      <div class="kt">🔬 방법</div>
+      <p><b>12만 2천 명</b>의 침(구강 샘플)을 미리 채취 → 8.8년 추적 → 445명 췌장암 vs 445명 대조. 세균은 <b>전장유전체 시퀀싱</b>, 곰팡이는 <b>ITS 시퀀싱</b>.</p>
+    </div>
+    <div class="kcard gold">
+      <div class="kt">💡 발견</div>
+      <p>입 속 <b>잇몸병균 3종</b> + <b>세균 20종</b> + <b>곰팡이 4종</b>이 췌장암 위험과 연결. 특히 <b>칸디다(Candida)</b> 곰팡이가 위험을 높임.</p>
+    </div>
+    <div class="kcard green">
+      <div class="kt">📈 의미</div>
+      <p>27종을 묶은 <b>미생물 위험 점수(MRS)</b>가 1단위 올라갈 때 췌장암 위험이 <b>3.44배</b>. 침 하나로 고위험군을 선별하는 비침습적 생체표지자 가능성.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. 배경 ============ -->
+<section>
+  <h2><span class="no">2</span> 배경: 왜 지금 이 논문이 중요한가</h2>
+  <p class="lead">미생물과 암의 관계는 이제 "상관관계"를 넘어 <b>"인과관계"</b>로 진화하고 있습니다. 장내미생물에 이어 구강·종양미세환경(TME) 속 미생물까지 밝혀지는 시대입니다.</p>
+
+  <div class="card">
+    <h3>세 가지 큰 흐름</h3>
+    <ul>
+      <li><b>① 장내미생물 → 구강 미생물:</b> 장(腸)만 보던 시선이 "입 속"으로 확장. 입은 몸의 관문이자 미생물 저장소입니다.</li>
+      <li><b>② 상관관계 → 인과관계:</b> "암 환자에게 이런 균이 많다"에서 → "이 균이 췌장으로 이동해 전암 병변을 만든다"(동물실험)로 진화.</li>
+      <li><b>③ 미생물 → 종양미세환경(TME):</b> 미생물이 종양 안에 살며 면역·대사에 관여한다는 증거가 쌓이고 있음.</li>
+    </ul>
+  </div>
+
+  <div class="figbox">
+    <svg viewBox="0 0 700 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="구강에서 췌장까지 미생물 경로 지도">
+      <text x="350" y="26" text-anchor="middle" font-size="16" font-weight="700" fill="#0f5e5e">입 속 미생물 → 췌장암까지: 경로 지도</text>
+      <!-- Oral -->
+      <rect x="30" y="60" width="180" height="95" rx="12" fill="#e3efee" stroke="#0f5e5e" stroke-width="2"/>
+      <text x="120" y="86" text-anchor="middle" font-size="15" font-weight="700" fill="#0f5e5e">👄 구강 (입)</text>
+      <text x="120" y="106" text-anchor="middle" font-size="11.5" fill="#3c5c5b">P. gingivalis · E. nodatum</text>
+      <text x="120" y="122" text-anchor="middle" font-size="11.5" fill="#3c5c5b">P. micra · Candida 곰팡이</text>
+      <text x="120" y="142" text-anchor="middle" font-size="10.5" fill="#6b6b6b">(잇몸병균 + 진균)</text>
+      <!-- Gut -->
+      <rect x="260" y="180" width="160" height="90" rx="12" fill="#e9f0e6" stroke="#5b7f5b" stroke-width="2"/>
+      <text x="340" y="206" text-anchor="middle" font-size="15" font-weight="700" fill="#5b7f5b">🦠 장 (소화관)</text>
+      <text x="340" y="228" text-anchor="middle" font-size="11.5" fill="#4a604a">장내미생물군</text>
+      <text x="340" y="246" text-anchor="middle" font-size="10.5" fill="#6b6b6b">(삼킴 경유 경로)</text>
+      <!-- Pancreas -->
+      <rect x="490" y="90" width="180" height="110" rx="12" fill="#fdecec" stroke="#b91c1c" stroke-width="2.5"/>
+      <text x="580" y="116" text-anchor="middle" font-size="15" font-weight="700" fill="#b91c1c">🫀 췌장 (종양)</text>
+      <text x="580" y="138" text-anchor="middle" font-size="11.5" fill="#7a3a3a">종양미세환경(TME)</text>
+      <text x="580" y="156" text-anchor="middle" font-size="11.5" fill="#7a3a3a">미생물 서식</text>
+      <text x="580" y="176" text-anchor="middle" font-size="10.5" fill="#6b6b6b">(면역·대사 조절)</text>
+      <!-- Arrows -->
+      <path d="M180 108 C 220 108, 220 195, 258 210" fill="none" stroke="#0f5e5e" stroke-width="2" marker-end="url(#arrT)"/>
+      <text x="205" y="150" font-size="11" fill="#0f5e5e" transform="rotate(60 205 150)">삼킴</text>
+      <path d="M210 90 C 340 40, 400 50, 488 110" fill="none" stroke="#b91c1c" stroke-width="2.5" stroke-dasharray="6 4" marker-end="url(#arrR)"/>
+      <text x="330" y="58" font-size="11.5" fill="#b91c1c" font-weight="700">직접 이동 (P. gingivalis)</text>
+      <path d="M420 200 C 460 190, 470 170, 488 160" fill="none" stroke="#5b7f5b" stroke-width="2" marker-end="url(#arrS)"/>
+      <text x="452" y="200" font-size="11" fill="#5b7f5b">역행·전위</text>
+      <!-- markers -->
+      <defs>
+        <marker id="arrT" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 z" fill="#0f5e5e"/></marker>
+        <marker id="arrR" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 z" fill="#b91c1c"/></marker>
+        <marker id="arrS" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 z" fill="#5b7f5b"/></marker>
+      </defs>
+      <text x="350" y="325" text-anchor="middle" font-size="12.5" fill="#6b6b6b">핵심: 입 속 병원체가 "삼켜지거나" 직접 이동해 췌장에 도달 → 전암 병변·종양 형성에 관여</text>
+    </svg>
+    <div class="figcap"><b>[그림 1] 미생물 경로.</b> 구강 병원체(*P. gingivalis* 등)는 삼켜져 장을 거치거나, 직접 혈류·신경을 타고 췌장으로 이동합니다. 칸디다는 발암 물질(니트로사민)을 만들 수 있습니다.</div>
+  </div>
+</section>
+
+<!-- ============ 3. 연구 설계 ============ -->
+<section>
+  <h2><span class="no">3</span> 연구 설계 (쉽게)</h2>
+  <p class="lead">이 논문의 가장 큰 강점은 <b>"전향적(prospective) 설계"</b>입니다. 샘플을 <b>암 진단 전에</b> 채취했기 때문에 "암이 미생물을 바꾼 것"이라는 역인과(reverse causation)를 배제할 수 있습니다.</p>
+
+  <div class="flow">
+    <div class="fnode"><b>① 2개 대규모 코호트</b><br>미국 CPS-II 영양 코호트 + PLCO 암검진 시험</div>
+    <div class="farrow">▼</div>
+    <div class="fnode"><b>② 구강 세척 샘플 122,000명</b><br>침(oral wash)으로 입 속 미생물 채취</div>
+    <div class="farrow">▼</div>
+    <div class="fnode"><b>③ 시퀀싱</b><br>세균 = 전장유전체 샷건(WGS) · 곰팡이 = ITS1 시퀀싱</div>
+    <div class="farrow">▼</div>
+    <div class="fnode"><b>④ 추적관찰 (중앙값 8.8년)</b><br>445명 췌장암 발생 확인</div>
+    <div class="farrow">▼</div>
+    <div class="fnode"><b>⑤ 1:1 매칭</b><br>연령·성별·인종·샘플 시점으로 445명 대조군 선정 (총 890명)</div>
+    <div class="farrow">▼</div>
+    <div class="fnode"><b>⑥ 통계 분석</b><br>ANCOM-BC2 (미생물 조성 편향 보정) · FDR 다중비교 보정</div>
+    <div class="farrow">▼</div>
+    <div class="fnode gold"><b>⑦ 미생물 위험 점수(MRS) 계산 → 위험 3.44배</b><br>27종을 가중합산한 점수로 췌장암 위험 예측</div>
+  </div>
+
+  <div class="researcher">
+    <div class="rt">🧪 연구자용 상세</div>
+    <ul>
+      <li><b>코호트:</b> CPS-II (70,000명 구강 샘플, 2001–2002 수집) + PLCO 대조군 (52,000명, 2000–2003)</li>
+      <li><b>분석 파이프라인:</b> SHOGUN (인간 리드 제거 · 분류학적 할당 · 배치 효과 보정)</li>
+      <li><b>통계:</b> ANCOM-BC2 (편향 보정), FDR Q&lt;.05(세균)/Q&lt;.10(곰팡이), R 4.4.1 · Python 3.9.13</li>
+      <li><b>품질관리:</b> 블라인드 반복 대조군 ICC 0.96(WGS)·0.80(ITS)</li>
+      <li><b>치주 병원체 red/orange complex</b>를 a priori로 선정해 검정</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 4. 핵심 결과 ============ -->
+<section>
+  <h2><span class="no">4</span> 핵심 결과</h2>
+
+  <div class="card">
+    <h3>🔴 잇몸병(치주염) 원인균 3종 — 위험 ↑</h3>
+    <p>치주염과 연결된 병원체 중 3종이 통계적으로 유의하게 췌장암 위험을 높였습니다 (신뢰구간이 1.0을 벗어남).</p>
+    <div class="figbox">
+      <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="숲그림 위험도 그래프">
+        <text x="330" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#0f5e5e">잇몸병균 3종과 췌장암 위험 (오즈비, Forest plot)</text>
+        <!-- null line -->
+        <line x1="320" y1="40" x2="320" y2="270" stroke="#999" stroke-width="1.5" stroke-dasharray="4 4"/>
+        <text x="320" y="286" text-anchor="middle" font-size="12" fill="#666">1.0 (위험 없음)</text>
+        <!-- ticks -->
+        <line x1="170" y1="40" x2="170" y2="270" stroke="#eee" stroke-width="1"/>
+        <line x1="470" y1="40" x2="470" y2="270" stroke="#eee" stroke-width="1"/>
+        <line x1="620" y1="40" x2="620" y2="270" stroke="#eee" stroke-width="1"/>
+        <text x="170" y="286" text-anchor="middle" font-size="11" fill="#888">0.5</text>
+        <text x="470" y="286" text-anchor="middle" font-size="11" fill="#888">1.5</text>
+        <text x="620" y="286" text-anchor="middle" font-size="11" fill="#888">2.0</text>
+        <!-- Row 1: P. gingivalis -->
+        <text x="20" y="94" font-size="13" fill="#333">P. gingivalis</text>
+        <text x="20" y="110" font-size="11" fill="#888">(red complex)</text>
+        <line x1="329" y1="88" x2="491" y2="88" stroke="#b91c1c" stroke-width="3"/>
+        <circle cx="401" cy="88" r="6" fill="#b91c1c"/>
+        <text x="560" y="93" font-size="13" font-weight="700" fill="#b91c1c">1.27 (1.03–1.57)</text>
+        <!-- Row 2: E. nodatum -->
+        <text x="20" y="154" font-size="13" fill="#333">E. nodatum</text>
+        <text x="20" y="170" font-size="11" fill="#888">(orange complex)</text>
+        <line x1="362" y1="148" x2="548" y2="148" stroke="#b91c1c" stroke-width="3"/>
+        <circle cx="446" cy="148" r="6" fill="#b91c1c"/>
+        <text x="560" y="153" font-size="13" font-weight="700" fill="#b91c1c">1.42 (1.14–1.76)</text>
+        <!-- Row 3: P. micra -->
+        <text x="20" y="214" font-size="13" fill="#333">P. micra</text>
+        <text x="20" y="230" font-size="11" fill="#888">(orange complex)</text>
+        <line x1="347" y1="208" x2="530" y2="208" stroke="#b91c1c" stroke-width="3"/>
+        <circle cx="428" cy="208" r="6" fill="#b91c1c"/>
+        <text x="560" y="213" font-size="13" font-weight="700" fill="#b91c1c">1.36 (1.09–1.70)</text>
+        <text x="240" y="40" font-size="11" fill="#888">← 위험 감소</text>
+        <text x="470" y="40" font-size="11" fill="#888">위험 증가 →</text>
+      </svg>
+      <div class="figcap"><b>[그림 2] Forest plot.</b> 점 = 오즈비(OR), 선 = 95% 신뢰구간. 선이 세로 점선(1.0)을 벗어나면 통계적으로 유의. 세 균 모두 1.0보다 오른쪽 → 췌장암 위험을 높임.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🦠 세균 전체 스캔 + 곰팡이</h3>
+    <table>
+      <tr><th>대상</th><th>결과</th><th>세부</th></tr>
+      <tr>
+        <td><b>세균 21종</b></td>
+        <td><span class="down">8종 위험 ↓</span> · <span class="up">13종 위험 ↑</span></td>
+        <td>위험↑ 예: <i>Slackia exigua</i>, <i>Cryptobacterium curtum</i>, <i>Leptotrichia goodfellowii</i>, <i>P. baroniae</i>, <i>P. catoniae</i></td>
+      </tr>
+      <tr>
+        <td><b>칸디다 속 (Candida)</b></td>
+        <td><span class="up">위험 ↑</span></td>
+        <td>입 속 곰팡이 중 가장 흔함(47.6%)</td>
+      </tr>
+      <tr>
+        <td><b>C. tropicalis</b></td>
+        <td><span class="up">위험 ↑</span> (fold 1.43)</td>
+        <td>종양 면역 회피·염증 조절 연관</td>
+      </tr>
+      <tr>
+        <td><b>C. albicans</b></td>
+        <td><span class="down">위험 ↓</span> (fold 0.77)</td>
+        <td>⚠️ 종 동정 30.4% 불완전 → 해석 주의</td>
+      </tr>
+      <tr>
+        <td><b>Malassezia globosa</b></td>
+        <td><span class="down">위험 ↓</span></td>
+        <td>말라세지아 속 전체는 무관</td>
+      </tr>
+    </table>
+    <p style="font-size:14px;color:var(--sub);">※ "위험↑/↓"는 이 연구의 상대적 연관성을 뜻하며, 아직 인과관계가 확정된 것은 아닙니다.</p>
+  </div>
+</section>
+
+<!-- ============ 5. MRS ============ -->
+<section>
+  <h2><span class="no">5</span> 미생물 위험 점수(MRS)란?</h2>
+  <p class="lead">개별 균 하나보다, <b>여러 균을 묶은 점수</b>가 더 강력하게 위험을 예측합니다. 유전자의 "다유전자 위험 점수(polygenic risk score)"를 미생물에 적용한 개념입니다.</p>
+
+  <div class="card">
+    <h3>MRS 작동 원리</h3>
+    <p><b>MRS = (각 미생물의 상대적 풍부도) × (그 미생물의 효과 크기 가중치)의 합</b></p>
+    <p style="margin-top:6px;">즉 "어떤 균이 얼마나 많고, 그 균이 위험과 얼마나 강하게 연결됐는가"를 하나의 숫자로 압축합니다. 27종(병원균 3 + 세균 20 + 곰팡이 4)을 합산.</p>
+  </div>
+
+  <div class="figbox">
+    <svg viewBox="0 0 660 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MRS 점수별 췌장암 위험 막대그래프">
+      <text x="330" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#0f5e5e">MRS 종류별 췌장암 위험 (1 표준편차 증가당 오즈비)</text>
+      <!-- baseline 1.0 -->
+      <line x1="282" y1="40" x2="282" y2="270" stroke="#999" stroke-width="1.5" stroke-dasharray="4 4"/>
+      <text x="282" y="288" text-anchor="middle" font-size="11" fill="#666">기준 1.0</text>
+      <!-- bars -->
+      <text x="168" y="64" text-anchor="end" font-size="12.5" fill="#333">3종 병원체 MRS</text>
+      <rect x="170" y="52" width="162" height="26" rx="5" fill="#9bb8b8"/>
+      <text x="340" y="71" font-size="12.5" font-weight="700" fill="#333">1.44</text>
+      <text x="168" y="124" text-anchor="end" font-size="12.5" fill="#333">곰팡이 MRS</text>
+      <rect x="170" y="112" width="164" height="26" rx="5" fill="#9bb8b8"/>
+      <text x="342" y="131" font-size="12.5" font-weight="700" fill="#333">1.46</text>
+      <text x="168" y="184" text-anchor="end" font-size="12.5" fill="#333">세균 MRS</text>
+      <rect x="170" y="172" width="399" height="26" rx="5" fill="#0f5e5e"/>
+      <text x="577" y="191" font-size="12.5" font-weight="700" fill="#0f5e5e">3.55</text>
+      <text x="168" y="244" text-anchor="end" font-size="12.5" fill="#333">세균+곰팡이 MRS</text>
+      <rect x="170" y="232" width="387" height="26" rx="5" fill="#b45309"/>
+      <text x="565" y="251" font-size="12.5" font-weight="700" fill="#b45309">3.44</text>
+      <text x="330" y="306" text-anchor="middle" font-size="12.5" fill="#6b6b6b">막대가 길수록 위험 예측력이 큼 — 세균 단독/세균+곰팡이 조합이 3배 이상으로 압도적</text>
+    </svg>
+    <div class="figcap"><b>[그림 3] MRS 비교.</b> 곰팡이만으로는 약한 신호(1.46배)지만, <b>세균을 더하면 3.4배 이상</b>으로 뛰어오릅니다. 미생물 "공동체"를 함께 보는 것이 핵심입니다.</div>
+  </div>
+
+  <div class="researcher">
+    <div class="rt">🧪 연구자용 상세 — MRS 수치 (Table 원문)</div>
+    <table>
+      <tr><th>MRS 구성</th><th>2-코호트 메타분석 OR (95% CI)</th><th>Monte Carlo CV</th></tr>
+      <tr><td>세균 (ANCOM-BC2)</td><td>3.55 (2.34–5.37)</td><td>3.10 (2.68–3.52)</td></tr>
+      <tr><td>3종 병원체</td><td>1.44 (1.16–1.79)</td><td>1.51 (1.28–1.75)</td></tr>
+      <tr><td>곰팡이 (ANCOM-BC2)</td><td>1.46 (1.16–1.83)</td><td>1.26 (1.10–1.43)</td></tr>
+      <tr><td><b>세균+곰팡이 (27종)</b></td><td><b>3.44 (2.63–4.51)</b></td><td><b>3.57 (1.83–5.31)</b></td></tr>
+    </table>
+    <p style="font-size:13px;color:var(--sub);">※ Monte Carlo 교차검증 = 데이터를 80/20으로 50회 반복 분할해 재현성 확인. 결과가 안정적임을 뒷받침.</p>
+    <p style="font-size:13px;color:var(--sub);">※ 세균 단독(3.55)이 조합(3.44)보다 살짝 높지만, 조합은 신뢰구간이 더 좁아(안정적) 종합 판단은 "조합 ≥3배"가 타당.</p>
+  </div>
+</section>
+
+<!-- ============ 6. 가이드 ============ -->
+<section>
+  <h2><span class="no">6</span> 이 논문이 "가이드"인 이유</h2>
+  <p class="lead">미생물-암 연구가 쏟아지는 지금, <b>"어떤 연구를 믿을 수 있나"</b>를 판별하는 기준이 필요합니다. 이 논문은 그 기준을 갖춘 모범 사례입니다.</p>
+
+  <div class="card">
+    <h3>✅ 신뢰할 만한 미생물-암 연구 판별 체크리스트</h3>
+    <table>
+      <tr><th style="width:34%">기준</th><th>이 논문</th></tr>
+      <tr><td><b>전향적 설계</b> (암 진단 전 샘플)</td><td>✅ 8.8년 추적, 역인과 배제</td></tr>
+      <tr><td><b>대규모 표본</b></td><td>✅ 12.2만 명 → 890명 분석</td></tr>
+      <tr><td><b>다중 코호트 재현</b></td><td>✅ 2개 코호트 일치</td></tr>
+      <tr><td><b>정밀 시퀀싱</b> (종 수준)</td><td>✅ WGS + ITS (16S 아님)</td></tr>
+      <tr><td><b>다중비교 보정</b></td><td>✅ FDR Q&lt;.05</td></tr>
+      <tr><td><b>교차검증</b></td><td>✅ Monte Carlo 50회</td></tr>
+      <tr><td><b>기전 근거 제시</b></td><td>✅ 동물실험·조직 검증 인용</td></tr>
+      <tr><td><b>한계 명시</b></td><td>✅ 관찰연구·백인 편향 인정</td></tr>
+    </table>
+  </div>
+
+  <div class="figbox">
+    <svg viewBox="0 0 660 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="증거 사다리">
+      <text x="330" y="26" text-anchor="middle" font-size="16" font-weight="700" fill="#0f5e5e">미생물-암 "증거 사다리"</text>
+      <!-- 4 steps -->
+      <rect x="20" y="52" width="600" height="42" rx="9" fill="#fdf0dc" stroke="#b45309" stroke-width="1.5"/>
+      <text x="42" y="70" font-size="14" font-weight="700" fill="#b45309">4단계 · 인과 확정</text>
+      <text x="42" y="86" font-size="12" fill="#7a5a2a">무작위 중재시험 (예: 항균 치료가 암 위험을 낮추는지) — 아직 없음</text>
+      <rect x="20" y="106" width="600" height="42" rx="9" fill="#fdecec" stroke="#b91c1c" stroke-width="1.5"/>
+      <text x="42" y="124" font-size="14" font-weight="700" fill="#b91c1c">3단계 · 기전 증거</text>
+      <text x="42" y="140" font-size="12" fill="#7a3a3a">동물/세포 실험: P. gingivalis 이동 → 전암병변, 칸디다 → 니트로사민 (이 논문이 인용)</text>
+      <rect x="20" y="160" width="600" height="42" rx="9" fill="#e3efee" stroke="#0f5e5e" stroke-width="1.5"/>
+      <text x="42" y="178" font-size="14" font-weight="700" fill="#0f5e5e">2단계 · 전향적 코호트 (시간순서)</text>
+      <text x="42" y="194" font-size="12" fill="#3c5c5b">암 진단 전 미생물 측정 → 이후 발병 추적 ⭐ 이 논문의 위치</text>
+      <rect x="20" y="214" width="600" height="42" rx="9" fill="#eee9df" stroke="#999" stroke-width="1.5"/>
+      <text x="42" y="232" font-size="14" font-weight="700" fill="#666">1단계 · 상관관계 (관찰)</text>
+      <text x="42" y="248" font-size="12" fill="#777">"암 환자에게 이런 균이 많다" — 인과는 불명, 가장 낮은 단계</text>
+      <!-- arrow -->
+      <line x1="320" y1="256" x2="320" y2="52" stroke="#0f5e5e" stroke-width="2.5" marker-end="url(#arrUp)"/>
+      <defs><marker id="arrUp" markerWidth="10" markerHeight="10" refX="4" refY="2" orient="auto"><path d="M0,6 L4,0 L8,6 z" fill="#0f5e5e"/></marker></defs>
+      <text x="350" y="285" text-anchor="middle" font-size="12.5" fill="#6b6b6b">높은 단계일수록 강한 증거. "인과 확정"에는 무작위 중재시험이 필요</text>
+    </svg>
+    <div class="figcap"><b>[그림 4] 증거 사다리.</b> 이 논문은 <b>2단계(전향적 코호트)</b>에 위치하고, 3단계(기전) 근거를 인용해 보강합니다. 4단계(인과 확정)는 아직 미래의 과제 — 이걸 아는 게 "연구를 냉정하게 읽는 힘"입니다.</div>
+  </div>
+</section>
+
+<!-- ============ 7. 용도변경 약물 관점 ============ -->
+<section>
+  <h2><span class="no">7</span> 용도변경 약물 관점 (우리 커뮤니티 연결)</h2>
+
+  <div class="callout red">
+    <b>⚠️ 정직한 고지</b>
+    <p>아래는 이 논문의 <b>직접 주장이 아니라</b>, 우리 커뮤니티(약물 재창출) 관점에서 <b>제가 연결한 아이디어</b>입니다. 논문은 관찰 연구이며 어떤 약물도 추천하지 않습니다. 실제 적용 전 반드시 1차 문헌 검증과 의료진 상담이 필요합니다.</p>
+  </div>
+
+  <div class="card">
+    <h3>💡 떠오르는 연결점 3가지</h3>
+    <ol>
+      <li><b>미생물을 표적으로 하는 기존 약물</b> — 칸디다엔 <b>항진균제</b>(플루코나졸 등), 잇몸병균엔 <b>항균제</b> 계열. 이미 승인된 약을 "미생물 조절"로 재창출하는 새로운 축.</li>
+      <li><b>연구 범위 확장</b> — 우리 KB는 항기생충(이버멕틴·펜벤다졸) 중심인데, 이 논문은 <b>항진균·항균</b> 영역으로 넓힐 근거가 됩니다.</li>
+      <li><b>예방 지표</b> — "구강 위생·치주 치료"가 췌장암 예방에 기여할 가능성 (실용적 생활 습관 메시지).</li>
+    </ol>
+  </div>
+
+  <div class="figbox">
+    <svg viewBox="0 0 660 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="미생물 기전 지도">
+      <text x="330" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#b91c1c">미생물 → 췌장암 기전 (논문이 인용한 증거)</text>
+      <!-- Pathway 1 -->
+      <rect x="20" y="48" width="300" height="100" rx="10" fill="#fdecec" stroke="#b91c1c" stroke-width="1.5"/>
+      <text x="170" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="#b91c1c">경로 ① 세균 (P. gingivalis)</text>
+      <text x="170" y="92" text-anchor="middle" font-size="12" fill="#7a3a3a">구강 → 췌장 이동</text>
+      <text x="170" y="110" text-anchor="middle" font-size="12" fill="#7a3a3a">→ 췌장 전암병변(metaplasia) 유발</text>
+      <text x="170" y="128" text-anchor="middle" font-size="12" fill="#7a3a3a">→ PanIN → 선암종 진행 가속</text>
+      <!-- Pathway 2 -->
+      <rect x="340" y="48" width="300" height="100" rx="10" fill="#fdf0dc" stroke="#b45309" stroke-width="1.5"/>
+      <text x="490" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="#b45309">경로 ② 곰팡이 (Candida)</text>
+      <text x="490" y="92" text-anchor="middle" font-size="12" fill="#7a5a2a">발암성 니트로사민 생성</text>
+      <text x="490" y="110" text-anchor="middle" font-size="12" fill="#7a5a2a">candidalysin + 대식세포 IL7 경로</text>
+      <text x="490" y="128" text-anchor="middle" font-size="12" fill="#7a5a2a">→ 종양 면역 회피(C. tropicalis)</text>
+      <!-- common -->
+      <rect x="20" y="170" width="620" height="52" rx="10" fill="#e3efee" stroke="#0f5e5e" stroke-width="1.5"/>
+      <text x="330" y="192" text-anchor="middle" font-size="14" font-weight="700" fill="#0f5e5e">공통 결과</text>
+      <text x="330" y="211" text-anchor="middle" font-size="12" fill="#3c5c5b">선천 면역 반응 유발 · 미생물 독소/대사산물 방출 · 종양미세환경 왜곡 → 발암 촉진</text>
+      <!-- arrows -->
+      <line x1="170" y1="148" x2="240" y2="170" stroke="#b91c1c" stroke-width="2" marker-end="url(#arrA)"/>
+      <line x1="490" y1="148" x2="420" y2="170" stroke="#b45309" stroke-width="2" marker-end="url(#arrB)"/>
+      <defs>
+        <marker id="arrA" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 z" fill="#b91c1c"/></marker>
+        <marker id="arrB" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 z" fill="#b45309"/></marker>
+      </defs>
+      <text x="330" y="248" text-anchor="middle" font-size="12.5" fill="#6b6b6b">→ 재창출 논리: "어떤 기존 약이 이 경로(이동·독소·면역회피)를 차단하는가?"</text>
+      <text x="330" y="268" text-anchor="middle" font-size="12.5" fill="#b45309" font-weight="700">항진균제 / 항균제 / 구강 위생 중재가 후보 축 (미검증 — 검증 필요)</text>
+    </svg>
+    <div class="figcap"><b>[그림 5] 기전 지도.</b> 논문이 인용한 기전 근거를 시각화. 재창출 아이디어는 "이 경로를 차단하는 기존 약"을 찾는 데서 출발합니다.</div>
+  </div>
+</section>
+
+<!-- ============ 8. 한계와 주의 ============ -->
+<section>
+  <h2><span class="no">8</span> 한계와 주의 (정직하게)</h2>
+  <div class="callout red">
+    <b>⚠️ 이 논문만으로 약을 바꾸지 마세요</b>
+    <p>논문이 스스로 밝힌 한계는 다음과 같습니다. 이 한계를 아는 것이 곧 연구를 제대로 읽는 것입니다.</p>
+  </div>
+  <table>
+    <tr><th style="width:34%">한계</th><th>설명</th></tr>
+    <tr><td><b>관찰 연구</b></td><td>측정하지 못한 교란 요인 가능 (예: 치과 진료 이력 부재). 인과관계 미확정.</td></tr>
+    <tr><td><b>단일 샘플</b></td><td>구강 미생물의 장기 변화를 못 잡음 (다만 기존 연구가 단일 측정의 유용성 지지).</td></tr>
+    <tr><td><b>인종 편향</b></td><td>대상 91.8%가 백인 → 다른 인종 일반화 제한.</td></tr>
+    <tr><td><b>곰팡이 DB 불완전</b></td><td>칸디다의 30.4%가 종 수준 미동정 → 종 단위 해석 주의.</td></tr>
+  </table>
+</section>
+
+<!-- ============ 9. 용어 사전 ============ -->
+<section>
+  <h2><span class="no">9</span> 초보자용 용어 사전</h2>
+  <table>
+    <tr><th style="width:32%">용어</th><th>쉬운 설명</th></tr>
+    <tr><td><b>미생물군(microbiome)</b></td><td>몸 안·표면에 사는 미생물 전체. 세균(bacteriome) + 곰팡이(mycobiome).</td></tr>
+    <tr><td><b>전향적 코호트</b></td><td>병이 생기기 전에 사람을 모아 추적하는 연구. "시간 순서"를 알 수 있어 인과 추론에 유리.</td></tr>
+    <tr><td><b>전장유전체 샷건(WGS)</b></td><td>DNA 전체를 잘게 읽는 정밀 시퀀싱. 종(species) 수준 식별 가능.</td></tr>
+    <tr><td><b>ITS 시퀀싱</b></td><td>곰팡이 식별용 유전자 부위(ITS1)를 읽는 방법.</td></tr>
+    <tr><td><b>치주 병원체(red/orange complex)</b></td><td>잇몸병(치주염)을 일으키는 세균 무리. 색깔별로 분류.</td></tr>
+    <tr><td><b>오즈비(OR)</b></td><td>위험의 배수. 1.0 = 차이 없음, 1.27 = 위험 27% 증가.</td></tr>
+    <tr><td><b>신뢰구간(95% CI)</b></td><td>참값이 있을 확률 95%의 범위. 1.0을 포함하면 통계적으로 불확실.</td></tr>
+    <tr><td><b>FDR 보정</b></td><td>많이 비교할 때 생기는 "우연의 발견"을 걸러내는 통계 보정.</td></tr>
+    <tr><td><b>ANCOM-BC2</b></td><td>미생물 조성 데이터의 편향을 보정하는 분석법.</td></tr>
+    <tr><td><b>MRS (미생물 위험 점수)</b></td><td>여러 미생물을 묶어 하나의 위험 점수로 만든 것.</td></tr>
+    <tr><td><b>종양미세환경(TME)</b></td><td>종양 주변의 세포·미생물·분자가 이루는 환경.</td></tr>
+    <tr><td><b>metaplasia (전암병변)</b></td><td>정상 세포가 암 전 단계 세포로 변한 상태.</td></tr>
+  </table>
+</section>
+
+<!-- ============ 10. 출처 ============ -->
+<section>
+  <h2><span class="no">10</span> 출처 · 상태 표시</h2>
+  <div class="foot">
+    <p><b>📄 원문:</b> Meng Y, et al. "Oral Bacterial and Fungal Microbiome and Subsequent Risk for Pancreatic Cancer." <i>JAMA Oncology</i>, 2025; doi:10.1001/jamaoncol.2025.3377</p>
+    <a class="btn-link" href="https://jamanetwork.com/journals/jamaoncology/fullarticle/2839132" target="_blank" rel="noopener">🔗 원문 보기</a>
+    <p style="margin-top:14px;">
+      <span class="pill v">검증됨</span> <b>논문 사실·수치</b> (1~5, 8, 9절) — PDF 원문에서 직접 확인<br>
+      <span class="pill u">미검증</span> <b>용도변경 약물 연결</b> (7절) — Hermes의 아이디어, 의학 검증 아님
+    </p>
+    <p style="margin-top:10px;"><b>⚠️ 면책:</b> 본 문서는 과학 논문의 이해를 돕기 위한 해설 자료입니다. 의학적 진단·치료 조언이 아니며, 어떤 약물 복용·중단 결정에도 사용하지 마십시오. 건강 관련 결정은 반드시 의료진과 상담하세요.</p>
+    <p style="margin-top:10px; text-align:right;">— 환자 주도 임상 커뮤니티 가이드 · Hermes Agent 작성</p>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

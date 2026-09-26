@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>조 티펜스 Q&A — 2026년 8월 20일</title>
+<style>
+  :root {
+    --bg: #faf8f4;
+    --surface: #ffffff;
+    --surface2: #f3efe6;
+    --border: #e5dfd3;
+    --accent: #0f5e5e;      /* teal */
+    --accent2: #5b7f5b;     /* sage/green */
+    --accent3: #b45309;     /* gold/amber */
+    --danger: #b91c1c;
+    --text: #2b2b2b;
+    --text-soft: #6b6b6b;
+    --text-strong: #1a1a1a;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.75;
+    padding-bottom: 60px;
+  }
+
+  /* HEADER / HERO */
+  .hero {
+    background: linear-gradient(160deg, #0f5e5e 0%, #146b6b 55%, #5b7f5b 100%);
+    color: #fff;
+    padding: 42px 20px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: 50%; transform: translateX(-50%);
+    width: 500px; height: 500px;
+    background: radial-gradient(ellipse, rgba(255,255,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-label {
+    display: inline-block;
+    background: rgba(255,255,255,0.16);
+    border: 1px solid rgba(255,255,255,0.4);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: clamp(22px, 5vw, 32px);
+    font-weight: 800;
+    line-height: 1.35;
+    margin-bottom: 12px;
+  }
+  .hero h1 em { color: #f5d78e; font-style: normal; }
+  .hero-meta { color: rgba(255,255,255,0.9); font-size: 13px; margin-bottom: 16px; }
+  .hero-meta span { margin: 0 7px; }
+  .hero-desc {
+    max-width: 620px; margin: 0 auto;
+    color: rgba(255,255,255,0.92); font-size: 14px; line-height: 1.7;
+  }
+
+  /* TOC NAV */
+  .toc {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    position: sticky; top: 0; z-index: 100;
+    overflow-x: auto; white-space: nowrap;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .toc-inner { display: inline-flex; gap: 4px; padding: 10px 0; }
+  .toc a {
+    color: var(--text-soft); text-decoration: none;
+    font-size: 13px; font-weight: 600; padding: 6px 13px; border-radius: 6px;
+    transition: all 0.15s; white-space: nowrap;
+  }
+  .toc a:hover { color: var(--accent); background: rgba(15,94,94,0.08); }
+
+  /* LAYOUT */
+  .container { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+
+  /* SECTION */
+  .section { margin-top: 38px; }
+  .section-title {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--border);
+  }
+  .section-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .icon-blue { background: rgba(15,94,94,0.12); }
+  .icon-green { background: rgba(91,127,91,0.15); }
+  .icon-orange { background: rgba(180,83,9,0.12); }
+  .icon-red { background: rgba(185,28,28,0.12); }
+  .section-title h2 {
+    font-size: clamp(17px, 3.5vw, 21px); font-weight: 800; color: var(--text-strong);
+  }
+
+  /* STORY CARD */
+  .story-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent2);
+    border-radius: 10px;
+    padding: 18px 20px; margin-bottom: 14px;
+  }
+  .story-card.new { border-left-color: var(--accent3); }
+  .story-card p { font-size: 15px; }
+  .tag-new {
+    display: inline-block; background: var(--accent3); color: #fff;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+    padding: 1px 8px; border-radius: 5px; margin-right: 6px; vertical-align: 2px;
+  }
+
+  /* MECHANISM */
+  .mech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 14px; }
+  .mech-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 18px 16px; text-align: center;
+  }
+  .mech-num { font-size: 28px; font-weight: 800; margin-bottom: 6px; }
+  .mech-card h3 { font-size: 14px; font-weight: 700; color: var(--text-strong); margin-bottom: 6px; }
+  .mech-card p { font-size: 13px; color: var(--text-soft); line-height: 1.6; }
+  .mech-card .highlight { color: var(--accent3); font-weight: 700; }
+
+  /* QA */
+  .qa-item {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    margin-bottom: 12px; overflow: hidden;
+  }
+  .qa-q {
+    background: var(--surface2); padding: 13px 17px;
+    display: flex; gap: 11px; align-items: flex-start; border-bottom: 1px solid var(--border);
+  }
+  .qa-badge {
+    flex-shrink: 0; font-size: 11px; font-weight: 800; letter-spacing: 1px;
+    padding: 3px 9px; border-radius: 5px; margin-top: 3px;
+  }
+  .badge-q { background: rgba(15,94,94,0.14); color: var(--accent); }
+  .badge-a { background: rgba(91,127,91,0.16); color: var(--accent2); }
+  .badge-k { background: rgba(180,83,9,0.14); color: var(--accent3); }
+  .qa-text { font-size: 14.5px; line-height: 1.7; color: var(--text); }
+  .qa-a { padding: 13px 17px; display: flex; gap: 11px; align-items: flex-start; }
+
+  /* SUCCESS */
+  .success-grid { display: grid; gap: 12px; }
+  .success-item {
+    background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--accent2);
+    border-radius: 10px; padding: 15px 17px; display: flex; gap: 13px; align-items: flex-start;
+  }
+  .success-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+  .success-item h3 { font-size: 14px; font-weight: 700; color: var(--accent2); margin-bottom: 4px; }
+  .success-item p { font-size: 14px; color: var(--text); line-height: 1.65; }
+
+  /* WARNING */
+  .warning-box {
+    background: rgba(185,28,28,0.05); border: 1px solid rgba(185,28,28,0.25);
+    border-radius: 10px; padding: 15px 17px; margin-bottom: 12px;
+    display: flex; gap: 11px; align-items: flex-start;
+  }
+  .warning-icon { font-size: 20px; flex-shrink: 0; }
+  .warning-text { font-size: 14px; color: #7a3a3a; line-height: 1.7; }
+  .warning-text strong { color: var(--danger); }
+
+  /* INFO BOX */
+  .info-box {
+    background: rgba(15,94,94,0.06); border: 1px solid rgba(15,94,94,0.22);
+    border-radius: 10px; padding: 15px 17px; margin-bottom: 12px;
+    font-size: 14px; line-height: 1.7; color: #2f4a4a;
+  }
+  .info-box strong { color: var(--accent); }
+
+  /* PROTOCOL TABLE */
+  .protocol-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 14px; border-radius: 10px; overflow: hidden; }
+  .protocol-table th {
+    background: var(--accent); color: #fff; font-size: 12px; font-weight: 700;
+    letter-spacing: 1px; padding: 10px 13px; text-align: left; border-bottom: 1px solid var(--border);
+  }
+  .protocol-table td { background: var(--surface); padding: 11px 13px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  .protocol-table tr:last-child td { border-bottom: none; }
+
+  /* RESOURCE */
+  .resource-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 15px 17px; margin-bottom: 10px; display: flex; gap: 13px; align-items: center;
+  }
+  .resource-card .res-icon { font-size: 22px; flex-shrink: 0; }
+  .resource-card h3 { font-size: 14px; font-weight: 700; color: var(--text-strong); margin-bottom: 2px; }
+  .resource-card p { font-size: 13px; color: var(--text-soft); }
+  .resource-card a { color: var(--accent); text-decoration: none; font-size: 13px; font-weight: 600; }
+  .resource-card a:hover { text-decoration: underline; }
+
+  /* DISCLAIMER */
+  .disclaimer {
+    background: var(--surface); border: 1px solid var(--border); border-top: 3px solid var(--accent3);
+    border-radius: 10px; padding: 18px 20px; margin-top: 38px;
+    font-size: 13px; color: var(--text-soft); line-height: 1.7;
+  }
+  .disclaimer strong { color: var(--accent3); }
+
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 34px 0; }
+
+  p { margin-bottom: 10px; }
+  strong { color: var(--text-strong); font-weight: 700; }
+  .up { color: var(--danger); font-weight: 700; }
+  .ok { color: var(--accent2); font-weight: 700; }
+
+  @media (max-width: 480px) {
+    .mech-grid { grid-template-columns: 1fr 1fr; }
+    .hero { padding: 32px 16px 26px; }
+    .toc a { font-size: 12px; padding: 5px 9px; }
+    .protocol-table th, .protocol-table td { padding: 9px 10px; font-size: 13px; }
+  }
+
+  /* PRINT */
+  @media print {
+    body { background: #fff !important; color: #000; font-size: 11.5pt; line-height: 1.55; }
+    .toc { display: none !important; }
+    .hero { background: #fff !important; color: #000 !important; border-bottom: 2px solid #333; padding: 18px 0; }
+    .hero::before { display: none; }
+    .hero-label, .hero h1, .hero h1 em, .hero-meta, .hero-desc { color: #000 !important; }
+    .hero-label { border-color: #999 !important; background: #eee !important; }
+    .story-card, .qa-item, .mech-card, .success-item, .resource-card, .warning-box, .info-box, .disclaimer {
+      background: #fff !important; color: #000 !important; border: 1px solid #bbb !important;
+      box-shadow: none !important; break-inside: avoid;
+    }
+    .qa-q, .qa-a { background: #fff !important; border-color: #bbb !important; }
+    .qa-badge { background: #eee !important; color: #000 !important; }
+    .mech-num, .mech-card h3, .mech-card p, .qa-text, .success-item h3, .success-item p, .warning-text, .info-box, .resource-card h3, .resource-card p, .disclaimer { color: #000 !important; }
+    .tag-new { background: #ddd !important; color: #000 !important; }
+    .protocol-table th { background: #eee !important; color: #000 !important; }
+    .protocol-table td { background: #fff !important; }
+    .protocol-table, .protocol-table th, .protocol-table td { border-color: #999 !important; }
+    a { color: #000 !important; text-decoration: none; }
+    .section { margin-top: 16px; }
+    .section-title { border-bottom-color: #999; }
+    h2, h3, strong { color: #000 !important; }
+    .divider { background: #ccc; }
+    .up { color: #000 !important; font-weight: 700; }
+    .ok { color: #000 !important; font-weight: 700; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">FRIENDS OF HIPPOCRATES 커뮤니티</div>
+  <h1>조 티펜스<em> Q&A</em><br>2026년 8월 20일</h1>
+  <div class="hero-meta">
+    <span>🎙 라이브 세션 · 62분</span>
+    <span>|</span>
+    <span>진행: Get Busy Living 채널 · 출연: Joe Tippens, Adam Payne(UltraBotanica CEO), Keith Bishop(약사·임상영양사)</span>
+  </div>
+  <p class="hero-desc">
+    말기 소세포폐암 4기를 펜벤다졸 기반 프로토콜로 극복한 조 티펜스(Joe Tippens)의 2026년 8월 20일 공개 Q&amp;A 세션 요약입니다.
+    <br>이 자료는 정보 제공 목적이며, 의학적 조언이 아닙니다.
+  </p>
+</div>
+
+<!-- TOC NAV -->
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#story">📖 조 티펜스 이야기</a>
+    <a href="#mechanism">🔬 작용 기전</a>
+    <a href="#protocol">💊 프로토콜</a>
+    <a href="#purchase">🛒 구매처·가짜제품</a>
+    <a href="#qa">❓ Q&amp;A</a>
+    <a href="#success">✅ 성공 사례</a>
+    <a href="#warnings">⚠️ 주의사항</a>
+    <a href="#resources">🔗 리소스</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- ===== 조 티펜스 이야기 ===== -->
+  <section class="section" id="story">
+    <div class="section-title">
+      <div class="section-icon icon-blue">📖</div>
+      <h2>조 티펜스 이야기 — 2016~2017년</h2>
+    </div>
+
+    <div class="story-card">
+      <p><strong>2016년 가을:</strong> MD Anderson 암센터에서 소세포폐암 4기 진단. 왼쪽 폐에 주먹만 한 종양 + 전신 전이(wide metastasis). "3~6개월 시한부"를 선고받음.</p>
+    </div>
+
+    <div class="story-card">
+      <p><strong>발견의 계기:</strong> 대형동물 수의사로부터 머크(Merck) 연구소 과학자의 사례를 전해 들음 — 이 과학자는 쥐에 여러 암을 이식해 연구하던 중 기생충 치료용 펜벤다졸 투여 후 이식암이 대부분 치유된 것을 관찰했고, 본인이 뇌간을 감싼 4기 교모세포종 진단을 받자 직접 복용해 6주 만에 완치됨.</p>
+    </div>
+
+    <div class="story-card">
+      <p><strong>2017년 1월:</strong> MD Anderson의 Dr. Steven Han(훗날 FDA 커미셔너)이 "더 해줄 수 있는 게 없다"고 통보. 이때 화학요법·방사선은 폐의 큰 종양을 제거했지만 암은 이미 전신으로 퍼진 상태였다.</p>
+    </div>
+
+    <div class="story-card new">
+      <p><span class="tag-new">이번 정정</span><strong>8주 단식에 대한 오해:</strong> "조는 8주 단식으로 나았다"는 설이 돌지만 사실이 아님. 단식은 건강 목적이 아니라 <strong>방사선이 식도를 '베이컨처럼' 태워</strong> 음식을 삼킬 수 없었기 때문. 그리고 광범위 전이는 그 단식 <em>이후에</em> 발생했다 — 단식과 완치는 무관.</p>
+    </div>
+
+    <div class="story-card">
+      <p><strong>2017년 5월:</strong> 완전 관해(complete remission). 조 티펜스는 MD Anderson 75년 역사상 광범위 전이 소세포폐암에서 <strong>유일한 데이터 아웃라이어</strong>로 남아 있다.</p>
+    </div>
+
+    <div class="info-box">
+      <strong>키트루다(Keytruda) 논란 &amp; 한국 정부 보도 반박:</strong><br>
+      6년 전 한국 정부가 "조는 키트루다를 동시에 복용했으니 사기"라는 보도를 냈는데, 조는 이번 세션에서 이를 정면 반박했다. 사실은 — 소세포폐암을 대상으로 한 키트루다 임상 3건이 <strong>모두 실패</strong>했고, 머크는 2021년 소세포폐암에 대한 키트루다 승인 신청을 FDA에서 <strong>철회</strong>했다. 현재 키트루다는 소세포폐암에 승인조차 되어 있지 않다. 3건의 임상에서 살아남은 사람은 조 1명뿐이며, "키트루다가 내 성공에 기여했다"는 주장은 사실이 아니라고 명백히 밝혔다. (키트루다는 비소세포폐암 등 일부 암에는 효과적이지만, 전이성 소세포폐암에는 효과가 없음.)
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== 작용 기전 ===== -->
+  <section class="section" id="mechanism">
+    <div class="section-title">
+      <div class="section-icon icon-green">🔬</div>
+      <h2>펜벤다졸의 작용 기전</h2>
+    </div>
+
+    <p style="margin-bottom:16px; color:var(--text-soft); font-size:14px;">
+      조 티펜스가 설명하는 생물학적 메커니즘 요약입니다. 이번 세션에서는 특히 <strong style="color:var(--accent3);">P53 하향조절자 공격</strong>을 강조했습니다.
+    </p>
+
+    <div class="mech-grid">
+      <div class="mech-card">
+        <div class="mech-num" style="color:var(--accent);">①</div>
+        <h3>마이크로튜불 억제</h3>
+        <p>암세포 분열에 필수인 마이크로튜불을 <em>약하게</em> 억제해 분열을 지연. 완전 차단이 아닌 지연이 핵심 — 독성·내성 발생을 피하는 이유.</p>
+      </div>
+      <div class="mech-card">
+        <div class="mech-num" style="color:var(--accent2);">②</div>
+        <h3>P53 활성화</h3>
+        <p><span class="highlight">이번 강조</span> P53은 암세포를 죽이는 유전자. 펜벤다졸은 <strong>P53 하향조절인자(down-regulator)를 공격</strong>해 P53을 급상승시킴 — 메벤다졸·알벤다졸·이버멕틴은 못 하는 고유 기전.</p>
+      </div>
+      <div class="mech-card">
+        <div class="mech-num" style="color:var(--accent3);">③</div>
+        <h3>당(포도당) 대사 차단</h3>
+        <p>암세포는 설탕에만 의존(PET 스캔이 이를 시각화). ①②의 연쇄 반응으로 암세포의 포도당 대사가 차단 → 에너지 고갈 → 세포 사멸.</p>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>왜 암에 "우연히" 효과가 있는가?</strong><br>
+      펜벤다졸은 원래 장내 기생충의 마이크로튜불을 파괴하기 위해 설계됨. 기생충 세포와 암세포가 구조적으로 매우 유사해, 구충제가 암세포에도 작용하게 되는 것.
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== 프로토콜 ===== -->
+  <section class="section" id="protocol">
+    <div class="section-title">
+      <div class="section-icon icon-orange">💊</div>
+      <h2>조 티펜스 프로토콜 개요 (현행판)</h2>
+    </div>
+
+    <div class="warning-box">
+      <div class="warning-icon">⚠️</div>
+      <div class="warning-text">
+        <strong>중요:</strong> 이 정보는 교육 목적입니다. 치료 결정은 반드시 의료 전문가와 상의하십시오. 조 티펜스 본인도 "나는 의사가 아니다"를 수차례 강조했습니다.
+      </div>
+    </div>
+
+    <table class="protocol-table">
+      <tr><th>항목</th><th>현행 권장</th><th>비고</th></tr>
+      <tr>
+        <td><strong>펜벤다졸</strong><br>(활성암)</td>
+        <td>222mg/일 × <strong>7일/주</strong></td>
+        <td>반드시 머크(Merck) 정품(Panacur C·Safeguard)의 분말·과립·페이스트·액체. 캡슐·알약은 가짜.</td>
+      </tr>
+      <tr>
+        <td><strong>공격적 4기</strong></td>
+        <td>첫 달 <strong>444mg</strong>(2배)로 시작</td>
+        <td>간효소 혈액검사로 모니터링 (저렴한 검사)</td>
+      </tr>
+      <tr>
+        <td><strong>관해 24개월 후</strong></td>
+        <td><strong>3일/주</strong> (4일 휴)로 감량</td>
+        <td>관해·NED 24개월이면 7일/주 불필요</td>
+      </tr>
+      <tr>
+        <td><strong>예방 목적</strong></td>
+        <td><strong>3일/주</strong></td>
+        <td>암 없는 사람의 예방적 복용도 같은 요법</td>
+      </tr>
+      <tr>
+        <td><strong>병용 제품</strong></td>
+        <td>Enco(Pathway) 제품군</td>
+        <td>아래 '제품 구성' 참조</td>
+      </tr>
+    </table>
+
+    <div class="info-box">
+      <strong>펜벤다졸 vs 이버멕틴:</strong> 펜벤다졸은 메벤다졸·알벤다졸·이버멕틴이 못 하는 일(p53 하향조절자 공격)을 한다. 이버멕틴은 약 5~6개 암종에만 효과적이며, 펜벤다졸+이버멕틴 병용 효과의 <strong>90%는 펜벤다졸</strong>이 한다는 것이 조의 판단. 병용은 해로울 것 없지만(유용한 보조), 핵심은 여전히 펜벤다졸.
+    </div>
+
+    <div class="info-box">
+      <strong>Keith Bishop의 관점(약사·임상영양사):</strong> 7일/주보다 <strong>5일/주 + 2~3일 휴</strong>(회전 요법)을 선호 — 몸에 휴식을 주고 내성을 막기 위함(활성암에도 적용). 펜벤다졸 반감기는 약 12~15시간(동물 데이터 기반 추정)이라 체내에 누적될 수 있음. 간효소 상승 사례는 대부분 항암제·여러 보충제를 동시에 복용한 경우였고, 일부는 <strong>마이코톡신(곰팡이 독소)</strong>이 간을 손상시킨 채 펜벤다졸까지 더해진 경우였다.
+    </div>
+
+    <div class="info-box">
+      <strong>항암 치료 병행 시:</strong> 조는 "부엌 싱크대 빼고 다 던져라(throw everything but the kitchen sink)" — 전통 치료와 프로토콜을 <strong>병행</strong>할 것을 강력 권장. 유일한 예외는 항암 치료 중 <strong>Pathway 2(커큐민)</strong> — 혈액 응고 관련이 있어 혈액희석제 복용 중이거나 응고 문제가 있으면 의료진 상담 필수. 나머지는 병행 가능.
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== 구매처 ===== -->
+  <section class="section" id="purchase">
+    <div class="section-title">
+      <div class="section-icon icon-red">🛒</div>
+      <h2>구매처 &amp; 가짜제품 경고</h2>
+    </div>
+
+    <div class="warning-box">
+      <div class="warning-icon">🚨</div>
+      <div class="warning-text">
+        <strong>오직 머크(Merck) 정품만:</strong> Panacur C 또는 Safeguard 브랜드의 <strong>분말·과립·페이스트·액체</strong> 형태만 사용. <strong>캡슐·알약 형태는 불신</strong> — 펜벤다졸은 법적으로 동물용 수의약품으로만 허가되어 캡슐 형태로 정식 판매되지 않음.
+      </div>
+    </div>
+
+    <div class="warning-box">
+      <div class="warning-icon">🛑</div>
+      <div class="warning-text">
+        <strong>아마존(Amazon) 피하기:</strong> 제3자 판매자를 통해 비공인 제품이 유통된 사례가 있음. <strong>1800petmeds.com, Chewy, Tractor Supply</strong> 같은 전통 수의약품 공급처가 안전.
+      </div>
+    </div>
+
+    <div class="warning-box">
+      <div class="warning-icon">🧪</div>
+      <div class="warning-text">
+        <strong>순도 테스트 결과:</strong> 커뮤니티 자체 테스트에서 <strong>머크 제품은 101%</strong>(표기보다 높음)로 일관되게 나옴. 반면 대부분의 타사 제품은 <strong>60% 이하</strong>, 그나마 한 곳이 80% 수준. 조는 "FenBen Labs" 등 비머크 제품을 권장하지 않음.
+      </div>
+    </div>
+
+    <div class="warning-box">
+      <div class="warning-icon">💰</div>
+      <div class="warning-text">
+        <strong>사기업체 주의:</strong> 조의 얼굴·목소리·이름을 AI로 위조해 "$800 결제 후 배송 없음" 사기를 치는 업체가 존재. 봇으로 180만 뷰를 만든 업체도 있으며, 한 달에 10명이 "사기꾼이 따로 있는데 나를 고소"하겠다고 협박했다고 전함. 조는 어떤 제품으로도 수익을 얻지 않음.
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== Q&A ===== -->
+  <section class="section" id="qa">
+    <div class="section-title">
+      <div class="section-icon icon-blue">❓</div>
+      <h2>주요 Q&amp;A 정리</h2>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q">
+        <span class="qa-badge badge-q">Q</span>
+        <p class="qa-text">췌장암에도 효과가 있나요?</p>
+      </div>
+      <div class="qa-a">
+        <span class="qa-badge badge-a">조</span>
+        <p class="qa-text">4기 췌장암 사례 7건을 알고 있다. 모두 "3~4개월 시한부"를 선고받았지만, 펜벤다졸이 암을 완전히 없애지는 못했어도 <strong>진행을 억제해 정상 생활 복귀</strong>를 가능하게 했다. 놀랍게도 7건 모두 <strong>18~22개월 연속 복용 후 갑자기 NED(암 없음)</strong> 판정을 받았다. PET 스캔에 계속 암이 보이다가 어느 날 갑자기 사라진 것. 췌장암은 섬유화(fibrosis)가 많아 약물이 종양에 도달하기 어려워 시간이 오래 걸리는 것으로 보인다.</p>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q">
+        <span class="qa-badge badge-q">Q</span>
+        <p class="qa-text">4기(골반 종괴, 타 장기 전이)입니다. 시작 용량은 얼마로 해야 하나요?</p>
+      </div>
+      <div class="qa-a">
+        <span class="qa-badge badge-a">조</span>
+        <p class="qa-text">활성암은 <strong>풀 용량(222mg/일)</strong>을 7일/주로 시작(Ketih는 5일/주 권장). 간효소를 관찰하라. 자세한 용량은 블로그 프로토콜 섹션에 명시되어 있다.</p>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q">
+        <span class="qa-badge badge-q">Q</span>
+        <p class="qa-text">의사에게 프로토콜 복용을 알려야 하나요? 이해해주는 의사는 어떻게 찾나요?</p>
+      </div>
+      <div class="qa-a">
+        <span class="qa-badge badge-k">Keith</span>
+        <p class="qa-text"><strong>알려야 한다.</strong> 의사가 상호작용을 알 수 있고, 성공하면 의사도 배워 다음 환자를 막지 않게 된다. 의사들은 3년 전보다 훨씬 수용적 — "지지할 수 없다"고 말해도 대부분 환자를 내보내지 않는다(일부는 "그러면 다른 의사 찾아라"고 하는 경우도 있음). 통합의학 전문의를 찾는 가장 좋은 경로는 <strong>UltraBotanica에 문의</strong>(프로토콜·Enco 제품을 아는 의사 목록 보유, 상호작용 검사 도구 제공).</p>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q">
+        <span class="qa-badge badge-q">Q</span>
+        <p class="qa-text">혈액희석제를 복용 중인데 펜벤다졸을 먹어도 되나요?</p>
+      </div>
+      <div class="qa-a">
+        <span class="qa-badge badge-a">조</span>
+        <p class="qa-text"><span class="ok">펜벤다졸은 문제없음.</span> 원래 구버전 프로토콜에 비타민E가 있었는데, 혈액희석제 복용자에게 문제를 일으킬 수 있어 <strong>제거했다</strong>가 바로 그 이유다.</p>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q">
+        <span class="qa-badge badge-q">Q</span>
+        <p class="qa-text">왜 비싼 UltraBotanica 제품을 홍보하나요?</p>
+      </div>
+      <div class="qa-a">
+        <span class="qa-badge badge-a">조</span>
+        <p class="qa-text">수익 때문이 아니다. 예를 들어 커큐민은 항암에 좋지만 약국(Walgreens·CVS) 제품은 <strong>2% 미만만 혈류에 도달</strong>. 9년 전 "고흡수" 제품이 15%까지 올렸고, 이 회사의 ProSorb 흡수 기술은 그보다 <strong>5~6배 더 높은</strong> 흡수율을 보인다. "혈류에 들어가야 효과가 있다"는 원리 때문에 바꿨을 뿐이다. (단, 개인 맞춤 상담은 Keith 등 전문가에게 받으라고 명시.)</p>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q">
+        <span class="qa-badge badge-q">Q</span>
+        <p class="qa-text">구버전(9년 전) 프로토콜을 따라도 되나요?</p>
+      </div>
+      <div class="qa-a">
+        <span class="qa-badge badge-a">조</span>
+        <p class="qa-text"><span class="up">열등하다(inferior).</span> AI 검색이 8~9년 전 구버전을 계속 띄우는 게 문제. 현행 프로토콜은 수년간의 연구로 크게 업그레이드되었다. 최신 버전은 블로그(mycancerstory.rocks)의 프로토콜 섹션을 봐라.</p>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q">
+        <span class="qa-badge badge-q">Q</span>
+        <p class="qa-text">Rick Simpson 오일(대마 오일)과 Pathway 1은 뭐가 다른가요?</p>
+      </div>
+      <div class="qa-a">
+        <span class="qa-badge badge-a">Adam</span>
+        <p class="qa-text">Rick Simpson 오일은 가열(탈카복실화)하면 유익 성분이 파괴된다. Pathway 1은 <strong>크라이오(극저온) 추출</strong>로 산성 카나비노이드(CBDA·CBGA 등)를 보존 — 실제로 작용하는 것은 "탈카복실화된" 형태가 아니라 <strong>산성(비가열) 형태</strong>라는 연구 결과에 기반. 카나비노이드 7g + 유향(프랑킨센스) 에센셜 오일 7g을 특정 품종(Ethiopian·Boswellia sacra)으로 구성.</p>
+      </div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q">
+        <span class="qa-badge badge-q">Q</span>
+        <p class="qa-text">삼중음성유방암(TNBC)에도 효과가 있나요?</p>
+      </div>
+      <div class="qa-a">
+        <span class="qa-badge badge-a">조</span>
+        <p class="qa-text">1년 전 이 방송에서 "아직 삼중음성유방암 성공사례는 못 봤다"고 했는데, 바로 그 방송에 두 명의 여성이 전화로 "나에게 효과가 있었다"고 보고했다. 한 명은 지인이었고, 식이·생활습관·긍정적 태도까지 함께 집중한 사례였다.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== 성공 사례 ===== -->
+  <section class="section" id="success">
+    <div class="section-title">
+      <div class="section-icon icon-green">✅</div>
+      <h2>이날 세션에서 공유된 성공 사례</h2>
+    </div>
+
+    <p style="margin-bottom:16px; font-size:14px; color:var(--text-soft);">
+      조 티펜스는 매주 3~5건의 새로운 성공 사례를 받는다고 밝혔습니다. "돈을 버는 일도 아닌데 누군가 '당신이 내 생명을 구했다'고 말할 때가 보상"이라고.
+    </p>
+
+    <div class="success-grid">
+      <div class="success-item">
+        <div class="success-icon">🫁</div>
+        <div>
+          <h3>4기 췌장암 7건 → NED</h3>
+          <p>"3~4개월 시한부" 선고 후 펜벤다졸로 정상 생활 유지, 18~22개월 연속 복용 후 전원 암 소실(PET 음성) 판정.</p>
+        </div>
+      </div>
+      <div class="success-item">
+        <div class="success-icon">🩸</div>
+        <div>
+          <h3>전립선암 — PSA 1000+ → 1 미만</h3>
+          <p>PSA가 1000을 넘던 환자가 펜벤다졸로 1 미만까지 하락. "매우 인상적"이라고 언급.</p>
+        </div>
+      </div>
+      <div class="success-item">
+        <div class="success-icon">🎯</div>
+        <div>
+          <h3>전립선암 — Gleason 8 (공격적)</h3>
+          <p>프로토콜 1년. 90일 만에 PSA가 5에서 하락 시작한 사례.</p>
+        </div>
+      </div>
+      <div class="success-item">
+        <div class="success-icon">🎗</div>
+        <div>
+          <h3>삼중음성유방암 2건</h3>
+          <p>지난 방송에서 라이브 전화로 성공 보고. 식이·생활습관·긍정 태도를 함께 병행.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== 주의사항 ===== -->
+  <section class="section" id="warnings">
+    <div class="section-title">
+      <div class="section-icon icon-red">⚠️</div>
+      <h2>주의사항</h2>
+    </div>
+
+    <div class="warning-box">
+      <div class="warning-icon">🩺</div>
+      <div class="warning-text">
+        <strong>간효소 모니터링:</strong> 간효소 상승 사례는 대부분 다약제(항암제+보충제) 병용 또는 <strong>마이코톡신(곰팡이 독소)</strong> 부담 때문이었다. 간은 회복력이 있어 원인을 제거하면 회복된다. 간효소 검사는 매우 저렴하므로 주기적으로 확인할 것.
+      </div>
+    </div>
+
+    <div class="warning-box">
+      <div class="warning-icon">💊</div>
+      <div class="warning-text">
+        <strong>혈액희석제·응고 문제:</strong> 펜벤다졸 자체는 문제없으나, Pathway 2(커큐민)는 혈액 응고에 관여하므로 혈액희석제 복용자·수술 예정자는 의료진 상담 필수. (구버전 프로토콜의 비타민E가 제거된 것도 이 때문.)
+      </div>
+    </div>
+
+    <div class="warning-box">
+      <div class="warning-icon">🚨</div>
+      <div class="warning-text">
+        <strong>가짜제품·캡슐 경고:</strong> 캡슐·알약 형태는 비머크 위조품일 가능성이 높다. 조의 얼굴·목소리·이름을 AI로 위조한 사기업체까지 존재하므로, 반드시 머크 정품(분말·과립·페이스트·액체)만 정식 공급처에서 구매할 것.
+      </div>
+    </div>
+
+    <div class="warning-box">
+      <div class="warning-icon">🔬</div>
+      <div class="warning-text">
+        <strong>키트루다 오해 주의:</strong> 키트루다는 전이성 소세포폐암에 승인되어 있지 않으며(임상 3건 실패, 2021년 FDA 철회), 조의 완치에 기여하지 않았다. "키트루다가 살렸다"는 주장은 사실이 아님.
+      </div>
+    </div>
+
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== 리소스 ===== -->
+  <section class="section" id="resources">
+    <div class="section-title">
+      <div class="section-icon icon-orange">🔗</div>
+      <h2>주요 리소스</h2>
+    </div>
+
+    <div class="resource-card">
+      <div class="res-icon">🌐</div>
+      <div>
+        <h3>조 티펜스 공식 블로그 &amp; 프로토콜</h3>
+        <p>최신 프로토콜, 성공 사례 아카이브, Q&amp;A 영상 게시 (AI가 띄우는 구버전이 아닌 현행판은 여기)</p>
+        <a href="https://mycancerstory.rocks" target="_blank" rel="noopener">mycancerstory.rocks</a>
+      </div>
+    </div>
+
+    <div class="resource-card">
+      <div class="res-icon">👥</div>
+      <div>
+        <h3>Joe Tippens Facebook 그룹 (공식)</h3>
+        <p>약 66.5만 명 회원. 사기꾼·다단계 판매자 배제를 위한 엄격한 가입 심사(질문+비밀번호). #positiveprogress 해시태그로 성공 사례 공유.</p>
+        <a href="https://www.facebook.com/groups/mycancerstoryrocks" target="_blank" rel="noopener">facebook.com/groups/mycancerstoryrocks</a>
+      </div>
+    </div>
+
+    <div class="resource-card">
+      <div class="res-icon">🧪</div>
+      <div>
+        <h3>UltraBotanica (Enco / Onco Adjunct 제품)</h3>
+        <p>Pathway 1~4 공식 구매처. 통합의학 전문의 목록 보유. 호주·뉴질랜드·스페인은 Pathway 1(대마 성분) 배송 불가(대체 제형 준비 중).</p>
+        <a href="https://ultratoday.com" target="_blank" rel="noopener">ultratoday.com</a>
+      </div>
+    </div>
+
+    <div class="resource-card">
+      <div class="res-icon">👨‍⚕️</div>
+      <div>
+        <h3>Keith Bishop — 약사 · 임상영양사</h3>
+        <p>개인 맞춤 상담, 무료 15분 초기 상담. "5가지 보충제 실수" 무료 워크숍, "펜벤다졸 복용 실수" 워크숍 진행.</p>
+        <a href="https://prevailovercancer.com" target="_blank" rel="noopener">prevailovercancer.com</a>
+      </div>
+    </div>
+
+    <div class="resource-card">
+      <div class="res-icon">🎙</div>
+      <div>
+        <h3>Templeton Wellness 인터뷰</h3>
+        <p>조가 "8년 만에 가장 포괄적인 인터뷰"라고 언급한 최근 영상. "Templeton Wellness Joe Tippens"으로 검색.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    <strong>⚕️ 의료 면책 조항</strong><br>
+    이 문서는 조 티펜스의 2026년 8월 20일 공개 Q&amp;A 세션을 한국어로 요약·정리한 것입니다. 의학적 조언이 아니며, 진단·치료·처방을 대체하지 않습니다. 조 티펜스, Keith Bishop, 세션 진행자 모두 "의사가 아님"을 수차례 명시했습니다. 모든 치료 결정은 담당 의료진과 함께 내리십시오.
+    <br><br>
+    이 자료는 <strong>Friends of Hippocrates 커뮤니티</strong> 교육 목적으로 정리되었습니다.
+    <br><br>
+    <strong>출처:</strong> "Joe Tippens LiveStream, August 20th, 2026" — Get Busy Living 채널 · YouTube (youtube.com/watch?v=FMzF_Z87XTo)
+  </div>
+
+</div><!-- /container -->
+
+</body>
+</html>

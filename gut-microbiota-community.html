@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>왜 같은 복용법인데, 누구는 되고 누구는 안 될까? — 장내미생물과 항암제 개인차</title>
+<style>
+:root{
+  --bg:#faf8f4; --card:#ffffff; --ink:#2b2a26; --ink2:#4a4740; --muted:#7d7767;
+  --gold:#a8813f; --gold-l:#c9a86a; --sage:#6b8f71; --sage-l:#e8f0e8;
+  --brick:#a34a3a; --brick-l:#fbeeea; --blue:#3a6186; --blue-l:#ecf2f8;
+  --line:#e4ded1; --line2:#d6cebd;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Malgun Gothic","Nanum Gothic","Apple SD Gothic Neo",sans-serif;
+  font-size:clamp(16px,4.4vw,18px);line-height:1.72;letter-spacing:-.01em;
+}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 64px}
+
+/* ---------- HERO ---------- */
+.hero{background:linear-gradient(160deg,#fffdf9 0%,#f4efe3 100%);
+  border-bottom:2px solid var(--gold-l);padding:30px 18px 26px;text-align:center;margin-bottom:20px}
+.hero .kicker{display:inline-block;background:#fff;border:1px solid var(--gold-l);
+  color:var(--gold);border-radius:100px;padding:4px 14px;font-size:13px;font-weight:700;
+  letter-spacing:.04em;margin-bottom:14px}
+.hero h1{font-size:clamp(21px,5.6vw,30px);line-height:1.36;margin:0 0 12px;
+  font-weight:800;color:#1f1e1b;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;color:var(--gold);border-bottom:3px solid var(--gold-l)}
+.hero p{margin:0 auto;max-width:600px;color:var(--ink2);font-size:15.5px}
+.hero .meta{margin-top:16px;font-size:13px;color:var(--muted)}
+
+/* ---------- CARDS ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:20px 18px;margin-bottom:16px;box-shadow:0 1px 4px rgba(120,105,75,.06)}
+.card>h2{font-size:clamp(18px,4.9vw,22px);margin:0 0 6px;font-weight:800;
+  color:#1f1e1b;display:flex;align-items:flex-start;gap:10px;line-height:1.38}
+.num{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+  width:30px;height:30px;border-radius:9px;background:var(--gold);color:#fff;
+  font-size:15px;font-weight:800;margin-top:1px}
+.num.sage{background:var(--sage)} .num.brick{background:var(--brick)} .num.blue{background:var(--blue)}
+.sub{color:var(--muted);font-size:14px;margin:0 0 14px;padding-left:40px}
+h3{font-size:17px;margin:20px 0 8px;font-weight:800;color:var(--gold)}
+h4{font-size:15.5px;margin:16px 0 6px;font-weight:700;color:var(--ink)}
+p{margin:0 0 12px}
+ul,ol{margin:0 0 12px;padding-left:22px}
+li{margin-bottom:7px}
+strong{font-weight:800;color:#1f1e1b}
+code{background:#f3efe6;border:1px solid var(--line);border-radius:5px;
+  padding:1px 6px;font-size:.9em;font-family:ui-monospace,Consolas,monospace;word-break:break-all}
+
+/* ---------- CALLOUTS ---------- */
+.callout{border-left:4px solid var(--gold);background:#fdfbf6;border-radius:0 10px 10px 0;
+  padding:13px 15px;margin:14px 0;font-size:15.5px}
+.callout.danger{border-left-color:var(--brick);background:var(--brick-l)}
+.callout.ok{border-left-color:var(--sage);background:var(--sage-l)}
+.callout.info{border-left-color:var(--blue);background:var(--blue-l)}
+.callout .ct{font-weight:800;display:block;margin-bottom:5px;font-size:15px}
+.callout.danger .ct{color:var(--brick)} .callout.ok .ct{color:#4d7053}
+.callout.info .ct{color:var(--blue)} .callout:not(.danger):not(.ok):not(.info) .ct{color:var(--gold)}
+
+/* ---------- PILLS ---------- */
+.pill{display:inline-block;font-size:12px;font-weight:800;border-radius:5px;
+  padding:2px 8px;margin-right:5px;vertical-align:middle;white-space:nowrap}
+.pill.v{background:#e6f0e6;color:#3d6345;border:1px solid #bcd6bc}
+.pill.u{background:#fbf0e2;color:#8a5d1c;border:1px solid #e5cba0}
+.pill.w{background:#fbeee9;color:#9c4331;border:1px solid #e8c2b6}
+
+/* ---------- TABLES ---------- */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0;border-radius:10px;
+  border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;background:#fff;min-width:440px}
+th{background:#f7f3ea;color:#6b5629;font-weight:800;text-align:left;
+  padding:10px 11px;border-bottom:1px solid var(--line2);font-size:13.5px;white-space:nowrap}
+td{padding:10px 11px;border-bottom:1px solid #f0ece2;vertical-align:top;color:var(--ink2)}
+tr:last-child td{border-bottom:none}
+td strong{color:#1f1e1b}
+
+/* ---------- STATS ---------- */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:14px 0}
+.stat{background:#fdfbf6;border:1px solid var(--line);border-radius:12px;
+  padding:13px 12px;text-align:center}
+.stat .n{font-size:clamp(19px,5.2vw,24px);font-weight:800;color:var(--gold);line-height:1.2}
+.stat .l{font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.45}
+
+/* ---------- FLOW (세로) ---------- */
+.flow{margin:16px 0}
+.fnode{background:#fdfbf6;border:1px solid var(--line2);border-left:5px solid var(--gold);
+  border-radius:10px;padding:13px 15px}
+.fnode .ft{font-weight:800;font-size:15.5px;color:#1f1e1b;margin-bottom:3px}
+.fnode .fd{font-size:14.5px;color:var(--ink2);margin:0}
+.farrow{text-align:center;color:var(--gold-l);font-size:20px;line-height:1;margin:7px 0}
+.fnode.s{border-left-color:var(--sage)} .fnode.b{border-left-color:var(--brick)}
+.fnode.bl{border-left-color:var(--blue)}
+
+/* ---------- SVG ---------- */
+.svgbox{background:#fff;border:1px solid var(--line);border-radius:12px;
+  padding:8px;margin:16px 0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.svgbox svg{display:block;margin:0 auto}
+.hint{font-size:12.5px;color:var(--muted);text-align:center;margin:2px 0 0}
+
+/* ---------- Q&A ---------- */
+details{background:#fdfbf6;border:1px solid var(--line);border-radius:11px;
+  margin-bottom:9px;overflow:hidden}
+details[open]{border-color:var(--gold-l);background:#fff}
+summary{cursor:pointer;padding:13px 15px;font-weight:700;font-size:15.5px;
+  color:var(--ink);list-style:none;display:flex;gap:9px;align-items:flex-start;
+  min-height:44px;line-height:1.5}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"Q";flex:0 0 auto;display:inline-flex;align-items:center;
+  justify-content:center;width:22px;height:22px;border-radius:6px;background:var(--gold-l);
+  color:#fff;font-size:12.5px;font-weight:800;margin-top:2px}
+details[open] summary{background:#fdfbf6;border-bottom:1px solid var(--line)}
+summary:active{background:#f5f1e8}
+.ans{padding:13px 15px 15px;font-size:15.5px;color:var(--ink2);border-left:3px solid var(--sage-l);margin:0 13px 13px}
+.ans p:last-child{margin-bottom:0}
+.ans .lvl{display:inline-block;font-size:11.5px;font-weight:800;background:#eef3ee;
+  color:#4d7053;border-radius:4px;padding:2px 7px;margin-bottom:8px}
+
+/* ---------- SECTION DIVIDER ---------- */
+.divider{display:flex;align-items:center;gap:12px;margin:26px 0 18px;color:var(--gold)}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line2)}
+.divider span{font-size:13px;font-weight:800;letter-spacing:.08em}
+
+/* ---------- FOOTER ---------- */
+.foot{margin-top:26px;padding-top:18px;border-top:1px solid var(--line2);
+  font-size:13.5px;color:var(--muted);line-height:1.7}
+.foot a{color:var(--blue);word-break:break-all}
+
+/* ---------- TOC ---------- */
+.toc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:18px}
+.toc .tt{font-weight:800;font-size:15px;color:var(--gold);margin-bottom:10px}
+.toc ol{margin:0;padding-left:20px;font-size:15px}
+.toc li{margin-bottom:5px}
+.toc a{color:var(--ink2);text-decoration:none;border-bottom:1px dotted var(--line2)}
+.toc a:active{color:var(--gold)}
+
+/* ---------- PRINT ---------- */
+@page{size:A4;margin:12mm 11mm}
+@media print{
+  :root{--bg:#fff}
+  body{background:#fff;font-size:11.2pt;line-height:1.5;color:#000}
+  .wrap{max-width:none;padding:0}
+  .hero{background:#fff;border-bottom:2px solid #a8813f;padding:0 0 12px;margin-bottom:12px;
+    page-break-after:avoid}
+  .hero .kicker{border-color:#a8813f;color:#7a5c22}
+  .toc{margin-bottom:12px}
+  /* 카드가 페이지보다 길면 통째로 밀리며 빈 페이지가 생긴다 →
+     긴 카드는 내부 분할을 허용하고, 짧은 원자 단위만 avoid 한다 */
+  .card{box-shadow:none;border:1px solid #cfc7b4;padding:11px 12px;margin-bottom:9px;
+    page-break-inside:auto;border-radius:8px}
+  .card>h2{page-break-after:avoid;font-size:14pt}
+  .num{width:22px;height:22px;font-size:11pt;border-radius:6px}
+  .sub{padding-left:0;font-size:9.5pt;margin-bottom:9px}
+  h3,h4{page-break-after:avoid}
+  h3{font-size:12pt;margin:12px 0 6px}
+  /* 원자 단위만 분할 금지 — 빈 페이지 방지.
+     단, SVG 박스는 높이가 커서 avoid 하면 통째로 다음 장으로 밀리며
+     앞 장 하단에 큰 공백이 생긴다 → SVG는 분할 허용 */
+  .callout,.stat,.fnode,details,.ans,table,tr{page-break-inside:avoid}
+  .farrow{page-break-inside:avoid}
+  .stats{page-break-inside:avoid}
+  .svgbox{page-break-inside:auto}
+  .tw{page-break-inside:auto;border:none}
+  table{font-size:9.5pt;min-width:0}
+  th{font-size:9pt;padding:6px 7px}
+  td{padding:6px 7px}
+  .tw{overflow:visible}
+  .svgbox{overflow:visible}
+  .svgbox svg{max-width:100%;height:auto}
+  .hint{display:none}
+  details{border:1px solid #cfc7b4}
+  details>summary{font-size:10.5pt;padding:8px 10px;min-height:0}
+  details:not([open]) .ans{display:block}
+  details[open] .ans,.ans{padding:8px 10px}
+  .ans{border-left:3px solid #bcd6bc;margin:0 9px 9px}
+  summary::before{width:17px;height:17px;font-size:9pt}
+  a{color:#000;text-decoration:none}
+}
+@media (max-width:360px){
+  .stats{grid-template-columns:1fr}
+  .hero h1{font-size:20px}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="kicker">환자 주도 임상 · 공부나눔 자료</span>
+  <h1>왜 같은 복용법인데<br>누구는 되고 <em>누구는 안 될까?</em></h1>
+  <p>항암 치료 반응의 개인차를 '장내미생물'이라는 렌즈로 설명한 최신 종설 리뷰를, 우리 커뮤니티 눈높이로 풀었습니다.</p>
+  <p class="meta">원문 게재 2026-09 · 리뷰 논문 140편 종합 · 2026년 9월 정리</p>
+</div>
+
+<div class="wrap">
+
+<div class="callout danger">
+  <span class="ct">⚠️ 먼저 이것부터 — 반드시 읽어주세요</span>
+  이 문서는 <strong>논문 내용의 소개</strong>이지, 복용 권고가 아닙니다.
+  원문 리뷰는 스스로 이렇게 결론짓습니다 —
+  <strong>"장내미생물 기반 개입은 잠재력이 있으나, 임상 적용은 여전히 대부분 탐색적(exploratory) 단계다."</strong>
+  즉 <strong>"장을 고치면 항암제가 잘 듣는다"는 아직 확립된 규칙이 아닙니다.</strong>
+  복용·중단·병용에 관한 모든 결정은 담당 의료진과 상의하십시오.
+</div>
+
+<div class="toc">
+  <div class="tt">이 문서의 순서</div>
+  <ol>
+    <li><a href="#s1">30초 요약 — 네 장의 카드</a></li>
+    <li><a href="#s2">비유로 이해하기 — 같은 요리법, 다른 냄비</a></li>
+    <li><a href="#s3">개인차를 만드는 3가지 경로</a></li>
+    <li><a href="#s4">약물별 실제 사례</a></li>
+    <li><a href="#s5">개입 전략 6가지 — 그리고 근거의 강도</a></li>
+    <li><a href="#s6">논문이 스스로 밝힌 한계</a></li>
+    <li><a href="#s7">우리에게 이것이 주는 실마리</a></li>
+    <li><a href="#s8">질문과 답변 — 초보자 · 고급</a></li>
+  </ol>
+</div>
+
+<!-- ============ 1 ============ -->
+<div class="card" id="s1">
+  <h2><span class="num">1</span>30초 요약 — 네 장의 카드</h2>
+  <p class="sub">바쁘신 분은 여기까지만 읽으셔도 됩니다.</p>
+
+  <div class="svgbox">
+    <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg" style="max-width:700px;width:100%">
+      <defs>
+        <linearGradient id="cg1" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#fdfbf6"/><stop offset="100%" stop-color="#f4efe3"/>
+        </linearGradient>
+      </defs>
+      <!-- 카드 1 -->
+      <rect x="10" y="10" width="330" height="106" rx="10" fill="url(#cg1)" stroke="#e4ded1"/>
+      <rect x="10" y="10" width="6" height="106" rx="3" fill="#3a6186"/>
+      <text x="30" y="38" fill="#3a6186" font-size="14" font-weight="800">질문</text>
+      <text x="30" y="63" fill="#4a4740" font-size="13">똑같은 약, 똑같은 용량인데</text>
+      <text x="30" y="84" fill="#4a4740" font-size="13">어떤 사람은 반응하고</text>
+      <text x="30" y="105" fill="#4a4740" font-size="13">어떤 사람은 반응하지 않는다</text>
+      <!-- 카드 2 -->
+      <rect x="360" y="10" width="330" height="106" rx="10" fill="url(#cg1)" stroke="#e4ded1"/>
+      <rect x="360" y="10" width="6" height="106" rx="3" fill="#a8813f"/>
+      <text x="380" y="38" fill="#a8813f" font-size="14" font-weight="800">실마리</text>
+      <text x="380" y="63" fill="#4a4740" font-size="13">장내미생물 구성이 사람마다</text>
+      <text x="380" y="84" fill="#4a4740" font-size="13">다르고, 그 차이가 약물의</text>
+      <text x="380" y="105" fill="#4a4740" font-size="13">분해·면역·대사산물을 바꾼다</text>
+      <!-- 카드 3 -->
+      <rect x="10" y="132" width="330" height="106" rx="10" fill="url(#cg1)" stroke="#e4ded1"/>
+      <rect x="10" y="132" width="6" height="106" rx="3" fill="#6b8f71"/>
+      <text x="30" y="160" fill="#6b8f71" font-size="14" font-weight="800">핵심 개념</text>
+      <text x="30" y="185" fill="#4a4740" font-size="13">약물미생물체학</text>
+      <text x="30" y="206" fill="#7d7767" font-size="12">(pharmacomicrobiomics)</text>
+      <text x="30" y="227" fill="#4a4740" font-size="13">"내 미생물이 내 약을 바꾼다"</text>
+      <!-- 카드 4 -->
+      <rect x="360" y="132" width="330" height="106" rx="10" fill="url(#cg1)" stroke="#e4ded1"/>
+      <rect x="360" y="132" width="6" height="106" rx="3" fill="#a34a3a"/>
+      <text x="380" y="160" fill="#a34a3a" font-size="14" font-weight="800">단서</text>
+      <text x="380" y="185" fill="#4a4740" font-size="13">아직 임상 규칙은 없다</text>
+      <text x="380" y="206" fill="#4a4740" font-size="13">대규모 이중맹검 RCT 희박</text>
+      <text x="380" y="227" fill="#4a4740" font-size="13">"탐색적 단계" (저자 표현)</text>
+    </svg>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">3</div><div class="l">개인차를 만드는<br>경로</div></div>
+    <div class="stat"><div class="n">6</div><div class="l">연구된<br>개입 전략</div></div>
+    <div class="stat"><div class="n">140</div><div class="l">종합한<br>참고문헌</div></div>
+    <div class="stat"><div class="n">39<span style="font-size:14px">년</span></div><div class="l">검색 범위<br>(1985~2026)</div></div>
+  </div>
+
+  <div class="callout ok">
+    <span class="ct">🌿 우리에게 주는 한 줄</span>
+    "같은 프로토콜을 썼는데 결과가 갈린다"는 경험은 <strong>실력이나 의지의 문제가 아니라,
+    생물학적으로 각자의 '내부 환경'이 다르기 때문</strong>일 수 있습니다. 이 논문은 그 '다름'의 정체를
+    세 가지 경로로 정리합니다.
+  </div>
+</div>
+
+<!-- ============ 2 ============ -->
+<div class="card" id="s2">
+  <h2><span class="num sage">2</span>비유로 이해하기 — 같은 요리법, 다른 냄비</h2>
+
+  <p>같은 레시피, 같은 재료, 같은 불 세기로 요리해도 <strong>냄비마다 결과가 다릅니다.</strong>
+  어떤 냄비는 열전도가 좋고, 어떤 냄비는 코팅이 벗겨졌고, 어떤 냄비는 뚜껑이 안 맞습니다.
+  요리사(=처방)가 같아도 <strong>냄비(=내 몸의 환경)</strong>가 다르면 나오는 음식이 달라집니다.</p>
+
+  <p>항암제도 비슷합니다. 약은 위장에서 흡수되어 간을 거쳐 전신을 돌고 종양에 도달합니다.
+  그런데 <strong>그 경로 곳곳에 장내미생물이 있습니다.</strong> 이 미생물들은 약을 미리 분해하기도 하고,
+  면역계에 신호를 보내기도 하며, 스스로 대사산물을 만들어 약효를 돕거나 방해합니다.</p>
+
+  <div class="svgbox">
+    <svg viewBox="0 0 700 330" xmlns="http://www.w3.org/2000/svg" style="max-width:700px;width:100%">
+      <text x="350" y="22" text-anchor="middle" fill="#1f1e1b" font-size="15" font-weight="800">약이 몸을 통과하는 길목마다 미생물이 있다</text>
+
+      <!-- 입 -->
+      <rect x="30" y="42" width="120" height="40" rx="20" fill="#fdfbf6" stroke="#d6cebd"/>
+      <text x="90" y="67" text-anchor="middle" fill="#4a4740" font-size="13" font-weight="700">💊 약 복용</text>
+
+      <!-- 경로 -->
+      <line x1="150" y1="62" x2="188" y2="62" stroke="#c9a86a" stroke-width="2"/>
+      <polygon points="188,57 188,67 194,62" fill="#c9a86a"/>
+
+      <!-- 위 -->
+      <rect x="196" y="42" width="120" height="40" rx="20" fill="#fdfbf6" stroke="#d6cebd"/>
+      <text x="256" y="67" text-anchor="middle" fill="#4a4740" font-size="13" font-weight="700">위 · 소장</text>
+
+      <line x1="316" y1="62" x2="354" y2="62" stroke="#c9a86a" stroke-width="2"/>
+      <polygon points="354,57 354,67 360,62" fill="#c9a86a"/>
+
+      <!-- 간 -->
+      <rect x="362" y="42" width="120" height="40" rx="20" fill="#fdfbf6" stroke="#d6cebd"/>
+      <text x="422" y="67" text-anchor="middle" fill="#4a4740" font-size="13" font-weight="700">간 (1차 대사)</text>
+
+      <line x1="482" y1="62" x2="520" y2="62" stroke="#c9a86a" stroke-width="2"/>
+      <polygon points="520,57 520,67 526,62" fill="#c9a86a"/>
+
+      <rect x="528" y="42" width="142" height="40" rx="20" fill="#ecf2f8" stroke="#b9cfe2"/>
+      <text x="599" y="67" text-anchor="middle" fill="#3a6186" font-size="13" font-weight="700">종양 도달 🎯</text>
+
+      <!-- 미생물 개입 3개 -->
+      <rect x="30" y="112" width="200" height="88" rx="10" fill="#fbeeea" stroke="#e8c2b6"/>
+      <text x="46" y="136" fill="#a34a3a" font-size="13.5" font-weight="800">① 직접 분해</text>
+      <text x="46" y="158" fill="#4a4740" font-size="12.5">세균 효소가 약을 종양</text>
+      <text x="46" y="176" fill="#4a4740" font-size="12.5">도달 전에 부숴버림</text>
+      <text x="46" y="193" fill="#7d7767" font-size="11.5">→ 약효 감소</text>
+
+      <rect x="250" y="112" width="200" height="88" rx="10" fill="#e8f0e8" stroke="#bcd6bc"/>
+      <text x="266" y="136" fill="#4d7053" font-size="13.5" font-weight="800">② 면역 조절</text>
+      <text x="266" y="158" fill="#4a4740" font-size="12.5">면역세포를 깨우거나</text>
+      <text x="266" y="176" fill="#4a4740" font-size="12.5">잠재우는 신호를 보냄</text>
+      <text x="266" y="193" fill="#7d7767" font-size="11.5">→ 면역항암 반응 좌우</text>
+
+      <rect x="470" y="112" width="200" height="88" rx="10" fill="#fdfbf6" stroke="#d6cebd"/>
+      <text x="486" y="136" fill="#a8813f" font-size="13.5" font-weight="800">③ 대사산물 생성</text>
+      <text x="486" y="158" fill="#4a4740" font-size="12.5">SCFA·담즙산 등을 만들어</text>
+      <text x="486" y="176" fill="#4a4740" font-size="12.5">약효를 돕거나 방해</text>
+      <text x="486" y="193" fill="#7d7767" font-size="11.5">→ 결과가 갈림</text>
+
+      <!-- 결론 -->
+      <rect x="120" y="222" width="460" height="76" rx="10" fill="#f4efe3" stroke="#c9a86a"/>
+      <text x="350" y="248" text-anchor="middle" fill="#1f1e1b" font-size="14" font-weight="800">결과: 같은 약 · 같은 용량 · 다른 반응</text>
+      <text x="350" y="272" text-anchor="middle" fill="#4a4740" font-size="12.5">이 세 경로가 사람마다 조합이 다르기 때문에</text>
+      <text x="350" y="290" text-anchor="middle" fill="#4a4740" font-size="12.5">"내겐 왜 안 들을까"가 생긴다</text>
+    </svg>
+    <p class="hint">폰에서는 그림을 옆으로 밀어서 보실 수 있습니다</p>
+  </div>
+
+  <div class="callout info">
+    <span class="ct">🔑 핵심 용어 — 약물미생물체학</span>
+    <strong>pharmacomicrobiomics</strong> = 약리학(pharmaco) + 미생물체(microbiome).
+    2010년 Aziz 등이 제안한 개념으로, <strong>"사람마다 다른 장내미생물이 약물의 체내 거동·효능·독성을
+    결정한다"</strong>는 뜻입니다. 이 논문 전체를 관통하는 뼈대입니다.
+    <span class="pill v">원문 확인</span>
+  </div>
+</div>
+
+<!-- ============ 3 ============ -->
+<div class="card" id="s3">
+  <h2><span class="num">3</span>개인차를 만드는 3가지 경로</h2>
+  <p class="sub">논문 2장의 핵심. 각 경로에 실제 사례가 있습니다.</p>
+
+  <h3>① 직접 약물 대사 — 세균이 약을 먼저 먹는다</h3>
+  <p>가장 직관적인 경로입니다. 장내세균이 가진 효소가 <strong>항암제를 종양에 도달하기 전에</strong>
+  분해하거나 변형시킵니다.</p>
+
+  <div class="flow">
+    <div class="fnode b">
+      <div class="ft">퓨소박테리움 누클레아툼 (F. nucleatum)</div>
+      <p class="fd">nitroreductase · oxidoreductase 효소를 발현해 <strong>5-FU(5-플루오로우라실)와
+      옥살리플라틴을 종양 도달 전에 분해</strong> → 활성 약물 농도 감소</p>
+    </div>
+    <div class="farrow">▼</div>
+    <div class="fnode b">
+      <div class="ft">세균 카르복시펩티다제 (CPDG2)</div>
+      <p class="fd"><strong>메토트렉세이트를 불활성 형태</strong>(2,4-diamino-N10-methylpteroic acid)로 변환
+      → 항암 효과 약화</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="ct">💡 여기서 얻을 실마리</span>
+    같은 용량을 먹어도 <strong>어떤 사람은 장에 이 효소를 가진 균이 많고, 어떤 사람은 적습니다.</strong>
+    그러면 종양에 실제로 도달하는 약물 농도가 달라집니다. <em>이것이 "흡수율 차이"와는 다른 층위의
+    개인차</em>입니다 — 약을 먹기 전에 이미 세균이 개입하기 때문입니다.
+  </div>
+
+  <h3>② 면역 조절 — 세균이 면역계에 신호를 보낸다</h3>
+  <p>미생물은 약을 직접 건드리지 않고, <strong>면역계를 통해 간접적으로</strong> 항암 효과를 좌우합니다.</p>
+
+  <div class="tw">
+    <table>
+      <tr><th>미생물 / 물질</th><th>작용</th></tr>
+      <tr>
+        <td><strong>아커만시아 뮤시니필라</strong><br><span style="font-size:12.5px;color:#7d7767">Akkermansia muciniphila</span></td>
+        <td>대식세포 활성화 · 담즙산 대사 · <strong>CD8⁺ T세포 매개 항종양 면역</strong>을 통해 PD-1/PD-L1 차단 반응에 관여</td>
+      </tr>
+      <tr>
+        <td><strong>세균 단백질 BOC1</strong></td>
+        <td>면역관문수용체 <strong>CD200R1</strong>에 높은 친화도로 결합 → 골수유래억제세포(MDSC) 분화 억제 → T세포 반응 강화</td>
+      </tr>
+    </table>
+  </div>
+
+  <h3>③ 활성 대사산물 생성 — 세균이 만든 물질이 약효를 바꾼다</h3>
+
+  <div class="tw">
+    <table>
+      <tr><th>대사산물</th><th>보고된 효과</th></tr>
+      <tr>
+        <td><strong>SCFA</strong><br><span style="font-size:12.5px;color:#7d7767">단쇄지방산</span></td>
+        <td>폐암 환자에서 anti-PD-1/PD-L1 치료 중 SCFA 농도가 높을수록 <strong>무진행생존(PFS)이 길었다</strong>는 임상 관찰</td>
+      </tr>
+      <tr>
+        <td><strong>DCA</strong><br><span style="font-size:12.5px;color:#7d7767">2차 담즙산</span></td>
+        <td>Ugt1a6b 매개 장간순환을 통해 <strong>FOLFOX의 대장암 항암 효과를 증강</strong> <span class="pill u">연구실 자체 결과</span></td>
+      </tr>
+      <tr>
+        <td><strong>뷰티르산</strong></td>
+        <td>CD8⁺ T세포 의존성 면역반응을 촉진해 <strong>옥살리플라틴 항암 효과를 강화</strong></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="callout danger">
+    <span class="ct">⚠️ 잠깐 — "그럼 SCFA가 좋은 거네?"라고 넘어가면 안 됩니다</span>
+    바로 이 논문이, 같은 7장에서 <strong>"SCFA와 아커만시아는 일반적으로 유익하다고 여겨지지만,
+    여러 연구가 오히려 치료 효능을 떨어뜨리거나 독성을 악화시킨다고 제기했다"</strong>고 스스로 반박합니다.
+    <br><br>
+    <strong>같은 물질이 어떤 상황에서는 약, 어떤 상황에서는 독입니다.</strong>
+    "유익균 / 유해균"이라는 이름표는 자연에 없습니다.
+  </div>
+</div>
+
+<!-- ============ 4 ============ -->
+<div class="card" id="s4">
+  <h2><span class="num blue">4</span>약물별 실제 사례</h2>
+  <p class="sub">논문이 인용한 구체적 사례만 추렸습니다.</p>
+
+  <div class="tw">
+    <table>
+      <tr><th>항암제</th><th>미생물의 개입</th><th>결과</th></tr>
+      <tr>
+        <td><strong>5-FU</strong><br>옥살리플라틴</td>
+        <td>F. nucleatum의 nitroreductase / oxidoreductase가 분해</td>
+        <td>활성 약물 농도 ↓<br><span style="color:#a34a3a;font-weight:700">효과 감소</span></td>
+      </tr>
+      <tr>
+        <td><strong>메토트렉세이트</strong></td>
+        <td>세균 CPDG2가 불활성 형태로 전환</td>
+        <td>항암 효과 ↓<br><span style="color:#a34a3a;font-weight:700">효과 감소</span></td>
+      </tr>
+      <tr>
+        <td><strong>면역관문억제제</strong><br>anti-PD-1 / PD-L1</td>
+        <td>아커만시아 등 특정 균주가 면역 반응 조절</td>
+        <td>반응군 / 비반응군이<br><span style="color:#3d6345;font-weight:700">균총에 따라 갈림</span></td>
+      </tr>
+      <tr>
+        <td><strong>FOLFOX</strong><br>(대장암)</td>
+        <td>2차 담즙산 DCA가 장간순환 경로로 증강</td>
+        <td>효과 증강 보고<br><span class="pill u">자체 연구실</span></td>
+      </tr>
+      <tr>
+        <td><strong>젬시타빈</strong></td>
+        <td>항생제 노출이 오히려 효능을 높였다는 관찰</td>
+        <td>맥락 의존<br><span style="color:#8a5d1c;font-weight:700">상반된 보고</span></td>
+      </tr>
+      <tr>
+        <td><strong>CTLA-4 / PD-1 차단</strong></td>
+        <td>특정 미생물이 유발된 <strong>장독성을 완화</strong></td>
+        <td>독성 완화 방향<br><span style="color:#3d6345;font-weight:700">보호 효과</span></td>
+      </tr>
+    </table>
+  </div>
+  <p class="hint">표가 넓으면 옆으로 밀어서 보세요</p>
+
+  <div class="callout ok">
+    <span class="ct">🌿 용도변경 약물 관점에서 눈여겨볼 점</span>
+    용도변경 약물(메트포르민, 구충제 등)도 <strong>대부분 경구 복용</strong>입니다. 그렇다면
+    같은 원리가 적용될 여지가 있습니다 — 장내세균이 그 약을 먼저 만나기 때문입니다.
+    <br><br>
+    다만 <strong>이 논문은 용도변경 약물을 직접 다루지 않습니다.</strong> 항암 표준치료제 중심의
+    리뷰입니다. 용도변경 약물에 그대로 적용된다고 단정할 수 없고, <strong>확인해야 할 가설</strong>로
+    두는 것이 정확합니다.
+    <span class="pill u">미검증 · 확인 필요</span>
+  </div>
+</div>
+
+<!-- ============ 5 ============ -->
+<div class="card" id="s5">
+  <h2><span class="num">5</span>개입 전략 6가지 — 그리고 근거의 강도</h2>
+  <p class="sub">논문 4장. <strong>"무엇이 연구되었는가"</strong>와 <strong>"얼마나 확실한가"</strong>를 분리해서 보십시오.</p>
+
+  <div class="tw">
+    <table>
+      <tr><th>전략</th><th>연구 상황</th><th>근거 강도</th></tr>
+      <tr>
+        <td><strong>① FMT</strong><br><span style="font-size:12.5px;color:#7d7767">대변미생물이식</span></td>
+        <td>가장 많이 연구됨. 10개 임상 메타분석(164명)에서 ORR↑<br>
+        2상(NCT04951583): NSCLC ORR 80%, 흑색종 75%<br>
+        불응성 흑색종 2건: 반응자 FMT로 민감성 부분 회복</td>
+        <td><span class="pill u">1·2상 중심</span></td>
+      </tr>
+      <tr>
+        <td><strong>② 항생제</strong></td>
+        <td><strong>양방향.</strong> anti-PD-1 전후 노출 시 효능↓ + irAE 위험↑(RCC·NSCLC).<br>
+        반대로 젬시타빈 기반 화학요법에는 효능↑ 보고</td>
+        <td><span class="pill w">맥락 의존</span></td>
+      </tr>
+      <tr>
+        <td><strong>③ 프로바이오틱스</strong><br>프리바이오틱스 · 신바이오틱스</td>
+        <td>20개 연구 974명 리뷰: 위장 증상 완화·삶의 질↑<br>
+        간암 RCT(n=100): PFS 9.4 vs 7.3개월, OS 27.7 vs 22.6개월<br>
+        RCC 1상(n=30): CBM588 PFS 12.7 vs 2.5개월</td>
+        <td><span class="pill u">소규모</span></td>
+      </tr>
+      <tr>
+        <td><strong>④ 조작된 세균</strong></td>
+        <td>RCom(15균주), VE800(11균주, NCT04208958) — 전임상 단계</td>
+        <td><span class="pill w">전임상</span></td>
+      </tr>
+      <tr>
+        <td><strong>⑤ 박테리오파지</strong></td>
+        <td>정밀 균총 편집, 항생제 내성 극복 잠재력</td>
+        <td><span class="pill w">신흥 단계</span></td>
+      </tr>
+      <tr>
+        <td><strong>⑥ 한방(TCM)</strong></td>
+        <td>균총을 경유한 대사 조절</td>
+        <td><span class="pill w">탐색적</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="callout danger">
+    <span class="ct">⚠️ 숫자를 그대로 받아들이지 마십시오</span>
+    위의 <strong>"ORR 80%", "PFS 12.7개월"</strong> 같은 숫자는 <strong>소규모 단일 시험</strong>의 결과입니다.
+    참가자가 30명, 100명 수준이며, 대규모 이중맹검 무작위 대조시험(RCT)이 아닙니다.
+    <br><br>
+    이런 숫자를 "이 약을 쓰면 80%가 반응한다"로 읽으면 <strong>큰 오해</strong>입니다.
+    논문 저자들도 <strong>"등록된 연구 대부분이 1상/2상이고, 대규모 이중맹검 RCT는 희박해
+    확정적 결론이 제한된다"</strong>고 명시합니다.
+  </div>
+
+  <div class="callout">
+    <span class="ct">📌 특히 주목할 대목 — 항생제의 양방향성</span>
+    같은 항생제가 <strong>어떤 항암제에는 해롭고, 다른 항암제에는 도움</strong>이 됩니다.
+    논문은 그 이유로 <strong>항생제 종류 · 투여 시점 · 기간 · 환자의 기저 균총</strong>이
+    모두 다르기 때문이라고 설명합니다.
+    <br><br>
+    즉 <em>"항생제를 쓰면 항암이 나빠진다"</em>도, <em>"항생제가 항암을 돕는다"</em>도
+    <strong>일반 명제로는 둘 다 틀렸습니다.</strong> 조건을 붙여야만 말이 됩니다.
+    <span class="pill v">원문 확인</span>
+  </div>
+</div>
+
+<!-- ============ 6 ============ -->
+<div class="card" id="s6">
+  <h2><span class="num brick">6</span>논문이 스스로 밝힌 한계</h2>
+  <p class="sub">이 섹션이 이 리뷰의 <strong>가장 정직한 부분</strong>입니다. 저자들이 직접 인정한 내용입니다.</p>
+
+  <div class="flow">
+    <div class="fnode b">
+      <div class="ft">① 상충하는 결과</div>
+      <p class="fd">"SCFA와 아커만시아는 일반적으로 유익하다 여겨지나, <strong>여러 연구가 오히려
+      치료 효능을 떨어뜨리거나 독성을 악화시킨다고 제기</strong>했다"</p>
+    </div>
+    <div class="fnode b">
+      <div class="ft">② 임상 단계가 미성숙</div>
+      <p class="fd">등록된 연구 대부분이 <strong>1상/2상</strong>. 대규모 이중맹검 <strong>RCT는 희박</strong>해
+      확정적 결론이 제한됨</p>
+    </div>
+    <div class="fnode b">
+      <div class="ft">③ FMT의 실제 실패 사례</div>
+      <p class="fd">급성골수성백혈병 이중맹검 2상(NCT03678493): <strong>감염률 유의 감소 없음</strong><br>
+      전이성 신세포암 1상 PERFORM(NCT04163289): <strong>Grade 3 irAE 약 50%</strong></p>
+    </div>
+    <div class="fnode b">
+      <div class="ft">④ 재현성 문제</div>
+      <p class="fd">16S rRNA·메타게놈 <strong>표준화 부재</strong>, 시료처리·시퀀싱 플랫폼·분석 파이프라인 편차</p>
+    </div>
+    <div class="fnode b">
+      <div class="ft">⑤ 동물 → 인간 외삽 한계</div>
+      <p class="fd">종간 균총 차이가 커서 <strong>동물모델 결과를 사람에게 그대로 옮길 수 없음</strong></p>
+    </div>
+    <div class="fnode b">
+      <div class="ft">⑥ 역동성</div>
+      <p class="fd">균총은 식이·약물·생활·항암치료로 <strong>계속 변함</strong> → 개입 효과의 지속성 문제</p>
+    </div>
+    <div class="fnode b">
+      <div class="ft">⑦ 기술적 한계</div>
+      <p class="fd">다수 혐기성 장내세균이 <strong>시험관 배양 불가</strong> → 기능 규명 불완전</p>
+    </div>
+    <div class="fnode b">
+      <div class="ft">⑧ 인과추론의 난점</div>
+      <p class="fd">종양 유형·항생제 종류/시점·공여자 선택·균주 특성·환자 유전배경·기저 균총이
+      <strong>모두 교란 요인</strong></p>
+    </div>
+  </div>
+
+  <div class="callout danger">
+    <span class="ct">저자들의 결론 — 원문 그대로</span>
+    <strong>"장내미생물 기반 개입은 표준치료와 병용 시 상당한 잠재력이 있으나,
+    임상 적용은 여전히 대부분 탐색적(exploratory) 단계다."</strong>
+    <span class="pill v">원문 확인</span>
+  </div>
+</div>
+
+<!-- ============ 7 ============ -->
+<div class="card" id="s7">
+  <h2><span class="num sage">7</span>우리에게 이것이 주는 실마리</h2>
+  <p class="sub">여기부터는 <strong>논문 내용이 아니라 제가 정리한 해석</strong>입니다.</p>
+
+  <p>이 논문이 우리 커뮤니티의 오랜 질문 —
+  <strong>"왜 똑같이 했는데 누구는 되고 누구는 안 되는가?"</strong> — 에 주는 답은 이렇습니다.</p>
+
+  <div class="flow">
+    <div class="fnode bl">
+      <div class="ft">첫째, 개인차는 "실패"가 아니라 "정보"입니다</div>
+      <p class="fd">반응이 갈리는 것은 프로토콜이 무의미해서가 아니라,
+      <strong>우리가 아직 '누가 반응할지' 예측하는 변수를 모르기 때문</strong>입니다.
+      논문은 그 후보로 장내미생물을 지목합니다.</p>
+    </div>
+    <div class="farrow">▼</div>
+    <div class="fnode bl">
+      <div class="ft">둘째, "같은 프로토콜 = 공정한 비교"가 아닐 수 있습니다</div>
+      <p class="fd">모두에게 같은 용량을 주는 것은 공정해 보이지만,
+      <strong>각자의 흡수·대사·면역 환경이 다르면 실제 노출량은 이미 다릅니다.</strong>
+      이것이 N=1 기록이 중요한 이유입니다.</p>
+    </div>
+    <div class="farrow">▼</div>
+    <div class="fnode bl">
+      <div class="ft">셋째, "유익균 늘리기"는 아직 전략이 아닙니다</div>
+      <p class="fd">논문 스스로 SCFA·아커만시아의 유익 통념이 뒤집힐 수 있다고 인정합니다.
+      <strong>지금 할 수 있는 것은 '균을 조작하는 것'이 아니라 '개인차를 기록하는 것'</strong>입니다.</p>
+    </div>
+  </div>
+
+  <h3>그래서 현실적으로 무엇을 할 수 있는가 — 기록 항목 제안</h3>
+  <p>논문이 RCT 부재를 한계로 꼽는 만큼, <strong>체계적으로 기록된 개인 경험</strong>은 그 자체로
+  가치가 있습니다. 아래는 제가 제안하는 기록 항목입니다. <span class="pill u">제 제안 · 미검증</span></p>
+
+  <div class="tw">
+    <table>
+      <tr><th>기록 항목</th><th>왜 기록하는가</th></tr>
+      <tr><td><strong>복용 시각 · 공복/식후</strong></td><td>흡수 조건이 결과를 바꿈</td></tr>
+      <tr><td><strong>같은 시간대의 식이 내용</strong></td><td>발효식품·섬유질이 균총에 영향</td></tr>
+      <tr><td><strong>항생제 복용 이력</strong></td><td>논문이 양방향 변수로 지목</td></tr>
+      <tr><td><strong>프로바이오틱스 제품 · 균주명</strong></td><td>제품마다 균주 조성이 달라 비교 불가</td></tr>
+      <tr><td><strong>예상 밖의 변화 (좋든 나쁘든)</strong></td><td>부작용 신호를 놓치지 않기 위해</td></tr>
+      <tr><td><strong>중단 기준을 미리 정해두기</strong></td><td>나쁜 결과를 오래 방치하지 않기 위해</td></tr>
+    </table>
+  </div>
+
+  <div class="callout danger">
+    <span class="ct">⚠️ 반드시 지킬 선</span>
+    기록은 <strong>관찰</strong>을 남기는 것이지, <strong>인과를 증명하는 것</strong>이 아닙니다.
+    "이걸 먹고 좋아졌다"는 기록은 소중하지만, 그것만으로 "이게 효과가 있다"고 말할 수는 없습니다.
+    <br><br>
+    그리고 <strong>복용·중단·병용의 결정은 반드시 담당 의료진과 상의</strong>하십시오.
+    이 문서는 정보 제공 목적이며, 진단·처방·복용 지도가 아닙니다.
+  </div>
+</div>
+
+<!-- ============ 8 ============ -->
+<div class="card" id="s8">
+  <h2><span class="num purple" style="background:#7d6a9c">8</span>질문과 답변</h2>
+  <p class="sub">초보자 질문 8개, 고급 질문 8개. 항목을 눌러 펼치세요.</p>
+
+  <h3>🟢 초보자 질문</h3>
+
+  <details>
+    <summary>장내미생물이 뭔가요? 어디에 있나요?</summary>
+    <div class="ans">
+      <span class="lvl">입문</span>
+      <p>우리 몸 안에 사는 미생물(세균·바이러스·곰팡이) 전체를 말합니다. 논문은 <strong>약 40조 개 세포</strong>로,
+      사람 세포와 비율이 <strong>약 1:1</strong>이라고 소개합니다. 대부분이 위장관(장)에 살고,
+      피부·구강·식도·질 등에도 있습니다.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>그게 어떻게 항암제 효과를 바꾸나요? 너무 먼 얘기 같은데요.</summary>
+    <div class="ans">
+      <span class="lvl">입문</span>
+      <p>세 가지 경로로 바꿉니다 — ① 세균 효소가 약을 <strong>직접 분해</strong>하거나,
+      ② 면역계에 <strong>신호를 보내</strong> 반응을 좌우하거나,
+      ③ SCFA·담즙산 같은 <strong>대사산물을 만들어</strong> 약효를 돕거나 방해합니다.</p>
+      <p>비유하자면 — 약은 소화기관을 통과하는데, <strong>그 길에 사는 세균들이 약을 먼저 만나서
+      손을 댈 수 있다</strong>는 뜻입니다.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>그럼 유산균을 먹으면 항암제가 더 잘 듣나요?</summary>
+    <div class="ans">
+      <span class="lvl">입문</span>
+      <p><strong>그렇게 단정할 수 없습니다.</strong> 논문이 인용한 프로바이오틱스 연구는
+      주로 <strong>"위장 증상 완화·삶의 질 개선"</strong>이었고, 항암 효과 자체를 확정한 것은 아닙니다.</p>
+      <p>게다가 논문은 <strong>"SCFA와 아커만시아가 오히려 효능을 떨어뜨리거나 독성을 악화시킨다는
+      보고도 있다"</strong>고 스스로 밝힙니다. 즉 <strong>"좋은 균을 늘리면 된다"는 아직 정립된 전략이
+      아닙니다.</strong></p>
+    </div>
+  </details>
+
+  <details>
+    <summary>논문에 나온 "ORR 80%" 같은 숫자를 믿어도 되나요?</summary>
+    <div class="ans">
+      <span class="lvl">입문</span>
+      <p><strong>숫자 자체는 논문에 실려 있지만, 해석에 주의</strong>가 필요합니다.
+      참가자 30~100명 수준의 <strong>소규모 단일 시험</strong>이며, 대규모 이중맹검 RCT가 아닙니다.</p>
+      <p>"80%가 반응했다"를 "이 치료를 받으면 80%가 좋아진다"로 읽으면 <strong>큰 오해</strong>입니다.
+      논문 저자들도 대규모 RCT가 희박해 확정적 결론이 제한된다고 명시합니다.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>아커만시아 뮤시니필라가 좋은 균이라고 들었는데요?</summary>
+    <div class="ans">
+      <span class="lvl">입문</span>
+      <p>많이 연구된 유익 후보균인 건 맞습니다. 하지만 <strong>이 논문은 그 통념에 스스로 제동을
+      겁니다</strong> — "일반적으로 유익하다고 여겨지나, 여러 연구가 오히려 효능을 떨어뜨리거나
+      독성을 악화시킨다고 제기했다"고 7장에 적었습니다.</p>
+      <p><strong>이 문서에서 계속 반복되는 주제입니다 — 같은 균이 어떤 맥락에서는 돕고,
+      어떤 맥락에서는 방해합니다.</strong></p>
+    </div>
+  </details>
+
+  <details>
+    <summary>대변미생물이식(FMT)을 받으면 되나요?</summary>
+    <div class="ans">
+      <span class="lvl">입문</span>
+      <p>아직 <strong>탐색적 단계</strong>입니다. 긍정 보고도 있지만 <strong>실패 사례도 실재</strong>합니다 —
+      급성골수성백혈병 이중맹검 2상에서는 감염률이 유의하게 줄지 않았고,
+      전이성 신세포암 1상에서는 <strong>Grade 3 면역관련 이상반응이 약 50%</strong>에서 나왔습니다.</p>
+      <p>또한 논문은 <strong>공여자 선택 기준·투여 경로·용량·평가지표가 연구마다 제각각</strong>이라고
+      지적합니다. 의료진 상담 없이 결정할 사안이 아닙니다.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>항생제를 먹으면 항암에 나쁜가요?</summary>
+    <div class="ans">
+      <span class="lvl">입문</span>
+      <p><strong>"나쁘다"도 "좋다"도 일반 명제로는 둘 다 틀렸습니다.</strong>
+      anti-PD-1 치료 전후 항생제 노출은 효능 감소·irAE 위험 증가와 연관된다는 보고가 있는 반면,
+      젬시타빈 기반 화학요법에서는 오히려 효능이 높아졌다는 보고가 있습니다.</p>
+      <p>논문은 그 원인으로 항생제 <strong>종류·시점·기간·환자 기저 균총</strong>의 차이를 꼽습니다.
+      항생제 복용이 필요하다면 <strong>담당 의료진 판단</strong>이 우선입니다.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>이 논문 하나로 "장을 고치면 항암이 잘 듣는다"고 말해도 되나요?</summary>
+    <div class="ans">
+      <span class="lvl">입문</span>
+      <p><strong>말할 수 없습니다.</strong> 논문은 리뷰(종설)이며, 스스로 결론에서
+      <strong>"장내미생물 기반 개입은 잠재력이 있으나 임상 적용은 여전히 대부분
+      탐색적(exploratory) 단계"</strong>라고 명시합니다.</p>
+      <p>또한 이 논문은 <strong>Journal Pre-proof</strong>(게재 승인 후 교정 전 버전)로,
+      출판사가 "production 과정에서 오류가 발견될 수 있고 최종 판본이 아니다"라고 경고합니다.</p>
+    </div>
+  </details>
+
+  <h3 style="margin-top:26px">🔵 고급 질문</h3>
+
+  <details>
+    <summary>약물미생물체학(pharmacomicrobiomics)의 정의와 기원은?</summary>
+    <div class="ans">
+      <span class="lvl">심화</span>
+      <p><strong>2010년 Aziz 등이 제안</strong>한 용어로, 개인 간 미생물체 변이가 약물의
+      <strong>체내 거동(disposition)·효능(efficacy)·독성(toxicity)</strong>에 미치는 영향을 다룹니다.
+      이 논문에서 11회 등장하며 전체를 관통하는 프레임입니다. <span class="pill v">원문 확인</span></p>
+      <p>구체적 기전 층위로는 (a) 장간순환·1차 통과 대사의 미생물 개입,
+      (b) 장내세균이 간 CYP450 효소의 발현·활성을 조절해 1차 통과 효율을 바꾸는 경로,
+      (c) 종양병변 내 세균에 의한 추가 대사가 제시됩니다.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>논문의 문헌 검색 방식은 어떻게 되나요? 재현할 수 있나요?</summary>
+    <div class="ans">
+      <span class="lvl">심화</span>
+      <p><strong>PubMed · Web of Science · Embase · ClinicalTrials</strong> 4개 DB를
+      <strong>1985년 1월 ~ 2026년 6월</strong> 범위로 검색했습니다. 검색어 조합은
+      "gut microbiota", "pharmacomicrobiomics", "cancer therapy", "personalized therapy"입니다.
+      참고문헌 140편. <span class="pill v">원문 확인</span></p>
+      <p>동일 검색을 재현해 결과 수를 대조하는 것은 이 리뷰의 <strong>선택 편향(selection bias)</strong>을
+      점검하는 한 가지 방법이 됩니다.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>DCA → FOLFOX 증강 결과를 독립 근거로 쓸 수 있나요?</summary>
+    <div class="ans">
+      <span class="lvl">심화</span>
+      <p><strong>주의가 필요합니다.</strong> 이 결과는 논문 본문에서 <strong>"our previous study"</strong>로
+      서술됩니다 — 즉 <strong>저자들 자신의 연구실 결과</strong>입니다
+      (참고문헌 [25], Ugt1a6b 매개 장간순환).</p>
+      <p>리뷰에서 자기 연구를 인용하는 것 자체는 정상이지만,
+      <strong>독립적 재현 여부는 이 논문만으로 확인되지 않습니다.</strong>
+      인용할 때는 "저자 연구실의 보고"라고 밝히는 것이 정확합니다.
+      <span class="pill u">Hermes 해석</span></p>
+    </div>
+  </details>
+
+  <details>
+    <summary>16S rRNA와 메타게놈 분석의 차이는? 왜 논문이 둘 다 언급하나요?</summary>
+    <div class="ans">
+      <span class="lvl">심화</span>
+      <p>논문 §7에서 연구 방법 표준화 부재를 논하며 <strong>두 기법을 구분</strong>합니다.</p>
+      <ul>
+        <li><strong>16S rRNA</strong> — 저비용·고처리량. <em>어떤 균이 있는가(분류)</em>를 봅니다.
+        대규모 임상 상관연구의 <strong>1차 스크리닝</strong>에 적합하다고 논문은 권합니다.</li>
+        <li><strong>메타게놈 + 대사체(metabolomics) 결합</strong> — 심층 기전 탐구용.
+        <em>무엇을 하는가(기능)</em>와 실제 산물을 봅니다.</li>
+      </ul>
+      <p>논문의 권고는 <strong>"16S로 스크리닝 → 메타게놈·대사체 다중오믹스로 검증"</strong>입니다.
+      <span class="pill v">원문 확인</span></p>
+    </div>
+  </details>
+
+  <details>
+    <summary>왜 동물모델 결과를 사람에 그대로 적용하면 안 되나요?</summary>
+    <div class="ans">
+      <span class="lvl">심화</span>
+      <p>논문은 <strong>"종간 균총 조성·기능의 뚜렷한 차이가 동물모델 → 인간 직접 외삽을 제한한다"</strong>고
+      명시합니다.</p>
+      <p>여기에 더해 <strong>역동성 문제</strong>도 겹칩니다 — 균총은 식이·약물·생활·항암치료로
+      계속 변하기 때문에, 기저 균총 프로파일로 개별 개입법을 설계해도
+      <strong>이후 환경·치료 변화가 미생물 조성을 바꿔 효과의 지속성을 훼손</strong>할 수 있습니다.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>논문이 제안하는 미래 방향 4가지는?</summary>
+    <div class="ans">
+      <span class="lvl">심화</span>
+      <p>논문 §7 "Challenges and opportunities"의 전망:</p>
+      <ol>
+        <li><strong>공간오믹스(spatial omics)</strong> — 종양미세환경 내에서 특정 미생물 군집이
+        숙주 면역세포·종양세포와 <em>공간적으로 어떻게 인접</em>하는지 시각화. 공간 전사체·공간 대사체가 핵심 도구.</li>
+        <li><strong>국제 표준화</strong> — IMMSA(국제 미생물·다중오믹스 표준 연합), IHMS(국제 인간 미생물 표준) 등이
+        체계적 편향·배치 효과·시료 품질관리·생물정보 워크플로우 표준을 마련 중.</li>
+        <li><strong>대규모 이중맹검 RCT</strong> — 임상 근거의 최종 확보 수단.</li>
+        <li><strong>AI 기반 동적 모니터링</strong> — 약물 농도와 균총 변화를 실시간 추적해
+        개인화 병용 전략을 개발.</li>
+      </ol>
+      <span class="pill v">원문 확인</span>
+    </div>
+  </details>
+
+  <details>
+    <summary>이 리뷰의 근거 수준을 어떻게 평가해야 하나요?</summary>
+    <div class="ans">
+      <span class="lvl">심화</span>
+      <p><strong>강점:</strong> 140편을 종합하고, 개입 전략의 <strong>실패 사례까지 명시</strong>합니다
+      (AML 이중맹검 실패, RCC 1상 Grade 3 irAE 50%). 유익 통념(SCFA·아커만시아)에 대해서도
+      스스로 반례를 제시합니다. <strong>균형 잡힌 종설</strong>로 볼 수 있습니다.
+      <span class="pill u">Hermes 평가</span></p>
+      <p><strong>주의:</strong> ① 1차 실험 데이터가 아니라 기존 문헌 종합입니다 —
+      "이 리뷰가 주장한다"와 "그것이 인용한 원연구가 보여줬다"를 구분해 읽어야 합니다.
+      ② 자기 연구실 결과를 핵심 근거로 인용합니다([25][26]). ③ 인용된 임상 수치는 대부분 소규모입니다.
+      ④ 게재 승인 후 교정 전(pre-proof) 버전입니다.
+      <span class="pill u">Hermes 평가</span></p>
+    </div>
+  </details>
+
+  <details>
+    <summary>우리 커뮤니티가 이 논문을 "가이드"로 쓸 수 있나요?</summary>
+    <div class="ans">
+      <span class="lvl">심화</span>
+      <p>결론을 그대로 옮기기보다, <strong>연구를 읽는 판별 기준</strong>으로 쓰는 것을 제안합니다.
+      <span class="pill u">Hermes 제안 · 미검증</span></p>
+      <div class="tw">
+        <table>
+          <tr><th>판별 질문</th><th>이 논문에서 배우는 것</th></tr>
+          <tr><td>대규모 RCT인가?</td><td>1·2상 소규모 결과는 "가능성"으로만 읽기</td></tr>
+          <tr><td>자기 연구실 결과를 근거로 쓰나?</td><td>독립 재현 여부 따로 확인하기</td></tr>
+          <tr><td>"확립"과 "가설"을 구분하나?</td><td>기전 확립 ≠ 임상 인과 확립</td></tr>
+          <tr><td>실패 사례를 밝히나?</td><td>실패를 숨긴 자료는 신뢰를 낮춰 읽기</td></tr>
+          <tr><td>대상이 우리와 같은가?</td><td>항암 표준치료 리뷰 ≠ 용도변경 약물 근거</td></tr>
+        </table>
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- ============ 출처 ============ -->
+<div class="card">
+  <h2><span class="num" style="background:#7d7767">§</span>출처 · 상태 표시</h2>
+
+  <h3>원문</h3>
+  <p style="font-size:14.5px">
+    Hou X, Chen K, Ran L, Pu R, Tong R, Li P, Liu K, Du H, Liu Y, Xu F.<br>
+    <strong>"Gut microbiota: A key modulator of individualized efficacy and toxicity in cancer therapy."</strong><br>
+    <em>Journal of Pharmaceutical Analysis</em> (2026). DOI:
+    <a href="https://doi.org/10.1016/j.jpha.2026.101802">10.1016/j.jpha.2026.101802</a>
+  </p>
+  <div class="callout" style="font-size:14.5px">
+    <strong>버전 주의:</strong> 이 문서가 참조한 것은 <strong>Journal Pre-proof</strong>
+    (2026-09-24 게재 승인, 교정 전)입니다. 출판사는 이 버전에 대해
+    <em>"production 과정에서 오류가 발견될 수 있으며, 최종 Version of Record가 아니다"</em>라고
+    명시했습니다.
+  </div>
+
+  <h3>표시 기준</h3>
+  <div class="tw">
+    <table>
+      <tr><th>표시</th><th>의미</th></tr>
+      <tr><td><span class="pill v">원문 확인</span></td><td>PDF 원문에서 직접 확인한 내용</td></tr>
+      <tr><td><span class="pill u">미검증 · 제안</span></td><td>문서 작성자의 해석·응용 제안 (논문 주장 아님)</td></tr>
+      <tr><td><span class="pill w">주의</span></td><td>사실과 다르게 읽힐 위험이 있는 부분</td></tr>
+    </table>
+  </div>
+
+  <div class="foot">
+    <strong>작성:</strong> 커뮤니티 공부나눔용 · 2026년 9월<br>
+    <strong>성격:</strong> 논문 소개 및 정보 제공. 진단·처방·복용 지도가 아니며,
+    <strong>모든 복용·중단·병용 결정은 담당 의료진과 상의하십시오.</strong><br>
+    <strong>함께 읽을 자료:</strong> 콜리박틴과 대장암 인과 논쟁 — "기전은 확립, 인과는 논쟁 중"
+    (같은 교훈: 물질의 맥락 의존성)
+  </div>
+</div>
+
+<div style="text-align:center;color:#a89e88;font-size:12.5px;margin-top:22px">
+  끝까지 읽어주셔서 감사합니다 · 궁금한 점은 댓글로 남겨주세요
+</div>
+
+</div>
+</body>
+</html>

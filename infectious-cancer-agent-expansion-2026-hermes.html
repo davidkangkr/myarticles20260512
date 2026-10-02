@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>감염성 암 원인체의 확장 — 심층 분석 보고서</title>
+<style>
+  :root{
+    --bg:#faf8f4; --card:#ffffff; --ink:#2b2b2b; --sub:#6b6b6b;
+    --teal:#0f5e5e; --teal-soft:#e3efee; --gold:#b45309; --gold-soft:#fdf0dc;
+    --sage:#5b7f5b; --sage-soft:#e9f0e6; --red:#b91c1c; --red-soft:#fdecec;
+    --line:#e5dfd3;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+    font-size:17px; line-height:1.72; padding:0 0 60px 0;
+  }
+  .wrap{max-width:780px; margin:0 auto; padding:0 16px;}
+  header{
+    background:linear-gradient(135deg,#0f5e5e 0%,#146b6b 52%,#5b7f5b 100%);
+    color:#fff; padding:38px 16px 30px; text-align:center;
+  }
+  header .tag{display:inline-block; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.4);
+    border-radius:999px; padding:4px 14px; font-size:13px; margin-bottom:12px; letter-spacing:.3px;}
+  header h1{font-size:24px; line-height:1.4; font-weight:800; margin-bottom:10px;}
+  header p{font-size:15px; opacity:.94; line-height:1.55;}
+  .meta{background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px 16px;
+    font-size:14px; color:var(--sub); margin-top:14px; text-align:left; box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .meta b{color:var(--ink);}
+  nav.toc{background:#fff; border-bottom:1px solid var(--line); padding:0 12px; position:sticky; top:0; z-index:50;
+    overflow-x:auto; white-space:nowrap; box-shadow:0 1px 4px rgba(0,0,0,.05);}
+  nav.toc div{display:inline-flex; gap:2px; padding:9px 0;}
+  nav.toc a{color:var(--sub); text-decoration:none; font-size:13px; font-weight:600; padding:6px 11px;
+    border-radius:6px; white-space:nowrap;}
+  nav.toc a:hover{color:var(--teal); background:rgba(15,94,94,.08);}
+  section{margin-top:34px;}
+  h2{font-size:21px; font-weight:800; color:var(--teal); margin-bottom:6px; display:flex; align-items:flex-start; gap:8px; line-height:1.35;}
+  h2 .no{background:var(--teal); color:#fff; border-radius:8px; font-size:14px; min-width:28px; height:28px;
+    display:inline-flex; align-items:center; justify-content:center; padding:0 6px; flex:none; margin-top:2px;}
+  .lead{color:var(--sub); font-size:15px; margin-bottom:14px;}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px;
+    box-shadow:0 1px 4px rgba(0,0,0,.05); margin-bottom:14px;}
+  .card h3{font-size:17px; font-weight:800; margin-bottom:8px;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  @media(max-width:560px){ .grid2{grid-template-columns:1fr;} }
+  .kcard{background:var(--card); border:1px solid var(--line); border-left:5px solid var(--teal);
+    border-radius:12px; padding:14px 15px; box-shadow:0 1px 4px rgba(0,0,0,.05);}
+  .kcard.gold{border-left-color:var(--gold);}
+  .kcard.sage{border-left-color:var(--sage);}
+  .kcard.red{border-left-color:var(--red);}
+  .kcard .kt{font-size:13px; font-weight:800; letter-spacing:.4px; color:var(--teal); margin-bottom:4px;}
+  .kcard.gold .kt{color:var(--gold);}
+  .kcard.sage .kt{color:var(--sage);}
+  .kcard.red .kt{color:var(--red);}
+  .kcard p{font-size:15px;}
+  .big{font-size:22px; font-weight:800; color:var(--teal); display:block; margin:2px 0 4px;}
+  .figbox{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px; text-align:center;
+    box-shadow:0 1px 4px rgba(0,0,0,.05); margin:14px 0;}
+  .figbox svg{max-width:100%; height:auto;}
+  .figcap{font-size:13.5px; color:var(--sub); margin-top:8px; line-height:1.55; text-align:left;}
+  .figcap b{color:var(--ink);}
+  .callout{border-radius:12px; padding:14px 16px; font-size:15px; margin:14px 0;}
+  .callout.teal{background:var(--teal-soft); border-left:5px solid var(--teal);}
+  .callout.gold{background:var(--gold-soft); border-left:5px solid var(--gold);}
+  .callout.red{background:var(--red-soft); border-left:5px solid var(--red);}
+  .callout.sage{background:var(--sage-soft); border-left:5px solid var(--sage);}
+  .callout p{margin-top:6px;}
+  .quote{background:#fbfaf7; border-left:4px solid var(--sub); padding:11px 14px; margin:12px 0;
+    font-size:14.5px; line-height:1.65; color:#3a3a3a; font-style:normal;}
+  .quote .src{display:block; margin-top:6px; font-size:12.5px; color:var(--sub);}
+  .expert{background:#f6f4ee; border:1px dashed #c9bfa8; border-radius:12px; padding:14px 16px;
+    font-size:14.5px; margin:14px 0;}
+  .expert .et{font-size:13px; font-weight:800; color:var(--gold); letter-spacing:.4px; margin-bottom:6px;}
+  .expert table{font-size:13.5px;}
+  table{width:100%; border-collapse:collapse; font-size:14.5px; background:var(--card);
+    border:1px solid var(--line); border-radius:12px; overflow:hidden; margin:12px 0;}
+  th{background:var(--teal); color:#fff; text-align:left; padding:9px 12px; font-size:14px;}
+  td{border-top:1px solid var(--line); padding:9px 12px; vertical-align:top;}
+  tr:nth-child(even) td{background:#fbfaf7;}
+  .qa{margin:16px 0;}
+  .q{font-weight:700; color:var(--teal); margin-bottom:6px; font-size:15.5px; line-height:1.5;}
+  .q .qtag{display:inline-block; background:var(--teal); color:#fff; border-radius:6px; padding:1px 9px; font-size:12px; margin-right:7px; vertical-align:1px;}
+  .q .qtag.deep{background:var(--gold);}
+  .a{font-size:15px; background:#fbfaf7; border-left:3px solid var(--teal); padding:10px 13px; border-radius:8px; line-height:1.65;}
+  .a.deep{border-left-color:var(--gold);}
+  .badge{display:inline-block; border-radius:999px; padding:1px 9px; font-size:12px; font-weight:800; margin-right:5px; white-space:nowrap;}
+  .b-est{background:var(--sage-soft); color:var(--sage); border:1px solid var(--sage);}
+  .b-evi{background:var(--teal-soft); color:var(--teal); border:1px solid var(--teal);}
+  .b-pro{background:var(--gold-soft); color:var(--gold); border:1px solid var(--gold);}
+  .foot{background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px 18px; font-size:14px;
+    color:var(--sub); margin-top:34px;}
+  .foot b{color:var(--ink);}
+  a{color:var(--teal);}
+  ul,ol{margin:8px 0 8px 22px;} li{margin:6px 0;}
+  .flow{display:flex; flex-direction:column; margin:14px 0;}
+  .fnode{background:var(--card); border:2px solid var(--teal); border-radius:12px; padding:12px 14px; font-size:15px;}
+  .fnode b{color:var(--teal);}
+  .fnode.gold{border-color:var(--gold);} .fnode.gold b{color:var(--gold);}
+  .farrow{text-align:center; color:var(--teal); font-size:20px; line-height:1.1; padding:2px 0;}
+  @media print{
+    body{background:#fff!important; color:#000; font-size:11.5pt; line-height:1.5;}
+    nav.toc{display:none!important;}
+    header{background:#fff!important; color:#000!important; border-bottom:2px solid #333; padding:16px 0;}
+    header .tag{border-color:#999!important; color:#000!important;}
+    header h1,header p{color:#000!important;}
+    .card,.kcard,.figbox,.callout,.expert,.quote,.a,.foot{background:#fff!important; border:1px solid #bbb!important; box-shadow:none!important; break-inside:avoid;}
+    .q,.a,h2,.card h3,strong,h3{color:#000!important;}
+    .q .qtag{background:#eee!important; color:#000!important;}
+    .badge{background:#eee!important; color:#000!important; border-color:#999!important;}
+    th{background:#eee!important; color:#000!important;} td{background:#fff!important;}
+    table,th,td{border-color:#999!important;}
+    .big{color:#000!important;} a{color:#000!important; text-decoration:none;}
+    section{margin-top:14px;} .flow .fnode{border-color:#666!important;} .flow .fnode b{color:#000!important;}
+    .figbox svg text{fill:#000!important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="tag">심층 분석 보고서 · 2026</span>
+    <h1>감염성 암 원인체의 확장</h1>
+    <p>외부 생명체가 암의 원인으로 공식 인정되다<br>— 그리고 그 목록은 아직 닫히지 않았다</p>
+    <div class="meta">
+      <b>근거 자료:</b> Lancet Oncology 2026 (IARC/WHO) · Cell 2022 (2편) · Signal Transduction and Targeted Therapy 2026 · Nature Medicine 2019<br>
+      <b>작성:</b> Hermes Agent · <b>대상:</b> 환자 주도 암 커뮤니티<br>
+      <b>⚠️ 이 문서는 정보·교육 목적이며 의학적 조언이 아닙니다.</b>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div>
+    <a href="#s1">① 30초 요약</a>
+    <a href="#s2">② 공식 인정</a>
+    <a href="#s3">③ 확장의 역사</a>
+    <a href="#s4">④ 목록 밖 생명체</a>
+    <a href="#s5">⑤ 복합 상호작용</a>
+    <a href="#s6">⑥ 인과성≠기여도</a>
+    <a href="#s7">⑦ 정직한 경계</a>
+    <a href="#s8">⑧ 이 문서의 결론</a>
+    <a href="#s9">⑨ Q&amp;A</a>
+    <a href="#s10">⑩ 용어·출처</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ===== 1 ===== -->
+<section id="s1">
+  <h2><span class="no">1</span> 30초 요약</h2>
+  <div class="grid2">
+    <div class="kcard sage">
+      <div class="kt">✅ 확립 — 공식 인정</div>
+      <p><span class="big">230만 건</span>2024년 감염 기인 암. 전체 암의 <b>12%</b>. IARC가 <b>12개 원인체</b>를 공식 발암원으로 인정.</p>
+    </div>
+    <div class="kcard sage">
+      <div class="kt">✅ 확립 — 목록은 계속 늘었다</div>
+      <p>2009년 이후 <b>HIV·MCV·HDV·HCMV</b>가 새로 편입. Lancet 논문은 2018년 대비 <b>16개 causal pair</b>를 추가했습니다.</p>
+    </div>
+    <div class="kcard teal">
+      <div class="kt">⚠️ 강한 증거 — 목록 밖에도 많다</div>
+      <p>진균만 해도 <b>31종</b>이 35개 암종에서 검출됐지만, <b>IARC Group 1에는 0종</b>입니다.</p>
+    </div>
+    <div class="kcard gold">
+      <div class="kt">❓ 전망 — 더 늘어날 것</div>
+      <p>Lancet 저자들 자신이 "향후 infection–cancer pair 목록이 늘 수 있다"고 명시했습니다. <b>단정은 아닙니다.</b></p>
+    </div>
+  </div>
+  <div class="callout teal">
+    <b>🧭 한 줄 결론</b>
+    <p>암의 원인 체계에 <b>외부 생명체가 공식 편입</b>되었고(✅), 그 목록은 <b>계속 확장되어 왔으며</b>(✅), 학계는 이미 그 밖의 생명체들과 <b>복합 상호작용</b>을 연구합니다(⚠️). 따라서 목록이 <b>향후 더 늘어날 가능성이 큽니다</b>(❓ 전망).</p>
+  </div>
+</section>
+
+<!-- ===== 2 ===== -->
+<section id="s2">
+  <h2><span class="no">2</span> 무엇이 공식 인정되었나 <span class="badge b-est">✅ 확립</span></h2>
+  <p class="lead">세계보건기구(WHO) 산하 <b>국제암연구소(IARC)</b>가 "인간에게 암을 일으킨다는 증거가 충분하다"고 판단한 원인체(Group 1)를, Lancet Oncology가 <b>전 세계 규모로 집계</b>했습니다.</p>
+
+  <div class="quote">
+    "An estimated <b>2·3 million new cancer cases</b> were attributable to infections globally in 2024, which is equivalent to <b>12% of all cancer cases</b>."
+    <span class="src">— Rumgay H, et al. Lancet Oncology 2026; 27: 1237–48 (초록)</span>
+  </div>
+
+  <table>
+    <tr><th>원인체</th><th>종류</th><th>주요 암</th><th>2024년 건수</th></tr>
+    <tr><td><b>H. pylori</b></td><td>세균</td><td>위암(비분문부 85%)</td><td>76만</td></tr>
+    <tr><td><b>HPV</b></td><td>바이러스</td><td>자궁경부암(100%)·구인두·항문</td><td>75만</td></tr>
+    <tr><td><b>HBV</b></td><td>바이러스</td><td>간세포암(52%)</td><td>36만</td></tr>
+    <tr><td><b>EBV</b></td><td>바이러스</td><td>비인두암(88%)·일부 위암·림프종</td><td>26만</td></tr>
+    <tr><td><b>HCV</b></td><td>바이러스</td><td>간세포암(20%)</td><td>16만</td></tr>
+    <tr><td><b>KSHV</b></td><td>바이러스</td><td>카포시 육종(100%)</td><td>3.5만</td></tr>
+    <tr><td colspan="4" style="background:#f3efe6;font-size:13.5px;">나머지 6종: HTLV-1, MCV, HIV, 주혈흡충(S. haematobium), 간흡충(O. viverrini), C. sinensis — 합계 1.9만</td></tr>
+  </table>
+
+  <div class="callout gold">
+    <b>⚠️ "Group 1"의 정확한 의미</b>
+    <p>Group 1은 <b>"이 원인체가 인간에게 암을 일으킨다는 증거가 충분하다"</b>는 뜻입니다.<br>
+    ❌ "노출되면 반드시 암에 걸린다" · ❌ "모든 암을 일으킨다" · ❌ "암 환자 대부분이 이 때문이다" — <b>모두 아닙니다.</b><br>
+    IARC 분류는 <b>hazard identification(위험요인 식별)</b>이며, 실제 위험의 크기는 노출량·방식·개인 특성에 따라 달라집니다.</p>
+  </div>
+
+  <div class="expert">
+    <div class="et">🧪 연구자용 — IARC의 Group 1 판정 논리</div>
+    <p>IARC는 세 종류의 증거를 검토합니다: <b>① 인간 역학자료 ② 동물실험 ③ 기전적 증거</b>. 중요한 점은 <b>세 가지가 모두 충분해야 하는 것은 아니라는 것</b>입니다 — IARC 분류표는 Group 1에 대해 <b>"human evidence가 sufficient이면 동물·기전 증거는 irrelevant"</b>하다고 명시합니다. 즉 인과성 판단의 무게중심은 <b>인간 역학자료</b>입니다.</p>
+    <p style="margin-top:8px;">인간 증거의 평가 요소: ① 연관성의 강도 ② 여러 연구에서의 반복성 ③ 노출량-반응 관계(dose–response) ④ 노출 중단 시 위험 감소 ⑤ 시간적 선후관계 ⑥ chance·bias·confounding 등 대안적 설명의 배제 가능성.</p>
+  </div>
+</section>
+
+<!-- ===== 3 ===== -->
+<section id="s3">
+  <h2><span class="no">3</span> ⭐ 그 목록은 닫혀 있지 않다 <span class="badge b-est">✅ 확립</span></h2>
+  <p class="lead">이 보고서의 <b>핵심 축</b>입니다. IARC의 감염성 발암원 목록은 <b>한 번도 고정된 적이 없습니다.</b></p>
+
+  <div class="figbox">
+    <svg viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="IARC 감염성 발암원 목록 확장 타임라인">
+      <text x="350" y="26" text-anchor="middle" font-size="15.5" font-weight="700" fill="#0f5e5e">IARC 감염성 발암원 목록의 확장</text>
+      <!-- timeline axis -->
+      <line x1="60" y1="330" x2="650" y2="330" stroke="#999" stroke-width="2"/>
+      <!-- nodes -->
+      <!-- 2009/2012 -->
+      <circle cx="85" cy="330" r="7" fill="#5b7f5b"/>
+      <text x="85" y="356" text-anchor="middle" font-size="12" font-weight="700" fill="#333">2009–2012</text>
+      <rect x="20" y="180" width="130" height="130" rx="8" fill="#e9f0e6" stroke="#5b7f5b" stroke-width="1.5"/>
+      <text x="85" y="202" text-anchor="middle" font-size="12.5" font-weight="700" fill="#5b7f5b">기초 틀</text>
+      <text x="85" y="224" text-anchor="middle" font-size="11.5" fill="#2f442f">Monographs Vol.100B</text>
+      <text x="85" y="244" text-anchor="middle" font-size="11.5" fill="#2f442f">H. pylori, HPV, HBV,</text>
+      <text x="85" y="262" text-anchor="middle" font-size="11.5" fill="#2f442f">HCV, EBV, KSHV,</text>
+      <text x="85" y="280" text-anchor="middle" font-size="11.5" fill="#2f442f">HTLV-1, 기생충 등</text>
+      <text x="85" y="300" text-anchor="middle" font-size="11" fill="#6b6b6b">"biological agents"</text>
+      <!-- 2018 -->
+      <circle cx="245" cy="330" r="7" fill="#0f5e5e"/>
+      <text x="245" y="356" text-anchor="middle" font-size="12" font-weight="700" fill="#333">2018</text>
+      <rect x="180" y="196" width="130" height="114" rx="8" fill="#e3efee" stroke="#0f5e5e" stroke-width="1.5"/>
+      <text x="245" y="218" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f5e5e">1차 전 세계 집계</text>
+      <text x="245" y="240" text-anchor="middle" font-size="11.5" fill="#1f3f3f">210만~220만 건</text>
+      <text x="245" y="258" text-anchor="middle" font-size="11.5" fill="#1f3f3f">전체 암의 약 13%</text>
+      <text x="245" y="280" text-anchor="middle" font-size="11" fill="#6b6b6b">de Martel et al.</text>
+      <text x="245" y="298" text-anchor="middle" font-size="11" fill="#6b6b6b">Lancet Glob Health</text>
+      <!-- 2025 -->
+      <circle cx="405" cy="330" r="7" fill="#b45309"/>
+      <text x="405" y="356" text-anchor="middle" font-size="12" font-weight="700" fill="#333">2025</text>
+      <rect x="340" y="180" width="130" height="130" rx="8" fill="#fdf0dc" stroke="#b45309" stroke-width="1.5"/>
+      <text x="405" y="202" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b45309">신규 편입</text>
+      <text x="405" y="224" text-anchor="middle" font-size="11.5" fill="#7a5a2a">HBV-HDV</text>
+      <text x="405" y="242" text-anchor="middle" font-size="11.5" fill="#7a5a2a">HCMV(거대세포바이러스)</text>
+      <text x="405" y="260" text-anchor="middle" font-size="11.5" fill="#7a5a2a">MCV(메르켈세포)</text>
+      <text x="405" y="282" text-anchor="middle" font-size="11" fill="#6b6b6b">Lancet Oncol 2025;26:994</text>
+      <text x="405" y="300" text-anchor="middle" font-size="11" fill="#6b6b6b">(재평가)</text>
+      <!-- 2026 -->
+      <circle cx="565" cy="330" r="8" fill="#0f5e5e"/>
+      <text x="565" y="356" text-anchor="middle" font-size="12" font-weight="700" fill="#333">2026</text>
+      <rect x="500" y="150" width="130" height="160" rx="8" fill="#fff" stroke="#0f5e5e" stroke-width="2"/>
+      <text x="565" y="172" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f5e5e">본 보고서 근거</text>
+      <text x="565" y="194" text-anchor="middle" font-size="11.5" fill="#1f3f3f">12개 원인체 집계</text>
+      <text x="565" y="212" text-anchor="middle" font-size="11.5" fill="#1f3f3f">230만 건 / 12%</text>
+      <text x="565" y="232" text-anchor="middle" font-size="11.5" fill="#b45309" font-weight="700">16개 causal pair</text>
+      <text x="565" y="250" text-anchor="middle" font-size="11.5" fill="#b45309" font-weight="700">신규 추가</text>
+      <text x="565" y="272" text-anchor="middle" font-size="11" fill="#6b6b6b">Rumgay et al.</text>
+      <text x="565" y="290" text-anchor="middle" font-size="11" fill="#6b6b6b">Lancet Oncol 27:1237</text>
+      <!-- arrow -->
+      <line x1="120" y1="120" x2="600" y2="120" stroke="#0f5e5e" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arw)"/>
+      <defs><marker id="arw" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 z" fill="#0f5e5e"/></marker></defs>
+      <text x="360" y="108" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f5e5e">확장의 방향 →</text>
+      <text x="360" y="140" text-anchor="middle" font-size="11.5" fill="#6b6b6b">목록은 닫힌 것이 아니라 계속 갱신되어 왔습니다</text>
+    </svg>
+    <div class="figcap"><b>[그림 1] 확장 타임라인.</b> IARC의 감염성 발암원 목록은 2009년 이후 <b>HIV·MCV·HDV·HCMV</b>가 추가되고, 2018→2026 사이 <b>16개 감염-암 조합</b>이 새로 편입되며 계속 늘어왔습니다.</div>
+  </div>
+
+  <div class="callout sage">
+    <b>🔑 결정적 근거 — Lancet 논문 저자들이 스스로 말한 것</b>
+    <div class="quote" style="margin-top:10px;background:rgba(255,255,255,.6);">
+      "However, molecular epidemiological approaches for identifying bacterial and parasitic carcinogens are <b>less well standardised than for viruses</b> and <b>the list of future infection–cancer pairs could include</b> possible links between <b>Plasmodium falciparum</b>, which is the most common malaria parasite, and Burkitt lymphoma (<b>currently IARC Monographs Group 2A</b>)."
+      <span class="src">— Rumgay H, et al. Lancet Oncology 2026 (Discussion, p.1245)</span>
+    </div>
+    <p>풀이하면: 세균·기생충 발암원을 찾는 방법은 바이러스보다 <b>아직 표준화가 덜 되어 있고</b>, <b>앞으로 infection–cancer 조합 목록이 늘어날 수 있다</b>는 것입니다. 논문은 그 예로 <b>말라리아 원충(Plasmodium falciparum)</b>과 버킷 림프종의 연관성(현재 Group 2A)을 들었습니다.</p>
+  </div>
+</section>
+
+<!-- ===== 4 ===== -->
+<section id="s4">
+  <h2><span class="no">4</span> 목록 밖의 생명체들 <span class="badge b-evi">⚠️ 강한 증거·진행 중</span></h2>
+  <p class="lead">12개 공식 원인체 <b>밖에도</b> 학계가 진지하게 연구하는 생명체가 다수 있습니다. 대표적으로 <b>진균(mycobiome)</b>이 있습니다.</p>
+
+  <div class="figbox">
+    <svg viewBox="0 0 700 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="공식 인정 12개와 연구 중 생명체 대비">
+      <text x="350" y="24" text-anchor="middle" font-size="15.5" font-weight="700" fill="#0f5e5e">공식 인정 12개 vs 연구 중인 다수</text>
+      <!-- left: official -->
+      <rect x="20" y="46" width="270" height="250" rx="12" fill="#e9f0e6" stroke="#5b7f5b" stroke-width="2"/>
+      <text x="155" y="72" text-anchor="middle" font-size="15" font-weight="800" fill="#5b7f5b">IARC Group 1 · 공식 인정</text>
+      <text x="155" y="94" text-anchor="middle" font-size="12.5" fill="#2f442f">"인간에게 암을 일으킨다는 증거 충분"</text>
+      <!-- 12 items as dots -->
+      <g font-size="12" fill="#2f442f">
+        <text x="42" y="126">🦠 H. pylori</text>
+        <text x="42" y="148">🧬 HPV</text>
+        <text x="42" y="170">🧬 HBV</text>
+        <text x="42" y="192">🧬 HCV</text>
+        <text x="42" y="214">🧬 EBV</text>
+        <text x="42" y="236">🧬 KSHV</text>
+        <text x="42" y="258">🧬 HTLV-1</text>
+        <text x="42" y="280">🧬 MCV</text>
+        <text x="168" y="126">🧬 HIV</text>
+        <text x="168" y="148">🐛 주혈흡충</text>
+        <text x="168" y="170">🐛 O. viverrini</text>
+        <text x="168" y="192">🐛 C. sinensis</text>
+      </g>
+      <text x="155" y="288" text-anchor="middle" font-size="13" font-weight="800" fill="#5b7f5b">12개</text>
+      <!-- right: studied -->
+      <rect x="410" y="46" width="270" height="250" rx="12" fill="#e3efee" stroke="#0f5e5e" stroke-width="2" stroke-dasharray="7 4"/>
+      <text x="545" y="72" text-anchor="middle" font-size="15" font-weight="800" fill="#0f5e5e">연구 중 · 목록 밖</text>
+      <text x="545" y="94" text-anchor="middle" font-size="12.5" fill="#1f3f3f">인과 확립 전 (아직 Group 1 아님)</text>
+      <g font-size="12" fill="#1f3f3f">
+        <text x="430" y="126">🍄 진균(mycobiome)</text>
+        <text x="440" y="146" font-size="11.5" fill="#6b6b6b">→ 31종 검출 (35개 암종)</text>
+        <text x="430" y="170">🍄 Candida · Malassezia</text>
+        <text x="430" y="194">🦠 Chlamydia trachomatis</text>
+        <text x="430" y="218">🦠 F. nucleatum · Bacteroides</text>
+        <text x="430" y="242">🦟 Plasmodium falciparum</text>
+        <text x="446" y="260" font-size="11.5" fill="#6b6b6b">(현재 Group 2A)</text>
+        <text x="430" y="282">🧬 HCMV · HDV (2025 재평가)</text>
+      </g>
+      <!-- arrow -->
+      <text x="352" y="160" text-anchor="middle" font-size="22" fill="#b45309">➜</text>
+      <text x="352" y="188" text-anchor="middle" font-size="11.5" fill="#b45309" font-weight="700">확장</text>
+      <text x="352" y="206" text-anchor="middle" font-size="11.5" fill="#b45309" font-weight="700">가능성</text>
+      <text x="350" y="322" text-anchor="middle" font-size="12.5" fill="#6b6b6b">진균은 IARC Group 1에 0종이지만, 35개 암종에서 검출되고 생존을 예측합니다</text>
+    </svg>
+    <div class="figcap"><b>[그림 2] 공식 vs 연구 중.</b> 왼쪽 12개는 IARC가 공식 인정한 원인체입니다. 오른쪽은 <b>아직 인정되지 않았지만 활발히 연구되는</b> 생명체들입니다. 진균만 31종이 검출됩니다.</div>
+  </div>
+
+  <div class="card">
+    <h3>🍄 진균(mycobiome) — IARC Group 1에 0종, 그러나 연구는 활발</h3>
+    <div class="quote">
+      "These studies reveal that fungi, although <b>in low abundance</b>, are <b>ubiquitous across all major human cancers</b> and that specific mycobiome types can be <b>predictive of survival</b>."
+      <span class="src">— Li X &amp; Saxena D. Cell 2022; 185:3787 (논평)</span>
+    </div>
+    <div class="quote">
+      "This revealed <b>31 fungi</b> with ≥1% aggregate genome coverage, including <b>Saccharomyces cerevisiae</b> (99.7% coverage), <b>Malassezia restricta</b> (98.6%), <b>Candida albicans</b> (84.1%), <b>Malassezia globosa</b> (40.5%), and <b>Blastomyces gilchristii</b> (35.0%)."
+      <span class="src">— Narunsky-Haziza L, et al. Cell 2022; 185:3789</span>
+    </div>
+    <div class="quote">
+      "We demonstrate that several <b>Candida species are living and transcriptionally active at the tumor site</b> and predictive of host tumor gene expression, disease state, and survival."
+      <span class="src">— Dohlman AB, et al. Cell 2022; 185:3807</span>
+    </div>
+    <p style="margin-top:10px;">⚠️ <b>"살아있다"는 "원인이다"와 다릅니다.</b> 이 발견들은 진균이 <b>단순 오염이 아님</b>을 보여줄 뿐, 인과관계 확립은 아직입니다.</p>
+  </div>
+
+  <div class="card">
+    <h3>연구 중인 다른 생명체</h3>
+    <table>
+      <tr><th>생명체</th><th>종류</th><th>근거</th><th>IARC 상태</th></tr>
+      <tr><td><i>Chlamydia trachomatis</i></td><td>세균</td><td>HPV와 <b>시너지</b>로 자궁경부암 촉진</td><td>—</td></tr>
+      <tr><td><i>Fusobacterium nucleatum</i></td><td>세균</td><td>대장암 진행·전이, β-catenin/Wnt 활성화</td><td>—</td></tr>
+      <tr><td><i>Bacteroides fragilis</i></td><td>세균</td><td>발암성 독소 생성</td><td>—</td></tr>
+      <tr><td><i>Plasmodium falciparum</i></td><td>원생동물</td><td>버킷 림프종 연관</td><td>⚠️ <b>Group 2A</b></td></tr>
+      <tr><td>HDV(델타 간염)</td><td>바이러스</td><td>HBV 동감염 시 간암 위험↑</td><td>✅ 2025 신규 Group 1</td></tr>
+      <tr><td>HCMV(거대세포바이러스)</td><td>바이러스</td><td>2025년 재평가 대상</td><td>⚠️ 재평가</td></tr>
+    </table>
+    <p style="font-size:13.5px;color:var(--sub);">※ HDV는 2025년 Group 1로 분류되었으나, HBV에 감염된 사람에서만 작용하므로 Lancet 집계에서는 HBV에 포함되어 별도 계수되지 않았습니다.</p>
+  </div>
+</section>
+
+<!-- ===== 5 ===== -->
+<section id="s5">
+  <h2><span class="no">5</span> ⭐ 복합 상호작용 — 단독이 아니라 함께 <span class="badge b-evi">⚠️ 강한 증거</span></h2>
+  <p class="lead">이 보고서의 <b>두 번째 핵심 축</b>입니다. 최신 논문들은 미생물을 <b>따로 떼어 보지 않고</b>, <b>여러 계(kingdom)가 뒤엉킨 생태계</b>로 봅니다.</p>
+
+  <div class="figbox">
+    <svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="복합 미생물 상호작용 네트워크">
+      <text x="350" y="26" text-anchor="middle" font-size="15.5" font-weight="700" fill="#0f5e5e">복합 상호작용 (Polymicrobial / Multi-kingdom)</text>
+      <!-- center: tumor -->
+      <circle cx="350" cy="215" r="62" fill="#fdecec" stroke="#b91c1c" stroke-width="2.5"/>
+      <text x="350" y="208" text-anchor="middle" font-size="13.5" font-weight="800" fill="#b91c1c">종양 · TME</text>
+      <text x="350" y="228" text-anchor="middle" font-size="11" fill="#7a3a3a">미생물 생태계</text>
+      <!-- four kingdom nodes -->
+      <!-- bacteria -->
+      <circle cx="110" cy="90" r="52" fill="#e9f0e6" stroke="#5b7f5b" stroke-width="2"/>
+      <text x="110" y="82" text-anchor="middle" font-size="13" font-weight="700" fill="#5b7f5b">🦠 세균</text>
+      <text x="110" y="102" text-anchor="middle" font-size="10.5" fill="#2f442f">H. pylori</text>
+      <text x="110" y="118" text-anchor="middle" font-size="10.5" fill="#2f442f">F. nucleatum</text>
+      <!-- virus -->
+      <circle cx="590" cy="90" r="52" fill="#e3efee" stroke="#0f5e5e" stroke-width="2"/>
+      <text x="590" y="82" text-anchor="middle" font-size="13" font-weight="700" fill="#0f5e5e">🧬 바이러스</text>
+      <text x="590" y="102" text-anchor="middle" font-size="10.5" fill="#1f3f3f">HPV · EBV · HBV</text>
+      <text x="590" y="118" text-anchor="middle" font-size="10.5" fill="#1f3f3f">KSHV · MCV</text>
+      <!-- fungi -->
+      <circle cx="110" cy="340" r="52" fill="#fdf0dc" stroke="#b45309" stroke-width="2"/>
+      <text x="110" y="332" text-anchor="middle" font-size="13" font-weight="700" fill="#b45309">🍄 진균</text>
+      <text x="110" y="352" text-anchor="middle" font-size="10.5" fill="#7a5a2a">Candida</text>
+      <text x="110" y="368" text-anchor="middle" font-size="10.5" fill="#7a5a2a">Malassezia</text>
+      <!-- parasite -->
+      <circle cx="590" cy="340" r="52" fill="#f3efe6" stroke="#888" stroke-width="2"/>
+      <text x="590" y="332" text-anchor="middle" font-size="13" font-weight="700" fill="#666">🐛 기생충</text>
+      <text x="590" y="352" text-anchor="middle" font-size="10.5" fill="#555">주혈흡충</text>
+      <text x="590" y="368" text-anchor="middle" font-size="10.5" fill="#555">간흡충</text>
+      <!-- links -->
+      <line x1="160" y1="118" x2="300" y2="180" stroke="#5b7f5b" stroke-width="2.2"/>
+      <line x1="540" y1="118" x2="400" y2="180" stroke="#0f5e5e" stroke-width="2.2"/>
+      <line x1="160" y1="310" x2="300" y2="248" stroke="#b45309" stroke-width="2.2"/>
+      <line x1="540" y1="310" x2="400" y2="248" stroke="#888" stroke-width="2.2"/>
+      <!-- cross links (synergy) -->
+      <line x1="162" y1="90" x2="538" y2="90" stroke="#b91c1c" stroke-width="1.8" stroke-dasharray="6 4"/>
+      <text x="350" y="80" text-anchor="middle" font-size="11" font-weight="700" fill="#b91c1c">시너지 (synergy)</text>
+      <line x1="162" y1="340" x2="538" y2="340" stroke="#b91c1c" stroke-width="1.8" stroke-dasharray="6 4"/>
+      <text x="350" y="360" text-anchor="middle" font-size="11" font-weight="700" fill="#b91c1c">복합 상호작용</text>
+      <!-- case labels -->
+      <text x="350" y="195" text-anchor="middle" font-size="10.5" fill="#7a3a3a">HPV + Chlamydia</text>
+      <text x="350" y="212" text-anchor="middle" font-size="10.5" fill="#7a3a3a">EBV ± H. pylori</text>
+      <text x="350" y="252" text-anchor="middle" font-size="10.5" fill="#7a3a3a">Candida + 세균</text>
+      <defs>
+        <marker id="a2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 z" fill="#b91c1c"/></marker>
+      </defs>
+      <text x="350" y="398" text-anchor="middle" font-size="12.5" fill="#6b6b6b">논문 표현: "polymicrobial network" · "multi-kingdom" · "multi-species process"</text>
+    </svg>
+    <div class="figcap"><b>[그림 3] 복합 상호작용 네트워크.</b> 세균·바이러스·진균·기생충이 <b>단독으로도, 서로 뒤엉켜서도</b> 종양미세환경에 작용합니다. 논문들은 이를 <b>"polymicrobial(복합 미생물)"</b>, <b>"multi-kingdom(다계)"</b>이라 부릅니다.</div>
+  </div>
+
+  <div class="card">
+    <h3>📖 논문이 직접 쓰는 표현들 (원문 인용)</h3>
+    <div class="quote">
+      "These data support a bacterial-dominated but <b>polymicrobial cancer microbiome</b>."
+      <span class="src">— Narunsky-Haziza L, et al. Cell 2022; 185:3789</span>
+    </div>
+    <div class="quote">
+      "…heterogeneous, intracellular, and <b>polymicrobial communities</b> in tumors motivates exploring cancer clonal evolution as a <b>multi-species process</b> with joint (e.g., TME nutrient limitations) and disjoint (e.g., antibiotic) selection pressures affecting <b>fungal-bacterial-cancer-immune cell compositions</b>."
+      <span class="src">— Narunsky-Haziza L, et al. Cell 2022; 185:3789</span>
+    </div>
+    <div class="quote">
+      "…a significant role for fungal communities in the TME has been demonstrated to reveal a <b>polymicrobial network within cancers</b>. Fungal profiling across 35 tumor types identified species such as Candida and Malassezia… These fungi <b>synergize with bacteria to promote cancer progression</b> and modulate immune responses."
+      <span class="src">— Yao Y, et al. Signal Transduction and Targeted Therapy 2026; 11:39</span>
+    </div>
+    <div class="quote">
+      "In cervical cancer, <b>coinfection with Chlamydia trachomatis… has been shown to act synergistically with HPV to promote carcinogenesis.</b>"
+      <span class="src">— Yao Y, et al. STTT 2026; 11:39</span>
+    </div>
+    <div class="quote">
+      "…community analysis showed that <b>Candida and Saccharomyces spp. could act as 'keystone taxa'</b> in the tumor microbiome, driving ecological interactions and overall variation in <b>multi-kingdom microbial composition</b>."
+      <span class="src">— Dohlman AB, et al. Cell 2022; 185:3807</span>
+    </div>
+    <div class="quote">
+      "…the microbiota within our guts (including <b>bacteria, archaea, viruses, fungi, protozoa, and other microbes</b>) can have a profound impact on our overall health and response to disease."
+      <span class="src">— Helmink BA, et al. Nature Medicine 2019; 25:377</span>
+    </div>
+  </div>
+
+  <div class="callout gold">
+    <b>📌 정리하면</b>
+    <p>논문들은 <b>① 여러 계(세균·바이러스·진균·기생충)가 종양에 함께 존재하고</b>(Narunsky-Haziza, Helmink), <b>② 서로 시너지한다</b>(STTT 2026, Dohlman)고 서술합니다. 이는 <b>12개 원인체를 따로 보는 관점을 넘어서는</b> 것입니다.</p>
+  </div>
+</section>
+
+<!-- ===== 6 ===== -->
+<section id="s6">
+  <h2><span class="no">6</span> 인과성과 기여도는 다른 문제다 <span class="badge b-est">✅ 확립</span></h2>
+  <p class="lead">확장을 논하기 전에 <b>반드시 구분</b>해야 할 것이 있습니다. 이 구분을 놓치면 숫자를 잘못 읽게 됩니다.</p>
+
+  <div class="figbox">
+    <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="인과성 판단과 기여도 추정의 4단계 분리">
+      <text x="350" y="26" text-anchor="middle" font-size="15.5" font-weight="700" fill="#0f5e5e">4단계를 분리해서 읽어야 한다</text>
+      <!-- step1 -->
+      <rect x="20" y="52" width="150" height="170" rx="10" fill="#e9f0e6" stroke="#5b7f5b" stroke-width="1.8"/>
+      <text x="95" y="76" text-anchor="middle" font-size="13" font-weight="800" fill="#5b7f5b">① 인과성 판단</text>
+      <text x="95" y="100" text-anchor="middle" font-size="11.5" fill="#2f442f">"감염 X가</text>
+      <text x="95" y="118" text-anchor="middle" font-size="11.5" fill="#2f442f">암 Y의 원인인가?"</text>
+      <line x1="40" y1="134" x2="150" y2="134" stroke="#c9d8c5" stroke-width="1"/>
+      <text x="95" y="154" text-anchor="middle" font-size="11" fill="#6b6b6b">IARC 평가</text>
+      <text x="95" y="172" text-anchor="middle" font-size="11" fill="#6b6b6b">(기존 근거)</text>
+      <text x="95" y="200" text-anchor="middle" font-size="10.5" font-weight="700" fill="#5b7f5b">이 논문의 전제</text>
+      <!-- arrow -->
+      <text x="185" y="142" text-anchor="middle" font-size="18" fill="#999">▼</text>
+      <!-- step2 -->
+      <rect x="200" y="52" width="150" height="170" rx="10" fill="#e3efee" stroke="#0f5e5e" stroke-width="2.2"/>
+      <text x="275" y="76" text-anchor="middle" font-size="13" font-weight="800" fill="#0f5e5e">② 기여도 추정</text>
+      <text x="275" y="100" text-anchor="middle" font-size="11.5" fill="#1f3f3f">"그렇다면</text>
+      <text x="275" y="118" text-anchor="middle" font-size="11.5" fill="#1f3f3f">몇 건인가?"</text>
+      <line x1="220" y1="134" x2="330" y2="134" stroke="#b9cfce" stroke-width="1"/>
+      <text x="275" y="154" text-anchor="middle" font-size="11" fill="#6b6b6b">PAF 계산</text>
+      <text x="275" y="172" text-anchor="middle" font-size="11" fill="#6b6b6b">× 암 발생 건수</text>
+      <text x="275" y="200" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0f5e5e">이 논문의 핵심 작업</text>
+      <!-- arrow -->
+      <text x="365" y="142" text-anchor="middle" font-size="18" fill="#999">▼</text>
+      <!-- step3 -->
+      <rect x="380" y="52" width="150" height="170" rx="10" fill="#fdf0dc" stroke="#b45309" stroke-width="1.8"/>
+      <text x="455" y="76" text-anchor="middle" font-size="13" font-weight="800" fill="#b45309">③ 최신화</text>
+      <text x="455" y="100" text-anchor="middle" font-size="11.5" fill="#7a5a2a">"2024년 현재</text>
+      <text x="455" y="118" text-anchor="middle" font-size="11.5" fill="#7a5a2a">부담은 얼마인가?"</text>
+      <line x1="400" y1="134" x2="510" y2="134" stroke="#e0d0b8" stroke-width="1"/>
+      <text x="455" y="154" text-anchor="middle" font-size="11" fill="#6b6b6b">GLOBOCAN 2024</text>
+      <text x="455" y="172" text-anchor="middle" font-size="11" fill="#6b6b6b">데이터 적용</text>
+      <text x="455" y="200" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b45309">→ 230만 건 / 12%</text>
+      <!-- arrow -->
+      <text x="545" y="142" text-anchor="middle" font-size="18" fill="#999">▼</text>
+      <!-- step4 -->
+      <rect x="560" y="52" width="120" height="170" rx="10" fill="#f3efe6" stroke="#888" stroke-width="1.8"/>
+      <text x="620" y="76" text-anchor="middle" font-size="13" font-weight="800" fill="#666">④ 확장</text>
+      <text x="620" y="100" text-anchor="middle" font-size="11.5" fill="#555">"빠진 관계가</text>
+      <text x="620" y="118" text-anchor="middle" font-size="11.5" fill="#555">있는가?"</text>
+      <line x1="580" y1="134" x2="660" y2="134" stroke="#ddd6c8" stroke-width="1"/>
+      <text x="620" y="154" text-anchor="middle" font-size="11" fill="#6b6b6b">16개</text>
+      <text x="620" y="172" text-anchor="middle" font-size="11" fill="#6b6b6b">causal pair</text>
+      <text x="620" y="200" text-anchor="middle" font-size="10.5" font-weight="700" fill="#666">신규 추가</text>
+      <text x="350" y="256" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b91c1c">"인과관계가 더 확실하다" ≠ "그 감염 때문에 발생하는 암이 더 많다"</text>
+      <text x="350" y="280" text-anchor="middle" font-size="12" fill="#6b6b6b">건수 = 유병률 × 위험 증가 정도 × 해당 암의 기본 발생률 × 인구 규모</text>
+    </svg>
+    <div class="figcap"><b>[그림 4] 인과성 ≠ 기여도.</b> 인과성 판단(①)과 기여도 추정(②)은 <b>완전히 다른 작업</b>입니다. 이 논문은 ①을 전제로 ②를 계산합니다.</div>
+  </div>
+
+  <div class="callout red">
+    <b>🚫 흔한 오해 3가지</b>
+    <p>① <b>"인과성이 확실하면 건수도 많다"</b> — 아닙니다. EBV는 인과성이 확립됐지만 26만 건이고, HPV는 잘 확립되어 75만 건입니다. 건수는 <b>유병률·기본발생률·인구규모</b>가 결정합니다.<br>
+    ② <b>"감염자 대부분이 암에 걸린다"</b> — 아닙니다. EBV 감염자 대부분은 발암하지 않습니다. <b>co-factor(숙주 유전, 환경·식이, 타 감염, 면역억제)</b>가 필요합니다.<br>
+    ③ <b>"12%니까 나머지 88%는 다른 단일 원인"</b> — 아닙니다. 암은 <b>여러 위험요인이 복합적으로</b> 작용합니다.</p>
+  </div>
+
+  <div class="expert">
+    <div class="et">🧪 연구자용 — three-tier 인과성 비교</div>
+    <table>
+      <tr><th>관계</th><th>핵심 그림</th><th>남는 복잡성</th></tr>
+      <tr><td><b>H. pylori → 위암</b></td><td>감염 → 만성 위염 → 위점막 변화 → 전암성 변화 → 위암</td><td>균주, 숙주, 식이·환경 등 위험 차이</td></tr>
+      <tr><td><b>고위험 HPV → 자궁경부암</b></td><td>지속적 고위험 감염 → 세포주기 조절 이상 → 전암병변 → 암</td><td>"HPV 감염"이 아니라 <b>"지속적 고위험 감염"</b>이 핵심</td></tr>
+      <tr><td><b>EBV → 림프종</b></td><td>EBV 감염 + 숙주/면역·유전적 조건 → 특정 종양</td><td>암종별로 기전·위험조건이 다름</td></tr>
+      <tr><td><b>EBV → 위암</b></td><td>EBV 감염이 일부 위암에 관여</td><td><b>H. pylori와 독립인지 상호작용인지 불확실</b></td></tr>
+    </table>
+    <p style="font-size:13.5px;color:var(--sub);margin-top:6px;">특히 EBV→위암은 <b>2026년 논문에서 새로 편입된 causal pair</b>이며, 저자들 스스로 "EBV가 독립적으로 작용하는지, H. pylori와 상승작용을 하는지 불명확"하다고 명시했습니다.</p>
+  </div>
+</section>
+
+<!-- ===== 7 ===== -->
+<section id="s7">
+  <h2><span class="no">7</span> 정직한 경계 — 증거 사다리 <span class="badge b-pro">❓ 전망은 전망으로</span></h2>
+  <p class="lead">이 보고서가 주장하는 것을 <b>신뢰도별로 정리</b>합니다. 어디까지가 확립이고 어디부터가 전망인지 명확히 하세요.</p>
+
+  <div class="figbox">
+    <svg viewBox="0 0 700 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="증거 사다리">
+      <text x="350" y="26" text-anchor="middle" font-size="15.5" font-weight="700" fill="#0f5e5e">증거 사다리 — 어디까지 확립인가</text>
+      <!-- step 4 전망 -->
+      <rect x="20" y="48" width="660" height="56" rx="9" fill="#fdf0dc" stroke="#b45309" stroke-width="1.8"/>
+      <text x="40" y="72" font-size="13.5" font-weight="800" fill="#b45309">❓ 전망 · 가설</text>
+      <text x="40" y="92" font-size="12" fill="#7a5a2a">"12개 목록이 향후 더 늘어날 가능성이 크다" — 근거 있는 추정, 확정 아님. 시점·규모는 미지.</text>
+      <!-- step 3 -->
+      <rect x="20" y="114" width="660" height="56" rx="9" fill="#e3efee" stroke="#0f5e5e" stroke-width="1.8"/>
+      <text x="40" y="138" font-size="13.5" font-weight="800" fill="#0f5e5e">⚠️ 강한 증거 · 진행 중</text>
+      <text x="40" y="158" font-size="12" fill="#1f3f3f">여러 계의 미생물이 종양에 함께 존재하고 서로 시너지한다 (polymicrobial / multi-kingdom)</text>
+      <!-- step 2 -->
+      <rect x="20" y="180" width="660" height="56" rx="9" fill="#e9f0e6" stroke="#5b7f5b" stroke-width="1.8"/>
+      <text x="40" y="204" font-size="13.5" font-weight="800" fill="#5b7f5b">✅ 확립 — 목록은 확장되어 왔다</text>
+      <text x="40" y="224" font-size="12" fill="#2f442f">IARC 목록에 HIV·MCV·HDV·HCMV 추가, 2018→2026 사이 16개 causal pair 신규 편입</text>
+      <!-- step 1 -->
+      <rect x="20" y="246" width="660" height="56" rx="9" fill="#e9f0e6" stroke="#5b7f5b" stroke-width="2.6"/>
+      <text x="40" y="270" font-size="13.5" font-weight="800" fill="#5b7f5b">✅ 확립 — 외부 생명체가 공식 인정됐다</text>
+      <text x="40" y="290" font-size="12" fill="#2f442f">12개 원인체가 IARC Group 1. 2024년 230만 건(전체 암의 12%)이 감염 기인.</text>
+      <text x="350" y="326" text-anchor="middle" font-size="12.5" fill="#6b6b6b">아래로 갈수록 단단한 근거. 위로 갈수록 전망과 불확실성이 커집니다.</text>
+    </svg>
+    <div class="figcap"><b>[그림 5] 증거 사다리.</b> ①과 ②는 확립된 사실, ③은 강한 증거, ④는 <b>전망</b>입니다. 이 보고서는 ④를 <b>전망으로만</b> 주장합니다.</div>
+  </div>
+
+  <div class="card">
+    <h3>⚠️ 함께 읽어야 할 한계 (Lancet 논문이 스스로 밝힌 것)</h3>
+    <ul>
+      <li><b>불확실성 구간 미제시</b> — 데이터 출처가 너무 이질적이라 신뢰할 구간을 만들 수 없었고, "정밀해 보이는 착시"를 피하려 의도적으로 제시하지 않았습니다. → <b>수치를 소수점까지 인용하면 안 됩니다.</b></li>
+      <li><b>저소득국 등록자료 부족</b> — 아프리카는 인구의 <b>2%만</b> 고품질 인구기반 등록에 포함됩니다. 과소·과대 추정 가능.</li>
+      <li><b>2018년과 직접 비교 불가</b> — 데이터 출처와 품질이 바뀌어 단순 비교는 성립하지 않습니다.</li>
+      <li><b>연령·성별 세부 한계</b> — GLOBOCAN은 연령별 수준에서 견고하지 않아, 성별 평균 PAF를 양쪽에 적용했습니다.</li>
+      <li><b>동물·기전 증거의 표준화 부족</b> — 세균·기생충 발암원 규명 방법이 바이러스보다 덜 표준화되어 있습니다(논문 명시).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== 8 ===== -->
+<section id="s8">
+  <h2><span class="no">8</span> 그래서 이 문서가 말하는 것</h2>
+  <div class="flow">
+    <div class="fnode"><b>① [확립]</b> 암의 원인 체계에 <b>외부 생명체가 공식 편입</b>되었습니다 — 12개 원인체, 230만 건, 12%</div>
+    <div class="farrow">▼</div>
+    <div class="fnode"><b>② [확립]</b> 그 목록은 <b>닫힌 것이 아니라 확장되어 왔습니다</b> — HIV·MCV·HDV·HCMV, 16개 causal pair</div>
+    <div class="farrow">▼</div>
+    <div class="fnode"><b>③ [강한 증거]</b> 학계는 목록 <b>밖의</b> 생명체도 연구합니다 — 진균 31종(전체 Group 1에 0종)</div>
+    <div class="farrow">▼</div>
+    <div class="fnode gold"><b>④ [강한 증거]</b> 더 나아가 <b>여러 계가 단독/복합으로 상호작용</b>합니다 — polymicrobial, multi-kingdom, synergy</div>
+    <div class="farrow">▼</div>
+    <div class="fnode gold"><b>⑤ [❓ 전망]</b> 따라서 이 목록은 <b>향후 더 늘어날 가능성이 큽니다</b> — 단정이 아니라 근거 있는 전망</div>
+  </div>
+
+  <div class="callout teal">
+    <b>🧭 이 보고서가 하지 않는 것</b>
+    <p>이 문서는 <b>특정 치료법·약물·복용법을 권하지 않습니다.</b> 미생물이 암에 관여한다는 <b>연구 동향</b>을 정리한 것이며, 관여 사실이 곧 <b>"이렇게 하면 낫는다"</b>를 뜻하지는 않습니다. 그 연결은 별도의 임상 근거가 필요합니다.</p>
+  </div>
+
+  <div class="callout gold">
+    <b>💡 그렇다면 왜 이 정리가 중요한가</b>
+    <p>암을 <b>"내 세포의 문제"</b>로만 보던 시각에 <b>"외부 생명체와의 생태계 문제"</b>라는 축이 <b>공식적으로 추가</b>되었기 때문입니다. 이것은 관점의 확장이며, 향후 연구·예방·개입의 <b>지형 자체가 넓어진다</b>는 뜻입니다. 다만 <b>어디까지가 확립이고 어디부터가 전망인지</b>를 계속 구분해야 합니다.</p>
+  </div>
+</section>
+
+<!-- ===== 9 ===== -->
+<section id="s9">
+  <h2><span class="no">9</span> Q&amp;A</h2>
+
+  <div class="card">
+    <h3>🙋 일반 질문</h3>
+
+    <div class="qa">
+      <div class="q"><span class="qtag">Q1</span>"외부 생명체가 암 원인으로 인정됐다"는 게 정확히 무슨 뜻인가요?</div>
+      <div class="a"><span class="badge b-est">✅ 확립</span>WHO 산하 <b>IARC</b>가 12개 감염원(세균·바이러스·기생충)을 <b>"인간에게 암을 일으킨다는 증거가 충분한" Group 1</b>으로 분류했고, Lancet Oncology가 이를 <b>전 세계 규모로 집계</b>해 발표했습니다. 담배·방사선 같은 무생물적 원인과 나란히, <b>살아있는 외부 생명체가 공식 원인 목록에 들어간</b> 것입니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag">Q2</span>곰팡이가 암을 만든다니, 무슨 뜻인가요?</div>
+      <div class="a"><span class="badge b-evi">⚠️ 진행 중</span>진균은 아직 IARC Group 1이 <b>아닙니다</b>(0종). 다만 35개 암종에서 진균이 검출되고, <i>Candida</i>는 종양에서 <b>살아서 활동 중</b>이며 전이를 예측한다는 연구가 있습니다. 즉 <b>"존재와 연관은 확인됐고, 인과 확립은 아직"</b>인 단계입니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag">Q3</span>그럼 미생물을 어떻게 치료에 쓰나요?</div>
+      <div class="a"><span class="badge b-pro">❓ 전망</span>이 보고서는 <b>구체적 치료법을 다루지 않습니다.</b> 논문들이 제시하는 방향은 ① 표적 제거(항생제·항진균제), ② 조성 변경(프로바이오틱스·식이·FMT), ③ 생체표지자(예후 예측)입니다. 다만 ①은 아직 대부분 동물실험 수준이고, 실제 임상 적용은 별도 검증이 필요합니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag">Q4</span>저는 지금 뭘 하면 되나요?</div>
+      <div class="a"><span class="badge b-est">✅ 확립</span>이 보고서의 범위에서 <b>근거가 확실한 것</b>은 이미 있는 예방 수단입니다: <b>HPV 백신, B형간염 백신, H. pylori 검사·제균, 위암·자궁경부암 국가 검진</b>. 미생물 기반 치료는 아직 연구 단계이므로, <b>검진과 백신</b>이 현재 가장 확실한 행동입니다. 구체적 결정은 담당 의료진과 상의하세요.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag">Q5</span>12개 목록이 정말 늘어날까요?</div>
+      <div class="a"><span class="badge b-pro">❓ 전망</span><b>가능성이 크다고 봅니다.</b> 근거는 ① 지금까지 계속 늘어왔고(HIV·MCV·HDV·HCMV), ② Lancet 저자들 자신이 "향후 목록이 늘 수 있다"고 논문에 명시했으며, ③ 진균 등 목록 밖 생명체 연구가 활발하기 때문입니다. 다만 <b>언제·얼마나</b> 늘어날지는 알 수 없고, <b>늘어난다고 단정할 수는 없습니다.</b></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🔬 심화 질문</h3>
+
+    <div class="qa">
+      <div class="q"><span class="qtag deep">D1</span>이 논문은 "인과관계를 새로 증명"한 것인가요?</div>
+      <div class="a deep"><span class="badge b-est">✅ 확립</span><b>아닙니다.</b> 논문은 이미 IARC가 인과성을 인정한 원인체를 <b>전제로</b> 삼고, 그 원인이 실제로 <b>몇 건</b>을 만드는지를 계산했습니다. 즉 <b>"인과성 판단"이 아니라 "기여도 추정"</b>이 핵심 작업입니다. 다만 2018년 이후 새로 축적된 근거를 반영해 <b>16개 감염-암 조합을 추가</b>했습니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag deep">D2</span>PAF와 인과성은 어떻게 다른가요?</div>
+      <div class="a deep"><span class="badge b-est">✅ 확립</span><b>PAF(population-attributable fraction)</b>는 "이 감염이 없었다면 이 인구집단에서 암이 얼마나 줄었을까"라는 <b>인구 수준의 반사실적(counterfactual)</b> 개념입니다. 개인 수준의 "암 환자 30%가 감염 때문"이 아니라, <b>다른 조건이 동일하다고 가정할 때</b>의 비율입니다. 인과성(원인인가)과 기여도(얼마나 많은가)는 <b>독립적인 두 질문</b>입니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag deep">D3</span>왜 진균은 아직 Group 1이 아닌가요?</div>
+      <div class="a deep"><span class="badge b-evi">⚠️ 진행 중</span>IARC Group 1은 <b>인간 역학자료가 충분</b>해야 합니다. 진균은 ① 종양에서 검출되지만 <b>저빈도(low abundance)</b>이고, ② 진균 감염이 흔한데 암은 드물어 <b>인과 방향이 불명확</b>하며, ③ 참조 데이터베이스가 불완전해 종 수준 동정이 어렵습니다. 즉 <b>"존재 증거는 강하지만 인과 증거는 아직"</b>입니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag deep">D4</span>"polymicrobial"을 임상시험으로 어떻게 검증하나요?</div>
+      <div class="a deep"><span class="badge b-pro">❓ 전망/방법론</span>어렵습니다. 다중 계(kingdom)가 동시에 얽혀 있어 단일 변수 조작이 힘들고, 개인차가 큽니다. 논문들이 제시하는 방법: ① 항생제로 특정 미생물 제거 후 결과 관찰, ② FMT(분변 이식)로 조성 변경, ③ 다계 프로파일링 후 결과와 상관 분석. 다만 <b>교란변수(식이·약물·면역상태) 통제</b>가 관건입니다. 참고로 이 논문들은 암 클론 진화를 <b>"multi-species process"</b>로 보자고 제안합니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag deep">D5</span>EBV→위암이 왜 특별히 불확실한가요?</div>
+      <div class="a deep"><span class="badge b-evi">⚠️ 진행 중</span>EBV는 <b>거의 모든 사람이 감염</b>되지만 대부분 발암하지 않습니다. 그래서 인과 모델이 <b>"EBV 하나 → 위암"이 아니라 "EBV + 특정 숙주 조건 + 추가 사건 → 위암"</b> 형태입니다. 특히 <b>EBV가 H. pylori와 독립적으로 작용하는지, 상승작용하는지가 불명확</b>합니다(Lancet 원문 명시). 그럼에도 2026년 논문은 이를 <b>causal pair로 편입</b>했습니다 — 인과를 인정하면서도 세부 경로는 미해명인 예입니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 10 ===== -->
+<section id="s10">
+  <h2><span class="no">10</span> 용어 사전 &amp; 출처</h2>
+  <table>
+    <tr><th style="width:30%">용어</th><th>설명</th></tr>
+    <tr><td><b>Microbiota</b></td><td>실제 미생물 자체의 집단 (세균·바이러스 등 생물). 비유: "집에 사는 사람들"</td></tr>
+    <tr><td><b>Microbiome</b></td><td>미생물 + 그들의 유전자 전체 + 환경. 비유: "집 전체(사람+가구+공간)"</td></tr>
+    <tr><td><b>Mycobiome</b></td><td>microbiome 중 <b>곰팡이(true fungi)</b>만. 비유: "집 안의 버섯 가족"</td></tr>
+    <tr><td><b>Polymicrobial</b></td><td><b>여러 미생물이 함께</b> 존재·작용하는 상태. 단일 병원체가 아님</td></tr>
+    <tr><td><b>Multi-kingdom</b></td><td><b>여러 계(界)</b>에 걸침 — 세균·진균·바이러스·원생동물 등이 함께</td></tr>
+    <tr><td><b>Synergy (시너지)</b></td><td>두 미생물이 함께일 때 <b>각자보다 큰 효과</b>를 내는 것 (예: HPV + 클라미디아)</td></tr>
+    <tr><td><b>Keystone taxa</b></td><td>생태계 전체를 좌우하는 <b>핵심 종</b> (Dohlman: Candida·Saccharomyces)</td></tr>
+    <tr><td><b>IARC Group 1</b></td><td>"인간에게 암을 일으킨다는 증거가 충분한" 최고 등급. <b>hazard identification</b>이지 위험크기 정량이 아님</td></tr>
+    <tr><td><b>Group 2A</b></td><td>"인간에게 발암 가능성이 높음(probably carcinogenic)". 말라리아 원충이 여기 해당</td></tr>
+    <tr><td><b>PAF</b></td><td>인구기여분율 — "이 원인이 없었다면 인구집단에서 암이 얼마나 줄었을까"(반사실적 개념)</td></tr>
+    <tr><td><b>Co-factor</b></td><td>공동요인 — 숙주 유전, 환경·식이, 타 감염, 면역억제 등. 단독 원인체만으로는 발암이 안 됨</td></tr>
+    <tr><td><b>TME</b></td><td>종양미세환경 (tumor microenvironment)</td></tr>
+    <tr><td><b>Dysbiosis</b></td><td>미생물 불균형 — 다양성 감소 또는 특정 종의 급격한 변화</td></tr>
+    <tr><td><b>ITS 시퀀싱</b></td><td>곰팡이 식별용 유전자 부위(Internal Transcribed Spacer)를 읽는 방법</td></tr>
+    <tr><td><b>GLOBOCAN</b></td><td>IARC의 전 세계 암 발생 통계 데이터베이스</td></tr>
+  </table>
+
+  <div class="foot">
+    <p><b>📄 주요 출처</b></p>
+    <ul style="margin-left:18px;">
+      <li>Rumgay H, Georges D, Huang Y, et al. <b>"Global burden of cancer attributable to infections in 2024: a worldwide incidence analysis."</b> Lancet Oncology 2026; 27: 1237–48. (IARC/WHO, 리옹)</li>
+      <li>Narunsky-Haziza L, Sepich-Poore GD, Livyatan I, et al. <b>"Pan-cancer analyses reveal cancer-type-specific fungal ecologies and bacteriome interactions."</b> Cell 2022; 185: 3789–3806.</li>
+      <li>Dohlman AB, Klug J, Mesko M, et al. <b>"A pan-cancer mycobiome analysis reveals fungal involvement in gastrointestinal and lung tumors."</b> Cell 2022; 185: 3807–3822.</li>
+      <li>Li X, Saxena D. <b>"The tumor mycobiome: A paradigm shift in cancer pathogenesis."</b> Cell 2022; 185: 3787–3789. (논평)</li>
+      <li>Yao Y, Zhu Y, Chen K, et al. <b>"Microbiota in cancer: current understandings and future perspectives."</b> Signal Transduction and Targeted Therapy 2026; 11: 39.</li>
+      <li>Helmink BA, Khan MAW, Hermann A, Gopalakrishnan V, Wargo JA. <b>"The microbiome, cancer, and cancer therapy."</b> Nature Medicine 2019; 25: 377–388.</li>
+      <li>Karagas MR, Kaldor J, Michaelis M, et al. <b>"Carcinogenicity of hepatitis D virus, human cytomegalovirus, and Merkel cell polyomavirus."</b> Lancet Oncology 2025; 26: 994–995.</li>
+    </ul>
+    <p style="margin-top:12px;">
+      <span class="badge b-est">✅ 확립</span> IARC Group 1 목록 · Lancet 집계 수치 · 확장 연혁 (2·3·6·7절)<br>
+      <span class="badge b-evi">⚠️ 강한 증거</span> 진균 존재·복합 상호작용 (4·5절) — 논문이 서술한 사실이나 인과 확정 전<br>
+      <span class="badge b-pro">❓ 전망</span> "향후 목록 확대" (3·8절) — 근거 있는 추정, 확정 아님
+    </p>
+    <p style="margin-top:10px;"><b>⚠️ 면책:</b> 본 문서는 정보·교육 목적의 문헌 분석 보고서이며, <b>의학적 조언이 아닙니다.</b> 진단·치료·복용 결정을 대체하지 않습니다. 특정 약물이나 치료법을 권하지 않습니다. 모든 건강 관련 결정은 담당 의료진과 상의하십시오.</p>
+    <p style="margin-top:10px; text-align:right;">— Hermes Agent · 환자 주도 암 커뮤니티용 심층 분석 보고서 · 2026-10</p>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

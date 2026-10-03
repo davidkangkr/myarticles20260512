@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>고혈압이 관절염을 악화시킨다 — AVP-AVPR1A 축 (Science 2026)</title>
+<style>
+  :root{
+    --bg:#faf8f4; --card:#ffffff; --ink:#2b2b2b; --sub:#6b6b6b;
+    --teal:#0f5e5e; --teal-soft:#e3efee; --gold:#b45309; --gold-soft:#fdf0dc;
+    --sage:#5b7f5b; --sage-soft:#e9f0e6; --red:#b91c1c; --red-soft:#fdecec;
+    --blue:#3a6186; --blue-soft:#ecf2f8;
+    --line:#e5dfd3;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+    font-size:17px; line-height:1.7; padding:0 0 60px 0;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:0 16px;}
+  header{
+    background:linear-gradient(135deg,#0f5e5e 0%,#146b6b 52%,#5b7f5b 100%);
+    color:#fff; padding:38px 16px 30px; text-align:center;
+  }
+  header .tag{display:inline-block; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.4);
+    border-radius:999px; padding:4px 14px; font-size:13px; margin-bottom:12px; letter-spacing:.3px;}
+  header h1{font-size:24px; line-height:1.4; font-weight:800; margin-bottom:10px;}
+  header p{font-size:15px; opacity:.93; line-height:1.55;}
+  .meta{background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px 16px;
+    font-size:14px; color:var(--sub); margin-top:14px; text-align:left; box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .meta b{color:var(--ink);}
+  nav.toc{background:#fff; border-bottom:1px solid var(--line); padding:0 12px; position:sticky; top:0; z-index:50;
+    overflow-x:auto; white-space:nowrap; box-shadow:0 1px 4px rgba(0,0,0,.04);}
+  nav.toc div{display:inline-flex; gap:2px; padding:9px 0;}
+  nav.toc a{color:var(--sub); text-decoration:none; font-size:13px; font-weight:600; padding:6px 12px;
+    border-radius:6px; white-space:nowrap;}
+  nav.toc a:hover{color:var(--teal); background:rgba(15,94,94,.08);}
+  section{margin-top:34px;}
+  h2{font-size:21px; font-weight:800; color:var(--teal); margin-bottom:6px; display:flex; align-items:center; gap:8px; line-height:1.3;}
+  h2 .no{background:var(--teal); color:#fff; border-radius:8px; font-size:14px; min-width:28px; height:28px;
+    display:inline-flex; align-items:center; justify-content:center; padding:0 6px; flex:none;}
+  .lead{color:var(--sub); font-size:15px; margin-bottom:14px;}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px;
+    box-shadow:0 1px 4px rgba(0,0,0,.05); margin-bottom:14px;}
+  .card h3{font-size:17px; font-weight:800; margin-bottom:8px;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  @media(max-width:560px){ .grid2{grid-template-columns:1fr;} }
+  .kcard{background:var(--card); border:1px solid var(--line); border-left:5px solid var(--teal);
+    border-radius:12px; padding:14px 15px; box-shadow:0 1px 4px rgba(0,0,0,.05);}
+  .kcard.gold{border-left-color:var(--gold);}
+  .kcard.sage{border-left-color:var(--sage);}
+  .kcard.red{border-left-color:var(--red);}
+  .kcard.blue{border-left-color:var(--blue);}
+  .kcard .kt{font-size:13px; font-weight:800; letter-spacing:.4px; color:var(--teal); margin-bottom:4px;}
+  .kcard.gold .kt{color:var(--gold);}
+  .kcard.sage .kt{color:var(--sage);}
+  .kcard.red .kt{color:var(--red);}
+  .kcard.blue .kt{color:var(--blue);}
+  .kcard p{font-size:15px;}
+  .big{font-size:22px; font-weight:800; color:var(--teal); display:block; margin:2px 0 4px;}
+  .kcard.gold .big{color:var(--gold);}
+  .kcard.sage .big{color:var(--sage);}
+  .kcard.red .big{color:var(--red);}
+  .kcard.blue .big{color:var(--blue);}
+  .figbox{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px; text-align:center;
+    box-shadow:0 1px 4px rgba(0,0,0,.05); margin:14px 0;}
+  .figbox svg{max-width:100%; height:auto;}
+  .figcap{font-size:13.5px; color:var(--sub); margin-top:8px; line-height:1.55; text-align:left;}
+  .figcap b{color:var(--ink);}
+  .callout{border-radius:12px; padding:14px 16px; font-size:15px; margin:14px 0;}
+  .callout.teal{background:var(--teal-soft); border-left:5px solid var(--teal);}
+  .callout.gold{background:var(--gold-soft); border-left:5px solid var(--gold);}
+  .callout.red{background:var(--red-soft); border-left:5px solid var(--red);}
+  .callout.sage{background:var(--sage-soft); border-left:5px solid var(--sage);}
+  .callout.blue{background:var(--blue-soft); border-left:5px solid var(--blue);}
+  .callout p{margin-top:6px;}
+  .expert{background:#f6f4ee; border:1px dashed #c9bfa8; border-radius:12px; padding:14px 16px;
+    font-size:14.5px; margin:14px 0;}
+  .expert .et{font-size:13px; font-weight:800; color:var(--gold); letter-spacing:.4px; margin-bottom:6px;}
+  .expert table{font-size:13.5px;}
+  table{width:100%; border-collapse:collapse; font-size:14.5px; background:var(--card);
+    border:1px solid var(--line); border-radius:12px; overflow:hidden; margin:12px 0;}
+  th{background:var(--teal); color:#fff; text-align:left; padding:9px 12px; font-size:14px;}
+  td{border-top:1px solid var(--line); padding:9px 12px; vertical-align:top;}
+  tr:nth-child(even) td{background:#fbfaf7;}
+  .qa{margin:16px 0;}
+  .q{font-weight:700; color:var(--teal); margin-bottom:6px; font-size:15.5px; line-height:1.5;}
+  .q .qtag{display:inline-block; background:var(--teal); color:#fff; border-radius:6px; padding:1px 9px; font-size:12px; margin-right:7px; vertical-align:1px;}
+  .q .qtag.deep{background:var(--gold);}
+  .q .qtag.skeptic{background:var(--red);}
+  .a{font-size:15px; background:#fbfaf7; border-left:3px solid var(--teal); padding:10px 13px; border-radius:8px; line-height:1.6;}
+  .a.deep{border-left-color:var(--gold);}
+  .a.skeptic{border-left-color:var(--red);}
+  .foot{background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px 18px; font-size:14px;
+    color:var(--sub); margin-top:34px;}
+  .foot b{color:var(--ink);}
+  .pill{display:inline-block; border-radius:999px; padding:2px 10px; font-size:12.5px; font-weight:700;}
+  .pill.v{background:#e5f6e5; color:#1a7a1a;}
+  .pill.u{background:var(--gold-soft); color:var(--gold);}
+  .pill.w{background:var(--red-soft); color:var(--red);}
+  a{color:var(--teal);}
+  ul,ol{margin:8px 0 8px 22px;} li{margin:6px 0;}
+  .flow{display:flex; flex-direction:column; margin:14px 0;}
+  .fnode{background:var(--card); border:2px solid var(--teal); border-radius:12px; padding:12px 14px; font-size:15px;}
+  .fnode b{color:var(--teal);}
+  .fnode.gold{border-color:var(--gold);} .fnode.gold b{color:var(--gold);}
+  .fnode.sage{border-color:var(--sage);} .fnode.sage b{color:var(--sage);}
+  .fnode.red{border-color:var(--red);} .fnode.red b{color:var(--red);}
+  .farrow{text-align:center; color:var(--teal); font-size:20px; line-height:1.1; padding:2px 0;}
+  @media print{
+    body{background:#fff; color:#000; font-size:11.5pt; line-height:1.5;}
+    nav.toc{display:none;} header{background:#fff!important; color:#000!important; border-bottom:2px solid #333; padding:16px 0;}
+    header .tag{border-color:#999!important; color:#000!important;}
+    header h1,header p{color:#000!important;}
+    .card,.kcard,.figbox,.callout,.expert,.qa .a,.foot{background:#fff!important; border:1px solid #bbb!important; box-shadow:none!important; break-inside:avoid;}
+    .q,.a,h2,.card h3,strong{color:#000!important;}
+    .q .qtag{background:#eee!important; color:#000!important;}
+    th{background:#eee!important; color:#000!important;} td{background:#fff!important;}
+    table,th,td{border-color:#999!important;}
+    .big{color:#000!important;} a{color:#000!important; text-decoration:none;}
+    section{margin-top:14px;} .pill{background:#eee!important; color:#000!important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="tag">🔬 Science 394, eaed8207 (2026) · 전남대·인제대</span>
+    <h1>혈압이 높으면 왜 관절이 더 닳는가,<br><em style="font-style:normal;color:#f5d78e;font-weight:800;">AVP–AVPR1A 축</em></h1>
+    <p>고혈압이 골관절염을 가속하는 신경내분비 경로의 첫 규명<br>— "관절만의 병"이라는 통념에 대한 반증</p>
+    <div class="meta">
+      <b>논문:</b> Hypertension fuels osteoarthritis through neuroendocrine signaling<br>
+      <b>저자:</b> Kim SJ, Kim HE, … Chun JS, Ryu JH (전남대 치의학전문대학원·인제대)<br>
+      <b>게재:</b> Science 394, eaed8207 (2026-10-01) · DOI 10.1126/science.aed8207
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div>
+    <a href="#s1">① 30초 요약</a>
+    <a href="#s2">② 기전</a>
+    <a href="#s3">③ 산 증거</a>
+    <a href="#s4">④ 임상 함의</a>
+    <a href="#s5">⑤ 한계</a>
+    <a href="#s6">⑥ 숫자·용어 읽기</a>
+    <a href="#s7">⑦ Q&amp;A</a>
+    <a href="#s8">⑧ 용어·출처</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ============ 1 ============ -->
+<section id="s1">
+  <h2><span class="no">1</span> 30초 요약</h2>
+  <div class="grid2">
+    <div class="kcard red">
+      <div class="kt">🎯 핵심 발견</div>
+      <p><span class="big">AVP–AVPR1A</span>고혈압이 올리는 <b>바소프레신(AVP)</b>이, 손상·노화로 수용체 <b>AVPR1A</b>가 늘어난 연골에 작용해 파괴를 촉진합니다.</p>
+    </div>
+    <div class="kcard gold">
+      <div class="kt">⚖️ 결정적 조건</div>
+      <p><span class="big">2-hit</span><b>고혈압 단독으로는 연골이 닳지 않습니다.</b> 기계적 손상 또는 노화로 인한 <b>프라이밍</b>이 반드시 필요합니다.</p>
+    </div>
+    <div class="kcard teal">
+      <div class="kt">👥 사람 근거</div>
+      <p><span class="big">36,820명</span>KNHANES 45세 이상 코호트. 고혈압과 OA가 <b>독립적으로 연관</b>되며, <b>구조적 병변이 심할수록 연관성이 강함</b>.</p>
+    </div>
+    <div class="kcard sage">
+      <div class="kt">🔬 기전 확정</div>
+      <p><span class="big">NR4A3</span>AVPR1A <b>유전자 결손</b> 및 <b>국소 약리 차단</b> 모두에서 연골 변성이 예방됨 — <b>인과관계 입증</b>.</p>
+    </div>
+  </div>
+  <div class="callout teal">
+    <b>🧭 한 줄 요약</b>
+    <p>골관절염은 기계적 마모만의 문제가 아니라 <b>전신 내분비 신호가 관절을 직접 조절하는 질환</b>입니다. 고혈압은 AVP를 올리고, 손상·노화된 연골은 AVPR1A를 올립니다. <b>이 둘이 결합할 때만</b> 연골 기질 분해가 촉진됩니다. AVPR1A 또는 그 하위 매개체(NR4A3)는 새로운 치료 표적입니다.</p>
+  </div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section id="s2">
+  <h2><span class="no">2</span> 기전 — 무엇이 어떻게 작동하는가</h2>
+  <p class="lead">전사체 분석에서 <b>Avpr1a</b>는 OA 연골세포에서 가장 강하게 상향조절된 유전자 중 하나였고, <b>관절 연골에서 유일하게 상향되는 AVP 수용체 유전자</b>였습니다. AVP–AVPR1A 축이 혈압 조절의 중심이므로, 연골 내 이 축의 이상은 고혈압과 OA의 직접적 분자 연결을 시사합니다.</p>
+
+  <div class="flow">
+    <div class="fnode"><b>① 전신 고혈압</b> — 혈중 AVP(아르기닌 바소프레신) 농도 상승. AVP는 관절에서 국소 합성되지 않고 <b>전신 순환을 통해 활액으로 도달</b>함 (Fig. S5에서 확인).</div>
+    <div class="farrow">▼</div>
+    <div class="fnode sage"><b>② 프라이밍 (필수 조건)</b> — 기계적 손상 또는 자연 노화가 기저 AVPR1A 발현을 상향. 건강한 젊은 연골에는 AVPR1A가 <b>거의 없음</b>.</div>
+    <div class="farrow">▼</div>
+    <div class="fnode gold"><b>③ AVP + AVPR1A 결합</b> — 연골 파괴에는 <b>AVP와 AVPR1A의 동시 상승</b>이 필요. 어느 하나만으로는 불충분 (Fig. S6).</div>
+    <div class="farrow">▼</div>
+    <div class="fnode gold"><b>④ NR4A3 활성화</b> — 전사체·유전자 침묵 분석으로 확인된 주요 하위 전사 매개체. RAAS·옥시토신 수용체와 <b>무관</b>.</div>
+    <div class="farrow">▼</div>
+    <div class="fnode red"><b>⑤ 연골 기질 분해</b> — MMP3·MMP13 ↑ / 아그리칸(Acan)·제2형 콜라겐 ↓. 이화작용 촉진·동화작용 억제. <b>세포 노화(senescence) 유도 없이</b> 발생.</div>
+  </div>
+
+  <div class="figbox">
+    <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="이중 타격 구조">
+      <text x="350" y="24" text-anchor="middle" font-size="16" font-weight="700" fill="#0f5e5e">이중 타격(two-hit) 구조 — 두 조건이 모두 필요</text>
+
+      <rect x="20" y="48" width="200" height="98" rx="10" fill="#e3efee" stroke="#0f5e5e" stroke-width="1.6"/>
+      <text x="120" y="72" text-anchor="middle" font-size="13.5" font-weight="700" fill="#0f5e5e">① 전신 고혈압</text>
+      <text x="120" y="94" text-anchor="middle" font-size="12" fill="#3c5c5b">혈중 AVP ↑</text>
+      <text x="120" y="112" text-anchor="middle" font-size="11.5" fill="#3c5c5b">(뇌에서 분비)</text>
+      <text x="120" y="134" text-anchor="middle" font-size="11" fill="#b45309" font-weight="700">단독으로는 불충분</text>
+
+      <rect x="250" y="48" width="200" height="98" rx="10" fill="#e9f0e6" stroke="#5b7f5b" stroke-width="1.6"/>
+      <text x="350" y="72" text-anchor="middle" font-size="13.5" font-weight="700" fill="#5b7f5b">② 관절 프라이밍</text>
+      <text x="350" y="94" text-anchor="middle" font-size="12" fill="#4a604a">손상 또는 노화</text>
+      <text x="350" y="112" text-anchor="middle" font-size="11.5" fill="#4a604a">→ AVPR1A ↑</text>
+      <text x="350" y="134" text-anchor="middle" font-size="11" fill="#b45309" font-weight="700">단독으로는 불충분</text>
+
+      <rect x="480" y="48" width="200" height="98" rx="10" fill="#fdecec" stroke="#b91c1c" stroke-width="1.6"/>
+      <text x="580" y="72" text-anchor="middle" font-size="13.5" font-weight="700" fill="#b91c1c">③ 결합 시</text>
+      <text x="580" y="94" text-anchor="middle" font-size="12" fill="#8a4038">NR4A3 활성</text>
+      <text x="580" y="112" text-anchor="middle" font-size="11.5" fill="#8a4038">연골 기질 분해</text>
+      <text x="580" y="134" text-anchor="middle" font-size="11" fill="#b91c1c" font-weight="700">→ OA 가속</text>
+
+      <text x="120" y="178" text-anchor="middle" font-size="20" fill="#c9bfa8">+</text>
+      <text x="350" y="178" text-anchor="middle" font-size="20" fill="#c9bfa8">=</text>
+
+      <!-- 결과 바 -->
+      <rect x="20" y="200" width="660" height="34" rx="8" fill="#f6f4ee" stroke="#c9bfa8" stroke-dasharray="4 3"/>
+      <text x="350" y="222" text-anchor="middle" font-size="13" fill="#6b6b6b">
+        검증: AVPR1A 유전자 결손 · 관절 내 약리 차단 → 고혈압성 연골 변성 <tspan font-weight="700" fill="#5b7f5b">예방됨</tspan>
+      </text>
+
+      <text x="350" y="262" text-anchor="middle" font-size="12.5" fill="#6b6b6b">
+        건강한 젊은 연골 = AVPR1A 거의 없음 → 고혈압만으로는 파괴되지 않음
+      </text>
+      <text x="350" y="284" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b45309">
+        핵심: 프라이밍이 필요 조건 (necessary), 고혈압은 촉진 조건
+      </text>
+    </svg>
+    <div class="figcap"><b>[그림 1]</b> 이중 타격 구조. 고혈압과 관절 프라이밍이 <b>동시에</b> 존재할 때만 연골 파괴가 일어납니다. Fig. S6에서 AVP 주입 단독·AVPR1A 과발현 단독은 모두 OA를 유발하지 못했습니다.</div>
+  </div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section id="s3">
+  <h2><span class="no">3</span> 산 증거 — 세 층위의 검증</h2>
+
+  <div class="card">
+    <h3>① 사람 코호트 (KNHANES)</h3>
+    <ul>
+      <li><b>대상:</b> 45세 이상 <b>36,820명</b> (국민건강영양조사)</li>
+      <li><b>OA 정의:</b> 자가보고 의사 진단 (류마티스 관절염 제외)</li>
+      <li><b>분석:</b> 다변수 로지스틱 회귀 — 연령대별·<b>성별</b> 층화, 조정 오즈비 + 95% CI (Fig. S1)</li>
+      <li><b>방사선 등급:</b> KL 등급(Kellgren–Lawrence) 기준 — 순서형·다항 로지스틱 회귀로 <b>단계별</b> 연관 추정 (Fig. S2)</li>
+      <li><b>결과:</b> 고혈압은 OA 유병과 <b>독립적으로 연관</b>, <b>구조적 병변이 심할수록 연관성이 점진적으로 강함</b></li>
+    </ul>
+    <p style="font-size:14px;color:var(--sub);margin-top:8px;">
+      ⚠️ <b>주의:</b> 자가보고 OA는 실제 유병률을 <b>과소 추정</b>할 수 있고(진단 미수진), KL 등급은 방사선 소견으로 <b>통증과 반드시 일치하지 않음</b>. 관찰 연구이므로 <b>인과 추론 불가</b>.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>② 생쥐 모델 — 두 종류 독립 모델</h3>
+    <table>
+      <tr><th style="width:34%">모델</th><th>유도 방법</th><th>결과</th></tr>
+      <tr>
+        <td><b>DOCA-salt</b></td>
+        <td>일측 신절제 + DOCA-salt 투여 (n=11/군)</td>
+        <td>OARSI 점수 ↑, 연골하 골판 두께 ↑</td>
+      </tr>
+      <tr>
+        <td><b>BPH/2J</b> (유전성)</td>
+        <td>유전적으로 고혈압인 계통, 18개월령</td>
+        <td>OARSI·골판 두께 모두 악화<br><b>p=0.0008</b></td>
+      </tr>
+    </table>
+    <p><b>실험 조건:</b> 정상혈압(NT)·고혈압(HT) × sham/DMM 수술, 수술 6주 후 안락사. 통계는 OARSI에 Kruskal–Wallis + Dunn, 골판 두께에 Welch's ANOVA + Games–Howell.</p>
+
+    <div class="callout gold">
+      <b>⚠️ 선택적 작용 — 특정 경로만 탄다는 증거</b>
+      <p>고혈압은 <b>연골 미란과 연골하 골판 두께를 증가</b>시켰으나, <b>활막염(synovitis)·골극 성숙(osteophyte maturity)에는 영향이 없었습니다.</b> 전신 염증이 전부 악화되는 것이 아니라 <b>AVP–AVPR1A 축이라는 특정 경로</b>를 통한다는 뜻입니다.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>③ 개입 실험 — 인과관계 확립</h3>
+    <table>
+      <tr><th style="width:30%">개입</th><th>설계</th><th>결과</th></tr>
+      <tr>
+        <td><b>AVPR1A 유전자 결손</b><br>(Avpr1a<sup>-/-</sup>)</td>
+        <td>WT vs KO, sham/DMM (n=18/군)</td>
+        <td>고혈압성 연골 변성 <b>예방</b></td>
+      </tr>
+      <tr>
+        <td><b>Relcovaptan</b><br>(AVPR1A 길항제)</td>
+        <td>관절 내 주사, 주 1회, 용량별<br>(0/5/10/20 mM, 10 μL)</td>
+        <td>고혈압 조건에서 <b>OA 진행 억제</b></td>
+      </tr>
+      <tr>
+        <td><b>SSR126768</b><br>(옥시토신 수용체 길항제)</td>
+        <td>대조 — 특이성 검증</td>
+        <td><b>억제하지 못함</b> → AVPR1A 특이성 입증</td>
+      </tr>
+    </table>
+
+    <div class="figbox">
+      <svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="개입 실험 요약">
+        <text x="350" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#0f5e5e">개입 실험 — 무엇이 연골을 보호했는가</text>
+
+        <rect x="20" y="46" width="150" height="86" rx="9" fill="#e9f0e6" stroke="#5b7f5b" stroke-width="1.5"/>
+        <text x="95" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="#5b7f5b">유전자 결손</text>
+        <text x="95" y="92" text-anchor="middle" font-size="11.5" fill="#4a604a">Avpr1a⁻ᐟ⁻</text>
+        <text x="95" y="116" text-anchor="middle" font-size="12" font-weight="700" fill="#2f6b2f">보호됨 ✓</text>
+
+        <rect x="190" y="46" width="150" height="86" rx="9" fill="#e9f0e6" stroke="#5b7f5b" stroke-width="1.5"/>
+        <text x="265" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="#5b7f5b">관절 내 주사</text>
+        <text x="265" y="92" text-anchor="middle" font-size="11.5" fill="#4a604a">relcovaptan</text>
+        <text x="265" y="116" text-anchor="middle" font-size="12" font-weight="700" fill="#2f6b2f">보호됨 ✓</text>
+
+        <rect x="360" y="46" width="150" height="86" rx="9" fill="#fdecec" stroke="#b91c1c" stroke-width="1.5"/>
+        <text x="435" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b91c1c">옥시토신 길항</text>
+        <text x="435" y="92" text-anchor="middle" font-size="11.5" fill="#8a4038">SSR126768</text>
+        <text x="435" y="116" text-anchor="middle" font-size="12" font-weight="700" fill="#b91c1c">효과 없음 ✗</text>
+
+        <rect x="530" y="46" width="150" height="86" rx="9" fill="#fdf0dc" stroke="#b45309" stroke-width="1.5"/>
+        <text x="605" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b45309">경구 로사르탄</text>
+        <text x="605" y="92" text-anchor="middle" font-size="11.5" fill="#7a5a2a">0.1 g/L</text>
+        <text x="605" y="116" text-anchor="middle" font-size="12" font-weight="700" fill="#b45309">효과 없음 ✗</text>
+
+        <rect x="20" y="152" width="660" height="30" rx="8" fill="#e3efee" stroke="#0f5e5e"/>
+        <text x="350" y="172" text-anchor="middle" font-size="12.5" fill="#0f5e5e">
+          관절 내 로사르탄(10 mg/mL, 10 μL)은 <tspan font-weight="700">효과 있음</tspan> — 경구와 대비 (Fig. S13)
+        </text>
+        <text x="350" y="206" text-anchor="middle" font-size="12" fill="#6b6b6b">
+          ※ 관절 내 로사르탄의 작용 기전은 불명확 — Fig. S17은 RAAS가 OA 연골에서 활성화되지 않는다고 보고
+        </text>
+        <text x="350" y="230" text-anchor="middle" font-size="12" font-weight="700" fill="#b45309">
+          → 본문(main text) 없이는 이 모순을 해소할 수 없음
+        </text>
+      </svg>
+      <div class="figcap"><b>[그림 2]</b> 개입 실험 요약. AVPR1A를 <b>없애거나 막으면</b> 보호되지만, 옥시토신 수용체 차단은 효과가 없습니다. 경구 로사르탄(Fig. S13)은 <b>실패</b>했고 관절 내 주사는 성공했습니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 ============ -->
+<section id="s4">
+  <h2><span class="no">4</span> 임상 함의와 치료 표적</h2>
+
+  <div class="callout sage">
+    <b>✅ 논문의 결론 (원문)</b>
+    <p>"AVPR1A 또는 그 하위 매개체를 표적으로 하는 것은 <b>관절 손상이나 고령을 겪는 고혈압 환자에서 골관절염 진행을 늦추는 치료 전략</b>을 제공한다."</p>
+  </div>
+
+  <div class="callout red">
+    <b>🔴 사람 치료제는 아직 없습니다</b>
+    <p>위 결과는 <b>전부 생쥐 모델</b>에서 나온 것입니다. AVPR1A 차단제의 <b>사람 임상시험은 아직 없습니다.</b> 연구팀은 후속으로 "AVP 신호 체계를 표적으로 하는 근본 치료제 개발"을 계획 중이라고 밝혔습니다. <b>당장 임상에서 이 치료를 적용할 수 없습니다.</b></p>
+  </div>
+
+  <div class="expert">
+    <div class="et">🧪 전문가용 — 기존 혈압약과의 관계</div>
+    <p><b>RAAS 경로와의 분리:</b> NR4A3 매개는 <b>레닌-안지오텐신-알도스테론계(RAAS) 또는 옥시토신 수용체와 무관</b>하게 작동한다고 보고되었습니다 (Fig. S17: OA 유사 연골세포에서 Agtr1a/Agtr2 발현 변화 없음).</p>
+    <p style="margin-top:8px;"><b>그러나 해석에 주의가 필요합니다.</b> Fig. S13에서 <b>관절 내 로사르탄(ARB)은 효과가 있었습니다</b>(p=0.0077/0.0117). 만약 RAAS가 연골에서 비활성이라면, 관절 내 ARB의 효과를 AT1 차단으로 설명하기 어렵습니다. <b>가능한 설명:</b> ① 국소 농도에서의 비특이적 항염 효과, ② 본문에 기술된 별도 기전, ③ Fig. S13의 대조군 설정 차이.</p>
+    <p style="margin-top:8px;"><b>→ 이 모순은 본문(main text)을 확보한 뒤에만 해소할 수 있습니다.</b> 현재로서 "ARB/ACEi가 AVP 경로를 차단하지 못한다"고 단정할 수 없습니다.</p>
+  </div>
+
+  <div class="callout blue">
+    <b>🏥 실무적으로 당장 옮길 수 있는 것</b>
+    <p>논문 자체의 임상 권고는 <b>"골관절염 환자를 진료할 때 관절 국소 부위뿐 아니라 고혈압 같은 온몸 건강 상태를 함께 관리해야 한다"</b>는 수준입니다(류제황 교수). 즉 <b>새 치료가 아니라 기존 위험인자 관리의 근거 보강</b>입니다.</p>
+    <p style="margin-top:6px;"><b>⚠️ 복용 중인 혈압약을 임의로 조절하면 안 됩니다.</b> 혈압약은 뇌졸중·심혈관 사건 예방이라는 독립적·확립된 이득이 있습니다.</p>
+  </div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section id="s5">
+  <h2><span class="no">5</span> 한계와 열린 질문</h2>
+
+  <div class="callout red">
+    <b>🚧 논문이 인정하는 한계</b>
+    <p>① <b>사람에서의 인과관계는 미확립</b> — 사람 데이터는 관찰 코호트(연관성)이고, 인과 검증은 생쥐에서만 이루어졌습니다.<br>
+    ② <b>사람 검체 표본이 소규모·고령·여성 편중</b> — 활액 16명(여 14/남 2, 66~80세), 연골 RNA 8명(여 6/남 2), 단백질 5명(여 4/남 1). Table S1 기준.<br>
+    ③ <b>지역적 편중</b> — 단일 국가(한국) 코호트.</p>
+  </div>
+
+  <div class="expert">
+    <div class="et">🧪 전문가용 — 남은 기계론적 물음</div>
+    <ul style="margin-top:6px;">
+      <li><b>AVP를 어떻게 낮출 것인가?</b> AVP는 삼투압·수분 조절과 결합되어 있어 단순 차단이 어려울 수 있습니다. V2 길항제(tolvaptan 등)는 저나트륨혈증용이며, 연골 AVPR1A는 V1a 아형입니다.</li>
+      <li><b>관절 내 로사르탄 효과의 정체</b> — 위 §4 참조. RAAS 비활성 주장과 상충.</li>
+      <li><b>시간 창(window)</b> — 프라이밍이 "되돌릴 수 있는지"가 불명확. AVPR1A 상향이 가역적이면 예방적 개입 여지가 있고, 비가역적이면 조기 개입이 결정적입니다.</li>
+      <li><b>AVP 농도 측정의 임상적 유용성</b> — AVP는 반감기가 짧고 측정이 까다로워, 대리표지자(copeptin)의 임상 적용 가능성이 논의될 수 있습니다. <b>(본문에 없음 — 미검증 추정)</b></li>
+      <li><b>기타 AVP 의존 조직</b> — 신장(V2), 혈관(V1a), 중추(V1b)에 대한 만성 차단의 안전성 프로파일.</li>
+    </ul>
+  </div>
+
+  <div class="expert">
+    <div class="et">📋 이 페이지에 대해 — 근거 수준 표시</div>
+    <table>
+      <tr><th style="width:32%">범위</th><th>상태</th></tr>
+      <tr><td>Supplementary (Fig. S1–S19, Table S1–S2)</td><td><span class="pill v">직접 확인</span> PDF 원문 확인</td></tr>
+      <tr><td>Abstract · Structured Abstract · Editor's Summary</td><td><span class="pill v">직접 확인</span> Science 페이지</td></tr>
+      <tr><td><b>본문(main text)</b></td><td><span class="pill w">미확보</span> 폐쇄 접근 — 정확한 OR 수치, Fig. S13/S17 모순 해소 불가</td></tr>
+      <tr><td>언론 보도 (연합뉴스·ScienceAlert)</td><td><span class="pill u">보도 인용</span> "여성에서 더 강한 연관" 등</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 6 ============ -->
+<section id="s6">
+  <h2><span class="no">6</span> 숫자·용어를 제대로 읽는 법</h2>
+
+  <div class="expert">
+    <div class="et">🧪 전문가용 — 지표 구분</div>
+    <table>
+      <tr><th style="width:28%">지표</th><th>뜻</th><th style="width:26%">이 논문에서</th></tr>
+      <tr>
+        <td><b>OR</b><br>(오즈비)</td>
+        <td>고혈압군의 OA 오즈 ÷ 비고혈압군의 오즈. 1.0 초과면 양의 연관</td>
+        <td>조정 OR + 95% CI<br>(Fig. S1·S2)</td>
+      </tr>
+      <tr>
+        <td><b>OARSI score</b><br>(0–6)</td>
+        <td>설치류 OA 연골 손상의 조직학적 등급. 높을수록 심함</td>
+        <td>median + IQR<br>Kruskal–Wallis + Dunn</td>
+      </tr>
+      <tr>
+        <td><b>KL grade</b></td>
+        <td>Kellgren–Lawrence 방사선 무릎 OA 등급. ≥2를 OA로 정의</td>
+        <td>순서형·다항 회귀</td>
+      </tr>
+      <tr>
+        <td><b>Subchondral bone plate</b></td>
+        <td>연골하 골판 두께 — OA 진행의 구조적 지표</td>
+        <td>mean + 95% CI<br>Welch's ANOVA + Games–Howell</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="callout gold">
+    <b>⚠️ "p&lt;0.05"가 항상 임상적 의미를 뜻하지는 않습니다</b>
+    <p>통계적 유의성은 <b>표본 크기에 좌우</b>됩니다. 이 연구의 생쥐 실험은 <b>군당 n=4~18</b>로 작아, 작은 절대 차이도 유의하게 나올 수 있습니다. 또한 <b>다중비교 보정</b>(Dunn, Games–Howell)을 적용했지만, <b>효과 크기(effect size)</b>는 별도로 확인해야 합니다. 본문 없이는 정확한 효과 크기를 알 수 없습니다.</p>
+  </div>
+
+  <div class="callout red">
+    <b>🚧 정직한 한계 — 이 문서 자체의 한계</b>
+    <p>① <b>본문(main text) 미확보</b> — OR·효과 크기의 정확한 수치, 상세 방법론을 반영하지 못했습니다.<br>
+    ② <b>그림 그래프의 개별 수치</b>는 캡션에 명시된 p값 외에는 판독하지 못했습니다 (축 값이 이미지에만 존재).<br>
+    ③ <b>Q&amp;A의 일부 답변은 작성자 해석</b>이며 논문의 직접 주장이 아닙니다 (아래 출처 표시 참조).</p>
+  </div>
+</section>
+
+<!-- ============ 7 ============ -->
+<section id="s7">
+  <h2><span class="no">7</span> 예상 질문 &amp; 답변</h2>
+  <p class="lead">이 연구를 접했을 때 나올 질문을 정리했습니다. <b>일반 질문 → 심화 질문 → 회의적 질문</b> 순서입니다.</p>
+
+  <div class="card">
+    <h3>🙋 일반 질문 — 누구나 궁금해할 것</h3>
+
+    <div class="qa">
+      <div class="q"><span class="qtag">Q1</span>혈압이 높으면 관절염이 반드시 생기나요?</div>
+      <div class="a"><b>아닙니다.</b> 이 연구의 핵심이 바로 그 반대입니다. <b>고혈압만으로는 연골이 닳지 않습니다.</b> Fig. S6에서 AVP 주입만, 또는 AVPR1A 과발현만으로는 OA가 유발되지 않았습니다. <b>관절이 이미 다쳤거나 나이가 들어 AVPR1A가 늘어난 상태</b>에서 고혈압이 더해질 때 비로소 진행이 가속됩니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag">Q2</span>그럼 혈압약을 끊으면 관절이 나빠지나요?</div>
+      <div class="a"><b>절대 아닙니다. 혈압약을 임의로 조절하면 안 됩니다.</b> 혈압약은 뇌졸중·심근경색·심부전을 막는 <b>생명과 직결된 약</b>이며, 이 이득은 이번 연구와 무관하게 확립되어 있습니다. 이 논문이 말하는 것은 <b>"혈압약 하나로 관절까지 다 해결되지는 않는다"</b>는 것이지, "약이 해롭다"가 아닙니다. 복용 조절은 <b>반드시 처방 의사와 상의</b>하십시오.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag">Q3</span>그럼 지금 개인적으로 할 수 있는 건?</div>
+      <div class="a">이 연구가 직접 권고하는 것은 <b>"관절만 보지 말고 전신 건강(특히 혈압)을 함께 관리하라"</b>입니다. 실무적으로는 —<br>
+      ✅ <b>혈압 관리</b> — 처방대로 복용, 정기 측정 (관절에도 이로울 수 있는 유일한 직접적 함의)<br>
+      ✅ <b>관절 부하 관리</b> — 체중, 무리한 계단·점프 회피, 근력 운동<br>
+      ✅ <b>정기 진료</b> — 관절 증상과 혈압을 <b>같이</b> 상담<br>
+      ⚠️ 이 논문을 근거로 <b>새 약을 요구하거나 복용약을 바꾸지 마십시오.</b> 사람용 AVPR1A 차단제는 존재하지 않습니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag">Q4</span>병원에서 맞는 관절 주사도 이 호르몬 때문인가요?</div>
+      <div class="a"><b>다릅니다.</b> 이 연구에서 쓴 약은 <b>AVPR1A 길항제(relcovaptan)</b>로, 호르몬 수용체를 막는 <b>연구용 약물</b>입니다. 실제 진료에서 맞는 주사(스테로이드·히알루론산 등)는 대개 <b>염증 억제나 점도 보충</b>이 목적이며 작용 기전이 완전히 다릅니다. <b>본인이 맞은 주사를 이 연구의 약으로 오해하지 마시고</b>, 진료 시 의료진에게 직접 확인하십시오.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag">Q5</span>측정된 "AVPR1A"를 제 몸에서 검사할 수 있나요?</div>
+      <div class="a"><b>현재 임상 검사로는 불가능합니다.</b> 이 연구에서 AVPR1A 발현은 <b>수술로 얻은 사람 연골 조직</b>(Table S1: n=8)과 생쥐 조직에서 qRT-PCR·면역조직화학으로 측정했습니다. 혈액 검사로 연골의 수용체 상태를 아는 방법은 이 논문에 제시되지 않았습니다. <b>(임상 적용 가능성에 대해서는 논문이 언급하지 않음)</b></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🔬 심화 질문 — 더 깊이 들어가고 싶은 분께</h3>
+
+    <div class="qa">
+      <div class="q"><span class="qtag deep">D1</span>AVPR1A는 왜 하필 연골에서 증가하나요? 다른 AVP 수용체는?</div>
+      <div class="a deep">Fig. S4에 따르면 <b>Avpr1a가 유일하게 상향조절되는 AVP 수용체 유전자</b>입니다 — Avpr1b와 Avpr2는 변하지 않았습니다(생쥐 qRT-PCR n=5; 사람 OA 연골 n=8). 즉 <b>수용체 아형 선택성</b>이 있습니다. 이는 치료 표적으로서 AVPR1A의 매력을 높이는 근거입니다 — V2(신장, 수분 조절)를 건드리지 않고 V1a만 표적할 수 있기 때문입니다. 다만 <b>AVPR1A 상향의 상류 기전</b>(어떤 전사인자가 Avpr1a 프로모터를 여는지)은 Supplementary에 명시적으로 제시되지 않았습니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag deep">D2</span>NR4A3는 무엇이고, 왜 "주요 매개체"인가요?</div>
+      <div class="a deep">NR4A3는 <b>핵 수용체 4A 계열의 전사인자</b>입니다. 연구팀은 전사체 프로파일링으로 후보를 좁히고, <b>유전자 침묵(gene silencing)으로 기능 검증</b>했습니다 — NR4A3를 억제하면 AVPR1A 과발현에 의한 이화작용 유전자 발현이 줄었습니다(Fig. S18). <b>중요한 점:</b> NR4A3는 <b>RAAS·옥시토신 수용체와 독립적</b>으로 작동한다고 보고되었습니다. 즉 기존 고혈압약의 표적과 겹치지 않는 <b>새로운 분기점</b>입니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag deep">D3</span>"프라이밍"은 되돌릴 수 있나요?</div>
+      <div class="a deep"><b>이 논문의 Supplementary만으로는 답할 수 없습니다.</b> 확인된 것은 <b>프라이밍이 필수 조건</b>이라는 것 — 즉 손상/노화가 AVPR1A를 올리고, 그 상태에서 AVP가 작용한다는 것입니다. Fig. S7은 <b>3·6·12·18개월</b>에 걸쳐 AVPR1A가 증가하고 OARSI 점수가 악화됨을 보여줍니다(p=0.0011 등). 그러나 <b>AVPR1A 상향이 가역적인지, 손상이 멈추면 되돌아오는지</b>는 이 그림들로 판단할 수 없습니다. <b>이것이 중요한 열린 질문입니다</b> — 가역적이라면 예방적 개입의 여지가 크고, 비가역적이면 조기 개입이 결정적입니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag deep">D4</span>고혈압이 "전신"이라면 왜 특정 관절만 심한가요?</div>
+      <div class="a deep">이 연구의 논리가 정확히 이것을 설명합니다. AVP는 <b>전신 순환</b>으로 모든 관절에 도달하지만(Fig. S5: AVP는 관절에서 합성되지 않음), <b>AVPR1A가 올라간 관절만</b> 반응합니다. 즉 <b>국소 취약성(손상 이력·노화 정도)이 전신 신호에 대한 감수성을 결정</b>합니다. 임상적으로는 <b>손상 이력이 있는 관절, 하중 관절(무릎), 고령</b>이 우선 감시 대상이 된다는 뜻입니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag deep">D5</span>사람 데이터에서 "여성에서 더 강한 연관"은 무엇을 뜻하나요?</div>
+      <div class="a deep">Fig. S1은 <b>성별 층화 분석</b>을 포함하며, 언론 보도에 따르면 연관성이 <b>여성에서 더 컸습니다.</b> 가능한 설명: ① 폐경 후 여성의 OA 유병률이 기저적으로 높아 <b>통계적 검출력이 큼</b>, ② 지방분포·대사 요인의 성차, ③ 호르몬 요인. <b>단, 이는 층화 분석 결과이며 상호작용 검정(interaction test)의 유의성은 본문 없이 확인할 수 없습니다.</b> "여성이 더 취약하다"고 단정하려면 상호작용 항의 p값이 필요합니다.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🤨 회의적 질문 — 날카로운 반론에 대한 답</h3>
+
+    <div class="qa">
+      <div class="q"><span class="qtag skeptic">S1</span>생쥐 결과를 사람에 적용해도 되나요?</div>
+      <div class="a skeptic"><b>아직 단정할 수 없습니다.</b> 생쥐 모델의 장점은 <b>인과 검증이 가능</b>하다는 것(유전자 결손·약리 차단)이지만, 한계도 명확합니다 — ① <b>DMM은 급성 외상성 모델</b>이고 사람 OA는 수십 년에 걸친 만성 과정입니다, ② 생쥐 연골은 두께·세포구성·부하 환경이 사람과 다릅니다, ③ <b>DOCA-salt 고혈압은 RAAS 비활성 모델</b>로, 사람의 본태성 고혈압(대개 RAAS 관여)과 기전이 다릅니다. 마지막 항목이 특히 중요합니다 — 이 모델 선택이 결과 해석에 영향을 줄 수 있습니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag skeptic">S2</span>관찰 코호트에서 "연관성"이 인과를 의미하나요?</div>
+      <div class="a skeptic"><b>아닙니다.</b> 관찰 연구의 연관성은 <b>교란</b>으로 설명될 수 있습니다 — 예컨대 비만은 고혈압과 OA <b>모두의</b> 위험인자이므로, 비만이 교란변수라면 연관성이 허구일 수 있습니다. 연구팀은 다변수 조정을 했다고 보고하지만, <b>잔여 교란(residual confounding)이 완전히 배제되지 않습니다.</b> 이 논문의 강점은 연관성을 <b>기계론적 실험으로 뒷받침</b>했다는 점이며, 연관성만으로는 부족합니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag skeptic">S3</span>경구 로사르탄이 효과 없었다는 게 오히려 기존 치료를 부정하는 것 아닌가요?</div>
+      <div class="a skeptic">부분적으로 타당하지만 <b>과잉 해석입니다.</b> 확인된 사실: Fig. S13에서 경구 로사르탄(0.1 g/L)은 OARSI·골판 두께에 유의한 변화를 주지 못했습니다(p=0.8376/0.9455). <b>그러나 이것이 "혈압 조절이 무의미하다"를 뜻하지 않습니다</b> — 대조군인 고혈압 자체가 이미 손상을 만든 상태이고, 개입 시점·기간이 충분했는지는 본문 없이 알 수 없습니다. <b>이 실험의 정확한 설계(투여 시작 시점, 기간)는 Supplementary 캡션만으로는 불완전합니다.</b></div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag skeptic">S4</span>이 연구는 제 관절염 치료에 즉시 도움이 되나요?</div>
+      <div class="a skeptic"><b>즉시는 아닙니다.</b> 정직하게 말하면 — ① 사람용 AVPR1A 차단제가 <b>없습니다</b>, ② 사람 대상 임상시험이 <b>없습니다</b>, ③ 관절 내 약물 투여는 연구 프로토콜이며 <b>임상 지침이 아닙니다</b>. 실제 가치는 <b>이해와 방향</b>에 있습니다: 관절염을 전신 질환의 맥락에서 보는 관점, 그리고 향후 표적 치료 개발의 근거입니다. <b>"오늘 병원에 가서 이 치료를 받겠다"는 기대는 성립하지 않습니다.</b></div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag skeptic">S5</span>Science에 실렸으니 다 검증된 것 아닌가요?</div>
+      <div class="a skeptic"><b>동료심사는 방법론의 타당성을 검증하지, 결론의 확정을 의미하지 않습니다.</b> Science의 심사는 엄격하지만(투고 2025-12-03 → 승인 2026-08-06, 약 8개월), 게재된 논문도 이후 <b>재현 실패나 반박</b>의 대상이 됩니다. 특히 이 연구는 <b>동물 모델 중심</b>이고 사람 데이터는 관찰적이므로, <b>사람에서의 임상적 유효성은 별개로 검증되어야 합니다.</b> 논문도 "장기 사람 연구가 다음 단계"라고 명시했습니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8 ============ -->
+<section id="s8">
+  <h2><span class="no">8</span> 용어 사전 &amp; 출처</h2>
+  <table>
+    <tr><th style="width:30%">용어</th><th>쉬운 설명</th></tr>
+    <tr><td><b>AVP</b></td><td>아르기닌 바소프레신 — 뇌에서 분비되는 호르몬. 혈압·수분 조절 담당.</td></tr>
+    <tr><td><b>AVPR1A</b></td><td>AVP 수용체 1A형(V1a). 세포 표면의 "자물쇠". 관절 연골에서 OA 시 상향.</td></tr>
+    <tr><td><b>NR4A3</b></td><td>핵 수용체 전사인자. AVP 신호를 연골 분해로 연결하는 하위 매개체.</td></tr>
+    <tr><td><b>MMP3 / MMP13</b></td><td>기질 금속단백분해효소 — 연골 기질을 분해하는 효소.</td></tr>
+    <tr><td><b>아그리칸 / 제2형 콜라겐</b></td><td>연골의 주요 구조 성분. 분해되면 연골이 얇아짐.</td></tr>
+    <tr><td><b>OARSI score</b></td><td>설치류 OA 연골 손상의 조직학적 등급 (0–6, 높을수록 심함).</td></tr>
+    <tr><td><b>KL grade</b></td><td>Kellgren–Lawrence — 방사선 무릎 OA 등급. ≥2를 OA로 정의.</td></tr>
+    <tr><td><b>DMM</b></td><td>Destabilization of the Medial Meniscus — 생쥐 OA 유도 수술.</td></tr>
+    <tr><td><b>DOCA-salt</b></td><td>고혈압 유도 모델 (신절제 + DOCA 투여). RAAS 비활성 모델.</td></tr>
+    <tr><td><b>RAAS</b></td><td>레닌-안지오텐신-알도스테론계. 기존 혈압약(ACEi·ARB)의 표적.</td></tr>
+    <tr><td><b>KNHANES</b></td><td>국민건강영양조사 — 한국의 국가 단위 건강 조사.</td></tr>
+    <tr><td><b>relcovaptan</b></td><td>AVPR1A 선택적 길항제 (연구용). Fig. S12에서 OA 진행 억제.</td></tr>
+    <tr><td><b>프라이밍(priming)</b></td><td>손상·노화로 AVPR1A 발현이 올라가 AVP에 반응할 수 있게 된 상태.</td></tr>
+  </table>
+
+  <div class="foot">
+    <p><b>📄 원문:</b> Kim SJ, Kim HE, Chung KH, et al. "Hypertension fuels osteoarthritis through neuroendocrine signaling." <i>Science</i> 394, eaed8207 (2026-10-01). DOI: <a href="https://doi.org/10.1126/science.aed8207" target="_blank" rel="noopener">10.1126/science.aed8207</a></p>
+    <p style="margin-top:6px;"><b>교신저자:</b> 전장수 (인제대, jschun@inje.ac.kr) · 류제황 (전남대, jesryu@jnu.ac.kr)</p>
+    <p style="margin-top:6px;"><b>기관:</b> 전남대학교 치의학전문대학원 약리·치의약학 교실 · Dental Science Research Institute · 인제대학교 · 전남대병원 정형외과·심혈관융합연구센터</p>
+    <p style="margin-top:6px;"><b>Perspective:</b> Wen C, Au MT. "Osteoarthritis as a vascular disease." <i>Science</i> (2026-10-01). DOI: 10.1126/science.ael3784</p>
+    <p style="margin-top:6px;"><b>데이터:</b> GEO GSE104793 · GSE104794 · GSE104795 (마이크로어레이) · GSE336934 · GSE311962 (RNA-seq)</p>
+    <p style="margin-top:6px;"><b>연구비:</b> 한국연구재단(NRF, MSIT) 2019R1A5A2027521 · 2021R1A2C3005727 · RS-2026-25489708 · RS-2024-00454010 · MRC RS-2025-02214129 · KBSI RS-2025-02413415</p>
+    <p style="margin-top:12px;">
+      <span class="pill v">직접 확인</span> Abstract · Structured Abstract · Editor's Summary · Supplementary (Fig. S1–S19, Table S1–S2) · 저자·기여·펀딩 정보<br>
+      <span class="pill u">보도 인용</span> "여성에서 연관성 더 강함", "여성·최중증 무릎 손상군에서 최대" (연합뉴스·ScienceAlert)<br>
+      <span class="pill w">미확보</span> 본문(main text) — 폐쇄 접근. 정확한 OR 수치 및 Fig. S13/S17 모순 해소 불가<br>
+      <span class="pill u">작성자 해석</span> Q&amp;A의 일부 답변 및 §4·§5의 전문가용 주석 — 논문 내용에 근거하나 논문의 직접 주장이 아님
+    </p>
+    <p style="margin-top:10px;"><b>⚠️ 면책:</b> 본 문서는 논문 이해를 돕기 위한 교육·정보 자료입니다. 의학적 진단·치료 조언이 아니며, 검사·치료·복용약 결정은 반드시 담당 의료진과 상의하십시오.</p>
+    <p style="margin-top:10px; text-align:right;">— 가족 및 지인 공유용 · Hermes Agent 정리 · 2026-10-03</p>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>혈압이 높으면 왜 무릎이 더 아플까? — 고혈압과 관절염의 연결</title>
+<style>
+:root{
+  --bg:#faf8f4; --card:#ffffff; --ink:#2b2a26; --ink2:#4a4740; --muted:#7d7767;
+  --gold:#a8813f; --gold-l:#c9a86a; --sage:#6b8f71; --sage-l:#e8f0e8;
+  --brick:#a34a3a; --brick-l:#fbeeea; --blue:#3a6186; --blue-l:#ecf2f8;
+  --line:#e4ded1; --line2:#d6cebd;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Malgun Gothic","Nanum Gothic","Apple SD Gothic Neo",sans-serif;
+  font-size:clamp(16px,4.4vw,18px);line-height:1.72;letter-spacing:-.01em;
+}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 64px}
+
+/* ---------- HERO ---------- */
+.hero{background:linear-gradient(160deg,#fffdf9 0%,#f4efe3 100%);
+ border-bottom:2px solid var(--gold-l);padding:30px 18px 26px;text-align:center;margin-bottom:20px}
+.hero .kicker{display:inline-block;background:#fff;border:1px solid var(--gold-l);
+ color:var(--gold);border-radius:100px;padding:4px 14px;font-size:13px;font-weight:700;
+ letter-spacing:.04em;margin-bottom:14px}
+.hero h1{font-size:clamp(21px,5.6vw,30px);line-height:1.36;margin:0 0 12px;
+ font-weight:800;color:#1f1e1b;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;color:var(--gold);border-bottom:3px solid var(--gold-l)}
+.hero p{margin:0 auto;max-width:600px;color:var(--ink2);font-size:15.5px}
+.hero .meta{margin-top:16px;font-size:13px;color:var(--muted)}
+
+/* ---------- CARDS ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;
+ padding:20px 18px;margin-bottom:16px;box-shadow:0 1px 4px rgba(120,105,75,.06)}
+.card>h2{font-size:clamp(18px,4.9vw,22px);margin:0 0 6px;font-weight:800;
+ color:#1f1e1b;display:flex;align-items:flex-start;gap:10px;line-height:1.38}
+.num{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;
+ width:30px;height:30px;border-radius:9px;background:var(--gold);color:#fff;
+ font-size:15px;font-weight:800;margin-top:1px}
+.num.sage{background:var(--sage)} .num.brick{background:var(--brick)} .num.blue{background:var(--blue)}
+.sub{color:var(--muted);font-size:14px;margin:0 0 14px;padding-left:40px}
+h3{font-size:17px;margin:20px 0 8px;font-weight:800;color:var(--gold)}
+h4{font-size:15.5px;margin:16px 0 6px;font-weight:700;color:var(--ink)}
+p{margin:0 0 12px}
+ul,ol{margin:0 0 12px;padding-left:22px}
+li{margin-bottom:7px}
+strong{font-weight:800;color:#1f1e1b}
+code{background:#f3efe6;border:1px solid var(--line);border-radius:5px;
+ padding:1px 6px;font-size:.9em;font-family:ui-monospace,Consolas,monospace;word-break:break-all}
+
+/* ---------- CALLOUTS ---------- */
+.callout{border-left:4px solid var(--gold);background:#fdfbf6;border-radius:0 10px 10px 0;
+  padding:13px 15px;margin:14px 0;font-size:15.5px}
+.callout.danger{border-left-color:var(--brick);background:var(--brick-l)}
+.callout.ok{border-left-color:var(--sage);background:var(--sage-l)}
+.callout.info{border-left-color:var(--blue);background:var(--blue-l)}
+.callout .ct{font-weight:800;display:block;margin-bottom:5px;font-size:15px}
+.callout.danger .ct{color:var(--brick)} .callout.ok .ct{color:#4d7053}
+.callout.info .ct{color:var(--blue)} .callout:not(.danger):not(.ok):not(.info) .ct{color:var(--gold)}
+
+/* ---------- PILLS ---------- */
+.pill{display:inline-block;font-size:12px;font-weight:800;border-radius:5px;
+  padding:2px 8px;margin-right:5px;vertical-align:middle;white-space:nowrap}
+.pill.v{background:#e6f0e6;color:#3d6345;border:1px solid #bcd6bc}
+.pill.u{background:#fbf0e2;color:#8a5d1c;border:1px solid #e5cba0}
+.pill.w{background:#fbeee9;color:#9c4331;border:1px solid #e8c2b6}
+
+/* ---------- TABLES ---------- */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0;border-radius:10px;
+  border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;background:#fff;min-width:440px}
+th{background:#f7f3ea;color:#6b5629;font-weight:800;text-align:left;
+  padding:10px 11px;border-bottom:1px solid var(--line2);font-size:13.5px;white-space:nowrap}
+td{padding:10px 11px;border-bottom:1px solid #f0ece2;vertical-align:top;color:var(--ink2)}
+tr:last-child td{border-bottom:none}
+td strong{color:#1f1e1b}
+
+/* ---------- STATS ---------- */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:14px 0}
+.stat{background:#fdfbf6;border:1px solid var(--line);border-radius:12px;
+  padding:13px 12px;text-align:center}
+.stat .n{font-size:clamp(19px,5.2vw,24px);font-weight:800;color:var(--gold);line-height:1.2}
+.stat .l{font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.45}
+
+/* ---------- FLOW (세로) ---------- */
+.flow{margin:16px 0}
+.fnode{background:#fdfbf6;border:1px solid var(--line2);border-left:5px solid var(--gold);
+  border-radius:10px;padding:13px 15px}
+.fnode .ft{font-weight:800;font-size:15.5px;color:#1f1e1b;margin-bottom:3px}
+.fnode .fd{font-size:14.5px;color:var(--ink2);margin:0}
+.farrow{text-align:center;color:var(--gold-l);font-size:20px;line-height:1;margin:7px 0}
+.fnode.s{border-left-color:var(--sage)} .fnode.b{border-left-color:var(--brick)}
+.fnode.bl{border-left-color:var(--blue)}
+
+/* ---------- SVG ---------- */
+.svgbox{background:#fff;border:1px solid var(--line);border-radius:12px;
+  padding:8px;margin:16px 0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.svgbox svg{display:block;margin:0 auto}
+.hint{font-size:12.5px;color:var(--muted);text-align:center;margin:2px 0 0}
+
+/* ---------- Q&A ---------- */
+details{background:#fdfbf6;border:1px solid var(--line);border-radius:11px;
+  margin-bottom:9px;overflow:hidden}
+details[open]{border-color:var(--gold-l);background:#fff}
+summary{cursor:pointer;padding:13px 15px;font-weight:700;font-size:15.5px;
+  color:var(--ink);list-style:none;display:flex;gap:9px;align-items:flex-start;
+  min-height:44px;line-height:1.5}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"Q";flex:0 0 auto;display:inline-flex;align-items:center;
+  justify-content:center;width:22px;height:22px;border-radius:6px;background:var(--gold-l);
+  color:#fff;font-size:12.5px;font-weight:800;margin-top:2px}
+details[open] summary{background:#fdfbf6;border-bottom:1px solid var(--line)}
+summary:active{background:#f5f1e8}
+.ans{padding:13px 15px 15px;font-size:15.5px;color:var(--ink2);border-left:3px solid var(--sage-l);margin:0 13px 13px}
+.ans p:last-child{margin-bottom:0}
+.ans .lvl{display:inline-block;font-size:11.5px;font-weight:800;background:#eef3ee;
+  color:#4d7053;border-radius:4px;padding:2px 7px;margin-bottom:8px}
+
+/* ---------- SECTION DIVIDER ---------- */
+.divider{display:flex;align-items:center;gap:12px;margin:26px 0 18px;color:var(--gold)}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line2)}
+.divider span{font-weight:800;font-size:14px;letter-spacing:.05em}
+
+/* ---------- FOOT ---------- */
+.foot{margin-top:22px;padding:16px 18px;background:#f7f3ea;border:1px solid var(--line);
+  border-radius:14px;font-size:13.5px;color:var(--muted);line-height:1.75}
+.foot b{color:var(--ink2)}
+.foot a{color:var(--gold);word-break:break-all}
+
+@media(max-width:520px){
+  .stats{grid-template-columns:1fr}
+  table{font-size:13.5px}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="kicker">커뮤니티 건강 정보</div>
+  <h1>혈압이 높으면 <em>왜 무릎이 더 아플까?</em></h1>
+  <p>고혈압과 관절염이 남의 일이 아니라는 걸, 과학자들이 처음으로 밝혀냈습니다</p>
+  <div class="meta">Science 지 2026년 10월 1일 · 전남대·인제대 공동연구</div>
+</div>
+
+<div class="wrap">
+
+<!-- ============ 도입 ============ -->
+<div class="card">
+  <h2><span class="num">1</span>먼저, 이런 경험 있으시죠?</h2>
+  <p>나이 드신 분들 중에는 <strong>혈압도 높고, 무릎도 아픈</strong> 분이 많습니다.
+  그동안 의사들은 이걸 "나이 때문"이라고 뭉뚱그려 넘겼습니다.
+  혈압은 혈관 문제, 무릎은 뼈 문제 — 서로 상관없는 <strong>우연</strong>이라고 생각했습니다.</p>
+
+  <div class="callout">
+    <span class="ct">그런데 정말 우연이었을까요?</span>
+    오래전부터 의사들 사이에 이상한 관찰이 있었습니다.
+    <strong>혈압이 높은 사람은 관절염도 더 심하다</strong>는 것.
+    하지만 왜 그런지는 30년 넘게 아무도 설명하지 못했습니다.
+  </div>
+
+  <p>2026년 10월, 한국 연구팀이 마침내 그 이유를 찾아냈습니다.
+  그리고 무료로 공개된 부속 자료까지 저희가 직접 확인했습니다.</p>
+</div>
+
+<!-- ============ 결론 먼저 ============ -->
+<div class="card">
+  <h2><span class="num sage">2</span>결론부터 아주 쉽게</h2>
+  <p class="sub">어려운 말 빼고 한 문장으로</p>
+
+  <div class="callout ok" style="font-size:17px">
+    <span class="ct">💡 딱 한마디로</span>
+    <strong>혈압이 높으면 몸속 호르몬이 늘어나는데, 이미 다친 관절은 그 호르몬을
+    잘 받아들이게 되어 있어서 — 둘이 만나면 연골이 빨리 닳습니다.</strong>
+  </div>
+
+  <h3>비유하자면 이런 겁니다</h3>
+
+  <div class="svgbox">
+  <svg viewBox="0 0 700 330" width="100%" style="max-width:680px" role="img"
+       aria-label="자물쇠와 열쇠 비유 그림">
+    <rect x="0" y="0" width="700" height="330" fill="#fffdf9"/>
+
+    <!-- 왼쪽: 건강한 관절 -->
+    <text x="175" y="32" text-anchor="middle" font-size="18" font-weight="800" fill="#4d7053">
+      건강한 관절
+    </text>
+
+    <!-- 연골 뼈대 -->
+    <rect x="60" y="88" width="230" height="30" rx="6" fill="#e8f0e8" stroke="#bcd6bc"/>
+    <text x="175" y="109" text-anchor="middle" font-size="14" fill="#3d6345">연골</text>
+    <rect x="60" y="118" width="230" height="58" rx="6" fill="#f0ece2" stroke="#d6cebd"/>
+    <text x="175" y="152" text-anchor="middle" font-size="14" fill="#7d7767">뼈</text>
+
+    <!-- 자물쇠 1개만 -->
+    <g transform="translate(160,72)">
+      <rect x="0" y="0" width="26" height="21" rx="4" fill="#fff" stroke="#6b8f71" stroke-width="2.5"/>
+      <path d="M6 0 v-6 a7 7 0 0 1 14 0 v6" fill="none" stroke="#6b8f71" stroke-width="2.5"/>
+    </g>
+
+    <!-- 왼쪽 설명 박스 (겹침 방지: 별도 영역) -->
+    <rect x="45" y="192" width="260" height="46" rx="8" fill="#e8f0e8" opacity="0.6"/>
+    <text x="175" y="212" text-anchor="middle" font-size="15" font-weight="700" fill="#4d7053">
+      자물쇠가 거의 없음
+    </text>
+    <text x="175" y="231" text-anchor="middle" font-size="14" fill="#5a7d5f">
+      열쇠가 와도 꽂을 자리가 없음
+    </text>
+
+    <!-- 열쇠(호르몬) -->
+    <g transform="translate(120,262)">
+      <circle cx="14" cy="0" r="11" fill="#fbf0e2" stroke="#c9a86a" stroke-width="2.5"/>
+      <rect x="23" y="-4" width="30" height="8" rx="3" fill="#c9a86a"/>
+      <rect x="44" y="4" width="6" height="9" fill="#c9a86a"/>
+    </g>
+    <text x="230" y="272" font-size="15" fill="#7d7767">열쇠(호르몬)</text>
+    <text x="175" y="308" text-anchor="middle" font-size="15" font-weight="700" fill="#4d7053">
+      → 그냥 지나갑니다
+    </text>
+
+    <!-- 구분선 -->
+    <line x1="350" y1="55" x2="350" y2="315" stroke="#e4ded1" stroke-width="2"
+          stroke-dasharray="6 6"/>
+
+    <!-- 오른쪽: 손상/노화 관절 -->
+    <text x="525" y="32" text-anchor="middle" font-size="18" font-weight="800" fill="#9c4331">
+      다쳤거나 나이 든 관절
+    </text>
+
+    <rect x="410" y="88" width="230" height="30" rx="6" fill="#fbeeea" stroke="#e8c2b6"/>
+    <text x="525" y="109" text-anchor="middle" font-size="14" fill="#9c4331">연골</text>
+    <rect x="410" y="118" width="230" height="58" rx="6" fill="#f0ece2" stroke="#d6cebd"/>
+    <text x="525" y="152" text-anchor="middle" font-size="14" fill="#7d7767">뼈</text>
+
+    <!-- 자물쇠 여러 개 -->
+    <g transform="translate(430,72)">
+      <rect x="0" y="0" width="26" height="21" rx="4" fill="#fff" stroke="#a34a3a" stroke-width="2.5"/>
+      <path d="M6 0 v-6 a7 7 0 0 1 14 0 v6" fill="none" stroke="#a34a3a" stroke-width="2.5"/>
+    </g>
+    <g transform="translate(478,72)">
+      <rect x="0" y="0" width="26" height="21" rx="4" fill="#fff" stroke="#a34a3a" stroke-width="2.5"/>
+      <path d="M6 0 v-6 a7 7 0 0 1 14 0 v6" fill="none" stroke="#a34a3a" stroke-width="2.5"/>
+    </g>
+    <g transform="translate(560,72)">
+      <rect x="0" y="0" width="26" height="21" rx="4" fill="#fff" stroke="#a34a3a" stroke-width="2.5"/>
+      <path d="M6 0 v-6 a7 7 0 0 1 14 0 v6" fill="none" stroke="#a34a3a" stroke-width="2.5"/>
+    </g>
+    <g transform="translate(608,72)">
+      <rect x="0" y="0" width="26" height="21" rx="4" fill="#fff" stroke="#a34a3a" stroke-width="2.5"/>
+      <path d="M6 0 v-6 a7 7 0 0 1 14 0 v6" fill="none" stroke="#a34a3a" stroke-width="2.5"/>
+    </g>
+
+    <!-- 오른쪽 설명 박스 -->
+    <rect x="395" y="192" width="260" height="46" rx="8" fill="#fbeeea" opacity="0.7"/>
+    <text x="525" y="212" text-anchor="middle" font-size="15" font-weight="700" fill="#9c4331">
+      자물쇠가 잔뜩 생김
+    </text>
+    <text x="525" y="231" text-anchor="middle" font-size="14" fill="#8a5044">
+      나이 들어도, 다쳐도 생김
+    </text>
+
+    <!-- 열쇠가 꽂힘 -->
+    <g transform="translate(490,262)">
+      <circle cx="14" cy="0" r="11" fill="#fbeeea" stroke="#a34a3a" stroke-width="2.5"/>
+      <rect x="23" y="-4" width="30" height="8" rx="3" fill="#a34a3a"/>
+    </g>
+    <text x="580" y="272" font-size="15" font-weight="700" fill="#9c4331">열쇠가 쏙</text>
+    <text x="525" y="308" text-anchor="middle" font-size="15" font-weight="700" fill="#9c4331">
+      → 연골이 닳기 시작
+    </text>
+  </svg>
+  <p class="hint">그림 1. 호르몬(열쇠)은 자물쇠가 있어야 작동합니다. 다친 관절에만 자물쇠가 생깁니다.</p>
+  </div>
+
+  <div class="callout danger">
+    <span class="ct">⚠️ 여기가 제일 중요합니다</span>
+    <strong>혈압만 높다고 무릎이 망가지지는 않습니다.</strong>
+    <strong>혈압이 높은 것 + 관절이 이미 다쳤거나 나이 든 것</strong> —
+    이 <u>두 가지가 같이 있어야</u> 연골이 빨리 닳습니다.
+    하나만으로는 안 됩니다.
+  </div>
+</div>
+
+<!-- ============ 순서 ============ -->
+<div class="card">
+  <h2><span class="num blue">3</span>몸속에서 벌어지는 일 (4단계)</h2>
+  <p class="sub">어려운 이름은 넘어가셔도 됩니다</p>
+
+  <div class="flow">
+    <div class="fnode">
+      <div class="ft">1단계 · 혈압이 오르면 호르몬이 늘어난다</div>
+      <p class="fd">뇌에서 만드는 <strong>바소프레신</strong>이라는 호르몬이 있습니다.
+      원래는 몸의 물을 조절하고 혈압을 맞추는 일을 합니다.
+      <strong>혈압이 높은 사람은 이 호르몬이 혈액에 더 많습니다.</strong></p>
+    </div>
+    <div class="farrow">▼</div>
+
+    <div class="fnode s">
+      <div class="ft">2단계 · 다친 관절에만 '자물쇠'가 생긴다</div>
+      <p class="fd">건강한 젊은 관절에는 이 호르몬을 받는 <strong>수용체(자물쇠)</strong>가
+      거의 없습니다. 그런데 <strong>관절이 다치거나, 나이가 들면</strong>
+      이 자물쇠가 갑자기 많이 생깁니다.
+      연구팀은 <strong>인간 관절에서 실제로 확인</strong>했습니다.</p>
+    </div>
+    <div class="farrow">▼</div>
+
+    <div class="fnode b">
+      <div class="ft">3단계 · 호르몬이 자물쇠에 꽂힌다</div>
+      <p class="fd">호르몬은 관절에서 만들어지는 게 아니라
+      <strong>혈액을 타고 멀리서 날아옵니다.</strong> 그리고 자물쇠가 있는 관절에만
+      달라붙습니다. 자물쇠가 없는 건강한 관절은 그냥 지나갑니다.</p>
+    </div>
+    <div class="farrow">▼</div>
+
+    <div class="fnode b">
+      <div class="ft">4단계 · 연골을 녹이는 스위치가 켜진다</div>
+      <p class="fd">호르몬이 자물쇠에 꽂히면 <strong>NR4A3</strong>라는 스위치가 켜집니다.
+      그러면 <strong>연골을 녹이는 효소는 늘고, 연골을 만드는 재료는 줄어듭니다.</strong>
+      결과적으로 연골이 닳습니다.</p>
+    </div>
+  </div>
+
+  <div class="callout info">
+    <span class="ct">이름이 어려우시면 이것만 기억하세요</span>
+    <strong>혈압 ↑ → 호르몬 ↑ → 다친 관절에서만 반응 → 연골 닳음</strong>
+  </div>
+</div>
+
+<!-- ============ 증거 ============ -->
+<div class="card">
+  <h2><span class="num">4</span>연구팀이 어떻게 확인했나</h2>
+  <p class="sub">말로만 주장한 게 아니라, 세 가지 방법으로 확인했습니다</p>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="n">36,820명</div>
+      <div class="l">45세 이상 한국인<br>조사 자료 분석</div>
+    </div>
+    <div class="stat">
+      <div class="n">생쥐 2종</div>
+      <div class="l">고혈압 생쥐 모델로<br>실험 재현</div>
+    </div>
+    <div class="stat">
+      <div class="n">유전자 차단</div>
+      <div class="l">자물쇠를 없애면<br>연골이 안 닳음</div>
+    </div>
+    <div class="stat">
+      <div class="n">약물 차단</div>
+      <div class="l">자물쇠를 약으로 막아도<br>연골이 안 닳음</div>
+    </div>
+  </div>
+
+  <h3>① 사람 조사에서 (한국인 3만 6천여 명)</h3>
+  <ul>
+    <li>혈압이 높은 사람은 <strong>관절염이 더 많았습니다.</strong>
+        (나이·성별 등 다른 요인을 계산에 넣고도)</li>
+    <li><strong>관절염이 심할수록 혈압과의 관련이 더 뚜렷했습니다.</strong>
+        — 가벼운 관절염보다 심한 관절염에서 더 강한 연관</li>
+    <li>이 조사 자료는 <strong>국민건강영양조사(KNHANES)</strong>입니다.</li>
+  </ul>
+
+  <h3>② 생쥐 실험에서</h3>
+  <ul>
+    <li>고혈압 생쥐는 관절염을 일부러 만들었을 때 <strong>연골이 더 많이 닳았습니다.</strong></li>
+    <li>그런데 <strong>정상 혈압 생쥐</strong>는 같은 수술을 해도 그만큼 닳지 않았습니다.</li>
+    <li>놀라운 건 — <strong>고혈압만 있고 관절이 멀쩡한 생쥐는 연골이 안 닳았습니다.</strong></li>
+  </ul>
+
+  <div class="callout">
+    <span class="ct">또 하나의 결정적 증거</span>
+    연구팀은 <strong>활막(관절 안쪽 막) 염증과 뼈 가시는 그대로였다</strong>는 걸
+    확인했습니다. 즉 고혈압이 <strong>아무거나 다 나쁘게 하는 게 아니라
+    '연골'이라는 특정 부분만</strong> 공격한다는 뜻입니다.
+  </div>
+
+  <h3>③ 자물쇠를 없애봤더니</h3>
+  <p><strong>자물쇠(수용체)를 유전자로 없앤 생쥐</strong>와
+  <strong>약으로 막은 생쥐</strong> 모두, 고혈압이 있어도 연골이 잘 닳지 않았습니다.
+  이게 "정말 이 경로 때문이다"를 증명하는 결정적 실험입니다.</p>
+</div>
+
+<!-- ============ 절망적인 소식 아님 ============ -->
+<div class="card">
+  <h2><span class="num sage">5</span>그럼 치료약이 나왔나요?</h2>
+  <p class="sub">솔직하게 말씀드립니다</p>
+
+  <div class="callout danger">
+    <span class="ct">🔴 아직 사람용 약은 없습니다</span>
+    위 결과는 <strong>모두 생쥐 실험</strong>에서 나온 것입니다.
+    사람에게 쓰는 약은 <strong>아직 만들지 않았습니다.</strong>
+    연구팀도 "앞으로 사람 대상 장기 연구가 필요하다"고 밝혔습니다.
+    <strong>당장 병원에서 이 치료를 받을 수는 없습니다.</strong>
+  </div>
+
+  <h3>그럼 지금 당장 할 수 있는 건?</h3>
+  <p>연구팀이 직접 강조한 것이 있습니다.
+  <strong>관절만 들여다보지 말고, 혈압 같은 몸 전체 상태를 같이 관리하라</strong>는 것입니다.</p>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="n">혈압 관리</div>
+      <div class="l">호르몬(열쇠)을 줄이는<br>가장 확실한 방법</div>
+    </div>
+    <div class="stat">
+      <div class="n">관절 부담 줄이기</div>
+      <div class="l">자물쇠가 더 생기는 걸<br>막는 방법</div>
+    </div>
+  </div>
+
+  <p>즉 <strong>혈압을 잘 관리하는 것이 관절에도 도움이 될 수 있다</strong>는
+  방향이 이 연구로 뒷받침됩니다. 반대로 말하면 —
+  <strong>혈압을 방치하면 관절도 손해</strong>일 수 있습니다.</p>
+</div>
+
+<!-- ============ 약 관련 ============ -->
+<div class="card">
+  <h2><span class="num brick">6</span>그럼 혈압약을 먹으면 관절도 좋아지나요?</h2>
+  <p class="sub">여기가 아주 중요하고, 좀 의외입니다</p>
+
+  <p>연구팀은 이 호르몬 경로가 <strong>기존 혈압약이 작용하는 경로와 다르다</strong>는 걸
+  확인했습니다. (레닌-안지오텐신 계통과 무관)</p>
+
+  <h3>실제로 실험해봤습니다</h3>
+  <p>고혈압 생쥐에게 <strong>로사르탄</strong>이라는 흔한 혈압약을
+  <strong>먹이는 방법</strong>과 <strong>관절에 직접 주사하는 방법</strong>으로
+  각각 투여하고 연골을 비교했습니다.</p>
+
+  <div class="tw">
+    <table>
+      <thead>
+        <tr>
+          <th>투여 방법</th>
+          <th>연골 손상(점수)</th>
+          <th>해석</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>먹는 혈압약</strong></td>
+          <td>효과 없음<br><span class="pill u">유의하지 않음</span></td>
+          <td>혈압약을 먹여도<br>연골은 나아지지 않았다</td>
+        </tr>
+        <tr>
+          <td><strong>관절에 직접 주사</strong></td>
+          <td>효과 있음<br><span class="pill v">유의함</span></td>
+          <td>관절에 직접 넣으면<br>연골 손상이 줄었다</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <span class="ct">이게 무슨 뜻인가요?</span>
+    <strong>혈압약을 먹는 것만으로는 관절이 보호되지 않을 수 있습니다.</strong>
+    연구팀은 혈압약을 <u>관절 안에 직접</u> 넣었을 때만 효과를 봤습니다.
+    다만 이건 <strong>생쥐 실험이고, 사람에게 관절 주사를 권하는 것이 아닙니다.</strong>
+    그리고 약 이름(로사르탄)은 <u>연구용으로 쓴 것</u>이지 처방 지침이 아닙니다.
+  </div>
+
+  <div class="callout danger">
+    <span class="ct">⚠️ 절대 오해하지 마세요</span>
+    <strong>"그럼 혈압약을 끊어도 되겠네?"가 아닙니다.</strong>
+    혈압약은 뇌졸중·심장병을 막는 <strong>생명과 직결된 약</strong>입니다.
+    이 연구는 <strong>"혈압약 하나로 관절까지 다 해결되지는 않는다"</strong>는 뜻이며,
+    <u>복용 중인 약을 임의로 조절하면 절대 안 됩니다.</u>
+  </div>
+</div>
+
+<!-- ============ Q&A ============ -->
+<div class="divider"><span>자주 묻는 질문</span></div>
+
+<details>
+  <summary>혈압이 높으면 관절염이 반드시 생기나요?</summary>
+  <div class="ans">
+    <span class="lvl">연구 결과 기준</span>
+    <p><strong>아닙니다.</strong> 연구에서 확인된 건
+    "혈압이 높은 사람에게 관절염이 <u>더 흔하게</u> 관찰된다"는 것과
+    "고혈압이 있으면 관절염이 <u>더 빨리 진행</u>된다"는 것입니다.</p>
+    <p>혈압이 높아도 관절이 멀쩡하면(다친 적 없고 젊으면) 이 경로는 작동하지 않습니다.
+    반대로 <strong>관절이 이미 다쳤는데 혈압까지 높으면</strong> 더 주의가 필요합니다.</p>
+  </div>
+</details>
+
+<details>
+  <summary>그럼 관절이 아픈 사람은 혈압을 꼭 재봐야 하나요?</summary>
+  <div class="ans">
+    <span class="lvl">상식적 권고</span>
+    <p>이 연구의 취지에 딱 맞습니다. <strong>관절이 안 좋으신 분은 혈압도 같이
+    확인해보시는 게 좋습니다.</strong> 특히 나이가 있으시거나 관절을 다친 적이 있다면요.</p>
+    <p>혈압은 집에서 재도 되고, 병원에서 한 번 재는 것만으로도 확인됩니다.
+    <strong>이 연구가 말하는 핵심은 "관절만 보지 말고 몸 전체를 보라"</strong>입니다.</p>
+  </div>
+</details>
+
+<details>
+  <summary>관절에 주사 맞는 것도 이 호르몬 때문인가요?</summary>
+  <div class="ans">
+    <span class="lvl">구분 필요</span>
+    <p>이 연구와 <strong>실제 병원에서 맞는 주사는 다를 수 있습니다.</strong>
+    병원 주사(스테로이드 등)는 대개 <u>염증을 가라앉히는</u> 목적입니다.
+    이 연구에서 쓴 것은 <u>호르몬 자물쇠를 막는</u> 완전히 다른 약입니다.</p>
+    <p>그러니 <strong>"내가 맞은 주사가 이 연구의 주사다"라고 생각하지 마시고</strong>,
+    궁금하시면 진료 때 의사 선생님께 직접 여쭤보시는 게 정확합니다.</p>
+  </div>
+</details>
+
+<details>
+  <summary>이 연구를 믿어도 되나요?</summary>
+  <div class="ans">
+    <span class="lvl">믿을 만한 근거</span>
+    <p><strong>Science</strong>는 세계에서 가장 권위 있는 과학 잡지 중 하나이고,
+    이 연구는 <strong>한국 정부(한국연구재단) 지원</strong>을 받아
+    <strong>약 8개월의 심사</strong>를 거쳐 실렸습니다.</p>
+    <p>연구진에는 <strong>정형외과 의사 2명, 심장 전문의, 통계 전문가</strong>가
+    함께 참여했고, <strong>연구 자료를 인터넷에 공개</strong>했습니다.
+    또 다른 연구자들이 검증할 수 있게 한 것입니다.</p>
+    <p><strong>다만 한계도 분명합니다.</strong> 사람에게서 "고혈압을 치료하면 관절염이
+    좋아진다"는 것까지는 <u>아직 증명되지 않았습니다.</u> 다음 연구가 필요합니다.</p>
+  </div>
+</details>
+
+<!-- ============ 요약 ============ -->
+<div class="card">
+  <h2><span class="num">7</span>이것만 기억하시면 됩니다</h2>
+
+  <div class="svgbox">
+  <svg viewBox="0 0 700 250" width="100%" style="max-width:680px" role="img"
+       aria-label="핵심 요약 그림">
+    <rect x="0" y="0" width="700" height="250" fill="#fffdf9"/>
+
+    <g transform="translate(30,60)">
+      <rect x="0" y="0" width="180" height="130" rx="12" fill="#ecf2f8" stroke="#a8c3d8"/>
+      <text x="90" y="34" text-anchor="middle" font-size="15" font-weight="800" fill="#3a6186">
+        혈압 높음
+      </text>
+      <text x="90" y="62" text-anchor="middle" font-size="13" fill="#4a4740">
+        몸속 호르몬
+      </text>
+      <text x="90" y="82" text-anchor="middle" font-size="13" fill="#4a4740">
+        (열쇠)가 늘어남
+      </text>
+      <text x="90" y="110" text-anchor="middle" font-size="12.5" fill="#7d7767">
+        이것만으론
+      </text>
+      <text x="90" y="127" text-anchor="middle" font-size="12.5" font-weight="700" fill="#3a6186">
+        부족
+      </text>
+    </g>
+
+    <text x="240" y="130" font-size="26" fill="#c9a86a" font-weight="800">+</text>
+
+    <g transform="translate(270,60)">
+      <rect x="0" y="0" width="180" height="130" rx="12" fill="#fbeeea" stroke="#e8c2b6"/>
+      <text x="90" y="34" text-anchor="middle" font-size="15" font-weight="800" fill="#a34a3a">
+        관절이 다침
+      </text>
+      <text x="90" y="62" text-anchor="middle" font-size="13" fill="#4a4740">
+        자물쇠(수용체)가
+      </text>
+      <text x="90" y="82" text-anchor="middle" font-size="13" fill="#4a4740">
+        잔뜩 생김
+      </text>
+      <text x="90" y="110" text-anchor="middle" font-size="12.5" fill="#7d7767">
+        나이 들어도
+      </text>
+      <text x="90" y="127" text-anchor="middle" font-size="12.5" font-weight="700" fill="#a34a3a">
+        생김
+      </text>
+    </g>
+
+    <text x="480" y="130" font-size="26" fill="#c9a86a" font-weight="800">=</text>
+
+    <g transform="translate(510,60)">
+      <rect x="0" y="0" width="165" height="130" rx="12" fill="#fbf0e2" stroke="#e5cba0"/>
+      <text x="82" y="40" text-anchor="middle" font-size="15" font-weight="800" fill="#8a5d1c">
+        연골이
+      </text>
+      <text x="82" y="64" text-anchor="middle" font-size="15" font-weight="800" fill="#8a5d1c">
+        빨리 닳음
+      </text>
+      <text x="82" y="96" text-anchor="middle" font-size="12.5" fill="#7d7767">
+        혈압을 잘 관리하면
+      </text>
+      <text x="82" y="114" text-anchor="middle" font-size="12.5" font-weight="700" fill="#8a5d1c">
+        도움이 됩니다
+      </text>
+    </g>
+
+    <text x="350" y="228" text-anchor="middle" font-size="13.5" fill="#7d7767">
+      두 가지가 함께 있어야 연골이 닳습니다 — 하나만으로는 안 됩니다
+    </text>
+  </svg>
+  <p class="hint">그림 2. 이 연구의 핵심을 한 장으로 정리</p>
+  </div>
+
+  <h3>세 줄 요약</h3>
+  <ol>
+    <li><strong>혈압이 높으면</strong> 몸속 호르몬이 늘어납니다.</li>
+    <li><strong>다쳤거나 나이 든 관절</strong>은 그 호르몬을 잘 받아들입니다.</li>
+    <li><strong>둘이 만나면</strong> 연골이 빨리 닳습니다. 그래서 혈압 관리가 관절에도 중요합니다.</li>
+  </ol>
+
+  <div class="callout ok">
+    <span class="ct">마지막으로 드리고 싶은 말</span>
+    이 연구는 <strong>"관절이 아프면 관절만 봐서는 안 된다"</strong>는 것을
+    처음으로 과학적으로 보여줬습니다. 여러분이 지금 혈압을 신경 쓰고 계신 것 자체가
+    <strong>관절에도 좋은 일</strong>일 수 있습니다.
+  </div>
+</div>
+
+<!-- ============ 출처 ============ -->
+<div class="foot">
+  <b>원문 논문</b><br>
+  Kim SJ, Kim HE, … Chun JS, Ryu JH.,
+  «Hypertension fuels osteoarthritis through neuroendocrine signaling»,
+  <i>Science</i> 394, eaed8207 (2026년 10월 1일).<br>
+  DOI: <a href="https://doi.org/10.1126/science.aed8207">10.1126/science.aed8207</a><br><br>
+
+  <b>근거 자료</b><br>
+  · Science 논문 초록 및 부속 자료(Supplementary Materials, Fig. S1–S19, Table S1–S2) —
+    <b>원문 PDF 직접 확인</b><br>
+  · 저자·기관·연구비 정보 (Science 원문)<br>
+  · 연합뉴스 보도 (2026년 10월 2일)<br><br>
+
+  <b>연구 기관</b><br>
+  전남대학교 치의학전문대학원 · 인제대학교 · 전남대학교병원 정형외과·심혈관융합연구센터<br>
+  교신저자: 전장수 교수(인제대) · 류제황 교수(전남대)<br>
+  지원: 한국연구재단(NRF), 과학기술정보통신부<br><br>
+
+  <b>⚠️ 꼭 읽어주세요</b><br>
+  이 문서는 <b>어려운 논문을 누구나 이해하기 쉽게</b> 정리한 것입니다.
+  <b>의학적 진단이나 처방이 아닙니다.</b>
+  건강에 대한 결정은 반드시 <b>담당 의사 선생님</b>과 상의하세요.
+  특히 <b>복용 중인 혈압약을 임의로 조절하면 위험합니다.</b><br><br>
+
+  정리: 2026년 10월 · 꿈많은사람2
+</div>
+
+</div>
+</body>
+</html>

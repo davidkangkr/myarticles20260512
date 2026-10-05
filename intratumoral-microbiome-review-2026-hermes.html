@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>종양내 미생물군 — 연구 현황과 검출 기술의 진화 (Chinese Journal of Oncology 2026)</title>
+<style>
+  :root{
+    --bg:#faf8f4; --card:#ffffff; --ink:#2b2b2b; --sub:#6b6b6b;
+    --teal:#0f5e5e; --teal-soft:#e3efee; --gold:#b45309; --gold-soft:#fdf0dc;
+    --sage:#5b7f5b; --sage-soft:#e9f0e6; --red:#b91c1c; --red-soft:#fdecec;
+    --line:#e5dfd3;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+    font-size:17px; line-height:1.72; padding:0 0 60px 0;
+  }
+  .wrap{max-width:780px; margin:0 auto; padding:0 16px;}
+  header{
+    background:linear-gradient(135deg,#0f5e5e 0%,#146b6b 52%,#5b7f5b 100%);
+    color:#fff; padding:38px 16px 30px; text-align:center;
+  }
+  header .tag{display:inline-block; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.4);
+    border-radius:999px; padding:4px 14px; font-size:13px; margin-bottom:12px; letter-spacing:.3px;}
+  header h1{font-size:23px; line-height:1.4; font-weight:800; margin-bottom:10px;}
+  header p{font-size:15px; opacity:.94; line-height:1.55;}
+  .meta{background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px 16px;
+    font-size:14px; color:var(--sub); margin-top:14px; text-align:left; box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .meta b{color:var(--ink);}
+  nav.toc{background:#fff; border-bottom:1px solid var(--line); padding:0 12px; position:sticky; top:0; z-index:50;
+    overflow-x:auto; white-space:nowrap; box-shadow:0 1px 4px rgba(0,0,0,.05);}
+  nav.toc div{display:inline-flex; gap:2px; padding:9px 0;}
+  nav.toc a{color:var(--sub); text-decoration:none; font-size:13px; font-weight:600; padding:6px 11px;
+    border-radius:6px; white-space:nowrap;}
+  nav.toc a:hover{color:var(--teal); background:rgba(15,94,94,.08);}
+  section{margin-top:34px;}
+  h2{font-size:21px; font-weight:800; color:var(--teal); margin-bottom:6px; display:flex; align-items:flex-start; gap:8px; line-height:1.35;}
+  h2 .no{background:var(--teal); color:#fff; border-radius:8px; font-size:14px; min-width:28px; height:28px;
+    display:inline-flex; align-items:center; justify-content:center; padding:0 6px; flex:none; margin-top:2px;}
+  .lead{color:var(--sub); font-size:15px; margin-bottom:14px;}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px;
+    box-shadow:0 1px 4px rgba(0,0,0,.05); margin-bottom:14px;}
+  .card h3{font-size:17px; font-weight:800; margin-bottom:8px;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  @media(max-width:560px){ .grid2{grid-template-columns:1fr;} }
+  .kcard{background:var(--card); border:1px solid var(--line); border-left:5px solid var(--teal);
+    border-radius:12px; padding:14px 15px; box-shadow:0 1px 4px rgba(0,0,0,.05);}
+  .kcard.gold{border-left-color:var(--gold);}
+  .kcard.sage{border-left-color:var(--sage);}
+  .kcard.red{border-left-color:var(--red);}
+  .kcard .kt{font-size:13px; font-weight:800; letter-spacing:.4px; color:var(--teal); margin-bottom:4px;}
+  .kcard.gold .kt{color:var(--gold);}
+  .kcard.sage .kt{color:var(--sage);}
+  .kcard.red .kt{color:var(--red);}
+  .kcard p{font-size:15px;}
+  .big{font-size:22px; font-weight:800; color:var(--teal); display:block; margin:2px 0 4px;}
+  .figbox{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px; text-align:center;
+    box-shadow:0 1px 4px rgba(0,0,0,.05); margin:14px 0;}
+  .figbox svg{max-width:100%; height:auto;}
+  .figcap{font-size:13.5px; color:var(--sub); margin-top:8px; line-height:1.55; text-align:left;}
+  .figcap b{color:var(--ink);}
+  .callout{border-radius:12px; padding:14px 16px; font-size:15px; margin:14px 0;}
+  .callout.teal{background:var(--teal-soft); border-left:5px solid var(--teal);}
+  .callout.gold{background:var(--gold-soft); border-left:5px solid var(--gold);}
+  .callout.red{background:var(--red-soft); border-left:5px solid var(--red);}
+  .callout.sage{background:var(--sage-soft); border-left:5px solid var(--sage);}
+  .callout p{margin-top:6px;}
+  .quote{background:#fbfaf7; border-left:4px solid var(--sub); padding:11px 14px; margin:12px 0;
+    font-size:14.5px; line-height:1.65; color:#3a3a3a;}
+  .quote .src{display:block; margin-top:6px; font-size:12.5px; color:var(--sub);}
+  .expert{background:#f6f4ee; border:1px dashed #c9bfa8; border-radius:12px; padding:14px 16px;
+    font-size:14.5px; margin:14px 0;}
+  .expert .et{font-size:13px; font-weight:800; color:var(--gold); letter-spacing:.4px; margin-bottom:6px;}
+  .expert table{font-size:13.5px;}
+  table{width:100%; border-collapse:collapse; font-size:14.5px; background:var(--card);
+    border:1px solid var(--line); border-radius:12px; overflow:hidden; margin:12px 0;}
+  th{background:var(--teal); color:#fff; text-align:left; padding:9px 12px; font-size:14px;}
+  td{border-top:1px solid var(--line); padding:9px 12px; vertical-align:top;}
+  tr:nth-child(even) td{background:#fbfaf7;}
+  .qa{margin:16px 0;}
+  .q{font-weight:700; color:var(--teal); margin-bottom:6px; font-size:15.5px; line-height:1.5;}
+  .q .qtag{display:inline-block; background:var(--teal); color:#fff; border-radius:6px; padding:1px 9px; font-size:12px; margin-right:7px; vertical-align:1px;}
+  .q .qtag.deep{background:var(--gold);}
+  .a{font-size:15px; background:#fbfaf7; border-left:3px solid var(--teal); padding:10px 13px; border-radius:8px; line-height:1.65;}
+  .a.deep{border-left-color:var(--gold);}
+  .badge{display:inline-block; border-radius:999px; padding:1px 9px; font-size:12px; font-weight:800; margin-right:5px; white-space:nowrap;}
+  .b-est{background:var(--sage-soft); color:var(--sage); border:1px solid var(--sage);}
+  .b-evi{background:var(--teal-soft); color:var(--teal); border:1px solid var(--teal);}
+  .b-pro{background:var(--gold-soft); color:var(--gold); border:1px solid var(--gold);}
+  .foot{background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px 18px; font-size:14px;
+    color:var(--sub); margin-top:34px;}
+  .foot b{color:var(--ink);}
+  a{color:var(--teal);}
+  ul,ol{margin:8px 0 8px 22px;} li{margin:6px 0;}
+  .flow{display:flex; flex-direction:column; margin:14px 0;}
+  .fnode{background:var(--card); border:2px solid var(--teal); border-radius:12px; padding:12px 14px; font-size:15px;}
+  .fnode b{color:var(--teal);}
+  .fnode.gold{border-color:var(--gold);} .fnode.gold b{color:var(--gold);}
+  .farrow{text-align:center; color:var(--teal); font-size:20px; line-height:1.1; padding:2px 0;}
+  @media print{
+    body{background:#fff!important; color:#000; font-size:11.5pt; line-height:1.5;}
+    nav.toc{display:none!important;}
+    header{background:#fff!important; color:#000!important; border-bottom:2px solid #333; padding:16px 0;}
+    header .tag{border-color:#999!important; color:#000!important;}
+    header h1,header p{color:#000!important;}
+    .card,.kcard,.figbox,.callout,.expert,.quote,.a,.foot{background:#fff!important; border:1px solid #bbb!important; box-shadow:none!important; break-inside:avoid;}
+    .q,.a,h2,.card h3,strong,h3{color:#000!important;}
+    .q .qtag{background:#eee!important; color:#000!important;}
+    .badge{background:#eee!important; color:#000!important; border-color:#999!important;}
+    th{background:#eee!important; color:#000!important;} td{background:#fff!important;}
+    table,th,td{border-color:#999!important;}
+    .big{color:#000!important;} a{color:#000!important; text-decoration:none;}
+    section{margin-top:14px;} .flow .fnode{border-color:#666!important;} .flow .fnode b{color:#000!important;}
+    .figbox svg text{fill:#000!important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="tag">논문 소개 · 中华肿瘤杂志 2026년 9월</span>
+    <h1>종양내 미생물군 —<br>연구 현황과 검출 기술의 진화</h1>
+    <p>瘤内微生物组的研究现状与检测技术演进<br>Current research status of the intratumoral microbiome<br>and evolution of detection technologies</p>
+    <div class="meta">
+      <b>저자:</b> 黄沁怡(Huang Qinyi) · 向怀荣(Xiang Huairong) · 涂华康(Tu Huakang, 교신) — <b>저장대학(Zhejiang University)</b><br>
+      <b>게재:</b> 中华肿瘤杂志(Chinese Journal of Oncology) 2026년 9월, 제48권 제9호<br>
+      <b>성격:</b> 종설(Review) · 15페이지 · 참고문헌 145건<br>
+      <b>⚠ 이 문서는 정보·교육 목적이며 의학적 조언이 아닙니다.</b>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div>
+    <a href="#s0">① 왜 지금 이 논문인가</a>
+    <a href="#s1">② 30초 요약</a>
+    <a href="#s2">③ 무균설의 붕괴</a>
+    <a href="#s3">④ 4계 미생물</a>
+    <a href="#s4">⑤ 복합 상호작용</a>
+    <a href="#s5">⑥ 발생·전이·치료</a>
+    <a href="#s6">⑦ 검출 기술 3세대</a>
+    <a href="#s7">⑧ 정직한 한계</a>
+    <a href="#s8">⑨ Q&amp;A</a>
+    <a href="#s9">⑩ 용어·출처</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ===== 0. 흐름 맥락 ===== -->
+<section id="s0">
+  <h2><span class="no">1</span> 왜 지금 이 논문인가 — 흐름 속의 위치</h2>
+  <p class="lead">이 논문은 갑자기 나온 것이 아닙니다. <b>"종양은 무균 상태"</b>라는 오랜 가정이 무너지고, 미생물이 암 생물학의 핵심으로 자리 잡아 온 <b>약 6년의 흐름</b> 위에 서 있습니다.</p>
+
+  <div class="figbox">
+    <svg viewBox="0 0 700 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="미생물-암 연구 흐름 타임라인">
+      <text x="350" y="26" text-anchor="middle" font-size="15.5" font-weight="700" fill="#0f5e5e">미생물-암 연구의 흐름 (2019 → 2026)</text>
+      <!-- timeline -->
+      <line x1="45" y1="380" x2="665" y2="380" stroke="#999" stroke-width="2"/>
+      <!-- 2019 -->
+      <circle cx="80" cy="380" r="7" fill="#5b7f5b"/>
+      <text x="80" y="404" text-anchor="middle" font-size="12" font-weight="700" fill="#333">2019</text>
+      <rect x="25" y="270" width="112" height="96" rx="8" fill="#e9f0e6" stroke="#5b7f5b" stroke-width="1.5"/>
+      <text x="81" y="292" text-anchor="middle" font-size="12" font-weight="700" fill="#5b7f5b">기반 연구</text>
+      <text x="81" y="312" text-anchor="middle" font-size="10.5" fill="#2f442f">Nature Med</text>
+      <text x="81" y="328" text-anchor="middle" font-size="10.5" fill="#2f442f">장내미생물 ↔</text>
+      <text x="81" y="344" text-anchor="middle" font-size="10.5" fill="#2f442f">면역항암제</text>
+      <text x="81" y="360" text-anchor="middle" font-size="10.5" fill="#2f442f">Nature: 췌장 진균</text>
+      <!-- 2020 -->
+      <circle cx="200" cy="380" r="7" fill="#0f5e5e"/>
+      <text x="200" y="404" text-anchor="middle" font-size="12" font-weight="700" fill="#333">2020</text>
+      <rect x="145" y="288" width="112" height="78" rx="8" fill="#e3efee" stroke="#0f5e5e" stroke-width="1.5"/>
+      <text x="201" y="310" text-anchor="middle" font-size="12" font-weight="700" fill="#0f5e5e">무균설 붕괴</text>
+      <text x="201" y="330" text-anchor="middle" font-size="10.5" fill="#1f3f3f">Science (Nejman)</text>
+      <text x="201" y="346" text-anchor="middle" font-size="10.5" fill="#1f3f3f">7개 암종 1,010건</text>
+      <text x="201" y="362" text-anchor="middle" font-size="10.5" fill="#1f3f3f">"종양 무균 아님"</text>
+      <!-- 2022 -->
+      <circle cx="322" cy="380" r="8" fill="#b45309"/>
+      <text x="322" y="404" text-anchor="middle" font-size="12" font-weight="700" fill="#333">2022</text>
+      <rect x="262" y="240" width="120" height="126" rx="8" fill="#fdf0dc" stroke="#b45309" stroke-width="1.8"/>
+      <text x="322" y="262" text-anchor="middle" font-size="12" font-weight="700" fill="#b45309">진균 실증</text>
+      <text x="322" y="282" text-anchor="middle" font-size="10.5" fill="#7a5a2a">Cell × 2편</text>
+      <text x="322" y="300" text-anchor="middle" font-size="10.5" fill="#7a5a2a">35개 암종</text>
+      <text x="322" y="316" text-anchor="middle" font-size="10.5" fill="#7a5a2a">17,401 샘플</text>
+      <text x="322" y="332" text-anchor="middle" font-size="10.5" fill="#7a5a2a">진균 31종 검출</text>
+      <text x="322" y="350" text-anchor="middle" font-size="10.5" fill="#7a5a2a">생존 예측 가능</text>
+      <!-- 2023 -->
+      <circle cx="432" cy="380" r="7" fill="#b45309"/>
+      <text x="432" y="404" text-anchor="middle" font-size="12" font-weight="700" fill="#333">2023</text>
+      <rect x="382" y="288" width="100" height="78" rx="8" fill="#fdf0dc" stroke="#b45309" stroke-width="1.5"/>
+      <text x="432" y="310" text-anchor="middle" font-size="12" font-weight="700" fill="#b45309">개념 승격</text>
+      <text x="432" y="330" text-anchor="middle" font-size="10.5" fill="#7a5a2a">STTT 논평</text>
+      <text x="432" y="346" text-anchor="middle" font-size="10.5" fill="#7a5a2a">"새로운</text>
+      <text x="432" y="362" text-anchor="middle" font-size="10.5" fill="#7a5a2a">hallmark"</text>
+      <!-- 2026 -->
+      <circle cx="570" cy="380" r="8" fill="#0f5e5e"/>
+      <text x="570" y="404" text-anchor="middle" font-size="12" font-weight="700" fill="#333">2026</text>
+      <rect x="495" y="200" width="150" height="166" rx="8" fill="#fff" stroke="#0f5e5e" stroke-width="2.5"/>
+      <text x="570" y="222" text-anchor="middle" font-size="12" font-weight="700" fill="#0f5e5e">⭐ 오늘의 논문</text>
+      <text x="570" y="242" text-anchor="middle" font-size="10.5" fill="#1f3f3f">中华肿瘤杂志</text>
+      <text x="570" y="260" text-anchor="middle" font-size="10.5" fill="#1f3f3f">"연구 현황과</text>
+      <text x="570" y="276" text-anchor="middle" font-size="10.5" fill="#1f3f3f">검출 기술의 진화"</text>
+      <line x1="510" y1="288" x2="630" y2="288" stroke="#d8e5e4" stroke-width="1"/>
+      <text x="570" y="306" text-anchor="middle" font-size="10.5" fill="#0f5e5e">· 무균설 붕괴 정리</text>
+      <text x="570" y="322" text-anchor="middle" font-size="10.5" fill="#0f5e5e">· 4계 미생물 정리</text>
+      <text x="570" y="338" text-anchor="middle" font-size="10.5" fill="#0f5e5e">· 복합 상호작용</text>
+      <text x="570" y="354" text-anchor="middle" font-size="10.5" fill="#0f5e5e">· 검출기술 3세대</text>
+      <!-- arrows -->
+      <line x1="120" y1="180" x2="620" y2="180" stroke="#0f5e5e" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arw)"/>
+      <defs><marker id="arw" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 z" fill="#0f5e5e"/></marker></defs>
+      <text x="370" y="168" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0f5e5e">부정 → 실증 → 개념화 → 통합</text>
+      <text x="370" y="204" text-anchor="middle" font-size="11.5" fill="#6b6b6b">종양에 미생물이 없다 → 있다 → 암의 핵심이다 → 어떻게 검출하고 쓸 것인가</text>
+      <text x="350" y="424" text-anchor="middle" font-size="12" fill="#6b6b6b">오늘의 논문은 그 흐름을 정리하고 "다음 단계(검출·임상 적용)"를 제시합니다</text>
+    </svg>
+    <div class="figcap"><b>[그림 1] 흐름 속 위치.</b> 2020년 무균설 붕괴 → 2022년 진균 실증 → 2023년 개념 승격 → <b>2026년 이 논문이 전체를 통합하고 검출 기술까지 정리</b>합니다.</div>
+  </div>
+
+  <div class="callout teal">
+    <b>■ 이 논문의 자리</b>
+    <p>앞선 연구들이 <b>"미생물이 있다"</b>를 보였다면, 이 논문은 <b>"그것을 어떻게 정확히 찾아낼 것인가"</b>를 다룹니다. 즉 <b>발견의 시대에서 검증·적용의 시대로</b> 넘어가는 관문에 있는 자료입니다.</p>
+  </div>
+</section>
+
+<!-- ===== 1. 30초 요약 ===== -->
+<section id="s1">
+  <h2><span class="no">2</span> 30초 요약</h2>
+  <div class="grid2">
+    <div class="kcard red">
+      <div class="kt">뒤집힌 가정</div>
+      <p>오랫동안 <b>"종양 조직은 무균"</b>이라는 가정이 지배했습니다. 시퀀싱·이미징 기술이 이를 <b>뒤집었습니다</b>.</p>
+    </div>
+    <div class="kcard teal">
+      <div class="kt">4계 미생물</div>
+      <p><b>세균 · 진균 · 바이러스 + (고세균·원생동물)</b>. 각각 암종별로 고유한 분포를 보입니다.</p>
+    </div>
+    <div class="kcard gold">
+      <div class="kt">복합 상호작용</div>
+      <p>미생물들은 <b>단독이 아니라 서로 얽혀</b> 작용합니다. <b>Candida biofilm이 혐기균에 환경을 만들고, 항생제가 Candida 균사화를 유도</b>합니다.</p>
+    </div>
+    <div class="kcard sage">
+      <div class="kt">검출 기술 3세대</div>
+      <p><b>원위치 탐지 → 메타게놈 → AI 계산병리</b>. 낮은 생물량 문제를 AI가 돌파 중입니다.</p>
+    </div>
+  </div>
+  <div class="callout teal">
+    <b>▶ 한 줄 결론</b>
+    <p>종양내 미생물은 <b>암의 발생·성장·전이·치료반응·예후 전 과정</b>에 관여하는 <b>미세환경의 핵심 기능 단위</b>이며, 이제는 <b>검출 기술과 AI</b>가 그 실체를 정밀하게 밝혀내는 단계에 들어섰습니다.</p>
+  </div>
+</section>
+
+<!-- ===== 2. 무균설 붕괴 ===== -->
+<section id="s2">
+  <h2><span class="no">3</span> 무균설의 붕괴 <span class="badge b-est">✅ 확립</span></h2>
+  <p class="lead">이 논문의 1장은 <b>패러다임 전환의 역사</b>로 시작합니다.</p>
+
+  <div class="flow">
+    <div class="fnode"><b>① 지배적 가정</b> — "종양 조직은 무균(肿瘤组织无菌)"<br><span style="font-size:13.5px;color:var(--sub);">면역 압력·대사 교란·물리화학 환경이 미생물 정착을 지지하기 어렵다고 봄</span></div>
+    <div class="farrow">▼</div>
+    <div class="fnode"><b>② 가정이 유지된 이유</b> — 기술의 한계<br><span style="font-size:13.5px;color:var(--sub);">전통 배양법은 저풍도 미생물을 포착하지 못했고, <b>오염 미생물과 실제 정착 미생물을 구분하지 못함</b></span></div>
+    <div class="farrow">▼</div>
+    <div class="fnode"><b>③ 기술의 돌파</b> — 고처리량 시퀀싱 · 단일세포 전사체 · 원위치 이미징</div>
+    <div class="farrow">▼</div>
+    <div class="fnode gold"><b>④ 2020년 결정적 증거 (Science, Nejman 등)</b><br>7종 악성종양 <b>1,010개 종양 샘플 + 516개 인접 정상 샘플</b> 시퀀싱<br>→ <b>모든 악성종양 유형</b>(난소암·신경교종·골육종 등 <b>비점막 접촉 종양 포함</b>)에 세균 DNA 존재, 각 종양이 <b>고유한 미생물 조성</b> 보유</div>
+    <div class="farrow">▼</div>
+    <div class="fnode"><b>⑤ 확립된 새 이론</b> — 종양 조직 내에 <b>안정적·재현 가능·조직특이적</b> 미생물 군집이 <b>오염이 아니라 장기 정착</b>하며, 종양세포·면역세포와 <b>복잡한 상호작용 네트워크</b>를 형성</div>
+  </div>
+
+  <div class="callout sage">
+    <b>▶ 핵심 전환</b>
+    <p>"<b>종양 조직 무균 가설</b>" → "<b>종양 미생태계(微生态系统) 이론</b>". 논문은 이것이 <b>종양 이질성·예후 차이·치료 반응 기전</b>을 설명하는 새 이론 틀을 제공했다고 평가합니다.</p>
+  </div>
+
+  <div class="quote">
+    "研究表明, 瘤内微生物并非被动存在于肿瘤组织中, 而是与宿主细胞形成<b>相互作用、共同进化的共生体系</b>"
+    <span class="src">— 원문(1장). 종양내 미생물은 수동적으로 존재하는 것이 아니라 숙주세포와 <b>상호작용·공동진화하는 공생 체계</b>를 이룸</span>
+  </div>
+</section>
+
+<!-- ===== 3. 4계 미생물 ===== -->
+<section id="s3">
+  <h2><span class="no">4</span> 종양 안의 네 계(界) <span class="badge b-evi">⚠ 강한 증거</span></h2>
+  <p class="lead">이 논문의 특징은 <b>세균·진균·바이러스·기타(고세균·원생동물)를 모두 다룬다</b>는 점입니다.</p>
+
+  <div class="figbox">
+    <svg viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="종양내 네 계 미생물 분포">
+      <text x="350" y="26" text-anchor="middle" font-size="15.5" font-weight="700" fill="#0f5e5e">종양 안의 4계(界) 미생물과 암종별 분포</text>
+      <!-- bacteria -->
+      <rect x="20" y="46" width="320" height="160" rx="11" fill="#e9f0e6" stroke="#5b7f5b" stroke-width="2"/>
+      <text x="180" y="70" text-anchor="middle" font-size="14.5" font-weight="800" fill="#5b7f5b">세균 — 가장 활발히 연구됨</text>
+      <text x="40" y="94" font-size="12.5" fill="#2f442f">· 4대 우세문: <tspan font-weight="700">변형균문·후벽균문·</tspan></text>
+      <text x="52" y="112" font-size="12.5" fill="#2f442f"><tspan font-weight="700">의균문·방선균문</tspan> (90% 이상 차지)</text>
+      <text x="40" y="136" font-size="12.5" fill="#2f442f">· 대장암: <tspan font-weight="700">F. nucleatum</tspan>, 독소생성 B. fragilis</text>
+      <text x="40" y="156" font-size="12.5" fill="#2f442f">· 위암: <tspan font-weight="700">H. pylori</tspan>, 연쇄구균, 프레보텔라</text>
+      <text x="40" y="176" font-size="12.5" fill="#2f442f">· 유방암: 포도상구균·연쇄구균·비피도박테리아</text>
+      <text x="40" y="196" font-size="11.5" fill="#6b6b6b">※ 말기 종양에서 다양성↓, 우세종 풍도↑</text>
+      <!-- fungi -->
+      <rect x="360" y="46" width="320" height="160" rx="11" fill="#fdf0dc" stroke="#b45309" stroke-width="2"/>
+      <text x="520" y="70" text-anchor="middle" font-size="14.5" font-weight="800" fill="#b45309">진균 — 최근 연구 열점</text>
+      <text x="380" y="94" font-size="12.5" fill="#7a5a2a">· 주요 문: <tspan font-weight="700">자낭균문 · 담자균문</tspan></text>
+      <text x="380" y="116" font-size="12.5" fill="#7a5a2a">· <tspan font-weight="700">Candida</tspan> → 두경부·식도·구강·간·위·대장</text>
+      <text x="380" y="136" font-size="12.5" fill="#7a5a2a">· <tspan font-weight="700">Malassezia</tspan> → 유방·췌장암</text>
+      <text x="380" y="156" font-size="12.5" fill="#7a5a2a">· <tspan font-weight="700">Aspergillus</tspan> → 간암 / <tspan font-weight="700">Blastomyces</tspan> → 폐암</text>
+      <text x="380" y="176" font-size="12.5" fill="#7a5a2a">· 세균과 <tspan font-weight="700">협동하여</tspan> 종양미세환경 조성</text>
+      <text x="380" y="196" font-size="11.5" fill="#6b6b6b">※ 세균보다 풍도 낮으나 조직·질병 특이성 강함</text>
+      <!-- virus -->
+      <rect x="20" y="220" width="320" height="160" rx="11" fill="#e3efee" stroke="#0f5e5e" stroke-width="2"/>
+      <text x="180" y="244" text-anchor="middle" font-size="14.5" font-weight="800" fill="#0f5e5e">바이러스 — 풍도 최저, 연구 초기</text>
+      <text x="40" y="268" font-size="12.5" fill="#1f3f3f">· DNA·RNA 바이러스</text>
+      <text x="40" y="290" font-size="12.5" fill="#1f3f3f">· <tspan font-weight="700">HPV</tspan> → 두경부 편평암·자궁경부암 (직접 관련)</text>
+      <text x="40" y="310" font-size="12.5" fill="#1f3f3f">· <tspan font-weight="700">EBV</tspan> → 비인두암·림프종 (직접 관련)</text>
+      <text x="40" y="330" font-size="12.5" fill="#1f3f3f">· 대장암 조직에서 HPV·폴리오마·헤르페스·</text>
+      <text x="52" y="348" font-size="12.5" fill="#1f3f3f">보카·Inoue-Melnick 검출 (인접조직엔 없음)</text>
+      <text x="40" y="370" font-size="11.5" fill="#6b6b6b">※ 게놈 통합·잠복감염 형태로 존재</text>
+      <!-- other -->
+      <rect x="360" y="220" width="320" height="160" rx="11" fill="#f3efe6" stroke="#888" stroke-width="2"/>
+      <text x="520" y="244" text-anchor="middle" font-size="14.5" font-weight="800" fill="#666">기타 — 고세균·원생동물</text>
+      <text x="380" y="268" font-size="12.5" fill="#555">· 연구 불충분하나 <tspan font-weight="700">생물학적 기능 있음</tspan></text>
+      <text x="380" y="292" font-size="12.5" fill="#555">· <tspan font-weight="700">고세균</tspan> → 염증·산화 스트레스로 종양 촉진</text>
+      <text x="380" y="314" font-size="12.5" fill="#555">· <tspan font-weight="700">이질아메바</tspan> → 만성 염증·산화손상</text>
+      <text x="392" y="332" font-size="12.5" fill="#555">→ 숙주 DNA 손상·상피 이상증식</text>
+      <text x="380" y="356" font-size="12.5" fill="#555">· <tspan font-weight="700">Trichomonas vaginalis</tspan> → HPV와 <tspan font-weight="700">협동</tspan>해</text>
+      <text x="392" y="374" font-size="12.5" fill="#555">자궁경부암 발생·발전에 관여</text>
+    </svg>
+    <div class="figcap"><b>[그림 2] 4계 미생물.</b> 세균이 가장 많이 연구되었고, 진균은 최근 열점이며, 바이러스는 풍도가 낮아 연구가 초기입니다. <b>고세균·원생동물까지</b> 포함해 총 4계를 다룹니다.</div>
+  </div>
+
+  <div class="expert">
+    <div class="et">연구자용 — 진균 정착의 구체 패턴</div>
+    <p><b>편향 정착의 근거:</b> <i>Candida albicans</i>는 <b>점막 유래 종양</b>(두경부 편평암·자궁내막암·대장암)에서 정착률이 높고, <b>비점막 유래 종양</b>(간암·신장암)에서는 정착률이 극히 낮거나 검출되지 않습니다. 한 연구에서 식도암 환자의 <i>C. albicans</i> 정착률은 <b>51.8%</b>로 양성 식도질환(24%)보다 유의하게 높았습니다.</p>
+    <p style="margin-top:8px;"><b>환경적 결정 요인:</b> ① 조직 장벽 완전성 ② 상피세포 부착 특성 ③ 국소 면역 압력. 또한 <b>산성·저산소 미세환경</b>이 <i>F. nucleatum</i>·<i>C. albicans</i> 같은 <b>내산성 미생물</b>에 유리하며, 저산소 종양 핵심부에는 <b>편성혐기균</b>이, 폐·피부처럼 공기 접촉 부위에는 <b>호기성·통성혐기성</b> 미생물이 우세합니다.</p>
+  </div>
+</section>
+
+<!-- ===== 4. 복합 상호작용 ===== -->
+<section id="s4">
+  <h2><span class="no">5</span> ⭐ 복합 상호작용 — 단독이 아니라 함께 <span class="badge b-evi">⚠ 강한 증거</span></h2>
+  <p class="lead">이 논문은 <b>"미생물 간 협동 조절 네트워크(微生物间协同调控网络)"</b>를 별도 절로 다룹니다. 세균과 진균이 어떻게 서로에게 영향을 주는지 <b>구체적 기전</b>까지 제시합니다.</p>
+
+  <div class="figbox">
+    <svg viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="세균-진균 상호작용 기전">
+      <text x="350" y="26" text-anchor="middle" font-size="15.5" font-weight="700" fill="#0f5e5e">세균 ↔ 진균 상호작용 — 구체 기전 3가지</text>
+      <!-- mechanism 1 -->
+      <rect x="20" y="46" width="660" height="100" rx="11" fill="#e3efee" stroke="#0f5e5e" stroke-width="1.8"/>
+      <text x="42" y="72" font-size="14" font-weight="800" fill="#0f5e5e">① Candida biofilm → 혐기균에 서식지 제공</text>
+      <text x="42" y="96" font-size="13" fill="#1f3f3f">Candida가 <tspan font-weight="700">바이오필름</tspan>을 형성하면 <tspan font-weight="700">저산소 미세환경</tspan>이 조성됨</text>
+      <text x="42" y="118" font-size="13" fill="#1f3f3f">→ <tspan font-weight="700">Clostridium perfringens</tspan>(가스괴저균), <tspan font-weight="700">Bacteroides fragilis</tspan> 등 <tspan font-weight="700">혐기균의 증식 조건</tspan>이 마련됨</text>
+      <text x="42" y="138" font-size="12" fill="#6b6b6b">※ 진균이 세균을 위해 환경을 조성하는 방향</text>
+      <!-- mechanism 2 -->
+      <rect x="20" y="160" width="660" height="100" rx="11" fill="#fdf0dc" stroke="#b45309" stroke-width="1.8"/>
+      <text x="42" y="186" font-size="14" font-weight="800" fill="#b45309">② 항생제 → 세균 펩티도글리칸 방출 → Candida 균사화</text>
+      <text x="42" y="210" font-size="13" fill="#7a5a2a"><tspan font-weight="700">항생제</tspan>가 세균을 죽이면서 <tspan font-weight="700">펩티도글리칸(peptidoglycan)</tspan>을 방출</text>
+      <text x="42" y="232" font-size="13" fill="#7a5a2a">→ 이것이 <tspan font-weight="700">Candida albicans의 균사화(hyphal growth)</tspan>를 유도</text>
+      <text x="42" y="252" font-size="13" fill="#7a5a2a">→ <tspan font-weight="700">침습·확산 능력 강화</tspan></text>
+      <text x="42" y="276" font-size="12" fill="#6b6b6b">※ 세균을 죽이는 개입이 오히려 진균을 강화하는 역설</text>
+      <!-- mechanism 3 -->
+      <rect x="20" y="274" width="660" height="100" rx="11" fill="#e9f0e6" stroke="#5b7f5b" stroke-width="1.8"/>
+      <text x="42" y="300" font-size="14" font-weight="800" fill="#5b7f5b">③ 대사 협동 → 종양 진행 촉진</text>
+      <text x="42" y="324" font-size="13" fill="#2f442f">세균-진균 협동이 <tspan font-weight="700">D-아르기닌·D-오르니틴</tspan> 수준을 올리고 <tspan font-weight="700">부티르산 대사경로</tspan>를 활성화</text>
+      <text x="42" y="346" font-size="13" fill="#2f442f">→ <tspan font-weight="700">대장암 진행 촉진</tspan> (공동 풍도 분포의 특이적 연관 패턴 확인)</text>
+      <text x="42" y="368" font-size="12" fill="#6b6b6b">※ 하부 위장관 종양: Candida속 ↔ 소간균속 양의 연관 / Ruminococcus·Akkermansia·Barnesiella와는 음의 연관</text>
+    </svg>
+    <div class="figcap"><b>[그림 3] 상호작용 기전.</b> 진균이 혐기균에 서식지를 만들고, <b>항생제가 진균을 강화</b>하며, 대사 협동이 종양을 촉진합니다. 이것이 처리해야 할 <b>복잡성</b>의 실체입니다.</div>
+  </div>
+
+  <div class="quote">
+    "白色念珠菌形成生物膜时营造的低氧微环境能够为<b>产气荚膜梭菌、脆弱拟杆菌等厌氧菌</b>提供适宜的增殖条件；而<b>抗生素干预下细菌释放的肽聚糖，又会诱导白色念珠菌菌丝化</b>，进一步增强其侵袭与扩散能力。"
+    <span class="src">— 원문 2장 3절. 진균↔세균이 서로의 증식을 돕는 양방향 기전</span>
+  </div>
+
+  <div class="callout red">
+    <b>⚠ 여기서 나오는 중요한 함의</b>
+    <p><b>"세균만 죽이면 된다"가 성립하지 않습니다.</b> 항생제는 세균을 줄이지만 동시에 <b>펩티도글리칸을 방출해 진균을 강화</b>할 수 있습니다. 논문은 이 생태계를 <b>하나의 네트워크</b>로 보고, <b>미생물 간 협동 조절 규칙을 해석하는 것이 종양 미생태계 개입 표적 발굴의 중요한 방향</b>이라고 씁니다.</p>
+  </div>
+</section>
+
+<!-- ===== 5. 발생·전이·치료 ===== -->
+<section id="s5">
+  <h2><span class="no">6</span> 발생 · 성장·전이 · 치료반응 — 전 과정 <span class="badge b-evi">⚠ 강한 증거</span></h2>
+
+  <div class="card">
+    <h3>① 발생 — 게놈 손상 · 신호경로 · 만성염증</h3>
+    <ul>
+      <li><b>유전독소로 직접 DNA 손상</b>: Pks⁺ 대장균, <i>Campylobacter jejuni</i>. <b>진균(Candida 등)과 바이러스(HPV·EBV)</b>도 대사산물로 산화 손상 유도 또는 게놈 통합</li>
+      <li><b>F. nucleatum</b>: 표면 부착인자 <b>FadA</b>가 E-카드헤린과 결합 → <b>Wnt/β-catenin</b> 활성화 → c-MYC·cyclin D1 ↑ → 세포 이상 증식</li>
+      <li><b>H. pylori</b>: 독력인자 <b>CagA</b>가 NF-κB·PI3K/AKT 활성화 → 위점막 상피 악성 전환</li>
+      <li><b>췌장암의 Malassezia</b>: <b>보체 C3 경로</b> 활성화 → 종양세포 증식·침습 → 전암병변 진행 가속</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>② 성장·전이 — EMT · 혈관신생 · 면역억제</h3>
+    <ul>
+      <li><b>포도상구균·유산균 등 세포내 미생물</b>이 <b>RhoA–ROCK 신호 억제</b>로 세포골격 재편 → 혈류의 기계적 스트레스에 저항 → <b>혈행 전이 촉진</b></li>
+      <li><b>F. nucleatum</b>: TLR4/Keap1/NRF2 → CYP2J2 ↑ → 리놀레산에서 <b>12,13-EpOME</b> 생성 → 유방암·대장암·후두암 전이 유도. 에탄올 존재 시 <b>EMT 활성화</b></li>
+      <li><b>반대 방향도 있음</b>: <i>Lactococcus</i>의 <b>니신(nisin)</b>이 MMP2 억제 / <i>L. plantarum</i> YYC-3 대사산물이 VEGF-MMP2/9 억제 → <b>항전이 효과</b></li>
+    </ul>
+    <div class="callout gold" style="margin-bottom:0;">
+      <b>⚖ 논문이 명시한 이중성</b>
+      <p>"종양내 미생물군에는 <b>촉암 아군(促癌亚群)과 항암 아군(抗癌亚群)이 존재</b>합니다." 예: 방사선 저항성 <i>Methylobacterium</i> JCM 2831은 종양 림프절 전이와 <b>음의 상관</b>(항전이 잠재력).</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>③ 치료 반응 — 화학·방사선·면역 모두 관여</h3>
+    <table>
+      <tr><th>치료</th><th>미생물의 작용</th></tr>
+      <tr><td><b>화학요법</b></td><td>췌장암에서 <b>γ-변형균</b>이 <b>시티딘 탈아미노효소</b>로 <b>젬시타빈을 불활성화</b> → <b>내성</b> 유발. 반대로 유전자 조작 살모넬라가 5-FC를 <b>5-FU로 전환</b>해 효과 증강</td></tr>
+      <tr><td><b>방사선</b></td><td>구강 <b>Lachnospira</b>(毛螺菌)가 부티르산 ↑ → <b>방사선 효능 저하</b>. 반대로 <b>진균 표적 제거는 방사선 효능 상승</b></td></tr>
+      <tr><td><b>면역치료</b></td><td><b>Bifidobacterium</b>이 STING·IFN 경로로 <b>항CD47 면역치료</b> 국소 효과 증강. 흑색종 모델에서 <b>항PD-L1</b> 효과 유의 향상 (PD-1 발현 억제·NK세포 활성화·퍼포린/IFNγ 분비 촉진)</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>④ 예후 — 바이오마커 가치</h3>
+    <ul>
+      <li><b>췌장암</b>: 종양내 미생물 <b>다양성이 높을수록 생존율 높음</b>. Pseudomonas·Bacillus 등 특정 특징이 장기 생존 예측</li>
+      <li><b>비인두암</b>: 종양내 <b>세균 부하 높음</b> ↔ 무병생존·전체생존 <b>단축</b> (신뢰할 만한 예후 지표)</li>
+      <li><b>위장관 종양</b>: <b>Candida DNA 양성 → 생존기간 단축</b></li>
+      <li><b>F. nucleatum</b>: 대장암에서 MSI 표현형·BRAF 변이와 연관. 식도 편평암에서 고풍도 ↔ <b>말기·재발·신보조화학요법 반응 저하</b></li>
+      <li><b>H. pylori</b>: 위암·대장 선종에서 질병 위험 상승·악화와 연관 (CagA 단백질 수준과 양의 상관)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== 6. 검출 기술 ===== -->
+<section id="s6">
+  <h2><span class="no">7</span> 검출 기술의 3세대 진화 <span class="badge b-est">✅ 확립</span></h2>
+  <p class="lead">이 논문의 <b>차별점</b>입니다. 다른 자료들이 "무엇이 발견됐나"에 머물 때, 이 논문은 <b>"어떻게 찾아내는가"</b>를 정면으로 다룹니다.</p>
+
+  <div class="figbox">
+    <svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="검출 기술 3세대 비교">
+      <text x="350" y="26" text-anchor="middle" font-size="15.5" font-weight="700" fill="#0f5e5e">검출 기술 3세대 — 강점과 한계</text>
+      <!-- gen1 -->
+      <rect x="20" y="46" width="320" height="176" rx="11" fill="#e9f0e6" stroke="#5b7f5b" stroke-width="2"/>
+      <text x="180" y="70" text-anchor="middle" font-size="14.5" font-weight="800" fill="#5b7f5b">1세대 · 원위치 탐지</text>
+      <text x="40" y="94" font-size="12.5" font-weight="700" fill="#2f442f">FISH · IHC · IF · PAS/GMS</text>
+      <text x="40" y="118" font-size="12" fill="#2f442f">[O] 공간 정보 보존 → 직접 증거</text>
+      <text x="40" y="140" font-size="12" fill="#2f442f">[O] 조직 슬라이드에서 위치 확인</text>
+      <text x="40" y="166" font-size="12" fill="#b91c1c">[X] 형광 간섭 → 다종 동시 검출 제한</text>
+      <text x="40" y="186" font-size="12" fill="#b91c1c">[X] 저풍도 진균·바이러스 민감도 부족</text>
+      <text x="40" y="206" font-size="12" fill="#b91c1c">[X] 항체 의존 / 판독 효율 낮음</text>
+      <!-- gen2 -->
+      <rect x="360" y="46" width="320" height="176" rx="11" fill="#e3efee" stroke="#0f5e5e" stroke-width="2"/>
+      <text x="520" y="70" text-anchor="middle" font-size="14.5" font-weight="800" fill="#0f5e5e">2세대 · 메타게놈 시퀀싱</text>
+      <text x="380" y="94" font-size="12.5" font-weight="700" fill="#1f3f3f">비표적 고처리량 시퀀싱</text>
+      <text x="380" y="118" font-size="12" fill="#1f3f3f">[O] 세균·진균·바이러스 총망라</text>
+      <text x="380" y="140" font-size="12" fill="#1f3f3f">[O] 16S보다 분해능↑ (종·균주 수준)</text>
+      <text x="380" y="166" font-size="12" fill="#b91c1c">[X] 숙주 DNA &gt;90% → 신호 방해</text>
+      <text x="380" y="186" font-size="12" fill="#b91c1c">[X] 환경 오염 → 위양성 (Decontam 필요)</text>
+      <text x="380" y="206" font-size="12" fill="#b91c1c">[X] 비용↑·분석 복잡 → 대규모 적용 제약</text>
+      <!-- gen3 -->
+      <rect x="20" y="240" width="660" height="150" rx="11" fill="#fdf0dc" stroke="#b45309" stroke-width="2.4"/>
+      <text x="350" y="266" text-anchor="middle" font-size="15" font-weight="800" fill="#b45309">3세대 · AI 계산병리학 ⭐ (논문이 주목하는 방향)</text>
+      <text x="42" y="292" font-size="12.5" fill="#7a5a2a">· <tspan font-weight="700">전슬라이드 이미지(WSI)</tspan> + 딥러닝 → 저풍도 미생물 자동 탐지</text>
+      <text x="42" y="314" font-size="12.5" fill="#7a5a2a">· 병리 기반모델: <tspan font-weight="700">UNI</tspan>(43종 암 분류 93.8%, AUC 0.976) · <tspan font-weight="700">CHIEF</tspan>(6만여 WSI, 정확도 약 94%) ·</text>
+      <text x="52" y="334" font-size="12.5" fill="#7a5a2a"><tspan font-weight="700">GigaPath</tspan>(13억 병리 이미지, 6종 암 AUC 0.9 이상)</text>
+      <text x="42" y="358" font-size="12.5" fill="#7a5a2a">· 이미 실현: <tspan font-weight="700">WSI 형태만으로 HPV·EBV 정착 상태 예측</tspan></text>
+      <text x="42" y="380" font-size="12" fill="#b91c1c">[!] 남은 과제: 미생물은 <tspan font-weight="700">저풍도 점상 분포</tspan> → 극도 불균형 데이터 → 기존 모델이 놓침</text>
+    </svg>
+    <div class="figcap"><b>[그림 4] 검출 기술 3세대.</b> 1세대는 공간을 보지만 다종 검출이 어렵고, 2세대는 총망라하지만 오염·비용 문제가 있으며, <b>3세대 AI가 저풍도 문제를 돌파</b>하려는 단계입니다.</div>
+  </div>
+
+  <div class="expert">
+    <div class="et">연구자용 — AI 검출의 남은 과제와 제안</div>
+    <p><b>문제:</b> 종양미세환경의 미생물은 <b>저풍도 점상 분포</b>로, 방대한 숙주세포·복잡한 간질에 비하면 <b>전형적 극불균형 데이터 분포</b>입니다. 기존 범용 특징 추출기는 이 <b>미약한 비숙주 신호를 놓치기 쉽습니다.</b></p>
+    <p style="margin-top:8px;"><b>논문이 제안하는 방향:</b> ① <b>미세 표적 주의가중(attention weighting)</b> 메커니즘 ② <b>능동학습(active learning)</b>과 <b>난례 채굴(hard example mining)</b>로 저신뢰·복잡배경 특징 민감도 강화 ③ <b>다중 예시 학습(multi-instance learning)</b> 프레임으로 WSI에서 임상 진단 가치가 있는 미생물 표현형 신호를 깊이 정제</p>
+    <p style="margin-top:8px;"><b>차세대 방향:</b> 3D 병리 이미징(공초점·다광자·광시트 현미경) → 세포 간 공간 관계 정량화. 공간오믹스(전사체·단백질·대사체 동시). 비용 문제를 <b>HE 염색 슬라이드만으로 종양미세환경 전사체·대사체 공간 분포를 예측</b>하는 방식으로 우회. 궁극적으로 <b>멀티모달 병리 파운데이션 모델</b> 구축.</p>
+  </div>
+</section>
+
+<!-- ===== 7. 한계 ===== -->
+<section id="s7">
+  <h2><span class="no">8</span> 정직한 한계 <span class="badge b-pro">❓ 아직 남은 문제</span></h2>
+  <p class="lead">논문이 스스로 밝힌 한계입니다. 이 부분을 함께 읽어야 연구를 냉정하게 이해할 수 있습니다.</p>
+
+  <div class="callout red">
+    <b>근본적 난점 3가지</b>
+    <p>① <b>생물량이 극히 낮음</b> — 숙주 DNA가 90%를 넘어 미생물 신호 포착이 어렵습니다.<br>
+    ② <b>환경 오염으로 인한 위양성</b> — 실제 정착인지 오염인지 구분이 어렵습니다(Decontam 등 <b>전용 디컨태미네이션 알고리즘</b> 필요).<br>
+    ③ <b>표준화 부재</b> — 검출·분석 규범이 표준화되어 있지 않아 비용과 재현성 문제가 남습니다.</p>
+  </div>
+
+  <div class="callout gold">
+    <b>⚠ 인과 확립은 아직</b>
+    <p>논문은 미생물이 "예후 영향이 <b>고도로 배경의존적(背景依赖性)</b>"이라고 명시하며, <b>Candida의 예후 가치는 아직 완전히 체계적으로 규명되지 않았다</b>고 인정합니다. 즉 <b>"관여한다"는 강한 증거가 있으나 "그래서 이렇게 하면 낫는다"는 아직 별개</b>입니다.</p>
+  </div>
+
+  <div class="callout sage">
+    <b>이중성(dual role)을 잊지 말 것</b>
+    <p>같은 <i>Candida albicans</i>가 <b>위암 조직에서는 발암을 촉진</b>하지만, 그 <b>무세포 상청액은 오히려 항종양 활성</b>(세포자멸 유도·생존유전자 억제·IL-8/NF-κB 하향)을 보입니다. <b>"나쁜 미생물"이라는 단순 도식은 성립하지 않습니다.</b></p>
+  </div>
+</section>
+
+<!-- ===== 8. Q&A ===== -->
+<section id="s8">
+  <h2><span class="no">9</span> 예상 질문 &amp; 답변</h2>
+
+  <div class="card">
+    <h3>일반 질문</h3>
+
+    <div class="qa">
+      <div class="q"><span class="qtag">Q1</span>이 논문의 핵심을 한 문장으로 말하면?</div>
+      <div class="a"><span class="badge b-est">✅ 확립</span>"종양은 무균"이라는 오래된 가정이 <b>뒤집혔고</b>, 이제는 종양 안의 <b>세균·진균·바이러스(+기타)</b>가 암의 전 과정에 관여한다는 것이 정리되었으며, <b>그것을 정확히 찾아내는 검출 기술(AI 포함)</b>이 다음 관문이라는 것입니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag">Q2</span>왜 이 논문이 지금 중요한가요?</div>
+      <div class="a"><span class="badge b-est">✅ 확립</span>2020년 무균설 붕괴 → 2022년 진균 실증 → 2023년 "새로운 hallmark" 개념화까지 흐름이 이어졌는데, 이 논문은 그 <b>전체를 통합 정리</b>하고 <b>검출 기술의 진화</b>라는 새 층을 더했습니다. 즉 <b>발견에서 적용으로 넘어가는 관문</b>에 있는 자료입니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag">Q3</span>그래서 나한테 무슨 의미가 있나요?</div>
+      <div class="a"><span class="badge b-pro">❓ 전망</span>이 논문은 <b>특정 치료법을 권하지 않습니다.</b> 다만 ① 미생물이 암에 관여한다는 것이 <b>학계 정설로 정리</b>되었다는 점, ② <b>검출 기술이 급격히 발전</b>해 개인별 미생태계 파악이 가까워지고 있다는 점, ③ 논문이 <b>항미생물 요법·표적 프로바이오틱스</b>를 미래 방향으로 제시한다는 점이 의미입니다. 구체적 결정은 의료진과 상의하세요.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag">Q4</span>세균만 보면 안 되나요? 왜 진균·바이러스까지 봐야 하나요?</div>
+      <div class="a"><span class="badge b-evi">⚠ 강한 증거</span>논문이 밝힌 이유: <b>세균과 진균은 서로에게 영향을 주기 때문</b>입니다. 예를 들어 <b>항생제가 세균을 죽이면 펩티도글리칸이 방출되어 진균이 더 침습적으로 변합니다.</b> 세균만 보면 이 효과를 놓칩니다. 또한 <i>Trichomonas vaginalis</i>는 <b>HPV와 협동</b>해 자궁경부암에 관여하는 등 <b>계를 넘는 협동</b>이 확인됩니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag">Q5</span>개인도 자기 미생물을 검사할 수 있나요?</div>
+      <div class="a"><span class="badge b-pro">❓ 전망</span>논문이 다루는 검출 기술(메타게놈·원위치 탐지·AI)은 대부분 <b>조직 샘플 기반의 연구·임상 도구</b>이며, 상용화된 개인 검사는 아직 아닙니다. 다만 논문은 <b>"HE 슬라이드만으로 미세환경을 예측"</b>하는 저비용 방향을 전망합니다. 현재 <b>일반인이 바로 쓸 수 있는 수단은 아닙니다.</b></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>심화 질문</h3>
+
+    <div class="qa">
+      <div class="q"><span class="qtag deep">D1</span>무균설은 왜 그렇게 오래 유지되었나요?</div>
+      <div class="a deep"><span class="badge b-est">✅ 확립</span>논문은 <b>기술적 한계</b>를 원인으로 지목합니다. 전통 배양법은 <b>저풍도 미생물을 포착하지 못했고</b>, <b>오염 미생물과 실제 정착 미생물을 구분하지 못했습니다</b>. 즉 "없다"는 결론이 아니라 "볼 수 없었다"는 상태였습니다. 고처리량 시퀀싱·단일세포 전사체·원위치 이미징이 이를 돌파하자 2020년에 결정적 증거가 나왔습니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag deep">D2</span>메타게놈 시퀀싱의 <b>구체적</b> 한계는?</div>
+      <div class="a deep"><span class="badge b-est">✅ 확립</span>① <b>숙주 DNA가 통상 90% 이상</b>을 차지해 미생물 서열 신호 포착을 심각하게 방해합니다. ② <b>환경 미생물 교차오염</b>이 위양성을 유발하므로 <b>Decontam 등 전문 디컨태미네이션 알고리즘과 엄격한 QC</b>가 필요합니다. ③ <b>비용이 높고 실험·분석 절차가 복잡</b>해 대규모 임상 코호트 적용이 제한됩니다. 해결 방향: 샘플 전처리 최적화·고효율 미생물 DNA 농축 기술·분석 알고리즘 개선·표준화된 실험/분석 규범 정립.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag deep">D3</span>AI가 이 문제를 어떻게 푸나요? 구체적으로?</div>
+      <div class="a deep"><span class="badge b-evi">⚠ 진행 중</span><b>전슬라이드 이미지(WSI)</b> + 딥러닝으로 저풍도 미생물을 자동 탐지합니다. 기반모델 성능: <b>UNI</b>(43종 암 분류 93.8%, AUC 0.976), <b>CHIEF</b>(19개 부위 6만여 WSI 프리트레이닝, 악성종양 관련 특징 인식 정확도 약 94%), <b>GigaPath</b>(13억 병리 이미지 프리트레이닝, 6종 암 AUC 0.9 이상). <b>이미 실현된 것:</b> WSI 형태 특징만으로 <b>HPV·EBV 정착 상태를 정확히 예측</b>. <b>남은 문제:</b> 미생물은 저풍도 점상 분포라 극불균형 데이터가 되고, 범용 추출기는 이를 놓칩니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag deep">D4</span>논문이 제안하는 다음 단계는 무엇인가요?</div>
+      <div class="a deep"><span class="badge b-pro">❓ 전망</span>① <b>미세 표적 주의가중 메커니즘</b>으로 배경에 가려진 핵심 신호 해결 ② <b>능동학습·난례 채굴</b>로 저신뢰·복잡배경 민감도 강화 ③ <b>다중 예시 학습</b>으로 WSI에서 임상 가치 있는 미생물 표현형 정제 ④ <b>3D 병리 이미징</b>(공초점·다광자·광시트)으로 세포 간 공간 관계 정량화 ⑤ <b>공간오믹스</b>와 결합 ⑥ 궁극적으로 <b>멀티모달 병리 파운데이션 모델</b> 구축 → "<b>미생태계 특징 기반 지능형 동반진단(companion diagnostics) 체계</b>"</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag deep">D5</span>그럼 이미 있는 연구로 치료에 쓸 수 있나요?</div>
+      <div class="a deep"><span class="badge b-pro">❓ 전망 / 주의</span>논문은 <b>항미생물 요법·표적 프로바이오틱스</b>를 미래 방향으로 제시하되, <b>인과 규명과 표준화가 선행되어야 한다</b>는 입장입니다. 특히 이중성을 강조합니다 — 같은 <i>Candida albicans</i>가 위암에선 촉진, 그 무세포 상청액은 <b>항종양 활성</b>을 보였습니다. 또한 <b>항생제로 세균을 없애면 진균이 강화</b>될 수 있습니다. 따라서 <b>"미생물을 없애면 좋다"는 단순 논리는 위험</b>하며, 실제 개입은 별도의 임상 근거가 필요합니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 9. 용어/출처 ===== -->
+<section id="s9">
+  <h2><span class="no">10</span> 용어 사전 &amp; 출처</h2>
+  <table>
+    <tr><th style="width:32%">용어</th><th>설명</th></tr>
+    <tr><td><b>종양내 미생물군<br>(瘤内微生物组, intratumoral microbiome)</b></td><td>종양 실질·간질 및 관련 미세환경에 존재하는 세균·진균·바이러스 등 미생물 군집과 그 유전물질의 총합</td></tr>
+    <tr><td><b>Microbiome · Mycobiome</b></td><td>미생물군 전체 / 그중 <b>곰팡이(진균)만</b></td></tr>
+    <tr><td><b>TME (종양미세환경)</b></td><td>종양 주변의 세포·미생물·분자가 이루는 환경</td></tr>
+    <tr><td><b>FISH</b></td><td>형광 원위치 혼성화 — 핵산 프로브로 조직 슬라이드에서 미생물 위치를 시각화</td></tr>
+    <tr><td><b>IHC / IF</b></td><td>면역조직화학 / 면역형광 — 항체로 미생물 항원 표지</td></tr>
+    <tr><td><b>PAS/GMS 염색</b></td><td>진균 식별의 <b>금표준</b> — 진균 세포벽 다당류를 특이 염색</td></tr>
+    <tr><td><b>메타게놈 시퀀싱</b></td><td>비표적 고처리량 시퀀싱 — 세균·진균·바이러스 전 게놈 포착</td></tr>
+    <tr><td><b>16S rRNA 시퀀싱</b></td><td>세균 표적 시퀀싱 (메타게놈보다 분해능 낮음)</td></tr>
+    <tr><td><b>Decontam</b></td><td>환경 오염 미생물을 걸러내는 전용 알고리즘</td></tr>
+    <tr><td><b>WSI (전슬라이드 이미지)</b></td><td>디지털 병리 슬라이드 전체 이미지 — AI 분석의 표준 데이터</td></tr>
+    <tr><td><b>AUC</b></td><td>ROC 곡선 아래 면적 — 진단 모델 성능 지표 (1에 가까울수록 우수)</td></tr>
+    <tr><td><b>EMT</b></td><td>상피-간질 전환 — 암세포가 침습·전이 능력을 얻는 과정</td></tr>
+    <tr><td><b>MSI</b></td><td>현미부수체 불안정성 — 대장암 등에서 치료 반응과 관련된 지표</td></tr>
+    <tr><td><b>ICI</b></td><td>면역관문억제제 (immune checkpoint inhibitor)</td></tr>
+  </table>
+
+  <div class="foot">
+    <p><b>소개하는 논문</b></p>
+    <p style="margin-top:6px;">黄沁怡, 向怀荣, 涂华康. <b>「瘤内微生物组的研究现状与检测技术演进」(종양내 미생물군의 연구 현황과 검출 기술의 진화).</b> 中华肿瘤杂志(Chinese Journal of Oncology) 2026년 9월, 제48권 제9호. 저장대학(Zhejiang University).<br>
+    <b>기금:</b> 국가자연과학기금(82574197), 건강저장 백만인 코호트(K20230085) · 참고문헌 145건</p>
+
+    <p style="margin-top:14px;"><b>흐름을 이룬 주요 연구 (이 논문이 참조)</b></p>
+    <ul style="margin-left:18px;">
+      <li>Nejman D, et al. "The human tumor microbiome is composed of tumor type-specific intracellular bacteria." <b>Science</b> 2020; 368: 973–980. — 무균설 붕괴</li>
+      <li>Narunsky-Haziza L, et al. "Pan-cancer analyses reveal cancer-type-specific fungal ecologies and bacteriome interactions." <b>Cell</b> 2022; 185: 3789–3806. — 35개 암종 진균</li>
+      <li>Dohlman AB, et al. "A pan-cancer mycobiome analysis reveals fungal involvement in gastrointestinal and lung tumors." <b>Cell</b> 2022; 185: 3807–3822.</li>
+      <li>Zong Z, Zhou F, Zhang L. "The fungal mycobiome: a new hallmark of cancer revealed by pan-cancer analyses." <b>Signal Transduction and Targeted Therapy</b> 2023; 8: 50. — 개념 승격</li>
+      <li>Aykut B, et al. "The fungal mycobiome promotes pancreatic oncogenesis via activation of MBL." <b>Nature</b> 2019; 574: 264–267.</li>
+      <li>Liu NN, et al. "Multi-kingdom microbiota analyses identify bacterial-fungal interactions and biomarkers of colorectal cancer across cohorts." <b>Nat Microbiol</b> 2022; 7: 238–250.</li>
+      <li>Fu AK, et al. "Tumor-resident intracellular microbiota promotes metastatic colonization in breast cancer." <b>Cell</b> 2022; 185: 1356–1372.</li>
+    </ul>
+
+    <p style="margin-top:14px;">
+      <span class="badge b-est">✅ 확립</span> 무균설 붕괴·4계 구성·검출기술 분류 (3·4·7절)<br>
+      <span class="badge b-evi">⚠ 강한 증거</span> 복합 상호작용·전 과정 관여 (5·6절) — 논문 서술 기반, 인과 확정 전<br>
+      <span class="badge b-pro">❓ 전망</span> AI 검출·임상 적용 (7·8절) — 미래 방향 제시
+    </p>
+    <p style="margin-top:10px;"><b>⚠ 면책:</b> 본 문서는 논문 이해를 돕기 위한 정보·교육 자료이며, <b>의학적 조언이 아닙니다.</b> 특정 약물·치료법을 권하지 않습니다. 진단·치료 결정은 반드시 담당 의료진과 상의하십시오.</p>
+    <p style="margin-top:10px; text-align:right;">— Hermes Agent · 커뮤니티 논문 소개 자료 · 2026-10</p>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

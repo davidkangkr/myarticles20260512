@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>미생물 관점에서 본 용도변경 약물과 보조제 — 방향성 보고서</title>
+<style>
+  :root{
+    --bg:#faf8f4; --card:#ffffff; --ink:#2b2b2b; --sub:#6b6b6b;
+    --teal:#0f5e5e; --teal-soft:#e3efee; --gold:#b45309; --gold-soft:#fdf0dc;
+    --sage:#5b7f5b; --sage-soft:#e9f0e6; --red:#b91c1c; --red-soft:#fdecec;
+    --line:#e5dfd3;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+    font-size:17px; line-height:1.72; padding:0 0 60px 0;
+  }
+  .wrap{max-width:780px; margin:0 auto; padding:0 16px;}
+  header{
+    background:linear-gradient(135deg,#0f5e5e 0%,#146b6b 52%,#5b7f5b 100%);
+    color:#fff; padding:36px 16px 28px; text-align:center;
+  }
+  header .tag{display:inline-block; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.4);
+    border-radius:999px; padding:4px 14px; font-size:13px; margin-bottom:12px;}
+  header h1{font-size:23px; line-height:1.4; font-weight:800; margin-bottom:10px;}
+  header p{font-size:15px; opacity:.94; line-height:1.55;}
+  .meta{background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px 16px;
+    font-size:14px; color:var(--sub); margin-top:14px; text-align:left; box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .meta b{color:var(--ink);}
+  nav.toc{background:#fff; border-bottom:1px solid var(--line); padding:0 12px; position:sticky; top:0; z-index:50;
+    overflow-x:auto; white-space:nowrap; box-shadow:0 1px 4px rgba(0,0,0,.05);}
+  nav.toc div{display:inline-flex; gap:2px; padding:9px 0;}
+  nav.toc a{color:var(--sub); text-decoration:none; font-size:13px; font-weight:600; padding:6px 11px; border-radius:6px;}
+  nav.toc a:hover{color:var(--teal); background:rgba(15,94,94,.08);}
+  section{margin-top:32px;}
+  h2{font-size:21px; font-weight:800; color:var(--teal); margin-bottom:6px; display:flex; align-items:flex-start; gap:8px; line-height:1.35;}
+  h2 .no{background:var(--teal); color:#fff; border-radius:8px; font-size:14px; min-width:28px; height:28px;
+    display:inline-flex; align-items:center; justify-content:center; padding:0 6px; flex:none; margin-top:2px;}
+  .lead{color:var(--sub); font-size:15px; margin-bottom:14px;}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px;
+    box-shadow:0 1px 4px rgba(0,0,0,.05); margin-bottom:14px;}
+  .card h3{font-size:17px; font-weight:800; margin-bottom:8px;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  @media(max-width:560px){ .grid2{grid-template-columns:1fr;} }
+  .kcard{background:var(--card); border:1px solid var(--line); border-left:5px solid var(--teal);
+    border-radius:12px; padding:14px 15px; box-shadow:0 1px 4px rgba(0,0,0,.05);}
+  .kcard.gold{border-left-color:var(--gold);} .kcard.sage{border-left-color:var(--sage);} .kcard.red{border-left-color:var(--red);}
+  .kcard .kt{font-size:13px; font-weight:800; letter-spacing:.4px; color:var(--teal); margin-bottom:4px;}
+  .kcard.gold .kt{color:var(--gold);} .kcard.sage .kt{color:var(--sage);} .kcard.red .kt{color:var(--red);}
+  .kcard p{font-size:15px;}
+  .big{font-size:22px; font-weight:800; color:var(--teal); display:block; margin:2px 0 4px;}
+  .figbox{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px; text-align:center;
+    box-shadow:0 1px 4px rgba(0,0,0,.05); margin:14px 0;}
+  .figbox svg{max-width:100%; height:auto;}
+  .figcap{font-size:13.5px; color:var(--sub); margin-top:8px; line-height:1.55; text-align:left;}
+  .figcap b{color:var(--ink);}
+  .callout{border-radius:12px; padding:14px 16px; font-size:15px; margin:14px 0;}
+  .callout.teal{background:var(--teal-soft); border-left:5px solid var(--teal);}
+  .callout.gold{background:var(--gold-soft); border-left:5px solid var(--gold);}
+  .callout.red{background:var(--red-soft); border-left:5px solid var(--red);}
+  .callout.sage{background:var(--sage-soft); border-left:5px solid var(--sage);}
+  .callout p{margin-top:6px;}
+  .banner{background:#7f1d1d; color:#fff; border-radius:14px; padding:18px 20px; margin:18px 0;
+    box-shadow:0 2px 8px rgba(0,0,0,.15);}
+  .banner .bt{font-size:16px; font-weight:800; margin-bottom:8px; display:block;}
+  .banner p{font-size:15px; line-height:1.65; margin-top:5px;}
+  .banner .em{color:#fde68a; font-weight:800;}
+  .quote{background:#fbfaf7; border-left:4px solid var(--sub); padding:11px 14px; margin:12px 0;
+    font-size:14.5px; line-height:1.65; color:#3a3a3a;}
+  .quote .src{display:block; margin-top:6px; font-size:12.5px; color:var(--sub);}
+  .expert{background:#f6f4ee; border:1px dashed #c9bfa8; border-radius:12px; padding:14px 16px; font-size:14.5px; margin:14px 0;}
+  .expert .et{font-size:13px; font-weight:800; color:var(--gold); letter-spacing:.4px; margin-bottom:6px;}
+  table{width:100%; border-collapse:collapse; font-size:14.5px; background:var(--card);
+    border:1px solid var(--line); border-radius:12px; overflow:hidden; margin:12px 0;}
+  th{background:var(--teal); color:#fff; text-align:left; padding:9px 12px; font-size:14px;}
+  td{border-top:1px solid var(--line); padding:9px 12px; vertical-align:top;}
+  tr:nth-child(even) td{background:#fbfaf7;}
+  .qa{margin:16px 0;}
+  .q{font-weight:700; color:var(--teal); margin-bottom:6px; font-size:15.5px; line-height:1.5;}
+  .q .qtag{display:inline-block; background:var(--teal); color:#fff; border-radius:6px; padding:1px 9px; font-size:12px; margin-right:7px; vertical-align:1px;}
+  .q .qtag.deep{background:var(--gold);} .q .qtag.skeptic{background:var(--red);}
+  .a{font-size:15px; background:#fbfaf7; border-left:3px solid var(--teal); padding:10px 13px; border-radius:8px; line-height:1.65;}
+  .a.deep{border-left-color:var(--gold);} .a.skeptic{border-left-color:var(--red);}
+  .badge{display:inline-block; border-radius:999px; padding:1px 9px; font-size:12px; font-weight:800; margin-right:5px; white-space:nowrap;}
+  .b-direct{background:var(--sage-soft); color:var(--sage); border:1px solid var(--sage);}
+  .b-env{background:var(--teal-soft); color:var(--teal); border:1px solid var(--teal);}
+  .b-poss{background:var(--gold-soft); color:var(--gold); border:1px solid var(--gold);}
+  .b-low{background:#f0f0f0; color:#666; border:1px solid #bbb;}
+  .layer{border-radius:14px; padding:0; margin:16px 0; border:1px solid var(--line); overflow:hidden; background:#fff;
+    box-shadow:0 1px 4px rgba(0,0,0,.05);}
+  .layer .lh{padding:12px 16px; font-size:16px; font-weight:800; color:#fff;}
+  .layer.l1 .lh{background:#5b7f5b;} .layer.l2 .lh{background:#0f5e5e;}
+  .layer.l3 .lh{background:#b45309;} .layer.l4 .lh{background:#6b6b6b;}
+  .layer .lb{padding:14px 16px; font-size:15px;}
+  .layer .lb ul{margin:6px 0 0 20px;} .layer .lb li{margin:7px 0;}
+  .foot{background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px 18px; font-size:14px;
+    color:var(--sub); margin-top:32px;}
+  .foot b{color:var(--ink);}
+  a{color:var(--teal);}
+  ul,ol{margin:8px 0 8px 22px;} li{margin:6px 0;}
+  @media print{
+    body{background:#fff!important; color:#000; font-size:11.5pt; line-height:1.5;}
+    nav.toc{display:none!important;}
+    header{background:#fff!important; color:#000!important; border-bottom:2px solid #333; padding:16px 0;}
+    header .tag{border-color:#999!important; color:#000!important;}
+    header h1,header p{color:#000!important;}
+    .card,.kcard,.figbox,.callout,.expert,.quote,.a,.foot,.layer{background:#fff!important; border:1px solid #bbb!important; box-shadow:none!important;}
+    .banner{background:#fff!important; color:#000!important; border:2px solid #000!important;}
+    .banner .bt,.banner .em{color:#000!important;}
+    .layer .lh{background:#eee!important; color:#000!important;}
+    .q,.a,h2,.card h3,strong,h3{color:#000!important;}
+    .q .qtag{background:#eee!important; color:#000!important;}
+    .badge{background:#eee!important; color:#000!important; border-color:#999!important;}
+    th{background:#eee!important; color:#000!important;} td{background:#fff!important;}
+    table,th,td{border-color:#999!important;}
+    .big{color:#000!important;} a{color:#000!important; text-decoration:none;}
+    section{margin-top:14px;}
+    .figbox svg text{fill:#000!important;}
+    .figbox svg rect,.figbox svg circle{stroke:#666!important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <span class="tag">방향성 보고서 · 커뮤니티용</span>
+    <h1>미생물 관점에서 본<br>용도변경 약물과 보조제</h1>
+    <p>해외·국내 환자들이 스스로 쓰는 약들이<br>미생물 · 그들의 환경 · 관계와 어떻게 얽히는가</p>
+    <div class="meta">
+      <b>근거 자료:</b> 설금홍(grsanga) 블로그 「암 치료에 관한 세계인들의 항암 프로토콜과 중요 약물 요약 정리」(2025-08-07) · 中华肿瘤杂志 종설(2026) · Cell(2022) · STTT(2026) · Nature Medicine(2019)<br>
+      <b>작성:</b> Hermes Agent · <b>대상:</b> 환자 주도 암 커뮤니티<br>
+      <b>읽기 전에:</b> 이 문서는 <b>방향성 제시</b>이며 <b>치료 권고가 아닙니다.</b>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div>
+    <a href="#s1">① 경고</a>
+    <a href="#s2">② 30초 요약</a>
+    <a href="#s3">③ 용어 정리</a>
+    <a href="#s4">④ 왜 '다 죽이기'는 틀렸나</a>
+    <a href="#s5">⑤ 린턴 콜아웃</a>
+    <a href="#s6">⑥ 약물 4층</a>
+    <a href="#s7">⑦ 대응표</a>
+    <a href="#s8">⑧ 부록</a>
+    <a href="#s9">⑨ Q&amp;A</a>
+    <a href="#s10">⑩ 용어·출처</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ===== 경고 배너 (최상단) ===== -->
+<section id="s1" style="margin-top:22px;">
+  <div class="banner">
+    <span class="bt">⚠️ 이 문서를 읽기 전에 — 가장 흔한 오해 하나를 먼저 막습니다</span>
+    <p>많은 분들이 이렇게 이해하십니다:</p>
+    <p style="margin-top:8px;">"<b>미생물이 암을 돕는다 → 그러면 항미생물제로 그 미생물들을 다 없애면 항암에도 효과가 있다</b>"</p>
+    <p style="margin-top:10px;"><span class="em">반절은 맞을 수 있습니다. 그러나 대부분은 틀린 해석입니다.</span></p>
+    <p style="margin-top:8px;">미생물을 <b>무조건 없애는 것</b>은 항암이 아닙니다. 오히려 <b>역효과</b>가 날 수 있습니다(4절에서 논문 근거로 설명합니다). 논문들이 말하는 것은 <b>"제거(elimination)"가 아니라 "조성(balance)의 재조정"</b>입니다.</p>
+  </div>
+  <div class="callout red" style="margin-top:4px;">
+    <b>🚫 그리고 반드시 기억하실 것</b>
+    <p>이 문서는 <b>정보·교육 목적의 방향성 보고서</b>이며 <b>의학적 조언이 아닙니다.</b> 여기 나오는 약물·보조제는 <b>공식 승인된 항암 치료가 아닙니다.</b> 어떤 약이든 <b>복용 전 반드시 담당 의료진과 상의</b>하세요. 특히 기존 항암 치료 중이라면 <b>상호작용 위험</b>이 있어 임의 복용은 금물입니다.</p>
+  </div>
+</section>
+
+<!-- ===== 30초 요약 ===== -->
+<section id="s2">
+  <h2><span class="no">2</span> 30초 요약</h2>
+  <p class="lead">이 문서가 보여주려는 것은 하나입니다 — <b>환자들이 쓰는 용도변경 약물과 보조제가 '미생물' 및 '그들의 환경·관계'와 깊이 얽혀 있다는 방향성</b>입니다.</p>
+  <div class="grid2">
+    <div class="kcard sage">
+      <div class="kt">① 미생물을 직접 겨냥</div>
+      <p>항진균제(진균), 항생제(세균), 구충제(기생충) — <b>특정 미생물을 겨냥하는 약</b>이 커뮤니티에서 폭넓게 쓰입니다.</p>
+    </div>
+    <div class="kcard">
+      <div class="kt">② 미생물의 '환경'을 깨뜨림</div>
+      <p>미생물이 만든 <b>보호막(바이오필름)</b>과 주변 환경을 허무는 약·보조제가 있습니다. 세라펩타아제·브로멜라인 계열이 여기 해당할 <b>가능성</b>이 있습니다.</p>
+    </div>
+    <div class="kcard gold">
+      <div class="kt">③ 미생물–면역 '관계'를 바꿈</div>
+      <p>프로바이오틱스·버섯추출물 등은 미생물을 없애는 게 아니라 <b>우리 몸의 면역과 미생물의 균형</b>을 조정합니다.</p>
+    </div>
+    <div class="kcard red">
+      <div class="kt">④ 미생물·암의 '연료'를 차단</div>
+      <p>케토 식이·메티오니나아제 등은 미생물과 암세포가 쓰는 <b>대사 연료</b> 관점에서 접근합니다.</p>
+    </div>
+  </div>
+  <div class="callout teal">
+    <b>🧭 이 문서의 성격을 한 줄로</b>
+    <p>이것은 <b>"이 약이 듣는다"는 주장이 아닙니다.</b> 환자들이 쓰는 약들이 <b>미생물 관점에서 어디에 걸리는지</b>를 정리해, 앞으로 무엇을 살펴볼지 <b>방향</b>을 제시하는 것입니다.</p>
+  </div>
+</section>
+
+<!-- ===== 용어 정리 ===== -->
+<section id="s3">
+  <h2><span class="no">3</span> 먼저 용어를 정리합니다 <span class="badge b-direct">필독</span></h2>
+  <p class="lead">여기서 용어를 헷갈리면 문서 전체가 뒤죽박죽이 됩니다. <b>2분만</b> 투자하세요.</p>
+
+  <div class="callout red">
+    <b>🚨 세균과 진균은 완전히 다른 생물입니다</b>
+    <p><b>"세균"</b>과 <b>"진균"</b>은 둘 다 '균'으로 끝나서 헷갈리기 쉽지만, <b>전혀 다른 계통</b>입니다.</p>
+    <p style="margin-top:8px;"><b>세균(박테리아)</b> — 단세포 미생물. 예: H. pylori, 대장균. <b>항생제</b>가 듣습니다.</p>
+    <p><b>진균(곰팡이)</b> — 효모·곰팡이·버섯을 포함하는 별개 계통. 예: Candida(칸디다), Malassezia(말라세지아). <b>항생제가 듣지 않고, 항진균제</b>가 듣습니다.</p>
+    <p style="margin-top:8px;">👉 <b>약이 완전히 다릅니다.</b> 그러니 이 문서에서는 항상 <b>"세균(박테리아)"</b>, <b>"진균(곰팡이)"</b>로 구분해 씁니다.</p>
+  </div>
+
+  <div class="figbox">
+    <svg viewBox="0 0 700 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="미생물 4분류와 대응 약물">
+      <text x="350" y="26" text-anchor="middle" font-size="15.5" font-weight="700" fill="#0f5e5e">미생물 4분류 — 그리고 각각에 대응하는 약</text>
+      <!-- 세균 -->
+      <rect x="20" y="46" width="158" height="250" rx="11" fill="#e9f0e6" stroke="#5b7f5b" stroke-width="2.2"/>
+      <text x="99" y="74" text-anchor="middle" font-size="15" font-weight="800" fill="#5b7f5b">세균</text>
+      <text x="99" y="94" text-anchor="middle" font-size="11.5" fill="#6b6b6b">(박테리아)</text>
+      <text x="99" y="120" text-anchor="middle" font-size="11.5" fill="#2f442f">단세포 미생물</text>
+      <line x1="40" y1="134" x2="158" y2="134" stroke="#c9d8c5" stroke-width="1"/>
+      <text x="99" y="156" text-anchor="middle" font-size="11.5" fill="#2f442f">H. pylori</text>
+      <text x="99" y="174" text-anchor="middle" font-size="11.5" fill="#2f442f">F. nucleatum</text>
+      <text x="99" y="192" text-anchor="middle" font-size="11.5" fill="#2f442f">대장균 등</text>
+      <line x1="40" y1="208" x2="158" y2="208" stroke="#c9d8c5" stroke-width="1"/>
+      <text x="99" y="230" text-anchor="middle" font-size="12.5" font-weight="800" fill="#5b7f5b">항생제</text>
+      <text x="99" y="250" text-anchor="middle" font-size="11" fill="#2f442f">독시사이클린</text>
+      <text x="99" y="267" text-anchor="middle" font-size="11" fill="#2f442f">아지스로마이신</text>
+      <text x="99" y="284" text-anchor="middle" font-size="11" fill="#2f442f">클래리스로마이신</text>
+      <!-- 진균 -->
+      <rect x="188" y="46" width="158" height="250" rx="11" fill="#fdf0dc" stroke="#b45309" stroke-width="2.2"/>
+      <text x="267" y="74" text-anchor="middle" font-size="15" font-weight="800" fill="#b45309">진균</text>
+      <text x="267" y="94" text-anchor="middle" font-size="11.5" fill="#6b6b6b">(곰팡이 · 효모)</text>
+      <text x="267" y="120" text-anchor="middle" font-size="11.5" fill="#7a5a2a">별개 계통</text>
+      <line x1="208" y1="134" x2="326" y2="134" stroke="#e0d0b8" stroke-width="1"/>
+      <text x="267" y="156" text-anchor="middle" font-size="11.5" fill="#7a5a2a">Candida(칸디다)</text>
+      <text x="267" y="174" text-anchor="middle" font-size="11.5" fill="#7a5a2a">Malassezia</text>
+      <text x="267" y="192" text-anchor="middle" font-size="11.5" fill="#7a5a2a">Aspergillus 등</text>
+      <line x1="208" y1="208" x2="326" y2="208" stroke="#e0d0b8" stroke-width="1"/>
+      <text x="267" y="230" text-anchor="middle" font-size="12.5" font-weight="800" fill="#b45309">항진균제</text>
+      <text x="267" y="250" text-anchor="middle" font-size="11" fill="#7a5a2a">이트라코나졸</text>
+      <text x="267" y="267" text-anchor="middle" font-size="11" fill="#7a5a2a">케토코나졸</text>
+      <text x="267" y="284" text-anchor="middle" font-size="11" fill="#6b6b6b">※ 항생제는 안 듦</text>
+      <!-- 바이러스 -->
+      <rect x="356" y="46" width="158" height="250" rx="11" fill="#e3efee" stroke="#0f5e5e" stroke-width="2.2"/>
+      <text x="435" y="74" text-anchor="middle" font-size="15" font-weight="800" fill="#0f5e5e">바이러스</text>
+      <text x="435" y="94" text-anchor="middle" font-size="11.5" fill="#6b6b6b">(세포 아님)</text>
+      <text x="435" y="120" text-anchor="middle" font-size="11.5" fill="#1f3f3f">숙주세포에 기생</text>
+      <line x1="376" y1="134" x2="494" y2="134" stroke="#b9cfce" stroke-width="1"/>
+      <text x="435" y="156" text-anchor="middle" font-size="11.5" fill="#1f3f3f">HPV</text>
+      <text x="435" y="174" text-anchor="middle" font-size="11.5" fill="#1f3f3f">EBV</text>
+      <text x="435" y="192" text-anchor="middle" font-size="11.5" fill="#1f3f3f">HBV 등</text>
+      <line x1="376" y1="208" x2="494" y2="208" stroke="#b9cfce" stroke-width="1"/>
+      <text x="435" y="230" text-anchor="middle" font-size="12.5" font-weight="800" fill="#0f5e5e">항바이러스제</text>
+      <text x="435" y="250" text-anchor="middle" font-size="11" fill="#1f3f3f">백신(HPV·HBV)</text>
+      <text x="435" y="267" text-anchor="middle" font-size="11" fill="#1f3f3f">항바이러스 요법</text>
+      <text x="435" y="284" text-anchor="middle" font-size="11" fill="#6b6b6b">※ 예방이 강력</text>
+      <!-- 기생충 -->
+      <rect x="524" y="46" width="158" height="250" rx="11" fill="#f3efe6" stroke="#888" stroke-width="2.2"/>
+      <text x="603" y="74" text-anchor="middle" font-size="15" font-weight="800" fill="#666">기생충</text>
+      <text x="603" y="94" text-anchor="middle" font-size="11.5" fill="#6b6b6b">(원생동물·연충)</text>
+      <text x="603" y="120" text-anchor="middle" font-size="11.5" fill="#555">다세포·단세포</text>
+      <line x1="544" y1="134" x2="662" y2="134" stroke="#ddd6c8" stroke-width="1"/>
+      <text x="603" y="156" text-anchor="middle" font-size="11.5" fill="#555">주혈흡충</text>
+      <text x="603" y="174" text-anchor="middle" font-size="11.5" fill="#555">간흡충</text>
+      <text x="603" y="192" text-anchor="middle" font-size="11.5" fill="#555">사상충 등</text>
+      <line x1="544" y1="208" x2="662" y2="208" stroke="#ddd6c8" stroke-width="1"/>
+      <text x="603" y="230" text-anchor="middle" font-size="12.5" font-weight="800" fill="#666">구충제</text>
+      <text x="603" y="250" text-anchor="middle" font-size="11" fill="#555">펜벤다졸</text>
+      <text x="603" y="267" text-anchor="middle" font-size="11" fill="#555">이버멕틴</text>
+      <text x="603" y="284" text-anchor="middle" font-size="11" fill="#555">니클로사미드</text>
+      <text x="350" y="322" text-anchor="middle" font-size="12.5" fill="#b91c1c" font-weight="700">4개는 서로 다른 생물입니다 — 약도 서로 다릅니다</text>
+    </svg>
+    <div class="figcap"><b>[그림 1] 미생물 4분류와 대응 약물.</b> 세균은 항생제, 진균은 항진균제, 기생충은 구충제입니다. <b>항생제로 진균을 잡을 수 없고, 항진균제로 세균을 잡을 수 없습니다.</b> 이 문서를 읽는 기본 틀입니다.</div>
+  </div>
+
+  <div class="card">
+    <h3>그리고 두 개의 '-바이옴'</h3>
+    <p><b>마이크로바이옴(microbiome)</b> — 우리 몸속 미생물 <b>전체</b>. 세균·진균·바이러스·기생충을 모두 포함합니다.</p>
+    <p style="margin-top:8px;"><b>마이코바이옴(mycobiome)</b> — 그중 <b>곰팡이(진균)만</b> 따로 부르는 말입니다. 마이크로바이옴의 <b>일부</b>입니다.</p>
+    <p style="margin-top:8px;">👉 포함 관계입니다. 나란히 있는 개념이 아닙니다. 이 문서에서는 특별히 진균을 강조할 때만 "진균(마이코바이옴)"이라고 표시하고, 나머지는 <b>"미생물"</b>로 통일해 씁니다.</p>
+  </div>
+</section>
+
+<!-- ===== 왜 다 죽이기는 틀렸나 ===== -->
+<section id="s4">
+  <h2><span class="no">4</span> 왜 "다 죽이기"는 틀렸는가</h2>
+  <p class="lead">1절의 오해를 <b>논문 근거</b>로 정면으로 반박합니다. 이 절은 문서에서 가장 중요합니다.</p>
+
+  <div class="figbox">
+    <svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="무조건 제거가 틀린 5가지 이유">
+      <text x="350" y="26" text-anchor="middle" font-size="15.5" font-weight="700" fill="#b91c1c">"미생물을 다 없애면 항암" — 왜 틀렸나</text>
+      <!-- 1 -->
+      <rect x="20" y="44" width="660" height="64" rx="9" fill="#fdecec" stroke="#b91c1c" stroke-width="1.6"/>
+      <text x="42" y="68" font-size="13.5" font-weight="800" fill="#b91c1c">① 다 없앨 수 없다 — 90% 이상이 우리와 공생하는 미생물</text>
+      <text x="42" y="90" font-size="12" fill="#7a3a3a">생태계를 통째로 파괴하면 면역이 무너집니다. "없애기"가 아니라 "균형"의 문제입니다.</text>
+      <!-- 2 -->
+      <rect x="20" y="116" width="660" height="64" rx="9" fill="#fdecec" stroke="#b91c1c" stroke-width="1.6"/>
+      <text x="42" y="140" font-size="13.5" font-weight="800" fill="#b91c1c">② 방향이 미생물마다 반대다</text>
+      <text x="42" y="162" font-size="12" fill="#7a3a3a">세균 제거는 화학요법 효과를 떨어뜨릴 수 있고, 진균 제거는 방사선 효과를 올립니다.</text>
+      <!-- 3 -->
+      <rect x="20" y="188" width="660" height="64" rx="9" fill="#fdecec" stroke="#b91c1c" stroke-width="1.6"/>
+      <text x="42" y="212" font-size="13.5" font-weight="800" fill="#b91c1c">③ 제거가 오히려 강화할 수 있다 — 역설</text>
+      <text x="42" y="234" font-size="12" fill="#7a3a3a">항생제가 세균을 죽이며 물질을 방출 → 칸디다균이 더 침습적으로 변합니다.</text>
+      <!-- 4 -->
+      <rect x="20" y="260" width="660" height="64" rx="9" fill="#fdecec" stroke="#b91c1c" stroke-width="1.6"/>
+      <text x="42" y="284" font-size="13.5" font-weight="800" fill="#b91c1c">④ 하나만 없애도 다른 것이 남는다</text>
+      <text x="42" y="306" font-size="12" fill="#7a3a3a">H. pylori만 제거해도 다른 세균들의 기여는 해결되지 않습니다.</text>
+      <!-- 5 -->
+      <rect x="20" y="332" width="660" height="64" rx="9" fill="#e3efee" stroke="#0f5e5e" stroke-width="1.8"/>
+      <text x="42" y="356" font-size="13.5" font-weight="800" fill="#0f5e5e">⑤ 논문이 말하는 것은 "제거"가 아니라 "조성 재조정"이다</text>
+      <text x="42" y="378" font-size="12" fill="#1f3f3f">프로바이오틱스 · FMT · 식이 · 선택적 항생제(연구 단계) — 균형 회복이 목표입니다.</text>
+    </svg>
+    <div class="figcap"><b>[그림 2] 5가지 이유.</b> 미생물을 "없애는" 것이 아니라 "균형을 되찾는" 것이 논문들이 말하는 방향입니다.</div>
+  </div>
+
+  <div class="card">
+    <h3>논문 원문 근거</h3>
+    <div class="quote">
+      "Conversely, specific bacterial elimination through antibiotic treatment <b>can impair the effectiveness of chemotherapy</b>, whereas <b>fungal eradication appears to enhance radiotherapy outcomes</b>."
+      <span class="src">— Yao Y, et al. Signal Transduction and Targeted Therapy 2026; 11:39. 세균 제거는 화학요법 효과를 떨어뜨릴 수 있고, 진균 제거는 방사선 효과를 올린다</span>
+    </div>
+    <div class="quote">
+      "Commensal fungi... may <b>dampen the immune response</b> following radiotherapy by binding to the receptor Dectin-1, which increases the number of <b>tumor-promoting macrophages</b> and <b>suppresses antitumor T-cell activity</b>."
+      <span class="src">— 같은 논문. 공생 진균이 Dectin-1 수용체에 결합해 방사선 후 면역 반응을 약화시킨다</span>
+    </div>
+    <div class="quote">
+      "However, eradication of H. pylori <b>has not addressed the potential contributions of other bacterial species</b>, despite its possible role in reducing the risk of gastric cancer."
+      <span class="src">— 같은 논문. H. pylori 제거만으로는 다른 세균의 기여를 해결하지 못한다</span>
+    </div>
+    <div class="quote">
+      "白色念珠菌形成生物膜时营造的低氧微环境能够为<b>产气荚膜梭菌、脆弱拟杆菌等厌氧菌</b>提供适宜的增殖条件；而<b>抗生素干预下细菌释放的肽聚糖，又会诱导白色念珠菌菌丝化</b>，进一步增强其侵袭与扩散能力。"
+      <span class="src">— 中华肿瘤杂志 2026;48(9). 항생제로 세균을 죽이면 방출된 펩티도글리칸이 칸디다균의 균사화를 유도해 침습성을 강화한다 (역설)</span>
+    </div>
+  </div>
+
+  <div class="callout gold">
+    <b>📌 그렇다면 논문들이 제시하는 방향은?</b>
+    <p>프로바이오틱스 · 프리바이오틱스 · 분변 이식(FMT) · 식이 조절로 <b>미생물 조성을 되돌리는 것</b>, 그리고 <b>선택적</b> 항생제로 특정 촉암 세균만 겨냥하는 것(연구 단계)입니다. 즉 <b>"생태계 관리"</b>이지 <b>"생태계 파괴"</b>가 아닙니다.</p>
+  </div>
+</section>
+
+<!-- ===== 마크 린턴 콜아웃 ===== -->
+<section id="s5">
+  <h2><span class="no">5</span> 콜아웃 — 마크 린턴의 진균 이론</h2>
+  <div class="callout gold">
+    <b>🍄 마크 린턴(Mark Lintern)은 왜 진균에 주목하는가</b>
+    <p style="margin-top:10px;">마크 린턴은 <b>"곰팡이를 중심으로 기생하는 미생물이 만든 종양의 환경을 깨뜨려야 한다"</b> 는 논리를 폅니다. 그가 보는 구조는 이렇습니다:</p>
+    <p style="margin-top:6px;">① 암을 유발하는 <b>연료(설탕·발효 대사)</b> 와 곰팡이 병원균의 <b>먹이</b>가 겹칩니다 →</p>
+    <p>② 그래서 <b>염증을 줄이고·에너지 대사를 제한하고·미생물 균형을 재조정하고·항진균 전략을 병행</b>하면 환경이 바뀝니다 →</p>
+    <p>③ 그가 제시하는 약들(이트라코나졸, 멜라토닌, 스타틴 등)은 대부분 <b>항진균제이거나 항진균 효과가 있는 성분</b>입니다.</p>
+    <p style="margin-top:10px;"><b>이 문서와의 관계:</b> 이 문서는 린턴의 이론을 <b>사실로 검증한 것이 아닙니다.</b> 다만 4절에서 본 것처럼 <b>"진균이 미생물 생태계에서 특별한 위치를 차지한다"</b>는 관찰 자체는 논문에서도 확인됩니다(Candida가 생물막을 만들고, 다른 세균의 환경을 조성).</p>
+    <p style="margin-top:8px;">⚠️ <b>중요한 구분:</b> 린턴의 표현도 <b>"곰팡이를 다 죽여라"가 아닙니다.</b> 그도 <b>"균형 재조정(balance)"</b>과 <b>"환경"</b>을 말합니다. 이 점이 4절의 교훈과 같습니다.</p>
+  </div>
+</section>
+
+<!-- ===== 약물 4층 ===== -->
+<section id="s6">
+  <h2><span class="no">6</span> 미생물 관점에서 본 약물 4개 층</h2>
+  <p class="lead">블로그 저자가 <b>접하기 쉬운 약물 위주로 추린 38개 항목</b>을, <b>미생물·환경·관계에 얼마나 가까운지</b>를 기준으로 4개 층에 배치했습니다.</p>
+
+  <div class="callout teal">
+    <b>🧭 층 배치의 기준</b>
+    <p>이 배치는 <b>약효 순위가 아닙니다.</b> "미생물 관점에서 어디에 걸리는가"의 <b>위치</b>입니다. 어떤 층에도 <b>"효과가 증명됐다"</b>는 의미는 없습니다.</p>
+  </div>
+
+  <!-- 1층 -->
+  <div class="layer l1">
+    <div class="lh">1층 · 미생물을 직접 겨냥하는 약</div>
+    <div class="lb">
+      <p><span class="badge b-direct">✅ 직접 관련</span> 특정 미생물 자체를 표적으로 합니다. <b>대응 관계가 가장 명확합니다.</b></p>
+      <ul>
+        <li><b>이트라코나졸</b> — 항진균제. 진균을 겨냥. 논문이 임상시험(NCT02749513)을 언급하며 연구 중임을 명시<span class="badge b-env">논문 근거</span></li>
+        <li><b>독시사이클린 · 아지스로마이신 · 클래리스로마이신</b> — 항생제. 세균을 겨냥. 논문은 <b>세포막 투과성 항생제로 종양내 세균을 겨냥</b>하는 전략을 소개<span class="badge b-env">논문 근거</span></li>
+        <li><b>니클로사미드 · 피르비늄</b> — 구충제 계열. 기생충 및 여러 경로</li>
+        <li><b>펜벤다졸 · 메벤다졸 · 이버멕틴</b> — 구충제 계열. 커뮤니티에서 폭넓게 사용. 단 <b>작용 기전은 미생물 표적이 아닌 것으로 알려져 있습니다</b>(아래 4층 설명 참조)</li>
+        <li><b>아르테미시닌 · 살리노마이신</b> — 여러 경로를 겨냥하는 약물</li>
+      </ul>
+      <p style="margin-top:10px;font-size:13.5px;color:var(--sub);">※ 구충제는 "기생충을 겨냥하는 약"이지만, 암세포에 대한 작용은 미생물과 무관하게 설명되는 부분이 있습니다. 이 구분은 4층에서 다시 다룹니다.</p>
+    </div>
+  </div>
+
+  <!-- 2층 -->
+  <div class="layer l2">
+    <div class="lh">2층 · 미생물이 만든 "환경"을 깨뜨리는 약·보조제</div>
+    <div class="lb">
+      <p><span class="badge b-env">⚠️ 환경·관계 관련 (가능성 높음)</span> 미생물을 죽이는 게 아니라, 미생물이 만들어 놓은 <b>보호 구조(바이오필름·주변 조직 환경)</b>를 허뭅니다.</p>
+      <div class="callout teal" style="margin-top:10px;">
+        <b>🔎 여기서 "가능성"이 왜 성립하는가</b>
+        <p>미생물은 혼자 떠 있는 게 아니라 <b>보호막(바이오필름)</b>을 만들어 항생제·면역을 피합니다. 이 보호막을 <b>단백질분해효소가 분해</b>하면, 그 안의 미생물이 노출됩니다. 즉 <b>"미생물의 환경을 깨는 약"</b>은 미생물과 간접적으로 깊이 연결됩니다.</p>
+        <p style="margin-top:6px;">⚠️ 다만 이 문서의 근거 문헌은 <b>세라펩타아제 자체를 직접 다루지 않습니다.</b> 따라서 <b>"가능성이 높다"</b>는 평가이며, 확증은 아닙니다.</p>
+      </div>
+      <ul>
+        <li><b>세라펩타아제</b> — 단백질분해효소. 인용 화면에서 ⭐</li>
+        <li><b>브로멜라인</b> — 파인애플 유래 단백질분해효소</li>
+        <li><b>베르베린</b> — 항균 활성이 보고된 식물 성분</li>
+        <li><b>커큐민 · EGCG · 레스베라트롤</b> — 미생물 대사·환경과 상호작용 보고</li>
+        <li><b>N-아세틸시스테인 · MSM</b> — 점액·조직 환경 관련</li>
+      </ul>
+      <p style="margin-top:10px;">📎 <b>참고:</b> 논문은 <b>"생물막을 만드는 Salmonella typhi의 만성 정착과 담낭암"</b> 사례를 인용합니다 — 미생물의 <b>환경(생물막)</b>이 암과 연결된 실제 연구 예입니다.</p>
+    </div>
+  </div>
+
+  <!-- 3층 -->
+  <div class="layer l3">
+    <div class="lh">3층 · 미생물과 우리 몸의 "관계(면역)"를 바꾸는 약·보조제</div>
+    <div class="lb">
+      <p><span class="badge b-env">⚠️ 관계 관련 (가능성 높음)</span> 미생물을 겨냥하는 게 아니라, <b>미생물과 우리 면역 사이의 균형</b>을 조정합니다.</p>
+      <ul>
+        <li><b>프로바이오틱스</b> — 유산균 등. 논문에서 <b>가장 많이 연구된 미생물 개입</b><span class="badge b-env">논문 근거</span></li>
+        <li><b>버섯 추출물(영지·아가리쿠스·칠면조 꼬리버섯)</b> — 베타글루칸이 면역 수용체에 작용. 논문이 <b>진균 세포벽 성분(β-글루칸)이 면역 수용체를 활성화</b>한다고 서술<span class="badge b-env">논문 근거</span></li>
+        <li><b>메트포르민</b> — 논문 인용: <b>장내미생물 조절로 F. nucleatum 유발 대장암을 억제</b>(EBioMedicine 2020)<span class="badge b-env">논문 근거</span></li>
+        <li><b>TUDCA · 실리마린</b> — 담즙·간 관련 환경</li>
+        <li><b>비타민D3 · 멜라토닌 · 아쉬아간다 · 케르세틴 · 마누카꿀</b> — 면역 조절 관련 보고</li>
+        <li><b>CBD 오일 · 오메가-3 · 변형 감귤 펙틴(MCP) · 살베스트롤</b> — 커뮤니티 다용 보조제</li>
+      </ul>
+      <p style="margin-top:10px;">📎 논문은 이 층의 방향을 이렇게 요약합니다: <b>"프로바이오틱스·프리바이오틱스·FMT로 건강한 미생물 균형을 회복시키고 염증을 줄이며 항종양 면역을 강화"</b>.</p>
+    </div>
+  </div>
+
+  <!-- 4층 -->
+  <div class="layer l4">
+    <div class="lh">4층 · 미생물·암세포의 "연료(대사)"를 차단하는 약·보조제</div>
+    <div class="lb">
+      <p><span class="badge b-poss">🔍 가능성 제시</span> 미생물 자체보다 <b>대사(에너지) 경로</b>를 겨냥합니다. 다만 마크 린턴의 논리처럼 <b>암세포 연료와 곰팡이 먹이가 겹친다</b>는 관점에서 미생물과 간접 연결됩니다.</p>
+      <ul>
+        <li><b>메티오니나아제</b> — 메티오닌 분해 효소. 메티오닌 결핍을 유도해 암세포를 겨냥. <b>미생물 경로와는 직접 관련이 낮은 대사 기전</b></li>
+        <li><b>스트라틴류(심바스타틴 등) · 시메티딘 · 프로프라놀올 · 오메프라졸</b> — 대사·미세환경 관련</li>
+        <li><b>라파마이신 · 저용량 날트렉손 · CBD 오일</b> — 신호 경로 조절</li>
+        <li><b>디설피람</b> — 대사 경로(구리·아세트알데히드) 관련</li>
+        <li><b>탈리도마이드 · 셀레콕시브</b> — 염증·면역 경로</li>
+        <li><b>비타민D3 · 멜라토닌 · 커큐민 · 케르세틴 등</b> — 여러 층에 걸쳐 등장</li>
+      </ul>
+      <p style="margin-top:10px;font-size:13.5px;color:var(--sub);">※ 펜벤다졸·메벤다졸 계열의 암세포 작용은 <b>튜불린(세포 골격) 억제</b>로 설명되며, 이는 미생물 표적이 아닙니다. 이버멕틴은 <b>P2X4/P2X7 등 우리 몸의 수용체</b>에도 작용합니다. 즉 <b>"구충제라서 미생물 경로"라고 단정할 수 없습니다.</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 대응표 ===== -->
+<section id="s7">
+  <h2><span class="no">7</span> 약물 ↔ 미생물 대응 한눈에 보기</h2>
+  <table>
+    <tr><th>약물 계열</th><th>겨냥하는 대상</th><th>예시</th><th>관련 층</th></tr>
+    <tr><td><b>항진균제</b></td><td>진균(곰팡이)</td><td>이트라코나졸</td><td>1층 (직접)</td></tr>
+    <tr><td><b>항생제</b></td><td>세균(박테리아)</td><td>독시사이클린, 아지스로마이신</td><td>1층 (직접)</td></tr>
+    <tr><td><b>구충제</b></td><td>기생충 (+ 별개 항암 기전)</td><td>펜벤다졸, 이버멕틴, 니클로사미드</td><td>1층 + 4층</td></tr>
+    <tr><td><b>단백질분해효소</b></td><td>미생물의 보호막(바이오필름)</td><td>세라펩타아제, 브로멜라인</td><td>2층 (환경)</td></tr>
+    <tr><td><b>프로바이오틱스</b></td><td>미생물 조성 자체</td><td>유산균 제제</td><td>3층 (관계)</td></tr>
+    <tr><td><b>면역조절 성분</b></td><td>미생물-면역 균형</td><td>베타글루칸(버섯), 비타민D3</td><td>3층 (관계)</td></tr>
+    <tr><td><b>대사 조절제</b></td><td>에너지·아미노산 경로</td><td>메티오니나아제, 2-DG</td><td>4층 (연료)</td></tr>
+  </table>
+  <p style="font-size:13.5px;color:var(--sub);">※ 이 표는 <b>분류 도구</b>이며, 어떤 약의 효과를 주장하지 않습니다.</p>
+</section>
+
+<!-- ===== 부록 ===== -->
+<section id="s8">
+  <h2><span class="no">8</span> 부록 — 블로그 본문에만 나오는 약물</h2>
+  <p class="lead">블로그 저자의 최종 요약(38개)에는 없으나, <b>본문 각 전문가 소개에는 등장하는</b> 약물들입니다. 참고용으로만 정리합니다.</p>
+  <div class="card">
+    <h3>본문 언급 약물 (요약 정본 밖)</h3>
+    <p style="font-size:15px;line-height:1.9;">
+    시로신고핀 · 피페롱구민 · 아세타졸아미드 · 펜톡시필린 · 아밀로라이드 · 오라노핀 · 벤제토늄 클로라이드 ·
+    디클로로아세테이트(DCA) · 탄산리튬 · 구리 글루코네이트 · 디곡신 · 2-DG · 3BP · 콜로이드 은 · IP6 ·
+    아스잔틴 · 유비퀴놀 · 정향오일 · 리코펜 · 아베마르 · 터키 테일 · 실리마린/실리비닌 · 폴리다틴 ·
+    제니스테인 · 쇼가올 · 프테오스틸벤 · 설포라판 · N-아세틸시스테인 · 겨우살이 렉틴 · 루테올린 ·
+    블랙시드 오일 · 십전대보탕 · 발프로산 · 클로로퀸 · 레바미솔 · 미페프리스톤 · 티모신 α1 ·
+    졸레드론산 · 디피리다몰 · 시타글립틴 · 비페리덴 · 케토롤락 · 아스피린 · 피세틴 · 아연 · 마늘 · 생강 ·
+    발프로산 · 글리벡 · 허셉틴 · 아리미덱스 · 아비라테론 · 타목시펜 등
+    </p>
+    <div class="callout gold" style="margin-top:12px;">
+      <b>🔍 이 부록의 약물들은 이 문서에서 미생물 관련성을 평가하지 않았습니다</b>
+      <p>대부분 <b>대사·신호·기존 항암제</b> 계열이며, 미생물과의 관련성은 별도 검증이 필요합니다. <b>추가 검증 요구</b>로 표시합니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Q&A ===== -->
+<section id="s9">
+  <h2><span class="no">9</span> 예상 질문 &amp; 답변</h2>
+  <p class="lead">읽으신 내용을 다시 상기하고, 스스로 질문해보시라고 넣었습니다.</p>
+
+  <div class="card">
+    <h3>🙋 일반 질문</h3>
+
+    <div class="qa">
+      <div class="q"><span class="qtag">Q1</span>이 문서는 치료법인가요?</div>
+      <div class="a"><span class="badge b-poss">방향성</span><b>아닙니다.</b> 해외·국내 환자들이 스스로 쓰는 약들이 <b>미생물 관점에서 어디에 걸리는지</b>를 정리한 <b>방향성 보고서</b>입니다. 특정 약을 권하지 않으며, 의학적 조언이 아닙니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag">Q2</span>그럼 미생물을 없애면 암이 낫나요?</div>
+      <div class="a"><span class="badge b-direct">핵심</span><b>아닙니다. 이 문서가 가장 강조하는 부분입니다.</b> 논문은 오히려 <b>세균 제거가 화학요법 효과를 떨어뜨릴 수 있다</b>고 밝힙니다. 그리고 항생제로 세균을 죽이면 <b>방출된 물질이 진균을 더 침습적으로 만들 수 있습니다</b>. 목표는 <b>"제거"가 아니라 "균형 재조정"</b>입니다(4절).</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag">Q3</span>세균과 진균은 뭐가 다른가요?</div>
+      <div class="a"><span class="badge b-direct">용어</span><b>완전히 다른 생물입니다.</b> 세균(박테리아)은 단세포 미생물이고, 진균(곰팡이)은 효모·곰팡이·버섯을 포함하는 별개 계통입니다. <b>약도 다릅니다</b> — 항생제는 세균용, 항진균제는 진균용입니다. 이 문서는 구분을 위해 항상 <b>"세균(박테리아)"</b>, <b>"진균(곰팡이)"</b>로 씁니다(3절).</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag">Q4</span>세라펩타아제가 왜 미생물과 관련되나요?</div>
+      <div class="a"><span class="badge b-env">가능성</span>세라펩타아제는 <b>단백질분해효소</b>입니다. 미생물은 <b>보호막(바이오필름)</b>을 만들어 항생제·면역을 피하는데, 이 보호막이 단백질로 이루어져 있습니다. 그래서 <b>보호막을 분해해 미생물을 노출시킬 가능성</b>이 있습니다. ⚠️ 다만 이 문서의 근거 문헌은 세라펩타아제를 직접 다루지 않으므로 <b>"가능성이 높다"는 평가이며 확증은 아닙니다.</b></div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag">Q5</span>그럼 저는 지금 뭘 하면 되나요?</div>
+      <div class="a"><span class="badge b-direct">행동</span>이 문서 범위에서 <b>근거가 확실한 것</b>은 이미 있는 예방·검진입니다: <b>HPV 백신, B형간염 백신, H. pylori 검사·제균, 국가 암검진</b>. 여기 나온 약물은 <b>복용 전 반드시 담당 의료진과 상의</b>하세요. 특히 <b>기존 항암 치료 중이라면 임의 복용은 위험합니다.</b></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🔬 심화 질문</h3>
+
+    <div class="qa">
+      <div class="q"><span class="qtag deep">D1</span>바이오필름이 뭔가요? 왜 중요한가요?</div>
+      <div class="a deep"><span class="badge b-env">환경</span>미생물이 자기들끼리 만들어 붙는 <b>점막 같은 보호막</b>입니다. 이 안에 있으면 항생제가 잘 닿지 않고 면역세포도 공격하기 어렵습니다. 그래서 <b>"미생물을 죽이는 약"만으로는 부족하고 "보호막을 깨는 접근"이 별도로 필요</b>하다는 논리가 나옵니다. 논문도 <b>생물막을 만드는 Salmonella typhi의 만성 정착이 담낭암과 연관</b>된 사례를 인용합니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag deep">D2</span>"항생제가 오히려 해롭다"는 게 무슨 뜻인가요?</div>
+      <div class="a deep"><span class="badge b-direct">논문 근거</span>논문은 <b>"specific bacterial elimination through antibiotic treatment can impair the effectiveness of chemotherapy"</b>(세균 제거가 화학요법 효과를 떨어뜨릴 수 있다)고 씁니다. 이유는 복잡합니다 — 항생제가 <b>유익한 미생물까지 없애 면역을 약화</b>시키고, 커뮤니티 논문이 밝힌 대로 <b>세균 사체에서 나온 물질이 진균을 강화</b>할 수도 있기 때문입니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag deep">D3</span>메티오니나아제는 어떤 원리인가요?</div>
+      <div class="a deep"><span class="badge b-poss">연료</span><b>메티오닌 분해 효소</b>입니다. 많은 암세포가 메티오닌(아미노산) 의존성이 높아서, 메티오닌을 분해해 없애면 암세포가 굶습니다. ⚠️ 이는 <b>대사 경로</b>이며 미생물과 직접 관련은 낮습니다. 다만 마크 린턴의 논리처럼 <b>"암세포 연료와 미생물 먹이가 겹친다"</b>는 관점에서는 4층(연료)에 놓을 수 있습니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag deep">D4</span>마크 린턴의 진균 이론은 무엇인가요?</div>
+      <div class="a deep"><span class="badge b-poss">이론</span><b>"곰팡이를 중심으로 기생하는 미생물이 만든 종양 환경을 깨뜨려야 한다"</b>는 논리입니다. 암을 유발하는 연료와 곰팡이 먹이가 겹치므로, 염증·에너지 대사·미생물 균형·항진균 전략을 함께 다뤄야 한다고 봅니다. ⚠️ 이 문서는 이를 <b>사실로 검증하지 않았습니다.</b> 다만 논문에서도 <b>진균(Candida)이 생물막을 만들고 다른 세균의 환경을 조성</b>한다는 관찰은 확인됩니다(5절).</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag deep">D5</span>구충제는 왜 미생물과 관련 있다고 보나요?</div>
+      <div class="a deep"><span class="badge b-poss">주의</span><b>단정할 수 없습니다.</b> 구충제는 원래 <b>기생충</b>을 겨냥합니다. 그러나 펜벤다졸·메벤다졸의 암세포 작용은 <b>튜불린(세포골격) 억제</b>로 설명되고, 이버멕틴은 <b>우리 몸의 수용체(P2X4/P2X7)</b>에도 작용합니다. 즉 <b>"구충제라서 미생물 경로"라고 자동으로 연결되지 않습니다.</b> 미생물 경로 여부는 별도 검증이 필요합니다.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🤨 회의적 질문</h3>
+
+    <div class="qa">
+      <div class="q"><span class="qtag skeptic">S1</span>이 약들 임상시험 통과했나요?</div>
+      <div class="a skeptic"><span class="badge b-poss">대부분 아님</span><b>아닙니다.</b> 대부분 암 치료제로 승인되지 않았습니다. 논문이 언급한 이트라코나졸도 <b>"전임상 및 임상시험이 탐색되는 중"</b>(NCT02749513) 단계입니다. 이 문서는 <b>연구·관찰 단계의 방향성</b>을 정리한 것입니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag skeptic">S2</span>커뮤니티 사례는 증거가 되나요?</div>
+      <div class="a skeptic"><span class="badge b-poss">부분적</span><b>그 자체로는 증거가 아닙니다.</b> 효과가 좋아 회자되는 사례만 보고되는 <b>선택 편향</b>이 있고, 효과 없던 사례는 언급되지 않습니다. 그래서 이 문서는 <b>"사례가 있다"와 "효과가 증명됐다"를 구분</b>해서 씁니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag skeptic">S3</span>이트라코나졸 항암 효과가 없다는 결과도 있던데요?</div>
+      <div class="a skeptic"><span class="badge b-direct">정직</span><b>맞습니다.</b> 이트라코나졸은 <b>여러 임상시험이 진행되었고 결과가 일관되지 않았습니다.</b> 논문도 "기대되는 결과가 나올 수 있으나 <b>추가 연구가 여전히 필요하다</b>"고 유보적으로 씁니다. 이 문서는 이트라코나졸이 듣는다고 주장하지 않습니다 — <b>"진균을 겨냥하는 약이라는 위치"</b>만 표시합니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag skeptic">S4</span>블로그 주장을 믿어도 되나요?</div>
+      <div class="a skeptic"><span class="badge b-poss">주의</span>블로그는 <b>여러 전문가의 책·자료를 개인이 요약</b>한 글입니다. 저자 본인도 <b>"현재로는 공식적인 것이 아니며, 정해진 것은 없다"</b>고 밝히고, <b>"맹목적으로 검증되지 않은 방법에 빠지는 것도 반대"</b>한다고 씁니다. 이 문서는 그 요약을 <b>미생물 관점으로 재배치</b>했을 뿐, 검증한 것이 아닙니다.</div>
+    </div>
+
+    <div class="qa">
+      <div class="q"><span class="qtag skeptic">S5</span>의사가 반대하면 어떻게 하나요?</div>
+      <div class="a skeptic"><span class="badge b-direct">원칙</span><b>의료진의 판단이 우선입니다.</b> 이 문서는 정보 정리이며, <b>담당 의료진을 대체하지 않습니다.</b> 특히 기존 항암 치료 중에는 <b>약물 상호작용 위험</b>이 있어, 임의 복용은 치료 자체를 방해할 수 있습니다. 궁금한 점은 <b>의료진에게 가져가 상의</b>하시는 것이 맞습니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 용어/출처 ===== -->
+<section id="s10">
+  <h2><span class="no">10</span> 용어 사전 &amp; 출처</h2>
+  <table>
+    <tr><th style="width:30%">용어</th><th>설명</th></tr>
+    <tr><td><b>세균 (박테리아)</b></td><td>단세포 미생물. 항생제가 듣는다. 예: H. pylori</td></tr>
+    <tr><td><b>진균 (곰팡이)</b></td><td>효모·곰팡이·버섯을 포함하는 별개 계통. 항진균제가 듣는다. 예: Candida</td></tr>
+    <tr><td><b>바이러스</b></td><td>세포가 아니며 숙주세포에 기생. 항바이러스제·백신. 예: HPV, EBV</td></tr>
+    <tr><td><b>기생충</b></td><td>원생동물·연충 등. 구충제가 듣는다. 예: 주혈흡충</td></tr>
+    <tr><td><b>마이크로바이옴<br>(microbiome)</b></td><td>몸속 미생물 <b>전체</b> (세균·진균·바이러스·기생충)</td></tr>
+    <tr><td><b>마이코바이옴<br>(mycobiome)</b></td><td>마이크로바이옴 중 <b>곰팡이(진균)만</b></td></tr>
+    <tr><td><b>바이오필름 (생물막)</b></td><td>미생물이 만들어 붙는 보호막. 항생제·면역을 피하는 수단</td></tr>
+    <tr><td><b>공생 미생물</b></td><td>우리 몸에 해 없이 함께 사는 미생물. 면역 유지에 필요</td></tr>
+    <tr><td><b>FMT (분변 이식)</b></td><td>건강한 사람의 장내미생물을 옮겨 조성을 회복하는 치료법</td></tr>
+    <tr><td><b>프로바이오틱스</b></td><td>유익한 미생물 자체를 섭취하는 것 (유산균 등)</td></tr>
+    <tr><td><b>프리바이오틱스</b></td><td>유익균의 먹이가 되는 성분 (식이섬유 등)</td></tr>
+    <tr><td><b>용도변경 (off-label)</b></td><td>승인된 용도와 다른 병에 쓰는 것. 연구·관찰 단계</td></tr>
+    <tr><td><b>베타글루칸</b></td><td>진균 세포벽 성분. 면역 수용체(Dectin-1 등)를 활성화</td></tr>
+  </table>
+
+  <div class="foot">
+    <p><b>📄 근거 자료</b></p>
+    <p style="margin-top:6px;"><b>①</b> 설금홍(grsanga). 「암 치료에 관한 세계인들의 항암 프로토콜과 중요 약물 요약 정리」. 네이버 블로그, 2025-08-07. (https://blog.naver.com/grsanga/223962532697) — <b>이 문서의 약물 목록 출처</b></p>
+    <p style="margin-top:4px;"><b>②</b> 黄沁怡, 向怀荣, 涂华康. 「瘤内微生物组的研究现状与检测技术演进」. 中华肿瘤杂志(Chinese Journal of Oncology) 2026; 48(9). 저장대학</p>
+    <p style="margin-top:4px;"><b>③</b> Yao Y, et al. "Microbiota in cancer: current understandings and future perspectives." <b>Signal Transduction and Targeted Therapy</b> 2026; 11: 39</p>
+    <p style="margin-top:4px;"><b>④</b> Narunsky-Haziza L, et al. "Pan-cancer analyses reveal cancer-type-specific fungal ecologies and bacteriome interactions." <b>Cell</b> 2022; 185: 3789–3806</p>
+    <p style="margin-top:4px;"><b>⑤</b> Helmink BA, et al. "The microbiome, cancer, and cancer therapy." <b>Nature Medicine</b> 2019; 25: 377–388</p>
+    <p style="margin-top:4px;"><b>⑥</b> Huang X, et al. "Metformin elicits antitumour effect by modulation of the gut microbiota and rescues Fusobacterium nucleatum-induced colorectal tumorigenesis." <b>EBioMedicine</b> 2020; 61: 103037</p>
+    <p style="margin-top:4px;"><b>⑦</b> Di Domenico EG, et al. "Biofilm producing Salmonella typhi: chronic colonization and development of gallbladder cancer." <b>Int J Mol Sci</b> 2017; 18: E1887</p>
+
+    <p style="margin-top:14px;"><b>🏷️ 이 문서가 사용한 표시</b></p>
+    <p style="margin-top:6px;">
+      <span class="badge b-direct">✅ 직접 관련</span> 미생물을 직접 겨냥하며 문헌 근거가 있음<br>
+      <span class="badge b-env">⚠️ 환경·관계 관련 (가능성 높음)</span> 바이오필름·면역 균형 등 간접 경로<br>
+      <span class="badge b-poss">🔍 가능성 제시</span> 방향성은 보이나 기전 미확립<br>
+      <span class="badge b-low">📎 미생물 관련 낮음</span> 대사·기타 경로
+    </p>
+
+    <p style="margin-top:14px;"><b>⚠️ 면책 (반드시 읽어주세요)</b></p>
+    <p style="margin-top:6px;">이 문서는 <b>정보·교육 목적의 방향성 보고서</b>이며 <b>의학적 조언이 아닙니다.</b> 여기 소개된 약물·보조제는 <b>암 치료제로 승인되지 않았고</b>, 특정 질환 치료에 유효하다는 주장이 아닙니다. 원문 블로그는 여러 전문가의 자료를 개인이 요약한 것이며 <b>저자 본인도 단일 요약을 사실로 받아들이지 말 것을 권고</b>합니다. 모든 복용·중단 결정은 <b>반드시 담당 의료진과 상의</b>하십시오. 특히 기존 항암 치료 중 임의 복용은 <b>상호작용으로 치료를 방해할 수 있습니다.</b></p>
+    <p style="margin-top:10px; text-align:right;">— Hermes Agent · 커뮤니티 방향성 보고서 · 2026-10</p>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

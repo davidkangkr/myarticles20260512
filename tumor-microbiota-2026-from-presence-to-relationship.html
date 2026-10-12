@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>종양내 미생물 — 존재에서 관계로 (2020 → 2026)</title>
+<style>
+  :root{
+    --bg:#faf8f4; --card:#ffffff; --ink:#2b2b2b; --sub:#6b6b6b;
+    --teal:#0f5e5e; --teal-soft:#e3efee; --gold:#b45309; --gold-soft:#fdf0dc;
+    --sage:#5b7f5b; --sage-soft:#e9f0e6; --red:#b91c1c; --red-soft:#fdecec;
+    --purple:#6d28a8; --purple-soft:#f2e9fb; --line:#e5dfd3;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+    font-size:17px; line-height:1.72; padding:0 0 60px 0;
+    -webkit-text-size-adjust:100%;}
+  .wrap{max-width:780px; margin:0 auto; padding:0 16px;}
+  header{background:linear-gradient(135deg,#0f5e5e 0%,#146b6b 52%,#5b7f5b 100%);
+    color:#fff; padding:38px 16px 30px; text-align:center;}
+  header .tag{display:inline-block; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.4);
+    border-radius:999px; padding:4px 14px; font-size:13px; margin-bottom:12px; letter-spacing:.3px;}
+  header h1{font-size:23px; line-height:1.4; font-weight:800; margin-bottom:10px;}
+  header p{font-size:15px; opacity:.94; line-height:1.55;}
+  .meta{background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px 16px;
+    font-size:14px; color:var(--sub); margin-top:14px; text-align:left; box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .meta b{color:var(--ink);}
+  section{background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:22px 20px; margin-top:22px; box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  h2{font-size:19px; color:var(--teal); font-weight:800; margin-bottom:14px;
+    padding-bottom:10px; border-bottom:2px solid var(--teal-soft); line-height:1.4;}
+  h2 .num{display:inline-block; background:var(--teal); color:#fff; border-radius:6px;
+    font-size:13px; padding:1px 8px; margin-right:8px; vertical-align:middle;}
+  h3{font-size:16px; color:var(--gold); font-weight:700; margin:18px 0 8px;}
+  h4{font-size:15px; color:var(--ink); font-weight:700; margin:14px 0 6px;}
+  p{margin-bottom:10px;}
+  ul,ol{margin:8px 0 12px 22px;}
+  li{margin-bottom:6px;}
+  b,strong{color:#111; font-weight:700;}
+  .lead{font-size:16.5px; color:var(--ink);}
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
+  th,td{border:1px solid var(--line); padding:8px 9px; text-align:left; vertical-align:top;}
+  th{background:var(--teal-soft); color:var(--teal); font-weight:700;}
+  tr:nth-child(even) td{background:#fcfbf8;}
+  .badge{display:inline-block; font-size:12px; font-weight:700; border-radius:5px;
+    padding:1px 7px; white-space:nowrap;}
+  .b-ok{background:var(--sage-soft); color:var(--sage); border:1px solid #c4d8c0;}
+  .b-strong{background:var(--gold-soft); color:var(--gold); border:1px solid #f0d5a8;}
+  .b-open{background:#eef2f7; color:#475569; border:1px solid #cdd7e3;}
+  .b-retract{background:var(--red-soft); color:var(--red); border:1px solid #f2c4c4;}
+  .card{background:var(--teal-soft); border-radius:10px; padding:13px 15px; margin:10px 0;
+    border-left:4px solid var(--teal);}
+  .card.gold{background:var(--gold-soft); border-left-color:var(--gold);}
+  .card.sage{background:var(--sage-soft); border-left-color:var(--sage);}
+  .card.red{background:var(--red-soft); border-left-color:var(--red);}
+  .card.purple{background:var(--purple-soft); border-left-color:var(--purple);}
+  .card h4{margin-top:0;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:12px 0;}
+  .stat{background:#fcfbf8; border:1px solid var(--line); border-radius:10px; padding:12px; text-align:center;}
+  .stat .n{font-size:22px; font-weight:800; color:var(--teal); line-height:1.2;}
+  .stat .l{font-size:13px; color:var(--sub); margin-top:3px;}
+  .qa{margin:12px 0;}
+  .q{font-weight:700; color:var(--teal); margin-top:14px; padding-left:22px; position:relative;}
+  .q::before{content:"Q"; position:absolute; left:0; top:0; background:var(--teal); color:#fff;
+    font-size:11px; width:16px; height:16px; border-radius:4px; text-align:center; line-height:16px;}
+  .a{margin:4px 0 0 22px; color:#333;}
+  .svgbox{overflow-x:auto; margin:14px 0; padding:4px;}
+  svg{display:block; max-width:100%; height:auto; margin:0 auto;}
+  .foot{font-size:13px; color:var(--sub); margin-top:26px; padding:16px; background:#f5f2ec;
+    border-radius:10px; line-height:1.6;}
+  .foot b{color:var(--ink);}
+  .tagline{font-size:13px; color:var(--sub); margin-top:6px;}
+  @media(max-width:520px){
+    body{font-size:16px;}
+    .grid2{grid-template-columns:1fr;}
+    section{padding:18px 15px;}
+    header h1{font-size:20px;}
+    table{font-size:13px;}
+    th,td{padding:6px 7px;}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="tag">논문 해설 · 흐름 정리 · 2026</div>
+  <h1>종양내 미생물 —<br>존재에서 관계로 (2020 → 2026)</h1>
+  <p>우리가 계속 봐온 것들의 “당연한 연장선”에 있는 논문</p>
+</header>
+
+<div class="wrap">
+
+  <div class="meta">
+    <b>해설 대상 논문</b><br>
+    Mei J, Imin I, Gao X, Xue Y, Xu K, Zhu M, Bai R, Liu Y. “Harnessing tumor-associated microbiota for cancer therapy and diagnosis: Mechanisms and engineering strategies.” <i>Acta Pharmaceutica Sinica B</i> (2026). DOI: 10.1016/j.apsb.2026.09.033<br><br>
+    <b>성격</b> 종설(Review) · 77쪽 · Journal Pre-proof(교정 전) &nbsp;|&nbsp; <b>분량</b> 참고문헌 197편
+    <div class="tagline">※ 이 문서는 논문을 <b>일반인이 읽을 수 있게</b> 풀어쓴 해설입니다. 원문을 대체하지 않습니다.</div>
+  </div>
+
+  <!-- ============ 1. 30초 요약 ============ -->
+  <section>
+    <h2><span class="num">1</span>30초 요약</h2>
+    <p class="lead">한 문장으로: <b>“종양 안에 세균·진균·바이러스가 있다”를 넘어, 이들이 <u>서로 어떻게 얽혀 암을 키우거나 치료를 돕는지</u>를 정리한 리뷰.</b></p>
+
+    <div class="grid2">
+      <div class="card">
+        <h4>① 무엇을 다루나</h4>
+        종양 미세환경(TME)에 사는 <b>세 계(界)</b> — 세균·진균·바이러스 — 를 한 번에 다룹니다.
+      </div>
+      <div class="card gold">
+        <h4>② 무엇이 새로운가</h4>
+        각 계를 따로 본 게 아니라, <b>계 사이의 상호작용(cross-kingdom)</b>을 중심에 놓았습니다.
+      </div>
+      <div class="card sage">
+        <h4>③ 그래서 무엇에 쓰나</h4>
+        진단(여러 계를 합치면 정확도↑)·치료(공학적 미생물 벡터·파지·종양용해 바이러스).
+      </div>
+      <div class="card red">
+        <h4>④ 정직한 그늘</h4>
+        아직 <b>대부분 상관 연구</b>이고, 살아있는 미생물 치료제는 <b>안전성·규제 허들이 큼</b>.
+      </div>
+    </div>
+
+    <div class="card purple">
+      <h4>⭐ 그리고 이 문서의 핵심 — 이 논문의 “위치”</h4>
+      이 논문은 갑자기 나온 것이 아닙니다. <b>“있나 없나”(2020) → “몇 계(界)가 있나·무슨 일을 하나”(2022) → “서로 어떻게 얽히나”(2026)</b> 로 이어지는 <b>당연한 다음 단계</b>입니다. 2장의 시계열 도식에서 이 흐름을 한눈에 보실 수 있습니다.
+    </div>
+  </section>
+
+  <!-- ============ 2. 시계열 도식 ============ -->
+  <section>
+    <h2><span class="num">2</span>큰 흐름 속의 위치 — 발견의 시계열</h2>
+    <p>“이 논문은 우리가 계속 봐온 것들의 연장선”이라는 말을 <b>한 장의 그림</b>으로 보여줍니다. 아래로 갈수록 연구가 진화합니다.</p>
+
+    <div class="svgbox">
+    <svg viewBox="0 0 720 620" role="img" aria-label="종양 미생물 연구의 시계열 진화 도식">
+      <defs>
+        <marker id="arw" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+          <path d="M0,0 L7,3 L0,6 Z" fill="#0f5e5e"/>
+        </marker>
+        <style>
+          .yr{font:700 15px sans-serif; fill:#0f5e5e;}
+          .tt{font:700 13px sans-serif; fill:#222;}
+          .st{font:400 11px sans-serif; fill:#555;}
+          .lb{font:700 10px sans-serif; fill:#fff;}
+          .sm{font:400 10.5px sans-serif; fill:#444;}
+        </style>
+      </defs>
+
+      <!-- flow arrow background -->
+      <line x1="60" y1="90" x2="60" y2="560" stroke="#c9dcd9" stroke-width="3"/>
+      <line x1="60" y1="560" x2="60" y2="575" stroke="#0f5e5e" stroke-width="3" marker-end="url(#arw)"/>
+
+      <!-- 2020 -->
+      <circle cx="60" cy="110" r="9" fill="#0f5e5e"/>
+      <text x="82" y="115" class="yr">2020</text>
+      <rect x="140" y="78" width="540" height="64" rx="8" fill="#e3efee" stroke="#0f5e5e" stroke-width="1"/>
+      <text x="152" y="98" class="tt">Nejman et al., Science — “종양은 무균”의 붕괴</text>
+      <text x="152" y="116" class="sm">1,526개 종양 / 7개 암종 · 종양세포 ‘내부’에도 세균 존재 확인</text>
+      <text x="152" y="133" class="sm">→ 의미: 세균의 【존재】를 확정. “있나 없나”의 시대 종료</text>
+
+      <!-- 2020 retracted -->
+      <circle cx="60" cy="185" r="7" fill="#b91c1c"/>
+      <text x="82" y="190" class="yr" fill="#b91c1c">2020</text>
+      <rect x="140" y="158" width="540" height="56" rx="8" fill="#fdecec" stroke="#b91c1c" stroke-width="1"/>
+      <text x="152" y="177" class="tt" fill="#b91c1c">Poore et al., Nature — 33개 암종 미생물 · 진단 <tspan>(2024 철회)</tspan></text>
+      <text x="152" y="194" class="sm">존재 확인을 넘어 “진단”까지 주장했으나 데이터 오류로 2024년 철회</text>
+      <text x="152" y="209" class="sm">→ 의미: 【인과·진단 주장】은 검증 없이 성립하지 않는다 (반면교사)</text>
+
+      <!-- 2022 fungi -->
+      <circle cx="60" cy="268" r="9" fill="#6d28a8"/>
+      <text x="82" y="273" class="yr" fill="#6d28a8">2022</text>
+      <rect x="140" y="236" width="540" height="62" rx="8" fill="#f2e9fb" stroke="#6d28a8" stroke-width="1"/>
+      <text x="152" y="255" class="tt">Narunsky-Haziza et al., Cell — 진균(마이코바이옴)의 확장</text>
+      <text x="152" y="272" class="sm">암종마다 특이적 진균 생태계가 있음 · 세균-진균 상호작용 시사</text>
+      <text x="152" y="289" class="sm">→ 의미: 계(界)를 세균에서 【진균】으로 확장</text>
+
+      <!-- 2022 function -->
+      <circle cx="60" cy="347" r="9" fill="#b45309"/>
+      <text x="82" y="352" class="yr" fill="#b45309">2022</text>
+      <rect x="140" y="316" width="540" height="60" rx="8" fill="#fdf0dc" stroke="#b45309" stroke-width="1"/>
+      <text x="152" y="335" class="tt">Fu et al., Cell — 종양 내 세균이 ‘전이’를 돕는다</text>
+      <text x="152" y="352" class="sm">유방암에서 종양세포 내 세균이 전이 정착을 촉진</text>
+      <text x="152" y="369" class="sm">→ 의미: 【존재】를 넘어 【기능(전이 촉진)】으로</text>
+
+      <!-- 2026 THIS -->
+      <circle cx="60" cy="440" r="11" fill="#0f5e5e"/>
+      <circle cx="60" cy="440" r="17" fill="none" stroke="#0f5e5e" stroke-width="2"/>
+      <text x="82" y="445" class="yr">2026</text>
+      <rect x="140" y="404" width="540" height="76" rx="8" fill="#0f5e5e"/>
+      <text x="152" y="425" class="lb">★ 이번 논문 (Acta Pharmaceutica Sinica B)</text>
+      <text x="152" y="444" fill="#dff0ee" font-family="sans-serif" font-size="11.5">세균 · 진균 · 바이러스 【세 계(界)를 한 번에】, 그 【관계】를 중심에</text>
+      <text x="152" y="461" fill="#dff0ee" font-family="sans-serif" font-size="11.5">cross-kingdom 대사 상호급이(cross-feeding)·생물막·면역축</text>
+      <text x="152" y="476" fill="#fff" font-family="sans-serif" font-size="11">→ 의미: 【관계】의 통합 — 존재·기능을 넘어</text>
+
+      <!-- next flow -->
+      <line x1="60" y1="500" x2="60" y2="545" stroke="#5b7f5b" stroke-width="3" stroke-dasharray="6 4"/>
+      <circle cx="60" cy="560" r="9" fill="none" stroke="#5b7f5b" stroke-width="2.5"/>
+      <rect x="140" y="522" width="540" height="66" rx="8" fill="#e9f0e6" stroke="#5b7f5b" stroke-width="1.5" stroke-dasharray="5 3"/>
+      <text x="152" y="541" class="tt" fill="#3f5f3f">다음 흐름 (자연스럽게 보이는 방향)</text>
+      <text x="152" y="558" class="sm">① 다계(多界) 진단 바이오마커 통합  ② 공학적 ‘살아있는 약’(smart bacteria)</text>
+      <text x="152" y="574" class="sm">③ 환자별 맞춤(동반진단)  ④ 안전성·규제 정립 — 7장에서 자세히</text>
+    </svg>
+    </div>
+
+    <h3>각 논문의 의미 — 한 줄 정리</h3>
+    <table>
+      <thead><tr><th>연도</th><th>논문</th><th>이 단계가 확정한 것</th><th>상태</th></tr></thead>
+      <tbody>
+        <tr><td><b>2020</b></td><td>Nejman, <i>Science</i></td><td>종양 내 세균의 <b>존재</b> (무균설 붕괴)</td><td><span class="badge b-ok">✅ 확립</span></td></tr>
+        <tr><td><b>2020</b></td><td>Poore, <i>Nature</i></td><td>“33개 암종·진단” 주장 → <b>철회</b></td><td><span class="badge b-retract">🔴 철회</span></td></tr>
+        <tr><td><b>2022</b></td><td>Narunsky-Haziza, <i>Cell</i></td><td><b>진균</b>으로 계(界) 확장</td><td><span class="badge b-strong">⚠ 강한 증거</span></td></tr>
+        <tr><td><b>2022</b></td><td>Fu, <i>Cell</i></td><td>세균의 <b>기능</b>(전이 촉진)</td><td><span class="badge b-strong">⚠ 강한 증거</span></td></tr>
+        <tr><td><b>2026</b></td><td><b>이번 논문</b></td><td>세 계(界)의 <b>관계</b> 통합</td><td><span class="badge b-strong">⚠ 리뷰</span></td></tr>
+      </tbody>
+    </table>
+
+    <div class="card blue" style="background:#eef4fb; border-left-color:#2b6cb0;">
+      <h4>이 표를 읽는 법 — 핵심은 “무엇이 확정되고, 무엇이 아직인가”</h4>
+      왼쪽의 <b>연도는 연구가 진화한 순서</b>이고, 오른쪽 <b>상태 배지</b>는 그 주장이 얼마나 단단한지를 나타냅니다. 세균·진균은 아직 <b>상관 근거 중심</b>인데, 바이러스만은 <b>인과가 확립</b>되어 있습니다(4장 참조). 이 <b>“확실성의 기울기”</b>가 이 논문 전체를 이해하는 열쇠입니다.
+    </div>
+  </section>
+
+  <!-- ============ 3. 세균 ============ -->
+  <section>
+    <h2><span class="num">3</span>세균 — 종양 안의 첫 번째 주민</h2>
+    <p>논문 §2에 해당합니다. 종양 안에 세균이 산다는 건 이제 <b>대부분의 고형암에서 검출</b>됩니다. 그런데 논문은 곧바로 <b>핵심 질문</b>을 던집니다.</p>
+
+    <div class="card gold">
+      <h4>⚠ 논문이 던지는 가장 중요한 경고</h4>
+      “종양 안 세균이 <b>암을 일으키는 주범(driver)</b>인가, 아니면 이미 생긴 종양에 <b>그냥 얹혀사는 얹혀살이(passenger)</b>인가?” — 이 둘은 완전히 다르지만, <b>실제로는 종(種)별·상황별로 갈립니다.</b> 대부분의 종양-미생물 연구는 <b>16S rRNA나 메타게놈의 상관(correlation) 근거</b>에 그칩니다.
+    </div>
+
+    <h3>인과 근거가 가장 강한 두 가지 예외</h3>
+    <table>
+      <thead><tr><th>미생물</th><th>기전</th><th>의미</th></tr></thead>
+      <tbody>
+        <tr><td><b><i>Fusobacterium nucleatum</i></b></td><td>FadA 부착인자가 E-cadherin에 결합 → β-catenin → Wnt 경로 활성</td><td>대장암(CRC)에서 <b>인과 근거 강함</b> — 증식 촉진</td></tr>
+        <tr><td><b>pks+ <i>E. coli</i></b></td><td>콜리박틴(colibactin) 생성 → DNA 손상</td><td>무균(germ-free) 동물에서 <b>단독 접종으로 종양 촉진</b></td></tr>
+      </tbody>
+    </table>
+    <div class="card">
+      <h4>🔍 콜리박틴 — 우리 브레인에도 기록된 사례</h4>
+      콜리박틴은 <b>유전독성 기전과 돌연변이 서명(SBS88/ID18)의 존재는 확립</b>됐지만, “대장암 <b>위험인자</b>”라는 <b>역학적 인과는 미확립·논쟁 중</b>입니다(Utah preprint가 “해부학적 부위 특성 반영일 뿐”이라 반박). → <b>기전 확립 ≠ 인과 확립</b>의 대표 사례.
+    </div>
+
+    <h3>세균을 이용한 치료 전략 (§2.3)</h3>
+    <ul>
+      <li><b>선택적 제거</b> — 항생제·항균 나노소재로 종양 촉진 세균 제거</li>
+      <li><b>프로바이오틱 정착</b> — 면역 지지 미생물총 복원 (§2.3.1)</li>
+      <li><b>공학적 세균 벡터</b> — 면역치료 페이로드 전달, 예: <b>E. coli Nissle 1917</b>으로 anti-PD-L1·anti-CTLA-4 나노바디 전달 (§2.3.2)</li>
+    </ul>
+    <div class="card red">
+      <b>냉정하게:</b> 다균주(multi-strain) 컨소시엄은 제조·품질관리 요건이 까다로워 <b>아직 어려움</b>이 많습니다. 세균은 바이러스보다 게놈이 크고 주석이 덜 되어 있어 <b>제어가 어렵습니다</b> — 이게 뒤(6장)에서 다시 나옵니다.
+    </div>
+  </section>
+
+  <!-- ============ 4. 진균 ============ -->
+  <section>
+    <h2><span class="num">4</span>진균 — 두 번째 계(界), 2022년의 확장</h2>
+    <p>논문 §3. 세균만 보던 시야가 <b>진균(마이코바이옴)</b>으로 넓어집니다. 종양마다 <b>특이적인 진균 생태계</b>가 있고, 진균 불균형(dysbiosis)이 <b>나쁜 예후와 연관</b>됩니다.</p>
+
+    <h3>진균의 양면성</h3>
+    <div class="grid2">
+      <div class="card red">
+        <h4>해로운 방향 (종양 촉진)</h4>
+        면역 조절(Dectin-1·NLRP3), 후성유전 변화(RASSF4), 독소(T-2 toxin) 등으로 종양 진행을 돕습니다. 예: <i>Candida</i>, <i>Malassezia</i>, <i>Fusarium</i>.
+      </div>
+      <div class="card sage">
+        <h4>진단 표지로 유용</h4>
+        특정 진균 서명이 <b>암종 분류·예후 예측</b>에 쓰일 수 있습니다. 예: 유방암의 <i>Malassezia</i>, 폐암의 <i>Blastomyces</i> → 나쁜 생존율 예측.
+      </div>
+    </div>
+
+    <h3>진균 성분을 이용한 치료 (§3.3)</h3>
+    <table>
+      <thead><tr><th>전략</th><th>내용</th></tr></thead>
+      <tbody>
+        <tr><td><b>나노입자</b></td><td>효모 β-glucan + 아드리아마이신 자가조립 → IL-1β·TNF-α·IFN-γ↑, 대식세포 활성화</td></tr>
+        <tr><td><b>효소-프로드러그</b></td><td>효모 시토신 탈아미노효소(yCD)가 무독성 5-FC를 항암제 5-FU로 전환</td></tr>
+        <tr><td><b>효모 벡터</b></td><td>MYD88·TNF mRNA 탑재 효모가 M2 대식세포에서 TNF-α 분비 2배↑ — 백신 전달체 가능성</td></tr>
+        <tr><td><b>내생진균 대사물</b></td><td>paclitaxel(탁솔) 생산 보고 이후 항암 후보물질 급증. 단 <b>임상 진입은 plinabulin·sonolisib 정도</b></td></tr>
+      </tbody>
+    </table>
+    <div class="card gold">
+      <b>정직하게:</b> 진균 유래 치료는 <b>세균·바이러스보다 더 이른 단계(earlier stage)</b>입니다. “가능성”이지 “임상 확립”이 아닙니다.
+    </div>
+  </section>
+
+  <!-- ============ 5. 바이러스 ============ -->
+  <section>
+    <h2><span class="num">5</span>바이러스 — 인과가 가장 확실한 계(界)</h2>
+    <p>논문 §4. 여기서 <b>중요한 반전</b>이 있습니다. 세균·진균은 아직 상관 근거 중심인데, <b>바이러스만은 인과가 확립</b>되어 있습니다.</p>
+
+    <div class="card purple">
+      <h4>⭐ 논문의 핵심 문장 (확실성의 기울기)</h4>
+      “<b>HBV·HPV·EBV·MCPyV는 IARC(국제암연구소) 1군 발암물질</b>로 분류 — 역학·기전·중재 근거가 견고하다. 반면 <b>종양 내 세균·진균은 주로 모델 특이적 인과 근거</b>에 머문다.”
+      <br>→ 즉 <b>“확립된 발암 바이러스 → 후보 세균 → 연관성 수준의 진균”</b> 순의 <b>인과 확실성 기울기</b>가 존재합니다.
+    </div>
+
+    <h3>대표 발암 바이러스</h3>
+    <table>
+      <thead><tr><th>바이러스</th><th>암</th><th>기전</th></tr></thead>
+      <tbody>
+        <tr><td><b>HPV</b> 16/18</td><td>자궁경부·구인두·HNSCC</td><td>E6→p53 분해, E7→Rb 불활성화, TERT 활성화</td></tr>
+        <tr><td><b>HBV</b></td><td>간세포암(HCC)</td><td>젖산↑ → 히스톤 락틸화(Kla), HBx → miRNA 조절이상</td></tr>
+        <tr><td><b>HCV</b></td><td>간세포암(HCC)</td><td>만성 감염 → 간경변 → HCC, Core/NS3/NS5A로 면역 회피</td></tr>
+        <tr><td><b>EBV</b></td><td>위암·비인두암·버킷림프종</td><td>NF-κB 활성, CpG 과메틸화(CIMP), p53·p16 교란</td></tr>
+        <tr><td><b>MCPyV</b></td><td>메르켈세포암</td><td>종양항원 large/small T가 p53·Rb 불활성화</td></tr>
+      </tbody>
+    </table>
+    <p><b>주의:</b> HCMV·HPV16·HPV18 세 가지가 분리된 바이러스 전체의 <b>41%</b>를 차지합니다. 그러나 <b>모든 종양내 바이러스가 나쁜 것은 아닙니다</b> — 일부는 항종양 면역을 돕습니다.</p>
+
+    <h3>바이러스의 유익한/치료적 역할 (§4.2)</h3>
+    <ul>
+      <li><b>박테리오파지</b> — 종양 촉진 세균을 선택적으로 줄여 미생물 균형 회복</li>
+      <li><b>면역 감지 강화</b> — 항원 제시·I형 인터페론·T세포 프라이밍 촉진</li>
+      <li><b>종양용해 바이러스(oncolytic virus)</b> — T-VEC 등, 종양에서 선택적 복제로 파괴</li>
+    </ul>
+    <div class="card">
+      <b>핵심:</b> 바이러스는 <b>“이중날(double-edged sword)”</b>입니다. 같은 파지가 장암에서는 종양 촉진 세균을 줄여 생존을 개선하기도 하고, 세균 용해로 PAMPs를 쏟아내 염증을 유발하기도 합니다.
+    </div>
+  </section>
+
+  <!-- ============ 6. cross-kingdom (핵심) ============ -->
+  <section>
+    <h2><span class="num">6</span>⭐ 핵심 진화 — “관계”의 등장 (cross-kingdom)</h2>
+    <p>논문 §5에 해당하며, <b>이 논문이 이전 논문들과 다른 지점</b>입니다. 세균·진균·바이러스를 <b>따로</b> 보는 대신, 이들이 <b>서로 어떻게 얽히는지</b>를 중심에 놓습니다.</p>
+
+    <div class="card gold">
+      <h4>논문의 요약 문장</h4>
+      “세균–진균, 파지–세균, 바이러스–세균 상호작용이 <b>종양–면역–미생물 축</b>을 함께 형성한다. <b>단일 계(界) 분석보다 통합 프로파일링</b>이 진단·예후·치료 층화에 더 유망하다.”
+    </div>
+
+    <div class="svgbox">
+    <svg viewBox="0 0 700 360" role="img" aria-label="계(界) 간 상호작용 도식">
+      <defs>
+        <style>
+          .ct{font:700 13px sans-serif; fill:#fff;}
+          .cs{font:400 10.5px sans-serif; fill:#444;}
+          .rt{font:700 11.5px sans-serif; fill:#0f5e5e;}
+          .rs{font:400 10px sans-serif; fill:#555;}
+          .ht{font:700 12px sans-serif; fill:#b45309;}
+        </style>
+      </defs>
+
+      <!-- three kingdoms triangles -->
+      <rect x="60" y="40" width="170" height="80" rx="10" fill="#0f5e5e"/>
+      <text x="145" y="70" text-anchor="middle" class="ct">세균</text>
+      <text x="145" y="90" text-anchor="middle" fill="#dff0ee" font-family="sans-serif" font-size="10">niche 형성 · SCFA</text>
+      <text x="145" y="105" text-anchor="middle" fill="#dff0ee" font-family="sans-serif" font-size="10">공생·길항</text>
+
+      <rect x="265" y="40" width="170" height="80" rx="10" fill="#6d28a8"/>
+      <text x="350" y="70" text-anchor="middle" class="ct">진균</text>
+      <text x="350" y="90" text-anchor="middle" fill="#eaddf7" font-family="sans-serif" font-size="10">신호 증폭</text>
+      <text x="350" y="105" text-anchor="middle" fill="#eaddf7" font-family="sans-serif" font-size="10">Dectin-1 · MBL</text>
+
+      <rect x="470" y="40" width="170" height="80" rx="10" fill="#b45309"/>
+      <text x="555" y="70" text-anchor="middle" class="ct">바이러스</text>
+      <text x="555" y="90" text-anchor="middle" fill="#fbe8cf" font-family="sans-serif" font-size="10">세포내 형질전환</text>
+      <text x="555" y="105" text-anchor="middle" fill="#fbe8cf" font-family="sans-serif" font-size="10">통합·종양단백</text>
+
+      <!-- interaction arrows -->
+      <line x1="230" y1="80" x2="265" y2="80" stroke="#5b7f5b" stroke-width="2.5" marker-end="url(#arw)"/>
+      <line x1="265" y1="95" x2="230" y2="95" stroke="#5b7f5b" stroke-width="2.5" marker-end="url(#arw)"/>
+      <text x="247" y="132" text-anchor="middle" class="cs">대사 상호급이</text>
+      <text x="247" y="146" text-anchor="middle" class="cs">생물막</text>
+
+      <line x1="435" y1="80" x2="470" y2="80" stroke="#5b7f5b" stroke-width="2.5" marker-end="url(#arw)"/>
+      <line x1="470" y1="95" x2="435" y2="95" stroke="#5b7f5b" stroke-width="2.5" marker-end="url(#arw)"/>
+      <text x="452" y="132" text-anchor="middle" class="cs">파지-세균 길항</text>
+      <text x="452" y="146" text-anchor="middle" class="cs">PAMPs 방출</text>
+
+      <!-- center: tumor-immune axis -->
+      <rect x="210" y="180" width="280" height="52" rx="10" fill="#fdf0dc" stroke="#b45309" stroke-width="1.5"/>
+      <text x="350" y="202" text-anchor="middle" class="ht">종양–면역–미생물 축</text>
+      <text x="350" y="221" text-anchor="middle" class="cs">세 계(界)가 함께 형성</text>
+
+      <line x1="145" y1="120" x2="300" y2="180" stroke="#cbd5c9" stroke-width="1.5"/>
+      <line x1="350" y1="120" x2="350" y2="180" stroke="#cbd5c9" stroke-width="1.5"/>
+      <line x1="555" y1="120" x2="400" y2="180" stroke="#cbd5c9" stroke-width="1.5"/>
+
+      <!-- outcome boxes -->
+      <rect x="40" y="262" width="290" height="76" rx="9" fill="#eef4fb" stroke="#2b6cb0" stroke-width="1"/>
+      <text x="52" y="282" class="rt">진단 — 다계(多界) 패널이 더 정확</text>
+      <text x="52" y="300" class="rs">CRC: 세균 단독 AUC 83.2% → 세균+진균 90.0%</text>
+      <text x="52" y="315" class="rs">흑색종: 0.64/0.65 → 통합 0.71</text>
+      <text x="52" y="330" class="rs">→ “세균만 보면 놓친다”</text>
+
+      <rect x="370" y="262" width="290" height="76" rx="9" fill="#e9f0e6" stroke="#5b7f5b" stroke-width="1"/>
+      <text x="382" y="282" class="rt">치료 — 파지·상호작용 이용</text>
+      <text x="382" y="300" class="rs">파지가 <i>F. nucleatum</i>·<i>B. fragilis</i> 억제</text>
+      <text x="382" y="315" class="rs">→ 화학요법 감수성 회복 (CRC)</text>
+      <text x="382" y="330" class="rs">담즙산 DCA 생성균 파지 → CD8+ T 회복</text>
+    </svg>
+    </div>
+
+    <h3>계(界) 사이 상호작용 — 구체적 사례</h3>
+    <table>
+      <thead><tr><th>상호작용</th><th>내용</th><th>결과</th></tr></thead>
+      <tbody>
+        <tr><td><b>세균 ↔ 진균</b></td><td>대사 상호급이·생물막. 진균 과성장이 세균 고갈로 유발될 수 있음</td><td>면역 회피·예후에 영향</td></tr>
+        <tr><td><b>파지 ↔ 세균</b></td><td>파지 활성 → 숙주 세균 용해 → PAMPs(지짐다당·펩티도글리칸·CpG DNA) 방출</td><td>염증 유발 or 종양 촉진균 감소</td></tr>
+        <tr><td><b>바이러스 ↔ 세균</b></td><td>MMTV가 세균 LPS를 이용해 TLR4 매개 면역 회피 (양방향)</td><td>면역 관용·공동감염 발암</td></tr>
+      </tbody>
+    </table>
+
+    <div class="grid2">
+      <div class="card">
+        <h4>진단: 합치면 더 정확 (CRC)</h4>
+        세균 단독 패널 AUC <b>83.22%</b> → 세균+진균 <b>90.02%</b> (대장암 대조). <b>+6.8%p</b> 절대 이득.
+      </div>
+      <div class="card sage">
+        <h4>진단: 흑색종도 마찬가지</h4>
+        세균만 0.64 / 진균만 0.65 → 통합 <b>0.71</b>. <i>Akkermansia</i>–<i>Rutstroemia</i> 상관이 면역치료 반응 표지.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. 다음 흐름 ============ -->
+  <section>
+    <h2><span class="num">7</span>자연스럽게 보이는 “다음 흐름”</h2>
+    <p>논문 §6·§7(미래 전망)이 가리키는 방향입니다. <b>“존재 → 관계 → 그래서 어디로”</b>의 마지막 조각입니다.</p>
+
+    <div class="card purple">
+      <h4>논문의 표현 그대로</h4>
+      “우리는 광범위 항생제나 단순 세균 투여를 넘어, <b>공학적 ‘스마트 박테리아’와 ‘트로이 목마’의 시대</b>로 이동하고 있다.”
+    </div>
+
+    <h3>4가지 다음 방향</h3>
+    <table>
+      <thead><tr><th>#</th><th>방향</th><th>내용</th></tr></thead>
+      <tbody>
+        <tr><td><b>①</b></td><td><b>다계(多界) 진단 통합</b></td><td>세균+진균+바이러스를 <b>한 패널</b>로 묶어 조기 스크리닝·예후 예측 (SAHMI·PROFIT-seq 등 도구 발전)</td></tr>
+        <tr><td><b>②</b></td><td><b>‘살아있는 약’</b></td><td>암 특이 대사물을 감지하고 치료 페이로드를 분비하는 <b>공학적 세균</b>. CD47·PD-L1·CTLA-4 나노바디 국소 전달</td></tr>
+        <tr><td><b>③</b></td><td><b>환자별 맞춤</b></td><td>동반진단(companion diagnostics)을 치료제와 <b>처음부터 함께 개발</b>. 메타게놈+대사체+면역표현형 통합</td></tr>
+        <tr><td><b>④</b></td><td><b>안전성·규제 정립</b></td><td>LBP(생균제품) 규제 프레임, 생물학적 격리(biocontainment), 환경 방출 감시</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card gold">
+      <h4>⭐ 왜 “자연스러운” 다음 흐름인가</h4>
+      2020년에 “종양 안에 미생물이 있다”가 밝혀졌고 → 2022년에 “여러 계가 있고 기능이 있다”가 밝혀졌으며 → 2026년에 “그들 사이 관계”가 정리됐습니다. 그 다음은 <b>논리적으로 “그 관계를 진단·치료에 어떻게 쓸 것인가”</b>입니다. 이 논문이 <b>공학 전략(engineering strategies)</b>을 제목에 넣은 이유가 여기 있습니다.
+    </div>
+  </section>
+
+  <!-- ============ 8. 안전성 ============ -->
+  <section>
+    <h2><span class="num">8</span>안전성·규제 — 아직 넘어야 할 벽</h2>
+    <p>논문 §6. 살아있는 미생물 치료제는 <b>기존 항암제와 근본적으로 다릅니다</b> — 자기복제하고, 대사가 살아 있고, 숙주 면역과 <b>양방향</b>으로 작용합니다.</p>
+
+    <table>
+      <thead><tr><th>쟁점</th><th>내용</th></tr></thead>
+      <tbody>
+        <tr><td><b>감염 위험</b></td><td>면역이 억제된 환자에서 <b>통제 불능 증식</b> 가능. 프로바이오틱 섀시(EcN·약독화 <i>Salmonella</i>)도 이론적 잔존 위험</td></tr>
+        <tr><td><b>항생제 역설</b></td><td>항생제로 교란된 장내균은 PD-1/PD-L1 반응↓. <b>혜택이 가장 클 환자가 이미 균총이 손상된 환자</b>일 수 있음</td></tr>
+        <tr><td><b>삽입 돌연변이</b></td><td>바이러스 유전체 통합 → 원종양유전자 활성 or 종양억제유전자 불활성화 위험</td></tr>
+        <tr><td><b>파지 용해 폭풍</b></td><td>다량의 PAMPs 방출 → 조절 어려운 전신 염증 반응</td></tr>
+        <tr><td><b>환경 방출</b></td><td>생균 벡터는 환경에서 생존·수평 유전자 전이 가능 → 방출 감시 필요</td></tr>
+      </tbody>
+    </table>
+
+    <h3>대응 — 생물학적 격리(biocontainment)</h3>
+    <ul>
+      <li><b>영양요구성(auxotrophy)</b> — 인체에 없는 대사물에 의존시켜 고갈되면 성장 정지</li>
+      <li><b>킬 스위치</b> — 신호 감지 시 독성 단백질·자기표적 CRISPR 발현</li>
+      <li><b>종양 특이 프로모터</b> — 저산소·pH·대사물(젖산·숙신산) 감지 시에만 페이로드 발현</li>
+      <li><b>쿼럼 센싱</b> — 세균 밀도 임계치에서만 치료 유전자 발현</li>
+      <li><b>사례: CAPPSID</b> — 공학 <i>Salmonella</i>가 바이러스를 종양에 전달, <b>두 미생물이 공동 정착한 곳에서만</b> 복제</li>
+    </ul>
+    <div class="card red">
+      <b>중요한 비대칭:</b> 종양용해 바이러스는 <b>여러 개가 시판 허가</b>를 받았지만, <b>공학적 세균은 아직 하나도 시판 허가를 받지 못했습니다.</b> 이유 = 바이러스는 게놈이 작아 정밀 조작이 쉽고, 세균은 게놈이 크고 수평 유전자 전이가 가능하기 때문입니다.
+    </div>
+  </section>
+
+  <!-- ============ 9. 정직한 한계 ============ -->
+  <section>
+    <h2><span class="num">9</span>정직한 한계 — 무엇이 확정이고 무엇이 아닌가</h2>
+    <p>이 문서의 원칙대로, 근거 없이 단정하지 않고 <b>✅ / ⚠️ / ❓ / 🔴</b>로 구분합니다.</p>
+
+    <div class="card red">
+      <h4>🔴 철회된 논문 — 반드시 기록해 둠 (David님 요청)</h4>
+      <b>Poore et al., <i>Nature</i> (2020-03)</b> — “33개 암종 미생물로 암 진단” 주장.
+      <ul>
+        <li>2023-10 Salzberg 그룹(<i>mBio</i>) “Major data analysis errors” — 데이터 오류 지적 (예: <i>Hepandensovirus</i> = <b>새우 바이러스</b>가 부신암 표지로 나옴)</li>
+        <li>2024-02 Knight 그룹(<i>Oncogene</i>) 자기 결과 방어(“robust”)</li>
+        <li><b>2024-06 Nature 최종 철회</b> — “일부 발견이 영향받았고 결론이 더 이상 지지되지 않음. 전 저자 동의”</li>
+      </ul>
+      <b>→ 의미:</b> 이 사례는 이번 논문의 논지와 정확히 맞물립니다 — <b>“존재 확인”을 넘어선 “인과·진단 주장”은 검증 없이 성립하지 않는다.</b> 철회 사실과 그에 이르기까지의 반박·확정 경위를 모두 남깁니다.
+    </div>
+
+    <table>
+      <thead><tr><th>주장</th><th>상태</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>종양 내 세균·진균·바이러스의 <b>존재</b></td><td><span class="badge b-ok">✅ 확립</span></td><td>다수 독립 연구 재현</td></tr>
+        <tr><td>HBV·HPV·EBV·MCPyV의 <b>발암 인과</b></td><td><span class="badge b-ok">✅ 확립</span></td><td>IARC 1군 — 역학·기전·중재 근거</td></tr>
+        <tr><td>F. nucleatum·pks+ E. coli의 <b>종양 촉진 기전</b></td><td><span class="badge b-strong">⚠ 강한 증거</span></td><td>동물 모델·기전 규명</td></tr>
+        <tr><td>“콜리박틴 = 대장암 위험인자” <b>역학적 인과</b></td><td><span class="badge b-open">❓ 논쟁 중</span></td><td>기전 확립 ≠ 인과 확립</td></tr>
+        <tr><td>진균 서명의 <b>예후 예측력</b></td><td><span class="badge b-strong">⚠ 연관성</span></td><td>주로 상관 근거</td></tr>
+        <tr><td>살아있는 미생물 치료제의 <b>임상 효능</b></td><td><span class="badge b-open">❓ 초기</span></td><td>대부분 전임상; 세균은 시판 0건</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card">
+      <h4>이 문서 자체의 한계</h4>
+      <ul>
+        <li>이 논문은 <b>종설(review)</b>이지 1차 실험이 아닙니다 — 원저 아님</li>
+        <li><b>Journal Pre-proof</b> (게재 승인 후 교정 전) — 출판사 명시 “production 과정에서 오류 발견 가능, 최종 Version of Record 아님”</li>
+        <li>이 문서는 논문 해설이며 <b>의료 조언이 아닙니다</b>. 치료 결정은 전문의 몫입니다</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 10. Q&A ============ -->
+  <section>
+    <h2><span class="num">10</span>예상 질문 &amp; 답변</h2>
+
+    <h3>일반 (초보자)</h3>
+    <div class="qa">
+      <div class="q">종양 안에 진짜 세균이 살아있나요?</div>
+      <div class="a">네, <b>확립된 사실</b>입니다. 2020년 <i>Science</i> 연구가 1,526개 종양에서 종양세포 <b>내부</b>까지 세균이 있음을 확인했습니다. “종양은 무균”이라는 옛 통념이 깨진 지점입니다.</div>
+
+      <div class="q">그럼 세균이 암을 만드나요?</div>
+      <div class="a">조건부입니다. 대부분은 <b>“얹혀사는지(passenger), 주범인지(driver)”가 아직 불분명</b>하고 주로 상관 근거입니다. 다만 <i>F. nucleatum</i>과 pks+ <i>E. coli</i>는 예외적으로 <b>인과 근거가 강합니다</b>.</div>
+
+      <div class="q">이 논문이 예전 논문이랑 뭐가 다른가요?</div>
+      <div class="a">예전엔 <b>“누가 있나”(존재)</b>와 <b>“무슨 일을 하나”(기능)</b>를 봤다면, 이 논문은 <b>“서로 어떻게 얽히나”(관계)</b>를 중심에 놓습니다. 2장 시계열 그림이 이 차이를 보여줍니다.</div>
+    </div>
+
+    <h3>심화 (배경 있는 독자)</h3>
+    <div class="qa">
+      <div class="q">cross-kingdom이 왜 중요한가요?</div>
+      <div class="a">진단 정확도가 실제로 올라가기 때문입니다. 대장암에서 세균 단독 AUC 83.2% → 세균+진균 90.0%, 흑색종 0.71. 즉 <b>단일 계만 보면 진단 정보를 놓칩니다.</b></div>
+
+      <div class="q">파지 치료가 암에 어떻게 쓰이나요?</div>
+      <div class="a">종양 촉진 세균을 <b>선택적으로 억제</b>합니다. 예: <i>B. fragilis</i> 표적 파지 VA7이 5-FU·옥살리플라틴 감수성을 회복시켰고, <i>F. nucleatum</i> 억제 파지가 대장암 1차 화학요법 효율을 개선했습니다(전임상).</div>
+
+      <div class="q">왜 세균 치료제는 시판 허가가 없나요?</div>
+      <div class="a">바이러스는 게놈이 작아 정밀 조작이 쉽지만, 세균은 게놈이 크고 <b>수평 유전자 전이</b>가 가능하며 생물막 상태로 면역·약물 제거를 견딥니다. 그래서 종양용해 바이러스는 여럿 허가됐지만 <b>공학 세균은 0건</b>입니다.</div>
+    </div>
+
+    <h3>회의적 (비판적 독자)</h3>
+    <div class="qa">
+      <div class="q">이거 또 “차세대 항암” 과대광고 아닌가요?</div>
+      <div class="a">아닙니다 — 이 논문은 스스로 한계를 명시합니다. §1에서 “대부분의 종양-미생물 연관은 <b>상관 근거</b>일 뿐”이라 밝히고, 세균 치료제는 “<b>아직 시판 0건</b>”이라고 인정합니다.</div>
+
+      <div class="q">철회된 논문이 왜 아직 인용되나요?</div>
+      <div class="a">정확한 지적입니다. Poore 2020(33개 암종)은 2024년 철회됐지만, “종양에 미생물이 있다”는 개념 자체를 대중화한 논문이라 역사적 맥락으로 인용됩니다. <b>철회 사실을 함께 알아야</b> 오독을 피합니다.</div>
+
+      <div class="q">그럼 “존재 확인”과 “인과 증명”은 어떻게 구분하나요?</div>
+      <div class="a">핵심 구분입니다. <b>존재</b>는 검출되면 확립, <b>인과</b>는 무균동물 단독접종·중재시험 같은 별도 증거가 필요합니다. 이 논문도 이 기울기(“확립된 바이러스 → 후보 세균 → 연관성 진균”)를 명시적으로 인정합니다.</div>
+    </div>
+  </section>
+
+  <!-- ============ 11. 용어·출처·면책 ============ -->
+  <section>
+    <h2><span class="num">11</span>용어 사전 &amp; 출처</h2>
+
+    <h3>용어</h3>
+    <table>
+      <thead><tr><th>용어</th><th>뜻</th></tr></thead>
+      <tbody>
+        <tr><td><b>TME</b></td><td>종양 미세환경 — 암세포·기질·면역세포·미생물이 함께 있는 공간</td></tr>
+        <tr><td><b>cross-kingdom</b></td><td>계(界) 간 상호작용 — 세균·진균·바이러스 사이의 관계</td></tr>
+        <tr><td><b>마이코바이옴</b></td><td>진균 미생물총</td></tr>
+        <tr><td><b>파지(phage)</b></td><td>세균을 감염시키는 바이러스</td></tr>
+        <tr><td><b>PAMPs</b></td><td>병원체 관련 분자 패턴 — 면역을 자극하는 미생물 유래 분자</td></tr>
+        <tr><td><b>콜리박틴</b></td><td>pks+ 대장균이 만드는 유전독성 물질 (DNA 손상)</td></tr>
+        <tr><td><b>LBP</b></td><td>생균제품(Live Biotherapeutic Product) — FDA/EMA 별도 규제 범주</td></tr>
+        <tr><td><b>AUC</b></td><td>진단 정확도 지표(ROC 곡선 아래 면적) — 1에 가까울수록 정확</td></tr>
+        <tr><td><b>biocontainment</b></td><td>생물학적 격리 — 살아있는 치료제가 몸 밖/표적 밖으로 새지 않게 하는 장치</td></tr>
+      </tbody>
+    </table>
+
+    <h3>주요 출처</h3>
+    <ul>
+      <li><b>본 논문</b>: Mei J, et al. <i>Acta Pharmaceutica Sinica B</i> (2026). DOI: 10.1016/j.apsb.2026.09.033</li>
+      <li>Nejman D, et al. <i>Science</i> 368, 973–980 (2020). DOI: 10.1126/science.aay9189</li>
+      <li>Narunsky-Haziza L, et al. <i>Cell</i> (2022). PMID 36179670</li>
+      <li>Fu A, et al. <i>Cell</i> 185, 1356–1372 (2022). DOI: 10.1016/j.cell.2022.02.027</li>
+      <li>Poore GD, et al. <i>Nature</i> 579, 567–574 (2020) — <b>2024년 철회</b> (Retraction Watch, 2024-06-26)</li>
+      <li>Salzberg SL, et al. “Major data analysis errors invalidate cancer microbiome findings.” <i>mBio</i> (2023)</li>
+    </ul>
+
+    <div class="foot">
+      <b>⚠️ 정직하게 밝힙니다</b>
+      <ul>
+        <li>이 문서는 <b>일반인용 해설</b>이며, 논문 원문을 대체하지 않습니다.</li>
+        <li>모든 수치·기전은 원문 본문 확인 결과입니다. 다만 논문이 <b>Journal Pre-proof</b>임을 감안해야 합니다.</li>
+        <li><b>의료 조언이 아닙니다.</b> 치료 결정은 반드시 전문의와 상의하십시오.</li>
+        <li>연도는 문헌 검증으로 확정했으나, David님이 기억하는 특정 논문과 다를 수 있습니다.</li>
+      </ul>
+      <b>작성일</b> 2026-10-12 · <b>형식</b> 단일 HTML (외부 의존 0) · <b>제작</b> Hermes Agent
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

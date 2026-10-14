@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>군중 응답의 구조 · 1,366 댓글 분석</title>
+<meta name="description" content="'3~4주 남았다면 이버멕틴은 너무 늦었나'에 대한 1,366개 해외 댓글의 응답 구조, 주장 목록, 경험담 구조, 상업 흐름 분석.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Serif+KR:wght@600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0e1317; --bg2:#141b21; --bg3:#1a232b; --line:#26323c; --ink:#dbe3ea; --ink2:#93a2af; --ink3:#66788a;
+  --emo:#f0b44c;   /* 정서: 응원·신앙 */
+  --claim:#4fc3d9; /* 주장·물질 */
+  --story:#a98bf0; /* 경험담 */
+  --risk:#ef6f7f;  /* 위험·그늘·한계 */
+  --ai:#6fcf97;    /* AI 클로드의 코멘트 */
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",system-ui,sans-serif;font-size:16.5px;line-height:1.8;word-break:keep-all;overflow-wrap:break-word}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px}
+h1,h2,h3{font-family:"Noto Serif KR",serif;line-height:1.4;margin:0;font-weight:700}
+a{color:var(--claim)}
+:focus-visible{outline:2px solid var(--emo);outline-offset:3px;border-radius:4px}
+.mono{font-family:var(--mono)}
+code,pre{font-family:var(--mono)}
+
+header.top{padding:40px 0 18px;border-bottom:1px solid var(--line)}
+.crumb{font-family:var(--mono);font-size:12.5px;color:var(--ink3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
+header.top h1{font-size:30px;margin-bottom:14px}
+header.top .src{font-size:14px;color:var(--ink2);margin:0}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin:16px 0 0;font-family:var(--mono);font-size:12.5px;color:var(--ink2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:2px;display:inline-block}
+
+.thesis{margin:26px 0;border:1px solid var(--line);border-left:4px solid var(--emo);background:var(--bg2);border-radius:10px;padding:20px 20px 18px}
+.thesis .lb{font-family:var(--mono);font-size:12px;color:var(--emo);letter-spacing:.1em;margin-bottom:8px}
+.thesis p{margin:0;font-family:"Noto Serif KR",serif;font-size:20px;line-height:1.7}
+.thesis p b{color:var(--emo)}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 10px}
+.kpi{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:14px 12px}
+.kpi .v{font-family:var(--mono);font-size:26px;font-weight:600;line-height:1.2}
+.kpi .k{font-size:13px;color:var(--ink2);line-height:1.5;margin-top:6px}
+.kpi.r .v{color:var(--risk)}.kpi.e .v{color:var(--emo)}.kpi.c .v{color:var(--claim)}.kpi.s .v{color:var(--story)}
+
+section.s{padding:34px 0 10px;border-top:1px solid var(--line);margin-top:22px}
+.sid{font-family:var(--mono);font-size:12.5px;color:var(--ink3);letter-spacing:.08em;margin-bottom:6px}
+section.s > h2{font-size:24px;margin-bottom:12px}
+section.s p{margin:0 0 12px}
+.dim{color:var(--ink2)}
+.small{font-size:14px}
+
+/* paradigm */
+.para{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.para .col{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:16px}
+.para .col h3{font-size:17px;margin-bottom:10px}
+.para .col.old h3{color:var(--emo)}.para .col.new h3{color:var(--ai)}
+.para dl{margin:0}
+.para dt{font-family:var(--mono);font-size:12px;color:var(--ink3);margin-top:8px}
+.para dd{margin:0;font-size:15px}
+
+/* bars */
+.chart{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:16px 16px 10px;margin:12px 0}
+.chart h3{font-size:15.5px;margin-bottom:2px}
+.chart .cap{font-size:13px;color:var(--ink3);font-family:var(--mono);margin-bottom:12px}
+.hb{display:grid;grid-template-columns:minmax(120px,210px) 1fr 64px;gap:10px;align-items:center;margin:0 0 9px;font-size:14px}
+.hb .lab{color:var(--ink);line-height:1.35}
+.hb .tr{height:12px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.hb .fl{height:100%;width:0;border-radius:3px;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.in .hb .fl{width:var(--w)}
+.hb .num{font-family:var(--mono);font-size:13px;color:var(--ink2);text-align:right}
+.c-emo{background:var(--emo)}.c-claim{background:var(--claim)}.c-story{background:var(--story)}.c-risk{background:var(--risk)}.c-ink{background:#7d8d9b}
+
+.cols{display:flex;align-items:flex-end;gap:6px;height:150px;padding:6px 0 0}
+.cols .cb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.cols .bar{width:100%;max-width:46px;background:var(--claim);border-radius:3px 3px 0 0;height:0;transition:height 1s cubic-bezier(.2,.8,.2,1)}
+.in .cols .bar{height:var(--h)}
+.cols .bv{font-family:var(--mono);font-size:11.5px;color:var(--ink2);margin-bottom:4px}
+.cols .bl{font-family:var(--mono);font-size:11px;color:var(--ink3);margin-top:6px}
+
+.stack{display:flex;height:22px;border-radius:4px;overflow:hidden;margin:6px 0 8px}
+.stack div{height:100%}
+.stack-leg{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--ink2);font-family:var(--mono)}
+
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{border-bottom:1px solid var(--line);padding:9px 8px;text-align:left;vertical-align:top}
+th{font-family:var(--mono);font-size:12px;color:var(--ink3);font-weight:500;letter-spacing:.04em}
+td.n{font-family:var(--mono);text-align:right;white-space:nowrap}
+
+/* claims */
+.claims{display:grid;gap:12px}
+.cl{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:14px 16px;border-left:3px solid var(--claim)}
+.cl.hi{border-left-color:var(--risk)}
+.cl .h{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 12px;margin-bottom:8px}
+.cl .h b{font-family:"Noto Serif KR",serif;font-size:17px}
+.cl .h .m{font-family:var(--mono);font-size:12px;color:var(--ink3)}
+.flag{white-space:nowrap;display:inline-block;font-family:var(--mono);font-size:11.5px;border-radius:3px;padding:1px 7px;margin-left:6px;vertical-align:1px}
+.f-hi{background:rgba(239,111,127,.15);color:var(--risk);border:1px solid rgba(239,111,127,.4)}
+.f-md{background:rgba(240,180,76,.12);color:var(--emo);border:1px solid rgba(240,180,76,.35)}
+.f-lo{background:rgba(147,162,175,.12);color:var(--ink2);border:1px solid rgba(147,162,175,.3)}
+.say{margin:0 0 8px;font-size:15px}
+.say .who{font-family:var(--mono);font-size:12px;color:var(--claim);margin-left:4px;white-space:nowrap}
+.say .en{display:block;font-size:13px;color:var(--ink3);font-style:italic;margin-top:2px}
+.ai{background:rgba(111,207,151,.07);border:1px solid rgba(111,207,151,.28);border-radius:8px;padding:9px 12px;font-size:14.5px;line-height:1.7;margin-top:6px}
+.ai .t{font-family:var(--mono);font-size:11.5px;color:var(--ai);letter-spacing:.05em;display:block;margin-bottom:2px}
+
+/* stories */
+.st-table td:nth-child(1){font-family:var(--mono);font-size:13px;white-space:nowrap;color:var(--story)}
+.tagx{display:inline-block;font-family:var(--mono);font-size:11px;border-radius:3px;padding:0 6px;margin:1px 2px 1px 0;border:1px solid var(--line);color:var(--ink2)}
+.tagx.y{border-color:rgba(169,139,240,.5);color:var(--story)}
+.tagx.r{border-color:rgba(239,111,127,.5);color:var(--risk)}
+.bias{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.bias div{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:14.5px}
+.bias b{display:block;color:var(--story);font-size:15px;margin-bottom:2px}
+
+/* quote */
+.qq{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:0 0 10px;font-size:15px}
+.qq .who{font-family:var(--mono);font-size:12px;color:var(--ink3);display:block;margin-top:4px}
+.qq .en{display:block;font-size:13px;color:var(--ink3);font-style:italic;margin-top:4px}
+.qq.risk{border-left:3px solid var(--risk)}
+.qq.story{border-left:3px solid var(--story)}
+.qq.emo{border-left:3px solid var(--emo)}
+
+/* pipeline */
+.pipe{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:12px 0}
+.pipe .st{background:var(--bg2);border:1px solid var(--line);border-top:3px solid var(--claim);border-radius:8px;padding:10px;font-size:13.5px;position:relative;line-height:1.55}
+.pipe .st b{display:block;font-size:14px;margin-bottom:4px}
+.pipe .st small{display:block;font-family:var(--mono);font-size:11px;color:var(--ink3);margin-top:6px}
+.pipe .st.g{border-top-color:var(--ai)}
+.pipe .st.r{border-top-color:var(--risk)}
+pre.prompt{background:#0a0f12;border:1px solid var(--line);border-radius:10px;padding:14px;font-size:13px;line-height:1.7;white-space:pre-wrap;color:var(--ink);margin:12px 0}
+pre.prompt .k{color:var(--claim)}
+pre.prompt .c{color:var(--risk)}
+pre.prompt .g{color:var(--ai)}
+
+.limits li{margin:0 0 8px}
+.limits b{color:var(--risk)}
+.boundary{border:1px solid rgba(239,111,127,.5);background:rgba(239,111,127,.06);border-radius:10px;padding:16px 18px;margin:20px 0}
+.boundary h3{color:var(--risk);font-size:17px;margin-bottom:6px}
+.boundary p{margin:0 0 6px;font-size:15px}
+.closing{margin:30px 0 10px;padding:22px 20px;border:1px solid var(--line);border-radius:10px;background:var(--bg2);font-family:"Noto Serif KR",serif;font-size:19px;line-height:1.75}
+footer{color:var(--ink3);font-size:13px;padding:22px 0 44px;border-top:1px solid var(--line);margin-top:30px;line-height:1.75}
+footer p{margin:0 0 6px}
+
+.rv{opacity:0;transform:translateY(12px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+.no-io .rv{opacity:1;transform:none}
+.no-io .hb .fl{width:var(--w)}
+.no-io .cols .bar{height:var(--h)}
+@media (prefers-reduced-motion: reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  .hb .fl{width:var(--w);transition:none}
+  .cols .bar{height:var(--h);transition:none}
+}
+@media (max-width:720px){
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .para{grid-template-columns:1fr}
+  .pipe{grid-template-columns:1fr}
+  .bias{grid-template-columns:1fr}
+  .hb{grid-template-columns:1fr 54px;gap:4px 10px}
+  .hb .lab{grid-column:1 / -1}
+  header.top h1{font-size:25px}
+  .thesis p{font-size:18px}
+  /* stacked tables */
+  table.stk thead{display:none}
+  table.stk tr{display:block;border:1px solid var(--line);border-radius:10px;margin:0 0 10px;padding:6px 10px;background:var(--bg2)}
+  table.stk td{display:block;border:0;padding:4px 0}
+  table.stk td::before{content:attr(data-l);display:block;font-family:var(--mono);font-size:11px;color:var(--ink3)}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="crumb">해외 사례 분석 · 군중 응답 분석 · N=1,366</div>
+  <h1>“3~4주 남았다면 너무 늦었나?”<br>— 군중 응답의 구조 분석</h1>
+  <p class="src">원본: Facebook “Ivermectin and Cancer Discussion Group” · Darryl, 2026-10-06 · 내보내기 2026-10-14 · 최상위 댓글 932 · 답글 434 · 작성자 1,095명</p>
+  <div class="legend">
+    <span><i style="background:var(--emo)"></i>정서 (응원·신앙)</span>
+    <span><i style="background:var(--claim)"></i>주장·물질</span>
+    <span><i style="background:var(--story)"></i>경험담</span>
+    <span><i style="background:var(--risk)"></i>위험·그늘·한계</span>
+    <span><i style="background:var(--ai)"></i>AI 클로드의 코멘트</span>
+  </div>
+</header>
+
+<div class="thesis rv">
+  <div class="lb">§0 · THESIS</div>
+  <p>1,366개의 응답은 “가능성은 열려 있다”는 <b>정서적 합의</b>를 빠르게 만들어 냈다. 그러나 개별화에 필요한 정보 요청은 <b>0.7%</b>였다. 이 스레드는 정답의 데이터가 아니라, <b>질문이 빠진 집단지성</b>의 표본이다.</p>
+</div>
+
+<div class="kpis rv">
+  <div class="kpi r"><div class="v">6 / 907</div><div class="k">환자 맥락(암종·치료력)을 되물은 최상위 댓글</div></div>
+  <div class="kpi e"><div class="v">60.7%</div><div class="k">공감 7,511개 중 상위 10개 댓글의 점유율</div></div>
+  <div class="kpi c"><div class="v">60.3%</div><div class="k">첫날(10/6)에 달린 댓글 비율 (824개)</div></div>
+  <div class="kpi s"><div class="v">0</div><div class="k">질문자 Darryl의 후속 댓글 수</div></div>
+</div>
+
+<!-- §1 -->
+<section class="s" id="s1">
+  <div class="sid">§1 · PARADIGM</div>
+  <h2>두 개의 질문 모델</h2>
+  <p>Darryl의 질문은 “<i>someone</i>”으로 시작합니다. 질문의 대상조차 특정되지 않았습니다. 그런데도 응답의 대다수는 질문자를 환자 본인처럼 대하며 즉시 결론(“늦지 않았다”)을 제시했습니다. 아래 표는 이 스레드가 작동한 방식과, 개별화된 질문이 작동하는 방식을 나란히 놓은 것입니다.</p>
+  <div class="para rv">
+    <div class="col old"><h3>군중 응답 모델 (이 스레드)</h3><dl>
+      <dt>질문 단위</dt><dd>약물 하나 (“이버멕틴이 늦었나?”)</dd>
+      <dt>정렬 기준</dt><dd>공감 수: 정서적 공명이 가시성을 결정</dd>
+      <dt>시간 구조</dt><dd>첫날 60%, 이후 급감, 추적 없음</dd>
+      <dt>반대 신호</dt><dd>신중론 24개의 공감 합계 6, 사실상 묻힘</dd>
+      <dt>결과물</dt><dd>“잃을 게 없다” + 물질 목록의 누적</dd>
+    </dl></div>
+    <div class="col new"><h3>개별화 모델</h3><dl>
+      <dt>질문 단위</dt><dd>환자 한 명 (암종·병기·치료력·현재 기능)</dd>
+      <dt>정렬 기준</dt><dd>조건: “이 프로파일에서 안전한가”</dd>
+      <dt>시간 구조</dt><dd>시작, 관찰, 재평가</dd>
+      <dt>반대 신호</dt><dd>반례와 위험을 먼저 기록</dd>
+      <dt>결과물</dt><dd>주치의에게 가져갈 구체적 질문</dd>
+    </dl></div>
+  </div>
+</section>
+
+<!-- §2 -->
+<section class="s" id="s2">
+  <div class="sid">§2 · METHOD</div>
+  <h2>분류 방법</h2>
+  <p>댓글 본문에 대해 <b>키워드·정규식 기반 다중 라벨 분류</b>를 적용했습니다. 한 댓글이 여러 갈래에 동시에 속할 수 있습니다. 응답의 ‘입장’은 질문에 직접 답한 <b>최상위 댓글 907개</b>(본문이 있는 것)를 단위로, 물질 언급과 경험담은 <b>전체 1,366개</b>를 단위로 셌습니다. 대표 인용은 수작업으로 골라 확인했습니다.</p>
+  <table class="stk rv">
+    <thead><tr><th>갈래</th><th>판정 단서 (예)</th><th>최상위 n</th></tr></thead>
+    <tbody>
+      <tr><td data-l="갈래">늦지 않았다·싸워라·해라</td><td data-l="단서" class="dim">never too late, fight, never give up, do it, take it, 단독 “No”</td><td data-l="최상위 n" class="n">348</td></tr>
+      <tr><td data-l="갈래">물질·식단 추가 권유</td><td data-l="단서" class="dim">fenben, mebendazole, apricot/B17, baking soda, fasting, sugar, vitamin…</td><td data-l="최상위 n" class="n">209</td></tr>
+      <tr><td data-l="갈래">신앙·기도</td><td data-l="단서" class="dim">God, Jesus, pray, amen, psalm, heaven…</td><td data-l="최상위 n" class="n">171</td></tr>
+      <tr><td data-l="갈래">잃을 게 없다</td><td data-l="단서" class="dim">nothing to lose, can't hurt, worth a try, why not</td><td data-l="최상위 n" class="n">112</td></tr>
+      <tr><td data-l="갈래">의사·예후 불신</td><td data-l="단서" class="dim">doctor, only God knows, expiration, drug peddler…</td><td data-l="최상위 n" class="n">95</td></tr>
+      <tr><td data-l="갈래">경험담</td><td data-l="단서" class="dim">my husband/friend…, I was given, cancer free, still here…</td><td data-l="최상위 n" class="n">58</td></tr>
+      <tr><td data-l="갈래">정보 요청 (구입처·용량)</td><td data-l="단서" class="dim">where to buy, dosage?, how much</td><td data-l="최상위 n" class="n">17</td></tr>
+      <tr><td data-l="갈래">신중론·한계</td><td data-l="단서" class="dim">probably, might be too late, not ideal, physician guidance…</td><td data-l="최상위 n" class="n">16</td></tr>
+      <tr><td data-l="갈래">상업·연락 유도</td><td data-l="단서" class="dim">PM me, supplier, telegram, $1500, fake…</td><td data-l="최상위 n" class="n">9</td></tr>
+      <tr><td data-l="갈래">환자 맥락 되묻기</td><td data-l="단서" class="dim">what type of cancer, what treatment, stage…</td><td data-l="최상위 n" class="n">6</td></tr>
+    </tbody>
+  </table>
+  <p class="small dim" style="margin-top:10px">어느 갈래에도 걸리지 않은 최상위 댓글은 177개입니다. 이모지만 있거나, 사람 태그만 있거나, 맥락 의존적인 짧은 문장이 대부분입니다. 한계는 <a href="#s9">§8</a>에 정리했습니다.</p>
+</section>
+
+<!-- §3 -->
+<section class="s" id="s3">
+  <div class="sid">§3 · DISTRIBUTION</div>
+  <h2>응답 분포, 공감 집중, 시간 곡선</h2>
+
+  <div class="chart rv">
+    <h3>최상위 댓글의 응답 갈래</h3>
+    <div class="cap">n=907 · 다중 라벨 · % = 해당 갈래 댓글 / 907</div>
+    <div class="hb"><span class="lab">늦지 않았다·싸워라</span><div class="tr"><div class="fl c-emo" style="--w:38.4%"></div></div><span class="num">38.4%</span></div>
+    <div class="hb"><span class="lab">물질·식단 추가 권유</span><div class="tr"><div class="fl c-claim" style="--w:23%"></div></div><span class="num">23.0%</span></div>
+    <div class="hb"><span class="lab">신앙·기도</span><div class="tr"><div class="fl c-emo" style="--w:18.9%"></div></div><span class="num">18.9%</span></div>
+    <div class="hb"><span class="lab">잃을 게 없다</span><div class="tr"><div class="fl c-emo" style="--w:12.3%"></div></div><span class="num">12.3%</span></div>
+    <div class="hb"><span class="lab">의사·예후 불신</span><div class="tr"><div class="fl c-ink" style="--w:10.5%"></div></div><span class="num">10.5%</span></div>
+    <div class="hb"><span class="lab">경험담</span><div class="tr"><div class="fl c-story" style="--w:6.4%"></div></div><span class="num">6.4%</span></div>
+    <div class="hb"><span class="lab">정보 요청</span><div class="tr"><div class="fl c-claim" style="--w:1.9%"></div></div><span class="num">1.9%</span></div>
+    <div class="hb"><span class="lab">신중론·한계</span><div class="tr"><div class="fl c-risk" style="--w:1.8%"></div></div><span class="num">1.8%</span></div>
+    <div class="hb"><span class="lab">환자 맥락 되묻기</span><div class="tr"><div class="fl c-risk" style="--w:.7%"></div></div><span class="num">0.7%</span></div>
+  </div>
+
+  <div class="chart rv">
+    <h3>공감은 어디로 갔나</h3>
+    <div class="cap">전체 1,366개 · 갈래별 공감 합계 (다중 라벨이라 합계는 7,511을 넘습니다)</div>
+    <div class="hb"><span class="lab">늦지 않았다·싸워라</span><div class="tr"><div class="fl c-emo" style="--w:100%"></div></div><span class="num">2,903</span></div>
+    <div class="hb"><span class="lab">신앙·기도</span><div class="tr"><div class="fl c-emo" style="--w:92%"></div></div><span class="num">2,673</span></div>
+    <div class="hb"><span class="lab">물질·식단</span><div class="tr"><div class="fl c-claim" style="--w:52.4%"></div></div><span class="num">1,520</span></div>
+    <div class="hb"><span class="lab">의사·예후 불신</span><div class="tr"><div class="fl c-ink" style="--w:31.4%"></div></div><span class="num">911</span></div>
+    <div class="hb"><span class="lab">잃을 게 없다</span><div class="tr"><div class="fl c-emo" style="--w:30.5%"></div></div><span class="num">884</span></div>
+    <div class="hb"><span class="lab">경험담</span><div class="tr"><div class="fl c-story" style="--w:23%"></div></div><span class="num">667</span></div>
+    <div class="hb"><span class="lab">신중론·한계 (24개)</span><div class="tr"><div class="fl c-risk" style="--w:.6%"></div></div><span class="num">6</span></div>
+    <div class="hb"><span class="lab">환자 맥락 되묻기 (7개)</span><div class="tr"><div class="fl c-risk" style="--w:.3%"></div></div><span class="num">0</span></div>
+  </div>
+
+  <div class="chart rv">
+    <h3>공감 집중도</h3>
+    <div class="cap">공감 7,511개의 분포</div>
+    <div class="stack" role="img" aria-label="상위 10개 댓글 60.7%, 나머지 405개 댓글 39.3%, 공감 0인 댓글 951개">
+      <div style="width:60.7%;background:var(--emo)"></div>
+      <div style="width:39.3%;background:#3a4955"></div>
+    </div>
+    <div class="stack-leg"><span>■ 상위 10개 댓글: 4,558 (60.7%)</span><span style="color:#7d8d9b">■ 그 외 405개: 2,953</span><span>공감 0인 댓글: 951개 (69.6%)</span></div>
+  </div>
+
+  <div class="chart rv">
+    <h3>날짜별 댓글 수</h3>
+    <div class="cap">내보내기 원본 타임스탬프 기준 · 10/14는 부분 집계</div>
+    <div class="cols" id="cols">
+      <div class="cb"><span class="bv">824</span><div class="bar" style="--h:100%"></div><span class="bl">10/6</span></div>
+      <div class="cb"><span class="bv">217</span><div class="bar" style="--h:26.3%"></div><span class="bl">10/7</span></div>
+      <div class="cb"><span class="bv">78</span><div class="bar" style="--h:9.5%"></div><span class="bl">10/8</span></div>
+      <div class="cb"><span class="bv">80</span><div class="bar" style="--h:9.7%"></div><span class="bl">10/9</span></div>
+      <div class="cb"><span class="bv">47</span><div class="bar" style="--h:5.7%"></div><span class="bl">10/10</span></div>
+      <div class="cb"><span class="bv">39</span><div class="bar" style="--h:4.7%"></div><span class="bl">10/11</span></div>
+      <div class="cb"><span class="bv">29</span><div class="bar" style="--h:3.5%"></div><span class="bl">10/12</span></div>
+      <div class="cb"><span class="bv">35</span><div class="bar" style="--h:4.2%"></div><span class="bl">10/13</span></div>
+      <div class="cb"><span class="bv">17</span><div class="bar" style="--h:2.1%"></div><span class="bl">10/14</span></div>
+    </div>
+  </div>
+  <p class="dim small">관찰: 공감 상위 10개 중 6개가 정서 갈래(응원 3, 신앙 3)이며, 이 6개는 모두 첫 댓글이 달린 뒤 10분 안에 올라왔습니다. 일찍 달린 짧은 응원이 공감을 선점하고, 뒤에 온 신중론과 맥락 질문은 공감 0으로 남는 구조입니다.</p>
+</section>
+
+<!-- §4 -->
+<section class="s" id="s4">
+  <div class="sid">§4 · CLAIMS</div>
+  <h2>주장 목록 (원문 그대로)</h2>
+  <p>댓글 속 주장은 원문을 그대로 번역해 옮겼습니다. <span style="color:var(--ai)">AI 클로드의 코멘트</span>는 공개 문헌에 대한 AI 클로드의 일반 지식에 따른 의견이며, 이 문서를 위해 개별 논문을 새로 검색·검증하지는 않았습니다. 위험 플래그 역시 AI 클로드의 평가입니다. 판단은 독자의 몫입니다.</p>
+  <p class="small dim">언급 수: 전체 1,366개 중 해당 단어가 등장한 댓글 수 · 이버멕틴 자체는 162개 댓글에서 언급</p>
+
+  <div class="claims">
+    <div class="cl hi rv"><div class="h"><b>이버멕틴 고용량 <span class="flag f-hi">위험 높음</span></b><span class="m">다수</span></div>
+      <p class="say">“아주 고용량! 체중 1kg당 2.5mg!”<span class="who">— Lance</span><span class="en">Very high dose! 2.5 mg/kg of body weight!</span></p>
+      <p class="say">“3~4일 안에 한 튜브를 통째로 먹고, 그걸 계속 반복하세요!”<span class="who">— Sandy</span><span class="en">take 1 whole tibe within a 3-4 day period, then do it again and again!!!!</span></p>
+      <p class="say">“한 사람은 하루에 말 페이스트 주사기를 7개까지 썼대요.”<span class="who">— Jakes</span><span class="en">one person said he used up to 7 horse past syringes a day.</span></p>
+      <div class="ai"><span class="t">AI 클로드의 코멘트</span>구충 목적의 사람 용량은 보통 체중 1kg당 0.2mg 안팎의 단회 투여입니다. 언급된 양은 그 수 배에서 수십 배에 해당합니다. 고용량에서는 운동실조, 혼란, 경련, 의식 저하 같은 신경독성이 보고되어 있습니다. 항암 효과는 실험실·동물 연구가 중심이며, 사람 대상 대규모 임상 결과는 아직 없습니다.</div></div>
+
+    <div class="cl hi rv"><div class="h"><b>“부작용 없다 / 과다복용 불가” <span class="flag f-hi">위험 높음</span></b><span class="m">반복</span></div>
+      <p class="say">“이버멕틴의 좋은 점은 부작용이 없다는 거예요!”<span class="who">— Sally · ♥51</span><span class="en">The great thing about IVRMCTN is that there are no side affects!</span></p>
+      <p class="say">“드세요. 과다복용이 안 돼요.”<span class="who">— Keri</span><span class="en">Take it yes. You can’t overdose on it</span></p>
+      <p class="say">반대 증언: “먹고 나서 경련을 네 번 했어요.”<span class="who">— Minella</span> · “이가 너무 아파요.”<span class="who">— Pamela</span></p>
+      <div class="ai"><span class="t">AI 클로드의 코멘트</span>과다복용 사례와 중독 신고는 실제로 보고되어 있습니다. 같은 스레드 안에 반대 증언이 있었지만, 공감은 “부작용 없다” 쪽에 51개, 경련 증언에는 0개였습니다.</div></div>
+
+    <div class="cl hi rv"><div class="h"><b>동물용 페이스트 · 체중 눈금 투여 <span class="flag f-hi">위험 높음</span></b><span class="m">19</span></div>
+      <p class="say">“농장 용품점에서 말 페이스트를 사세요. 주사기 눈금이 50파운드 단위라 말처럼 체중대로 먹으면 돼요. 체중보다 4분의 1쯤 더 먹어도 괜찮아요. 서방형이라 과다복용이 아주 어려워요. 약국에서 사지 마세요. 의사와 약사는 암을 끝내서 돈을 버는 게 아니라, 당신을 아프게 두고 약을 사게 해서 돈을 벌어요.”<span class="who">— Sherre</span><span class="en">... don’t be afraid to take about a quarter more than your weight ... It’s very hard to OD on either of these medications because they are time release drugs. I recommend the horse paste from a farm supply store. ...</span></p>
+      <div class="ai"><span class="t">AI 클로드의 코멘트</span>이버멕틴은 서방형 약이 아닙니다. 동물용 제품은 말 체중 기준의 고농도이며, 부형제가 사람용으로 검증되지 않았습니다. 눈금 단위가 커서 사람에게 정확히 나누기 어렵습니다.</div></div>
+
+    <div class="cl rv"><div class="h"><b>펜벤다졸 <span class="flag f-md">주의</span></b><span class="m">99</span></div>
+      <p class="say">“이버멕틴은 암세포를, 펜벤다졸은 종양을 노려요.”<span class="who">— Sherre</span></p>
+      <p class="say">“지방이 든 음식과 먹어야 효과가 나요.”<span class="who">— Marj</span></p>
+      <div class="ai"><span class="t">AI 클로드의 코멘트</span>동물용 구충제입니다. 항암 작용은 세포·동물 실험과 증례 보고가 중심입니다. 장기 복용 시 간 수치 상승이 보고된 바 있습니다. 지방과 함께 먹으면 흡수가 늘어난다는 점은 약리적으로 맞는 설명입니다.</div></div>
+
+    <div class="cl rv"><div class="h"><b>메벤다졸 <span class="flag f-md">주의</span></b><span class="m">19</span></div>
+      <p class="say">“이버멕틴은 기생충은 죽이지만 알은 못 죽여요. 펜벤다졸과 메벤다졸이 죽여요.”<span class="who">— John-Rita</span></p>
+      <p class="say">“뇌에 있으면 혈뇌장벽을 넘는 메벤다졸을 써야 해요.”<span class="who">— Marj</span></p>
+      <div class="ai"><span class="t">AI 클로드의 코멘트</span>사람용 구충제로, 일부 암종에서 초기 임상이 진행됐습니다. 고용량에서는 간 수치와 혈구 수치를 지켜봐야 합니다.</div></div>
+
+    <div class="cl rv"><div class="h"><b>메틸렌블루 병용 프로토콜 <span class="flag f-md">주의</span></b><span class="m">2</span></div>
+      <p class="say">“저는 의사가 아니고 정보로만 드리는 겁니다. 펜벤다졸 400~500mg(공격적 암이면 800~1000mg), 메틸렌블루 2~4mg/kg 하루 2회, 이버멕틴 0.4~0.5mg/kg/일. SSRI나 MAOI 복용 중이면 메틸렌블루를 피하세요(세로토닌 증후군 위험). 2~4주마다 간·신장 혈액검사를 하세요.”<span class="who">— Jaco · ♥8</span></p>
+      <div class="ai"><span class="t">AI 클로드의 코멘트</span>이 댓글은 형식상 AI가 생성한 문서처럼 보이며, 같은 문단이 두 번 반복됩니다. 세로토닌 증후군 경고와 간 기능 검사 권고는 실제 위험을 짚고 있습니다. 반면 세 약을 함께 쓴 사람 대상 연구는 알려져 있지 않습니다.</div></div>
+
+    <div class="cl hi rv"><div class="h"><b>살구씨 · B17(아미그달린) <span class="flag f-hi">위험 높음</span></b><span class="m">30</span></div>
+      <p class="say">“처음엔 하루 3개였는데 조사해 보고 20개, 지금은 하루 30개예요. 네, 아직 멀쩡히 살아 있어요.”<span class="who">— Alena</span></p>
+      <p class="say">“하루 3개만요. 너무 많이 먹으면 시안화물로 바뀌어요.”<span class="who">— Sophiane</span></p>
+      <p class="say">“생아몬드도 한 줌씩. 비타민 B17, 암 킬러예요.”<span class="who">— Randy</span></p>
+      <div class="ai"><span class="t">AI 클로드의 코멘트</span>아미그달린은 체내에서 시안화물을 생성합니다. 1980년대 미국 국립암연구소 지원 임상에서 효과가 확인되지 않았고, 시안화물 중독 사례가 보고되어 있습니다. 일반 단맛 아몬드에는 의미 있는 양이 들어 있지 않습니다.</div></div>
+
+    <div class="cl rv"><div class="h"><b>베이킹소다 “트로이 목마” <span class="flag f-md">주의</span></b><span class="m">24</span></div>
+      <p class="say">“물 한 컵에 베이킹소다 1티스푼, 레몬즙과 당밀을 섞어 하루 두 번 드세요. 당밀이 트로이 목마예요. 암세포가 당밀의 설탕에 미친 듯이 끌려와 붙으면, 베이킹소다가 튀어나와 죽여요. 진짜 위험은 혈압이 오를 수 있다는 것뿐이에요.”<span class="who">— Samuel</span></p>
+      <p class="say">“베이킹소다 캡슐로 인생이 바뀌었어요. 만성 통증이 사라졌어요.”<span class="who">— Rachel (2nd)</span></p>
+      <div class="ai"><span class="t">AI 클로드의 코멘트</span>“트로이 목마” 기전은 근거가 제시되지 않은 설명입니다. 다량 섭취는 대사성 알칼리증과 고나트륨혈증을 일으킬 수 있습니다. 신장 기능이 떨어진 말기 환자에게서는 특히 위험이 커집니다.</div></div>
+
+    <div class="cl hi rv"><div class="h"><b>과산화수소 마시기 <span class="flag f-hi">위험 높음</span></b><span class="m">6</span></div>
+      <p class="say">“과산화수소와 베이킹소다를 마시세요. 몸의 산을 당장 중화해야 해요.”<span class="who">— Brock</span><span class="en">Drink hydrogen peroxide and baking soda . Need to neutralize the acid in your body asap</span></p>
+      <p class="say">반박: “WebMD는 마시지 말래요. 꽤 위험할 수 있대요.”<span class="who">— Samuel</span> → 재반박: “WebMD는 붕사 마시는 것에 대해선 뭐래요?”<span class="who">— Brock</span></p>
+      <div class="ai"><span class="t">AI 클로드의 코멘트</span>섭취하면 소화관 손상과 산소 색전(혈관 내 기포)이 생길 수 있습니다. 식품 등급 고농도 제품은 특히 위험합니다. 붕사 역시 사람이 마실 물질이 아닙니다.</div></div>
+
+    <div class="cl rv"><div class="h"><b>알칼리 이론 · 설탕 차단 <span class="flag f-lo">낮음–주의</span></b><span class="m">17 / 50</span></div>
+      <p class="say">“암은 알칼리성 몸에서 살 수 없어요.”<span class="who">— Roanna 외</span></p>
+      <p class="say">커뮤니티 내부 반박: “몸을 알칼리로 만들 수는 없어요. 위산이 바로 끝내 버리고, 설령 된다 해도 장기가 망가져요. 알칼리 식단으로 좋아졌다는 건 가공식품을 끊고 채소를 먹어서지, pH 때문이 아니에요.”<span class="who">— Kira · ♥5</span></p>
+      <div class="ai"><span class="t">AI 클로드의 코멘트</span>Kira의 설명은 생리학적으로 정확합니다. 혈액 pH는 7.35~7.45로 엄격히 유지됩니다. 설탕을 끊어도 종양만 골라 굶길 수는 없고, 말기에는 열량 부족이 더 직접적인 문제입니다.</div></div>
+
+    <div class="cl hi rv"><div class="h"><b>장기 단식 · 물 단식 <span class="flag f-hi">위험 높음</span></b><span class="m">51</span></div>
+      <p class="say">“최후의 수단으로 병원에 입원해 40일 물 단식을 하세요. 친구가 6개월 시한부였는데 42일 물 단식으로 완치됐어요. 몸이 약해 단식 때문에 거의 죽을 뻔했지만요.”<span class="who">— Jaco</span></p>
+      <p class="say">“최대 3주 완전 단식.”<span class="who">— Gaspard</span> · “2주 물 단식.”<span class="who">— Mary</span></p>
+      <p class="say">반대 방향: “체중을 유지하세요! 꼭 필요해요.”<span class="who">— Victoria</span></p>
+      <div class="ai"><span class="t">AI 클로드의 코멘트</span>3~4주 예후의 환자 상당수는 이미 암 악액질(근육·체중 소실) 상태입니다. 장기 단식은 근육 소실, 전해질 이상, 재급식 증후군의 위험을 키웁니다. 댓글 작성자 본인도 “거의 죽을 뻔했다”고 썼습니다.</div></div>
+
+    <div class="cl rv"><div class="h"><b>고용량 비타민 D·C <span class="flag f-md">주의</span></b><span class="m">37</span></div>
+      <p class="say">“비타민 D3 30,000 IU 이상 + K2”<span class="who">— Ws · ♥390</span> · “비타민 D 10,000 매일, 비타민 C는 왕창”<span class="who">— Pamela · ♥108</span></p>
+      <p class="say">“에시악 차, 정맥 비타민 C 50그램. 그러면 살 거예요.”<span class="who">— David (9th)</span></p>
+      <div class="ai"><span class="t">AI 클로드의 코멘트</span>하루 수만 IU의 비타민 D를 지속하면 고칼슘혈증 위험이 있습니다. 뼈 전이가 있는 환자에게서는 특히 주의가 필요합니다. 고용량 정맥 비타민 C는 연구가 진행 중이며, 신장 결석이나 G6PD 결핍 환자에게는 위험합니다.</div></div>
+
+    <div class="cl rv"><div class="h"><b>사워솝 · 에시악 · 블랙씨드 <span class="flag f-lo">낮음–주의</span></b><span class="m">19 / 13 / 17</span></div>
+      <p class="say">“사워솝도요!”<span class="who">— Betsy · ♥45</span> · “진짜 에시악 차를 찾으세요.”<span class="who">— Diann</span> · “TQ 함량이 높은 걸로요. 에티오피아산은 4.65%예요.”<span class="who">— Jola</span></p>
+      <div class="ai"><span class="t">AI 클로드의 코멘트</span>모두 사람 대상 항암 근거는 제한적입니다. 사워솝(그라비올라)의 아노나신은 장기 섭취 시 신경독성 우려가 제기되어 왔습니다.</div></div>
+
+    <div class="cl hi rv"><div class="h"><b>MMS(이산화염소) <span class="flag f-hi">위험 높음</span></b><span class="m">4</span></div>
+      <p class="say">“MMS 이산화염소”<span class="who">— Timmy</span> · “Jim Humble의 책 ‘기적의 미네랄 용액’에 ‘1주일 남았을 때’ 프로토콜이 있어요!”<span class="who">— Samantha</span></p>
+      <div class="ai"><span class="t">AI 클로드의 코멘트</span>이산화염소는 산업용 표백제 성분입니다. 미국 FDA는 마시지 말라고 여러 차례 경고했습니다. 구토, 심한 설사, 탈수, 생명을 위협하는 저혈압이 보고되어 있습니다.</div></div>
+
+    <div class="cl hi rv"><div class="h"><b>소변 요법 · 직장 투여 <span class="flag f-hi">위험 높음</span></b><span class="m">4</span></div>
+      <p class="say">“대장으로 넣으면 간을 거치지 않고 바로 혈류로 들어가요.” … “증거는 없지만, 내가 죽어 간다면 뭐든 하겠어요. 21일 숙성한 소변에는 줄기세포가 1억 개 있어요. 소변 관장도 하겠어요.”<span class="who">— Corey</span></p>
+      <p class="say">“이버멕틴 프로토콜, 소변 마시기(줄기세포를 위한 소변 요법), 살구씨, 그리고 설탕으로 바뀌는 건 절대 아무것도 먹지 마세요.”<span class="who">— Tiffany</span></p>
+      <div class="ai"><span class="t">AI 클로드의 코멘트</span>소변에 의미 있는 줄기세포가 있다는 근거는 없습니다. 숙성 소변 관장은 감염과 장 점막 손상 위험이 있습니다. 작성자 스스로 “증거는 없다”고 밝혔습니다.</div></div>
+
+    <div class="cl hi rv"><div class="h"><b>봉독 직접 쏘이기 <span class="flag f-hi">위험 높음</span></b><span class="m">1</span></div>
+      <p class="say">“봉독은 48시간 안에 암을 죽일 수 있어요. 꿀벌 1,000마리를 사서 핀셋으로 집어 직접 쏘이게 했어요. 그런데 독주머니 30개를 쏘인 뒤에야 알레르기가 있다는 걸 알았어요. 그래서 이제 그건 안 해요. 이버멕틴과 펜벤다졸로 3년을 더 살았어요.”<span class="who">— Mark (8th)</span></p>
+      <div class="ai"><span class="t">AI 클로드의 코멘트</span>다발성 벌 쏘임은 아나필락시스와 신부전을 일으킬 수 있습니다. 작성자가 직접 겪은 알레르기 반응이 바로 그 위험입니다.</div></div>
+
+    <div class="cl rv"><div class="h"><b>대마·RSO · 펩타이드 · 니코틴 패치 · 기타 <span class="flag f-lo">혼재</span></b><span class="m">10 / 2 / 2</span></div>
+      <p class="say">“여유가 되면 당장 RSO(Rick Simpson Oil, THC)를.”<span class="who">— Shay</span> · “PNC-27, PNC-28 펩타이드 프로토콜을 추가하세요.”<span class="who">— Ryan</span> · “니코틴 패치가 암을 죽여요. 암은 기생충이에요.”<span class="who">— Lori</span></p>
+      <div class="ai"><span class="t">AI 클로드의 코멘트</span>대마 제제는 통증·식욕·구역 같은 증상 완화 목적으로는 쓰입니다. 펩타이드는 대부분 연구용 제품으로, 품질 보증이 없습니다. “암은 기생충”이라는 주장은 일부 기생충 관련 암(예: 간흡충과 담관암)을 일반화한 것입니다.</div></div>
+
+    <div class="cl hi rv"><div class="h"><b>표준 치료 중단 권유 <span class="flag f-hi">위험 높음</span></b><span class="m">다수</span></div>
+      <p class="say">“기존 치료는 전부 멈추고, 이버멕틴을 포함한 대체요법을 바로 시작하세요.”<span class="who">— Lawana · ♥8</span></p>
+      <p class="say">“단식하고, 몸을 알칼리화하고, … 병원에 가서 방사선이나 항암을 하지 마세요.”<span class="who">— Jenni</span></p>
+      <p class="say">“의사는 당신이 살든 죽든 상관 안 해요. 30달러짜리 치료로는 돈이 안 되니까 120만 달러짜리 항암을 시키는 거죠.”<span class="who">— Justin (2nd)</span></p>
+      <div class="ai"><span class="t">AI 클로드의 코멘트</span>3~4주 예후라면 이미 표준 치료가 끝났을 가능성이 높습니다. 다만 완화의료(통증 조절, 호흡, 영양)까지 끊어 버리면 남은 시간의 질이 크게 떨어질 수 있습니다. 반면 같은 스레드의 Rob (2nd)은 면역항암치료와 병용해 좋아졌다고 썼습니다.</div></div>
+  </div>
+</section>
+
+<!-- §5 -->
+<section class="s" id="s5">
+  <div class="sid">§5 · TESTIMONY STRUCTURE</div>
+  <h2>경험담의 구조</h2>
+  <p>경험담을 ‘좋아졌다/나빠졌다’가 아니라 <b>무엇이 함께 있었고, 얼마나 지켜봤는가</b>로 다시 정리했습니다.</p>
+  <table class="stk st-table rv">
+    <thead><tr><th>화자</th><th>대상 · 주장된 결과</th><th>병용·교란 요인</th><th>추적</th></tr></thead>
+    <tbody>
+      <tr><td data-l="화자">Karen (3rd) ♥246</td><td data-l="대상 · 결과">친구, 전이성 유방암(뼈·간·담낭). 종양 크기 감소, 통증 10→0</td><td data-l="병용"><span class="tagx y">IVM</span><span class="tagx y">펜벤</span><span class="tagx y">메벤</span><span class="tagx">TUDCA</span><span class="tagx">“그 외 여러 가지”</span></td><td data-l="추적">약 3개월 · 영상 수치 제시</td></tr>
+      <tr><td data-l="화자">JanDeana ♥76</td><td data-l="대상 · 결과">파트너, 3~4개월 예후. 매주 체중 증가</td><td data-l="병용"><span class="tagx y">IVM</span><span class="tagx y">펜벤</span><span class="tagx">간 보조제</span><span class="tagx">영양관 조제식</span></td><td data-l="추적">약 4개월 · 암 상태 언급 없음</td></tr>
+      <tr><td data-l="화자">Giang</td><td data-l="대상 · 결과">어머니, 위 출구 폐쇄. 3일째 물 250ml/일</td><td data-l="병용"><span class="tagx y">IVM</span><span class="tagx y">메벤</span><span class="tagx">모르핀</span></td><td data-l="추적">약 1개월</td></tr>
+      <tr><td data-l="화자">Rob (2nd)</td><td data-l="대상 · 결과">본인, 생존 가능성 4%. “사실상 무병”</td><td data-l="병용"><span class="tagx r">면역항암치료</span><span class="tagx y">IVM(치료 전)</span></td><td data-l="추적">기간 불명</td></tr>
+      <tr><td data-l="화자">Andy (2nd)</td><td data-l="대상 · 결과">아내, 난소암. 수술 후 암 없음</td><td data-l="병용"><span class="tagx r">수술</span><span class="tagx y">펜벤</span></td><td data-l="추적">수술 시점까지</td></tr>
+      <tr><td data-l="화자">Tiffany</td><td data-l="대상 · 결과">본인, 종양 골프공→구슬 크기(5주)</td><td data-l="병용"><span class="tagx">기생충 클렌즈</span><span class="tagx">살구씨</span><span class="tagx">과산화수소</span><span class="tagx">10여 종</span></td><td data-l="추적">5주 · 아직 IVM 미복용</td></tr>
+      <tr><td data-l="화자">Mayra</td><td data-l="대상 · 결과">남편, 2주 예후 → 7년 관해</td><td data-l="병용"><span class="tagx">내용 불명</span></td><td data-l="추적">7년 · 세부 없음</td></tr>
+      <tr><td data-l="화자">Mark (8th)</td><td data-l="대상 · 결과">본인, 2024 성탄 전 사망 예상 → 생존 중</td><td data-l="병용"><span class="tagx y">IVM</span><span class="tagx y">펜벤</span><span class="tagx">약초 4종</span><span class="tagx">프로바이오틱스</span><span class="tagx">봉독</span></td><td data-l="추적">약 2년</td></tr>
+      <tr><td data-l="화자">Rick (2nd) ♥2</td><td data-l="대상 · 결과">본인, 전립선암. <b style="color:var(--risk)">PSA 3.16→16.4로 상승</b>, PET 매번 악화</td><td data-l="병용"><span class="tagx y">IVM 96mg</span><span class="tagx y">펜벤 1g</span><span class="tagx">케토</span><span class="tagx">주 2일 단식</span></td><td data-l="추적">약 20개월 · 수치 시계열 제시</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-size:17px;margin:22px 0 10px">2차 전언과 정정</h3>
+  <div class="qq story rv">Joe Tippens 사례에 대해: “그가 같은 시기에 신약 임상시험에도 참여하고 있었다는 걸 알게 됐어요.”<span class="who">— Scott (3rd)</span></div>
+  <div class="qq story rv">→ “맞아요. 하지만 그 임상의 다른 사람들은 모두 죽었대요. 대체요법을 같이 한 건 그 사람뿐이었고요.”<span class="who">— Kathy (2nd) · ♥5</span></div>
+  <div class="qq story rv">Chris Wark에 대해: “그는 처음엔 항암을 받았어요. 사람들이 솔직해야 다른 사람도 알죠.” → 이후 “제가 잘못 읽었나 봐요, 죄송해요.”<span class="who">— Wendy</span></div>
+
+  <h3 style="font-size:17px;margin:22px 0 10px">반사실 서사: “먹지 않아서 죽었다”</h3>
+  <div class="qq emo rv">“친구에게 먹이지 못했고, 장례식에 다녀왔어요.”<span class="who">— Nelda · ♥12</span></div>
+  <div class="qq emo rv">“제 자매는 3개월 남았는데 안 먹었어요. 두 달 뒤 죽었죠. 이버멕틴 부작용을 걱정했어요.”<span class="who">— Hendrik · ♥15</span></div>
+  <div class="qq emo rv">“23년 함께한 사람에게 먹이고 싶었는데, 그의 딸이 겁을 줘서 한 번 먹고 말았어요. 도움이 됐을지도 모르는데 이제 알 수 없죠.”<span class="who">— Jane (2nd)</span></div>
+
+  <div class="bias rv">
+    <div><b>병용 교란</b>좋아졌다는 사례 8건 중 2건은 수술 또는 면역항암치료가 함께였고, 대부분은 5~10종을 동시에 썼습니다. 어떤 요소가 작용했는지 분리할 수 없습니다.</div>
+    <div><b>생존자·보고 편향</b>잘되지 않은 환자는 댓글을 남기기 어렵습니다. 반례인 Rick (2nd)의 상세한 시계열은 공감 2개를 받았습니다.</div>
+    <div><b>짧은 추적</b>상당수가 1~4개월 시점의 보고이며, 이후 경과는 남아 있지 않습니다. 질문자 Darryl 쪽의 후속 소식도 없습니다.</div>
+    <div><b>반사실 서사</b>“안 먹어서 죽었다”는 이야기는 감정적으로 강하지만 검증할 수 없습니다. 그런데도 “잃을 게 없다”는 결론을 강화하는 데 쓰였습니다.</div>
+  </div>
+</section>
+
+<!-- §6 -->
+<section class="s" id="s6">
+  <div class="sid">§6 · COMMERCE &amp; IMPERSONATION</div>
+  <h2>상업·사칭 흐름</h2>
+  <p>이것도 해외 커뮤니티의 흐름입니다. 응원과 정보 사이로 판매와 유도가 섞여 들었습니다.</p>
+  <div class="qq risk rv">“안녕하세요. 저는 Curovia Exim입니다. 저희 회사는 의약품을 다룹니다. 해외로 모든 종류의 약을 팝니다. 약이 필요하면 연락 주세요. (전화·텔레그램 번호 삭제)”<span class="who">— Curovia · 판매 광고</span></div>
+  <div class="qq risk rv">“프로토콜과 공급처 정보가 모두 표에 있어요. 도움이 되길 바라요.” 같은 문장과 표 이미지를 구입처 질문마다 <b>4회</b> 반복 게시<span class="who">— Marcy</span></div>
+  <div class="qq risk rv">“해 볼 용기가 있다면 제안할 수 있어요. 전적으로 본인 책임이에요. 메시지 주세요.”<span class="who">— Philip</span> · “15분짜리 ‘현현(manifestation)’ 오디오, 메시지 주면 구글 드라이브 링크 보내 드릴게요.”<span class="who">— Arnaldo</span></div>
+  <table class="stk rv" style="margin-top:8px">
+    <thead><tr><th>흐름</th><th>내용</th><th>규모</th></tr></thead>
+    <tbody>
+      <tr><td data-l="흐름">William Makis 박사 논쟁</td><td data-l="내용">“$1,500 선불을 내야 상담” (JanDeana ♥76) ↔ “Substack과 X에만 있다, 페이스북 계정은 사칭” ↔ “그 이메일은 가짜 같다” ↔ “맞는 이메일이다”</td><td data-l="규모" class="n">한 스레드 답글 35</td></tr>
+      <tr><td data-l="흐름">개별 메시지 유도</td><td data-l="내용">“메시지 보냈어요”, “제 프로필 고정 글을 보세요”, “링크 보냈어요”</td><td data-l="규모" class="n">≥7</td></tr>
+      <tr><td data-l="흐름">브랜드·판매처 언급</td><td data-l="내용">RNC, TJ Supply, Apricot Power, True Moss, Silver Fern, Amazon, 농장 용품점, 아미시 상점</td><td data-l="규모" class="n">8곳 이상</td></tr>
+      <tr><td data-l="흐름">진품·가짜 논쟁</td><td data-l="내용">“아마존은 가짜를 팔다 여러 번 걸렸다”, “Arm &amp; Hammer 베이킹소다는 중금속 투성이” ↔ “아무 문제 없다”</td><td data-l="규모" class="n">≥4</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-size:17px;margin:22px 0 10px">답 없는 용량 질문</h3>
+  <p>구입처·용량 질문 23개의 대부분은 직접 답을 받지 못했거나, 위의 표 이미지로만 응답받았습니다.</p>
+  <div class="qq risk rv">“이버멕틴과 펜벤다졸을 지지하는 의사가 있다면 여기 나와서 기본 용량을 알려 주세요. 저는 전립선암 4기, 전이성이에요. 배, 어깨, 가슴, 목에 덩어리가 다섯 개쯤 있어요. 위와 장 밑, 척추 사이에 60×80mm 종양이 있어요. 저 같은 사람은 뭘 먹어야 하나요? 하루에 몇 ml씩요? 어떤 의사든 도와주세요. 저 죽어 가고 있어요.”<span class="who">— Rick (3rd) · ♥0 · 답글 0</span></div>
+  <div class="qq risk rv">“우리 88세 아버지가 위암을 막 진단받았어요. 체중 200파운드인데 용량이 얼마예요?”<span class="who">— Tammie (2nd) · 답글 0</span> · “얼마나 먹어야 해요? 140파운드, 허리 통증”(같은 문장 3회 게시)<span class="who">— Jc</span></div>
+  <div class="ai rv"><span class="t">AI 클로드의 코멘트</span>스레드에서 가장 절박한 질문들이 가장 응답받지 못했습니다. 짧은 응원 댓글은 수백 개의 공감을 받았지만, 구체적인 상황을 적은 질문은 침묵 속에 남았습니다.</div>
+</section>
+
+<!-- §7 -->
+<section class="s" id="s7">
+  <div class="sid">§7 · REFRAME</div>
+  <h2>같은 질문을 개별화하면</h2>
+  <p>“늦었나?”는 답할 수 없는 질문입니다. 답할 수 있는 형태로 바꾸려면, 3~4주 예후 시점에 특히 중요한 변수를 먼저 채워야 합니다.</p>
+  <table class="stk rv">
+    <thead><tr><th>변수</th><th>왜 이 시점에 중요한가</th></tr></thead>
+    <tbody>
+      <tr><td data-l="변수">삼킴·경구 섭취 가능 여부</td><td data-l="이유">댓글 속 Lora의 아버지, Giang의 어머니처럼 삼킬 수 없는 경우가 많습니다. 투여 경로가 질문 자체를 바꿉니다.</td></tr>
+      <tr><td data-l="변수">간·신장 기능</td><td data-l="이유">이버멕틴과 벤즈이미다졸계는 간에서 대사됩니다. 베이킹소다·비타민 D는 신장 부담과 직결됩니다.</td></tr>
+      <tr><td data-l="변수">병용약 (오피오이드, 진정제, 항경련제 등)</td><td data-l="이유">중추신경 억제와 대사 경로 상호작용 가능성이 있습니다.</td></tr>
+      <tr><td data-l="변수">체중·악액질 상태</td><td data-l="이유">단식·설탕 차단 권유가 실제로 해가 될 수 있는 조건입니다.</td></tr>
+      <tr><td data-l="변수">환자 본인의 목표</td><td data-l="이유">연장인가, 편안함인가. Charlie와 Stephanie (2nd)의 어머니처럼 “더 싸우지 않겠다”는 선택도 존재합니다.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-size:17px;margin:22px 0 4px">댓글 주장을 질문으로 바꾸는 확인 사슬</h3>
+  <div class="pipe rv">
+    <div class="st"><b>① 주장 추출</b>댓글에서 물질·용량·기전 주장을 원문 그대로 목록화<small>이 문서 §4</small></div>
+    <div class="st"><b>② 문헌 확인</b>사람 대상 연구가 있는지 확인<small>PubMed · Semantic Scholar MCP</small></div>
+    <div class="st"><b>③ 임상시험 확인</b>진행·완료된 시험과 그 결과<small>ClinicalTrials.gov API</small></div>
+    <div class="st r"><b>④ 프로파일 대조</b>위 5개 변수에 비춰 안전 문제 표시<small>환자 프로파일 · 빈칸</small></div>
+    <div class="st g"><b>⑤ 질문 생성</b>주치의에게 가져갈 질문 3개<small>결정은 주치의와</small></div>
+  </div>
+  <pre class="prompt rv"><span class="k">[역할]</span> 너는 문헌을 확인하는 조사 보조자다. 치료 결정이나 용량 권고를 하지 않는다.
+<span class="k">[환자 프로파일]</span> 암종: ____ / 병기: ____ / 치료 이력: ____
+             삼킴: ____ / 간·신장 기능: ____ / 현재 복용약: ____ / 목표: 연장·편안함
+<span class="k">[입력]</span> 아래 댓글 주장 목록 (원문)
+<span class="k">[요청]</span> 각 주장마다 (1) 사람 대상 연구가 있는가 (2) 위 프로파일에서 예상되는 안전 문제
+       (3) 주치의에게 물을 질문 1개
+<span class="c">[제약]</span> PMID 또는 NCT 번호로 확인되지 않는 것은 반드시 '확인 불가'로 표시한다.
+       동물·세포 연구와 사람 연구를 구분한다. 용량을 제시하지 않는다.
+<span class="g">[출력]</span> 표 1개 + 주치의 질문 목록</pre>
+  <p class="small dim">환자 프로파일은 의도적으로 빈칸으로 두었습니다. 같은 주장이라도 프로파일이 다르면 답이 달라진다는 것이 이 섹션의 요점입니다.</p>
+</section>
+
+<!-- §9 -->
+<section class="s" id="s9">
+  <div class="sid">§8 · LIMITS</div>
+  <h2>이 분석의 한계</h2>
+  <ul class="limits">
+    <li><b>키워드 분류:</b> 반어, 철자 오류(“Fenbenzadol”, “ferbendixal”), 맥락 의존 문장을 놓치거나 잘못 분류할 수 있습니다. 비율은 흐름을 보여 주는 근사치입니다.</li>
+    <li><b>“No”의 모호성:</b> 단독 “No”는 “늦지 않았다”로 분류했지만, 일부는 다른 뜻일 수 있습니다.</li>
+    <li><b>답글의 맥락:</b> 답글은 앞 댓글에 기대는 경우가 많아 단독 분류가 어렵습니다. 그래서 입장 분석은 최상위 댓글로 한정했습니다.</li>
+    <li><b>내보내기 범위:</b> 페이스북은 1.5K로 표시하지만 내보낸 것은 1,366개입니다. 삭제·숨김 댓글은 포함되지 않습니다. 공감은 총합만 있고 종류(좋아요·슬퍼요)는 구분되지 않습니다.</li>
+    <li><b>검증 불가:</b> 작성자 신원, 진단, 경과는 확인할 수 없습니다. 모든 경험담은 본인 주장입니다.</li>
+    <li><b>AI 클로드의 코멘트:</b> 공개 문헌에 대한 AI의 일반 지식에 따른 의견이며, 이 문서를 위한 개별 문헌 검색·검증을 거치지 않았습니다. 번역 역시 AI 클로드가 했습니다.</li>
+  </ul>
+</section>
+
+<div class="boundary rv">
+  <h3>안전 경계</h3>
+  <p>복용·병용·중단의 최종 결정은 <b>반드시 주치의</b>의 몫입니다. 이 문서의 댓글은 해외 커뮤니티 구성원의 주장을 원문 그대로 옮긴 것이며, 치료 권고가 아닙니다.</p>
+  <p>이버멕틴을 비롯해 문서에 등장하는 모든 약물은 <b>예시(illustrative)</b>입니다.</p>
+  <p style="margin:0">AI는 결정이 아니라 <b>더 나은 질문</b>을 준비하는 도구입니다.</p>
+</div>
+
+<div class="closing rv">군중은 빠르게 “가능성”을 외쳤고, 그 목소리는 진심이었습니다. 그러나 가능성을 한 사람의 시도로 옮기는 데 필요한 것은 더 큰 목소리가 아니라 <b style="color:var(--emo)">하나의 질문</b>입니다. “이 사람은 지금 어떤 상태인가?” 1,366개의 메아리 속에서 그 질문은 여섯 번 울렸습니다.</div>
+
+<footer>
+  <p>원본: Facebook “Ivermectin and Cancer Discussion Group”, Darryl의 게시글(2026-10-06), 2026-10-14 기준 내보내기 데이터(JSON/CSV, 1,366건).</p>
+  <p>이름: 성을 삭제하고 이름만 표시했습니다. 동명이인은 등장 순서에 따라 (2nd), (3rd) 등으로 구분했습니다. 공적 인물(William Makis, Joe Tippens, Eric Berg, Chris Wark, Jim Humble 등)은 실명을 유지했습니다. 판매 광고의 연락처는 삭제했습니다.</p>
+  <p>번역·분류·AI 클로드의 코멘트: AI 클로드 작성 · 자매 문서: 커뮤니티 초보자용 「1,366개의 메아리」</p>
+</footer>
+
+</div>
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els = document.querySelectorAll('.rv');
+  if (!('IntersectionObserver' in window) || reduce) {
+    document.documentElement.classList.add('no-io');
+    els.forEach(function(e){ e.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, {threshold:.1, rootMargin:'0px 0px -5% 0px'});
+  els.forEach(function(e){ io.observe(e); });
+})();
+</script>
+</body>
+</html>

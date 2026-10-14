@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1,366개의 메아리 · 해외 댓글 들여다보기</title>
+<meta name="description" content="'3~4주 남았다면 이버멕틴은 너무 늦었나요?'라는 해외 페이스북 질문에 달린 1,366개 댓글의 흐름을 정리했습니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fbf6ec; --paper2:#f4ecdc; --ink:#2b2620; --ink2:#5c5246; --line:#e3d7c1;
+  --sun:#d9822b; --sun-soft:#fbe6cc;
+  --leaf:#3f7d58; --leaf-soft:#dcefe2;
+  --sky:#3b6e9e; --sky-soft:#dde9f4;
+  --plum:#7a4f8a; --plum-soft:#ede1f2;
+  --clay:#b5483a; --clay-soft:#f7dcd6;
+  --claude:#8a5a1f; --claude-bg:#fff4e2;
+  --card:#fffdf8;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Sans KR",system-ui,sans-serif;font-size:19px;line-height:1.85;word-break:keep-all;overflow-wrap:break-word}
+.wrap{max-width:720px;margin:0 auto;padding:0 18px}
+h1,h2,h3{font-family:"Gowun Batang",serif;line-height:1.4;font-weight:700;margin:0}
+a{color:var(--sky)}
+:focus-visible{outline:3px solid var(--sun);outline-offset:3px;border-radius:6px}
+
+/* hero */
+.hero{padding:44px 0 26px}
+.kicker{font-size:15px;color:var(--ink2);letter-spacing:.02em;margin-bottom:14px}
+.hero h1{font-size:34px;margin-bottom:22px}
+.hero h1 em{font-style:normal;color:var(--sun)}
+.ask{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:20px 20px 18px;position:relative;box-shadow:0 4px 0 var(--line)}
+.ask .who{font-size:15px;color:var(--ink2);margin-bottom:6px}
+.ask .en{font-size:16px;color:var(--ink2);font-style:italic;margin:0 0 8px}
+.ask .ko{font-family:"Gowun Batang",serif;font-size:24px;line-height:1.55;margin:0}
+.lead{margin:22px 0 0;font-size:19px}
+
+/* glance */
+.glance{background:var(--paper2);border-radius:22px;padding:26px 20px;margin:12px 0 10px}
+.glance h2{font-size:26px;margin-bottom:6px}
+.glance .sub{color:var(--ink2);font-size:16px;margin:0 0 20px}
+.flow{list-style:none;margin:0;padding:0;position:relative}
+.flow li{position:relative;padding:0 0 22px 52px}
+.flow li:last-child{padding-bottom:0}
+.flow li::before{content:"";position:absolute;left:19px;top:38px;bottom:0;width:2px;background:var(--line)}
+.flow li:last-child::before{display:none}
+.flow .dot{position:absolute;left:0;top:2px;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;color:#fff}
+.flow b{display:block;font-size:20px;line-height:1.5}
+.flow span{font-size:16.5px;color:var(--ink2);display:block;line-height:1.7}
+.d1{background:var(--ink2)}.d2{background:var(--sun)}.d3{background:var(--sun)}.d4{background:var(--plum)}.d5{background:var(--clay)}.d6{background:var(--ink)}
+
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:24px 0 6px}
+.tile{background:var(--card);border-radius:16px;padding:14px 10px;text-align:center;border:1px solid var(--line)}
+.tile .n{font-family:"Gowun Batang",serif;font-size:34px;font-weight:700;line-height:1.2}
+.tile .l{font-size:14px;color:var(--ink2);line-height:1.5;margin-top:4px}
+.tile.c1 .n{color:var(--clay)}.tile.c2 .n{color:var(--plum)}.tile.c3 .n{color:var(--ink)}
+
+.bars{margin:22px 0 8px}
+.bars h3{font-size:19px;margin-bottom:4px}
+.bars .note{font-size:14.5px;color:var(--ink2);margin:0 0 14px}
+.bar{margin:0 0 12px}
+.bar .t{display:flex;justify-content:space-between;gap:10px;font-size:16.5px;line-height:1.4;margin-bottom:5px}
+.bar .t strong{font-weight:700;white-space:nowrap}
+.bar .track{height:16px;background:#ece2cf;border-radius:10px;overflow:hidden}
+.bar .fill{height:100%;border-radius:10px;width:0;transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+.in .bar .fill{width:var(--w)}
+.f-sun{background:var(--sun)}.f-leaf{background:var(--leaf)}.f-plum{background:var(--plum)}.f-sky{background:var(--sky)}.f-clay{background:var(--clay)}.f-ink{background:var(--ink2)}
+.verdict{margin:20px 0 0;background:var(--ink);color:#fff8ec;border-radius:16px;padding:18px 18px;font-family:"Gowun Batang",serif;font-size:20.5px;line-height:1.65}
+
+/* metaphor */
+.echo{display:flex;gap:14px;align-items:flex-start;background:var(--sky-soft);border-radius:18px;padding:18px;margin:26px 0}
+.echo svg{flex:0 0 64px}
+.echo p{margin:0;font-size:17.5px}
+.echo b{font-family:"Gowun Batang",serif;font-size:19px}
+
+/* sections */
+section.part{padding:36px 0 8px}
+.sec-no{display:inline-block;font-size:14px;font-weight:700;color:var(--sun);background:var(--sun-soft);border-radius:999px;padding:2px 12px;margin-bottom:10px}
+section.part > h2{font-size:28px;margin-bottom:10px}
+section.part > p.intro{color:var(--ink2);margin:0 0 18px}
+
+.group{margin:26px 0 8px}
+.group h3{font-size:22px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.group h3 .cnt{font-family:"Noto Sans KR",sans-serif;font-size:15px;font-weight:500;color:var(--ink2);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:0 10px}
+.chip{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:2px;transform:translateY(-1px)}
+
+.q{background:var(--card);border-radius:16px;padding:16px 16px 12px;margin:0 0 12px;border:1px solid var(--line);border-left:6px solid var(--line)}
+.q .ko{margin:0 0 8px;font-size:18.5px}
+.q .ko::before{content:"“";font-family:"Gowun Batang",serif;color:var(--sun);font-size:26px;line-height:0;margin-right:2px;vertical-align:-6px}
+.q .meta{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:15px;color:var(--ink2)}
+.q .heart{white-space:nowrap}
+.q details{margin-top:6px}
+.q summary{cursor:pointer;font-size:14.5px;color:var(--sky);list-style:none;display:inline-block;padding:2px 0}
+.q summary::-webkit-details-marker{display:none}
+.q summary::before{content:"▸ "}
+.q details[open] summary::before{content:"▾ "}
+.q .en{font-size:15.5px;color:var(--ink2);font-style:italic;background:var(--paper);border-radius:10px;padding:10px 12px;margin:6px 0 4px;line-height:1.65}
+.b-sun{border-left-color:var(--sun)}.b-leaf{border-left-color:var(--leaf)}.b-plum{border-left-color:var(--plum)}.b-sky{border-left-color:var(--sky)}.b-clay{border-left-color:var(--clay)}.b-ink{border-left-color:var(--ink2)}
+
+.claude{background:var(--claude-bg);border:1.5px dashed #e3b679;border-radius:16px;padding:14px 16px;margin:14px 0 4px;font-size:17px}
+.claude .tag{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--claude);margin-bottom:4px}
+.claude .tag::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--claude)}
+.claude p{margin:0}
+
+/* top10 */
+.rank{list-style:none;margin:0;padding:0;counter-reset:r}
+.rank li{counter-increment:r;display:grid;grid-template-columns:38px 1fr;gap:10px;align-items:start;padding:12px 0;border-bottom:1px solid var(--line)}
+.rank li::before{content:counter(r);font-family:"Gowun Batang",serif;font-weight:700;font-size:22px;color:var(--sun);text-align:center;line-height:1.5}
+.rank .txt{font-size:17.5px;line-height:1.6}
+.rank .txt small{display:block;font-size:14.5px;color:var(--ink2);margin-top:2px}
+.rank .kind{display:inline-block;font-size:13px;border-radius:6px;padding:0 7px;margin-right:4px;color:#fff;vertical-align:1px}
+.k-sun{background:var(--sun)}.k-plum{background:var(--plum)}.k-leaf{background:var(--leaf)}.k-ink{background:var(--ink2)}.k-sky{background:var(--sky)}
+
+/* two roads */
+.road h3{font-size:21px;margin:22px 0 12px;padding:10px 14px;border-radius:12px}
+.road.up h3{background:var(--leaf-soft);color:#24533a}
+.road.down h3{background:var(--clay-soft);color:#7d2c22}
+
+/* substances */
+.sub-list{display:grid;gap:12px}
+.subst{background:var(--card);border-radius:16px;border:1px solid var(--line);padding:16px}
+.subst .head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px}
+.subst .head b{font-family:"Gowun Batang",serif;font-size:21px}
+.subst .head span{font-size:14.5px;color:var(--ink2);white-space:nowrap}
+.subst .claim{margin:0 0 8px;font-size:17px}
+.subst .claim i{color:var(--ink2);font-style:normal;font-size:14.5px}
+.subst .cl{font-size:16px;background:var(--claude-bg);border-radius:10px;padding:9px 12px;color:#5a3a12;line-height:1.65}
+.subst .cl b{color:var(--claude);font-size:13.5px;margin-right:4px}
+
+/* shadow */
+.shadow{background:#efe6d6;border-radius:20px;padding:20px 18px;margin:8px 0}
+.shadow h3{font-size:20px;margin:6px 0 10px}
+.shadow .q{background:#fffaf1}
+
+/* ask */
+.copy{background:var(--card);border:2px solid var(--leaf);border-radius:16px;padding:16px 16px 12px;margin:0 0 14px}
+.copy .lbl{font-size:14px;font-weight:700;color:var(--leaf);margin-bottom:6px}
+.copy p{margin:0 0 10px;font-family:"Gowun Batang",serif;font-size:19.5px;line-height:1.65}
+.copy button{font:inherit;font-size:15px;border:0;background:var(--leaf);color:#fff;border-radius:999px;padding:6px 16px;cursor:pointer}
+.copy button.done{background:var(--ink2)}
+.try{background:var(--sun-soft);border-radius:20px;padding:20px 18px;margin:22px 0}
+.try h3{font-size:22px;margin-bottom:10px}
+.try ol{margin:0;padding-left:24px}
+.try li{margin:0 0 8px}
+.safety{border:3px solid var(--clay);border-radius:20px;padding:18px;margin:24px 0;background:#fff}
+.safety h3{color:var(--clay);font-size:21px;margin-bottom:8px}
+.safety p{margin:0 0 8px}
+.closing{text-align:center;padding:30px 6px 10px;font-family:"Gowun Batang",serif;font-size:22px;line-height:1.7}
+footer{border-top:1px solid var(--line);margin-top:30px;padding:22px 0 40px;font-size:14.5px;color:var(--ink2);line-height:1.75}
+footer p{margin:0 0 8px}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+.no-io .rv{opacity:1;transform:none}
+.no-io .bar .fill{width:var(--w)}
+@media (prefers-reduced-motion: reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  .bar .fill{width:var(--w);transition:none}
+}
+@media (max-width:480px){
+  body{font-size:18px}
+  .hero h1{font-size:28px}
+  .ask .ko{font-size:21px}
+  .tile .n{font-size:28px}
+  .tile .l{font-size:13px}
+  section.part > h2{font-size:25px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">해외 커뮤니티 들여다보기 · Facebook “Ivermectin and Cancer Discussion Group”</div>
+  <h1>질문 하나에 돌아온<br><em>1,366개의 메아리</em></h1>
+  <div class="ask">
+    <div class="who">Darryl · 2026년 10월 6일에 올린 글</div>
+    <p class="en">“If someone had 3 to 4 weeks left is it to late to take ivermectin”</p>
+    <p class="ko">누군가에게 3~4주가 남았다면,<br>이버멕틴을 먹기엔 너무 늦었을까요?</p>
+  </div>
+  <p class="lead">이 짧은 질문에 일주일 동안 <b>1,366개의 댓글</b>이 달렸습니다. 해외 환우와 가족들은 이런 질문에 어떻게 대답할까요? 댓글 전부를 하나하나 세어 보았습니다.</p>
+</header>
+
+<section class="glance rv" aria-labelledby="g-title">
+  <h2 id="g-title">한눈에 보는 전체 흐름</h2>
+  <p class="sub">위에서 아래로 따라 내려오세요.</p>
+  <ol class="flow">
+    <li><div class="dot d1">1</div><b>한 사람이 물었습니다</b><span>“남은 시간이 3~4주라면, 너무 늦었나요?”</span></li>
+    <li><div class="dot d2">2</div><b>첫날에만 824개가 쏟아졌습니다</b><span>전체 댓글의 60%가 글이 올라온 당일에 달렸습니다.</span></li>
+    <li><div class="dot d3">3</div><b>대답은 거의 하나였습니다</b><span>“늦지 않았다!”, “싸워라!”, “잃을 게 뭐가 있나!”</span></li>
+    <li><div class="dot d4">4</div><b>공감은 응원과 기도에 몰렸습니다</b><span>공감 표시 7,511개 중 61%가 단 10개 댓글에 몰렸습니다.</span></li>
+    <li><div class="dot d5">5</div><b>“어떤 암이세요?”라고 물은 사람은 6명</b><span>최상위 댓글 907개 중 0.7%만 환자의 상황을 되물었습니다.</span></li>
+    <li><div class="dot d6">6</div><b>질문자는 다시 나타나지 않았습니다</b><span>Darryl이 남긴 후속 댓글은 0개였습니다.</span></li>
+  </ol>
+
+  <div class="tiles">
+    <div class="tile c1"><div class="n">6명</div><div class="l">환자 상황을<br>되물은 사람</div></div>
+    <div class="tile c2"><div class="n">61%</div><div class="l">상위 10개 댓글에<br>몰린 공감</div></div>
+    <div class="tile c3"><div class="n">0번</div><div class="l">질문자의<br>후속 댓글</div></div>
+  </div>
+
+  <div class="bars" id="bars">
+    <h3>사람들은 무엇이라고 답했나</h3>
+    <p class="note">질문에 바로 단 댓글 907개 기준 · 한 댓글이 여러 갈래에 속할 수 있습니다</p>
+    <div class="bar"><div class="t"><span><span class="chip f-sun"></span> 늦지 않았다 · 싸워라 · 해라</span><strong>38%</strong></div><div class="track"><div class="fill f-sun" style="--w:38.4%"></div></div></div>
+    <div class="bar"><div class="t"><span><span class="chip f-leaf"></span> 이것도 같이 드세요 (다른 물질·식단)</span><strong>23%</strong></div><div class="track"><div class="fill f-leaf" style="--w:23%"></div></div></div>
+    <div class="bar"><div class="t"><span><span class="chip f-plum"></span> 기도하세요 · 하나님께 맡기세요</span><strong>19%</strong></div><div class="track"><div class="fill f-plum" style="--w:18.9%"></div></div></div>
+    <div class="bar"><div class="t"><span><span class="chip f-sun"></span> 잃을 게 뭐가 있나요</span><strong>12%</strong></div><div class="track"><div class="fill f-sun" style="--w:12.3%"></div></div></div>
+    <div class="bar"><div class="t"><span><span class="chip f-ink"></span> 의사가 정한 날짜는 믿지 마세요</span><strong>10.5%</strong></div><div class="track"><div class="fill f-ink" style="--w:10.5%"></div></div></div>
+    <div class="bar"><div class="t"><span><span class="chip f-sky"></span> 나도 / 가족도 좋아졌어요 (경험담)</span><strong>6%</strong></div><div class="track"><div class="fill f-sky" style="--w:6.4%"></div></div></div>
+    <div class="bar"><div class="t"><span><span class="chip f-clay"></span> 늦었을 수도 있어요 (신중론)</span><strong>1.8%</strong></div><div class="track"><div class="fill f-clay" style="--w:1.8%"></div></div></div>
+    <div class="bar"><div class="t"><span><span class="chip f-clay"></span> 어떤 암인가요? (상황을 되물음)</span><strong>0.7%</strong></div><div class="track"><div class="fill f-clay" style="--w:.7%"></div></div></div>
+  </div>
+
+  <p class="verdict">따뜻한 응원은 넘쳤습니다. 하지만 이 사람에게 맞는 답을 찾기 위한 질문, “어떤 암이고, 지금 어떤 상태인가요?”는 거의 들리지 않았습니다.</p>
+</section>
+
+<div class="echo rv">
+  <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M6 54 L24 20 L34 36 L42 24 L58 54 Z" fill="#9bb7d0"/><circle cx="14" cy="40" r="3" fill="#3b6e9e"/><path d="M20 38 q4 2 0 4 M24 35 q7 5 0 10 M28 32 q10 8 0 16" fill="none" stroke="#3b6e9e" stroke-width="2" stroke-linecap="round"/></svg>
+  <p><b>왜 ‘메아리’일까요?</b><br>산에 대고 소리치면 내 목소리가 되돌아옵니다. 이 댓글창은 “포기하지 마!”라는 같은 소리가 수백 번 울린 방 같았습니다. 마음은 따뜻해지지만, 새로운 정보는 잘 들리지 않습니다. 이 글은 그 방 안을 차분히 둘러보는 산책입니다.</p>
+</div>
+
+<!-- PART 1 -->
+<section class="part" id="p1">
+  <span class="sec-no">하나</span>
+  <h2>사람들은 이렇게 답했습니다</h2>
+  <p class="intro">대표적인 댓글을 원문 그대로 옮겼습니다. ♥는 그 댓글이 받은 공감 수입니다. ‘원문 보기’를 누르면 영어 원문이 나옵니다.</p>
+
+  <div class="group rv">
+    <h3><span class="chip f-sun"></span>“늦지 않았어요! 싸우세요!” <span class="cnt">348개</span></h3>
+    <div class="q b-sun"><p class="ko">싸우고, 싸우고, 또 싸워요! 절대 포기하지 마세요!</p><div class="meta"><span>Christy</span><span class="heart">♥ 960 · 전체 1위</span></div><details><summary>원문 보기</summary><p class="en">Fight fight fight! Never give up!</p></details></div>
+    <div class="q b-sun"><p class="ko">절대 늦지 않았어요.</p><div class="meta"><span>Linda</span><span class="heart">♥ 504</span></div><details><summary>원문 보기</summary><p class="en">It's NEVER too late</p></details></div>
+    <div class="q b-sun"><p class="ko">늦은 건 죽고 난 다음뿐이에요!</p><div class="meta"><span>Kerry</span><span class="heart">♥ 0</span></div><details><summary>원문 보기</summary><p class="en">It’s only too late when you’re dead!</p></details></div>
+  </div>
+
+  <div class="group rv">
+    <h3><span class="chip f-sun"></span>“잃을 게 뭐가 있나요?” <span class="cnt">112개</span></h3>
+    <div class="q b-sun"><p class="ko">잃을 게 뭐가 있나요?</p><div class="meta"><span>Marvin</span><span class="heart">♥ 720 · 전체 3위</span></div><details><summary>원문 보기</summary><p class="en">What do you have to lose?</p></details></div>
+    <div class="q b-sun"><p class="ko">잃을 게 뭐가 있어요? 저는 친구에게 먹이지 못했고, 그 친구 장례식에 다녀왔습니다.</p><div class="meta"><span>Nelda</span><span class="heart">♥ 12</span></div><details><summary>원문 보기</summary><p class="en">What do you have to loose ? I couldn't get my friend to take it and I attended her funeral</p></details></div>
+    <div class="q b-sun"><p class="ko">할 수 있는 건 다 하세요. 필요한 만큼 돈을 쓰세요. 빨리 받으려면 카드로라도 긁으세요. 죽으면 상관없는 일이고, 살면 그 돈과 시간은 값어치가 있었던 거죠.</p><div class="meta"><span>Gary</span><span class="heart">♥ 0</span></div><details><summary>원문 보기</summary><p class="en">Do everything you can. Spend whatever you need. Charge it even for faster delivery. If you die it wont matter but if you live then it was worth the cost and time</p></details></div>
+    <div class="claude"><div class="tag">클로드의 한마디</div><p>“잃을 게 없다”는 말은 마음을 움직입니다. 다만 남은 몇 주에도 잃을 수 있는 것은 있습니다. 편안함, 먹고 마실 수 있는 힘, 지금 먹는 진통제와의 관계 같은 것들입니다.</p></div>
+  </div>
+
+  <div class="group rv">
+    <h3><span class="chip f-plum"></span>“기도하세요” <span class="cnt">171개</span></h3>
+    <div class="q b-plum"><p class="ko">어떤 상황에서든 최고는 “예수 그리스도”께 드리는 기도입니다! 그분은 여전히 죄를 용서하시고 병을 고치십니다!</p><div class="meta"><span>Nipper</span><span class="heart">♥ 799 · 전체 2위</span></div><details><summary>원문 보기</summary><p class="en">BEST IN EVERY CIRCUMSTANCE IS PRAYER TO "JESUS CHRIST"! He still forgives sin &amp; heals!</p></details></div>
+    <div class="q b-plum"><p class="ko">그분이 예수 그리스도를 알게 해 주세요.</p><div class="meta"><span>Beth</span><span class="heart">♥ 376</span></div><details><summary>원문 보기</summary><p class="en">Make sure they know Jesus Christ</p></details></div>
+    <div class="q b-plum"><p class="ko">우리 각자에게 얼마나 시간이 남았는지는 하나님만 아십니다. 그분이 우리를 본향으로 부르실 때까지요!</p><div class="meta"><span>Pat</span><span class="heart">♥ 159</span></div><details><summary>원문 보기</summary><p class="en">Only GOD knows how long each of has before HE calls us Home!</p></details></div>
+    <div class="claude"><div class="tag">클로드의 한마디</div><p>신앙의 위로는 많은 사람에게 큰 힘이 됩니다. 다만 이 갈래의 댓글 아래에서는 종교를 둘러싼 말다툼도 길게 이어졌습니다. 질문자의 원래 질문은 그 사이에 묻혀 버렸습니다.</p></div>
+  </div>
+
+  <div class="group rv">
+    <h3><span class="chip f-leaf"></span>“이것도 같이 드세요” <span class="cnt">209개</span></h3>
+    <div class="q b-leaf"><p class="ko">목숨을 걸고 싸우세요. 설탕과 탄수화물로 암을 먹여 살리지 말고, 이버멕틴과 고용량 비타민 D3(30,000 IU 이상 + K2)를 드세요. 저라면 단식도 하겠어요. 암을 굶기는 거죠! 몸이 나쁜 세포를 먹어 치우게 하세요. 유튜브에서 Eric Berg 박사를 보세요.</p><div class="meta"><span>Ws</span><span class="heart">♥ 390</span></div><details><summary>원문 보기</summary><p class="en">Fight for your life. Stop feeding the cancer with sugar and carbs and Take ivermectin and high dosages of vitamin d3 (30,000 iu or more + k2) , I would also fast too, starve the cancer! Allow your body to eat the bad cells. Watch dr Eric berg on YouTube</p></details></div>
+    <div class="q b-leaf"><p class="ko">설탕은 절대 안 돼요. 방부제 든 음식도 안 되고, 모두 신선한 채소로요. 처음엔 과일도 안 돼요. 지중해식 식단을 하시고, 당연히 살구씨, 이버멕틴, 사워솝 비터스도요. 생마늘 하루 2~3쪽. 브로콜리가 최고의 항암 식품이에요. 저는 4기 암이었는데 지금은 혈액검사, CT 모두 좋게 나왔어요.</p><div class="meta"><span>Kathy (3rd)</span><span class="heart">♥ 219</span></div><details><summary>원문 보기</summary><p class="en">No sugar at all. No preservative foods all fresh vegetables Not even fruit at first. Do Mediterranean diet and of course, apricot seeds ivermectin soursop bitters. Raw garlic, 2 to 3 cloves a day broccoli is the number one cancer fighter. I was stage four cancer and now all my blood work CAT scan everything came back good</p></details></div>
+    <div class="q b-leaf"><p class="ko">비타민 D 10,000 (K2와 함께) 매일, 비타민 C는 왕창, 이버멕틴과 펜벤다졸은 하루 2~3번, 사워솝과 에시악 차는 하루 두 번, 아연, 퀘르세틴. 절대 포기하지 마세요.</p><div class="meta"><span>Pamela</span><span class="heart">♥ 108</span></div><details><summary>원문 보기</summary><p class="en">10,000 mg of vitamin D with K2 daily / pound the vitamin C / use the ivermectin and the Fenben 2-3 Xs daily / add soursop and Essex tea twice a day / Zinc / Quercetin / Never give up</p></details></div>
+    <p style="font-size:16px;color:var(--ink2);margin:6px 0 0">→ 함께 권해진 물질 전체 목록은 <a href="#p4">‘넷’</a>에서 볼 수 있습니다.</p>
+  </div>
+
+  <div class="group rv">
+    <h3><span class="chip f-ink"></span>“의사가 정한 날짜는 믿지 마세요” <span class="cnt">95개</span></h3>
+    <div class="q b-ink"><p class="ko">사람에겐 유통기한이 없어요. 의사는 죽을 날짜를 절대 말해선 안 됩니다. 전해질과 비타민을 최적으로 유지하고, 매일 운동하고, 살려는 의지를 가지세요.</p><div class="meta"><span>Eliseo</span><span class="heart">♥ 4</span></div><details><summary>원문 보기</summary><p class="en">Human beings don't have expiration. Doctors should never give any date when you are dying. Make sure you have optimal electrolytes and vitsamins. Exercise everyday. Have the will to live</p></details></div>
+    <div class="q b-ink"><p class="ko">의사가 남은 시간을 말하면 그때가 새 의사를 찾을 때라고 들었어요. 저도 그렇게 믿어요. 저는 간호사예요.</p><div class="meta"><span>Terri</span><span class="heart">♥ 1</span></div><details><summary>원문 보기</summary><p class="en">EXACTLY and I was told if a dr tells you how long you have to live it’s Tim TO GET A NEW DOCTOR ... and I believe that and I am a nurse</p></details></div>
+    <div class="q b-ink"><p class="ko">현실은 이래요. 의사는 날짜를 틀릴 수 있어요. 의사는 결국 그럴듯한 약 장수일 뿐이고, 이런 상황에선 반드시 자연요법으로 가야 해요. 다른 방법을 시도해서 잃을 건 없어요.</p><div class="meta"><span>Rachael</span><span class="heart">♥ 3</span></div><details><summary>원문 보기</summary><p class="en">The reality is: - doctors can get things wrong, especially timelines - doctors are ultimately just glorified drug peddlers - this situation DEMANDS a holistic route - allopathy has continued to fail. There’s nothing to lose by trying other options</p></details></div>
+  </div>
+
+  <div class="group rv">
+    <h3><span class="chip f-sky"></span>“나도, 우리 가족도 좋아졌어요” <span class="cnt">58개</span></h3>
+    <div class="q b-sky"><p class="ko">2011년에 4개월 이하라고 했어요… 그런데 저 여기 있어요! 기존 치료는 전부 멈추고, 이버멕틴을 포함한 대체요법을 바로 시작하세요. 제 의견이지만 강력히 추천해요.</p><div class="meta"><span>Lawana</span><span class="heart">♥ 8</span></div><details><summary>원문 보기</summary><p class="en">Start now!! 2011 gave me 4 or less months…here I am! Stop conventional everything aside start alternative, including ivermectin immediately. That is my opinion but highly recommend.</p></details></div>
+    <div class="q b-sky"><p class="ko">남편이 2주 남았다고 했어요. 그래서 그 기회를 잡았죠. 절대 늦지 않아요. 지금 다행히 7년째 관해 상태예요.</p><div class="meta"><span>Mayra</span><span class="heart">♥ 0</span></div><details><summary>원문 보기</summary><p class="en">my husband had two weeks to live . so we took that chance. never to late. he is now 7 years in remission thankfully.</p></details></div>
+    <p style="font-size:16px;color:var(--ink2);margin:6px 0 0">→ 좋아졌다는 이야기와 그렇지 않았던 이야기는 <a href="#p3">‘셋’</a>에서 나란히 봅니다.</p>
+  </div>
+
+  <div class="group rv">
+    <h3><span class="chip f-clay"></span>조용한 소수: “늦었을 수도”, “어떤 상황인가요?” <span class="cnt">22개</span></h3>
+    <div class="q b-clay"><p class="ko">아니요. 하지만 늦었을 수도 있어요.</p><div class="meta"><span>Helen-Frances</span><span class="heart">♥ 0</span></div><details><summary>원문 보기</summary><p class="en">No but it might be too late</p></details></div>
+    <div class="q b-clay"><p class="ko">우선, 누구도 사람의 죽음을 예측할 수 없어요. 그래서 항암치료에 더해 허가 외 약을 쓰는 건 언제나 의사의 지도 아래 고려해야 해요. 환자가 견딜 수 있다면 드리는 게 낫겠지만, 지금 같은 상황에서 고용량은 권하지 않아요.</p><div class="meta"><span>Sudharshan</span><span class="heart">♥ 0</span></div><details><summary>원문 보기</summary><p class="en">Firstly, no one can predict someone’s death. So taking off label drugs in addition to Chemo should always be considered as per a physician guidance. Better to give him/her, if the patient can tolerate the medicine. High dose not recommended in your given circumstances.</p></details></div>
+    <div class="q b-clay"><p class="ko">어떤 암이세요? 얼마나 되셨어요? 어떤 치료를 받으셨어요?</p><div class="meta"><span>Bud</span><span class="heart">♥ 0</span></div><details><summary>원문 보기</summary><p class="en">What type of cancer do you have? How long have you had it? What treatment have you had?</p></details></div>
+    <div class="q b-clay"><p class="ko">이런 일을 겪고 계시다니 정말 마음이 아파요. 어떤 종류, 몇 기 암인지 여쭤봐도 될까요? 지금 치료를 받고 계신가요?</p><div class="meta"><span>She</span><span class="heart">♥ 0</span></div><details><summary>원문 보기</summary><p class="en">I’m so sorry you are going through this. May I ask what type and stage of cancer you have? Are you currently receiving any treatment?</p></details></div>
+    <div class="q b-clay"><p class="ko">저라면 화가 날 거예요, 제 고통을 늘린다면요. 편히 죽게 해 주세요.</p><div class="meta"><span>Charlie</span><span class="heart">♥ 0</span></div><details><summary>원문 보기</summary><p class="en">I would be mad if you lengthened my misery . Let me die in peace .</p></details></div>
+    <div class="claude"><div class="tag">클로드의 한마디</div><p>상황을 되물은 댓글과 신중한 댓글은 모두 공감 0개였습니다. 정작 다음 걸음에 꼭 필요한 질문이 가장 조용했습니다.</p></div>
+  </div>
+</section>
+
+<!-- PART 2 -->
+<section class="part" id="p2">
+  <span class="sec-no">둘</span>
+  <h2>가장 많이 공감받은 댓글 10개</h2>
+  <p class="intro">공감 7,511개 중 4,558개(61%)가 아래 10개에 몰렸습니다. 대부분 짧은 응원과 기도입니다.</p>
+  <ol class="rank rv">
+    <li><div class="txt"><span class="kind k-sun">응원</span>싸우고, 싸우고, 또 싸워요! 절대 포기하지 마세요!<small>Christy · ♥ 960</small></div></li>
+    <li><div class="txt"><span class="kind k-plum">신앙</span>어떤 상황에서든 최고는 예수 그리스도께 드리는 기도입니다!<small>Nipper · ♥ 799</small></div></li>
+    <li><div class="txt"><span class="kind k-sun">응원</span>잃을 게 뭐가 있나요?<small>Marvin · ♥ 720</small></div></li>
+    <li><div class="txt"><span class="kind k-sun">응원</span>절대 늦지 않았어요.<small>Linda · ♥ 504</small></div></li>
+    <li><div class="txt"><span class="kind k-leaf">물질</span>설탕·탄수화물 끊고, 이버멕틴과 고용량 비타민 D3, 단식까지.<small>Ws · ♥ 390</small></div></li>
+    <li><div class="txt"><span class="kind k-plum">신앙</span>그분이 예수 그리스도를 알게 해 주세요.<small>Beth · ♥ 376</small></div></li>
+    <li><div class="txt"><span class="kind k-sky">경험담</span>4주 남았다던 친구가 석 달째 좋아지고 있어요. (아래 ‘셋’ 참고)<small>Karen (3rd) · ♥ 246</small></div></li>
+    <li><div class="txt"><span class="kind k-leaf">물질</span>설탕 끊고, 살구씨·이버멕틴·사워솝·생마늘. 저는 4기였어요.<small>Kathy (3rd) · ♥ 219</small></div></li>
+    <li><div class="txt"><span class="kind k-ink">인물</span>William Makis 박사는 4기 암 환자도 고쳤어요.<small>Chris · ♥ 185</small></div></li>
+    <li><div class="txt"><span class="kind k-plum">신앙</span>얼마나 남았는지는 하나님만 아십니다!<small>Pat · ♥ 159</small></div></li>
+  </ol>
+</section>
+
+<!-- PART 3 -->
+<section class="part" id="p3">
+  <span class="sec-no">셋</span>
+  <h2>두 갈래의 경험담</h2>
+  <p class="intro">“나았다”는 이야기와 “그렇지 않았다”는 이야기가 같은 댓글창에 함께 있었습니다. 둘 다 옮깁니다.</p>
+
+  <div class="road up rv">
+    <h3>좋아졌다는 이야기</h3>
+    <div class="q b-leaf"><p class="ko">제 친구는 석 달 전에 4주 남았다는 말을 들었어요. 전이성 유방암이 뼈, 간, 담낭에 있었고, 항암이나 수술은 제안받지 못했어요. 유방 종양은 7월 10일 4.6cm에서 10월 1일 1.7cm가 됐어요. 담낭의 1.5cm 종양은 완전히 사라졌고, 간의 4.4cm 종양은 2.7cm가 됐어요. 간 종양 10개가 7개로 줄었어요. 통증은 10점 만점에 10이었는데 지금은 0이에요. 이버멕틴 12mg 3알을 주 7일 식사 30분 전에, 펜벤다졸 444mg 3알과 메벤다졸 200mg 3알을 식사와 함께 주 5일 두 달간 먹다가 2알로 줄였어요. 간 해독엔 TUDCA와 제올라이트 방울을 써요. 이제 종양이 줄었으니 항암을 하자고 하는데, 단호히 거절했어요. 목표는 삶의 질이에요.</p><div class="meta"><span>Karen (3rd)</span><span class="heart">♥ 246</span></div><details><summary>원문 보기</summary><p class="en">My friend had four weeks to live three months ago. Metastatic breast cancer in the bones, liver and gallbladder. No chemo or surgery was offered. Breast tumour was 4.6cm July 10th and now 1.7cm Oct 1st. A 1.5 cm tumour in the gallbladder is completely gone. A 4.4 cm tumour in the liver is now 2.7cm. There was 10 tumours in the liver and she is down to 7 of them. ... She was a 10/10 pain and is now a 0/10. She was taking 3 Ivermectin 12mg seven days a week 30 minutes before she eats. 3 Fenbenzadole 444mg and 3 menbenzadole 200mg with food 5 days a week for 2 months then dropped ... to 2 pills 5 days a week. ... Tudca and zeolite drops are what we use to detox the liver. She is on some other things also. ... They just offered her chemo now that things have shrunk. It is a hard no. Quality of life is the goal.</p></details></div>
+    <div class="q b-leaf"><p class="ko">엄마가 너무 약해져 응급실에 갔더니 모르핀을 열흘 치 주면서, 더 필요하면 아직 살아 있다는 경찰 확인서를 받아 오라고 했어요. 종양이 위로 가는 길을 막아서 입으로는 아무것도 못 드셨죠(배에 영양관). 이버멕틴과 메벤다졸을 거의 한 달 드렸더니, 지난 3일 동안 하루 250ml 정도 물을 입으로 드실 수 있게 됐어요. 아직 약하지만 큰 발전이에요.</p><div class="meta"><span>Giang</span><span class="heart">♥ 0</span></div><details><summary>원문 보기</summary><p class="en">We sent my Mom to emergency because she was so weak, they gave my Mom morphine for 10 days ... she couldn’t drink or eat anything by mouth because the tumour blocked the way to her stomach (she’s got a feeding tube on her abdomen). We put her on Ivermectin and Mebendazole for nearly 1 month now and she could drink water by mouth for the last 3 days, around 250ml/day, she’s still weak but that’s a great improvement. Fight! Don’t give up</p></details></div>
+    <div class="q b-leaf"><p class="ko">면역항암치료를 해도 생존 가능성이 4%라고 했어요. 지금 저는 사실상 암이 없어요. 치료 전에 이버멕틴을 먹었고, 도움이 됐다고 확신해요. 해가 되진 않았어요.</p><div class="meta"><span>Rob (2nd)</span><span class="heart">♥ 0</span></div><details><summary>원문 보기</summary><p class="en">I was given a 4% chance of survival even with immunotherapy. Here I am effectively cancer-free now. I took Ivermectin (aka Stromotol) before my treatment and I am sure it helped. It didn't do any harm.</p></details></div>
+    <div class="q b-leaf"><p class="ko">아내가 2025년 1월 난소암 진단을 받고 펜벤다졸 444mg을 먹었어요. 수술이 두 번 취소된 끝에 8월 14일에 수술을 받았는데, 암이 없는 것으로 나왔어요.</p><div class="meta"><span>Andy (2nd)</span><span class="heart">♥ 1</span></div><details><summary>원문 보기</summary><p class="en">My wife was diagnosed with ovarian cancer in January 2025 and went on to fenbendazole 444mgs and after 2 cancelled operations she finally had her operation on August 14th and was found clear of cancer ...</p></details></div>
+  </div>
+
+  <div class="road down rv">
+    <h3>그렇지 않았던 이야기</h3>
+    <div class="q b-clay"><p class="ko">2024년 12월부터 케토 식단에, 이버멕틴 96mg과 펜벤다졸 1g을 주 4일, 주 2일 단식도 했어요. PSA가 3.16 → 3.87 → 4.49 → 5.34 → 7.94 → 9.63 → 11.6으로 1년 만에 두 배가 넘었어요. PET 검사 세 번 모두 매번 나빠졌어요. 지금은 메벤다졸+이버멕틴으로 바꿨어요. 2026년 8월 10일 PSA는 16.4예요.</p><div class="meta"><span>Rick (2nd)</span><span class="heart">♥ 2</span></div><details><summary>원문 보기</summary><p class="en">... In Dec 2024 I went on a Keto diet. I take 96mg of ivermectin and 1 gram of Fenbendazole 4 days a week. I also take other supplements. I fast 2 days a week, sometimes more. My PSA went to 3.87 in march 2025 and 4.49 in June. ... September 5.34 and on December 31st of 2025 it was 7.94. April 2026 it went to 9.63. May 2026 it went to 11.6. So it has more than doubled in one year on the Ivermectin-Fenbendazole- Keto diet. I had 3 PSMA-PET scans in the last 3 years. Each time it is getting worst. I have just switched to Mebendazole-Ivermectin. ... Now on 8/10/26 my psa is 16.4</p></details></div>
+    <div class="q b-clay"><p class="ko">아빠도 먹었지만 그땐 이미 늦었어요. 혈액암이었으니 다른 암이라면 다를 수도 있겠죠.</p><div class="meta"><span>Antony</span><span class="heart">♥ 0</span></div><details><summary>원문 보기</summary><p class="en">Yes, most likely. My dad was taking them, but by then it was too late, but he had blood Cancer, so it may be different for someone dealing with other types</p></details></div>
+    <div class="q b-clay"><p class="ko">남편의 사촌이 먹어 왔는데 뼈로 퍼졌고, 막 호스피스에 들어갔어요. 이제 하나님께 달렸죠.</p><div class="meta"><span>Carla (2nd)</span><span class="heart">♥ 0</span></div><details><summary>원문 보기</summary><p class="en">... My husband's cousin has been on it but it's in the bones and he's just been put on hospice. So its up to God. ...</p></details></div>
+    <div class="q b-clay"><p class="ko">언니는 암이 배 전체로 퍼졌어요. 배액관을 달았고, 이제 호스피스에 가고 싶어 해요. 나흘째 얼음 조각 말고는 못 먹었어요. 암에는 어떤 것도 소용없어지는 시점이 온다고 생각해요. 언니는 의자에서 일어나지도 못해요.</p><div class="meta"><span>Janice (4th)</span><span class="heart">♥ 0</span></div><details><summary>원문 보기</summary><p class="en">... my sister’s cancer metastasized all in her belly ... now she wants to go in Hospice she hasn’t eaten except for ice chips ... I think it comes to a point in your cancer that’s too late for anything my sister can’t even get up off the chair.</p></details></div>
+    <div class="q b-clay"><p class="ko">엄마의 암은 퍼졌지만, 엄마는 좋은 삶을 살았다는 사실을 받아들였고 더는 싸울 힘이 없대요.</p><div class="meta"><span>Stephanie (2nd)</span><span class="heart">♥ 0</span></div><details><summary>원문 보기</summary><p class="en">I guess it would depend on how much you want to fight. My moms cancer has spread, but she has come to terms with the fact that she had a great life, and doesn’t have any fight left.</p></details></div>
+  </div>
+
+  <div class="claude rv"><div class="tag">클로드의 한마디</div><p>좋아졌다는 이야기를 자세히 보면 수술(Andy)이나 면역항암치료(Rob)가 함께였던 경우가 섞여 있습니다. 또 잘되지 않은 분들은 댓글을 남기기 어렵습니다. 그래서 댓글창에는 좋아진 이야기가 더 크게 남기 쉽습니다. 어느 쪽 이야기든 “그 밖에 어떤 치료를 받았나요?”를 함께 보면 그림이 더 선명해집니다.</p></div>
+</section>
+
+<!-- PART 4 -->
+<section class="part" id="p4">
+  <span class="sec-no">넷</span>
+  <h2>함께 권해진 것들</h2>
+  <p class="intro">댓글 1,366개 전체에서 언급된 횟수입니다. 이버멕틴 자체는 162번 언급됐습니다. 주장은 원문 그대로 옮겼고, 아래 ‘클로드의 한마디’는 AI 클로드의 의견일 뿐입니다. 판단은 여러분의 몫입니다.</p>
+  <div class="sub-list rv">
+    <div class="subst"><div class="head"><b>이버멕틴 “부작용 없다, 과다복용 안 된다”</b><span>여러 번</span></div><p class="claim">“이버멕틴의 좋은 점은 부작용이 없다는 거예요!” <i>— Sally ♥51</i><br>“드세요. 과다복용이 안 돼요.” <i>— Keri</i><br>반대로: “먹고 나서 경련을 네 번 했어요. 원인이 그거였다는 걸 나중에 알았죠.” <i>— Minella</i></p><div class="cl"><b>클로드의 한마디</b>부작용이 없는 약은 없습니다. 고용량에서는 어지럼, 혼란, 경련 같은 신경계 이상이 보고되어 있습니다.</div></div>
+    <div class="subst"><div class="head"><b>펜벤다졸</b><span>99회</span></div><p class="claim">“이버멕틴은 암세포를, 펜벤다졸은 종양을 노려요. 둘 다 체중보다 4분의 1쯤 더 먹어도 겁낼 것 없어요. 서방형이라 과다복용이 아주 어려워요.” <i>— Sherre</i></p><div class="cl"><b>클로드의 한마디</b>동물용 구충제로, 사람 암 연구는 대부분 실험실 단계입니다. 장기 복용 시 간 수치 상승이 보고된 바 있습니다.</div></div>
+    <div class="subst"><div class="head"><b>단식</b><span>51회</span></div><p class="claim">“병원에 입원해서 40일 물 단식을 하세요. 친구가 6개월 시한부였는데 42일 물 단식으로 완치됐어요. 몸이 약해서 단식 때문에 거의 죽을 뻔했지만요.” <i>— Jaco</i></p><div class="cl"><b>클로드의 한마디</b>말기 암 환자는 이미 근육과 체중이 빠지는 경우가 많습니다. 이때 단식은 몸을 더 빨리 약하게 할 수 있습니다.</div></div>
+    <div class="subst"><div class="head"><b>설탕·탄수화물 끊기</b><span>50회</span></div><p class="claim">“암은 설탕을 먹고 자라요. 설탕과 탄수화물로 암을 먹이지 마세요.” <i>— 여러 댓글</i><br>반대로: “설탕이 암을 먹인다는 건 실험실 접시에서나 맞는 얘기래요.” <i>— Lora</i></p><div class="cl"><b>클로드의 한마디</b>정상 세포도 포도당을 씁니다. 설탕을 끊는다고 암만 골라 굶길 수는 없고, 먹는 양이 줄면 체력이 함께 떨어집니다.</div></div>
+    <div class="subst"><div class="head"><b>비타민 D·C 고용량</b><span>37회</span></div><p class="claim">“비타민 D3 30,000 IU 이상 + K2” <i>— Ws ♥390</i><br>“비타민 C 50그램 정맥주사를 하면 살 거예요.” <i>— David (9th)</i></p><div class="cl"><b>클로드의 한마디</b>비타민 D를 고용량으로 오래 먹으면 혈중 칼슘이 지나치게 오를 수 있습니다.</div></div>
+    <div class="subst"><div class="head"><b>살구씨 · B17</b><span>30회</span></div><p class="claim">“처음엔 하루 3개였는데, 조사해 보고 20개, 지금은 하루 30개예요. 네, 아직 멀쩡히 살아 있어요.” <i>— Alena</i><br>“하루 3개만요. 너무 많이 먹으면 시안화물(청산가리)로 바뀌어요.” <i>— Sophiane</i></p><div class="cl"><b>클로드의 한마디</b>살구씨에는 몸속에서 청산가리 성분을 만드는 물질이 들어 있습니다. 1980년대 사람 대상 연구에서 효과가 확인되지 않았고 중독 위험이 있습니다.</div></div>
+    <div class="subst"><div class="head"><b>베이킹소다 (+ 당밀·꿀)</b><span>24회</span></div><p class="claim">“물 한 컵에 베이킹소다 1티스푼, 레몬즙과 당밀을 섞어 하루 두 번. 당밀은 트로이 목마예요. 암세포가 설탕에 끌려와 붙으면 베이킹소다가 튀어나와 죽여요.” <i>— Samuel</i></p><div class="cl"><b>클로드의 한마디</b>몸의 산도는 신장과 폐가 좁은 범위로 지킵니다. 베이킹소다를 많이 먹으면 혈액이 지나치게 알칼리성이 되거나 나트륨이 쌓이는 문제가 생길 수 있습니다.</div></div>
+    <div class="subst"><div class="head"><b>동물용 이버멕틴 페이스트</b><span>19회</span></div><p class="claim">“농장 용품점에서 말 페이스트를 사세요. 주사기에 50파운드 단위 눈금이 있어서 말처럼 체중대로 먹으면 돼요. 약국에서 사지 마세요. 의사와 약사는 암을 끝내서 돈 버는 게 아니니까요.” <i>— Sherre</i><br>“어떤 사람은 하루에 말 페이스트 주사기를 7개까지 썼대요.” <i>— Jakes</i></p><div class="cl"><b>클로드의 한마디</b>동물용 제품은 말·소의 체중에 맞춘 농도라 사람이 쓰면 과량이 되기 쉽고, 첨가물도 사람용으로 검증되지 않았습니다.</div></div>
+    <div class="subst"><div class="head"><b>메벤다졸</b><span>19회</span></div><p class="claim">“이버멕틴은 기생충을 죽이지만 알은 못 죽여요. 펜벤다졸과 메벤다졸이 죽여요.” <i>— John-Rita</i></p><div class="cl"><b>클로드의 한마디</b>사람용 구충제로, 일부 암에서 초기 연구가 진행됐습니다. 간 수치 상승을 지켜봐야 하는 약입니다.</div></div>
+    <div class="subst"><div class="head"><b>과산화수소 마시기</b><span>6회</span></div><p class="claim">“과산화수소와 베이킹소다를 마시세요. 몸의 산을 당장 중화해야 해요.” <i>— Brock</i><br>반대로: “WebMD는 과산화수소를 마시지 말래요. 꽤 위험할 수 있대요.” <i>— Samuel</i></p><div class="cl"><b>클로드의 한마디</b>과산화수소를 마시면 식도와 위에 손상이 생기고, 혈관에 기포가 생기는 심각한 사고도 보고되어 있습니다.</div></div>
+    <div class="subst"><div class="head"><b>MMS(이산화염소) · 소변 요법</b><span>각 4회</span></div><p class="claim">“MMS 이산화염소” <i>— Timmy</i><br>“Jim Humble의 책 ‘기적의 미네랄 용액’에 ‘1주일 남았을 때’ 프로토콜이 있어요!” <i>— Samantha</i><br>“21일 숙성한 소변에는 줄기세포가 1억 개 있어요. 저라면 소변 관장도 하겠어요.” <i>— Corey</i></p><div class="cl"><b>클로드의 한마디</b>MMS는 표백제 성분으로, 미국 FDA가 마시지 말라고 경고한 제품입니다. 소변 요법은 효과가 확인된 바 없습니다.</div></div>
+  </div>
+</section>
+
+<!-- PART 5 -->
+<section class="part" id="p5">
+  <span class="sec-no">다섯</span>
+  <h2>댓글창의 그늘</h2>
+  <p class="intro">이것도 해외 커뮤니티의 흐름입니다. 위로와 정보 사이로 판매, 사칭, 다툼이 함께 흘렀습니다.</p>
+  <div class="shadow rv">
+    <h3>① 파는 사람, 연락하라는 사람</h3>
+    <div class="q b-ink"><p class="ko">안녕하세요. 저는 Curovia Exim입니다. 저희 회사는 의약품을 다룹니다. 해외로 모든 종류의 약을 팝니다. 약이 필요하면 연락 주세요. 친구와 가족에게도 알려 주세요. (전화·텔레그램 번호 삭제)</p><div class="meta"><span>Curovia</span><span class="heart">♥ 0</span></div></div>
+    <div class="q b-ink"><p class="ko">“프로토콜과 공급처 정보가 모두 표에 있어요. 도움이 되길 바라요.” 같은 문장과 표 이미지를 ‘어디서 사요?’라는 질문마다 4번 반복해서 올렸습니다.</p><div class="meta"><span>Marcy</span><span class="heart">♥ 0</span></div></div>
+    <div class="q b-ink"><p class="ko">해 볼 용기가 있다면 몇 가지 제안할 수 있어요. 하지만 전적으로 본인 책임이에요. 관심 있으면 메시지 주세요.</p><div class="meta"><span>Philip</span><span class="heart">♥ 0</span></div></div>
+
+    <h3>② “Makis 박사”를 둘러싼 혼란</h3>
+    <div class="q b-ink"><p class="ko">1,500달러를 선불로 줘야만 해요. 여기 많은 사람들이 직접 겪은 지식을 무료로 알려 줄 거예요. 저희도 그렇게 도움받았어요. 돈을 안 냈다고 그가 우릴 외면한 뒤에요.</p><div class="meta"><span>JanDeana</span><span class="heart">♥ 76</span></div></div>
+    <div class="q b-ink"><p class="ko">조심하세요. 그를 사칭하며 가짜 계정을 만드는 사기꾼이 넘쳐나요.</p><div class="meta"><span>Ws</span><span class="heart">♥ 3</span></div></div>
+    <p style="font-size:16px;color:var(--ink2);margin:0 0 10px">같은 스레드에서 “그건 진짜 그의 페이지예요”, “아니에요, 그는 페이스북을 안 해요”, “그 이메일은 가짜 같아요”, “그게 맞는 이메일이에요”가 계속 엇갈렸습니다.</p>
+
+    <h3>③ 질문은 사라지고 남은 다툼</h3>
+    <div class="q b-ink"><p class="ko">여긴 종교 사이트가 아니에요. 이런 글은 정말 거북해요. 예수 이야기는 그만해 주세요.</p><div class="meta"><span>Sandra (2nd)</span><span class="heart">♥ 4</span></div></div>
+    <div class="q b-ink"><p class="ko">설교 말고, 그냥 질문에 답해 주면 안 될까요?</p><div class="meta"><span>Elizabeth (4th)</span><span class="heart">♥ 0</span></div></div>
+    <div class="q b-ink"><p class="ko">기도해서 얻는 건 아픈 무릎뿐이에요.</p><div class="meta"><span>Andrew</span><span class="heart">♥ 4</span></div></div>
+    <p style="font-size:16px;color:var(--ink2);margin:0">“지옥은 있다/없다”, “성인에게 기도하는 건 우상숭배다” 같은 논쟁이 여러 스레드에서 수십 개씩 이어졌고, 일부는 욕설로 번졌습니다.</p>
+  </div>
+</section>
+
+<!-- PART 6 -->
+<section class="part" id="p6">
+  <span class="sec-no">여섯</span>
+  <h2>우리라면 이렇게 물었을 거예요</h2>
+  <p class="intro">이 댓글창에서 가장 부족했던 것은 ‘질문’이었습니다. 아래 문장은 그대로 복사해서 쓰셔도 됩니다.</p>
+
+  <div class="copy rv"><div class="lbl">주치의에게</div><p>“가족이 남은 시간이 몇 주라고 들었습니다. 지금 상태(삼킴, 간 기능, 먹고 있는 진통제)에서 새로운 약을 더해도 괜찮은지 확인해 주실 수 있을까요?”</p><button type="button">복사하기</button></div>
+  <div class="copy rv"><div class="lbl">주치의에게</div><p>“지금 가장 중요한 것이 통증 조절과 편안함이라면, 꼭 해야 할 것과 하지 말아야 할 것은 무엇일까요?”</p><button type="button">복사하기</button></div>
+  <div class="copy rv"><div class="lbl">해외 커뮤니티에 물을 때</div><p>“암종은 ○○, ○기이고, 지금까지 ○○ 치료를 받았습니다. 지금은 ○○ 상태입니다. 비슷한 상황을 겪으신 분의 경험을 듣고 싶습니다.”</p><button type="button">복사하기</button></div>
+  <div class="copy rv"><div class="lbl">AI에게</div><p>“이 댓글들에 나온 주장 가운데, 사람을 대상으로 한 연구가 있는 것만 골라서 출처와 함께 알려 줘. 없는 것은 없다고 말해 줘.”</p><button type="button">복사하기</button></div>
+
+  <div class="try rv">
+    <h3>이것부터 해 보세요!</h3>
+    <p style="margin:0 0 10px">다음에 해외 댓글을 읽을 때, 이 세 가지만 확인해 보세요.</p>
+    <ol>
+      <li><b>누가 말했나요?</b> 본인 경험인가요, “누가 그랬대요”인가요?</li>
+      <li><b>다른 치료도 함께였나요?</b> 수술, 항암, 면역치료가 같이 있었나요?</li>
+      <li><b>그 뒤 소식이 있나요?</b> 몇 달, 몇 년 뒤의 이야기가 있나요?</li>
+    </ol>
+  </div>
+
+  <div class="safety rv">
+    <h3>꼭 기억해 주세요</h3>
+    <p>약을 먹을지, 함께 먹을지, 그만둘지는 <b>반드시 주치의와 함께</b> 정하셔야 합니다.</p>
+    <p>이 글의 댓글은 해외 사람들의 주장을 그대로 옮긴 것이며, 치료 권고가 아닙니다. 이버멕틴을 비롯해 이 글에 나온 약 이름은 모두 <b>예시</b>입니다.</p>
+    <p style="margin:0">‘클로드의 한마디’는 AI 클로드의 의견일 뿐, 의학적 판정이 아닙니다. AI는 ‘결정’을 대신하지 않습니다. 주치의에게 가져갈 <b>더 나은 질문</b>을 함께 준비할 뿐입니다.</p>
+  </div>
+</section>
+
+<p class="closing rv">“포기하지 마세요”라는 수백 개의 목소리,<br>그 진심은 진짜입니다.<br>우리는 거기에 <b>“지금 어떤 상황이세요?”</b><br>한 줄을 더하는 커뮤니티가 되면 좋겠습니다.</p>
+
+<footer>
+  <p><b>원본</b> · Facebook “Ivermectin and Cancer Discussion Group”, Darryl의 글(2026.10.6). 2026년 10월 14일 기준으로 내보낸 댓글 1,366개(질문에 바로 단 댓글 932 · 답글 434)를 분석했습니다.</p>
+  <p><b>세는 방법</b> · 댓글 속 단어를 기준으로 갈래를 나눴고, 한 댓글이 여러 갈래에 속할 수 있습니다. 숫자는 흐름을 보기 위한 근사치입니다. 더 자세한 방법은 전문가용 문서에 있습니다.</p>
+  <p><b>이름</b> · 성은 지우고 이름만 표시했습니다. 같은 이름이 여러 명이면 (2nd), (3rd)로 구분했습니다. 공적 인물의 이름은 그대로 두었습니다.</p>
+  <p><b>번역</b> · 댓글 번역과 ‘클로드의 한마디’는 AI 클로드가 작성했습니다.</p>
+</footer>
+
+</div>
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els = document.querySelectorAll('.rv, #bars');
+  if (!('IntersectionObserver' in window) || reduce) {
+    document.documentElement.classList.add('no-io');
+    els.forEach(function(e){ e.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(e){ io.observe(e); });
+  }
+  document.querySelectorAll('.copy button').forEach(function(b){
+    b.addEventListener('click', function(){
+      var t = b.parentNode.querySelector('p').innerText.replace(/^“|”$/g,'');
+      var done = function(){ b.textContent = '복사했어요 ✓'; b.classList.add('done'); setTimeout(function(){ b.textContent='복사하기'; b.classList.remove('done'); }, 1800); };
+      if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(done, done); }
+      else { var ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy');}catch(e){} document.body.removeChild(ta); done(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>

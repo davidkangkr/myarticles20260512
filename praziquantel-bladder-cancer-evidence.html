@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>프라지콴텔로 방광암을 예방할 수 있나 — 근거의 강도 점검</title>
+<style>
+:root{
+  --bg:#faf8f4; --card:#ffffff; --ink:#2b2b2b; --sub:#6b6b6b; --line:#e5dfd3;
+  --teal:#0f5e5e; --teal-soft:#e3efee; --gold:#b45309; --gold-soft:#fdf0dc;
+  --sage:#5b7f5b; --sage-soft:#e9f0e6; --red:#b91c1c; --red-soft:#fdecec;
+  --purple:#6d28a8; --purple-soft:#f2e9fb; --slate:#475569; --slate-soft:#eef2f7;
+  --tint:#fcfbf8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  font-size:17px;line-height:1.72;padding:0 0 60px;word-break:keep-all;overflow-wrap:break-word}
+.wrap{max-width:780px;margin:0 auto;padding:0 16px}
+a{color:var(--teal);word-break:break-all}
+b,strong{color:#111;font-weight:700}
+
+header{background:linear-gradient(135deg,#0f5e5e 0%,#146b6b 52%,#5b7f5b 100%);color:#fff;padding:38px 16px 30px;text-align:center}
+header .inner{max-width:780px;margin:0 auto}
+header .tag{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:4px 14px;font-size:13px;margin-bottom:12px;letter-spacing:.3px}
+header h1{font-size:23px;line-height:1.4;font-weight:800;margin-bottom:10px}
+header .sub{font-size:15px;opacity:.94;line-height:1.55}
+.meta{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-size:14px;color:var(--sub);margin-top:14px;text-align:left;box-shadow:0 1px 3px rgba(0,0,0,.05);line-height:1.6}
+.meta b,.meta i{color:var(--ink)}
+.meta .lbl{display:block;font-weight:700;color:var(--teal);margin-bottom:4px}
+.notice{font-size:13px;opacity:.9;margin-top:12px}
+.notice b{color:#fff}
+
+.toc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-top:22px;font-size:15px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.toc b{display:block;color:var(--teal);margin-bottom:6px}
+.toc ol{margin:0 0 0 22px;color:var(--sub)}
+.toc li{margin-bottom:3px}
+.toc a{color:var(--ink);text-decoration:none;word-break:keep-all}
+
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 20px;margin-top:22px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+h2{font-size:19px;color:var(--teal);font-weight:800;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--teal-soft);line-height:1.4}
+h2 .n{display:inline-block;background:var(--teal);color:#fff;border-radius:6px;font-size:13px;padding:1px 8px;margin-right:8px;vertical-align:middle}
+h3{font-size:16px;color:var(--gold);font-weight:700;margin:18px 0 8px}
+h4{font-size:15px;color:var(--ink);font-weight:700;margin:0 0 6px}
+p{margin-bottom:10px}
+ul,ol{margin:8px 0 12px 22px}
+li{margin-bottom:6px}
+
+/* summary */
+.oneline{background:var(--teal-soft);border-left:4px solid var(--teal);border-radius:10px;padding:13px 15px;font-size:16.5px;line-height:1.6;margin-bottom:12px}
+.oneline b{color:var(--teal)}
+.verdict{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.vbox{border-radius:12px;padding:14px;text-align:center;border:1px solid var(--line)}
+.vbox .q{font-size:13px;color:var(--sub);margin-bottom:4px}
+.vbox .a{font-size:21px;font-weight:800;line-height:1.3}
+.vbox .d{font-size:13px;color:#444;margin-top:6px;line-height:1.5}
+.vbox.ok{background:var(--sage-soft);border-color:#c4d8c0}.vbox.ok .a{color:var(--sage)}
+.vbox.no{background:var(--gold-soft);border-color:#f0d5a8}.vbox.no .a{color:var(--gold)}
+
+.call{border-radius:10px;padding:13px 15px;margin:10px 0;font-size:15.5px;border-left:4px solid var(--teal);background:var(--teal-soft)}
+.call h4{margin-bottom:6px}
+.call p:last-child,.call ul:last-child{margin-bottom:0}
+.call.green{background:var(--sage-soft);border-left-color:var(--sage)}
+.call.amber{background:var(--gold-soft);border-left-color:var(--gold)}
+.call.red{background:var(--red-soft);border-left-color:var(--red)}
+.call.purple{background:var(--purple-soft);border-left-color:var(--purple)}
+
+/* evidence-level badges */
+.ev{display:inline-block;font-size:12px;font-weight:700;border-radius:5px;padding:0 7px;white-space:nowrap;vertical-align:.08em;line-height:1.6;margin-right:3px}
+.ev.mech{background:var(--purple-soft);color:var(--purple);border:1px solid #dcc8f0}
+.ev.ani{background:var(--slate-soft);color:var(--slate);border:1px solid #cdd7e3}
+.ev.case{background:#f5f2ec;color:#7a5a2a;border:1px solid #e3d6bf}
+.ev.eco{background:var(--gold-soft);color:var(--gold);border:1px solid #f0d5a8}
+.ev.cc{background:var(--teal-soft);color:var(--teal);border:1px solid #bcd8d5}
+.ev.coh{background:var(--sage-soft);color:var(--sage);border:1px solid #c4d8c0}
+.ev.rct{background:var(--red-soft);color:var(--red);border:1px solid #f2c4c4}
+.ev.inf{background:#fff;color:var(--sub);border:1px dashed #bbb}
+.legend{display:flex;flex-wrap:wrap;gap:6px 8px;margin:6px 0 4px}
+
+/* evidence ladder */
+.ladder{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:12px 0}
+.lrow{display:grid;grid-template-columns:1.4fr 1fr 1fr;border-bottom:1px solid var(--line);font-size:14.5px}
+.lrow:last-child{border-bottom:none}
+.lrow>div{padding:9px 10px;display:flex;align-items:center;gap:6px}
+.lrow.head{background:var(--teal-soft);color:var(--teal);font-weight:700;font-size:13.5px}
+.lrow .lv{font-weight:700}
+.lrow .lv small{display:block;font-weight:400;color:var(--sub);font-size:12px}
+.mark{font-weight:800;font-size:13.5px;line-height:1.35}
+.mark.y{color:var(--sage)}.mark.p{color:var(--gold)}.mark.x{color:var(--red)}
+.lrow:nth-child(even):not(.head){background:var(--tint)}
+.ladder-note{font-size:12.5px;color:var(--sub);margin-top:-4px}
+
+/* flow chart */
+.flow{display:flex;flex-direction:column;align-items:stretch;margin:14px 0}
+.node{background:var(--tint);border:1px solid var(--line);border-left:5px solid var(--teal);border-radius:10px;padding:10px 13px;font-size:15px}
+.node .t{font-weight:800;color:var(--ink)}
+.node .s{font-size:13.5px;color:#555;margin-top:2px;line-height:1.5}
+.node.start{border-left-color:var(--slate);background:var(--slate-soft)}
+.node.end{border-left-color:var(--red);background:var(--red-soft)}
+.node.mid{border-left-color:var(--gold)}
+.arrow{align-self:center;color:var(--teal);font-size:18px;line-height:1;margin:3px 0;font-weight:800}
+.branch{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.branch .node{border-left-color:var(--purple)}
+
+/* broken chain */
+.chain{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:6px;margin:14px 0;text-align:center}
+.link{border-radius:10px;padding:12px 8px;font-size:14px;font-weight:700;line-height:1.4}
+.link small{display:block;font-weight:400;font-size:12px;margin-top:3px}
+.link.a{background:var(--slate-soft);color:var(--slate)}
+.link.b{background:var(--sage-soft);color:var(--sage)}
+.link.c{background:var(--gold-soft);color:var(--gold);border:2px dashed var(--gold)}
+.con{font-size:12px;font-weight:700;line-height:1.3}
+.con.ok{color:var(--sage)}.con.no{color:var(--gold)}
+.con span{display:block;font-size:20px}
+
+/* bar chart */
+.bars{background:var(--tint);border:1px solid var(--line);border-radius:10px;padding:14px;margin:12px 0}
+.bars .ttl{font-weight:700;font-size:14.5px;margin-bottom:10px;color:var(--ink)}
+.grp{margin-bottom:12px}
+.grp:last-of-type{margin-bottom:4px}
+.grp .gl{font-size:13px;color:var(--sub);margin-bottom:4px;font-weight:700}
+.bar{display:grid;grid-template-columns:5.6rem 1fr 3.2rem;align-items:center;gap:8px;font-size:13px;margin:3px 0}
+.bar .tr{background:#ece7dc;border-radius:4px;height:14px;overflow:hidden}
+.bar .fl{height:100%;border-radius:4px}
+.fl.scc{background:var(--red)}.fl.tcc{background:var(--teal)}.fl.bil{background:var(--gold)}
+.bar .v{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.bars .src{font-size:12px;color:var(--sub);margin-top:8px;line-height:1.5}
+
+/* timeline */
+.tl{position:relative;margin:14px 0 6px;padding-left:22px}
+.tl::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--teal-soft)}
+.ti{position:relative;margin-bottom:12px;font-size:14.5px}
+.ti::before{content:"";position:absolute;left:-20px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--teal);border:2px solid #fff;box-shadow:0 0 0 1px var(--teal)}
+.ti.pzq::before{background:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.ti.res::before{background:var(--red);box-shadow:0 0 0 1px var(--red)}
+.ti .y{font-weight:800;color:var(--teal);margin-right:6px}
+.ti.pzq .y{color:var(--gold)}.ti.res .y{color:var(--red)}
+.ti .d{color:#333}
+
+/* compare cards */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.cardx{background:var(--tint);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:14.5px}
+.cardx h4{color:var(--teal)}
+.cardx.g{border-top:4px solid var(--sage)}.cardx.g h4{color:var(--sage)}
+.cardx.o{border-top:4px solid var(--gold)}.cardx.o h4{color:var(--gold)}
+.cardx ul{margin-bottom:0}
+
+/* factor table */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:440px}
+th,td{border:1px solid var(--line);padding:8px 9px;text-align:left;vertical-align:top}
+th{background:var(--teal-soft);color:var(--teal);font-weight:700;white-space:nowrap}
+tr:nth-child(even) td{background:var(--tint)}
+.scroll-hint{font-size:12.5px;color:var(--sub);margin:-4px 0 10px}
+
+/* bottom line */
+.bl{display:grid;grid-template-columns:1fr;gap:10px;margin:12px 0}
+.blc{border-radius:10px;padding:13px 15px;font-size:15px}
+.blc h4{font-size:16px;margin-bottom:6px}
+.blc ul{margin:4px 0 0 20px}
+.blc.a{background:var(--sage-soft);border-left:5px solid var(--sage)}.blc.a h4{color:var(--sage)}
+.blc.b{background:var(--gold-soft);border-left:5px solid var(--gold)}.blc.b h4{color:var(--gold)}
+.blc.c{background:var(--slate-soft);border-left:5px solid var(--slate)}.blc.c h4{color:var(--slate)}
+
+/* faq */
+details{border:1px solid var(--line);border-radius:10px;margin:8px 0;overflow:hidden;background:var(--card)}
+summary{cursor:pointer;padding:11px 14px 11px 40px;font-weight:700;color:var(--teal);font-size:15.5px;list-style:none;position:relative;display:flex;justify-content:space-between;gap:8px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"Q";position:absolute;left:14px;top:14px;background:var(--teal);color:#fff;font-size:11px;width:16px;height:16px;border-radius:4px;text-align:center;line-height:16px}
+summary::after{content:"＋";color:var(--sub);flex:none}
+details[open] summary::after{content:"－"}
+details .a{padding:0 14px 12px 40px;font-size:15px;color:#333}
+
+.honest{font-size:14px;color:var(--sub);margin-top:26px;padding:16px;background:#f5f2ec;border-radius:10px;line-height:1.6}
+.honest b{color:var(--ink)}
+.honest ul{margin-bottom:0}
+.srcs li{font-size:14px;margin-bottom:5px}
+footer{font-size:13px;color:var(--sub);margin-top:14px;text-align:center;line-height:1.7}
+footer b{color:var(--ink)}
+.print-btn{display:inline-block;margin-top:10px;font:inherit;font-size:13px;font-weight:600;color:var(--teal);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 18px;cursor:pointer}
+
+@media(max-width:520px){
+  body{font-size:16px}
+  section{padding:18px 15px}
+  header h1{font-size:20px}
+  .verdict,.two,.branch{grid-template-columns:1fr}
+  .lrow{font-size:13px}
+  .lrow>div{padding:8px 7px}
+  .chain{grid-template-columns:1fr;gap:4px}
+  .con span{transform:rotate(90deg);display:inline-block}
+  table{font-size:13px}
+  th,td{padding:6px 7px}
+}
+@media print{
+  body{background:#fff;font-size:11px}
+  header{background:#fff;color:#000;border-bottom:2px solid var(--teal)}
+  header .tag{border-color:#999;background:#fff}
+  .notice b{color:#000}
+  .print-btn,.toc{display:none}
+  details .a{display:block}
+  section{page-break-inside:avoid;box-shadow:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="inner">
+  <span class="tag">근거 점검 · 약물 재창출 · 2026</span>
+  <h1>프라지콴텔로 방광암을<br>예방할 수 있을까?</h1>
+  <p class="sub">“빌하르츠 주혈흡충을 없애면 방광암이 줄어든다”는 주장,<br>근거는 어디까지 단단한가.</p>
+  <div class="meta">
+    <span class="lbl">점검 대상 주장</span>
+    Osman 외 2026 리뷰(<i>Journal of Cancer Research Updates</i>)는 프라지콴텔로 <i>S. haematobium</i>을 제거하는 것이 방광 편평세포암에 대한 “일관되고 인과적 근거를 갖춘 예방책”이라고 서술합니다.
+    <div style="margin-top:8px;font-size:13px">※ 해설자는 이 리뷰 원문을 찾지 못했습니다. 그래서 리뷰를 직접 평가하는 대신, 주장이 기대는 <b>1차 근거(IARC·WHO·PubMed 문헌)</b>를 하나씩 점검했습니다.</div>
+  </div>
+  <p class="notice">※ 이 문서는 <b>일반인을 위한 근거 해설</b>이며 의료 조언이 아닙니다.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc">
+  <b>목차</b>
+  <ol>
+    <li><a href="#s0">30초 요약</a></li>
+    <li><a href="#s1">근거의 사다리 — 무엇이 입증되었나</a></li>
+    <li><a href="#s2">인과: 주혈흡충은 정말 방광암을 일으키나</a></li>
+    <li><a href="#s3">예방: 프라지콴텔이 암을 줄였다는 직접 증거</a></li>
+    <li><a href="#s4">이집트 사례: 무엇이 변화를 만들었나</a></li>
+    <li><a href="#s5">시기: 늦게 치료해도 효과가 있나</a></li>
+    <li><a href="#s6">다른 유행 지역(사하라 이남 아프리카)</a></li>
+    <li><a href="#s7">결론 — 입증 / 추론 / 미지</a></li>
+    <li><a href="#s8">예상 질문 & 출처</a></li>
+  </ol>
+</nav>
+
+<!-- 0 -->
+<section id="s0">
+  <h2><span class="n">0</span>30초 요약</h2>
+  <div class="oneline">한 문장으로: <b>“주혈흡충이 방광암을 일으킨다”는 입증됐지만, “프라지콴텔을 먹으면 방광암이 줄어든다”는 직접 검증된 적이 없습니다.</b> 리뷰의 “인과적 근거를 갖춘”이라는 표현은 <b>논리의 구조</b>를 설명할 뿐, 효과가 증명됐다는 뜻은 아닙니다.</div>
+  <div class="verdict">
+    <div class="vbox ok"><div class="q">질문 ① 감염이 방광암을 일으키나?</div><div class="a">✅ 입증</div><div class="d">IARC 1군 발암원. 환자-대조군 연구, 지역 비교, 기전 근거가 일관됨</div></div>
+    <div class="vbox no"><div class="q">질문 ② 프라지콴텔이 방광암을 줄이나?</div><div class="a">❓ 미검증</div><div class="d">치료군 vs 미치료군 방광암 발생을 비교한 코호트·무작위시험 <b>0건</b></div></div>
+  </div>
+  <div class="call amber"><h4>⚠ 가장 흔한 오해</h4>이집트에서 감염이 줄고 편평세포암이 줄어든 것은 사실입니다. 그러나 그 기간에는 <b>달팽이 박멸, 상수도, 이전 약(메트리포네이트), 흡연 증가, 진단 방식 변화</b>가 함께 일어났습니다. 그래서 “프라지콴텔 덕분”이라고 따로 떼어 말할 수 없습니다.</div>
+</section>
+
+<!-- 1 -->
+<section id="s1">
+  <h2><span class="n">1</span>근거의 사다리 — 무엇이 입증되었나</h2>
+  <p>의학 근거에는 강도의 순서가 있습니다. 아래로 갈수록 약하고, 위로 갈수록 강합니다. 같은 사다리에서 <b>“인과”</b>와 <b>“예방”</b>이 각각 어디까지 올라왔는지 비교하면 차이가 한눈에 보입니다.</p>
+  <div class="legend">
+    <span class="ev rct">무작위시험</span><span class="ev coh">코호트</span><span class="ev cc">환자-대조군</span><span class="ev eco">생태학/시계열</span><span class="ev case">증례 보고</span><span class="ev ani">동물</span><span class="ev mech">기전</span><span class="ev inf">해설자 추론</span>
+  </div>
+  <div class="ladder">
+    <div class="lrow head"><div>근거 수준 (강함 ↑)</div><div>감염 → 방광암 (인과)</div><div>프라지콴텔 → 방광암↓ (예방)</div></div>
+    <div class="lrow"><div class="lv">무작위시험<small>약을 무작위로 배정해 비교</small></div><div><span class="mark x">✗ 없음</span></div><div><span class="mark x">✗ 없음</span></div></div>
+    <div class="lrow"><div class="lv">코호트<small>사람들을 오래 추적</small></div><div><span class="mark x">✗ 없음</span></div><div><span class="mark x">✗ 없음</span></div></div>
+    <div class="lrow"><div class="lv">환자-대조군<small>암 환자와 비환자의 과거 비교</small></div><div><span class="mark y">✓ 다수<br><small style="font-weight:400">상대위험 약 2–14</small></span></div><div><span class="mark x">✗ 없음</span></div></div>
+    <div class="lrow"><div class="lv">생태학/시계열<small>지역·시기별 비교</small></div><div><span class="mark y">✓ 일관됨</span></div><div><span class="mark p">△ 이집트 추세<br><small style="font-weight:400">교란 많음</small></span></div></div>
+    <div class="lrow"><div class="lv">증례 보고<small>종양 속 알 발견</small></div><div><span class="mark y">✓ 다수</span></div><div><span class="mark x">—</span></div></div>
+    <div class="lrow"><div class="lv">동물<small>쥐·영장류</small></div><div><span class="mark p">△ 제한적</span></div><div><span class="mark x">✗ 없음</span></div></div>
+    <div class="lrow"><div class="lv">기전<small>세포·분자 수준</small></div><div><span class="mark y">✓ 그럴듯함</span></div><div><span class="mark p">△ 대리지표만<br><small style="font-weight:400">병변 호전 등</small></span></div></div>
+  </div>
+  <p class="ladder-note">✓ 근거 있음 · △ 부분적·약함 · ✗ 없음. 인과 쪽은 IARC 1994 평가, 예방 쪽은 해설자가 확인한 문헌 기준입니다.</p>
+  <div class="call"><h4>읽는 법</h4>인과 쪽은 <b>환자-대조군</b> 단계까지 탄탄히 올라와 있습니다. 반면 예방 쪽은 <b>이집트의 시계열 추세</b>(생태학 수준) 하나에 거의 전부를 기대고 있습니다. 두 주장의 근거 높이가 다릅니다.</div>
+</section>
+
+<!-- 2 -->
+<section id="s2">
+  <h2><span class="n">2</span>인과: 주혈흡충은 정말 방광암을 일으키나</h2>
+
+  <h3>IARC는 왜 1군으로 분류했나</h3>
+  <p>국제암연구소(IARC)는 1994년 Monograph 61권에서 <i>S. haematobium</i>을 <b>1군 발암원(인체 발암 확실)</b>으로 분류했습니다. 사람 근거는 “충분”, 동물 근거는 “제한적”으로 평가했습니다. 2012년 100B권에서도 이 분류가 유지됐습니다.</p>
+  <ul>
+    <li><span class="ev eco">생태학</span> 감염이 흔한 지역일수록 방광암, 특히 편평세포암이 많았습니다. 예를 들어 전체 암 중 방광암 비율이 이집트 남성에서 알제리 남성보다 약 10배 높았습니다.</li>
+    <li><span class="ev case">증례</span> 방광암 조직에서 주혈흡충 알이 발견된 사례가 다수 보고됐습니다.</li>
+    <li><span class="ev cc">환자-대조군</span> 7개 연구 중 6개에서 유의한 연관이 나왔고, 상대위험은 약 2–14였습니다. 모두 병원 기반 연구였고, 흡연을 고려한 연구는 1개뿐이었습니다. 그래도 IARC는 연관이 강해서 교란만으로는 설명되기 어렵다고 판단했습니다.</li>
+    <li><span class="ev coh">코호트</span> 코호트 연구는 <b>없습니다.</b></li>
+  </ul>
+  <div class="call purple"><h4>🔍 흡연을 보정하면 연관은 더 작아집니다</h4><span class="ev cc">환자-대조군</span> 알렉산드리아 연구(Bedwani 1998, 환자 190명·대조군 187명)는 흡연과 직업을 보정했습니다. 그 결과 요로 주혈흡충증 병력의 오즈비는 <b>1.72(95% CI 1.0–2.9)</b>로 “유의하지만 크지 않은” 연관이었습니다.
+    <ul>
+      <li>15세 이전에 감염된 경우 오즈비 3.3</li>
+      <li>감염 후 35년 이상 지난 경우 오즈비 3.0</li>
+    </ul>
+    → <b>어릴 때부터, 오래 감염될수록</b> 위험이 커지는 방향입니다. 저자들은 이 지역 방광암의 약 16%가 주혈흡충증과 관련된다고 추정했습니다.</div>
+
+  <h3>제안된 기전 — 흐름도</h3>
+  <p>알이 방광벽에 박힌 뒤 암이 되기까지 거론되는 경로입니다. 각 단계에 근거 수준을 표시했습니다.</p>
+  <div class="flow">
+    <div class="node start"><div class="t">① 감염 — 물속 유충이 피부로 침투</div><div class="s">성충이 방광 주변 정맥에 자리 잡고 수년간 알을 낳음</div></div>
+    <div class="arrow">↓</div>
+    <div class="node"><div class="t">② 알이 방광벽에 박힘 <span class="ev case">증례</span><span class="ev ani">동물</span></div><div class="s">배출되지 못한 알 주위에 육아종(염증 덩어리)이 생김</div></div>
+    <div class="arrow">↓</div>
+    <div class="node"><div class="t">③ 만성 염증 · 섬유화 <span class="ev mech">기전</span></div><div class="s">조직이 손상과 재생을 수십 년간 반복함</div></div>
+    <div class="arrow">↓</div>
+    <div class="branch">
+      <div class="node"><div class="t">④-a 요로 폐색 → 소변 정체 → 2차 세균 감염 <span class="ev case">증례</span></div><div class="s">반복 세균 감염은 주혈흡충 없이도 편평세포암과 연관됨</div></div>
+      <div class="node"><div class="t">④-b 니트로사민 · 산화질소 <span class="ev mech">기전</span><span class="ev ani">동물</span></div><div class="s">환자 소변에 돌연변이 유발 물질 증가. 개코원숭이에서 니트로사민과 감염이 겹치면 종양 증가</div></div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="node mid"><div class="t">⑤ 편평상피화생 <span class="ev case">증례</span></div><div class="s">방광 내벽이 피부 같은 편평세포로 바뀜. 감염 환자에서 편평세포암이 많은 이유로 거론</div></div>
+    <div class="arrow">↓</div>
+    <div class="node mid"><div class="t">⑥ p53 유전자 변이 <span class="ev mech">기전</span></div><div class="s">이집트 종양 92개 분석: 주혈흡충 관련 암에서 CpG 위치 변이가 더 많음(18/34 vs 25/103, P=0.003). 저자들은 염증성 산화질소를 원인으로 제안</div></div>
+    <div class="arrow">↓</div>
+    <div class="node end"><div class="t">⑦ 방광 편평세포암 (SCC)</div><div class="s">보통 수십 년의 잠복기를 거쳐 비교적 젊은 나이에 발생</div></div>
+  </div>
+  <div class="call amber"><h4>⚠ 기전 근거의 한계</h4>동물 모델은 실제 감염을 잘 재현하지 못합니다. 쥐 방광에 알을 한 번 주사하는 모델(Fu 외)은 과증식까지는 보이지만, 수십 년간 계속 알을 낳는 사람 감염과는 다릅니다. 한 리뷰(Frontiers in Medicine 2018)는 주혈흡충이 암에 <b>기여하지만 단독으로는 충분하지 않을 가능성</b>이 높다고 정리합니다.</div>
+</section>
+
+<!-- 3 -->
+<section id="s3">
+  <h2><span class="n">3</span>예방: 프라지콴텔이 암을 줄였다는 직접 증거</h2>
+  <div class="oneline"><b>없습니다.</b> 프라지콴텔 치료를 받은 사람과 받지 않은 사람의 방광암 발생률을 비교한 코호트 연구나 무작위시험은 해설자가 찾은 범위에서 <b>한 건도 없습니다.</b> 검토한 리뷰들도 그런 연구를 인용하지 않습니다.</div>
+
+  <h3>주장의 논리 구조 — 끊어진 고리</h3>
+  <div class="chain">
+    <div class="link a">프라지콴텔 복용</div>
+    <div class="con ok"><span>→</span>✅ 입증</div>
+    <div class="link b">감염 제거<small>충·알 감소</small></div>
+    <div class="con no"><span>⇢</span>❓ 미검증</div>
+    <div class="link c">방광암 감소<small>직접 측정 없음</small></div>
+  </div>
+  <p>첫 번째 화살표는 확실합니다. 프라지콴텔은 감염을 치료합니다. 두 번째 화살표는 “감염이 암을 일으키니 감염을 없애면 암도 줄 것”이라는 <b>추론</b>입니다. 합리적인 추론이지만, 실제로 측정된 효과는 아닙니다.</p>
+
+  <h3>그럼 무엇이 있나 — 간접 근거</h3>
+  <ul>
+    <li><span class="ev eco">시계열</span> 주로 이집트의 인구 수준 추세입니다(4장).</li>
+    <li><span class="ev inf">대리지표</span> 치료 후 초음파상 방광 병변이 호전되었다는 소규모 연구(5장), 치료 후 염색체 손상이 줄었다는 소규모 연구가 있습니다.</li>
+  </ul>
+  <div class="call red"><h4>대리지표 ≠ 암 감소</h4>병변 호전이나 염색체 손상 감소가 실제로 <b>암 발생 감소로 이어지는지는 검증되지 않았습니다.</b> 중간 지표가 좋아져도 최종 결과(암)는 따로 확인해야 합니다.</div>
+</section>
+
+<!-- 4 -->
+<section id="s4">
+  <h2><span class="n">4</span>이집트 사례: 무엇이 변화를 만들었나</h2>
+
+  <h3>무엇이 바뀌었나 <span class="ev eco">시계열</span></h3>
+  <div class="bars">
+    <div class="ttl">카이로 국립암연구소 방광암 9,843명의 조직형 변화</div>
+    <div class="grp">
+      <div class="gl">편평세포암 (SCC) — 주혈흡충 관련형</div>
+      <div class="bar"><span>1970–74</span><span class="tr"><span class="fl scc" style="width:75.9%"></span></span><span class="v">75.9%</span></div>
+      <div class="bar"><span>2003–07</span><span class="tr"><span class="fl scc" style="width:28.4%"></span></span><span class="v">28.4%</span></div>
+    </div>
+    <div class="grp">
+      <div class="gl">요로상피암 (TCC) — 흡연·화학물질 관련형</div>
+      <div class="bar"><span>1970–74</span><span class="tr"><span class="fl tcc" style="width:16%"></span></span><span class="v">16.0%</span></div>
+      <div class="bar"><span>2003–07</span><span class="tr"><span class="fl tcc" style="width:65.8%"></span></span><span class="v">65.8%</span></div>
+    </div>
+    <div class="grp">
+      <div class="gl">주혈흡충 연관 비율</div>
+      <div class="bar"><span>1970–74</span><span class="tr"><span class="fl bil" style="width:82.4%"></span></span><span class="v">82.4%</span></div>
+      <div class="bar"><span>2003–07</span><span class="tr"><span class="fl bil" style="width:55.3%"></span></span><span class="v">55.3%</span></div>
+    </div>
+    <p class="src">출처: Gouda 외 2007, J Egypt Natl Canc Inst (PMID 19034337). 같은 기간 환자 중앙 나이는 47세에서 61세로 높아졌습니다. Felix 외 2008(Cancer Causes Control)도 같은 기관 기록에서 2005년 환자가 1980년보다 요로상피암일 오즈가 약 6배(OR 6.00)라고 보고했습니다.</p>
+  </div>
+  <p>감염률도 크게 떨어졌습니다. 질문에 나온 “1983년 약 35% → 2003년 1.7%”라는 정확한 수치는 해설자가 원출처로 확인하지 못했습니다. 다만 감소 방향 자체는 여러 문헌에서 일관되며, 2006년 약 1.2%라는 수치도 인용됩니다.</p>
+
+  <h3>그 사이에 무엇이 함께 일어났나 — 이집트 관리 연표</h3>
+  <div class="tl">
+    <div class="ti"><span class="y">1920년대</span><span class="d">학생 치료 시작, 운하에 황산구리를 뿌려 달팽이 박멸</span></div>
+    <div class="ti"><span class="y">1953–1985</span><span class="d">대규모 관리 사업. 주로 <b>달팽이 박멸</b> 중심에 약물 치료 보조</span></div>
+    <div class="ti"><span class="y">1960–1970</span><span class="d">아스완 하이댐 건설. 연중 관개로 바뀌며 전파 조건이 변함(효과는 논쟁 중)</span></div>
+    <div class="ti"><span class="y">1975</span><span class="d"><b>메트리포네이트</b>(이전 약) 사용. 나세르호 어부 감염률 67% → 약 20%</span></div>
+    <div class="ti"><span class="y">1983</span><span class="d">나일 삼각주 감염률이 이미 약 4–8%로 감소 — <b>프라지콴텔 도입 전</b></span></div>
+    <div class="ti pzq"><span class="y">1988</span><span class="d"><b>프라지콴텔</b>을 중·상이집트 사업에 도입</span></div>
+    <div class="ti pzq"><span class="y">1997</span><span class="d">국가 사업으로 삼각주 <b>프라지콴텔 집단 투약</b> 시작, 일부 달팽이 관리 병행</span></div>
+    <div class="ti res"><span class="y">2003–07</span><span class="d">편평세포암 28%, 요로상피암 66%로 역전</span></div>
+  </div>
+  <p style="font-size:13px;color:var(--sub)">출처: 이집트 주혈흡충증 역학 리뷰(PMC4293883), Gouda 2007</p>
+
+  <h3>변화의 원인 후보 — 얼마나 설명하나</h3>
+  <div class="tw"><table>
+    <tr><th>요인</th><th>역할</th><th>판단</th></tr>
+    <tr><td><b>프라지콴텔</b></td><td>1988년 이후 핵심 수단. 후반부 감소에 기여</td><td>기여는 분명하나 <b>단독 효과를 분리할 수 없음</b></td></tr>
+    <tr><td><b>달팽이 박멸</b></td><td>수십 년간의 주력 수단</td><td>초기 감소의 큰 부분으로 보임 <span class="ev inf">추론</span></td></tr>
+    <tr><td><b>상수도·위생·보건교육</b></td><td>오염된 물과의 접촉 감소</td><td>문헌이 감소 요인으로 함께 언급</td></tr>
+    <tr><td><b>메트리포네이트 등 이전 약</b></td><td>1975년부터 사용</td><td>프라지콴텔 이전 감소에 기여</td></tr>
+    <tr><td><b>흡연 증가</b></td><td>요로상피암의 주요 원인</td><td>요로상피암이 늘면 SCC의 <b>비율</b>은 저절로 줄어듦 <span class="ev inf">추론</span></td></tr>
+    <tr><td><b>농약·화학물질</b></td><td>요로상피암 위험 요인으로 제기</td><td>측정 자료 부족</td></tr>
+    <tr><td><b>진단·기록 변화</b></td><td>방광내시경 확대로 초기 요로상피암 발견 증가, 의뢰 병원 기록의 한계</td><td>비율 변화를 일부 만들 수 있음 <span class="ev inf">추론</span></td></tr>
+  </table></div>
+  <p class="scroll-hint">← 표는 옆으로 밀어 볼 수 있습니다</p>
+
+  <div class="call amber"><h4>⚠ 시간이 맞지 않는 문제 <span class="ev inf">추론</span></h4>주혈흡충 관련 방광암은 <b>수십 년</b>의 감염 뒤에 생깁니다. 1980–90년대에 이미 보이던 조직형 변화는 대부분 <b>프라지콴텔 이전</b>의 감염 감소, 또는 훨씬 전에 감염된 사람들의 결과일 가능성이 큽니다. 1997년 집단 투약의 효과가 암 통계에 나타나려면 아직 시간이 더 필요합니다.</div>
+  <div class="call"><h4>이집트 사례 정리</h4>주혈흡충 관련 편평세포암의 감소는 <b>주혈흡충증 관리 전체</b>의 결과로 보는 것이 가장 타당합니다. 프라지콴텔은 그 후반부의 주력 수단이었지만, 현재 자료로는 프라지콴텔만의 몫을 계산할 수 없습니다. 이 변화를 인과관계로 서술한 논문(Salem 2011)도 있지만, 아직 인과가 충분히 입증되지 않았다며 전향적 연구를 요구하는 저자들도 있습니다.</div>
+</section>
+
+<!-- 5 -->
+<section id="s5">
+  <h2><span class="n">5</span>시기: 늦게 치료해도 효과가 있나</h2>
+  <p>나이에 따라 <b>암 발생</b>을 비교한 연구는 없습니다. 대신 방광 병변이 치료 후 되돌아가는지 본 연구가 있습니다.</p>
+  <div class="two">
+    <div class="cardx g">
+      <h4>👧 어린이 — 대체로 호전</h4>
+      <ul>
+        <li>앙골라 학생 70명, 프라지콴텔 1회 투여 후 6–8개월 추적 <span class="ev case">소규모 추적</span></li>
+        <li><b>76%</b>가 초음파상 호전</li>
+        <li>단, 완전히 사라진 병변은 없었고, 추적률이 절반 미만</li>
+      </ul>
+    </div>
+    <div class="cardx o">
+      <h4>👩 성인 — 섬유화는 남음</h4>
+      <ul>
+        <li>케냐 여성 93명, 반복 집단 투약 후 <b>14년</b> 추적 <span class="ev coh">코호트</span></li>
+        <li>감염률 34% → 9%로 감소</li>
+        <li>요로 병변은 15% → 19%로 <b>줄지 않음</b>(유의하지 않음)</li>
+        <li>요관 확장·수신증 같은 후기 변화는 치료에 반응하지 않음</li>
+      </ul>
+    </div>
+  </div>
+  <div class="flow">
+    <div class="node start"><div class="t">어릴 때 · 감염 초기 치료</div><div class="s">염증성 병변 대부분 회복 가능 → 암 위험을 낮출 <b>가능성</b>이 가장 큼</div></div>
+    <div class="arrow">↓ 시간이 흐르며 손상 누적</div>
+    <div class="node mid"><div class="t">성인 · 오래된 감염</div><div class="s">섬유화·편평상피화생·유전자 변이가 이미 쌓였을 수 있음 → 감염을 없애도 되돌리기 어려울 수 있음</div></div>
+    <div class="arrow">↓</div>
+    <div class="node end"><div class="t">이미 병변이 있는 사람</div><div class="s">치료가 암 위험을 낮추는지 <b>알 수 없음</b></div></div>
+  </div>
+  <div class="call"><h4>합리적 추론 <span class="ev inf">추론</span></h4>Bedwani 연구에서 어릴 때, 오래 감염될수록 위험이 컸던 점과 합치면 방향은 이렇습니다. <b>어린 시절부터 일찍, 반복해서 치료할 때</b> 예방 효과가 가장 클 가능성이 높습니다. 반면 오래된 섬유화나 화생이 있는 성인에게도 위험을 낮추는지는 모릅니다.</div>
+</section>
+
+<!-- 6 -->
+<section id="s6">
+  <h2><span class="n">6</span>다른 유행 지역(사하라 이남 아프리카)</h2>
+  <div class="oneline">집단 투약 이후 방광암이 줄었다는 자료는 <b>찾지 못했습니다.</b></div>
+  <ul>
+    <li><span class="ev case">증례</span> 자료는 대부분 <b>병원 조직검사 모음</b>입니다. 나이지리아·수단·잠비아·세네갈·앙골라 9개 연구에서 편평세포암이 가장 흔했고, 평균 40.5%에서 알이 발견됐습니다.</li>
+    <li>인구 기반 암 등록이 부족하고, 많은 비뇨기 센터에 기본 내시경 장비도 없다고 리뷰는 지적합니다.</li>
+    <li><span class="ev inf">추론</span> 대규모 집단 투약은 대부분 2000년대 이후 시작됐고, 주로 학령기 아동이 대상입니다. 잠복기가 수십 년이므로 효과가 있더라도 <b>아직 암 통계로 확인할 시점이 아닙니다.</b></li>
+  </ul>
+</section>
+
+<!-- 7 -->
+<section id="s7">
+  <h2><span class="n">7</span>결론 — 입증 / 추론 / 미지</h2>
+  <div class="bl">
+    <div class="blc a"><h4>✅ (a) 입증된 것</h4>
+      <ul>
+        <li><i>S. haematobium</i> 감염은 방광암, 특히 편평세포암을 일으킨다 (IARC 1군)</li>
+        <li>프라지콴텔은 감염을 치료하고, 인구 수준의 감염률을 낮춘다</li>
+        <li>이집트에서 감염 감소와 함께 편평세포암↓·요로상피암↑ 변화가 있었다</li>
+      </ul>
+    </div>
+    <div class="blc b"><h4>🟡 (b) 합리적으로 추론되는 것</h4>
+      <ul>
+        <li>감염을 막거나 일찍 치료하면, 특히 어린 시절에 그렇게 하면, 수십 년에 걸쳐 주혈흡충 관련 편평세포암이 줄 것이다</li>
+        <li>이집트의 조직형 변화는 적어도 일부가 주혈흡충증 관리 <b>전체</b>(달팽이·물·이전 약 포함)의 결과다</li>
+      </ul>
+    </div>
+    <div class="blc c"><h4>❓ (c) 아직 모르는 것</h4>
+      <ul>
+        <li>프라지콴텔 자체가 방광암을 얼마나 예방하는가 (코호트·시험 없음)</li>
+        <li>오래된 병변이 있는 성인을 치료하면 위험이 낮아지는가</li>
+        <li>이집트 변화 중 흡연·화학물질·진단과 기록 변화가 차지하는 몫</li>
+        <li>사하라 이남에서도 비슷한 감소가 나타날 것인가</li>
+      </ul>
+    </div>
+  </div>
+  <div class="call"><h4>한 줄 평가</h4>리뷰의 “일관되고 인과적 근거를 갖춘 예방책”은 <b>추론의 구조</b>를 설명하는 말로는 타당합니다. 그러나 <b>“효과가 입증된 예방법”</b>으로 읽으면 근거를 넘어섭니다.</div>
+  <div class="call red"><h4>🔴 커뮤니티 공유 시 주의</h4>
+    <ul>
+      <li>이 내용은 <b>주혈흡충 유행 지역 감염자</b>에 대한 이야기입니다. 감염이 없는 사람이 방광암 예방 목적으로 프라지콴텔을 먹는 근거는 <b>전혀 없습니다.</b></li>
+      <li>한국의 일반적인 방광암(요로상피암)은 주로 흡연·화학물질과 관련되며, 이 논의와 기전이 다릅니다.</li>
+      <li>치료 결정은 반드시 전문의와 상의하십시오.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 8 -->
+<section id="s8">
+  <h2><span class="n">8</span>예상 질문 & 출처</h2>
+  <details><summary>IARC 1군이면 담배만큼 확실한 발암원이라는 뜻인가요?</summary><div class="a">“사람에게 암을 일으킨다는 근거가 충분하다”는 뜻입니다. 위험의 <b>크기</b>를 말하는 등급은 아닙니다. 1군 안에서도 담배와 주혈흡충의 위험 크기는 다릅니다.</div></details>
+  <details><summary>인과가 입증됐는데 왜 예방은 입증이 아닌가요?</summary><div class="a">“A가 B를 일으킨다”와 “A를 없애면 B가 줄어든다”는 별개의 질문입니다. 이미 손상이 쌓였다면 원인을 없애도 위험이 남을 수 있습니다. 또 효과가 나타나려면 수십 년이 걸립니다. 그래서 예방 효과는 따로 측정해야 하는데, 그 측정이 아직 없습니다.</div></details>
+  <details><summary>그래도 이집트 사례는 강력한 증거 아닌가요?</summary><div class="a">감염 관리가 암 패턴을 바꿨다는 <b>강한 정황</b>입니다. 하지만 병원 기록의 비율 변화이고, 같은 시기에 여러 요인이 겹쳤습니다. 생태학 수준의 근거는 “프라지콴텔 단독 효과”를 분리하지 못합니다.</div></details>
+  <details><summary>왜 무작위시험을 하지 않나요?</summary><div class="a">감염자에게 치료를 보류하는 것은 윤리적으로 불가능하고, 암이 생기기까지 수십 년을 추적해야 합니다. 현실적으로는 집단 투약 지역의 장기 암 등록 자료가 가장 좋은 대안입니다.</div></details>
+
+  <h3>주요 출처</h3>
+  <ul class="srcs">
+    <li>IARC Monographs Vol. 61 (1994), <i>Schistosomes, Liver Flukes and Helicobacter pylori</i> — <a href="https://inchem.org/documents/iarc/vol61/m61-1.html">INCHEM 요약</a> · Vol. 100B (2012) 재확인</li>
+    <li>Bedwani R, et al. Schistosomiasis and the risk of bladder cancer in Alexandria, Egypt. <i>Br J Cancer</i> 1998. <a href="https://www.nature.com/articles/bjc1998197">nature.com/articles/bjc1998197</a></li>
+    <li>Warren W, et al. Mutations in the p53 gene in schistosomal bladder cancer. <i>Carcinogenesis</i> 1995. <a href="https://www.qxmd.com/r/7767983">qxmd.com/r/7767983</a></li>
+    <li>Gouda I, et al. Bilharziasis and bladder cancer: a time trend analysis of 9843 patients. <i>J Egypt Natl Canc Inst</i> 2007. <a href="https://pubmed.ncbi.nlm.nih.gov/19034337/">PMID 19034337</a></li>
+    <li>Felix AS, et al. The changing patterns of bladder cancer in Egypt over the past 26 years. <i>Cancer Causes Control</i> 2008. <a href="https://link.springer.com/article/10.1007/s10552-007-9104-7">doi:10.1007/s10552-007-9104-7</a></li>
+    <li>Salem S, et al. Successful control of schistosomiasis and the changing epidemiology of bladder cancer in Egypt. <i>BJU Int</i> 2011. <a href="https://www.researchgate.net/publication/49730849_Successful_control_of_schistosomiasis_and_the_changing_epidemiology_of_bladder_cancer_in_Egypt">초록</a></li>
+    <li>이집트 주혈흡충증 역학 리뷰(관리 연표). <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4293883">PMC4293883</a></li>
+    <li>Bocanegra C, et al. 앙골라 아동 프라지콴텔 후 초음파 변화. <i>Am J Trop Med Hyg</i> 2018. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6159568">PMC6159568</a></li>
+    <li>Joekes EC, et al. A 14-year follow-up of ultrasound-detected urinary tract pathology (Kenya). 2023. <a href="https://lshtm-eprints-repo-prod.lshtm-eprints.cdl.cosector.com/4671298/7/Joekes-etal-2023-A-14-year-follow-up.pdf">LSHTM 원문</a></li>
+    <li>Jalloh M, et al. Is schistosomiasis a risk factor for bladder cancer? <i>J Trop Med</i> 2020. <a href="https://www.hindawi.com/journals/jtm/2020/8270810/">hindawi</a></li>
+    <li>Understanding urogenital schistosomiasis-related bladder cancer: an update. <i>Front Med</i> 2018. <a href="https://frontiersin.org/article/10.3389/fmed.2018.00223/full">frontiersin.org</a></li>
+    <li>Amin, et al. Schistosomiasis and bladder cancer in Egypt: truths and myths. <i>OAMJMS</i> 2019. <a href="https://oamjms.eu/index.php/mjms/article/view/oamjms.2019.857">oamjms.eu</a></li>
+  </ul>
+</section>
+
+<div class="honest">
+  <b>⚠️ 정직하게 밝힙니다</b>
+  <ul>
+    <li>점검 대상인 Osman 외 2026 리뷰의 원문은 찾지 못했습니다. 이 문서는 리뷰의 인용 문장을 1차 근거와 대조한 것입니다.</li>
+    <li>IARC 평가 내용은 Vol. 61 요약(INCHEM)으로 확인했습니다. Vol. 100B는 이번에 다시 읽지 않았습니다.</li>
+    <li>“1983년 35% → 2003년 1.7%” 수치는 원출처를 확인하지 못했습니다.</li>
+    <li>일부 문헌은 초록이나 리뷰를 통해서만 확인했습니다. <span class="ev inf">추론</span> 표시는 해설자의 해석입니다.</li>
+    <li><b>의료 조언이 아닙니다.</b> 치료 결정은 반드시 전문의와 상의하십시오.</li>
+  </ul>
+</div>
+
+<footer>
+  <b>작성일</b> 2026-10-21 · <b>형식</b> 단일 HTML (외부 의존 0) · <b>제작</b> Claude<br>
+  히포크라테스의 친구들 · 근거 점검
+  <br><button class="print-btn" onclick="window.print()">인쇄 / PDF로 저장</button>
+</footer>
+
+</div>
+</body>
+</html>

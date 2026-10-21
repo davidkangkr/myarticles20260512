@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>니클로사마이드 프로드러그 — 포장을 바꿔도 약은 그대로 (2026)</title>
+<style>
+:root{
+  --bg:#faf8f4; --card:#ffffff; --ink:#2b2b2b; --sub:#6b6b6b; --line:#e5dfd3;
+  --teal:#0f5e5e; --teal-soft:#e3efee; --gold:#b45309; --gold-soft:#fdf0dc;
+  --sage:#5b7f5b; --sage-soft:#e9f0e6; --red:#b91c1c; --red-soft:#fdecec;
+  --purple:#6d28a8; --purple-soft:#f2e9fb; --slate:#475569; --slate-soft:#eef2f7;
+  --tint:#fcfbf8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  font-size:17px;line-height:1.72;padding:0 0 60px;word-break:keep-all;overflow-wrap:break-word}
+.wrap{max-width:780px;margin:0 auto;padding:0 16px}
+a{color:var(--teal);word-break:break-all}
+b,strong{color:#111;font-weight:700}
+
+/* header (template gradient) */
+header{background:linear-gradient(135deg,#0f5e5e 0%,#146b6b 52%,#5b7f5b 100%);color:#fff;padding:38px 16px 30px;text-align:center}
+header .inner{max-width:780px;margin:0 auto}
+header .tag{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:4px 14px;font-size:13px;margin-bottom:12px;letter-spacing:.3px}
+header h1{font-size:23px;line-height:1.4;font-weight:800;margin-bottom:10px}
+header .sub{font-size:15px;opacity:.94;line-height:1.55}
+.meta{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-size:14px;color:var(--sub);margin-top:14px;text-align:left;box-shadow:0 1px 3px rgba(0,0,0,.05);line-height:1.6}
+.meta b,.meta i{color:var(--ink)}
+.meta .lbl{display:block;font-weight:700;color:var(--teal);margin-bottom:4px}
+.meta .row2{margin-top:8px;font-size:13px}
+.notice{font-size:13px;opacity:.9;margin-top:12px}
+.notice b{color:#fff}
+
+/* toc */
+.toc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-top:22px;font-size:15px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.toc b{display:block;color:var(--teal);margin-bottom:6px}
+.toc ol{margin:0 0 0 22px;color:var(--sub)}
+.toc li{margin-bottom:3px}
+.toc a{color:var(--ink);text-decoration:none;word-break:keep-all}
+
+/* sections as cards */
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 20px;margin-top:22px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+h2{font-size:19px;color:var(--teal);font-weight:800;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--teal-soft);line-height:1.4}
+h2 .n{display:inline-block;background:var(--teal);color:#fff;border-radius:6px;font-size:13px;padding:1px 8px;margin-right:8px;vertical-align:middle}
+h3{font-size:16px;color:var(--gold);font-weight:700;margin:18px 0 8px}
+h4{font-size:15px;color:var(--ink);font-weight:700;margin:0 0 6px}
+p{margin-bottom:10px}
+ul,ol{margin:8px 0 12px 22px}
+li{margin-bottom:6px}
+
+/* summary */
+.oneline{background:var(--teal-soft);border-left:4px solid var(--teal);border-radius:10px;padding:13px 15px;font-size:16.5px;line-height:1.6;margin-bottom:12px}
+.oneline b{color:var(--teal)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.card{background:var(--tint);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:15px;color:#333}
+.card h4{color:var(--teal)}
+.card.star{grid-column:1/-1;background:var(--gold-soft);border:1px solid #f0d5a8;border-left:4px solid var(--gold)}
+.card.star h4{color:var(--gold)}
+
+/* callouts (template .card variants) */
+.call{border-radius:10px;padding:13px 15px;margin:10px 0;font-size:15.5px;border-left:4px solid var(--teal);background:var(--teal-soft)}
+.call h4{margin-bottom:6px}
+.call p:last-child,.call ul:last-child{margin-bottom:0}
+.call.green{background:var(--sage-soft);border-left-color:var(--sage)}
+.call.amber{background:var(--gold-soft);border-left-color:var(--gold)}
+.call.red{background:var(--red-soft);border-left-color:var(--red)}
+.call.blue{background:var(--teal-soft);border-left-color:var(--teal)}
+.call.purple{background:var(--purple-soft);border-left-color:var(--purple)}
+
+/* source tags (template badge style) */
+.tag-s,.tag{display:inline-block;font-size:12px;font-weight:700;border-radius:5px;padding:0 7px;white-space:nowrap;vertical-align:.08em;margin-right:3px;line-height:1.6}
+.t-p{background:var(--teal-soft);color:var(--teal);border:1px solid #bcd8d5}
+.t-x{background:var(--sage-soft);color:var(--sage);border:1px solid #c4d8c0}
+.t-i{background:#3730a3;color:#fff;border:1px solid #3730a3}
+.guide{background:#eef0ff;border:1px solid #c7cbf5;border-left:5px solid #3730a3;border-radius:12px;padding:14px 16px;margin-top:22px;font-size:14.5px;line-height:1.6}
+.guide h4{color:#3730a3;margin-bottom:6px;font-size:15.5px}
+.guide ul{margin:6px 0 0 20px}
+.guide li{margin-bottom:4px}
+.ainote{font-size:13px;color:#3730a3;margin:4px 0 10px;font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--sub);margin:4px 0 12px}
+
+/* tables */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:460px}
+th,td{border:1px solid var(--line);padding:8px 9px;text-align:left;vertical-align:top}
+th{background:var(--teal-soft);color:var(--teal);font-weight:700;white-space:nowrap}
+tr:nth-child(even) td{background:var(--tint)}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.scroll-hint{font-size:12.5px;color:var(--sub);margin:-4px 0 10px}
+
+/* bar chart */
+.bars{background:var(--tint);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:12px 0}
+.bar{display:grid;grid-template-columns:7.4rem 1fr 3rem;align-items:center;gap:8px;font-size:13px;margin:3px 0}
+.bar .nm{color:#444;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .tr{background:#ece7dc;border-radius:4px;height:12px;overflow:hidden}
+.bar .fl{height:100%;border-radius:4px}
+.bar .fl.e{background:var(--teal)}
+.bar .fl.c{background:var(--gold)}
+.bar .v{text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--ink)}
+.bars .half{font-size:13px;color:var(--sub);margin:8px 0 0;line-height:1.55}
+.keyrow{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--sub);margin-bottom:8px}
+.sw{display:inline-block;width:11px;height:11px;border-radius:2px;vertical-align:-1px;margin-right:4px}
+
+/* compare */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.vs .card.n{border-top:4px solid var(--teal)}
+.vs .card.i{border-top:4px solid var(--gold)}
+.vs .card.i h4{color:var(--gold)}
+.vs ul{margin-bottom:0}
+
+.st{white-space:nowrap;font-weight:700}
+
+/* faq (template Q/A look) */
+details{border:1px solid var(--line);border-radius:10px;margin:8px 0;overflow:hidden;background:var(--card)}
+summary{cursor:pointer;padding:11px 14px 11px 40px;font-weight:700;color:var(--teal);font-size:15.5px;list-style:none;position:relative;display:flex;justify-content:space-between;gap:8px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"Q";position:absolute;left:14px;top:14px;background:var(--teal);color:#fff;font-size:11px;width:16px;height:16px;border-radius:4px;text-align:center;line-height:16px}
+summary::after{content:"＋";color:var(--sub);flex:none}
+details[open] summary::after{content:"－"}
+details .a{padding:0 14px 12px 40px;font-size:15px;color:#333}
+
+/* steps */
+.steps{counter-reset:s;list-style:none;margin:8px 0 12px;padding:0}
+.steps li{counter-increment:s;position:relative;padding:10px 12px 10px 44px;background:var(--tint);border:1px solid var(--line);border-radius:10px;margin:8px 0;font-size:15.5px;color:#333}
+.steps li::before{content:counter(s);position:absolute;left:12px;top:11px;width:22px;height:22px;border-radius:6px;background:var(--sage);color:#fff;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center}
+
+.honest{font-size:14px;color:var(--sub);margin-top:26px;padding:16px;background:#f5f2ec;border-radius:10px;line-height:1.6}
+.honest b{color:var(--ink)}
+.honest ul{margin-bottom:0}
+footer{font-size:13px;color:var(--sub);margin-top:14px;text-align:center;line-height:1.7}
+footer b{color:var(--ink)}
+.print-btn{display:inline-block;margin-top:10px;font:inherit;font-size:13px;font-weight:600;color:var(--teal);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 18px;cursor:pointer}
+
+@media(max-width:520px){
+  body{font-size:16px}
+  .grid,.vs{grid-template-columns:1fr}
+  section{padding:18px 15px}
+  header h1{font-size:20px}
+  table{font-size:13px}
+  th,td{padding:6px 7px}
+  .bar{grid-template-columns:6.4rem 1fr 2.6rem;font-size:12px}
+}
+@media print{
+  body{background:#fff;font-size:11px}
+  header{background:#fff;color:#000;border-bottom:2px solid var(--teal)}
+  header .tag{border-color:#999;background:#fff}
+  .notice b{color:#000}
+  .print-btn,.toc{display:none}
+  details .a{display:block}
+  section,.card,.call{page-break-inside:avoid;box-shadow:none}
+  .tw{overflow:visible}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="inner">
+  <span class="tag">논문 해설 · 약물 재창출 · 2026</span>
+  <h1>니클로사마이드 프로드러그 —<br>포장을 바꿔도 약은 그대로</h1>
+  <p class="sub">구충제 니클로사마이드에 21가지 “기름 꼬리”를 붙여 본 시험관 연구.<br>무엇을 보여줬고, 무엇은 아직 보여주지 못했는가.</p>
+  <div class="meta">
+    <span class="lbl">해설 대상 논문</span>
+    Gribok A, Pavlidou M, Li K, Kim H, … Njoo E. “<i>Development of Niclosamide Prodrugs Preserves Wnt Inhibition and Anticancer Activity Through Rapid Bioactivation.</i>” <i>Targets</i> (MDPI) 2026;4:32.<br>
+    DOI: <a href="https://doi.org/10.3390/targets4040032">10.3390/targets4040032</a>
+    <div class="row2"><b>성격</b> 원저(Article) · 시험관(in vitro) + 컴퓨터 예측 · 18쪽 | <b>소속</b> ASDRP (Fremont, CA, USA) | <b>게재</b> 2026-10-08 · 외부 연구비 없음</div>
+  </div>
+  <p class="notice">※ 이 문서는 <b>AI(Claude, Anthropic)가 작성한</b> 일반인용 논문 해설이며, 원문과 의료 조언을 대체하지 않습니다.</p>
+  </div>
+</header>
+<div class="wrap">
+<nav class="toc">
+  <b>목차</b>
+  <ol>
+    <li><a href="#s0">30초 요약</a></li>
+    <li><a href="#s1">논문 요약 — 무엇을 했고 무엇을 얻었나</a></li>
+    <li><a href="#s2">왜 하필 니클로사마이드인가? 이버멕틴은?</a></li>
+    <li><a href="#s3">“프로드러그”란 무엇인가 (쉬운 설명)</a></li>
+    <li><a href="#s4">공유할 때 주의할 점 — 정직한 한계</a></li>
+    <li><a href="#s5">예상 질문 & 답변</a></li>
+    <li><a href="#s6">용어 사전 & 출처</a></li>
+  </ol>
+</nav>
+
+<div class="guide">
+  <h4>📌 읽기 전에 — 라벨 구분</h4>
+  <ul>
+    <li><span class="tag t-p">논문</span> 해설 대상 논문에 적힌 내용</li>
+    <li><span class="tag t-x">외부</span> 다른 문헌에서 가져온 내용</li>
+    <li><span class="tag t-i">🤖 Claude 판단</span> 문헌에 그대로 적혀 있지 않고, 이 문서를 작성한 <b>AI Claude가 내린 해석·평가·추론</b>. 박스 제목에 이 라벨이 있으면 그 박스 전체가 Claude의 판단입니다.</li>
+  </ul>
+</div>
+
+<!-- 0. SUMMARY -->
+<section id="s0">
+  <h2><span class="n">0</span>30초 요약</h2>
+  <div class="oneline">한 문장으로: <b>니클로사마이드에 다양한 꼬리를 붙인 21가지 “프로드러그”를 만들었더니, 세포 실험에서는 대부분 원래 약과 비슷하게 작동했다.</b> 다만 이 연구가 해결하려던 진짜 문제, 즉 <b>몸속 흡수가 나아지는지는 아직 측정하지 않았다.</b></div>
+  <div class="grid">
+    <div class="card"><h4>① 무엇을 했나</h4>먹어도 흡수가 잘 안 되는 구충제 니클로사마이드에 에스터 12종·카보네이트 9종, 모두 <b>21가지 꼬리</b>를 붙였습니다.</div>
+    <div class="card"><h4>② 무엇을 봤나</h4>꼬리가 얼마나 빨리 떨어지는지, 암세포 5종에서의 억제력, 짧은 노출 효과, Wnt 신호 억제, 컴퓨터 흡수 예측을 봤습니다.</div>
+    <div class="card"><h4>③ 결과</h4>꼬리 종류와 상관없이 <b>세포 억제력은 대체로 원래 약 수준</b>이었습니다. 결국 효과를 내는 것은 꼬리가 떨어진 뒤의 니클로사마이드 자신이라는 결론입니다.</div>
+    <div class="card"><h4>④ 정직한 그늘</h4>동물·사람 데이터가 <b>0건</b>입니다. 꼬리가 풀리는 실험은 알코올이 섞인 시험관 조건이었고, 흡수 개선은 <b>컴퓨터 예측</b>뿐입니다.</div>
+    <div class="card star"><h4>⭐ 이 문서의 핵심 <span class="tag t-i">🤖 Claude 판단</span></h4>“프로드러그로 만들어도 <b>약효는 유지된다</b>”는 확인됐습니다. 그러나 “프로드러그로 만들면 <b>몸에 더 잘 들어간다</b>”는 아직 가설입니다. 게다가 이 논문의 컴퓨터 예측에서도 21종 중 17종은 장 흡수가 <b>“낮음”</b>으로 나왔습니다. 공유할 때 이 둘을 섞지 않는 것이 가장 중요합니다.</div>
+  </div>
+</section>
+
+<!-- 1. PAPER SUMMARY -->
+<section id="s1">
+  <h2><span class="n">1</span>논문 요약 — 무엇을 했고 무엇을 얻었나</h2>
+  <div class="legend">
+    <span><span class="tag t-p">논문</span>원문에 적힌 내용</span>
+    <span><span class="tag t-x">외부</span>다른 문헌</span>
+    <span><span class="tag t-i">🤖 Claude 판단</span> AI Claude의 해석 (원문에 없음)</span>
+  </div>
+
+  <h3>연구 목적</h3>
+  <p><span class="tag t-p">논문</span> 니클로사마이드는 여러 암 관련 신호(Wnt/β-catenin, STAT3, NF-κB, mTOR 등 14개 표적을 표로 정리)를 건드린다는 전임상 근거가 많습니다. 그러나 <b>물에 거의 녹지 않아</b>(0.23 µg/mL) 몸에 흡수되기 어렵습니다. 그동안 페놀(-OH) 자리에 꼬리를 붙인 시도는 여럿 있었지만, 꼬리 종류를 <b>체계적으로 비교한 연구는 드물었다</b>는 것이 저자들이 밝힌 출발점입니다.</p>
+
+  <h3>방법 — 다섯 가지 실험</h3>
+  <div class="tw"><table>
+    <tr><th>실험</th><th>무엇을 보나</th><th>조건</th></tr>
+    <tr><td><b>합성</b></td><td>에스터 12종(2a–2l), 카보네이트 9종(3a–3i)</td><td>수율 14–96% / 26–76%</td></tr>
+    <tr><td><b>가수분해</b></td><td>꼬리가 떨어져 니클로사마이드로 돌아오는 속도</td><td>이소프로판올 혼합 용매, 물 9%, pH 7, 효소 없음, 60분, 2회 반복</td></tr>
+    <tr><td><b>세포 억제(MTT)</b></td><td>암세포 5종 IC50</td><td>대장(HCT-116, HT-29)·유방(MDA-MB-231)·폐(A549)·쥐 흑색종(B16F10), 72시간</td></tr>
+    <tr><td><b>워시아웃</b></td><td>짧게 노출 후 씻어낼 때의 효과</td><td>HT-29, 15·30·60분·24시간 노출</td></tr>
+    <tr><td><b>Wnt 리포터</b></td><td>Wnt 신호 억제력</td><td>쥐 섬유아세포(3T3) 발광 리포터, 대표 7종, 주로 25·250 µM</td></tr>
+    <tr><td><b>SwissADME</b></td><td>흡수·지용성 등 약물성</td><td>무료 웹 도구로 <b>계산만</b> 함</td></tr>
+  </table></div>
+  <p class="scroll-hint">← 표는 옆으로 밀어 볼 수 있습니다</p>
+
+  <h3>결과 ① 가수분해 — “빠르다”지만 꼬리마다 차이가 큼</h3>
+  <p><span class="tag t-p">논문</span> 60분 동안 니클로사마이드로 돌아온 비율입니다. 가장 빠른 것은 스테아르산 에스터(2j)로 92.6%, 속도상수 0.0434/분이었습니다. 가장 느린 것은 라우르산 에스터(2g)로 8.66%였습니다. 꼬리 길이나 크기와 일관된 규칙은 보이지 않았습니다.</p>
+  <div class="bars">
+    <div class="keyrow"><span><span class="sw" style="background:var(--blue)"></span>에스터</span><span><span class="sw" style="background:var(--amber)"></span>카보네이트</span><span>60분 시점 가수분해 %</span></div>
+    <div class="bar"><span class="nm">스테아르산 2j</span><span class="tr"><span class="fl e" style="width:92.6%"></span></span><span class="v">92.6</span></div>
+    <div class="bar"><span class="nm">n-옥틸 3f</span><span class="tr"><span class="fl c" style="width:66.85%"></span></span><span class="v">66.9</span></div>
+    <div class="bar"><span class="nm">이소부틸 3c</span><span class="tr"><span class="fl c" style="width:57.34%"></span></span><span class="v">57.3</span></div>
+    <div class="bar"><span class="nm">데실 3g</span><span class="tr"><span class="fl c" style="width:56.31%"></span></span><span class="v">56.3</span></div>
+    <div class="bar"><span class="nm">데칸산 2f</span><span class="tr"><span class="fl e" style="width:55.25%"></span></span><span class="v">55.3</span></div>
+    <div class="bar"><span class="nm">미리스트산 2h</span><span class="tr"><span class="fl e" style="width:54.16%"></span></span><span class="v">54.2</span></div>
+    <div class="bar"><span class="nm">에틸 3a</span><span class="tr"><span class="fl c" style="width:53.88%"></span></span><span class="v">53.9</span></div>
+    <div class="bar"><span class="nm">헥산산 2e</span><span class="tr"><span class="fl e" style="width:53.05%"></span></span><span class="v">53.1</span></div>
+    <div class="bar"><span class="nm">헥실 3e</span><span class="tr"><span class="fl c" style="width:49.84%"></span></span><span class="v">49.8</span></div>
+    <div class="bar"><span class="nm">프로판산 2a</span><span class="tr"><span class="fl e" style="width:37.5%"></span></span><span class="v">37.5</span></div>
+    <div class="bar"><span class="nm">피발산 2c</span><span class="tr"><span class="fl e" style="width:36.77%"></span></span><span class="v">36.8</span></div>
+    <div class="bar"><span class="nm">팔미트산 2i</span><span class="tr"><span class="fl e" style="width:36.62%"></span></span><span class="v">36.6</span></div>
+    <div class="bar"><span class="nm">이소프로필 3b</span><span class="tr"><span class="fl c" style="width:30.54%"></span></span><span class="v">30.5</span></div>
+    <div class="bar"><span class="nm">이소부티르산 2b</span><span class="tr"><span class="fl e" style="width:27.63%"></span></span><span class="v">27.6</span></div>
+    <div class="bar"><span class="nm">헥사데실 3i</span><span class="tr"><span class="fl c" style="width:23.71%"></span></span><span class="v">23.7</span></div>
+    <div class="bar"><span class="nm">부탄산 2d</span><span class="tr"><span class="fl e" style="width:19.33%"></span></span><span class="v">19.3</span></div>
+    <div class="bar"><span class="nm">올레산 2k</span><span class="tr"><span class="fl e" style="width:14.34%"></span></span><span class="v">14.3</span></div>
+    <div class="bar"><span class="nm">도데실 3h</span><span class="tr"><span class="fl c" style="width:11.09%"></span></span><span class="v">11.1</span></div>
+    <div class="bar"><span class="nm">아다만탄 2l</span><span class="tr"><span class="fl e" style="width:9.15%"></span></span><span class="v">9.2</span></div>
+    <div class="bar"><span class="nm">사이클로펜틸 3d</span><span class="tr"><span class="fl c" style="width:8.88%"></span></span><span class="v">8.9</span></div>
+    <div class="bar"><span class="nm">라우르산 2g</span><span class="tr"><span class="fl e" style="width:8.66%"></span></span><span class="v">8.7</span></div>
+    <p class="half">출처: 논문 Table 3. <span class="tag t-i">🤖 Claude 판단</span> 60분 안에 절반 이상 풀린 것은 <b>21종 중 8종</b>뿐입니다. 논문 고찰의 “1시간 안에 빠르게 니클로사마이드로 돌아온다”는 표현은 실측값보다 넉넉한 서술로 보입니다.</p>
+  </div>
+
+  <h3>결과 ② 세포 억제력(IC50) — “비슷하다”의 폭이 넓음</h3>
+  <p><span class="tag t-p">논문</span> 프로드러그 21종의 IC50은 <b>0.10–62.43 µM</b>였고, 저자들은 이를 니클로사마이드와 “비슷하다”고 정리했습니다. 쥐 흑색종 B16F10이 대체로 가장 민감했습니다. 아래는 히트맵(Figure 3)에서 뽑은 대표값입니다.</p>
+  <div class="tw"><table>
+    <tr><th>화합물</th><th>HCT-116</th><th>HT-29</th><th>MDA-MB-231</th><th>A549</th><th>B16F10</th></tr>
+    <tr><td><b>니클로사마이드</b></td><td class="num">19.5</td><td class="num">12</td><td class="num">5.83</td><td class="num">14.1</td><td class="num">0.91</td></tr>
+    <tr><td>데칸산 에스터 2f</td><td class="num">2.6</td><td class="num">28.5</td><td class="num">36.1</td><td class="num">1.92</td><td class="num">0.15</td></tr>
+    <tr><td>데실 카보네이트 3g</td><td class="num">25.9</td><td class="num">0.96</td><td class="num">0.104</td><td class="num">2.95</td><td class="num">4.14</td></tr>
+    <tr><td>프로판산 에스터 2a</td><td class="num">15.3</td><td class="num">18.3</td><td class="num">15.7</td><td class="num">3.78</td><td class="num">60.01</td></tr>
+    <tr><td>헥사데실 카보네이트 3i</td><td class="num">11</td><td class="num">62.43</td><td class="num">22.8</td><td class="num">15.3</td><td class="num">5.84</td></tr>
+  </table></div>
+  <p class="scroll-hint">단위 µM, 숫자가 작을수록 강함. ← 옆으로 밀어 보기</p>
+  <div class="call amber"><h4>⚠ 읽을 때 주의</h4>
+    <ul>
+      <li><span class="tag t-i">🤖 Claude 판단</span> 같은 세포에서도 원래 약과 <b>수십 배</b> 차이 나는 경우가 있습니다(예: B16F10에서 니클로사마이드 0.91 vs 2a 60.01 µM). “비슷하다”는 전체 범위로 본 표현입니다.</li>
+      <li><span class="tag t-p">논문</span> 본문은 니클로사마이드 IC50을 <b>0.25–19.49 µM</b>로 적으면서 문헌 [51]을 인용합니다. 그런데 히트맵의 같은 실험값 최솟값은 0.91 µM입니다. <b>비교 기준이 이번 실험값인지 문헌값인지 섞여 있습니다.</b></li>
+    </ul>
+  </div>
+
+  <h3>결과 ③ 워시아웃 — 처음 15분만 다르고 이후엔 수렴</h3>
+  <p><span class="tag t-p">논문</span> HT-29 세포에 약을 <b>15분만</b> 주고 씻어냈을 때 차이가 났습니다. 원래 약의 IC50은 19.07 µM이었습니다.</p>
+  <ul>
+    <li><b>짧고 가지 친 에스터는 약해짐</b>: 피발산 2c 71.72, 프로판산 2a 54.82, 이소부티르산 2b 48.43 µM</li>
+    <li><b>긴 에스터는 원래 약 수준 유지</b>: 데칸산 2f 10.05, 헥산산 2e 14.14 µM</li>
+    <li><b>카보네이트는 반대 경향</b>: 긴 사슬(3f 75.16, 3g 91.15, 3i 84.84 µM)은 약해졌고, 사이클로펜틸 3d(16.67 µM)는 유지</li>
+  </ul>
+  <p>30분 이상 노출하면 이런 차이는 대부분 사라졌습니다. 저자들은 이를 <b>세포에 처음 들어가는 속도 차이</b>로 해석합니다.</p>
+
+  <h3>결과 ④ Wnt 리포터 — 일부는 원래 약보다 강하게 억제</h3>
+  <p><span class="tag t-p">논문</span> Wnt 신호를 켰을 때 빛을 내는 세포(3T3)로 대표 7종을 시험했습니다. 남은 발광은 250 µM에서 4.2–42%, 25 µM에서 18–72%였습니다. 피발산 에스터 2c와 카보네이트 3a·3b·3f·3i는 니클로사마이드보다 <b>통계적으로 유의하게 강했습니다</b>(이원분산분석, n=4, p&lt;0.05). 프로판산 2a·데칸산 2f 에스터는 원래 약보다 약했습니다. 리포터 세포에서는 세포독성이 거의 없었다고 보고합니다.</p>
+
+  <h3>결과 ⑤ SwissADME — 계산상 “흡수 높음”은 4종뿐</h3>
+  <p><span class="tag t-p">논문</span> 사슬이 길수록 지용성(logP)이 3.96(2a)에서 10.8(2j)까지 올라갔습니다. 장 흡수(GI absorption) 예측은 <b>짧은 에스터 4종(2a–2d)만 “높음”</b>이었고, 나머지 에스터와 카보네이트 9종은 모두 “낮음”이었습니다. 에스터의 생체이용률 점수는 사슬이 길어질수록 0.55에서 0.17로 떨어졌습니다.</p>
+  <div class="call purple"><h4>🔍 Claude의 메모 <span class="tag t-i">🤖 Claude 판단</span></h4>논문은 이 결과를 “약물성을 조절할 수 있다”고 긍정적으로 요약합니다. 그러나 표를 그대로 읽으면, 꼬리를 길게 붙일수록 <b>계산상 흡수는 오히려 나빠지는 쪽</b>입니다. 흡수를 개선하려는 연구라면 이 부분이 가장 중요한 숙제입니다.</div>
+
+  <h3>저자들의 결론</h3>
+  <p><span class="tag t-p">논문</span> 꼬리 종류는 가수분해 속도와 초기 세포 흡수에는 영향을 주지만, 오래 노출하면 효과가 수렴합니다. 따라서 이 프로드러그들의 활성은 <b>꼬리가 아니라 원래 약(니클로사마이드)이 결정</b>합니다. 다음 단계로는 동물 모델에서 흡수와 체내 분포, 효능을 확인하겠다고 밝혔습니다.</p>
+
+  <h3>저자들이 니클로사마이드를 고른 이유 (논문 근거)</h3>
+  <ul>
+    <li><span class="tag t-p">논문</span> <b>이미 FDA 승인된 약</b>입니다. 용도변경은 안전성이 알려진 약으로 개발을 앞당기는 경로라고 서론에서 밝힙니다.</li>
+    <li><span class="tag t-p">논문</span> <b>표적이 넓습니다.</b> 14개 표적(Table 1)과 파킨슨병·당뇨·세균 감염 등 다른 적응증 연구도 함께 제시합니다.</li>
+    <li><span class="tag t-p">논문</span> <b>뚜렷한 약점이 있습니다.</b> 낮은 용해도와 흡수가 전신 항암제 개발을 막고 있다고 서론과 결론 양쪽에서 강조합니다.</li>
+    <li><span class="tag t-p">논문</span> <b>선행 시도가 많아 비교 기준이 있습니다.</b> 아세트산·스테아르산·벤조산 에스터 등(참고문헌 37–46)이 있었고, 이를 체계적으로 비교한 연구가 없다는 점이 틈새입니다.</li>
+  </ul>
+</section>
+
+<!-- 2. WHY NICLOSAMIDE -->
+<section id="s2">
+  <h2><span class="n">2</span>왜 하필 니클로사마이드인가? 이버멕틴은?</h2>
+  <p>용도변경 후보 약은 많습니다. 이 연구 질문에 왜 니클로사마이드가 잘 맞았는지 네 가지 관점으로 봅니다.</p>
+
+  <h3>① 연구 질문과 딱 맞는 “문제 있는 약”</h3>
+  <p><span class="tag t-p">논문</span> 이 연구의 질문은 “전달·흡수를 개선할 수 있나”입니다. 니클로사마이드는 <b>세포에서는 강한데 몸에는 잘 안 들어가는</b> 약의 대표 사례라서, 프로드러그 연구의 대상으로 명분이 분명합니다.</p>
+  <p><span class="tag t-x">외부</span> 실제 임상에서도 이 문제가 확인됐습니다.</p>
+  <ul>
+    <li>거세저항성 전립선암 1상(Schweizer 2018): 경구 니클로사마이드를 최대 내약 용량(500 mg 하루 3회)까지 올려도 혈중 농도가 <b>치료 문턱을 꾸준히 넘지 못해</b> 무익성으로 조기 종료됐습니다. 정정 공지에 따른 최고 혈중 농도는 35.7–182 ng/mL였습니다(<span class="tag t-i">🤖 Claude 판단</span> 약 0.11–0.56 µM).</li>
+    <li>재제형 니클로사마이드(PDMX1001, Parikh 2021) 1b상: 아비라테론 병용에서 최저·최고 농도 모두 <b>0.2 µM 문턱을 넘었습니다.</b> 즉 “제형을 바꾸면 흡수 문제를 넘을 수 있다”는 선례가 있습니다.</li>
+  </ul>
+
+  <h3>② 화학 구조와 실험 편의성</h3>
+  <ul>
+    <li><span class="tag t-p">논문</span> 꼬리를 붙일 자리가 <b>페놀 -OH 하나</b>입니다. 산염화물이나 클로로포메이트와 한 단계 반응으로 끝나며, 일부는 5분 만에 반응이 완료됐습니다.</li>
+    <li><span class="tag t-p">논문</span> 니클로사마이드는 <b>노란색</b>을 띠고 380 nm에서 흡광합니다. 꼬리가 떨어지면 노란색이 진해지므로, 비싼 장비(HPLC·질량분석) 없이 <b>플레이트 리더만으로 가수분해를 추적</b>할 수 있습니다.</li>
+    <li><span class="tag t-i">🤖 Claude 판단</span> 싸고 구하기 쉬운 출발물질, 한 단계 합성, 색 변화 측정. 21종을 한꺼번에 만들고 비교하기에 이상적인 조건입니다.</li>
+  </ul>
+
+  <h3>③ 연구실의 기존 연구 분야</h3>
+  <p><span class="tag t-p">논문</span> 참고문헌에 교신저자 Njoo의 이름이 든 선행 연구가 있습니다.</p>
+  <ul>
+    <li>입체 장애가 있는 에스터의 가수분해 속도 연구(참고문헌 47)</li>
+    <li>Wnt1을 조절하는 항암 화합물 연구(참고문헌 49)</li>
+  </ul>
+  <p><span class="tag t-i">🤖 Claude 판단</span> 같은 리포터 시험을 쓴 안드로그라폴라이드 유도체(48), 카모퍼 유사체(8)도 같은 그룹 연구로 보입니다(저자 목록 일부만 확인). 즉 이 연구실은 <b>“에스터 가수분해 + Wnt 리포터 + 기존 약 변형”</b>이라는 도구를 이미 갖추고 있었습니다. 니클로사마이드는 대표 표적이 Wnt인 약이라 이 도구 세트에 정확히 맞습니다.</p>
+  <p><span class="tag t-x">외부</span> ASDRP는 주로 <b>학생 연구자</b>가 지도교수 아래에서 연구하는 비영리 연구 프로그램으로 알려져 있습니다. 공저자 수(14명)와 실험 설계의 성격도 이와 맞습니다. 이것만으로 논문의 질을 판단할 수는 없지만, 단순한 반응과 측정이 가능한 약을 고른 배경으로는 자연스럽습니다.</p>
+
+  <h3>④ 이버멕틴과 비교</h3>
+  <div class="vs">
+    <div class="card n">
+      <h4>니클로사마이드</h4>
+      <ul>
+        <li>분자량 약 327, 구조가 작고 단순</li>
+        <li>꼬리 붙일 자리 1곳(페놀) → 선택성 문제 없음</li>
+        <li>가수분해되면 색이 변함 → 측정 쉬움</li>
+        <li>주된 약점이 <b>흡수</b>라서 프로드러그 질문과 일치</li>
+        <li>임상: 전립선암 1상(무익성 종료), 재제형 1b/2상</li>
+      </ul>
+    </div>
+    <div class="card i">
+      <h4>이버멕틴</h4>
+      <ul>
+        <li>분자량 약 875, 거대 고리 락톤으로 구조가 복잡</li>
+        <li>-OH가 여러 개 → 원하는 자리만 바꾸기 어렵고 보호기 필요 <span class="tag t-i">🤖 Claude 판단</span></li>
+        <li>가수분해해도 색 변화 없음 → HPLC 등 필요 <span class="tag t-i">🤖 Claude 판단</span></li>
+        <li>P-당단백질이 뇌 유입을 막아 줌 → 흡수·투과를 바꾸는 개조는 <b>신경독성 우려</b> <span class="tag t-x">외부</span></li>
+        <li>임상: 고형암 등 1/2상(초기 단계)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tw"><table>
+    <tr><th>질문</th><th>니클로사마이드</th><th>이버멕틴</th></tr>
+    <tr><td colspan="3" style="font-size:13px;color:#3730a3;font-weight:600">✅/⚠ 적합성 판정은 <span class="tag t-i">🤖 Claude 판단</span>입니다.</td></tr>
+    <tr><td><b>이 논문 목적(프로드러그 비교)에 더 적합?</b></td><td><span class="st">✅ 적합</span> 단일 반응점·색 측정·흡수가 핵심 약점</td><td><span class="st">⚠ 불리</span> 합성·분석 난도가 높고 안전성 변수까지 추가</td></tr>
+    <tr><td><b>항암 근거 수준</b></td><td>전임상 다수 + 소규모 임상(전립선암)</td><td>전임상 다수 + 초기 임상</td></tr>
+    <tr><td><b>필요 농도 vs 혈중 농도</b></td><td>경구 기존 제형: 0.11–0.56 µM 수준으로 0.2 µM 문턱을 불안정하게 넘음 <span class="tag t-x">외부</span><br>이 논문 IC50은 대개 수 µM 이상 → 격차가 더 큼 <span class="tag t-i">🤖 Claude 판단</span></td><td>표준 용량 최고 혈중 농도는 대략 0.05 µM 안팎, 세포 실험 유효 농도는 흔히 수 µM 이상 → <b>격차가 수십~수백 배</b> <span class="tag t-x">외부</span> <small>(대략값, 이 문서에서 원문 재확인하지 않음)</small></td></tr>
+    <tr><td><b>격차를 줄인 선례</b></td><td>재제형 PDMX1001이 0.2 µM 문턱 돌파 <span class="tag t-x">외부</span></td><td>Claude가 확인한 범위에서는 비슷한 선례 없음 <span class="tag t-i">🤖 Claude 판단</span></td></tr>
+  </table></div>
+  <p class="scroll-hint">← 옆으로 밀어 보기</p>
+
+  <div class="call blue"><h4>정리 <span class="tag t-i">🤖 Claude 판단</span></h4>
+    <p>“이버멕틴이 더 유리하지 않은가?”에 대해서는 <b>질문을 둘로 나눠야 합니다.</b></p>
+    <ul>
+      <li><b>프로드러그 연구 대상으로는</b> 니클로사마이드가 분명히 유리합니다. 단순한 구조, 한 단계 합성, 색으로 측정할 수 있다는 점 때문입니다.</li>
+      <li><b>항암제 후보로서는</b> 둘 다 “세포에서 필요한 농도 &gt; 사람 혈중 농도”라는 같은 벽 앞에 있습니다. 어느 쪽이 더 낫다고 말할 근거는 아직 부족합니다. 다만 니클로사마이드는 재제형으로 그 벽을 일부 넘은 임상 선례가 있다는 점이 다릅니다.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 3. PRODRUG -->
+<section id="s3">
+  <h2><span class="n">3</span>“프로드러그”란 무엇인가 (쉬운 설명)</h2>
+
+  <div class="call green"><h4>💊 한 줄 비유</h4>프로드러그는 <b>포장지에 싸인 약</b>입니다. 포장 상태로는 일을 하지 않다가, 몸속에서 포장이 벗겨지면 진짜 약이 되어 작동합니다.</div>
+
+  <h3>왜 일부러 포장을 할까?</h3>
+  <ul>
+    <li><b>잘 흡수되게</b>: 물을 좋아하는 약에 기름 성질의 포장을 씌우면 장벽을 더 쉽게 통과할 수 있습니다.</li>
+    <li><b>오래 머무르게</b>: 포장이 천천히 벗겨지면 효과가 길게 갑니다.</li>
+    <li><b>원하는 곳에서만 작동하게</b>: 특정 장기나 효소가 있는 곳에서만 포장을 벗기게 설계할 수 있습니다.</li>
+    <li><b>속쓰림·맛 문제 줄이기</b>: 위에서는 포장 상태로 지나가게 할 수 있습니다.</li>
+  </ul>
+
+  <h3>우리가 아는 약에도 있습니다 <span class="tag t-x">외부</span></h3>
+  <div class="tw"><table>
+    <tr><th>약</th><th>포장된 상태</th><th>몸속에서 바뀌는 것</th></tr>
+    <tr><td><b>타미플루</b> (오셀타미비르)</td><td>에틸 <b>에스터</b> 포장</td><td>간에서 포장이 벗겨져 활성형 오셀타미비르 카복실산으로 바뀜</td></tr>
+    <tr><td><b>발트렉스</b> (발라시클로버)</td><td>아미노산 포장</td><td>아시클로버로 바뀜. 흡수가 몇 배 좋아짐</td></tr>
+    <tr><td><b>에날라프릴</b> (혈압약)</td><td>에스터 포장</td><td>에날라프릴라트로 바뀌어 작용</td></tr>
+  </table></div>
+  <p>특히 타미플루는 이 논문과 같은 <b>에스터 포장</b>이라서 가장 가까운 예입니다.</p>
+
+  <h3>이 논문에 대입하면</h3>
+  <ol class="steps">
+    <li>니클로사마이드에는 <b>손잡이(-OH)</b>가 하나 있습니다. 이 손잡이 때문에 물에도 기름에도 애매하게 녹아 흡수가 나쁩니다.</li>
+    <li>저자들은 이 손잡이에 <b>기름 꼬리 21종</b>(짧은 것부터 탄소 18개짜리, 고리 모양까지)을 달아 손잡이를 가렸습니다.</li>
+    <li>시험관에서 꼬리가 떨어지며 <b>원래 니클로사마이드로 돌아오는지</b> 노란색 변화로 확인했습니다.</li>
+    <li>결과적으로 세포는 결국 <b>포장이 벗겨진 니클로사마이드</b>에 반응했습니다. 그래서 꼬리 종류와 상관없이 효과가 비슷하게 나왔습니다.</li>
+    <li>아직 남은 질문은 <b>“포장한 덕분에 몸에 더 잘 들어가는가?”</b>입니다. 이는 동물 실험으로 확인해야 합니다.</li>
+  </ol>
+  <div class="call amber"><h4>⚠ 포장에도 딜레마가 있습니다 <span class="tag t-i">🤖 Claude 판단</span></h4>포장이 <b>너무 빨리</b> 벗겨지면 장에 닿기 전에 원래 약으로 돌아와 흡수 개선 효과가 사라집니다. 반대로 <b>너무 안 벗겨지면</b> 약이 작동하지 않습니다. 이 논문의 “빨리 풀린다”는 장점이 실제 몸에서는 단점이 될 수도 있는 이유입니다.</div>
+</section>
+
+<!-- 4. LIMITS -->
+<section id="s4">
+  <h2><span class="n">4</span>공유할 때 주의할 점 — 정직한 한계</h2>
+  <div class="tw"><table>
+    <tr><th>주장</th><th>상태 (🤖 Claude 판단)</th><th>이유</th></tr>
+    <tr><td>21종 프로드러그를 합성했다</td><td class="st">✅ 확인</td><td>NMR·IR 자료를 보충자료로 제시</td></tr>
+    <tr><td>세포 억제력이 원래 약과 대체로 비슷</td><td class="st">⚠ 제한적</td><td>범위로는 비슷하나 일부는 수십 배 차이. 비교 기준값 출처가 혼재</td></tr>
+    <tr><td>“빠르게” 원래 약으로 돌아온다</td><td class="st">⚠ 조건부</td><td>알코올 혼합·효소 없음 조건. 60분에 절반 이상은 8/21종</td></tr>
+    <tr><td>일부는 원래 약보다 Wnt 억제가 강함</td><td class="st">⚠ 제한적</td><td>25–250 µM의 매우 높은 농도. 리포터 세포 1종(쥐 3T3)</td></tr>
+    <tr><td>흡수·생체이용률이 개선된다</td><td class="st">❓ 미검증</td><td>측정 없음. 계산 예측뿐이며, 예측도 17/21종이 “흡수 낮음”</td></tr>
+    <tr><td>사람 암 치료에 효과가 있다</td><td class="st">🔴 근거 없음</td><td>동물·사람 데이터 0건</td></tr>
+  </table></div>
+  <p class="scroll-hint">← 옆으로 밀어 보기</p>
+
+  <h3>구체적 한계</h3>
+  <p class="ainote">아래 한계 목록은 논문을 검토한 <span class="tag t-i">🤖 Claude 판단</span>입니다.</p>
+  <ul>
+    <li><b>시험관 결과뿐입니다.</b> 동물·사람 데이터가 없고, 저자들도 동물 실험을 “향후 과제”로 적었습니다.</li>
+    <li><b>가수분해 조건이 실제 몸과 다릅니다.</b> 이소프로판올이 대부분이고 물은 약 9%였습니다. 실제 몸에서 꼬리를 떼는 <b>에스테라아제 효소, 혈장, 장액, 간 조건이 없습니다.</b> 반복도 2회뿐입니다.</li>
+    <li><b>니클로사마이드 비교값의 출처가 불분명합니다.</b> 본문의 0.25–19.49 µM은 문헌 [51] 인용이고, 그림의 같은 실험값(0.91–19.5 µM)과 다릅니다.</li>
+    <li><b>Wnt 시험 농도가 매우 높습니다.</b> 25–250 µM은 기존 경구 제형의 사람 혈중 농도(최고 약 0.1–0.6 µM)보다 <b>수십~수천 배</b> 높습니다 <span class="tag t-i">🤖 Claude 판단</span>.</li>
+    <li><b>흡수 개선은 계산 예측입니다.</b> SwissADME는 무료 예측 도구이고, 실측(투과도, 동물 약동학)이 아닙니다.</li>
+    <li><b>세포 안에서 실제로 꼬리가 떨어졌는지는 직접 측정하지 않았습니다</b> <span class="tag t-i">🤖 Claude 판단</span>. “비슷한 효과라서 풀렸을 것”이라는 간접 추론입니다.</li>
+    <li><b>본문에 작은 불일치가 있습니다</b> <span class="tag t-i">🤖 Claude 판단</span>. 카보네이트와 “아마이드 계열”을 비교한다는 문장(에스터의 오기로 보임), 입체 장애와 가수분해 속도에 대한 서로 다른 서술 등이 있습니다.</li>
+  </ul>
+
+  <div class="call red"><h4>🔴 커뮤니티 공유 시 꼭 지킬 것 <span class="tag t-i">🤖 Claude 판단</span></h4>
+    <ul>
+      <li>이 논문의 화합물들은 <b>시판되지 않으며</b> 사람에게 쓰인 적이 없습니다.</li>
+      <li>“니클로사마이드가 암에 효과가 있다는 새 증거”로 소개하지 마십시오. 이 논문은 <b>포장 방식 비교 연구</b>입니다.</li>
+      <li>니클로사마이드를 자가 복용하거나 지방·기름과 섞어 먹는 식으로 응용하는 것은 <b>이 논문이 뒷받침하지 않습니다.</b> 치료 결정은 반드시 전문의와 상의하십시오.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 5. FAQ -->
+<section id="s5">
+  <h2><span class="n">5</span>예상 질문 & 답변</h2>
+  <p class="ainote">아래 질문과 답변은 Claude가 작성한 해설입니다 <span class="tag t-i">🤖 Claude 판단</span>.</p>
+
+  <h3>일반 (처음 읽는 분)</h3>
+  <details><summary>니클로사마이드가 뭔가요?</summary><div class="a">촌충 같은 장내 기생충을 없애는 오래된 구충제입니다. 장에서 거의 흡수되지 않아서 장 안의 기생충에만 작용하는데, 구충제로는 장점인 이 성질이 항암제로는 큰 약점이 됩니다.</div></details>
+  <details><summary>그럼 이 논문으로 니클로사마이드가 항암제가 된 건가요?</summary><div class="a">아닙니다. 세포 실험에서 “포장을 씌워도 약효가 유지된다”를 보인 단계입니다. 몸에 더 잘 들어가는지, 동물에서 암이 줄어드는지는 아직 시험하지 않았습니다.</div></details>
+  <details><summary>펜벤다졸·메벤다졸이랑 비슷한 이야기인가요?</summary><div class="a">“물에 잘 안 녹아 흡수가 나쁜 구충제”라는 점에서 같은 문제를 공유합니다. 그래서 제형을 바꾸거나 포장하는 연구가 계속 나옵니다. 다만 약마다 구조가 달라서 이 논문 결과를 다른 약에 그대로 옮길 수는 없습니다.</div></details>
+
+  <h3>심화 (배경 있는 분)</h3>
+  <details><summary>꼬리를 붙였는데 왜 효과가 거의 같나요?</summary><div class="a">시험관과 배양 조건에서 꼬리가 비교적 빨리 떨어져 원래 약으로 돌아오기 때문이라고 저자들은 해석합니다. 72시간 배양하면 결국 같은 물질을 보게 되는 셈입니다. 그래서 세포 실험만으로는 프로드러그의 진짜 장점(흡수·분포)을 볼 수 없습니다.</div></details>
+  <details><summary>워시아웃 실험은 왜 했나요?</summary><div class="a">약이 세포에 짧게만 닿아도 들어가는지 보기 위해서입니다. 15분 노출에서는 꼬리에 따라 효과가 크게 달랐고, 30분이 넘으면 비슷해졌습니다. 몸속에서 약이 짧게 지나가는 상황을 흉내 낸 것으로 볼 수 있지만, 실제 체내 조건과는 다릅니다.</div></details>
+  <details><summary>Wnt 억제가 원래 약보다 강했다는데 의미가 큰가요?</summary><div class="a">흥미롭지만 조심해야 합니다. 25–250 µM의 높은 농도에서, 쥐 섬유아세포 리포터 1종으로, 대표 7종만 시험한 결과입니다. 사람 몸에서 도달할 수 있는 농도에서도 차이가 유지되는지는 알 수 없습니다.</div></details>
+
+  <h3>회의적 (비판적인 분)</h3>
+  <details><summary>흡수를 개선하려는 연구인데 흡수를 안 쟀다면 핵심이 빠진 것 아닌가요?</summary><div class="a">정확한 지적입니다. 이 논문이 실제로 증명한 것은 “약효 유지”이고, “흡수 개선”은 다음 단계로 남겨 두었습니다. 게다가 이 논문의 계산 예측조차 대부분의 꼬리가 장 흡수를 “낮음”으로 판정했습니다. 제목의 “Rapid Bioactivation”도 효소가 없는 시험관 조건 결과임을 기억해야 합니다.</div></details>
+  <details><summary>학생 연구 프로그램 논문이면 믿을 수 없는 것 아닌가요?</summary><div class="a">누가 했는지보다 <b>무엇을 어떻게 측정했는지</b>로 판단해야 합니다. 합성과 측정 방법은 공개돼 있고 결과도 자기 주장에 비교적 절제적입니다(“꼬리는 시험관 효능을 크게 바꾸지 않는다”). 다만 반복 수가 적고, 비교 기준이 혼재하며, 서술이 데이터보다 넉넉한 부분이 있습니다. 이 점은 위 한계표에 그대로 적었습니다.</div></details>
+</section>
+
+<!-- 6. GLOSSARY & SOURCES -->
+<section id="s6">
+  <h2><span class="n">6</span>용어 사전 & 출처</h2>
+  <div class="tw"><table>
+    <tr><th>용어</th><th>뜻</th></tr>
+    <tr><td><b>프로드러그</b></td><td>몸속에서 바뀌어야 작동하는 “포장된 약”</td></tr>
+    <tr><td><b>에스터 / 카보네이트</b></td><td>약의 -OH에 꼬리를 붙이는 두 가지 화학 연결 방식. 둘 다 물과 효소로 끊어질 수 있음</td></tr>
+    <tr><td><b>가수분해</b></td><td>물에 의해 결합이 끊어지는 반응. 여기서는 꼬리가 떨어지는 것</td></tr>
+    <tr><td><b>IC50</b></td><td>세포 성장을 절반으로 줄이는 농도. 작을수록 강함</td></tr>
+    <tr><td><b>워시아웃</b></td><td>약을 잠깐 주고 씻어낸 뒤 남은 효과를 보는 실험</td></tr>
+    <tr><td><b>Wnt/β-catenin</b></td><td>세포 증식과 줄기세포 성질에 관여하는 신호 경로. 대장암 등에서 과활성</td></tr>
+    <tr><td><b>리포터 시험</b></td><td>특정 신호가 켜지면 빛을 내도록 만든 세포로 신호 세기를 재는 방법</td></tr>
+    <tr><td><b>logP</b></td><td>지용성 지표. 클수록 기름을 좋아함(물에 덜 녹음)</td></tr>
+    <tr><td><b>SwissADME</b></td><td>구조만 넣으면 흡수·대사 성질을 예측해 주는 무료 웹 도구. 실측 아님</td></tr>
+    <tr><td><b>에스테라아제</b></td><td>몸속에서 에스터 결합을 끊는 효소. 이 논문의 가수분해 시험에는 없음</td></tr>
+  </table></div>
+
+  <h3>주요 출처</h3>
+  <ul>
+    <li><b>본 논문</b>: Gribok A, et al. <i>Targets</i> 2026;4:32. <a href="https://doi.org/10.3390/targets4040032">doi.org/10.3390/targets4040032</a></li>
+    <li>Schweizer MT, et al. A phase I study of niclosamide in combination with enzalutamide in men with CRPC. <i>PLoS ONE</i> 2018;13:e0198389. <a href="https://doi.org/10.1371/journal.pone.0198389">doi.org/10.1371/journal.pone.0198389</a> (최고 혈중 농도 정정: <a href="https://doi.org/10.1371/journal.pone.0202709">e0202709</a>)</li>
+    <li>Parikh M, et al. Phase Ib trial of reformulated niclosamide with abiraterone/prednisone in men with CRPC. <i>Sci Rep</i> 2021;11:6377. <a href="https://doi.org/10.1038/s41598-021-85969-x">doi.org/10.1038/s41598-021-85969-x</a></li>
+    <li>Al-Zoubi RM, et al. Antiparasitic agents in oncology. <i>Eur J Med Chem</i> 2026;316:118987. <a href="https://doi.org/10.1016/j.ejmech.2026.118987">doi.org/10.1016/j.ejmech.2026.118987</a> (임상 단계 비교 참고)</li>
+  </ul>
+</section>
+
+<div class="honest">
+  <b>⚠️ 정직하게 밝힙니다</b>
+  <ul>
+    <li>이 문서는 <b>일반인용 해설</b>이며, 논문 원문을 대체하지 않습니다.</li>
+    <li>논문 수치는 원문 본문·표·그림(히트맵)에서 옮겼습니다. 그림에서 읽은 값은 판독 오차가 있을 수 있습니다.</li>
+    <li><span class="tag t-x">외부</span> 표시의 임상 수치 중 니클로사마이드는 원문 초록으로 확인했습니다. <b>이버멕틴 혈중 농도·세포 유효 농도는 대략값</b>이며 이 문서에서 원문을 재확인하지 않았습니다.</li>
+    <li><span class="tag t-i">🤖 Claude 판단</span> 표시는 원문에 없는 <b>AI Claude의 해석·평가·추론</b>입니다. 저자들의 주장과 구분해서 읽어 주십시오. 사람 전문가의 검토를 거치지 않았습니다.</li>
+    <li><b>의료 조언이 아닙니다.</b> 치료 결정은 반드시 전문의와 상의하십시오.</li>
+  </ul>
+</div>
+
+<footer>
+  <b>작성일</b> 2026-10-21 · <b>형식</b> 단일 HTML (외부 의존 0) · <b>작성</b> Claude (Anthropic의 AI)<br>
+  히포크라테스의 친구들 · 논문 해설
+  <br><button class="print-btn" onclick="window.print()">인쇄 / PDF로 저장</button>
+</footer>
+
+</div>
+</body>
+</html>

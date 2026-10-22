@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>약물 재창출 리뷰 한 편, ReDO_DB 옆에 놓고 읽기 (2026)</title>
+<style>
+  :root{
+    --bg:#faf8f4; --card:#ffffff; --ink:#2b2b2b; --sub:#6b6b6b;
+    --teal:#0f5e5e; --teal-soft:#e3efee; --gold:#b45309; --gold-soft:#fdf0dc;
+    --sage:#5b7f5b; --sage-soft:#e9f0e6; --red:#b91c1c; --red-soft:#fdecec;
+    --purple:#6d28a8; --purple-soft:#f2e9fb; --line:#e5dfd3;
+    --navy:#1e3a5f; --navy-soft:#e6ecf5;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+    font-size:17px; line-height:1.72; padding:0 0 60px 0;
+    -webkit-text-size-adjust:100%; word-break:keep-all; overflow-wrap:break-word;}
+  .wrap{max-width:780px; margin:0 auto; padding:0 16px;}
+  a{color:var(--teal); word-break:break-all;}
+  header{background:linear-gradient(135deg,#0f5e5e 0%,#146b6b 52%,#5b7f5b 100%);
+    color:#fff; padding:38px 16px 30px; text-align:center;}
+  header .tag{display:inline-block; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.4);
+    border-radius:999px; padding:4px 14px; font-size:13px; margin-bottom:12px; letter-spacing:.3px;}
+  header h1{font-size:23px; line-height:1.4; font-weight:800; margin-bottom:10px;}
+  header p{font-size:15px; opacity:.94; line-height:1.55;}
+  .meta{background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px 16px;
+    font-size:14px; color:var(--sub); margin-top:14px; text-align:left; box-shadow:0 1px 3px rgba(0,0,0,.05);}
+  .meta b{color:var(--ink);}
+  section{background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:22px 20px; margin-top:22px; box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  h2{font-size:19px; color:var(--teal); font-weight:800; margin-bottom:14px;
+    padding-bottom:10px; border-bottom:2px solid var(--teal-soft); line-height:1.4;}
+  h2 .num{display:inline-block; background:var(--teal); color:#fff; border-radius:6px;
+    font-size:13px; padding:1px 8px; margin-right:8px; vertical-align:middle;}
+  h3{font-size:16px; color:var(--gold); font-weight:700; margin:18px 0 8px;}
+  h4{font-size:15px; color:var(--ink); font-weight:700; margin:14px 0 6px;}
+  p{margin-bottom:10px;}
+  ul,ol{margin:8px 0 12px 22px;}
+  li{margin-bottom:6px;}
+  b,strong{color:#111; font-weight:700;}
+  .lead{font-size:16.5px; color:var(--ink);}
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px;}
+  th,td{border:1px solid var(--line); padding:8px 9px; text-align:left; vertical-align:top;}
+  th{background:var(--teal-soft); color:var(--teal); font-weight:700;}
+  tr:nth-child(even) td{background:#fcfbf8;}
+  tr.grp td{background:#f5f2ec !important; font-weight:700; color:var(--gold); font-size:13.5px;}
+  td.c{text-align:center; white-space:nowrap;}
+  .badge{display:inline-block; font-size:12px; font-weight:700; border-radius:5px;
+    padding:1px 7px; white-space:nowrap;}
+  .b-ok{background:var(--sage-soft); color:var(--sage); border:1px solid #c4d8c0;}
+  .b-strong{background:var(--gold-soft); color:var(--gold); border:1px solid #f0d5a8;}
+  .b-open{background:#eef2f7; color:#475569; border:1px solid #cdd7e3;}
+  .b-retract{background:var(--red-soft); color:var(--red); border:1px solid #f2c4c4;}
+  .card{background:var(--teal-soft); border-radius:10px; padding:13px 15px; margin:10px 0;
+    border-left:4px solid var(--teal);}
+  .card.gold{background:var(--gold-soft); border-left-color:var(--gold);}
+  .card.sage{background:var(--sage-soft); border-left-color:var(--sage);}
+  .card.red{background:var(--red-soft); border-left-color:var(--red);}
+  .card.purple{background:var(--purple-soft); border-left-color:var(--purple);}
+  .card.ai{background:var(--navy-soft); border-left-color:var(--navy);}
+  .card h4{margin-top:0;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:12px 0;}
+  .grid4{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:12px 0;}
+  .stat{background:#fcfbf8; border:1px solid var(--line); border-radius:10px; padding:12px; text-align:center;}
+  .stat .n{font-size:22px; font-weight:800; color:var(--teal); line-height:1.2;}
+  .stat .l{font-size:13px; color:var(--sub); margin-top:3px;}
+  .qa{margin:12px 0;}
+  .q{font-weight:700; color:var(--teal); margin-top:14px; padding-left:22px; position:relative;}
+  .q::before{content:"Q"; position:absolute; left:0; top:0; background:var(--teal); color:#fff;
+    font-size:11px; width:16px; height:16px; border-radius:4px; text-align:center; line-height:16px;}
+  .a{margin:4px 0 0 22px; color:#333;}
+  .foot{font-size:13px; color:var(--sub); margin-top:26px; padding:16px; background:#f5f2ec;
+    border-radius:10px; line-height:1.6;}
+  .foot b{color:var(--ink);}
+  .tagline{font-size:13px; color:var(--sub); margin-top:6px;}
+  .note{font-size:13.5px; color:var(--sub);}
+  /* 출처 라벨 */
+  .src{display:inline-block; font-size:11.5px; font-weight:700; border-radius:5px; padding:0 6px;
+    margin:0 2px; white-space:nowrap; vertical-align:1px; border:1px solid transparent;}
+  .s-paper{background:var(--teal-soft); color:var(--teal); border-color:#b9d6d3;}
+  .s-ref{background:var(--gold-soft); color:var(--gold); border-color:#f0d5a8;}
+  .s-redo{background:var(--sage-soft); color:var(--sage); border-color:#c4d8c0;}
+  .s-ai{background:var(--navy); color:#fff;}
+  .print-btn{margin-top:12px; background:var(--teal); color:#fff; border:0; border-radius:8px;
+    padding:8px 16px; font-size:14px; cursor:pointer;}
+  table.drug{table-layout:fixed;}
+  .tbl{overflow-x:auto; -webkit-overflow-scrolling:touch;}
+  @media(max-width:520px){
+    td.c,th.c{padding:6px 3px; text-align:center;}
+    .badge{padding:1px 4px; font-size:11.5px;}
+    body{font-size:16px;}
+    .grid2{grid-template-columns:1fr;}
+    .grid4{grid-template-columns:1fr 1fr;}
+    section{padding:18px 15px;}
+    header h1{font-size:20px;}
+    table{font-size:13px;}
+    th,td{padding:6px 7px;}
+  }
+  @media print{ .print-btn{display:none;} section{break-inside:avoid-page;} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="tag">논문 소개 · 약물 재창출 · 2026</div>
+  <h1>구충제부터 혈압약까지 —<br>약물 재창출 리뷰 한 편, 어떻게 읽을까</h1>
+  <p>9개 약물 분류, 약 45개 약물을 훑은 2026년 리뷰.<br>무엇을 담았고, ReDO_DB와 나란히 놓으면 무엇이 보이는가.</p>
+</header>
+
+<div class="wrap">
+
+  <div class="meta">
+    <b>소개 대상 논문</b><br>
+    Yadav V, Mandaliya VB, Shah U. “Drug Repurposing in Cancer Therapy: A Review of Therapeutic Potential Across Diverse Drug Classes.” <i>ChemistrySelect</i> 11(38) (2026). DOI: <a href="https://doi.org/10.1002/slct.202506782">10.1002/slct.202506782</a><br><br>
+    <b>성격</b> 종설(Review) · 화학 분야 학술지(Wiley/Chemistry Europe) &nbsp;|&nbsp; <b>분량</b> 참고문헌 157편 &nbsp;|&nbsp; <b>접근</b> 본문 유료
+    <div class="tagline">※ 이 문서는 논문을 <b>일반인이 읽을 수 있게</b> 풀어쓴 소개글입니다. 원문과 의료 조언을 대체하지 않습니다.</div>
+  </div>
+
+  <!-- ============ 1. 30초 요약 ============ -->
+  <section>
+    <h2><span class="num">1</span>30초 요약</h2>
+    <p class="lead">한 문장으로: <b>“원래 다른 병에 쓰던 약이 암에도 듣는가”를 약물 분류별로 훑은 <u>입문용 개론 리뷰</u>.</b></p>
+
+    <div class="grid2">
+      <div class="card">
+        <h4>① 무엇을 다루나 <span class="src s-paper">논문</span></h4>
+        소염진통제, 당뇨약, 구충제, 항바이러스제, 항생제, 항경련제, 마취제, 항정신병약, 심혈관 약 등 <b>9개 분류</b>를 다룹니다.
+      </div>
+      <div class="card gold">
+        <h4>② 몇 개의 약이 나오나 <span class="src s-ref">참고문헌</span></h4>
+        참고문헌 제목으로 확인되는 구체적 약물은 <b>약 45개</b>입니다. 아스피린, 메트포르민, 메벤다졸, 플루벤다졸, 프로프라놀롤 등이 있습니다.
+      </div>
+      <div class="card sage">
+        <h4>③ 새로운 것이 있나 <span class="src s-redo">ReDO_DB</span> <span class="src s-ai">🤖 Claude 판단</span></h4>
+        거의 없습니다. 이 약들은 <b>2개를 빼고 모두 ReDO_DB에 이미 있습니다.</b> ReDO_DB는 375개 약물을 근거 수준과 함께 정리한 공개 데이터베이스입니다.
+      </div>
+      <div class="card red">
+        <h4>④ 조심할 점 <span class="src s-ai">🤖 Claude 판단</span></h4>
+        리뷰에는 <b>근거 수준 구분이 없습니다.</b> 사람 대상 연구가 하나도 없는 약과 임상시험까지 간 약이 같은 무게로 나열됩니다.
+      </div>
+    </div>
+
+    <div class="card purple">
+      <h4>⭐ 이 소개글의 핵심 <span class="src s-ai">🤖 Claude 판단</span></h4>
+      이 논문은 <b>“어떤 약들이 거론되는가”를 훑는 지도</b>로는 쓸모가 있습니다. 하지만 <b>“어느 약의 근거가 어디까지 왔는가”</b>는 알려주지 않습니다. 그래서 반드시 <b>ReDO_DB의 근거 표시와 나란히</b> 읽기를 권합니다. 3장 표에 두 자료를 합쳐 두었습니다.
+    </div>
+  </section>
+
+  <!-- ============ 2. 읽는 법 ============ -->
+  <section>
+    <h2><span class="num">2</span>먼저 — 이 소개글은 어떻게 만들었나</h2>
+    <p>논문 본문은 유료라 이번에 <b>직접 읽지 못했습니다.</b> 그래서 아래 세 가지 자료를 조합했습니다. 문장마다 어느 자료에서 왔는지 라벨을 붙였습니다.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>라벨</th><th>뜻</th></tr></thead>
+      <tbody>
+        <tr><td><span class="src s-paper">논문</span></td><td>논문 <b>초록</b>과 서지 정보에 적힌 내용</td></tr>
+        <tr><td><span class="src s-ref">참고문헌</span></td><td>논문이 인용한 <b>157편의 제목</b>에서 확인한 내용. 이 논문은 본문 순서대로 번호를 매기므로, 번호 순서로 본문 구성을 짐작할 수 있습니다.</td></tr>
+        <tr><td><span class="src s-redo">ReDO_DB</span></td><td><a href="https://data.tp53.org.uk/redo_db.php">ReDO_DB</a>(2026-10-15 판)에 기록된 내용</td></tr>
+        <tr><td><span class="src s-ai">🤖 Claude 판단</span></td><td>위 자료를 바탕으로 <b>AI(Claude)가 해석하거나 추정한 것</b>입니다. 사실로 확인된 내용과 구별해 읽어 주세요.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="card gold">
+      <h4>왜 참고문헌만으로도 꽤 알 수 있나</h4>
+      61–65번은 아스피린, 66–76번은 당뇨약, 77–93번은 구충제 하는 식으로 <span class="src s-ref">참고문헌</span> 번호가 초록의 분류 순서와 그대로 겹칩니다. 다만 본문이 각 약을 얼마나 깊게 다뤘는지는 <b>알 수 없습니다.</b>
+    </div>
+  </section>
+
+  <!-- ============ 3. 약물 목록 + ReDO ============ -->
+  <section>
+    <h2><span class="num">3</span>논문 속 약물 목록 — ReDO_DB 근거 표시와 함께</h2>
+
+    <div class="grid4">
+      <div class="stat"><div class="n">157</div><div class="l">참고문헌</div></div>
+      <div class="stat"><div class="n">9</div><div class="l">약물 분류</div></div>
+      <div class="stat"><div class="n">~45</div><div class="l">구체적 약물</div></div>
+      <div class="stat"><div class="n">2</div><div class="l">ReDO_DB에 없는 약</div></div>
+    </div>
+
+    <p>왼쪽 두 칸은 <span class="src s-ref">참고문헌</span>, 오른쪽 두 칸(임상시험·사람 데이터)은 <span class="src s-redo">ReDO_DB</span> 기록입니다.</p>
+    <ul class="note">
+      <li><b>임상시험</b>: 사람 대상 임상시험이 하나라도 등록·보고되어 있는가</li>
+      <li><b>사람 데이터</b>: 증례, 관찰연구, 임상시험 중 무엇이든 사람에게서 얻은 자료가 있는가</li>
+      <li>“예”는 <b>효과가 입증됐다는 뜻이 아닙니다.</b> 그런 연구가 존재한다는 뜻일 뿐입니다.</li>
+    </ul>
+
+    <div class="tbl"><table class="drug"><colgroup><col style="width:30%"><col><col style="width:15%"><col style="width:15%"></colgroup>
+      <thead><tr><th>약물</th><th>참고문헌 (주제)</th><th class="c">임상<br>시험</th><th class="c">사람<br>데이터</th></tr></thead>
+      <tbody>
+        <tr class="grp"><td colspan="4">소염진통제 (NSAIDs)</td></tr>
+        <tr><td><b>아스피린</b></td><td>61–65 · 대장암 예방, 린치증후군 무작위시험</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+        <tr><td>COX-2 억제제<br><span class="note">(ReDO: 셀레콕시브)</span></td><td>146 · 수술 전후 베타차단제 병용</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+
+        <tr class="grp"><td colspan="4">당뇨약</td></tr>
+        <tr><td><b>메트포르민</b></td><td>68–70, 76 · 간 지질생성 억제, 체계적 고찰</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+        <tr><td>피오글리타존</td><td>71–73 · 대장암 간전이, 췌장암</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+        <tr><td>SGLT2 억제제<br><span class="note">(ReDO: 다파·카나글리플로진)</span></td><td>74–75 · 기전 리뷰</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+
+        <tr class="grp"><td colspan="4">구충제·항말라리아제</td></tr>
+        <tr><td>아이버멕틴</td><td>77 · 리뷰</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+        <tr><td><b>플루벤다졸</b></td><td>78–81 · STAT3, HER2 유방암, PD-1 억제</td><td class="c"><span class="badge b-open">아니오</span></td><td class="c"><span class="badge b-retract">아니오</span></td></tr>
+        <tr><td><b>메벤다졸</b></td><td>22, 83–86 · 교종 1상, 부신피질암 증례</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+        <tr><td>알벤다졸</td><td>52 · 간세포암</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+        <tr><td>니클로사마이드</td><td>87–89 · Wnt, Notch</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+        <tr><td>클리오퀴놀</td><td>90–91 · HDAC, 백혈병·골수종</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+        <tr><td>아르테미시닌 계열<br><span class="note">(ReDO: 아르테수네이트)</span></td><td>92–93, 147 · 리뷰</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+
+        <tr class="grp"><td colspan="4">항바이러스제</td></tr>
+        <tr><td>리토나비르</td><td>94–95 · AKT(난소암), 교종</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+        <tr><td>시도포비르</td><td>97 · 교모세포종</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+        <tr><td>리바비린</td><td>98 · <span class="note">항바이러스 논문(항암 근거 아님)</span></td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+
+        <tr class="grp"><td colspan="4">항생제</td></tr>
+        <tr><td><b>베다퀼린</b></td><td>99–100 · 미토콘드리아, 암줄기세포</td><td class="c"><span class="badge b-open">아니오</span></td><td class="c"><span class="badge b-retract">아니오</span></td></tr>
+        <tr><td>티게사이클린</td><td>101, 103, 105 · 급성골수성백혈병 1상</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+        <tr><td>미노사이클린</td><td>102, 104 · 테트라사이클린 계열</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+        <tr><td><b>클로폭톨</b></td><td>106–107 · 전립선암, 소포체 스트레스</td><td class="c"><span class="badge b-open">아니오</span></td><td class="c"><span class="badge b-retract">아니오</span></td></tr>
+
+        <tr class="grp"><td colspan="4">항경련제</td></tr>
+        <tr><td>옥스카바제핀</td><td>112 · IDH 변이 교종 줄기세포</td><td class="c"><span class="badge b-open">아니오</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+        <tr><td><b>라모트리진</b></td><td>114 · 유방암 FoxO3a</td><td class="c"><span class="badge b-open">아니오</span></td><td class="c"><span class="badge b-retract">아니오</span></td></tr>
+        <tr><td>레베티라세탐</td><td>115–116 · <span class="note">기전 리뷰(항암 근거 아님)</span></td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+        <tr><td>발프로산</td><td>123–124 · 교종, 혈관신생 억제</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+
+        <tr class="grp"><td colspan="4">마취제</td></tr>
+        <tr><td>리도카인</td><td>117 · 리뷰</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+        <tr><td>케타민</td><td>118–119 · 난소암</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+
+        <tr class="grp"><td colspan="4">항정신병약·항우울제</td></tr>
+        <tr><td><b>아리피프라졸</b></td><td>132–133 · Src, 암줄기세포</td><td class="c"><span class="badge b-open">아니오</span></td><td class="c"><span class="badge b-retract">아니오</span></td></tr>
+        <tr><td><b>브렉스피프라졸</b></td><td>130–131 · <span class="note">약리 논문(항암 근거 아님)</span></td><td class="c"><span class="badge b-open">아니오</span></td><td class="c"><span class="badge b-retract">아니오</span></td></tr>
+        <tr><td>세르틴돌</td><td>134–135 · 위암 STAT3, 유방암 뇌전이</td><td class="c" colspan="2"><span class="badge b-strong">ReDO_DB에 없음</span></td></tr>
+        <tr><td>삼환계 항우울제<br><span class="note">(ReDO: 이미프라민)</span></td><td>126 · 소세포폐암</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+        <tr><td>SSRI<br><span class="note">(ReDO: 플루옥세틴)</span></td><td>127 · 버킷 림프종</td><td class="c"><span class="badge b-open">아니오</span></td><td class="c"><span class="badge b-retract">아니오</span></td></tr>
+
+        <tr class="grp"><td colspan="4">심혈관·지질 약</td></tr>
+        <tr><td><b>프로프라놀롤</b></td><td>140–145, 157 · 영아 혈관종, 두경부암, 면역치료 병용</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+        <tr><td>로사르탄</td><td>138 · 대장암</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+        <tr><td>발사르탄</td><td>139 · 대장암</td><td class="c"><span class="badge b-open">아니오</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+        <tr><td>캅토프릴</td><td>149–150 · p53, RAAS</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+        <tr><td>스타틴<br><span class="note">(ReDO: 아토르바스타틴 등)</span></td><td>137 · 유방암 재발(관찰연구)</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+        <tr><td><b>미녹시딜</b></td><td>151 · 부인암</td><td class="c"><span class="badge b-open">아니오</span></td><td class="c"><span class="badge b-retract">아니오</span></td></tr>
+        <tr><td>테조센탄</td><td>152 · 엔도텔린 수용체</td><td class="c" colspan="2"><span class="badge b-strong">ReDO_DB에 없음</span></td></tr>
+        <tr><td>페노피브레이트</td><td>153–154 · 위암 미토콘드리아</td><td class="c"><span class="badge b-ok">예</span></td><td class="c"><span class="badge b-ok">예</span></td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">※ 괄호 안 “ReDO: …”는 논문이 계열 이름만 적어서, ReDO_DB의 대표 약물 기록으로 대신 표시한 것입니다. 이 대응은 <span class="src s-ai">🤖 Claude 판단</span>입니다. 독소루비신(108–110, 148)은 원래 항암제라, 탈리도마이드(20)는 이미 항암제로 승인된 약이라 표에서 뺐습니다.</p>
+  </section>
+
+  <!-- ============ 4. ReDO_DB와 비교 ============ -->
+  <section>
+    <h2><span class="num">4</span>ReDO_DB와 무엇이 다른가</h2>
+    <div class="tbl"><table>
+      <thead><tr><th></th><th>이 논문</th><th>ReDO_DB</th></tr></thead>
+      <tbody>
+        <tr><td><b>정리 기준</b></td><td>원래 약물 분류 9개</td><td>알파벳순, 원래 적응증 표시</td></tr>
+        <tr><td><b>규모</b></td><td>약 45개</td><td>375개</td></tr>
+        <tr><td><b>근거 수준</b></td><td>구분 없음 (서술형)</td><td>시험관·동물·증례·관찰·임상시험·사람 데이터를 약마다 예/아니오로 표시</td></tr>
+        <tr><td><b>실용 정보</b></td><td>없음</td><td>WHO 필수의약품 여부, 특허만료 여부, 분자 표적</td></tr>
+        <tr><td><b>형식</b></td><td>읽는 글 (유료)</td><td>검색하는 데이터 (무료 공개)</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="card red">
+      <h4>같은 무게로 나열된 약들 <span class="src s-redo">ReDO_DB</span></h4>
+      ReDO_DB에서 <b>사람 데이터가 “아니오”</b>인 약이 8개입니다. 플루벤다졸, 베다퀼린, 클로폭톨, 라모트리진, 아리피프라졸, 브렉스피프라졸, 미녹시딜, 플루옥세틴입니다. 리뷰에서는 이 약들이 메트포르민이나 프로프라놀롤처럼 6개 근거 항목이 모두 “예”인 약과 구별 없이 등장합니다.
+    </div>
+    <div class="card ai">
+      <h4>플루벤다졸의 경우 <span class="src s-ai">🤖 Claude 판단</span></h4>
+      이 리뷰에서 플루벤다졸은 참고문헌이 4편(78–81)이나 되어 비중이 커 보입니다. 하지만 ReDO_DB 기준으로는 증례·관찰연구·임상시험이 <b>하나도 없습니다.</b> 인용 편수가 많다고 근거가 강한 것은 아니라는 좋은 예입니다.
+    </div>
+  </section>
+
+  <!-- ============ 5. 그래도 이 논문이 더하는 것 ============ -->
+  <section>
+    <h2><span class="num">5</span>그래도 이 논문이 더하는 것</h2>
+    <ul>
+      <li><b>최근 문헌 일부</b> <span class="src s-ref">참고문헌</span> — 플루벤다졸 PD-1 억제 연구(2023, 80번), FDA 승인 약물의 PD-1/PD-L1 억제 후보 탐색(2026, 82번) 등이 있습니다.</li>
+      <li><b>ReDO_DB에 없는 약 2개</b> <span class="src s-redo">ReDO_DB</span> — 세르틴돌(항정신병약)과 테조센탄(엔도텔린 수용체 길항제)입니다.</li>
+      <li><b>분류별 기전 정리</b> <span class="src s-paper">논문</span> — 초록에 따르면 세포사멸 유도, 증식 억제, 혈관신생 억제, 종양 대사 교란 같은 “암의 특징”과 연결해 설명합니다. 깊이는 본문을 못 봐서 확인하지 못했습니다.</li>
+    </ul>
+    <div class="card gold">
+      <h4>알아둘 점 <span class="src s-ref">참고문헌</span></h4>
+      교신저자 Umang Shah 본인의 논문이 인용되어 있습니다(16번 코로나19 약물 재창출 리뷰, 82번 PD-1/PD-L1 후보 탐색). 자기인용 자체는 흔한 일이지만, 82번은 이 리뷰의 주제와 직접 맞닿아 있으니 함께 고려해 읽으면 좋습니다.
+    </div>
+  </section>
+
+  <!-- ============ 6. 펜벤다졸 관점 ============ -->
+  <section>
+    <h2><span class="num">6</span>우리 카페의 관점 — 펜벤다졸은?</h2>
+    <p><b>펜벤다졸은 이 논문에도, ReDO_DB에도 없습니다.</b> <span class="src s-ref">참고문헌</span> <span class="src s-redo">ReDO_DB</span> 같은 벤즈이미다졸 계열 중에는 아래 세 약만 나옵니다.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>약물</th><th>논문 인용</th><th>ReDO 사람 데이터</th></tr></thead>
+      <tbody>
+        <tr><td>메벤다졸</td><td>5편 (교종 1상 포함)</td><td class="c"><span class="badge b-ok">예</span></td></tr>
+        <tr><td>알벤다졸</td><td>1편 (간세포암)</td><td class="c"><span class="badge b-ok">예</span></td></tr>
+        <tr><td>플루벤다졸</td><td>4편</td><td class="c"><span class="badge b-retract">아니오</span></td></tr>
+        <tr><td>펜벤다졸</td><td>없음</td><td class="c"><span class="badge b-open">수록 안 됨</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="card ai">
+      <h4>어떻게 받아들일까 <span class="src s-ai">🤖 Claude 판단</span></h4>
+      펜벤다졸이 빠졌다고 해서 효과가 없다는 뜻은 아닙니다. 사람용으로 승인된 약이 아니어서 “승인 약물의 재창출”을 다루는 리뷰와 데이터베이스의 범위 밖에 있을 가능성이 큽니다. 오히려 펜벤다졸을 볼 때 <b>같은 계열에서 사람 연구까지 간 메벤다졸</b>(83번 교종 1상 등)이 비교 기준이 될 수 있습니다.
+    </div>
+  </section>
+
+  <!-- ============ 7. 정직한 한계 ============ -->
+  <section>
+    <h2><span class="num">7</span>정직한 한계 — 무엇이 확인됐고 무엇이 아닌가</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>항목</th><th>상태</th></tr></thead>
+      <tbody>
+        <tr><td>서지 정보, 초록의 9개 분류</td><td><span class="badge b-ok">✅ 확인</span></td></tr>
+        <tr><td>참고문헌 157편의 제목과 약물 이름</td><td><span class="badge b-ok">✅ 확인</span></td></tr>
+        <tr><td>ReDO_DB 대조 결과 (2026-10-15 판)</td><td><span class="badge b-ok">✅ 확인</span></td></tr>
+        <tr><td>본문이 각 약을 얼마나, 어떻게 평가했는지</td><td><span class="badge b-open">❓ 미확인 (본문 미열람)</span></td></tr>
+        <tr><td>본문에 표나 근거 등급이 따로 있는지</td><td><span class="badge b-open">❓ 미확인</span></td></tr>
+        <tr><td>계열명만 나온 약의 구체적 약물 대응</td><td><span class="badge b-strong">⚠ Claude 추정</span></td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">본문에 근거 등급표가 있다면 4장의 “근거 수준 구분 없음”은 고쳐야 합니다. 본문을 구하는 대로 다시 확인하겠습니다.</p>
+  </section>
+
+  <!-- ============ 8. Q&A ============ -->
+  <section>
+    <h2><span class="num">8</span>예상 질문 &amp; 답변</h2>
+    <div class="qa">
+      <div class="q">이 목록에 있는 약을 먹어도 되나요?</div>
+      <div class="a">이 논문은 <b>치료 지침이 아닙니다.</b> 대부분 세포·동물 실험이고, ReDO_DB도 스스로 “환자의 치료 선택지 목록이 아니다”라고 밝힙니다. 복용은 반드시 주치의와 상의하십시오.</div>
+
+      <div class="q">ReDO_DB에서 “임상시험 예”면 효과가 입증된 건가요?</div>
+      <div class="a">아닙니다. <b>임상시험이 하나라도 있다</b>는 뜻입니다. 결과가 실패였거나 소규모 1상일 수도 있습니다. 근거의 “존재”와 “강도”는 다릅니다.</div>
+
+      <div class="q">새로운 게 거의 없다면 왜 소개하나요?</div>
+      <div class="a"><span class="src s-ai">🤖 Claude 판단</span> 이런 개론 리뷰는 앞으로도 계속 나옵니다. 이번 글은 <b>새 리뷰를 만났을 때 ReDO_DB에 대보는 읽기 방법</b>을 함께 보여드리려는 것입니다.</div>
+
+      <div class="q">전체 약물 목록은 어디서 보나요?</div>
+      <div class="a"><a href="https://data.tp53.org.uk/redo_db.php">ReDO_DB</a>에서 375개 약물을 무료로 검색할 수 있습니다. 약 이름을 누르면 PubMed 검색으로도 이어집니다.</div>
+    </div>
+  </section>
+
+  <!-- ============ 9. 용어·출처 ============ -->
+  <section>
+    <h2><span class="num">9</span>용어 사전 &amp; 출처</h2>
+
+    <h3>용어</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>용어</th><th>뜻</th></tr></thead>
+      <tbody>
+        <tr><td><b>약물 재창출</b></td><td>이미 다른 병에 쓰는 약을 새로운 병(여기선 암)에 쓰려는 연구 (repurposing)</td></tr>
+        <tr><td><b>종설(리뷰)</b></td><td>새 실험 없이 기존 연구들을 모아 정리한 논문</td></tr>
+        <tr><td><b>ReDO_DB</b></td><td>Repurposing Drugs in Oncology Database. Anticancer Fund가 만들고 현재 George Pantziarka TP53 Trust가 관리</td></tr>
+        <tr><td><b>시험관 / 동물</b></td><td>세포 배양 실험(in vitro) / 동물 실험(in vivo)</td></tr>
+        <tr><td><b>1상 임상시험</b></td><td>사람에게 처음 투여해 안전한 용량을 찾는 단계. 효과 입증 단계가 아님</td></tr>
+        <tr><td><b>벤즈이미다졸</b></td><td>메벤다졸, 알벤다졸, 플루벤다졸, 펜벤다졸이 속한 구충제 계열</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>주요 출처</h3>
+    <ul>
+      <li><b>본 논문</b>: Yadav V, Mandaliya VB, Shah U. <i>ChemistrySelect</i> 11(38) (2026). DOI: <a href="https://doi.org/10.1002/slct.202506782">10.1002/slct.202506782</a></li>
+      <li>ReDO_DB: <a href="https://data.tp53.org.uk/redo_db.php">data.tp53.org.uk/redo_db.php</a> (2026-10-15 빌드, 375개 약물)</li>
+      <li>Pantziarka P, et al. “ReDO_DB: The Repurposing Drugs in Oncology Database.” <i>ecancermedicalscience</i> 12:886 (2018). DOI: 10.3332/ecancer.2018.886</li>
+      <li>Gallia GL, et al. “Mebendazole and temozolomide in high-grade gliomas: phase 1.” <i>Neuro-Oncology Advances</i> 3:vdaa154 (2021). DOI: 10.1093/noajnl/vdaa154</li>
+    </ul>
+
+    <div class="foot">
+      <b>⚠️ 정직하게 밝힙니다</b>
+      <ul>
+        <li>논문 <b>본문은 읽지 못했습니다.</b> 초록, 참고문헌 목록, ReDO_DB만으로 만든 소개글입니다.</li>
+        <li><span class="src s-ai">🤖 Claude 판단</span> 라벨이 붙은 내용은 AI의 해석입니다. 사실 확인 내용과 구별해 읽어 주세요.</li>
+        <li><b>의료 조언이 아닙니다.</b> 치료 결정은 반드시 전문의와 상의하십시오.</li>
+      </ul>
+      <b>작성일</b> 2026-10-22 · <b>형식</b> 단일 HTML (외부 의존 0) · <b>제작</b> Claude<br>
+      히포크라테스의 친구들 · 논문 소개
+      <br><button class="print-btn" onclick="window.print()">인쇄 / PDF로 저장</button>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

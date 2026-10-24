@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>비타민B3 영상 근거 검증</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: 한 줄 기둥의 검증 리포트. 각 섹션 = 근거 하나, 영상 발언과 원문을 좌우로 맞대어 놓는다 */
+:root{
+  --bg:#f2f4f6; --surface:#ffffff; --ink:#18212b; --muted:#5a6672; --line:#d6dce2;
+  --accent:#1d5b79; --accent-soft:#e2edf3;
+  --ok:#2f7d4f; --ok-soft:#e3f2e8;
+  --warn:#a86a0c; --warn-soft:#fbf0dc;
+  --bad:#b23a3a; --bad-soft:#f8e4e3;
+  --stat:#6b4aa0; --stat-soft:#eee7f8;
+  --chart-a:#1d5b79; --chart-b:#9fb3c2; --chart-hi:#b23a3a;
+  --f-display:"Gowun Batang","Nanum Myeongjo",serif;
+  --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11161c; --surface:#19212a; --ink:#e6ebf0; --muted:#9aa7b4; --line:#2c3743;
+    --accent:#7fb8d6; --accent-soft:#1d3240;
+    --ok:#6cc08f; --ok-soft:#173326; --warn:#e3a94d; --warn-soft:#3a2c14;
+    --bad:#ec7c78; --bad-soft:#3d1c1c; --stat:#b49ae0; --stat-soft:#2b2340;
+    --chart-a:#7fb8d6; --chart-b:#4b5d6d; --chart-hi:#ec7c78;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11161c; --surface:#19212a; --ink:#e6ebf0; --muted:#9aa7b4; --line:#2c3743;
+  --accent:#7fb8d6; --accent-soft:#1d3240;
+  --ok:#6cc08f; --ok-soft:#173326; --warn:#e3a94d; --warn-soft:#3a2c14;
+  --bad:#ec7c78; --bad-soft:#3d1c1c; --stat:#b49ae0; --stat-soft:#2b2340;
+  --chart-a:#7fb8d6; --chart-b:#4b5d6d; --chart-hi:#ec7c78;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.75 var(--f-body);
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.wrap{max-width:980px;margin:0 auto;padding-block:40px 64px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:56px}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;text-wrap:balance;margin:0;line-height:1.35}
+h1{font-size:clamp(1.9rem,4.6vw,2.7rem)}
+h2{font-size:1.6rem}
+h3{font-size:1.15rem}
+p{margin:0;max-width:68ch}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.eyebrow{font:500 .78rem/1.4 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+section{display:flex;flex-direction:column;gap:18px}
+.sec-head{display:flex;flex-direction:column;gap:6px;border-top:2px solid var(--ink);padding-top:14px}
+.lead{font-size:1.05rem;color:var(--ink)}
+.note{font-size:.85rem;color:var(--muted)}
+
+/* header */
+header{display:flex;flex-direction:column;gap:16px}
+.verdict-box{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--accent);padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.verdict-box strong{font-weight:600}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.85rem;color:var(--muted)}
+
+/* chips */
+.chip{display:inline-flex;align-items:center;gap:6px;font:600 .74rem/1 var(--f-body);padding:5px 9px;border-radius:3px;white-space:nowrap}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.c-ok{color:var(--ok);background:var(--ok-soft)}
+.c-warn{color:var(--warn);background:var(--warn-soft)}
+.c-bad{color:var(--bad);background:var(--bad-soft)}
+.c-stat{color:var(--stat);background:var(--stat-soft)}
+.c-info{color:var(--accent);background:var(--accent-soft)}
+.legend{display:flex;flex-wrap:wrap;gap:8px}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:.88rem}
+th,td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+thead th{font:600 .78rem/1.4 var(--f-body);color:var(--muted);background:var(--bg);letter-spacing:.02em}
+tbody tr:last-child td{border-bottom:0}
+td.k{font-weight:600;white-space:nowrap}
+.yes{color:var(--ok);font-weight:600}.no{color:var(--bad);font-weight:600}
+
+/* figure blocks */
+figure{margin:0;background:var(--surface);border:1px solid var(--line);padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+figcaption{font-size:.85rem;color:var(--muted)}
+figure h3{font-size:1.05rem}
+.svg-scroll{overflow-x:auto}
+svg{display:block;max-width:100%;height:auto}
+svg text{font-family:var(--f-body);fill:var(--ink)}
+svg .t-muted{fill:var(--muted)}
+svg .t-mono{font-family:var(--f-mono)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+
+/* claim checker */
+.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.tab{font:500 .9rem var(--f-body);padding:8px 14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;border-radius:3px}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.claims{display:flex;flex-direction:column;gap:12px}
+.claim{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);background:var(--surface)}
+.claim>div{padding:14px 16px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.claim .said{border-right:1px solid var(--line)}
+.claim .lbl{font:500 .72rem/1 var(--f-mono);letter-spacing:.08em;color:var(--muted)}
+.claim .said p{font-family:var(--f-display);font-size:1.02rem}
+.claim .src p{font-size:.92rem}
+.claim-head{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--bg)}
+.claim-head span.t{font-weight:600;font-size:.92rem}
+@media (max-width:640px){.claim{grid-template-columns:1fr}.claim .said{border-right:0;border-bottom:1px solid var(--line)}}
+
+/* toggle */
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;align-self:flex-start}
+.seg button{font:500 .82rem var(--f-body);padding:6px 12px;border:0;background:var(--surface);color:var(--ink);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--surface)}
+
+/* scorecard */
+.score{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
+.score div{background:var(--surface);border:1px solid var(--line);padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.score p{font-size:.88rem}
+
+/* checklist */
+ol.qs{margin:0;padding-left:1.4em;display:flex;flex-direction:column;gap:10px;max-width:72ch}
+ol.qs li::marker{font-family:var(--f-mono);color:var(--accent)}
+.callout{background:var(--accent-soft);padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+ul.src-list{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px;font-size:.88rem}
+footer{font-size:.82rem;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;display:flex;flex-direction:column;gap:6px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">히포크라테스의 친구들 · 영상 근거 검증 노트</div>
+  <h1>"비타민B3가 폐암·췌장암 치료를 돕는다" 영상, 원문과 맞춰 보기</h1>
+  <p class="lead">배석철 교수(충북대 의대)의 유튜브 영상은 네 가지 근거를 엮어 비타민B3(니코틴아마이드)의 항암 효과를 설명합니다. 영상에서 인용한 논문 네 편의 원문을 모두 찾아, 발언 하나하나를 저자들이 실제로 쓴 내용과 비교했습니다.</p>
+  <div class="verdict-box">
+    <strong>한 줄 결론</strong>
+    <p>영상은 논문의 숫자는 대체로 정확히 읽었습니다. 하지만 숫자가 의미하는 바는 네 편 모두에서 저자들보다 훨씬 강하게 해석했습니다. 특히 췌장암 증례의 "다른 설명이 불가능하다"는 발언은 원문 저자들의 결론과 정반대이고, 본인 임상시험은 1차 평가지표에서 통계적으로 유의한 차이를 보이지 못했습니다.</p>
+  </div>
+  <div class="meta-row"><span>작성 기준일 2026-10-24</span><span>대상: 니코틴아마이드(NAM, 비타민B3의 한 형태)</span><span>의학적 조언이 아닙니다</span></div>
+</header>
+
+<!-- 1. Evidence pyramid -->
+<section>
+  <div class="sec-head"><div class="eyebrow">근거의 무게</div><h2>네 가지 근거는 피라미드의 어디에 있나</h2></div>
+  <p>의학 근거에는 위계가 있습니다. 시험관 실험과 환자 한 명의 증례는 가설을 만드는 단계이고, 대규모 무작위 임상이 쌓여야 "효과가 있다"고 말할 수 있습니다. 영상이 다룬 근거는 대부분 아래쪽에 있습니다.</p>
+  <figure>
+    <div class="svg-scroll">
+    <svg viewBox="0 0 860 400" role="img" aria-labelledby="pyr-t">
+      <title id="pyr-t">근거 수준 피라미드와 네 가지 근거의 위치</title>
+      <g>
+        <polygon points="230,30 290,30 330,100 190,100" fill="var(--accent-soft)" stroke="var(--line)"/>
+        <polygon points="190,100 330,100 370,170 150,170" fill="var(--accent-soft)" stroke="var(--line)"/>
+        <polygon points="150,170 370,170 410,240 110,240" fill="var(--bg)" stroke="var(--line)"/>
+        <polygon points="110,240 410,240 450,310 70,310" fill="var(--bg)" stroke="var(--line)"/>
+        <polygon points="70,310 450,310 490,380 30,380" fill="var(--bg)" stroke="var(--line)"/>
+      </g>
+      <g font-size="13" text-anchor="middle">
+        <text x="260" y="70">메타분석</text>
+        <text x="260" y="140">대규모 3상 임상</text>
+        <text x="260" y="210">소규모 무작위 임상(2상)</text>
+        <text x="260" y="280">관찰 연구 · 증례 보고</text>
+        <text x="260" y="350">시험관 · 동물 실험</text>
+      </g>
+      <g font-size="13">
+        <line x1="400" y1="205" x2="520" y2="205" stroke="var(--accent)" stroke-width="1.5"/>
+        <circle cx="400" cy="205" r="5" fill="var(--accent)"/>
+        <text x="530" y="200" font-weight="600">④ 배석철 교수팀 폐암 임상 (2b상, 110명)</text>
+        <text x="530" y="218" class="t-muted" font-size="12">1차 평가지표 차이 없음(P=0.2) · 이득은 하위군에서만</text>
+
+        <line x1="420" y1="268" x2="520" y2="262" stroke="var(--accent)" stroke-width="1.5"/>
+        <circle cx="420" cy="268" r="5" fill="var(--accent)"/>
+        <text x="530" y="258" font-weight="600">① 소세포폐암 증례 (1명)</text>
+        <text x="530" y="276" class="t-muted" font-size="12">표준치료 + 방사선 + 비타민C + B3 동시 사용</text>
+
+        <line x1="430" y1="292" x2="520" y2="310" stroke="var(--accent)" stroke-width="1.5"/>
+        <circle cx="430" cy="292" r="5" fill="var(--accent)"/>
+        <text x="530" y="308" font-weight="600">③ 독일 췌장암 증례 (1명)</text>
+        <text x="530" y="326" class="t-muted" font-size="12">저자 스스로 "인과관계 확립 불가" 명시</text>
+
+        <line x1="470" y1="350" x2="520" y2="358" stroke="var(--accent)" stroke-width="1.5"/>
+        <circle cx="470" cy="350" r="5" fill="var(--accent)"/>
+        <text x="530" y="356" font-weight="600">② Cell Metabolism 위암 논문</text>
+        <text x="530" y="374" class="t-muted" font-size="12">B3 복용은 시험하지 않음 · NAM 효과는 시험관 실험</text>
+      </g>
+    </svg>
+    </div>
+    <figcaption>번호는 영상에 등장한 순서입니다. 증례 보고는 효과가 좋았던 환자만 논문으로 나오는 경향(출판 편향)이 있어 근거로서 가장 약한 편에 속합니다.</figcaption>
+  </figure>
+</section>
+
+<!-- 2. Overview table -->
+<section>
+  <div class="sec-head"><div class="eyebrow">한눈에 비교</div><h2>네 편의 논문, 무엇을 했고 무엇을 결론 내렸나</h2></div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>근거</th><th>연구 형태</th><th>환자 수</th><th>B3 복용을 직접 시험했나</th><th>저자들의 결론</th><th>영상의 해석</th></tr></thead>
+      <tbody>
+        <tr><td class="k">① 소세포폐암 증례<br><span class="note">Cureus, 2026.1</span></td><td>증례 보고</td><td class="mono">1</td><td class="no">아니오<br><span class="note">환자가 스스로 복용, 대조 없음</span></td><td>"가설 생성용 관찰. 인과관계 확립 불가. 비소세포폐암 근거를 소세포폐암에 직접 적용할 수 없음"</td><td>"완전 관해율이 크게 높아졌다", "B3 효과로 생각된다"</td></tr>
+        <tr><td class="k">② 위암 니코틴아마이드 대사<br><span class="note">Cell Metabolism, 2024.6</span></td><td>기초·중개 연구 (환자 검체 + 세포·생쥐 실험)</td><td class="mono">환자 검체 분석</td><td class="no">아니오<br><span class="note">생쥐 치료는 NAMPT 소포체 주입</span></td><td>"NAM/MNAM 비율이 면역항암제 반응의 지표가 될 수 있다. NAM 대사는 복잡하다"</td><td>"NAM 농도가 오르면 면역관문억제제 효과가 높아진다"</td></tr>
+        <tr><td class="k">③ 췌장암 증례<br><span class="note">Frontiers in Oncology, 2026.9</span></td><td>증례 보고</td><td class="mono">1</td><td class="no">아니오<br><span class="note">대조 없음, NAD⁺·PARP 측정 안 함</span></td><td>"우연일 수 있고, 젬시타빈의 지연 반응일 수 있다. NAM의 기여는 추측"</td><td>"나이아신아마이드 아니면 설명이 불가능하다"</td></tr>
+        <tr><td class="k">④ 폐암 무작위 임상<br><span class="note">Clinical Cancer Research, 2024.4</span></td><td>무작위 이중맹검 2b상</td><td class="mono">110</td><td class="yes">예<br><span class="note">1g/일 vs 위약</span></td><td>"잠재적 개선. 여성·비흡연자에서 두드러진 생존 이득"</td><td>"기대수명 1년 이상 연장, 사망 위험 절반 = 절반이 생존"</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">네 편 가운데 니코틴아마이드를 위약과 무작위로 비교한 것은 ④ 하나뿐입니다. 위암·소세포폐암·췌장암에서 니코틴아마이드를 시험한 임상시험은 아직 보고되지 않았습니다.</p>
+</section>
+
+<!-- 3. Claim checker -->
+<section>
+  <div class="sec-head"><div class="eyebrow">발언별 대조</div><h2>영상 발언 vs 원문</h2></div>
+  <div class="legend">
+    <span class="chip c-ok">원문과 일치</span><span class="chip c-info">맥락 누락</span><span class="chip c-warn">과장</span><span class="chip c-bad">원문과 충돌</span><span class="chip c-stat">통계 해석 오류</span>
+  </div>
+  <div class="tabs" role="tablist" aria-label="근거 선택">
+    <button class="tab" role="tab" id="tab-sclc" aria-selected="true" aria-controls="panel">① 소세포폐암</button>
+    <button class="tab" role="tab" id="tab-cm" aria-selected="false" aria-controls="panel">② Cell Metabolism</button>
+    <button class="tab" role="tab" id="tab-pdac" aria-selected="false" aria-controls="panel">③ 췌장암</button>
+    <button class="tab" role="tab" id="tab-lung" aria-selected="false" aria-controls="panel">④ 폐암 임상</button>
+    <button class="tab" role="tab" id="tab-etc" aria-selected="false" aria-controls="panel">기타 발언</button>
+  </div>
+  <div id="panel" class="claims" role="tabpanel" aria-live="polite"></div>
+</section>
+
+<!-- 4. Cell Metabolism chart -->
+<section>
+  <div class="sec-head"><div class="eyebrow">② Cell Metabolism · Figure 4H</div><h2>그란자임B가 올라간 실험, 출발점과 농도를 함께 보면</h2></div>
+  <p>영상은 "23.3에서 51.5까지 올라간다"고 소개했습니다. 숫자는 정확합니다. 그런데 23.3은 면역억제 물질 MNAM을 넣어 T세포를 일부러 약하게 만든 조건이고, 아무것도 넣지 않은 대조군(32.6)보다 낮습니다. 이 실험이 보여주는 핵심은 NAM과 MNAM의 <strong>비율</strong>이 T세포 기능을 좌우한다는 점입니다.</p>
+  <div class="grid2">
+    <figure>
+      <h3 id="h-4h">CD8⁺ T세포 활성 (시험관, 24시간)</h3>
+      <div class="seg" role="group" aria-label="지표 선택">
+        <button type="button" id="seg-gzmb" aria-pressed="true">그란자임B</button>
+        <button type="button" id="seg-ifng" aria-pressed="false">인터페론 감마</button>
+      </div>
+      <div class="svg-scroll"><svg id="chart-4h" viewBox="0 0 440 300" role="img" aria-labelledby="h-4h"></svg></div>
+      <figcaption>양성 세포 비율(%). 원문 Figure 4H의 유세포분석 수치. NAM:MNAM 비율 조건은 MNAM 5 mM에 NAM 1·5·25·50 mM을 더한 것입니다.</figcaption>
+    </figure>
+    <figure>
+      <h3 id="h-conc">실험 농도 vs 복용 시 혈중 농도</h3>
+      <div class="svg-scroll">
+      <svg viewBox="0 0 440 300" role="img" aria-labelledby="h-conc">
+        <!-- log axis 0.01..100 mM mapped to x 70..420 ; 4 decades -> 87.5px each -->
+        <g stroke="var(--line)">
+          <line x1="70" y1="40" x2="70" y2="240"/><line x1="157.5" y1="40" x2="157.5" y2="240"/>
+          <line x1="245" y1="40" x2="245" y2="240"/><line x1="332.5" y1="40" x2="332.5" y2="240"/><line x1="420" y1="40" x2="420" y2="240"/>
+        </g>
+        <g font-size="11" text-anchor="middle" class="t-mono">
+          <text x="70" y="258" class="t-muted">0.01</text><text x="157.5" y="258" class="t-muted">0.1</text><text x="245" y="258" class="t-muted">1</text><text x="332.5" y="258" class="t-muted">10</text><text x="420" y="258" class="t-muted">100</text>
+        </g>
+        <text x="245" y="282" font-size="12" text-anchor="middle" class="t-muted">농도 (mM, 로그 눈금)</text>
+        <!-- bar1: NAM 50mM -> log10(50)=1.699 -> x=245+1.699*87.5=393.7 -->
+        <rect x="70" y="58" width="323.7" height="34" fill="var(--chart-hi)"/>
+        <text x="78" y="50" font-size="12" font-weight="600">시험관 NAM 최고 농도 50 mM</text>
+        <!-- bar2: MNAM 5 mM -> log 0.699 -> 306.2 -->
+        <rect x="70" y="118" width="236.2" height="34" fill="var(--chart-b)"/>
+        <text x="78" y="110" font-size="12">시험관 MNAM 5 mM</text>
+        <!-- bar3: plasma 0.1-0.3 mM -> 157.5 .. log(.3)=-0.523 -> 199.3 -->
+        <rect x="70" y="178" width="87.5" height="34" fill="var(--chart-a)" opacity=".45"/>
+        <rect x="157.5" y="178" width="41.8" height="34" fill="var(--chart-a)"/>
+        <text x="78" y="170" font-size="12">고용량 복용 시 추정 혈중 0.1–0.3 mM</text>
+        <text x="208" y="200" font-size="11" class="t-muted">하루 1.5g 기준</text>
+      </svg>
+      </div>
+      <figcaption>혈중 농도 추정치는 ③ 췌장암 증례 저자들이 제시한 값입니다. 시험관 최고 농도는 이보다 약 170~500배 높습니다. 시험관 결과를 복용량으로 옮기기 어려운 이유입니다.</figcaption>
+    </figure>
+  </div>
+  <div class="callout">
+    <strong>영상에서 빠진 이 논문의 핵심</strong>
+    <p>이 논문의 주인공은 섬유아세포의 효소 NNMT입니다. NNMT는 NAM을 면역억제 물질 MNAM으로 바꿉니다. NAM을 많이 먹으면 NNMT의 원료도 늘어납니다. 그래서 저자들이 택한 전략은 NAM 공급이 아니라 NNMT를 줄이는 것이었고, 생쥐에게 준 치료도 NAM이 아니라 NAMPT를 담은 세포외소포였습니다. 저자들은 또 NAM의 예후적 의미가 암종마다 달랐다고 보고했습니다(Figure S1F).</p>
+  </div>
+</section>
+
+<!-- 5. Mechanism conflict -->
+<section>
+  <div class="sec-head"><div class="eyebrow">기전 비교</div><h2>같은 물질, 서로 엇갈리는 세 가지 설명</h2></div>
+  <p>영상은 세 논문을 하나의 이야기로 엮었지만, 각 논문이 내세운 기전은 서로 방향이 다릅니다. 핵심 충돌 지점은 <strong>서투인(SIRT)</strong>입니다.</p>
+  <figure>
+    <div class="svg-scroll">
+    <svg viewBox="0 0 900 360" role="img" aria-labelledby="mech-t" style="min-width:720px">
+      <title id="mech-t">세 가지 기전 가설과 서투인을 둘러싼 충돌</title>
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker>
+        <marker id="tee" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M5,0 L5,10" stroke="var(--bad)" stroke-width="2.5"/></marker>
+      </defs>
+      <g font-size="13" font-weight="600">
+        <text x="20" y="28">배석철 교수 가설 (④·① 인용)</text>
+        <text x="320" y="28">Cell Metabolism (②)</text>
+        <text x="630" y="28">독일 췌장암 증례 저자 (③)</text>
+      </g>
+      <g font-size="13">
+        <!-- column 1 -->
+        <rect x="20" y="50" width="250" height="40" fill="var(--accent-soft)" stroke="var(--line)"/><text x="145" y="75" text-anchor="middle">니코틴아마이드(NAM)</text>
+        <line x1="145" y1="90" x2="145" y2="130" stroke="var(--bad)" stroke-width="2" marker-end="url(#tee)"/>
+        <text x="155" y="115" font-size="11" class="t-muted">억제</text>
+        <rect x="20" y="135" width="250" height="40" fill="var(--bad-soft)" stroke="var(--bad)"/><text x="145" y="160" text-anchor="middle" font-weight="600">서투인(SIRT) ↓</text>
+        <line x1="145" y1="175" x2="145" y2="210" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arr)"/>
+        <rect x="20" y="215" width="250" height="40" fill="var(--surface)" stroke="var(--line)"/><text x="145" y="240" text-anchor="middle">RUNX3 재활성화</text>
+        <line x1="145" y1="255" x2="145" y2="290" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arr)"/>
+        <rect x="20" y="295" width="250" height="40" fill="var(--surface)" stroke="var(--line)"/><text x="145" y="320" text-anchor="middle">항암제 효과 강화</text>
+
+        <!-- column 2 -->
+        <rect x="320" y="50" width="270" height="40" fill="var(--surface)" stroke="var(--line)"/><text x="455" y="75" text-anchor="middle">대식세포 NAMPT 소포체</text>
+        <line x1="455" y1="90" x2="455" y2="130" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arr)"/>
+        <text x="465" y="115" font-size="11" class="t-muted">활성화</text>
+        <rect x="320" y="135" width="270" height="40" fill="var(--ok-soft)" stroke="var(--ok)"/><text x="455" y="160" text-anchor="middle" font-weight="600">SIRT1 작동 ↑ (섬유아세포)</text>
+        <line x1="455" y1="175" x2="455" y2="210" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arr)"/>
+        <rect x="320" y="215" width="270" height="40" fill="var(--surface)" stroke="var(--line)"/><text x="455" y="240" text-anchor="middle">NICD 탈아세틸화 → NNMT ↓</text>
+        <line x1="455" y1="255" x2="455" y2="290" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arr)"/>
+        <rect x="320" y="295" width="270" height="40" fill="var(--surface)" stroke="var(--line)"/><text x="455" y="320" text-anchor="middle">MNAM ↓ → CD8⁺ T세포 기능 회복</text>
+
+        <!-- column 3 -->
+        <rect x="630" y="50" width="250" height="40" fill="var(--accent-soft)" stroke="var(--line)"/><text x="755" y="75" text-anchor="middle">고용량 NAM</text>
+        <line x1="700" y1="90" x2="700" y2="130" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="810" y1="90" x2="810" y2="130" stroke="var(--bad)" stroke-width="2" marker-end="url(#tee)"/>
+        <rect x="630" y="135" width="120" height="40" fill="var(--surface)" stroke="var(--line)"/><text x="690" y="160" text-anchor="middle">NAD⁺ ↑</text>
+        <rect x="760" y="135" width="120" height="40" fill="var(--surface)" stroke="var(--line)"/><text x="820" y="160" text-anchor="middle">PARP 부분 억제</text>
+        <line x1="690" y1="175" x2="690" y2="210" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="820" y1="175" x2="820" y2="210" stroke="var(--muted)" stroke-width="1.5" marker-end="url(#arr)"/>
+        <rect x="630" y="215" width="120" height="58" fill="var(--surface)" stroke="var(--line)"/><text x="690" y="238" text-anchor="middle" font-size="12">면역 기능 개선?</text><text x="690" y="258" text-anchor="middle" font-size="11" class="t-muted">(NAD⁺는 SIRT 연료)</text>
+        <rect x="760" y="215" width="120" height="58" fill="var(--surface)" stroke="var(--line)"/><text x="820" y="238" text-anchor="middle" font-size="12">DNA 복구 결함</text><text x="820" y="258" text-anchor="middle" font-size="12">암세포 사멸?</text>
+        <text x="755" y="310" text-anchor="middle" font-size="12" class="t-muted">저자: "종양 성장을 도울 수도 있는</text>
+        <text x="755" y="328" text-anchor="middle" font-size="12" class="t-muted">양날의 칼"</text>
+      </g>
+      <!-- conflict marker -->
+      <path d="M270,155 C290,155 300,155 320,155" stroke="var(--bad)" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
+      <text x="295" y="145" font-size="18" text-anchor="middle" fill="var(--bad)" font-weight="700">≠</text>
+    </svg>
+    </div>
+    <figcaption>배 교수 가설은 NAM이 서투인을 <em>억제</em>해야 효과가 납니다. Cell Metabolism에서 좋은 효과를 낸 경로는 SIRT1이 <em>작동</em>해야 성립하며, 연구진이 SIRT1 억제제(셀리시스타트)를 넣자 효과가 되돌아갔습니다(Figure 5G, 5K). 독일 저자들은 NAM이 NAD⁺를 올린다고 설명하는데, NAD⁺는 서투인을 활성화하는 물질입니다. 세 설명을 동시에 근거로 쓰려면 이 충돌부터 해결해야 합니다.</figcaption>
+  </figure>
+</section>
+
+<!-- 6. Pancreatic CA19-9 -->
+<section>
+  <div class="sec-head"><div class="eyebrow">③ 췌장암 증례</div><h2>CA19-9 경과: 영상이 건너뛴 11주</h2></div>
+  <p>영상은 "항암을 해도 계속 오르다가, B3를 먹자마자 수직으로 떨어졌다"고 설명했습니다. 원문에는 그 사이에 한 구간이 더 있습니다. 항암 중단 뒤 B3를 시작하기 전 <strong>11주 동안 CA19-9가 이미 더 오르지 않고 정체</strong>되어 있었습니다. 저자들은 이 정체가 짧은 젬시타빈 치료의 결과일 수 있다고 썼습니다.</p>
+  <figure>
+    <h3 id="h-ca">CA19-9 (U/ml, 로그 눈금)</h3>
+    <div class="svg-scroll">
+    <svg id="chart-ca" viewBox="0 0 860 320" role="img" aria-labelledby="h-ca" style="min-width:640px"></svg>
+    </div>
+    <figcaption>원문 본문에 기재된 수치만으로 다시 그린 개략도입니다(원 그래프를 디지털화한 것이 아님). 정상 상한 34 U/ml. 점선 구간은 본문에 측정값이 없는 부분입니다.</figcaption>
+  </figure>
+  <div class="grid2">
+    <div class="callout">
+      <strong>저자들이 직접 쓴 한계</strong>
+      <p>"단일 증례로는 인과관계를 확립할 수 없다. 시간적 일치는 우연일 수 있다. 짧은 젬시타빈 치료의 지연 반응일 수 있다. 환자의 NAD⁺ 수치나 PARP 활성은 측정하지 않았다. 니코틴아마이드의 기여는 추측으로 남는다."</p>
+    </div>
+    <div class="callout">
+      <strong>"이 치료의 근거가 바로 저의 연구"?</strong>
+      <p>이 논문의 참고문헌 44편에 배 교수팀의 폐암 임상은 없습니다. 저자들이 밝힌 근거는 피부암 연구, 다른 암종에서 진행 중인 임상, NAD⁺·PARP 관련 분자 기전입니다. 또 환자의 유전형이 드문 형태(KRAS 정상, HER2 증폭)라는 점도 반응의 원인 후보로 논의했습니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Lung trial -->
+<section>
+  <div class="sec-head"><div class="eyebrow">④ 배석철 교수팀 폐암 임상</div><h2>전체 결과와 하위군 결과는 다릅니다</h2></div>
+  <p>EGFR 변이 4기 폐선암 환자 110명을 니코틴아마이드 1g/일과 위약에 55명씩 무작위 배정한 제대로 된 임상입니다. 그러나 미리 정한 1차 평가지표(무진행생존기간)와 2차 평가지표(전체생존기간) 모두 두 군의 차이가 통계적으로 유의하지 않았습니다. 영상과 언론이 강조한 "1년 이상 연장"은 여성·비흡연자 하위군 결과입니다.</p>
+  <div class="grid2">
+    <figure>
+      <h3 id="h-trial">전체 환자 110명 결과 (중앙값, 개월)</h3>
+      <div class="svg-scroll">
+      <svg viewBox="0 0 440 280" role="img" aria-labelledby="h-trial">
+        <!-- y scale 0..40 -> 230..30 ; 5px per month -->
+        <g stroke="var(--line)"><line x1="50" y1="230" x2="420" y2="230"/><line x1="50" y1="180" x2="420" y2="180" stroke-dasharray="2 4"/><line x1="50" y1="130" x2="420" y2="130" stroke-dasharray="2 4"/><line x1="50" y1="80" x2="420" y2="80" stroke-dasharray="2 4"/><line x1="50" y1="30" x2="420" y2="30" stroke-dasharray="2 4"/></g>
+        <g font-size="11" class="t-mono" text-anchor="end"><text x="42" y="234" class="t-muted">0</text><text x="42" y="184" class="t-muted">10</text><text x="42" y="134" class="t-muted">20</text><text x="42" y="84" class="t-muted">30</text><text x="42" y="34" class="t-muted">40</text></g>
+        <!-- PFS: 12.7 vs 10.9 -->
+        <rect x="80" y="166.5" width="50" height="63.5" fill="var(--chart-a)"/>
+        <rect x="136" y="175.5" width="50" height="54.5" fill="var(--chart-b)"/>
+        <text x="105" y="160" text-anchor="middle" font-size="12" class="t-mono">12.7</text>
+        <text x="161" y="169" text-anchor="middle" font-size="12" class="t-mono">10.9</text>
+        <text x="133" y="250" text-anchor="middle" font-size="12">무진행생존 (1차)</text>
+        <text x="133" y="267" text-anchor="middle" font-size="11" class="t-muted t-mono">P = 0.2</text>
+        <!-- OS: 31.0 vs 29.4 -->
+        <rect x="270" y="75" width="50" height="155" fill="var(--chart-a)"/>
+        <rect x="326" y="83" width="50" height="147" fill="var(--chart-b)"/>
+        <text x="295" y="69" text-anchor="middle" font-size="12" class="t-mono">31.0</text>
+        <text x="351" y="77" text-anchor="middle" font-size="12" class="t-mono">29.4</text>
+        <text x="323" y="250" text-anchor="middle" font-size="12">전체생존 (2차)</text>
+        <text x="323" y="267" text-anchor="middle" font-size="11" class="t-muted t-mono">P = 0.2</text>
+        <!-- legend -->
+        <rect x="230" y="10" width="10" height="10" fill="var(--chart-a)"/><text x="245" y="19" font-size="11">니코틴아마이드</text>
+        <rect x="335" y="10" width="10" height="10" fill="var(--chart-b)"/><text x="350" y="19" font-size="11">위약</text>
+      </svg>
+      </div>
+      <figcaption>Clinical Cancer Research 2024 초록 수치. 하위군(여성 P=0.01, 비흡연자 P=0.03)에서만 사망 위험 감소가 유의했습니다. 언론 보도 수치로는 여성 하위군 중앙 생존 43.4개월입니다.</figcaption>
+    </figure>
+    <figure>
+      <h3 id="h-hr">"사망 위험 절반"은 "절반이 산다"가 아닙니다</h3>
+      <div class="svg-scroll"><svg id="chart-hr" viewBox="0 0 440 280" role="img" aria-labelledby="h-hr"></svg></div>
+      <figcaption>개념도(실제 임상 데이터 아님). 위험비(HR) 0.5는 어느 시점에서든 사망할 순간 위험이 절반이라는 뜻입니다. 생존 곡선이 오른쪽으로 늦춰질 뿐, 시간이 지나면 두 곡선 모두 내려갑니다.</figcaption>
+    </figure>
+  </div>
+  <div class="callout">
+    <strong>하위군 결과는 왜 조심해서 읽어야 하나</strong>
+    <p>전체에서 차이가 없을 때 여러 하위군을 나눠 보면, 우연만으로도 어느 한 집단에서 "유의한" 결과가 나올 수 있습니다. 하위군 결과는 다음 임상에서 그 집단만 모아 다시 확인해야 할 가설입니다. 또 이 임상은 1세대 표적치료제(제피티닙·엘로티닙) 시절의 결과라, 지금 쓰이는 3세대 약(오시머티닙 등)과 함께 썼을 때도 같을지는 알 수 없습니다.</p>
+  </div>
+</section>
+
+<!-- 8. Citation map -->
+<section>
+  <div class="sec-head"><div class="eyebrow">인용 관계</div><h2>논문들이 실제로 서로를 인용했나</h2></div>
+  <p>영상 속에서는 네 근거가 하나의 사슬처럼 이어지지만, 원문 참고문헌을 확인하면 실제 연결은 하나뿐입니다.</p>
+  <figure>
+    <div class="svg-scroll">
+    <svg viewBox="0 0 820 300" role="img" aria-labelledby="cite-t" style="min-width:640px">
+      <title id="cite-t">논문 간 실제 인용과 영상이 만든 연결</title>
+      <defs>
+        <marker id="a-ok" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--ok)"/></marker>
+        <marker id="a-bad" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--bad)"/></marker>
+      </defs>
+      <g font-size="13">
+        <rect x="300" y="20" width="220" height="56" fill="var(--accent-soft)" stroke="var(--accent)"/>
+        <text x="410" y="44" text-anchor="middle" font-weight="600">④ 배석철 교수팀 폐암 임상</text><text x="410" y="63" text-anchor="middle" font-size="11" class="t-muted">2024, RUNX3 가설</text>
+        <rect x="30" y="200" width="220" height="56" fill="var(--surface)" stroke="var(--line)"/>
+        <text x="140" y="224" text-anchor="middle" font-weight="600">① 소세포폐암 증례</text><text x="140" y="243" text-anchor="middle" font-size="11" class="t-muted">Cureus 2026</text>
+        <rect x="300" y="200" width="220" height="56" fill="var(--surface)" stroke="var(--line)"/>
+        <text x="410" y="224" text-anchor="middle" font-weight="600">② Cell Metabolism</text><text x="410" y="243" text-anchor="middle" font-size="11" class="t-muted">2024, 위암</text>
+        <rect x="570" y="200" width="220" height="56" fill="var(--surface)" stroke="var(--line)"/>
+        <text x="680" y="224" text-anchor="middle" font-weight="600">③ 독일 췌장암 증례</text><text x="680" y="243" text-anchor="middle" font-size="11" class="t-muted">Frontiers 2026</text>
+      </g>
+      <!-- real citation: 1 -> 4 -->
+      <line x1="140" y1="198" x2="320" y2="80" stroke="var(--ok)" stroke-width="2.5" marker-end="url(#a-ok)"/>
+      <text x="170" y="128" font-size="12" fill="var(--ok)" font-weight="600">실제 인용 ✓</text>
+      <!-- video links -->
+      <line x1="300" y1="228" x2="254" y2="228" stroke="var(--bad)" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#a-bad)"/>
+      <text x="277" y="290" font-size="11" fill="var(--bad)" text-anchor="middle">영상: "①의 이론적 설명"</text>
+      <text x="277" y="276" font-size="11" fill="var(--bad)" text-anchor="middle">①은 ②를 인용 안 함</text>
+      <line x1="660" y1="198" x2="500" y2="80" stroke="var(--bad)" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#a-bad)"/>
+      <text x="610" y="118" font-size="12" fill="var(--bad)" font-weight="600">영상: "근거가 저의 연구"</text>
+      <text x="610" y="136" font-size="11" fill="var(--bad)">③은 ④를 인용 안 함 ✗</text>
+    </svg>
+    </div>
+    <figcaption>실선은 원문 참고문헌에 실제로 있는 인용, 점선은 영상에서 말로 만든 연결입니다.</figcaption>
+  </figure>
+</section>
+
+<!-- 9. Scorecard -->
+<section>
+  <div class="sec-head"><div class="eyebrow">종합 판정</div><h2>영상 전체 점검표</h2></div>
+  <div class="score">
+    <div><span class="chip c-ok">원문과 일치</span><p>케이스 리포트가 무엇인지에 대한 설명</p></div>
+    <div><span class="chip c-ok">원문과 일치</span><p>Figure 4H 그란자임B·인터페론 감마 수치 인용</p></div>
+    <div><span class="chip c-ok">타당</span><p>비타민C 하루 3g 경구 복용의 효과에 대한 회의</p></div>
+    <div><span class="chip c-info">맥락 누락</span><p>Figure 4H의 출발점(MNAM 억제 조건)과 50 mM 농도</p></div>
+    <div><span class="chip c-warn">과장</span><p>소세포폐암 증례를 "완전 관해"로 표현, 2.5%와 직접 비교</p></div>
+    <div><span class="chip c-warn">과장</span><p>"B3 효과는 암종을 가리지 않는다"</p></div>
+    <div><span class="chip c-bad">원문과 충돌</span><p>췌장암 증례 "B3 아니면 설명 불가능"</p></div>
+    <div><span class="chip c-bad">원문과 충돌</span><p>"독일 연구의 근거가 저의 연구"</p></div>
+    <div><span class="chip c-stat">통계 해석 오류</span><p>"사망 위험 절반 = 절반이 생존"</p></div>
+    <div><span class="chip c-stat">통계 해석 오류</span><p>하위군 결과를 전체 결과처럼 제시, 1차 지표 미달 언급 없음</p></div>
+  </div>
+  <p class="note">이해관계: 배 교수가 이끄는 바이오 기업 셀가디언은 비타민B3 건강기능식품("배석철의 아미나")을 판매합니다. 연구 자체를 부정할 이유는 아니지만, 발언을 들을 때 함께 고려할 사실입니다.</p>
+</section>
+
+<!-- 10. Takeaway -->
+<section>
+  <div class="sec-head"><div class="eyebrow">회원분들께</div><h2>그래서 먹어도 되나요?</h2></div>
+  <div class="callout">
+    <p>니코틴아마이드는 비교적 안전한 물질이고 연구할 가치가 있는 후보입니다. 하지만 현재 근거로는 <strong>위암·폐암·췌장암 치료 중 복용이 도움이 된다고 말할 수 없습니다.</strong> 반대 방향의 데이터도 있습니다. 미국 케이스웨스턴 연구진은 NAM 등 NAD⁺ 전구체가 실험실과 생쥐에서 췌장암 세포의 생존을 돕고 항암제 효과를 떨어뜨렸다고 보고했습니다. 항암 치료 중이라면 복용 전 반드시 주치의와 상의하시기 바랍니다.</p>
+  </div>
+  <h3>비슷한 영상을 볼 때 스스로 확인할 질문</h3>
+  <ol class="qs">
+    <li>이 근거는 사람 대상 무작위 임상인가, 아니면 시험관·동물 실험이나 환자 한 명의 이야기인가?</li>
+    <li>임상이라면, 미리 정한 1차 평가지표에서 차이가 있었나? 아니면 하위군에서만 있었나?</li>
+    <li>시험관 실험의 농도는 사람이 먹어서 도달할 수 있는 농도인가?</li>
+    <li>논문 저자들은 스스로 어떤 결론과 한계를 썼나? 소개하는 사람의 해석과 같은가?</li>
+    <li>같은 시기에 받은 다른 치료(항암제, 방사선, 다른 보충제)로 설명할 수는 없나?</li>
+    <li>소개하는 사람이 관련 제품과 이해관계가 있나?</li>
+  </ol>
+</section>
+
+<section>
+  <div class="sec-head"><div class="eyebrow">출처</div><h2>원문 링크</h2></div>
+  <ul class="src-list">
+    <li>① Lee M, et al. Potential Therapeutic Synergy of High-Dose Vitamin C and Nicotinamide … Extensive-Stage Small-Cell Lung Cancer: A Case Report. <em>Cureus</em> 2026;18(1):e101050. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12881835/" target="_blank" rel="noopener">PMC12881835</a></li>
+    <li>② Jiang Y, et al. Nicotinamide metabolism face-off between macrophages and fibroblasts manipulates the microenvironment in gastric cancer. <em>Cell Metabolism</em> 2024;36:1806–1822. <a href="https://doi.org/10.1016/j.cmet.2024.05.013" target="_blank" rel="noopener">doi:10.1016/j.cmet.2024.05.013</a></li>
+    <li>③ Kolb H, et al. Case Report: Long-term remission of metastatic pancreatic ductal adenocarcinoma after surgery and high-dose nicotinamide supplementation. <em>Front Oncol</em> 2026;16:1927317. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13581960/" target="_blank" rel="noopener">PMC13581960</a></li>
+    <li>④ Oh HJ, Bae SC, et al. Nicotinamide in Combination with EGFR-TKIs for the Treatment of Stage IV Lung Adenocarcinoma with EGFR Mutations: A Randomized Double-Blind (Phase IIb) Trial. <em>Clin Cancer Res</em> 2024;30:1478–1487. <a href="https://pubmed.ncbi.nlm.nih.gov/38593249/" target="_blank" rel="noopener">PMID 38593249</a> · <a href="https://clinicaltrials.gov/study/NCT02416739" target="_blank" rel="noopener">NCT02416739</a></li>
+    <li>케이스웨스턴 연구 소개: <a href="https://case.edu/cancer/winter-nad-pancreatic-cancer" target="_blank" rel="noopener">Winter Examines the Effect of NAD+ Supplements on Pancreatic Cancer Treatment</a></li>
+    <li>건강기능식품 출시 보도: <a href="https://www.mt.co.kr/thebio/2025/01/16/2025011615115262066" target="_blank" rel="noopener">머니투데이 2025.1.16</a></li>
+  </ul>
+</section>
+
+<footer>
+  <span>이 자료는 공개된 논문 원문과 영상 자막을 대조한 교육용 정리이며, 개인의 치료 결정을 위한 의학적 조언이 아닙니다.</span>
+  <span>히포크라테스의 친구들 · 2026년 10월</span>
+</footer>
+</div>
+
+<script>
+(function(){
+  var NS="http://www.w3.org/2000/svg";
+  function el(tag,attrs,text){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);if(text!=null)e.textContent=text;return e;}
+
+  /* ---------- claim checker ---------- */
+  var C={ok:["c-ok","원문과 일치"],info:["c-info","맥락 누락"],warn:["c-warn","과장"],bad:["c-bad","원문과 충돌"],stat:["c-stat","통계 해석 오류"]};
+  var DATA={
+    sclc:[
+      {t:"반응 범위",v:"warn",said:"측정 가능한 종양이 거의 다 사라졌다. 거의 완전 관해에 도달했다고 결론 내릴 수 있다.",src:"원문은 '흉부(thoracic)' 반응이 거의 완전했다고만 씁니다. 진단 당시 있던 뇌·뼈·부신 전이가 어떻게 됐는지는 보고하지 않았습니다. 저자들은 RECIST 평가가 후향적이었으므로 완전 반응 분류는 신중해야 한다고 명시했습니다."},
+      {t:"표준치료와 비교",v:"warn",said:"표준치료 완전 관해율은 2.5%. 이 환자는 B3를 먹고 그만큼 효과를 봤으니 완전 관해율이 굉장히 높아졌다.",src:"2.5%는 면역항암+화학요법 시험(IMpower133)의 전신 반응 기준입니다. 이 환자는 흉부 방사선과 전뇌 방사선까지 받았고, 흉부만 평가했습니다. 같은 잣대가 아닙니다. 환자 한 명으로 '관해율'을 말할 수도 없습니다."},
+      {t:"추적 기간",v:"info",said:"4개월 후 거의 완전 관해.",src:"마지막 영상은 2025년 10월 9일, 논문 발표는 2026년 1월 7일입니다. 이후 재발이나 생존 정보는 없습니다. 소세포폐암은 처음에 잘 줄어들고 빨리 재발하는 경우가 많아, 지속 기간이 핵심입니다."},
+      {t:"비타민C vs B3",v:"warn",said:"비타민C 3g 경구로는 효과를 기대하기 어렵다. 아마도 표준치료와 B3 병용의 효과일 것이다.",src:"경구 비타민C에 대한 회의는 타당합니다. 그러나 저자들은 오히려 비타민C의 기전을 상세히 논의하며 두 비타민의 '시너지'를 가설로 제시했습니다. 가장 유력한 설명은 표준치료와 방사선이며, B3 단독 공로로 돌린 것은 영상의 해석입니다."},
+      {t:"이론적 설명",v:"bad",said:"Cell Metabolism 논문이 이 환자가 B3로 더 좋은 효과를 낸 이론적 설명이 될 수 있다.",src:"이 증례 논문은 Cell Metabolism 논문을 인용하지 않았습니다. 니코틴아마이드의 근거로는 RUNX3 재활성화와 배 교수팀 연구를 들었고, 비소세포폐암 근거를 소세포폐암에 직접 적용할 수 없다고 밝혔습니다."}
+    ],
+    cm:[
+      {t:"수치 인용",v:"ok",said:"그란자임B 23.3, 25.4, 29, 34, 48, 51까지 올라간다. 인터페론 감마도 28에서 44.9로 오른다.",src:"Figure 4H의 수치 그대로입니다."},
+      {t:"실험 조건",v:"info",said:"나이아신아마이드를 올려주면 CD8 T세포의 반응성이 달라진다.",src:"출발점 23.3은 면역억제 물질 MNAM 5 mM을 넣은 조건으로, 대조군 32.6보다 낮습니다. 중간 조건들은 NAM:MNAM 비율을 바꾼 것입니다. 최고 효과는 NAM 50 mM으로, 사람이 복용해 도달하는 혈중 농도보다 수백 배 높습니다."},
+      {t:"면역항암제 효과",v:"warn",said:"이 논문은 나이아신아마이드 농도가 올라가면 면역관문억제제 효과가 훨씬 더 높아진다는 것이다.",src:"논문은 NAM 투여로 항PD-1 효과가 높아지는지 시험하지 않았습니다. 생쥐에서 항PD-1 효과를 높인 것은 NAMPT를 담은 대식세포 소포체 주입이었습니다. 논문의 결론은 NAM/MNAM '비율'이 반응의 지표가 될 수 있다는 것입니다."},
+      {t:"NNMT의 역할",v:"info",said:"(언급 없음)",src:"논문의 핵심 효소 NNMT는 NAM을 면역억제 물질 MNAM으로 바꿉니다. NAM을 많이 먹으면 NNMT의 원료도 늘어납니다. 저자들의 전략이 'NAM 공급'이 아니라 'NNMT 억제'였던 이유입니다."},
+      {t:"한계",v:"info",said:"(언급 없음)",src:"저자들은 종양세포의 NAMPT가 오히려 악성화를 지지할 수 있다고 한계에서 밝혔고, NAM의 예후적 의미가 암종마다 달랐다고 보고했습니다(Figure S1F)."}
+    ],
+    pdac:[
+      {t:"치료 결정 과정",v:"warn",said:"환자가 비타민B3 치료를 하고 싶다고 제안했고, 병원이 받아들였다.",src:"원문: 환자는 항암 지속을 원하지 않았고, 니코틴아마이드 시작은 환자가 적극 참여한 상태에서 논의해 결정했다. 누가 제안했는지는 적혀 있지 않습니다."},
+      {t:"CA19-9 하락",v:"warn",said:"투약한 그 주부터 즉시 수직으로 떨어져 바닥까지 내려갔다.",src:"5주 만에 79% 감소, 5개월 만에 정상화. 큰 흐름은 맞지만, 항암 중단 후 B3 시작 전 11주 동안 수치가 이미 정체되어 있었다는 사실이 빠졌습니다."},
+      {t:"인과관계",v:"bad",said:"이것은 분명히 다른 어떤 이유로도 설명할 수 없다. 나이아신아마이드 효과가 아니면 설명이 불가능하다.",src:"저자들의 결론은 정반대입니다. 단일 증례로 인과관계를 확립할 수 없고, 시간적 일치는 우연일 수 있으며, 젬시타빈의 지연 반응일 수 있다고 명시했습니다. 니코틴아마이드의 기여는 '추측(speculative)'이라고 썼습니다."},
+      {t:"치료의 근거",v:"bad",said:"표준치료를 중단하고 비타민으로 치료하려면 과학적 근거가 있어야 한다. 그게 바로 저의 연구 결과다.",src:"참고문헌 44편에 배 교수팀 폐암 임상은 없습니다. 저자들이 밝힌 근거는 피부암 연구, 다른 암종의 진행 중 임상, NAD⁺ 증가와 PARP 억제라는 분자 기전입니다."},
+      {t:"유전형",v:"info",said:"ERBB2 증폭까지 있는 매우 악성인 암이었다.",src:"사실입니다. 다만 저자들은 KRAS 정상이라는 드문 유전형 자체가 반응의 원인일 수 있다고도 논의했습니다. 영상은 이를 '기적이 더 놀랍다'는 쪽으로만 해석했습니다."},
+      {t:"추적 결과",v:"ok",said:"25개월이 지나도 간 전이가 다시 나타나지 않았다.",src:"원문과 같습니다. 니코틴아마이드 시작 후 25개월 시점까지 영상에서 전이가 보이지 않았습니다."}
+    ],
+    lung:[
+      {t:"수명 연장",v:"stat",said:"비타민B3를 썼을 때 기대수명을 1년 이상 연장했다.",src:"전체 110명의 중앙 생존은 31.0개월 대 29.4개월(P=0.2)로 차이가 유의하지 않았습니다. 1차 평가지표인 무진행생존도 12.7개월 대 10.9개월(P=0.2)이었습니다. '1년 이상'은 여성·비흡연자 하위군 결과입니다."},
+      {t:"사망 위험 절반",v:"stat",said:"사망 위험을 절반으로 줄일 수 있었다. 이건 절반이 생존할 수 있다는 뜻이다.",src:"위험비 0.5는 어느 시점에서든 사망할 순간 위험이 절반이라는 뜻입니다. 생존 곡선이 늦춰질 뿐, 환자의 절반이 살아남는다는 의미가 아닙니다."},
+      {t:"현대 항암제와 비교",v:"warn",said:"항암제만으로 평균 수명 2년 연장은 현대에는 불가능하다.",src:"이 임상의 위약군(1세대 표적치료제만 사용)이 이미 중앙 생존 29.4개월이었습니다. 3세대 표적치료제는 대규모 3상에서 그보다 더 긴 생존을 보였습니다."},
+      {t:"4기 폐암 치사율",v:"warn",said:"폐암 4기는 치사율이 거의 100% 이상이다.",src:"EGFR 변이 폐암은 표적치료로 수년간 생존하는 환자가 적지 않습니다."},
+      {t:"연구 형태",v:"ok",said:"4기 폐암 환자에게 표적항암제와 비타민B3를 함께 쓴 임상.",src:"무작위 이중맹검 2b상으로, 영상에 나온 근거 중 유일하게 제대로 된 비교 임상입니다."}
+    ],
+    etc:[
+      {t:"케이스 리포트 설명",v:"ok",said:"케이스 리포트는 다수 환자의 통계적 유의성을 보는 것이 아니라, 소수 환자의 특별한 효과를 보고하는 논문이다.",src:"정확한 설명입니다. 그만큼 근거로서의 무게가 가볍다는 점도 함께 기억해야 합니다."},
+      {t:"피부암 예방",v:"warn",said:"비타민B3로 피부암 발병률을 30%나 감소시켰다.",src:"호주 ONTRAC 임상에서 보고된 감소폭은 약 23%였고, 장기이식 환자 대상 후속 임상에서는 효과가 확인되지 않았습니다. ③의 저자들이 인용한 2026년 리뷰 제목도 '아직 결론 나지 않았다'입니다."},
+      {t:"암종 일반화",v:"warn",said:"비타민B3의 암 예방과 치료 효과는 암종을 거의 가리지 않는다.",src:"근거가 없는 일반화입니다. ②의 저자들은 NAM의 예후적 의미가 암종마다 달랐다고 보고했고, 췌장암에서는 NAD⁺ 전구체가 항암제 효과를 떨어뜨렸다는 실험 결과도 있습니다."},
+      {t:"면역관문억제제 원리",v:"info",said:"보통 암세포는 PD-L1이 없어 면역에 죽고, 드물게 PD-L1을 가진 암세포만 살아남는다.",src:"교육용 단순화로는 이해할 만하지만, 실제로는 PD-L1 외에도 여러 면역 회피 방식이 있고 PD-L1 발현은 환경에 따라 변합니다."}
+    ]
+  };
+  var panel=document.getElementById("panel");
+  var tabs=[].slice.call(document.querySelectorAll(".tab"));
+  function render(key){
+    panel.textContent="";
+    DATA[key].forEach(function(c){
+      var d=document.createElement("article");d.className="claim";
+      var h=document.createElement("div");h.className="claim-head";
+      var t=document.createElement("span");t.className="t";t.textContent=c.t;
+      var ch=document.createElement("span");ch.className="chip "+C[c.v][0];ch.textContent=C[c.v][1];
+      h.appendChild(t);h.appendChild(ch);d.appendChild(h);
+      var s=document.createElement("div");s.className="said";
+      s.innerHTML='<span class="lbl">영상 발언</span>';var p1=document.createElement("p");p1.textContent=c.said;s.appendChild(p1);
+      var r=document.createElement("div");r.className="src";
+      r.innerHTML='<span class="lbl">원문 확인</span>';var p2=document.createElement("p");p2.textContent=c.src;r.appendChild(p2);
+      d.appendChild(s);d.appendChild(r);panel.appendChild(d);
+    });
+  }
+  tabs.forEach(function(b){
+    b.addEventListener("click",function(){
+      tabs.forEach(function(x){x.setAttribute("aria-selected",x===b?"true":"false");});
+      render(b.id.replace("tab-",""));
+      panel.setAttribute("aria-labelledby",b.id);
+    });
+  });
+  render("sclc");
+
+  /* ---------- Figure 4H chart ---------- */
+  var F4={labels:["대조군","MNAM\n5mM","1:5","1:1","5:1","10:1","NAM\n50mM"],
+    gzmb:[32.6,23.3,25.4,29.0,34.7,48.2,51.5], ifng:[36.6,28.5,29.1,33.9,37.7,40.3,44.9]};
+  var svg4=document.getElementById("chart-4h");
+  function draw4(key){
+    svg4.textContent="";
+    var vals=F4[key], x0=50,x1=430,y0=230,ymax=60,h=190;
+    function Y(v){return y0-v/ymax*h;}
+    [0,20,40,60].forEach(function(t){
+      svg4.appendChild(el("line",{x1:x0,x2:x1,y1:Y(t),y2:Y(t),stroke:"var(--line)","stroke-dasharray":t?"2 4":""}));
+      svg4.appendChild(el("text",{x:x0-8,y:Y(t)+4,"text-anchor":"end","font-size":11,"class":"t-muted t-mono"},t));
+    });
+    var bw=(x1-x0)/vals.length;
+    vals.forEach(function(v,i){
+      var x=x0+i*bw+8, w=bw-16;
+      var fill=i===0?"var(--chart-b)":(i===1?"var(--chart-hi)":"var(--chart-a)");
+      svg4.appendChild(el("rect",{x:x,y:Y(v),width:w,height:y0-Y(v),fill:fill}));
+      svg4.appendChild(el("text",{x:x+w/2,y:Y(v)-6,"text-anchor":"middle","font-size":11,"class":"t-mono"},v.toFixed(1)));
+      F4.labels[i].split("\n").forEach(function(line,j){
+        svg4.appendChild(el("text",{x:x+w/2,y:y0+16+j*13,"text-anchor":"middle","font-size":10.5,"class":"t-muted"},line));
+      });
+    });
+    var c=vals[0];
+    svg4.appendChild(el("line",{x1:x0,x2:x1,y1:Y(c),y2:Y(c),stroke:"var(--ink)","stroke-width":1,"stroke-dasharray":"5 3"}));
+    svg4.appendChild(el("text",{x:x1,y:Y(c)-5,"text-anchor":"end","font-size":11},"대조군 수준"));
+    svg4.appendChild(el("text",{x:(x0+x1)/2+30,y:y0+44,"text-anchor":"middle","font-size":11,"class":"t-muted"},"← NAM:MNAM 비율 →"));
+    svg4.appendChild(el("text",{x:x0+bw*1.5,y:18,"text-anchor":"middle","font-size":11,fill:"var(--chart-hi)"},"영상의 출발점"));
+  }
+  var bG=document.getElementById("seg-gzmb"),bI=document.getElementById("seg-ifng");
+  bG.addEventListener("click",function(){bG.setAttribute("aria-pressed","true");bI.setAttribute("aria-pressed","false");draw4("gzmb");});
+  bI.addEventListener("click",function(){bI.setAttribute("aria-pressed","true");bG.setAttribute("aria-pressed","false");draw4("ifng");});
+  draw4("gzmb");
+
+  /* ---------- CA19-9 chart ---------- */
+  var sc=document.getElementById("chart-ca");
+  (function(){
+    var x0=70,x1=830,y0=270,y1=30,m0=8,m1=42;
+    function X(m){return x0+(m-m0)/(m1-m0)*(x1-x0);}
+    var l0=Math.log10(10),l1=Math.log10(3000);
+    function Y(v){return y0-(Math.log10(v)-l0)/(l1-l0)*(y0-y1);}
+    // bands
+    sc.appendChild(el("rect",{x:X(12),y:y1,width:X(12.75)-X(12),height:y0-y1,fill:"var(--warn-soft)"}));
+    sc.appendChild(el("rect",{x:X(12.75),y:y1,width:X(15.4)-X(12.75),height:y0-y1,fill:"var(--accent-soft)"}));
+    sc.appendChild(el("text",{x:X(12.37),y:y0-44,"text-anchor":"middle","font-size":11},"항암"));
+    sc.appendChild(el("text",{x:(X(12.75)+X(15.4))/2,y:y0-44,"text-anchor":"middle","font-size":11,"font-weight":600},"정체 11주"));
+    sc.appendChild(el("text",{x:(X(12.75)+X(15.4))/2,y:y0-30,"text-anchor":"middle","font-size":10.5,"class":"t-muted"},"영상에서 생략"));
+    // grid
+    [10,34,100,300,1000,3000].forEach(function(t){
+      sc.appendChild(el("line",{x1:x0,x2:x1,y1:Y(t),y2:Y(t),stroke:t===34?"var(--ok)":"var(--line)","stroke-dasharray":t===34?"6 4":"2 4"}));
+      sc.appendChild(el("text",{x:x0-8,y:Y(t)+4,"text-anchor":"end","font-size":11,"class":"t-muted t-mono"},t));
+    });
+    sc.appendChild(el("text",{x:x0+6,y:Y(34)+15,"text-anchor":"start","font-size":11,fill:"var(--ok)"},"정상 상한 34"));
+    [10,15,20,25,30,35,40].forEach(function(m){
+      sc.appendChild(el("text",{x:X(m),y:y0+18,"text-anchor":"middle","font-size":11,"class":"t-muted t-mono"},m));
+    });
+    sc.appendChild(el("text",{x:(x0+x1)/2,y:y0+38,"text-anchor":"middle","font-size":11.5,"class":"t-muted"},"잠정 진단 후 개월"));
+    // events
+    [[10,"수술"],[15.4,"NAM 시작 1.5g/일"]].forEach(function(e,i){
+      sc.appendChild(el("line",{x1:X(e[0]),x2:X(e[0]),y1:y1,y2:y0,stroke:i?"var(--accent)":"var(--muted)","stroke-width":i?2:1}));
+      sc.appendChild(el("text",{x:X(e[0])+5,y:y0-8,"font-size":11,fill:i?"var(--accent)":"var(--muted)","font-weight":i?600:400},e[1]));
+    });
+    // data points from text
+    var pts=[[10.4,270,"퇴원 270"],[12,810,"810"],[12.75,1434,"1434"],[15.4,1376,"1376"],[16.6,289,"−79% (5주)"],[20.4,30,"정상화 (5개월)"],[40,30,"40개월까지 정상"]];
+    function seg(a,b,dash){sc.appendChild(el("line",{x1:X(a[0]),y1:Y(a[1]),x2:X(b[0]),y2:Y(b[1]),stroke:"var(--ink)","stroke-width":2,"stroke-dasharray":dash||""}));}
+    seg(pts[0],pts[1],"4 4");seg(pts[1],pts[2]);seg(pts[2],pts[3]);seg(pts[3],pts[4]);seg(pts[4],pts[5],"4 4");seg(pts[5],pts[6],"4 4");
+    pts.forEach(function(p,i){
+      sc.appendChild(el("circle",{cx:X(p[0]),cy:Y(p[1]),r:4.5,fill:"var(--surface)",stroke:"var(--ink)","stroke-width":2}));
+      var L={0:[-8,4,"end"],1:[-8,4,"end"],2:[0,-12,"middle"],3:[8,-8,"start"],4:[8,16,"start"],5:[0,-12,"middle"],6:[0,-12,"end"]}[i];
+      sc.appendChild(el("text",{x:X(p[0])+L[0],y:Y(p[1])+L[1],"font-size":11,"class":"t-mono","text-anchor":L[2]},p[2]));
+    });
+  })();
+
+  /* ---------- HR concept chart ---------- */
+  var sh=document.getElementById("chart-hr");
+  (function(){
+    var x0=50,x1=420,y0=225,y1=30,T=60;
+    function X(t){return x0+t/T*(x1-x0);} function Y(s){return y0-s*(y0-y1);}
+    [0,.25,.5,.75,1].forEach(function(s){
+      sh.appendChild(el("line",{x1:x0,x2:x1,y1:Y(s),y2:Y(s),stroke:"var(--line)","stroke-dasharray":s?"2 4":""}));
+      sh.appendChild(el("text",{x:x0-8,y:Y(s)+4,"text-anchor":"end","font-size":11,"class":"t-muted t-mono"},Math.round(s*100)+"%"));
+    });
+    [0,12,24,36,48,60].forEach(function(t){sh.appendChild(el("text",{x:X(t),y:y0+16,"text-anchor":"middle","font-size":11,"class":"t-muted t-mono"},t));});
+    sh.appendChild(el("text",{x:(x0+x1)/2,y:y0+34,"text-anchor":"middle","font-size":11,"class":"t-muted"},"개월"));
+    var lam=Math.log(2)/18;
+    function path(k){var d="";for(var t=0;t<=T;t+=1){d+=(t?"L":"M")+X(t).toFixed(1)+","+Y(Math.exp(-lam*k*t)).toFixed(1);}return d;}
+    sh.appendChild(el("path",{d:path(1),fill:"none",stroke:"var(--chart-b)","stroke-width":2.5}));
+    sh.appendChild(el("path",{d:path(.5),fill:"none",stroke:"var(--chart-a)","stroke-width":2.5}));
+    sh.appendChild(el("text",{x:X(20),y:Y(Math.exp(-lam*.5*20))-10,"font-size":11.5,fill:"var(--chart-a)","font-weight":600},"위험비 0.5"));
+    sh.appendChild(el("text",{x:X(30),y:Y(Math.exp(-lam*30))+16,"font-size":11.5,"class":"t-muted"},"기준"));
+    var s60=Math.exp(-lam*.5*60);
+    sh.appendChild(el("circle",{cx:X(60),cy:Y(s60),r:4,fill:"var(--chart-a)"}));
+    sh.appendChild(el("text",{x:X(60)-6,y:Y(s60)+18,"text-anchor":"end","font-size":11,"class":"t-mono"},"5년 시점 생존 "+Math.round(s60*100)+"%"));
+  })();
+})();
+</script>
+</body>
+</html>

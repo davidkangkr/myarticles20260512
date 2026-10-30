@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>숫자로 본 백신 게시글</title>
+<style>
+:root{
+  --bg:#f6f5f1; --card:#ffffff; --ink:#1d1d1b; --muted:#5f5e58; --line:#e3e1da;
+  --accent:#1f6f5c; --accent-soft:#e3f1ec;
+  --red:#b3261e; --red-soft:#fbe9e7;
+  --amber:#8a5a00; --amber-soft:#fdf1d8;
+  --blue:#1d4f91; --blue-soft:#e6eef9;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#151614; --card:#1f201d; --ink:#ecebe6; --muted:#a6a59e; --line:#34352f;
+    --accent:#6cc5a8; --accent-soft:#1d3029;
+    --red:#ff8a80; --red-soft:#3a1f1d;
+    --amber:#f2c06b; --amber-soft:#36301f;
+    --blue:#8db4f0; --blue-soft:#1d2738;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#151614; --card:#1f201d; --ink:#ecebe6; --muted:#a6a59e; --line:#34352f;
+  --accent:#6cc5a8; --accent-soft:#1d3029;
+  --red:#ff8a80; --red-soft:#3a1f1d;
+  --amber:#f2c06b; --amber-soft:#36301f;
+  --blue:#8db4f0; --blue-soft:#1d2738;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
+  font-size:18px;line-height:1.75;word-break:keep-all;overflow-wrap:break-word}
+main{max-width:720px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:1.6rem;line-height:1.35;margin:.2em 0 .4em}
+h2{font-size:1.3rem;line-height:1.4;margin:2.2em 0 .6em;padding-top:.6em;border-top:2px solid var(--line)}
+h3{font-size:1.08rem;margin:0 0 .3em}
+p{margin:.6em 0}
+.lead{color:var(--muted);font-size:1rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 16px 12px;margin:14px 0}
+.summary{background:var(--accent-soft);border:none}
+.alert{background:var(--red-soft);border:none}
+.alert h3{color:var(--red)}
+.tag{display:inline-block;font-size:.8rem;font-weight:700;padding:2px 10px;border-radius:99px;margin-right:6px;vertical-align:2px}
+.t-red{background:var(--red-soft);color:var(--red)}
+.t-amber{background:var(--amber-soft);color:var(--amber)}
+.t-blue{background:var(--blue-soft);color:var(--blue)}
+.t-green{background:var(--accent-soft);color:var(--accent)}
+.small{font-size:.9rem;color:var(--muted)}
+ul,ol{padding-left:1.3em;margin:.5em 0}
+li{margin:.35em 0}
+.big{display:grid;grid-template-columns:1fr;gap:10px;margin:14px 0}
+.num{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.num b{display:block;font-size:2.2rem;line-height:1.1;color:var(--red);font-variant-numeric:tabular-nums}
+.num .label{font-weight:700;margin-top:4px}
+.num p{margin:.3em 0 0;font-size:.95rem;color:var(--muted)}
+.timeline{list-style:none;padding:0;margin:12px 0;border-left:3px solid var(--line)}
+.timeline li{position:relative;padding:4px 0 12px 18px;margin:0}
+.timeline li::before{content:"";position:absolute;left:-8px;top:12px;width:13px;height:13px;border-radius:50%;background:var(--card);border:3px solid var(--muted)}
+.timeline li.hot::before{border-color:var(--red);background:var(--red)}
+.timeline time{display:block;font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.vs div{border-radius:12px;padding:12px;font-size:.95rem}
+.vs .us{background:var(--accent-soft)}
+.vs .them{background:var(--red-soft)}
+.vs b{display:block;margin-bottom:4px}
+.check li{list-style:none;margin-left:-1.3em;padding-left:1.8em;position:relative}
+.check li::before{content:"☐";position:absolute;left:0;color:var(--accent);font-weight:700}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:10px 0}
+summary{cursor:pointer;font-weight:700}
+.sources li{font-size:.88rem;word-break:break-all}
+a{color:var(--blue)}
+footer{margin-top:3em;font-size:.88rem;color:var(--muted)}
+@media (min-width:600px){ .big{grid-template-columns:1fr 1fr} }
+</style>
+</head>
+<body>
+<main>
+
+<p class="small">히포크라테스의 친구들 · 회원을 위한 읽기 안내 · 2026년 10월</p>
+<h1>숫자로 본<br>“충격 발표!” 백신 게시글</h1>
+<p class="lead">최근 자유게시판에 백신과 암을 연결하는 글 3개가 연달아 올라왔습니다. 의견이 아니라 <b>누구나 확인할 수 있는 숫자</b>부터 보겠습니다. 글쓴이는 이하 <b>A 회원</b>이라고 부릅니다.</p>
+
+<h2>1. 숫자가 말하는 것</h2>
+
+<div class="big">
+<div class="num">
+<b>5,391번</b>
+<div class="label">카페 방문</div>
+<p>이 카페가 문을 연 2020년 1월 8일부터 지금까지 약 2,490일. 개설 첫날부터 <b>하루도 빠짐없이 매일 2번 이상</b> 들어와야 나오는 숫자입니다. 하루 1번이면 약 15년이 걸립니다.</p>
+</div>
+<div class="num">
+<b>0개</b>
+<div class="label">다른 회원 글에 남긴 댓글</div>
+<p>카페 글 16,397개 중 어디에도 질문, 공감, 감사 한마디가 없었습니다. 이 지적에 A 회원은 반박하지 않았습니다.</p>
+</div>
+<div class="num">
+<b>3개 / 27일</b>
+<div class="label">전체 작성글</div>
+<p>수년간 조용하다가 10월 3일~30일 사이에 갑자기 3개를 올렸습니다. 3개 모두 백신·음모 주제이고, 모두 남이 만든 유튜브 영상 링크가 중심입니다.</p>
+</div>
+<div class="num">
+<b>0번</b>
+<div class="label">자기 글에 달린 댓글에 답한 횟수 (퇴출 요청 전까지)</div>
+<p>첫 두 글에 달린 댓글 9개에는 한 번도 답하지 않았습니다. 첫 답글은 퇴출 요청 댓글이 달리고 <b>27분 뒤</b>였습니다.</p>
+</div>
+</div>
+
+<div class="card alert">
+<h3>왜 이 숫자가 이상할까요?</h3>
+<p>암 환자 본인이거나 가족이 암에 걸린 사람이라면, 매일 두 번씩 수년 동안 이곳 글을 읽으면서 <b>궁금한 것 하나, 고마운 글 하나</b>가 없기는 어렵습니다. 이 카페에 오는 이유 자체가 묻고, 나누고, 위로받기 위해서이기 때문입니다.</p>
+<p>그런데 처음으로 입을 연 순간이 <b>자기 경험이 아닌, 남이 만든 자극적 영상의 배포</b>였습니다. 그리고 그 글에 달린 질문에는 답이 없다가, 퇴출 이야기가 나오자 길고 공격적인 댓글로 대응했습니다. 이 활동 방식은 정보를 나누러 온 환우의 패턴이 아니라, <b>콘텐츠를 뿌리고 지나가는 계정</b>의 패턴에 가깝습니다.</p>
+</div>
+
+<h2>2. 한 달 동안 일어난 일</h2>
+<ul class="timeline">
+<li><time>2020.01 ~ 2026.09</time>방문만 수천 번. 글 0개, 댓글 0개</li>
+<li class="hot"><time>10월 3일</time>첫 글 “화이자가 우리를 속였다. 플로리다 법무장관 충격 발표!” — 시사 유튜브 영상 + 한 줄. 댓글 6개에 답 없음</li>
+<li class="hot"><time>10월 21일</time>“모든 mRNA 백신은 면역 기능을 끄고 염증과 암을 증식 시킨다!” — 쇼츠 + 논문 요약 붙여넣기. 댓글 3개에 답 없음</li>
+<li class="hot"><time>10월 30일 14:48</time>“세계인구과잉을 말했던 사람들이 백신을 맞췄다! 암 폭증 원인..” — 쇼츠 4개, 본인 설명 없음</li>
+<li><time>10월 30일 20:20</time>회원이 운영진에게 퇴출 요청</li>
+<li class="hot"><time>10월 30일 20:47</time>A 회원 첫 답글. 이후 “여기가 북한입니까?”, “한통속”, “나쁜 사람” 등으로 반박, 마지막에 “백신 해독부터 하라”고 권유</li>
+</ul>
+
+<p>세 제목을 이어 읽으면 주장이 계단처럼 커집니다. <b>“한 회사가 속였다” → “모든 mRNA 백신이 암을 키운다” → “인구를 줄이려는 자들이 일부러 맞혔다”</b>. 앞 단계에 고개를 끄덕인 독자가 다음 단계도 받아들이도록 설계된, 음모론의 전형적인 확대 순서입니다.</p>
+
+<h2>3. 왜 스팸보다 위험한가 — “편가르기”</h2>
+
+<div class="card">
+<p>스팸은 돈을 노리고, 누구나 알아봅니다. 이런 글은 <b>사람들 사이를 갈라놓는 것</b>을 노리고, 걱정해 주는 얼굴로 다가옵니다. 이 글타래에서 쓰인 말을 보면 구조가 분명합니다.</p>
+<div class="vs">
+<div class="us"><b>“우리”</b>진실을 아는 사람, 깨어 있는 사람, 환자를 살리려는 사람</div>
+<div class="them"><b>“그들”</b>거대 제약사, 딥스테이트, 빌 게이츠, 그리고 <u>반론하는 회원</u></div>
+</div>
+<p>핵심은 마지막입니다. 근거를 묻는 회원은 곧바로 “그들” 편으로 분류됩니다. “여기가 북한입니까?”, “세 번 속으면 한통속”, “남의 생명보다 사심을 중시하는 나쁜 사람”. <b>근거에 대한 질문이 인격과 동기에 대한 공격으로 바뀝니다.</b> 이렇게 되면 어떤 증거를 보여줘도 “그것도 그들의 증거”가 되어 대화가 불가능해집니다.</p>
+</div>
+
+<div class="card">
+<h3>역사가 보여준 같은 수법</h3>
+<p><b>나치 독일</b>의 선전은 특정 집단을 사회를 오염시키는 “독”으로 그렸고, 1938년에는 이를 아이들에게 가르치는 그림책(『독버섯』)까지 만들었습니다. 내부의 적을 만들고, 의심하는 사람을 배신자로 몰고, 공포로 결속시키는 방식이었습니다.</p>
+<p>오늘날에도 같은 구조가 쓰입니다. 미국 조지워싱턴대 연구팀은 러시아 정부와 연계된 트롤 계정들이 <b>백신을 사회 분열의 쐐기로</b> 썼다고 분석했습니다. 이들은 백신 찬성과 반대 글을 <b>모두</b> 올렸는데, 목적이 어느 한쪽의 승리가 아니라 사람들끼리 싸우게 만드는 것이었기 때문입니다. 연구진은 이런 계정이 진짜 사용자처럼 위장해 과학적 합의를 허무는 효과를 낸다고 결론지었습니다.</p>
+<p class="small">즉, 백신은 수단입니다. 노리는 것은 공동체의 신뢰입니다.</p>
+</div>
+
+<h2>4. 이런 활동에는 목표, 계획, 비용이 있습니다</h2>
+<p>“설마 누가 돈을 들여 이런 걸 하겠어?”라고 생각하기 쉽습니다. 하지만 이미 확인된 사례들이 있습니다.</p>
+
+<div class="card">
+<h3>소수가 만들고, 다수가 퍼 나른다</h3>
+<p>영미권 비영리단체 CCDH는 2021년 초 SNS에 올라온 반백신 콘텐츠를 분석해, 그중 약 <b>65%가 단 12명</b>(이른바 “허위정보 12인”)에게서 시작됐다고 발표했습니다. 우리 카페에 올라온 영상들도 누군가 만든 것을 옮겨온 것입니다.</p>
+</div>
+
+<div class="card">
+<h3>산업이 있다</h3>
+<p>같은 단체는 주요 반백신 조직들의 연 매출을 최소 <b>3,600만 달러</b>로 추산했습니다. 이들은 2020년 10월 회의를 열어 백신에 대한 의심과 부작용 이야기를 최대한 키우자는 전략을 세웠고, 영양제·건강식품 같은 <b>자체 상품 판매</b>와 연결돼 있었습니다.</p>
+<p>A 회원이 마지막에 “구충제 치료 전에 <b>백신 해독</b>부터 하라, 방법은 검색해 보라”고 한 부분을 다시 보세요. 공포를 만든 뒤 해결책을 파는 곳으로 안내하는 것, 이것이 이 산업의 전형적인 동선입니다.</p>
+</div>
+
+<div class="card">
+<h3>우리나라도 예외가 아닙니다</h3>
+<p>조직적으로 온라인 여론을 움직이려 한 일은 우리나라에서도 법원 판결로 확인됐습니다. 2012년 국가정보원 댓글 사건, 2018년 드루킹 댓글 조작 사건이 대표적입니다. 진영은 달랐지만 방식은 같았습니다. <b>평범한 사용자처럼 보이는 계정</b>으로 특정 메시지를 반복해 퍼뜨린 것입니다.</p>
+</div>
+
+<p class="small">A 회원 한 사람이 이런 조직에 속해 있는지는 우리가 알 수 없고, 단정할 필요도 없습니다. 중요한 것은 <b>활동 방식이 이 패턴과 같다</b>는 점, 그리고 그 결과 피해를 보는 쪽이 우리 환우들이라는 점입니다.</p>
+
+<h2>5. 근거로 내세운 내용, 사실일까요?</h2>
+<p class="small"><span class="tag t-green">사실</span> <span class="tag t-amber">과장</span> <span class="tag t-red">왜곡</span> <span class="tag t-blue">맥락 왜곡</span></p>
+
+<div class="card">
+<h3>플로리다 법무장관의 화이자 소송</h3>
+<p><span class="tag t-green">사실</span> 2026년 10월 1일 소비자보호법 위반 민사소송이 실제로 제기됐습니다.</p>
+<p><span class="tag t-amber">과장</span> 판결이 아니라 “주장”입니다. 화이자는 반박했고, 앞서 2025년 1월 플로리다 대배심은 백신 제조사의 법 위반 증거를 찾지 못했습니다.</p>
+<p><span class="tag t-red">왜곡</span> 보도된 소송 쟁점은 심근염 등 위험 고지와 마케팅에 관한 것이며, 게시글이 말한 “암·터보암 발생 이유”는 핵심 쟁점이 아닙니다.</p>
+</div>
+
+<div class="card">
+<h3>“모든 mRNA 백신은 암을 증식시킨다” — 생쥐 논문</h3>
+<p><span class="tag t-red">왜곡</span> 2026년 중국 연구팀의 생쥐 논문은 실제로 있지만 게시글과 다릅니다.</p>
+<ul>
+<li>건강한 쥐에 암이 생긴 실험이 아니라, <b>암세포를 혈관에 직접 주입</b>한 뒤 폐 전이를 본 실험입니다.</li>
+<li>체중당 지질 용량이 사람 백신의 <b>약 1,100배</b>였습니다(팩트체크 매체의 대략적 계산).</li>
+<li>같은 논문에서 <b>실제 mRNA 백신을 맞은 쥐는 오히려 전이가 줄었습니다.</b> 게시글은 이 부분을 뺐습니다.</li>
+<li>논문의 기전은 면역이 과하게 “켜지는” 것입니다. 제목의 “면역 기능을 끈다”와 정반대입니다.</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>“인구과잉을 말한 사람들” — 빌 게이츠 TED 강연</h3>
+<p><span class="tag t-blue">맥락 왜곡</span> 2010년 강연에서 그는 보건의료와 백신으로 아이들이 살아남으면 가정이 아이를 덜 낳게 되어 인구 <b>증가 속도</b>가 줄어든다고 말했습니다. 지금 사는 사람을 줄인다는 뜻이 아니며, 여러 나라 팩트체크 기관이 같은 결론을 냈습니다.</p>
+</div>
+
+<div class="card">
+<h3>“암 폭증”</h3>
+<p><span class="tag t-amber">과장</span> 2023년 국내 신규 암 환자는 약 28만 9천 명으로 전년보다 2.5% 늘었습니다. 하지만 절반 이상이 65세 이상이고, 정부는 증가 원인을 고령화로 설명합니다. 인구 구조 변화를 빼면 발생 수준은 해마다 비슷합니다.</p>
+</div>
+
+<div class="card">
+<h3>“mRNA 독감 백신을 매년 맞으면서”</h3>
+<p><span class="tag t-red">왜곡</span> 세계 최초의 mRNA 독감 백신은 <b>2026년 8월</b>에야 미국에서 승인됐습니다. 그동안 매년 맞아 온 독감 백신은 mRNA가 아닙니다.</p>
+</div>
+
+<h2>6. 1분 자가 점검표</h2>
+<p>두세 개 이상 해당하면 한 번 더 의심해 보세요.</p>
+<div class="card">
+<ul class="check">
+<li>오래 조용하던 계정이 갑자기 같은 주제만 연달아 올리는가?</li>
+<li>본인 경험이나 설명 없이 남이 만든 영상 링크만 있는가?</li>
+<li>제목에 “충격”, “모든”, “폭증”, 느낌표가 많은가?</li>
+<li>자기 글에 달린 질문에는 답하지 않는가?</li>
+<li>반론에 근거 대신 “한통속”, “북한”, “나쁜 사람” 같은 딱지를 붙이는가?</li>
+<li>“소송 제기”, “쥐 실험”을 “밝혀진 사실”처럼 말하는가?</li>
+<li>마지막에 “해독”, 특정 요법, 상품으로 안내하는가?</li>
+</ul>
+</div>
+
+<h2>7. 환우분들께 드리는 부탁</h2>
+<div class="card summary">
+<ul>
+<li>백신이 걱정되시면 <b>주치의에게 직접</b> 물어보세요. 항암 일정과 면역 상태에 맞춰 정하는 것이 가장 안전합니다.</li>
+<li>“백신 해독” 제품이나 요법은 효과가 입증된 것이 없고, 복용 중인 약과 부딪칠 수 있습니다.</li>
+<li>이런 글은 댓글로 다투기보다 <b>신고</b>해 주세요. 댓글 싸움은 글을 더 많은 사람에게 보여주고, 편가르기를 완성시켜 줍니다.</li>
+<li>제약사를 비판적으로 보는 눈은 우리 카페의 장점입니다. 그 눈을 <b>이런 글에도 똑같이</b> 적용해 주세요.</li>
+</ul>
+</div>
+
+<details>
+<summary>참고한 자료 (눌러서 펼치기)</summary>
+<ul class="sources">
+<li>A 회원 프로필 및 게시글 21006·21047·21064 (2026.10.31 기준 화면)</li>
+<li>Broniatowski 외, “Weaponized Health Communication”, American Journal of Public Health, 2018: <a href="https://gwtoday.gwu.edu/node/9731">gwtoday.gwu.edu</a></li>
+<li>CCDH “Disinformation Dozen”, 2021: <a href="https://prnewswire.com/news-releases/disinformation-dozen-two-thirds-of-online-anti-vaccine-content-originates-from-top-12-anti-vax-leaders-301255060.html">prnewswire.com</a></li>
+<li>CCDH “Pandemic Profiteers”, 2021: <a href="https://counterhate.com/research/pandemic-profiteers/">counterhate.com</a></li>
+<li>Florida Phoenix — 플로리다 화이자 소송, 2026.10.01: <a href="https://floridaphoenix.com/2026/10/01/uthmeier-alleges-pfizer-misled-florida-about-its-covid-vaccines-safety/">floridaphoenix.com</a></li>
+<li>TechARP 팩트체크 — Wang 등(2026) 생쥐 논문: <a href="https://www.techarp.com/fact-check/wang-study-mrna-vaccines-turbo-cancer/">techarp.com</a></li>
+<li>PolitiFact — 빌 게이츠 TED 발언: <a href="https://politifact.com/factchecks/2021/oct/11/blog-posting/bill-gates-didnt-say-he-wanted-use-vaccines-reduce/">politifact.com</a></li>
+<li>국가암정보센터 — 2023년 국가암등록통계: <a href="https://cancer.go.kr/lay1/S1T639C640/contents.do">cancer.go.kr</a></li>
+<li>세계일보 — 2023년 암 통계(고령화 영향): <a href="https://www.segye.com/newsView/20260120515341">segye.com</a></li>
+<li>ABC News — 첫 mRNA 독감 백신 승인, 2026.08: <a href="https://www.goodmorningamerica.com/wellness/story/fda-approves-modernas-mrna-seasonal-flu-vaccine-135384178">abcnews</a></li>
+</ul>
+</details>
+
+<footer>
+이 안내문은 회원 누구나 비슷한 글을 만났을 때 스스로 판단할 수 있도록 돕기 위한 글입니다. 의학적 결정은 반드시 담당 의료진과 상의하세요.
+</footer>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>자극적 백신 게시글 읽는 법</title>
+<style>
+:root{
+  --bg:#f6f5f1; --card:#ffffff; --ink:#1d1d1b; --muted:#5f5e58; --line:#e3e1da;
+  --accent:#1f6f5c; --accent-soft:#e3f1ec;
+  --red:#b3261e; --red-soft:#fbe9e7;
+  --amber:#8a5a00; --amber-soft:#fdf1d8;
+  --blue:#1d4f91; --blue-soft:#e6eef9;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#151614; --card:#1f201d; --ink:#ecebe6; --muted:#a6a59e; --line:#34352f;
+    --accent:#6cc5a8; --accent-soft:#1d3029;
+    --red:#ff8a80; --red-soft:#3a1f1d;
+    --amber:#f2c06b; --amber-soft:#36301f;
+    --blue:#8db4f0; --blue-soft:#1d2738;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#151614; --card:#1f201d; --ink:#ecebe6; --muted:#a6a59e; --line:#34352f;
+  --accent:#6cc5a8; --accent-soft:#1d3029;
+  --red:#ff8a80; --red-soft:#3a1f1d;
+  --amber:#f2c06b; --amber-soft:#36301f;
+  --blue:#8db4f0; --blue-soft:#1d2738;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
+  font-size:18px;line-height:1.75;word-break:keep-all;overflow-wrap:break-word}
+main{max-width:720px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:1.6rem;line-height:1.35;margin:.2em 0 .4em}
+h2{font-size:1.3rem;line-height:1.4;margin:2.2em 0 .6em;padding-top:.6em;border-top:2px solid var(--line)}
+h3{font-size:1.08rem;margin:0 0 .3em}
+p{margin:.6em 0}
+.lead{color:var(--muted);font-size:1rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 16px 12px;margin:14px 0}
+.summary{background:var(--accent-soft);border:none}
+.summary p{margin:.4em 0}
+.tag{display:inline-block;font-size:.8rem;font-weight:700;padding:2px 10px;border-radius:99px;margin-right:6px;vertical-align:2px}
+.t-red{background:var(--red-soft);color:var(--red)}
+.t-amber{background:var(--amber-soft);color:var(--amber)}
+.t-blue{background:var(--blue-soft);color:var(--blue)}
+.t-green{background:var(--accent-soft);color:var(--accent)}
+.claim{font-weight:700}
+.small{font-size:.9rem;color:var(--muted)}
+ul,ol{padding-left:1.3em;margin:.5em 0}
+li{margin:.35em 0}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
+.fact b{display:block;font-size:1.5rem;line-height:1.2}
+.fact span{font-size:.85rem;color:var(--muted)}
+.ladder{list-style:none;padding:0;margin:12px 0;counter-reset:s}
+.ladder li{position:relative;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 12px 12px 52px;margin:8px 0}
+.ladder li::before{counter-increment:s;content:counter(s);position:absolute;left:12px;top:12px;width:28px;height:28px;border-radius:50%;background:var(--red-soft);color:var(--red);font-weight:700;text-align:center;line-height:28px;font-size:.95rem}
+.check li{list-style:none;margin-left:-1.3em;padding-left:1.8em;position:relative}
+.check li::before{content:"☐";position:absolute;left:0;color:var(--accent);font-weight:700}
+.two{display:grid;grid-template-columns:1fr;gap:10px}
+.box-ok{border-left:5px solid var(--accent)}
+.box-no{border-left:5px solid var(--red)}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:10px 0}
+summary{cursor:pointer;font-weight:700}
+.sources li{font-size:.88rem;word-break:break-all}
+a{color:var(--blue)}
+footer{margin-top:3em;font-size:.88rem;color:var(--muted)}
+@media (min-width:600px){ .two{grid-template-columns:1fr 1fr} .facts{grid-template-columns:repeat(4,1fr)} }
+</style>
+</head>
+<body>
+<main>
+
+<p class="small">히포크라테스의 친구들 · 회원을 위한 읽기 안내 · 2026년 10월</p>
+<h1>“충격 발표!” 백신 게시글,<br>어떻게 읽어야 할까요?</h1>
+<p class="lead">최근 자유게시판에 백신과 암을 연결하는 게시글이 연이어 올라왔습니다. 누가 올렸는지보다, <b>무엇을 어떻게 주장하는지</b>를 차분히 확인해 봤습니다.</p>
+
+<div class="card summary">
+<p><b>먼저 결론부터</b></p>
+<p>① 세 게시글이 근거로 든 뉴스·논문·영상은 <b>실제로 존재하지만, 그 내용이 말하는 것보다 훨씬 크게 부풀려져</b> 있었습니다.</p>
+<p>② 이런 글은 스팸처럼 티가 나지 않고, 우리 카페가 소중히 여기는 가치(환자의 자기결정, 제약사에 대한 비판적 시선)의 옷을 입고 들어옵니다. 그래서 <b>스팸보다 위험</b>합니다.</p>
+<p>③ 글쓴이의 의도는 알 수 없습니다. 하지만 <b>의도와 상관없이</b> 환우분들의 실제 결정(예방접종 거부, “해독” 상품 구매)에 영향을 줄 수 있다는 점이 핵심입니다.</p>
+</div>
+
+<h2>1. 세 게시글을 한눈에</h2>
+<p>모두 같은 회원(이하 <b>A 회원</b>)이 자유게시판에 올린 글입니다. 본인의 글은 거의 없고 유튜브 링크가 중심입니다.</p>
+
+<div class="card">
+<h3>10월 3일 · “화이자가 우리를 속였다. 플로리다 법무장관 충격 발표!”</h3>
+<p class="small">유튜브 시사 채널 영상 1개 + “암·터보암·자가면역질환 발생 이유”라는 한 줄</p>
+</div>
+<div class="card">
+<h3>10월 21일 · “모든 mRNA 백신은 면역 기능을 끄고 염증과 암을 증식시킨다!”</h3>
+<p class="small">유튜브 쇼츠 1개 + 생쥐 실험 논문 요약문 붙여넣기</p>
+</div>
+<div class="card">
+<h3>10월 30일 · “세계인구과잉을 말했던 사람들이 백신을 맞췄다! 암 폭증 원인..”</h3>
+<p class="small">유튜브 쇼츠 3개 + 짧은 영상 1개, 본인 설명 없음</p>
+</div>
+
+<p>제목만 이어서 읽어 보면 주장이 계단처럼 커집니다.</p>
+<ol class="ladder">
+<li><b>“한 회사가 속였다”</b> — 특정 기업의 잘못 주장</li>
+<li><b>“모든 mRNA 백신이 암을 키운다”</b> — 기술 전체로 일반화</li>
+<li><b>“인구를 줄이려는 사람들이 일부러 맞혔다”</b> — 의도적 음모로 확대</li>
+</ol>
+<p class="small">기업 비판 → 기술 전체 부정 → 악의적 음모. 이 순서는 건강 관련 음모론이 퍼질 때 자주 보이는 단계적 확대 패턴입니다. 앞 단계에 동의한 독자가 다음 단계도 받아들이기 쉬워집니다.</p>
+
+<h2>2. 주장을 하나씩 확인했습니다</h2>
+<p class="small">판정 기준 — <span class="tag t-green">사실</span> 확인됨 <span class="tag t-amber">과장</span> 일부 사실을 부풀림 <span class="tag t-red">왜곡</span> 근거가 말하지 않는 내용 <span class="tag t-blue">맥락</span> 앞뒤를 잘라 다른 뜻으로 사용</p>
+
+<div class="card">
+<h3>① 플로리다 법무장관의 화이자 소송</h3>
+<p><span class="tag t-green">사실</span> 소송 자체는 실제로 있었습니다. 플로리다주 법무장관은 2026년 10월 1일, 화이자와 CEO를 상대로 백신의 위험성(심근염 등)을 충분히 알리지 않고 마케팅했다며 주 소비자보호법 위반으로 민사 소송을 냈습니다.</p>
+<p><span class="tag t-amber">과장</span> 하지만 이것은 <b>“주장을 담은 소장 제출”</b>이지 법원 판결이 아닙니다. 화이자는 근거 없는 주장이라며 반박했고, 앞서 2025년 1월 같은 주의 대배심은 백신 제조사의 법 위반 증거를 찾지 못했습니다. 텍사스주의 비슷한 소송은 1심에서 기각된 바 있습니다.</p>
+<p><span class="tag t-red">왜곡</span> 게시글은 이 소송을 “암·터보암 발생 이유”로 소개했지만, 보도된 소송 쟁점은 심근염, 임신 관련 우려, 전파 차단 효과 등 <b>마케팅과 정보 공개</b>에 관한 것이며 암이 핵심 쟁점으로 나오지 않습니다.</p>
+</div>
+
+<div class="card">
+<h3>② “모든 mRNA 백신은 암을 증식시킨다” — 생쥐 논문</h3>
+<p><span class="tag t-green">사실</span> 2026년 중국 쓰촨대 연구팀(Binhan Wang 등)의 생쥐 실험 논문은 실제로 있습니다. 백신 운반체인 지질나노입자(LNP)를 근육에 주사하면 염증 반응이 생기고, 그 결과 폐로 퍼지는 암세포가 늘어나는 현상을 보고했습니다.</p>
+<p>그런데 논문을 직접 확인하면 게시글과 다른 점이 여럿 나옵니다.</p>
+<ul>
+<li><b>건강한 쥐에 암이 생긴 실험이 아닙니다.</b> 연구진이 쥐 꼬리 정맥에 흑색종 세포를 직접 넣은 뒤, 폐에 얼마나 자리 잡는지를 본 “전이 모델”입니다. 암을 새로 만드는 것(발암)과는 다른 질문입니다.</li>
+<li><b>용량이 매우 컸습니다.</b> 팩트체크 매체의 대략적 계산으로는 체중당 지질 양이 사람 백신 1회분의 약 1,100배 수준입니다. (쥐와 사람을 단순 비교할 수는 없다는 점도 함께 밝혀 두었습니다.)</li>
+<li><b>같은 논문 안에서 실제 mRNA 백신(E6/E7 항원)을 맞은 쥐는 오히려 폐 전이가 줄었습니다.</b> 게시글은 이 결과를 빼놓았습니다.</li>
+<li>논문이 말하는 기전은 <b>면역 반응이 과하게 켜지는 것</b>(호중구 활성화)입니다. 제목의 “면역 기능을 끈다”와는 정반대입니다.</li>
+</ul>
+<p><span class="tag t-red">왜곡</span> 생쥐 한 실험의 결과를 “모든 mRNA 백신”, “사람의 암 증식”으로 일반화한 것은 논문이 말하지 않은 내용입니다. 이 결과는 “더 안전한 운반체를 연구해야 한다”는 과제를 보여줄 뿐, 사람에게서 확인된 위험은 아닙니다.</p>
+</div>
+
+<div class="card">
+<h3>③ “인구과잉을 말한 사람들이 백신을 맞혔다” — 빌 게이츠 TED 강연</h3>
+<p><span class="tag t-blue">맥락</span> 영상은 2010년 빌 게이츠의 TED 강연(탄소 배출을 0으로 줄이는 방법) 일부입니다. 그는 백신·보건의료가 좋아지면 인구 <b>증가 속도</b>를 10~15% 낮출 수 있다고 했습니다.</p>
+<p>이 말의 뜻은 “아이가 살아남을 거라 믿을 수 있는 가정은 아이를 덜 낳는다”는 인구학의 오래된 관찰(인구 변천)입니다. 지금 사는 사람의 수를 줄인다는 뜻이 아니며, 여러 나라의 팩트체크 기관이 같은 결론을 냈습니다.</p>
+</div>
+
+<div class="card">
+<h3>④ “암이 폭증하고 있다” — 실제 통계</h3>
+<p><span class="tag t-amber">과장</span> 우리나라 2023년 신규 암 환자는 약 28만 9천 명으로 전년보다 2.5% 늘었습니다. 그러나 신규 환자의 절반 이상이 65세 이상이고, 정부는 증가의 주된 원인을 <b>고령화</b>로 설명합니다. 인구 구조 변화를 빼고 보면 발생 수준은 해마다 비슷합니다.</p>
+<p>미국에서도 백신 접종 이후 신규 암 진단이 대부분 연령대에서 보합 또는 소폭 감소했다는 의료기록 분석이 있습니다. “터보암”을 뒷받침한다고 소개된 일부 관찰 연구들은 연구자 스스로 추적 기간이 짧고, 검진이 늘어서 발견이 많아졌을 가능성을 인정했습니다.</p>
+</div>
+
+<div class="card">
+<h3>⑤ “mRNA 독감 백신을 매년 맞으면서…”</h3>
+<p><span class="tag t-red">왜곡</span> 댓글에서 A 회원은 회원들이 “위험한 mRNA 독감 백신을 매년 맞는다”고 했습니다. 그러나 세계 최초의 mRNA 독감 백신은 <b>2026년 8월</b>에야 미국 FDA 승인을 받았습니다(50세 이상 대상). 지금까지 매년 맞아 온 독감 백신은 mRNA 방식이 아닙니다.</p>
+</div>
+
+<h2>3. 계정 활동 패턴 — 관찰과 해석을 구분합니다</h2>
+<p>카페 프로필과 게시판에서 누구나 볼 수 있는 숫자입니다.</p>
+<div class="facts">
+<div class="fact"><b>5,391</b><span>카페 방문 수</span></div>
+<div class="fact"><b>3</b><span>전체 작성글</span></div>
+<div class="fact"><b>27일</b><span>3개 글이 올라온 기간</span></div>
+<div class="fact"><b>3/3</b><span>백신·음모 주제 글</span></div>
+</div>
+
+<div class="two">
+<div class="card box-ok">
+<h3>관찰된 사실</h3>
+<ul>
+<li>오랜 기간 방문만 하다가 10월 한 달에 같은 주제의 글만 연속으로 올림</li>
+<li>세 글 모두 본인의 경험이나 정리 없이 남이 만든 영상 링크가 중심</li>
+<li>제목마다 “충격”, “모든”, “폭증”, 느낌표 등 클릭을 부르는 표현</li>
+<li>반론 댓글에는 “여기가 북한입니까”, “세 번 속으면 한통속” 같은 상대 동기 공격으로 응답</li>
+<li>마지막 댓글에서 구충제 치료 전에 “백신 해독”부터 해야 한다고 권유</li>
+</ul>
+</div>
+<div class="card box-no">
+<h3>여기서 단정할 수 없는 것</h3>
+<ul>
+<li>사람인지 자동화 계정인지</li>
+<li>대가를 받고 쓰는지, 정치적 목적이 있는지</li>
+<li>진심으로 믿고 걱정해서 올렸을 가능성</li>
+</ul>
+<p class="small">방문은 많고 글은 적은 회원(이른바 “눈팅족”)은 어느 커뮤니티에나 많습니다. 그래서 숫자만으로 의도를 판정하지 않았습니다. 다만 <b>의도와 상관없이 글이 미치는 영향은 같습니다.</b></p>
+</div>
+</div>
+
+<h2>4. 왜 스팸보다 위험할까요?</h2>
+<div class="card">
+<ol>
+<li><b>스팸은 티가 납니다.</b> “대출”, “당첨” 같은 글은 누구나 걸러냅니다. 반면 이런 글은 “환자를 걱정해서”라는 얼굴로 다가옵니다.</li>
+<li><b>우리 카페의 가치를 빌려 씁니다.</b> 이곳은 표준치료의 한계를 겪고 대안을 찾는 분들이 모인 곳입니다. “거대 제약사가 숨긴다”는 말은 그 경험에 쉽게 스며듭니다. 하지만 제약사를 비판적으로 보는 것과, 근거 없이 모든 것을 음모로 보는 것은 전혀 다릅니다.</li>
+<li><b>실제 행동을 바꿉니다.</b> 항암 중이거나 면역이 약한 분들에게 독감 같은 감염은 치료 일정까지 흔들 수 있습니다. 예방접종을 피하거나, 근거 없는 “해독” 요법에 돈과 시간을 쓰게 만드는 것은 사기 못지않은 피해입니다.</li>
+<li><b>반론을 미리 막아 둡니다.</b> “진실은 원래 쓰다”, “반대하는 사람은 한통속”이라는 말은 어떤 증거도 받아들이지 않게 만드는 구조입니다. 이렇게 되면 대화로 바로잡기가 매우 어렵습니다.</li>
+<li><b>카페 전체의 신뢰를 깎습니다.</b> 용도변경 약물처럼 근거를 꼼꼼히 따지는 정보까지 “거기 음모론 카페”로 함께 묶여 버릴 수 있습니다.</li>
+</ol>
+</div>
+
+<h2>5. 1분 자가 점검표</h2>
+<p>이런 글을 보면 아래 질문을 떠올려 보세요. 두세 개 이상 해당하면 한 번 더 의심해 볼 만합니다.</p>
+<div class="card">
+<ul class="check">
+<li>제목에 “충격”, “모든”, “경악”, “폭증”, 느낌표가 많은가?</li>
+<li>글쓴이 본인의 설명 없이 영상 링크만 있는가?</li>
+<li>근거가 “뉴스에 나왔다”, “논문이 있다”뿐이고, 원문을 확인할 방법이 없는가?</li>
+<li>쥐·세포 실험 결과를 사람에게 그대로 적용하는가?</li>
+<li>“소송 제기”나 “의혹”을 “사실로 밝혀졌다”처럼 말하는가?</li>
+<li>반대 의견을 근거 대신 동기(“한통속”, “돈 받았냐”)로 공격하는가?</li>
+<li>마지막에 특정 요법·“해독”·상품으로 안내하는가?</li>
+</ul>
+</div>
+
+<h2>6. 환우분들께 드리는 부탁</h2>
+<div class="card summary">
+<ul>
+<li>백신이 걱정되시면 <b>주치의에게 직접</b> 물어보세요. 항암 일정과 면역 상태에 맞춰 접종 여부와 시기를 정하는 것이 가장 안전합니다.</li>
+<li>“백신 해독”을 내세운 제품이나 요법은 효과가 입증된 것이 없습니다. 복용 중인 약과 상호작용할 수 있으니 시작 전 꼭 상의하세요.</li>
+<li>의심스러운 글은 다투기보다 <b>신고</b> 후 운영진 판단에 맡겨 주세요. 댓글 싸움은 오히려 글을 더 많은 사람에게 보여줍니다.</li>
+<li>약에 대한 비판적 시선은 우리 카페의 장점입니다. 그 시선을 <b>백신 음모론에도 똑같이</b> 적용해 주세요.</li>
+</ul>
+</div>
+
+<details>
+<summary>참고한 자료 (눌러서 펼치기)</summary>
+<ul class="sources">
+<li>Florida Phoenix — 플로리다 법무장관 화이자 소송 보도, 2026.10.01: <a href="https://floridaphoenix.com/2026/10/01/uthmeier-alleges-pfizer-misled-florida-about-its-covid-vaccines-safety/">floridaphoenix.com</a></li>
+<li>Reuters 인용 보도 — 소송 쟁점: <a href="https://wsau.com/2026/10/01/florida-attorney-general-sues-pfizer-and-ceo-over-covid-19-vaccine-claims/">wsau.com</a></li>
+<li>Top Class Actions — 텍사스 유사 소송 기각: <a href="https://topclassactions.com/lawsuit-settlements/lawsuit-news/florida-ag-sues-pfizer-over-covid-vaccine-safety-claims/">topclassactions.com</a></li>
+<li>TechARP 팩트체크 — Wang 등(2026) 생쥐 논문 분석: <a href="https://www.techarp.com/fact-check/wang-study-mrna-vaccines-turbo-cancer/">techarp.com</a></li>
+<li>PolitiFact — 빌 게이츠 TED 발언: <a href="https://politifact.com/factchecks/2021/oct/11/blog-posting/bill-gates-didnt-say-he-wanted-use-vaccines-reduce/">politifact.com</a></li>
+<li>AAP FactCheck — 빌 게이츠 TED 발언: <a href="https://www.aap.com.au/factcheck/bill-gates-vaccination-tedtalk-hasnt-been-scrubbed/">aap.com.au</a></li>
+<li>국가암정보센터 — 2023년 국가암등록통계: <a href="https://cancer.go.kr/lay1/S1T639C640/contents.do">cancer.go.kr</a></li>
+<li>세계일보 — 2023년 암 통계 보도(고령화 영향): <a href="https://www.segye.com/newsView/20260120515341">segye.com</a></li>
+<li>Reason — “터보암” 주장 검토, 미국 암 진단 추이: <a href="https://reason.com/2025/11/13/covid-shots-are-not-causing-a-turbo-cancer-epidemic">reason.com</a></li>
+<li>Public Health Communication Collaborative — 한국 관찰연구 해석: <a href="https://publichealthcollaborative.org/?p=3499">publichealthcollaborative.org</a></li>
+<li>ABC News — 첫 mRNA 독감 백신 FDA 승인, 2026.08: <a href="https://www.goodmorningamerica.com/wellness/story/fda-approves-modernas-mrna-seasonal-flu-vaccine-135384178">abcnews</a></li>
+</ul>
+</details>
+
+<footer>
+이 안내문은 특정 회원을 비난하려는 글이 아니라, 회원 누구나 비슷한 글을 만났을 때 스스로 판단할 수 있도록 돕기 위한 글입니다. 의학적 결정은 반드시 담당 의료진과 상의하세요.
+</footer>
+
+</main>
+</body>
+</html>

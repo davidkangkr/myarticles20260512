@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>호주 암 2025: 진단·생존·사망을 한 번에 | AIHW + ABS 한국어 해설</title>
+<meta name="description" content="AIHW Cancer data in Australia(발생·생존)와 ABS Causes of Death 2025(사망)를 함께 엮은 한국어 해설 보고서">
+<style>
+:root{--bg:#f6f5f2;--card:#ffffff;--ink:#1c2230;--muted:#5f6b7a;--line:#e5e7eb;--soft:#f1f3f6;--accent:#0f766e;--accent2:#2563eb;--cancer:#dc4a34;--cancer-soft:#fde8e4;--other:#a3adbb;--warn:#b45309;--male:#2563eb;--female:#db2777;--shadow:0 1px 2px rgba(16,24,40,.05),0 4px 16px rgba(16,24,40,.06)}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1218;--card:#171b23;--ink:#e8ebf1;--muted:#9aa4b2;--line:#2a303b;--soft:#1f2430;--accent:#2dd4bf;--accent2:#60a5fa;--cancer:#ff6b55;--cancer-soft:#3a1d19;--other:#5b6574;--warn:#f59e0b;--male:#60a5fa;--female:#f472b6;--shadow:none}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,-apple-system,sans-serif;line-height:1.65;font-size:16px;word-break:keep-all;-webkit-font-smoothing:antialiased}
+a{color:var(--accent2)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+header.hero{padding:56px 0 28px}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--accent);text-transform:uppercase}
+h1{font-size:clamp(28px,4.4vw,44px);line-height:1.2;margin:10px 0 14px;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--cancer)}
+.lead{font-size:18px;color:var(--muted);max-width:760px;margin:0}
+nav.toc{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav.toc .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:10px;padding-bottom:10px;scrollbar-width:none}
+nav.toc a{flex:none;font-size:13.5px;text-decoration:none;color:var(--muted);padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card)}
+nav.toc a:hover{color:var(--ink);border-color:var(--accent)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:28px 0 8px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px 16px;box-shadow:var(--shadow)}
+.kpi .v{font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.kpi .v small{font-size:15px;font-weight:600;color:var(--muted);margin-left:2px}
+.kpi .l{font-size:14px;color:var(--muted);margin-top:4px}
+.kpi.hl{border-color:var(--cancer);background:linear-gradient(180deg,var(--cancer-soft),var(--card) 70%)}
+.kpi.hl .v{color:var(--cancer)}
+section{padding:44px 0 8px}
+section>.wrap>h2{font-size:clamp(22px,3vw,28px);margin:0 0 6px;letter-spacing:-.01em}
+.sub{color:var(--muted);margin:0 0 18px;max-width:820px}
+.num{display:inline-block;min-width:28px;height:28px;line-height:28px;text-align:center;border-radius:8px;background:var(--ink);color:var(--bg);font-size:14px;font-weight:800;margin-right:10px;vertical-align:3px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);margin-bottom:16px}
+.card h3{margin:0 0 4px;font-size:17px}
+.card .cap{font-size:13.5px;color:var(--muted);margin:0 0 14px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px}
+.callout{border-left:4px solid var(--accent);background:var(--card);padding:14px 18px;border-radius:0 14px 14px 0;margin:0 0 16px;box-shadow:var(--shadow)}
+.callout.c{border-left-color:var(--cancer)}
+.callout.w{border-left-color:var(--warn)}
+.callout b{color:var(--ink)}
+.insights{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px;margin-bottom:16px}
+.ins{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
+.ins .t{font-weight:800;margin-bottom:4px}
+.ins p{margin:0;color:var(--muted);font-size:14.5px}
+.ins .big{font-size:26px;font-weight:800;color:var(--cancer);line-height:1.2}
+/* bars */
+.bars{display:flex;flex-direction:column;gap:6px}
+.bar{display:grid;grid-template-columns:minmax(120px,210px) 1fr 74px;align-items:center;gap:10px;font-size:14px;cursor:default;border-radius:6px;padding:1px 2px}
+.bar:hover{background:var(--soft)}
+.bl{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bt{height:16px;background:var(--soft);border-radius:5px;overflow:hidden;display:flex}
+.bf{height:100%;background:var(--other);border-radius:5px;transition:width .5s ease}
+.bar.hl .bf{background:var(--cancer)}
+.bar.hl .bl{font-weight:700;color:var(--cancer)}
+.bar.ac .bf{background:var(--accent)}
+.bv{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.bf.m{background:var(--male);border-radius:5px 0 0 5px}.bf.f{background:var(--female);border-radius:0 5px 5px 0}
+@media (max-width:560px){.bar{grid-template-columns:110px 1fr 62px;font-size:13px}}
+/* legend + chips */
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--muted);margin:6px 0 10px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.chip{font:inherit;font-size:13px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--muted);cursor:pointer}
+.chip.on{color:#fff;border-color:transparent}
+.seg{display:inline-flex;flex-wrap:wrap;max-width:100%;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:0 0 12px}
+.seg button{font:inherit;font-size:13px;padding:6px 12px;border:0;background:var(--card);color:var(--muted);cursor:pointer}
+.seg button.on{background:var(--ink);color:var(--bg)}
+/* tables */
+.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th,.tbl td{padding:8px 8px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl th{font-size:12.5px;color:var(--muted);font-weight:700;cursor:pointer;user-select:none;position:sticky;top:0;background:var(--card)}
+.tbl th:first-child,.tbl td:first-child{text-align:left;white-space:normal}
+.tbl tr.hl td:first-child{color:var(--cancer);font-weight:700}
+.tbl tr:hover td{background:var(--soft)}
+.scroll{overflow-x:auto}
+.up{color:var(--cancer);font-weight:700}.down{color:var(--accent);font-weight:700}.flat{color:var(--muted)}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:999px;background:var(--cancer-soft);color:var(--cancer);margin-left:6px;vertical-align:1px}
+/* svg charts */
+.chart{width:100%;position:relative}
+.chart svg{display:block;width:100%;overflow:visible}
+.chart .ax{stroke:var(--line)}
+.chart text{fill:var(--muted);font-size:11.5px;font-family:inherit}
+.chart .lbl{font-size:12px;font-weight:700}
+.tip{position:fixed;pointer-events:none;z-index:50;background:var(--ink);color:var(--bg);font-size:13px;line-height:1.5;padding:8px 11px;border-radius:10px;opacity:0;transition:opacity .12s;max-width:300px;box-shadow:0 6px 24px rgba(0,0,0,.2)}
+.tip b{font-weight:800}
+/* age band cards */
+.band{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow)}
+.band h4{margin:0 0 2px;font-size:16px}
+.band .meta{font-size:12.5px;color:var(--muted);margin-bottom:8px}
+.band ol{margin:0;padding-left:20px;font-size:14px}
+.band li.c{color:var(--cancer);font-weight:700}
+.band .cbar{height:6px;border-radius:3px;background:var(--soft);margin-top:10px;overflow:hidden}
+.band .cbar span{display:block;height:100%;background:var(--cancer)}
+.statecard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow)}
+.statecard h4{margin:0 0 8px;font-size:15px}
+.statecard ol{margin:0;padding-left:20px;font-size:13.5px}
+.statecard li.c{color:var(--cancer);font-weight:700}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:700px){.vs{grid-template-columns:1fr}}
+footer{padding:40px 0 60px;color:var(--muted);font-size:13.5px}
+footer .card{font-size:14px;color:var(--ink)}
+.help{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;font-size:14px;margin-top:8px}
+.help div{background:var(--soft);border-radius:10px;padding:8px 12px}
+.note{font-size:12.5px;color:var(--muted);margin-top:10px}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;background:var(--soft);font-size:12.5px;color:var(--muted)}
+
+/* AI 주석 */
+.ai{border:1px dashed color-mix(in srgb,var(--accent2) 60%,var(--line));background:color-mix(in srgb,var(--accent2) 6%,var(--card));border-radius:16px;padding:18px 20px;margin:0 0 16px}
+.ai-badge{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.04em;color:var(--card);background:var(--accent2);padding:3px 10px;border-radius:999px;vertical-align:2px;margin-right:8px}
+.ai h4{display:inline;margin:0;font-size:17px}
+.ai .ai-sum{margin:10px 0 4px;font-weight:700;font-size:15px}
+.ai h5{margin:18px 0 6px;font-size:15px;color:var(--accent2)}
+.ai p,.ai li{font-size:14.5px;margin:4px 0}
+.ai ul{margin:4px 0;padding-left:20px}
+.ai .eq{font-weight:700;background:var(--soft);padding:9px 12px;border-radius:10px;text-align:center;margin:8px 0;font-size:15px}
+.ai .fac{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:8px;margin:8px 0}
+.ai .fac>div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13.5px;color:var(--muted)}
+.ai .fac b{display:block;font-size:22px;color:var(--ink);line-height:1.3}
+.ai .fac .r b{color:var(--cancer)}.ai .fac .g b{color:var(--accent)}
+.ai .zone{display:grid;grid-template-columns:118px 1fr;gap:10px;padding:9px 0;border-top:1px solid var(--line);font-size:14.5px}
+.ai .zone:first-of-type{border-top:0}
+.ai .zone .k{font-weight:800}
+.ai .disc{font-size:12.5px;color:var(--muted);margin-top:14px}
+@media (max-width:560px){.ai{padding:16px}.ai .zone{grid-template-columns:1fr;gap:2px}}
+
+/* report-specific */
+.dt{display:inline-block;font-size:11px;font-weight:800;padding:1px 7px;border-radius:999px;margin-left:6px;vertical-align:2px;letter-spacing:.02em}
+.dt.a{background:color-mix(in srgb,var(--accent) 16%,var(--card));color:var(--accent)}
+.dt.p{background:color-mix(in srgb,var(--warn) 18%,var(--card));color:var(--warn)}
+.kpi .src{font-size:12px;color:var(--muted);margin-top:6px}
+.trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px;margin-bottom:16px}
+.trio .ins .q{font-size:13px;color:var(--muted);margin-top:8px;border-top:1px dashed var(--line);padding-top:8px}
+.pbars{display:flex;flex-direction:column;gap:4px}
+.pbar{display:grid;grid-template-columns:minmax(96px,150px) 1fr 130px;gap:10px;align-items:center;font-size:14px;padding:3px 2px;border-radius:6px}
+.pbar:hover{background:var(--soft)}
+.pbar .tr{display:flex;flex-direction:column;gap:3px}
+.pbar .tr span{display:block;height:10px;border-radius:4px;min-width:2px}
+.pbar .i{background:var(--accent2)}.pbar .d{background:var(--cancer)}
+.pbar .v{font-size:12.5px;text-align:right;font-variant-numeric:tabular-nums;line-height:1.35}
+.pbar .v b{font-weight:700}
+.db{display:grid;grid-template-columns:minmax(96px,150px) 1fr 132px;gap:10px;align-items:center;font-size:14px;padding:4px 2px;border-radius:6px}
+.db:hover{background:var(--soft)}
+.db .tk{position:relative;height:18px;background:linear-gradient(var(--line),var(--line)) center/100% 1px no-repeat}
+.db .seg{position:absolute;top:7px;height:4px;background:var(--accent);border-radius:2px;opacity:.45}
+.db .p0,.db .p1{position:absolute;top:3px;width:12px;height:12px;border-radius:50%;margin-left:-6px}
+.db .p0{background:var(--other)}.db .p1{background:var(--accent)}
+.db.neg .p1{background:var(--cancer)}.db.neg .seg{background:var(--cancer)}
+.db .v{font-size:12.5px;text-align:right;font-variant-numeric:tabular-nums}
+.heat td.h{font-weight:700;color:var(--ink)}
+.tierlg{display:flex;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--muted);margin:2px 0 10px}
+.tierlg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.known{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px}
+.known ul{margin:6px 0 0;padding-left:20px;font-size:14.5px}
+.known li{margin:4px 0}
+.known .no h3{color:var(--cancer)}
+.known .yes h3{color:var(--accent)}
+.prio td:first-child{font-weight:700}
+.badge3{display:inline-block;min-width:20px;text-align:center;font-size:12px;font-weight:800;border-radius:6px;padding:1px 6px;background:var(--cancer-soft);color:var(--cancer)}
+@media (max-width:560px){.pbar,.db{grid-template-columns:84px 1fr 100px;font-size:13px}.pbar .v,.db .v{font-size:11.5px}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">AIHW Cancer data in Australia × ABS Causes of Death 2025</div>
+  <h1>호주 암 2025: <em>진단·생존·사망</em>을 한 번에</h1>
+  <p class="lead">"몇 명이 걸리고, 몇 명이 살아남고, 몇 명이 사망하는가." 사망 통계(ABS)만으로는 알 수 없는 발생과 생존을 AIHW 자료로 채워, 암종별로 한 화면에 엮었습니다. 모든 숫자에 <span class="dt a">실제</span> 집계인지 <span class="dt p">추정</span>치인지 표시했습니다.</p>
+  <div class="kpis">
+    <div class="kpi"><div class="v" id="k1"></div><div class="l">2025년 새로 진단받은 암 <span class="dt p">추정</span></div><div class="src">AIHW · 기저·편평세포 피부암 제외</div></div>
+    <div class="kpi hl"><div class="v">51,808<small>명</small></div><div class="l">2025년 암 사망 <span class="dt a">실제</span></div><div class="src">ABS · 악성신생물 C00–C97</div></div>
+    <div class="kpi"><div class="v">71.6<small>%</small></div><div class="l">5년 상대생존율 <span class="dt a">실제</span></div><div class="src">AIHW · 2017–2021년 진단자</div></div>
+    <div class="kpi"><div class="v">약 96.9<small>만 명</small></div><div class="l">최근 10년 안에 진단받고 생존 중 <span class="dt p">추정</span></div><div class="src">AIHW · 2025년 말 기준, 인구의 3.5%</div></div>
+  </div>
+</div></header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#s1">핵심 요약</a><a href="#s2">세 숫자의 차이</a><a href="#s3">걸리는 암 vs 사망하는 암</a><a href="#s4">진단 대비 사망</a><a href="#s5">5년 생존율</a><a href="#s6">생존율의 변화</a><a href="#s7">발생↑ 사망 위험↓</a><a href="#s8">젊은 층</a><a href="#s9">희귀암·격차</a><a href="#s10">치료 현황</a><a href="#s11">커뮤니티 시사점</a><a href="#apx">부록</a>
+</div></nav>
+
+<main>
+<section id="s1"><div class="wrap">
+  <h2><span class="num">1</span>핵심 요약</h2>
+  <p class="sub">10년, 25년 단위로 보면 <b>진단받는 사람은 크게 늘었지만, 같은 나이 기준 사망 위험은 꾸준히 줄고, 생존율은 올랐습니다.</b> 다만 몇몇 암은 이 흐름에서 뒤처져 있습니다.</p>
+  <div class="insights" id="insights"></div>
+</div></section>
+
+<section id="s2"><div class="wrap">
+  <h2><span class="num">2</span>세 가지 숫자의 차이: 발생, 사망, 생존</h2>
+  <p class="sub">이 보고서는 서로 다른 세 종류의 숫자를 함께 씁니다. 같은 암이라도 무엇을 세느냐에 따라 전혀 다른 그림이 나옵니다.</p>
+  <div class="trio">
+    <div class="ins"><div class="t">발생 (Incidence)</div><div class="big" style="color:var(--accent2)">새로 진단</div><p>그해 <b>새로 진단받은 사람 수</b>. "얼마나 많이 걸리나"를 보여줍니다. 출처: AIHW 호주 암 데이터베이스. 실제 집계는 2021년까지이고, 2022–2025년은 추정치입니다.</p><div class="q">예: 2025년 폐암 진단 약 15,108건 <span class="dt p">추정</span></div></div>
+    <div class="ins"><div class="t">사망 (Mortality)</div><div class="big">그해 사망</div><p>그해 <b>그 암으로 사망한 사람 수</b>. 언제 진단받았는지는 상관없습니다. 출처: ABS 사망원인 통계. 2025년 실제 집계입니다.</p><div class="q">예: 2025년 폐암 사망 9,130명 <span class="dt a">실제</span></div></div>
+    <div class="ins"><div class="t">생존율 (Relative survival)</div><div class="big" style="color:var(--accent)">5년 뒤 생존</div><p>진단받은 사람이 <b>5년 뒤에도 살아 있을 가능성</b>을 같은 나이·성별 일반인과 비교한 값. 출처: AIHW. 5년을 지켜봐야 하므로 최신 값이 2017–2021년 진단자 기준입니다.</p><div class="q">예: 폐암 5년 상대생존율 27.3% <span class="dt a">실제</span></div></div>
+  </div>
+  <div class="ai">
+    <span class="ai-badge">AI 주석</span><h4>자주 하는 오해 세 가지</h4>
+    <p class="ai-sum">한 줄 요약: 사망자 수는 "얼마나 많이"를, 생존율은 "진단 후 얼마나 오래"를 보여줍니다. 둘을 섞어 읽으면 결론이 틀어집니다.</p>
+    <h5>오해 1. "사망자 수가 늘었으니 치료가 나빠졌다"</h5>
+    <p>아닙니다. 인구가 늘고 고령화되면 사망자 수는 자연히 늘어납니다. 치료 성적은 생존율로, 실제 위험 변화는 연령표준화 사망률로 봐야 합니다. 2000년부터 2025년까지 암 사망자 수는 늘었지만, 연령표준화 사망률은 10만 명당 194.1명에서 142.7명으로 26% 줄었습니다.</p>
+    <h5>오해 2. "사망자 ÷ 진단자 = 사망 확률"</h5>
+    <p>정확하지 않습니다. 2025년 사망자 중 상당수는 2025년 이전에 진단받은 사람들이므로, 같은 집단이 아닙니다. 4번에서 보여주는 '진단 대비 사망 비율'은 대략적인 치명도 지표일 뿐, 개인의 사망 확률이 아닙니다.</p>
+    <h5>오해 3. "생존율 72%는 지금 진단받는 사람의 미래다"</h5>
+    <p>생존율은 늘 과거를 봅니다. 2017–2021년에 진단받은 사람들의 결과라, 그 뒤에 나온 새 치료(예: 새 면역항암제, 표적치료제)의 효과는 아직 반영되지 않았습니다. 지금 진단받는 사람의 전망은 이보다 조금 나을 수 있습니다.</p>
+    <p class="disc">AI 주석은 AI가 AIHW·ABS 공개 수치로 작성한 해설이며, 두 기관의 공식 분석이 아닙니다.</p>
+  </div>
+</div></section>
+
+<section id="s3"><div class="wrap">
+  <h2><span class="num">3</span>많이 걸리는 암 vs 많이 사망하는 암</h2>
+  <p class="sub">파란 막대는 2025년 진단 수 <span class="dt p">AIHW 추정</span>, 빨간 막대는 2025년 사망 수 <span class="dt a">ABS 실제</span>입니다. 두 막대의 길이 차이가 클수록 "걸려도 대부분 살아남는 암"이고, 비슷할수록 "걸리면 위험한 암"입니다.</p>
+  <div class="card">
+    <div class="legend"><span><i style="background:var(--accent2)"></i>2025 진단 (추정)</span><span><i style="background:var(--cancer)"></i>2025 사망 (실제)</span></div>
+    <div id="pairBars"></div>
+    <p class="note">진단 수 순으로 정렬. 대장암은 C18–C20(결장·직장S결장 접합부·직장) 기준입니다. 일부 암은 AIHW와 ABS의 코드 범위가 조금 다릅니다(부록 표 참고).</p>
+  </div>
+  <div class="callout c"><b>눈에 띄는 대비:</b> 전립선암은 진단 28,868건에 사망 3,749명, 흑색종은 진단 17,443건에 사망 1,552명입니다. 반면 폐암은 진단 15,108건에 사망 9,130명으로 <b>사망 1위</b>이고, 췌장암은 진단 4,825건에 사망 3,885명으로 진단과 사망의 차이가 가장 작은 암 중 하나입니다.</div>
+</div></section>
+
+<section id="s4"><div class="wrap">
+  <h2><span class="num">4</span>진단 대비 사망 비율: 걸리면 얼마나 위험한가</h2>
+  <p class="sub">2025년 사망자 수 <span class="dt a">ABS</span>를 2025년 진단 수 <span class="dt p">AIHW</span>로 나눈 값입니다. 국제적으로 'MIR(Mortality-to-Incidence Ratio)'이라 부르며, 1에 가까울수록 걸린 사람 대부분이 결국 그 암으로 사망한다는 뜻입니다.</p>
+  <div class="card">
+    <div class="tierlg"><span><i style="background:var(--cancer)"></i>0.6 이상: 매우 위험</span><span><i style="background:var(--warn)"></i>0.3–0.6: 중간</span><span><i style="background:var(--accent)"></i>0.3 미만: 비교적 양호</span></div>
+    <div id="mirBars"></div>
+  </div>
+  <div class="ai">
+    <span class="ai-badge">AI 주석</span><h4>이 비율을 읽을 때 주의할 점</h4>
+    <p class="ai-sum">한 줄 요약: '진단 대비 사망 비율'은 빠르게 위험도를 훑어보는 지표이고, 생존율을 대신할 수는 없습니다.</p>
+    <ul>
+      <li><b>다른 사람들을 나눈 값입니다.</b> 분자(2025년 사망자)와 분모(2025년 진단자)는 같은 사람들이 아닙니다. 진단 건수가 빠르게 늘어나는 암은 비율이 실제보다 낮게, 줄어드는 암은 높게 나올 수 있습니다.</li>
+      <li><b>원발부위 불명암이 1을 넘는 이유:</b> 진단 때는 다른 암으로 등록됐다가 사망진단서에 '원발부위 불명'으로 적히는 경우가 있는 등, 진단 기록과 사망 기록의 분류 방식이 다르기 때문입니다.</li>
+      <li><b>대략 '1 − 비율'이 5년 생존율과 비슷하게 움직입니다.</b> 예를 들어 췌장암은 비율 0.81, 5년 생존율 13.5%이고, 유방암은 비율 0.16, 5년 생존율 92.7%입니다. 다만 정확한 값은 5번의 생존율을 보세요.</li>
+      <li><b>추정치가 섞여 있습니다.</b> 2025년 진단 수는 추세를 바탕으로 한 AIHW 추정치입니다.</li>
+    </ul>
+    <p class="disc">AI 주석은 AI가 AIHW·ABS 공개 수치로 작성한 해설이며, 두 기관의 공식 분석이 아닙니다.</p>
+  </div>
+</div></section>
+
+<section id="s5"><div class="wrap">
+  <h2><span class="num">5</span>5년 생존율: 암종별 순위</h2>
+  <p class="sub">2017–2021년에 진단받은 사람들의 5년 상대생존율입니다 <span class="dt a">AIHW 실제</span>. 100%는 "그 암이 생존에 영향을 주지 않는다", 50%는 "같은 나이 일반인에 비해 5년 생존 가능성이 절반"이라는 뜻입니다.</p>
+  <div class="card">
+    <div class="tierlg"><span><i style="background:var(--cancer)"></i>30% 미만: 낮은 생존 암</span><span><i style="background:var(--warn)"></i>30–70%</span><span><i style="background:var(--accent)"></i>70% 이상</span></div>
+    <div id="survBars"></div>
+    <p class="note">전립선암·자궁암·자궁경부암·난소암은 해당 성별 기준입니다. 혈액암 전체는 2012–2016년부터 자료가 있습니다.</p>
+  </div>
+  <div class="card">
+    <h3>이미 살아남은 기간이 길수록 전망은 좋아집니다 (조건부 생존율)</h3>
+    <p class="cap">"진단 후 이미 1년, 3년, 5년을 살아낸 사람이 앞으로 5년 더 생존할 가능성"입니다 <span class="dt a">AIHW 실제</span> · 2017–2021년, 5년 상대생존율</p>
+    <div class="scroll"><table class="tbl heat" id="condTbl"></table></div>
+  </div>
+  <div class="ai">
+    <span class="ai-badge">AI 주석</span><h4>환자와 가족에게 더 의미 있는 숫자</h4>
+    <p class="ai-sum">한 줄 요약: 진단 시점의 생존율이 낮은 암일수록, 첫 1~3년을 넘기면 전망이 크게 좋아집니다.</p>
+    <ul>
+      <li><b>췌장암</b>은 진단 시점 5년 생존율이 13.5%이지만, 1년을 살아낸 사람은 34.2%, 3년을 살아낸 사람은 68.8%, 5년을 살아낸 사람은 83.9%로 올라갑니다.</li>
+      <li><b>원발부위 불명암</b>은 13.2%에서 1년 뒤 62.3%로 크게 뛰어, 첫해가 가장 위험한 고비라는 점을 보여줍니다.</li>
+      <li><b>중피종</b>은 5년을 살아낸 뒤에도 38.7%에 머물러, 장기 생존자에게도 위험이 계속된다는 뜻입니다. <b>다발골수종</b>도 60%대에서 거의 변하지 않습니다.</li>
+      <li>조건부 생존율은 집단 평균입니다. 개인의 전망은 병기, 나이, 건강 상태, 받은 치료에 따라 크게 다릅니다.</li>
+    </ul>
+    <p class="disc">AI 주석은 AI가 AIHW 공개 수치로 작성한 해설이며, AIHW의 공식 분석이 아닙니다. 개인 의료 판단의 근거로 쓰지 마세요.</p>
+  </div>
+</div></section>
+
+<section id="s6"><div class="wrap">
+  <h2><span class="num">6</span>생존율은 얼마나 좋아졌나</h2>
+  <p class="sub">1987–1991년 진단자(회색 점)와 2017–2021년 진단자(색 점)의 5년 상대생존율 비교입니다 <span class="dt a">AIHW 실제</span>. 전체 암 생존율은 <b>50.4%에서 71.6%</b>로 올랐습니다.</p>
+  <div class="card">
+    <div id="dumbbell"></div>
+    <p class="note">개선 폭(%p) 순 정렬. 혈액암 전체는 2012–2016년과 비교. 방광암의 하락은 분류·코딩 방식 변화의 영향일 수 있어 해석에 주의가 필요합니다.</p>
+  </div>
+  <div class="card">
+    <h3>병기(stage)가 생존을 가릅니다: 5대 암 병기별 5년 생존율</h3>
+    <p class="cap">2011년 진단자 기준 <span class="dt a">AIHW 실제</span> · 전국 단위 병기 자료는 이 2011년 시범 자료가 가장 최신입니다. 오른쪽 열은 그해 진단자 중 4기로 진단된 비율입니다.</p>
+    <div class="scroll"><table class="tbl heat" id="stageTbl"></table></div>
+  </div>
+  <div class="callout">같은 암이라도 <b>1기에 발견하면 대부분 살고, 4기에 발견하면 생존율이 크게 떨어집니다.</b> 폐암은 진단자의 42%가 이미 4기였고, 4기 5년 생존율은 3.2%였습니다. 호주는 2025년 7월 국가 폐암 검진 프로그램을 시작했습니다.</div>
+</div></section>
+
+<section id="s7"><div class="wrap">
+  <h2><span class="num">7</span>진단은 늘고, 사망 위험은 줄고</h2>
+  <p class="sub">나이 구조를 보정한 <b>연령표준화율</b>(10만 명당, 2001년 호주 표준인구)의 2000–2025년 추이입니다 <span class="dt a">AIHW</span>. 회색 영역은 추정 구간입니다(발생 2022년~, 사망 2024년~).</p>
+  <div class="card">
+    <div class="legend"><span><i style="background:var(--accent2)"></i>발생률</span><span><i style="background:var(--cancer)"></i>사망률</span></div>
+    <div class="chart" id="asrChart"></div>
+    <p class="note">진단 건수: 2000년 88,002건 → 2025년 169,759건(약 1.9배). 같은 기간 연령표준화 발생률은 468.4 → 494.1(+5%)로 거의 그대로입니다. 즉 진단 건수 증가의 대부분은 인구 증가와 고령화 때문입니다.</p>
+  </div>
+  <div class="card">
+    <h3>암종별 25년 변화 (2000 → 2025, 연령표준화율)</h3>
+    <p class="cap">열 제목을 눌러 정렬하세요. 빨간색은 증가, 초록색은 감소입니다. 혈액암 발생률은 2003년 기준.</p>
+    <div class="scroll"><table class="tbl" id="chgTbl"></table></div>
+  </div>
+  <div class="callout c"><b>흐름을 거스르는 암:</b> 간암은 발생률이 2.1배(4.2 → 8.8), 사망률이 1.8배(4.0 → 7.1)로 늘었습니다. 췌장암도 발생률 +30%, 사망률 +17%로 늘었습니다. 자궁암은 발생률 +24%, 사망률 +36%입니다. 반면 폐암(사망률 -35%), 대장암(-47%), 위암(-48%)은 크게 개선되었습니다.</div>
+</div></section>
+
+<section id="s8"><div class="wrap">
+  <h2><span class="num">8</span>젊은 층의 암: 30대와 40대</h2>
+  <p class="sub">30대와 40대의 암 발생률(10만 명당)은 2000년부터 2025년 사이에 각각 <b>120.6 → 134.7</b>, <b>280.4 → 312.9</b>로 올랐습니다 <span class="dt p">2025년은 추정</span>. 하지만 같은 나이대의 <b>사망률은 오히려 내려갔습니다</b>(30대 18 → 11, 40대 60 → 37).</p>
+  <div class="card">
+    <h3>30·40대 암종별 발생률 변화 (10만 명당, 2000 → 2025)</h3>
+    <p class="cap">AIHW 개요 표 1 기준. 변화 폭 순 정렬.</p>
+    <div class="scroll"><table class="tbl" id="youngTbl"></table></div>
+  </div>
+  <div class="callout w"><b>주목할 예외: 30대 대장암.</b> 30대 대장암 발생률은 6.3 → 18.9로 3배가 되었고, 사망률도 10만 명당 1.8 → 2.8로 늘었습니다. 젊은 층에서 발생 증가가 사망 증가로 이어진 대표적인 암입니다. 40대 자궁암 사망률도 0.2 → 0.5로 늘었습니다(전체 인구 기준). 이 페이지와 연결된 ABS 분석에서도 대장암은 25–54세 사망원인 상위 10위 안에 들었습니다.</div>
+</div></section>
+
+<section id="s9"><div class="wrap">
+  <h2><span class="num">9</span>희귀암과 격차</h2>
+  <p class="sub">"희귀암"은 발생률이 인구 10만 명당 6건 미만인 암입니다. 하나하나는 드물지만 모으면 적지 않고, 생존율 개선도 더뎠습니다.</p>
+  <div class="card">
+    <h3>희귀도별 진단·사망·생존 (2025년 추정, 생존율은 2017–2021년)</h3>
+    <div class="scroll"><table class="tbl" id="rareTbl"></table></div>
+    <p class="note">희귀암과 덜 흔한 암은 진단의 26%지만 사망의 36%를 차지합니다. 1987–1991년 이후 5년 생존율 개선 폭은 흔한 암 약 23%p, 덜 흔한 암 약 15%p, 희귀암 약 14%p였습니다(AIHW).</p>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h3>원주민(First Nations)</h3>
+      <p class="cap">AIHW 2026년 7월 신규 자료</p>
+      <ul style="margin:0;padding-left:20px;font-size:14.5px">
+        <li>2025년 추정 진단 약 3,600건, 사망 약 1,200명 <span class="dt p">추정</span></li>
+        <li>연령표준화 발생률 342 → 315, 사망률 148 → 105 (2011 → 2025). 여전히 비원주민보다 높지만, 감소 폭은 더 큽니다.</li>
+        <li>생존율 낮은 암(폐암·간암·췌장암 등) 진단 가능성이 비원주민의 2배</li>
+        <li>췌장암 5년 생존율: 원주민 8.8%, 비원주민 19% (2017–2021)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>소득 수준(사회경제적 지역)</h3>
+      <p class="cap">AIHW 「Australia's health」 · 2012–2016년, 사망률은 2015–2019년</p>
+      <ul style="margin:0;padding-left:20px;font-size:14.5px">
+        <li>가장 불리한 지역의 5년 관찰생존율 56%, 가장 유리한 지역 68% (12%p 차이)</li>
+        <li>암 사망률 10만 명당 185명 vs 130명 (40% 이상 높음)</li>
+        <li>불리한 지역에서 발생률이 특히 높은 암: 폐암 1.8배, 두경부암·원발부위 불명암·간암·자궁경부암 1.5~1.6배</li>
+        <li>반대로 전립선암·유방암·흑색종은 불리한 지역에서 진단율이 더 낮음(검진 접근성 차이 가능성)</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<section id="s10"><div class="wrap">
+  <h2><span class="num">10</span>치료 현황: 알 수 있는 것과 없는 것</h2>
+  <p class="sub">공개 통계에는 "누가 어떤 치료를 받고 어떻게 되었는지"가 나오지 않습니다. 전체 치료 건수 같은 큰 그림만 있습니다.</p>
+  <div class="kpis">
+    <div class="kpi"><div class="v">약 140<small>만 건</small></div><div class="l">암 관련 입원 (2021–22) <span class="dt a">실제</span></div><div class="src">전체 입원 8건 중 1건 · 75%가 당일 입원</div></div>
+    <div class="kpi"><div class="v">62.5<small>만 건</small></div><div class="l">Medicare 지원 항암치료 (2023) <span class="dt a">실제</span></div><div class="src">MBS 서비스 건수</div></div>
+    <div class="kpi"><div class="v">270<small>만 건</small></div><div class="l">Medicare 지원 방사선치료 (2023) <span class="dt a">실제</span></div><div class="src">MBS 서비스 건수 · 암종 정보 없음</div></div>
+    <div class="kpi"><div class="v">약 5.3<small>만 건</small></div><div class="l">완화의료 포함 암 입원 (2021–22) <span class="dt a">실제</span></div><div class="src">전체 완화의료 입원의 56%</div></div>
+  </div>
+  <div class="known">
+    <div class="card yes"><h3>공개 자료로 알 수 있는 것</h3><ul>
+      <li>암 관련 입원 건수와 주진단 암 종류 (가장 흔한 주진단: 비흑색종 피부암 24%, 전립선암 10%)</li>
+      <li>Medicare 항암·방사선치료 서비스 건수 (전체 합계)</li>
+      <li>완화의료 입원의 주진단: 전이암 22%, 폐암 14%, 대장암 7.9%, 췌장암 7.1%</li>
+      <li>PBS(정부 약값 보조) 처방 통계로 본 약물별 사용량 추세</li>
+    </ul></div>
+    <div class="card no"><h3>공개 자료로 알 수 없는 것</h3><ul>
+      <li>특정 암 환자가 수술, 항암, 방사선, 면역치료 중 무엇을 받았는지</li>
+      <li>어떤 치료를 받은 사람이 더 오래 살았는지 (치료별 생존율)</li>
+      <li>2025년 사망자들이 생전에 받은 치료</li>
+      <li>약물 재창출(오프라벨) 사용 여부. PBS 통계로는 원래 적응증 처방과 구분되지 않음</li>
+      <li>Medicare 방사선치료의 암종별 분석</li>
+    </ul></div>
+  </div>
+  <div class="callout">AIHW는 암 등록 자료를 PBS·병원 기록과 개인 단위로 연결한 국가 데이터를 갖고 있지만, <b>승인받은 연구자만</b> 쓸 수 있습니다. 치료별 성적은 개별 연구 논문과 임상시험 결과로 확인해야 합니다. 출처: AIHW 「Australia's health 2024: Cancer」.</div>
+</div></section>
+
+<section id="s11"><div class="wrap">
+  <h2><span class="num">11</span>커뮤니티 시사점: 새로운 치료가 가장 필요한 곳</h2>
+  <p class="sub">가로축은 5년 생존율, 세로축은 2025년 사망자 수입니다. <b>왼쪽 위로 갈수록</b> "많이 사망하고, 걸리면 살아남기 어려운" 암입니다.</p>
+  <div class="card"><div class="chart" id="scatter"></div><p class="note">원 크기 = 2025년 사망자 수(ABS). 빨간 원 = 5년 생존율 30% 미만. 세로축은 제곱근 눈금입니다.</p></div>
+  <div class="card">
+    <h3>미충족 수요가 큰 암 (세 가지 기준)</h3>
+    <p class="cap">① 5년 생존율 30% 미만 ② 2025년 사망 500명 이상 ③ 2000년 이후 연령표준화 사망률 개선이 20% 미만. 충족한 기준 수 순으로 정렬.</p>
+    <div class="scroll"><table class="tbl prio" id="prioTbl"></table></div>
+  </div>
+  <div class="ai">
+    <span class="ai-badge">AI 주석</span><h4>약물 재창출 임상을 고민하는 커뮤니티를 위한 해석</h4>
+    <p class="ai-sum">한 줄 요약: 췌장암, 간암, 뇌암이 세 기준을 모두 충족합니다. 폐암은 사망 규모가 압도적이지만 위험은 빠르게 줄고 있고, 원발부위 불명암·식도암·중피종은 생존율이 낮지만 사망률은 개선 중입니다.</p>
+    <ul>
+      <li><b>췌장암:</b> 사망 3,885명(3위), 5년 생존율 13.5%, 연령표준화 사망률은 25년간 오히려 +17%. 생존율 개선(3.1% → 13.5%)에도 불구하고 가장 뚜렷한 미충족 수요입니다.</li>
+      <li><b>간암:</b> 발생률과 사망률이 모두 2배 가까이 올랐습니다. 9번의 격차 자료와 함께 보면, 원주민과 불리한 지역에 부담이 몰려 있습니다.</li>
+      <li><b>뇌암:</b> 30년 동안 5년 생존율이 20.6%에서 23.8%로 거의 변하지 않았습니다. 젊은 나이 사망이 많은 암이라(ABS 사망 1건당 손실 연수 12.8년) 사회적 부담이 큽니다.</li>
+      <li><b>중피종·다발골수종:</b> 장기 생존자도 위험이 계속되는 암이라(5번 조건부 생존율), 재발 방지나 유지 치료 연구의 여지가 큽니다.</li>
+      <li><b>주의:</b> 이 표는 "어디에 연구가 더 필요한가"를 보여주는 것이지, 특정 약이나 치료가 효과가 있다는 뜻이 아닙니다. 치료 결정은 반드시 담당 의료진과 상의해야 합니다.</li>
+    </ul>
+    <p class="disc">AI 주석은 AI가 AIHW·ABS 공개 수치로 작성한 해설이며, 두 기관의 공식 분석이 아닙니다. 기준선(30%, 500명, 20%)은 이해를 돕기 위해 AI가 정한 값입니다.</p>
+  </div>
+</div></section>
+
+<section id="apx"><div class="wrap">
+  <h2><span class="num">+</span>부록: 전체 표, 데이터 출처, 용어</h2>
+  <div class="card">
+    <h3>암종별 전체 표</h3>
+    <p class="cap">열 제목을 눌러 정렬하세요. 진단 = 2025년 AIHW 추정, 사망 = 2025년 ABS 실제, AIHW 사망 = 2025년 AIHW 추정(참고), 5년 생존 = 2017–2021년, 5년 유병 = 2021년 말 기준 최근 5년 내 진단받고 생존 중인 사람 수.</p>
+    <div class="scroll"><table class="tbl" id="masterTbl"></table></div>
+  </div>
+  <div class="card">
+    <h3>데이터 출처와 연도</h3>
+    <div class="scroll"><table class="tbl" id="srcTbl">
+      <tr><th>항목</th><th>출처</th><th>연도</th><th>종류</th></tr>
+      <tr><td>암 사망자 수 (암종별)</td><td>ABS Causes of Death, Australia 2025</td><td>2025</td><td><span class="dt a">실제</span> (잠정치)</td></tr>
+      <tr><td>암 진단 수, 연령표준화 발생률</td><td>AIHW Cancer data in Australia 2025, Book 1a</td><td>~2021 실제, 2022–2025 추정</td><td><span class="dt p">추정</span></td></tr>
+      <tr><td>연령표준화 사망률 (추세)</td><td>AIHW CdiA 2025, Book 2a (National Mortality Database)</td><td>~2023 실제, 2024–2025 추정</td><td>혼합</td></tr>
+      <tr><td>5년 상대생존율, 조건부 생존율</td><td>AIHW CdiA 2025, Book 3a</td><td>1987–1991 ~ 2017–2021</td><td><span class="dt a">실제</span></td></tr>
+      <tr><td>병기별 생존율</td><td>AIHW CdiA, Book 8</td><td>2011년 진단자</td><td><span class="dt a">실제</span></td></tr>
+      <tr><td>5년 유병</td><td>AIHW CdiA 2025, Book 6</td><td>2021년 말</td><td><span class="dt a">실제</span></td></tr>
+      <tr><td>30·40대, 희귀암</td><td>AIHW CdiA, Overview of cancer in Australia 2025</td><td>2000–2025</td><td>혼합</td></tr>
+      <tr><td>원주민</td><td>AIHW 보도자료 (2026년 7월 14일)</td><td>2011–2025</td><td>혼합</td></tr>
+      <tr><td>소득 격차, 치료 현황</td><td>AIHW Australia's health 2024: Cancer</td><td>2012–2023</td><td><span class="dt a">실제</span></td></tr>
+    </table></div>
+    <p class="note">AIHW 2025년 암 사망 추정치(53,545명)는 C00–C96과 일부 D45–D47(골수 질환)을 포함해 ABS 악성신생물 집계(51,808명)와 범위가 다릅니다. 이 보고서의 2025년 사망자 수는 ABS 실제 집계를 썼습니다.</p>
+  </div>
+  <div class="card">
+    <h3>용어</h3>
+    <div class="help">
+      <div><b>상대생존율</b>: 암 환자의 생존율을 같은 나이·성별 일반인의 생존율로 나눈 값. 100%를 조금 넘을 수도 있습니다.</div>
+      <div><b>조건부 생존율</b>: 이미 일정 기간 살아낸 사람이 앞으로 5년 더 생존할 가능성.</div>
+      <div><b>연령표준화율</b>: 인구의 나이 구조를 고정해 계산한 비율. 고령화 효과를 빼고 실제 위험 변화를 비교할 때 씁니다.</div>
+      <div><b>병기(stage)</b>: 진단 당시 암이 퍼진 정도. 1기는 국소, 4기는 원격 전이.</div>
+      <div><b>MIR</b>: 사망자 수 ÷ 진단 수. 대략적인 치명도 지표.</div>
+      <div><b>유병</b>: 일정 기간 안에 진단받고 아직 살아 있는 사람 수.</div>
+    </div>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <div class="card">이 보고서는 공개 통계(AIHW Cancer data in Australia, 2025년 10월 데이터·2026년 7월 갱신 / ABS Causes of Death, Australia 2025, 2026년 10월 27일 발표)를 바탕으로 AI의 도움을 받아 한국어로 정리했습니다. 'AI 주석'은 AI가 작성한 해설입니다. 의료적 판단의 근거로 쓰지 마시고, 개인의 상황은 담당 의료진과 상의하세요.</div>
+</div></footer>
+
+<script>
+const D={"R":[{"k":"lung","ko":"폐암","note":"AIHW C33–C34, ABS C34","inc25":15108,"inc00":8277,"iasr00":44.1,"iasr25":41.5,"masr00":36.9,"masr25":24.1,"aihwD25":8994,"d25":9130,"d16":8436,"s5":0.273,"s5first":0.095,"s5firstP":"1987–1991","s5series":[["1987–1991",0.095],["1992–1996",0.104],["1997–2001",0.121],["2002–2006",0.126],["2007–2011",0.146],["2012–2016",0.188],["2017–2021",0.273]],"cond":[0.273,0.469,0.641,0.716],"prev5":27675,"sexSpec":""},{"k":"crc","ko":"대장암","note":"AIHW C18–C20·C26.0, ABS C18–C20","inc25":14784,"inc00":12376,"iasr00":66,"iasr25":43.6,"masr00":26.3,"masr25":14,"aihwD25":5235,"d25":4471,"d16":4346,"s5":0.716,"s5first":0.522,"s5firstP":"1987–1991","s5series":[["1987–1991",0.522],["1992–1996",0.562],["1997–2001",0.596],["2002–2006",0.636],["2007–2011",0.671],["2012–2016",0.701],["2017–2021",0.716]],"cond":[0.716,0.804,0.878,0.92],"prev5":55995,"sexSpec":""},{"k":"blood","ko":"혈액암","note":"C81–C96 (AIHW는 D45–D47 일부 포함)","inc25":20120,"iasr00":52.8,"iasr25":57.9,"masr00":22.6,"masr25":16.4,"aihwD25":6329,"d25":5189,"d16":4426,"s5":0.701,"s5first":0.674,"s5firstP":"2012–2016","s5series":[["2012–2016",0.674],["2017–2021",0.701]],"cond":[0.701,0.792,0.839,0.859],"prev5":62682,"sexSpec":""},{"k":"panc","ko":"췌장암","note":"C25","inc25":4825,"inc00":1905,"iasr00":10.2,"iasr25":13.3,"masr00":9.3,"masr25":10.9,"aihwD25":4039,"d25":3885,"d16":2919,"s5":0.135,"s5first":0.031,"s5firstP":"1987–1991","s5series":[["1987–1991",0.031],["1992–1996",0.039],["1997–2001",0.05],["2002–2006",0.056],["2007–2011",0.067],["2012–2016",0.109],["2017–2021",0.135]],"cond":[0.135,0.342,0.688,0.839],"prev5":5356,"sexSpec":""},{"k":"prost","ko":"전립선암","note":"C61","inc25":28868,"inc00":11010,"iasr00":58.6,"iasr25":80.2,"masr00":14.3,"masr25":9.9,"aihwD25":3975,"d25":3749,"d16":3286,"s5":0.96,"s5first":0.599,"s5firstP":"1987–1991","s5series":[["1987–1991",0.599],["1992–1996",0.735],["1997–2001",0.838],["2002–2006",0.872],["2007–2011",0.933],["2012–2016",0.955],["2017–2021",0.96]],"cond":[0.96,0.966,0.975,0.98],"prev5":106705,"sexSpec":""},{"k":"breast","ko":"유방암","note":"C50","inc25":20336,"inc00":11514,"iasr00":61.3,"iasr25":63.4,"masr00":13.6,"masr25":9.3,"aihwD25":3353,"d25":3273,"d16":3028,"s5":0.927,"s5first":0.747,"s5firstP":"1987–1991","s5series":[["1987–1991",0.747],["1992–1996",0.807],["1997–2001",0.855],["2002–2006",0.881],["2007–2011",0.895],["2012–2016",0.911],["2017–2021",0.927]],"cond":[0.927,0.931,0.939,0.949],"prev5":85395,"sexSpec":""},{"k":"cup","ko":"원발부위 불명암","note":"AIHW C77–C80, ABS C80","inc25":2633,"inc00":2915,"iasr00":15.6,"iasr25":6.9,"masr00":12.4,"masr25":7.6,"aihwD25":2933,"d25":2816,"d16":2562,"s5":0.132,"s5first":0.063,"s5firstP":"1987–1991","s5series":[["1987–1991",0.063],["1992–1996",0.061],["1997–2001",0.07],["2002–2006",0.087],["2007–2011",0.118],["2012–2016",0.123],["2017–2021",0.132]],"cond":[0.132,0.623,0.824,0.88],"prev5":2984,"sexSpec":""},{"k":"liver","ko":"간암","note":"C22","inc25":3175,"inc00":792,"iasr00":4.2,"iasr25":8.8,"masr00":4,"masr25":7.1,"aihwD25":2632,"d25":2580,"d16":1864,"s5":0.246,"s5first":0.062,"s5firstP":"1987–1991","s5series":[["1987–1991",0.062],["1992–1996",0.085],["1997–2001",0.115],["2002–2006",0.131],["2007–2011",0.168],["2012–2016",0.201],["2017–2021",0.246]],"cond":[0.246,0.425,0.592,0.704],"prev5":4974,"sexSpec":""},{"k":"brain","ko":"뇌암","note":"C71","inc25":2098,"inc00":1309,"iasr00":6.9,"iasr25":6.5,"masr00":5.8,"masr25":4.8,"aihwD25":1639,"d25":1670,"d16":1439,"s5":0.238,"s5first":0.206,"s5firstP":"1987–1991","s5series":[["1987–1991",0.206],["1992–1996",0.198],["1997–2001",0.182],["2002–2006",0.204],["2007–2011",0.22],["2012–2016",0.221],["2017–2021",0.238]],"cond":[0.238,0.408,0.71,0.787],"prev5":3676,"sexSpec":""},{"k":"mel","ko":"흑색종","note":"C43","inc25":17443,"inc00":8741,"iasr00":46.4,"iasr25":51.8,"masr00":5.2,"masr25":3.8,"aihwD25":1455,"d25":1552,"d16":1289,"s5":0.943,"s5first":0.883,"s5firstP":"1987–1991","s5series":[["1987–1991",0.883],["1992–1996",0.902],["1997–2001",0.919],["2002–2006",0.914],["2007–2011",0.904],["2012–2016",0.92],["2017–2021",0.943]],"cond":[0.943,0.951,0.964,0.973],"prev5":69131,"sexSpec":""},{"k":"oes","ko":"식도암","note":"C15","inc25":1781,"inc00":1082,"iasr00":5.8,"iasr25":4.9,"masr00":5.2,"masr25":3.9,"aihwD25":1439,"d25":1393,"d16":1341,"s5":0.256,"s5first":0.109,"s5firstP":"1987–1991","s5series":[["1987–1991",0.109],["1992–1996",0.146],["1997–2001",0.167],["2002–2006",0.164],["2007–2011",0.178],["2012–2016",0.225],["2017–2021",0.256]],"cond":[0.256,0.458,0.726,0.812],"prev5":3124,"sexSpec":""},{"k":"stom","ko":"위암","note":"C16","inc25":2740,"inc00":2008,"iasr00":10.7,"iasr25":7.8,"masr00":6.4,"masr25":3.3,"aihwD25":1187,"d25":1214,"d16":1097,"s5":0.395,"s5first":0.185,"s5firstP":"1987–1991","s5series":[["1987–1991",0.185],["1992–1996",0.216],["1997–2001",0.239],["2002–2006",0.268],["2007–2011",0.302],["2012–2016",0.348],["2017–2021",0.395]],"cond":[0.395,0.599,0.828,0.905],"prev5":6361,"sexSpec":""},{"k":"blad","ko":"방광암","note":"C67","inc25":3345,"inc00":2179,"iasr00":11.6,"iasr25":8.9,"masr00":4.4,"masr25":2.9,"aihwD25":1156,"d25":1123,"d16":1030,"s5":0.573,"s5first":0.664,"s5firstP":"1987–1991","s5series":[["1987–1991",0.664],["1992–1996",0.623],["1997–2001",0.591],["2002–2006",0.549],["2007–2011",0.525],["2012–2016",0.546],["2017–2021",0.573]],"cond":[0.573,0.705,0.82,0.856],"prev5":9117,"sexSpec":""},{"k":"kid","ko":"신장암","note":"C64","inc25":4868,"inc00":2010,"iasr00":10.7,"iasr25":14.6,"masr00":4.1,"masr25":2.7,"aihwD25":1005,"d25":947,"d16":961,"s5":0.826,"s5first":0.509,"s5firstP":"1987–1991","s5series":[["1987–1991",0.509],["1992–1996",0.582],["1997–2001",0.635],["2002–2006",0.682],["2007–2011",0.738],["2012–2016",0.788],["2017–2021",0.826]],"cond":[0.826,0.89,0.913,0.919],"prev5":16889,"sexSpec":""},{"k":"meso","ko":"중피종","note":"C45","inc25":898,"inc00":482,"iasr00":2.6,"iasr25":2.4,"masr00":2.3,"masr25":1.8,"aihwD25":704,"d25":690,"d16":675,"s5":0.084,"s5first":0.057,"s5firstP":"1987–1991","s5series":[["1987–1991",0.057],["1992–1996",0.051],["1997–2001",0.048],["2002–2006",0.057],["2007–2011",0.059],["2012–2016",0.065],["2017–2021",0.084]],"cond":[0.084,0.138,0.285,0.387],"prev5":1172,"sexSpec":""},{"k":"myel","ko":"다발골수종","note":"AIHW C90.0, ABS C90","inc25":2755,"inc00":1092,"iasr00":5.8,"iasr25":7.6,"masr00":3.6,"masr25":3.1,"aihwD25":1210,"d25":1037,"d16":937,"s5":0.607,"s5first":0.277,"s5firstP":"1987–1991","s5series":[["1987–1991",0.277],["1992–1996",0.274],["1997–2001",0.34],["2002–2006",0.381],["2007–2011",0.459],["2012–2016",0.532],["2017–2021",0.607]],"cond":[0.607,0.637,0.634,0.638],"prev5":7995,"sexSpec":""},{"k":"ovary","ko":"난소암","note":"AIHW 발생은 C56+나팔관 장액성암, ABS C56","inc25":1929,"inc00":1185,"iasr00":6.3,"iasr25":5.8,"masr00":4.2,"masr25":2.9,"aihwD25":1061,"d25":1043,"d16":941,"s5":0.489,"s5first":0.363,"s5firstP":"1987–1991","s5series":[["1987–1991",0.363],["1992–1996",0.404],["1997–2001",0.414],["2002–2006",0.425],["2007–2011",0.446],["2012–2016",0.487],["2017–2021",0.489]],"cond":[0.489,0.564,0.684,0.799],"prev5":5574,"sexSpec":""},{"k":"uter","ko":"자궁암(체부)","note":"AIHW C54–C55, ABS C54","inc25":3493,"inc00":1594,"iasr00":8.5,"iasr25":10.5,"masr00":1.4,"masr25":1.9,"aihwD25":706,"d25":499,"d16":343,"s5":0.825,"s5first":0.775,"s5firstP":"1987–1991","s5series":[["1987–1991",0.775],["1992–1996",0.783],["1997–2001",0.813],["2002–2006",0.812],["2007–2011",0.823],["2012–2016",0.831],["2017–2021",0.825]],"cond":[0.825,0.871,0.936,0.961],"prev5":12716,"sexSpec":""},{"k":"cerv","ko":"자궁경부암","note":"C53","inc25":946,"inc00":772,"iasr00":4.1,"iasr25":3.4,"masr00":1.4,"masr25":0.8,"aihwD25":254,"d25":250,"d16":262,"s5":0.768,"s5first":0.702,"s5firstP":"1987–1991","s5series":[["1987–1991",0.702],["1992–1996",0.728],["1997–2001",0.73],["2002–2006",0.724],["2007–2011",0.718],["2012–2016",0.739],["2017–2021",0.768]],"cond":[0.768,0.836,0.92,0.948],"prev5":3875,"sexSpec":""},{"k":"anal","ko":"항문암","note":"C21","inc25":613,"inc00":231,"iasr00":1.2,"iasr25":1.8,"masr00":0.3,"masr25":0.4,"aihwD25":147,"d25":157,"d16":87,"s5":0.695,"s5first":0.561,"s5firstP":"1987–1991","s5series":[["1987–1991",0.561],["1992–1996",0.563],["1997–2001",0.624],["2002–2006",0.631],["2007–2011",0.646],["2012–2016",0.694],["2017–2021",0.695]],"cond":[0.695,0.766,0.872,0.919],"prev5":2004,"sexSpec":""},{"k":"larynx","ko":"후두암","note":"C32","inc25":592,"inc00":562,"iasr00":3,"iasr25":1.6,"masr00":1.3,"masr25":0.5,"aihwD25":195,"d25":211,"d16":197,"s5":0.641,"s5first":0.638,"s5firstP":"1987–1991","s5series":[["1987–1991",0.638],["1992–1996",0.643],["1997–2001",0.656],["2002–2006",0.634],["2007–2011",0.626],["2012–2016",0.655],["2017–2021",0.641]],"cond":[0.641,0.737,0.812,0.838],"prev5":2019,"sexSpec":""},{"k":"gall","ko":"담낭암","note":"C23","inc25":403,"inc00":288,"iasr00":1.5,"iasr25":1.1,"masr00":1.1,"masr25":0.5,"aihwD25":185,"d25":208,"d16":158,"s5":0.198,"s5first":0.11,"s5firstP":"1987–1991","s5series":[["1987–1991",0.11],["1992–1996",0.108],["1997–2001",0.137],["2002–2006",0.163],["2007–2011",0.166],["2012–2016",0.182],["2017–2021",0.198]],"cond":[0.198,0.452,0.739,0.879],"prev5":631,"sexSpec":""},{"k":"thyr","ko":"갑상선암","note":"C73","inc25":4355,"inc00":1063,"iasr00":5.6,"iasr25":14.6,"masr00":0.5,"masr25":0.5,"aihwD25":179,"d25":157,"d16":140,"s5":0.968,"s5first":0.877,"s5firstP":"1987–1991","s5series":[["1987–1991",0.877],["1992–1996",0.914],["1997–2001",0.938],["2002–2006",0.943],["2007–2011",0.959],["2012–2016",0.966],["2017–2021",0.968]],"cond":[0.968,0.984,0.989,0.995],"prev5":16550,"sexSpec":""}],"ALL":{"inc25":169759,"inc00":88002,"aihwD25":53545,"s5":{"1987–1991":[0.504,0.502,0.506],"1992–1996":[0.558,0.556,0.56],"1997–2001":[0.6,0.598,0.601],"2002–2006":[0.629,0.627,0.631],"2007–2011":[0.67,0.668,0.671],"2012–2016":[0.694,0.693,0.696],"2017–2021":[0.716,0.715,0.718]},"cond":{"0":0.716,"1":0.833,"2":0.878,"3":0.904,"4":0.92,"5":0.931},"iasr":{"2000":[468.4,"A"],"2001":[470.5,"A"],"2002":[477.9,"A"],"2003":[475.9,"A"],"2004":[490.6,"A"],"2005":[495.1,"A"],"2006":[497.7,"A"],"2007":[502.7,"A"],"2008":[508.4,"A"],"2009":[507.9,"A"],"2010":[502,"A"],"2011":[498.5,"A"],"2012":[502.1,"A"],"2013":[496.4,"A"],"2014":[494.4,"A"],"2015":[495.3,"A"],"2016":[498.7,"A"],"2017":[497.5,"A"],"2018":[500,"A"],"2019":[501.5,"A"],"2020":[484.6,"A"],"2021":[490.3,"A"],"2022":[496.2,"P"],"2023":[495.3,"P"],"2024":[494.8,"P"],"2025":[494.1,"P"]},"masr":{"2000":[194.1,"A"],"2001":[193,"A"],"2002":[191.9,"A"],"2003":[187.4,"A"],"2004":[186.2,"A"],"2005":[184.4,"A"],"2006":[181.1,"A"],"2007":[180.8,"A"],"2008":[179.6,"A"],"2009":[176.4,"A"],"2010":[175.2,"A"],"2011":[172.3,"A"],"2012":[169.4,"A"],"2013":[167.3,"A"],"2014":[163.2,"A"],"2015":[163.1,"A"],"2016":[160.9,"A"],"2017":[158.4,"A"],"2018":[156.2,"A"],"2019":[154.9,"A"],"2020":[151.1,"A"],"2021":[150.5,"A"],"2022":[149.2,"A"],"2023":[146.8,"A"],"2024":[144.6,"P"],"2025":[142.7,"P"]},"incN":{"2000":88002,"2001":90717,"2002":94262,"2003":95946,"2004":101029,"2005":104259,"2006":107214,"2007":111276,"2008":115399,"2009":118259,"2010":120006,"2011":122175,"2012":126204,"2013":127753,"2014":130376,"2015":133579,"2016":137631,"2017":140973,"2018":145222,"2019":149433,"2020":148614,"2021":153526,"2022":158908,"2023":162355,"2024":166154,"2025":169759},"mortN":{"2000":36316,"2001":37222,"2002":37947,"2003":37919,"2004":38524,"2005":39133,"2006":39435,"2007":40539,"2008":41357,"2009":41717,"2010":42658,"2011":43167,"2012":43704,"2013":44376,"2014":44440,"2015":45565,"2016":46140,"2017":46899,"2018":47515,"2019":48561,"2020":49003,"2021":50326,"2022":51189,"2023":51724,"2024":52636,"2025":53545},"prev5":527711,"incM":94956,"incF":74803},"stage":{"Breast cancer":{"Females":{"I":100,"II":94.6,"III":80.6,"IV":32,"Stage unknown":65}},"Colorectal cancer":{"Males":{"I":97.7,"II":87.7,"III":71.2,"IV":13.2,"Stage unknown":61.2},"Females":{"I":99.7,"II":89.7,"III":71.4,"IV":13.6,"Stage unknown":51.2},"Persons":{"I":98.6,"II":88.6,"III":71.3,"IV":13.4,"Stage unknown":56.9}},"Lung cancer":{"Males":{"I":61.8,"II":31.3,"III":13.6,"IV":3,"Stage unknown":13.4},"Females":{"I":74.8,"II":33.8,"III":21.9,"IV":3.5,"Stage unknown":15.9},"Persons":{"I":67.7,"II":32.3,"III":17.1,"IV":3.2,"Stage unknown":14.4}},"Melanoma of the skin":{"Males":{"I":98.7,"II":69.2,"III":55.7,"IV":26.8,"Stage unknown":90.8},"Females":{"I":99.8,"II":81.3,"III":70,"Stage unknown":90.7},"Persons":{"I":99.2,"II":73.6,"III":61.1,"IV":26.2,"Stage unknown":90.8}},"Prostate cancer":{"Males":{"I":100,"II":98.6,"III":99.9,"IV":36.4,"Stage unknown":55.7}}},"stageN":{"Breast cancer":{"Females":{"I":6110,"II":4936,"III":1721,"IV":660,"Stage unknown":788}},"Colorectal cancer":{"Males":{"I":1783,"II":1817,"III":1803,"IV":1379,"Stage unknown":959},"Females":{"I":1315,"II":1582,"III":1496,"IV":1095,"Stage unknown":764},"Persons":{"I":3098,"II":3399,"III":3299,"IV":2474,"Stage unknown":1723}},"Lung cancer":{"Males":{"I":657,"II":405,"III":668,"IV":2629,"Stage unknown":1760},"Females":{"I":526,"II":257,"III":463,"IV":1644,"Stage unknown":1125},"Persons":{"I":1183,"II":662,"III":1131,"IV":4273,"Stage unknown":2885}},"Melanoma of the skin":{"Males":{"I":4935,"II":1001,"III":205,"IV":158,"Stage unknown":192},"Females":{"I":3795,"II":576,"III":126,"IV":75,"Stage unknown":136},"Persons":{"I":8730,"II":1577,"III":331,"IV":233,"Stage unknown":328}},"Prostate cancer":{"Males":{"I":7186,"II":9245,"III":2246,"IV":836,"Stage unknown":528}}},"young":[["유방암",22.1,22.7,0.6,76.8,81.1,4.3],["자궁경부암",5.6,5.1,-0.5,5.6,8.5,2.9],["대장암",6.3,18.9,12.6,24.9,31.3,6.4],["신장암",2,3.6,1.6,7,11.8,4.8],["간암",0.3,0.7,0.4,2.1,2.5,0.4],["폐암",2.1,1.8,-0.3,11.4,8.9,-2.5],["흑색종",31.4,18.4,-13,50.5,44.6,-5.9],["췌장암",0.5,1.3,0.8,3.2,5,1.8],["전립선암",0.1,0.3,0.2,4.9,12.5,7.6],["고환암",7.3,9.8,2.5,4.1,5.3,1.2],["갑상선암",7,15.8,8.8,9.6,20.1,10.5],["자궁암",1.2,3,1.8,5.3,8.4,3.1],["암 전체",120.6,134.7,14.1,280.4,312.9,32.5]],"rare":[["희귀암 (발생률 6 미만)",20446,"12%",7460,"15%","49%","63%"],["덜 흔한 암 (6–12)",22138,"13%",10262,"21%","37%","53%"],["흔한 암 (12 이상)",124345,"74%",31512,"64%","56%","80%"]]};
+const $=s=>document.querySelector(s);
+const fmt=n=>n==null?'–':Math.round(n).toLocaleString('ko-KR');
+const pc=(v,d=1)=>v==null?'–':(v*100).toFixed(d)+'%';
+const chg=(a,b)=>(a==null||b==null)?null:(b-a)/a*100;
+const sg=v=>v==null?'–':(v>0?'+':'')+v.toFixed(0)+'%';
+const cls=v=>v==null?'flat':v>0?'up':'down';
+const R=D.R;
+
+$('#k1').innerHTML=fmt(D.ALL.inc25)+'<small>건</small>';
+
+// 1. insights
+const L=k=>R.find(r=>r.k===k);
+const ins=[
+ ['진단은 25년 새 1.9배','88,002 → '+fmt(D.ALL.inc25),'2000년부터 2025년까지 진단 건수는 크게 늘었지만, 연령표준화 발생률은 468 → 494로 5% 늘었을 뿐입니다. 증가의 대부분은 인구 증가와 고령화입니다.'],
+ ['사망 위험은 26% 감소','194 → 143','같은 나이 기준 암 사망률(10만 명당)은 2000년부터 2025년까지 꾸준히 내려갔습니다. 폐암, 대장암, 위암의 개선이 컸습니다.'],
+ ['생존율 50% → 72%','+21%p','1987–1991년 진단자의 5년 생존율은 50.4%, 2017–2021년 진단자는 71.6%입니다.'],
+ ['사망 1위는 여전히 폐암','9,130명','진단은 5위권(약 15,108건)이지만 사망은 1위. 5년 생존율 27.3%, 진단자의 42%가 4기에 발견됩니다(2011년).'],
+ ['췌장암: 개선이 가장 더딘 암','13.5%','진단 4,825건에 사망 3,885명. 5년 생존율 13.5%, 연령표준화 사망률은 25년간 오히려 +17%.'],
+ ['간암: 발생·사망 모두 2배 가까이','+110%','연령표준화 발생률 4.2 → 8.8, 사망률 4.0 → 7.1. 흐름을 거스르는 대표적인 암입니다.'],
+];
+$('#insights').innerHTML=ins.map(i=>`<div class="ins"><div class="t">${i[0]}</div><div class="big">${i[1]}</div><p>${i[2]}</p></div>`).join('');
+
+// 3. pair bars
+(()=>{const it=[...R].filter(r=>r.inc25).sort((a,b)=>b.inc25-a.inc25);const max=Math.max(...it.map(r=>r.inc25));
+$('#pairBars').innerHTML='<div class="pbars">'+it.map(r=>`<div class="pbar"><div class="bl">${r.ko}</div><div class="tr"><span class="i" style="width:${r.inc25/max*100}%"></span><span class="d" style="width:${r.d25/max*100}%"></span></div><div class="v"><b style="color:var(--accent2)">${fmt(r.inc25)}</b><br><b style="color:var(--cancer)">${fmt(r.d25)}</b></div></div>`).join('')+'</div>';})();
+
+// 4. MIR
+(()=>{const it=[...R].filter(r=>r.inc25&&r.d25).map(r=>({...r,m:r.d25/r.inc25})).sort((a,b)=>b.m-a.m);
+$('#mirBars').innerHTML='<div class="bars">'+it.map(r=>{const c=r.m>=.6?'var(--cancer)':r.m>=.3?'var(--warn)':'var(--accent)';return `<div class="bar"><div class="bl">${r.ko}</div><div class="bt"><div class="bf" style="width:${Math.min(r.m,1.1)/1.1*100}%;background:${c}"></div></div><div class="bv">${r.m.toFixed(2)}</div></div>`}).join('')+'</div>';})();
+
+// 5. survival bars
+(()=>{const it=[...R].filter(r=>r.s5!=null).sort((a,b)=>b.s5-a.s5);
+$('#survBars').innerHTML='<div class="bars">'+it.map(r=>{const c=r.s5<.3?'var(--cancer)':r.s5<.7?'var(--warn)':'var(--accent)';return `<div class="bar"><div class="bl">${r.ko}</div><div class="bt"><div class="bf" style="width:${Math.min(r.s5,1)*100}%;background:${c}"></div></div><div class="bv">${pc(r.s5)}</div></div>`}).join('')+`<div class="bar ac"><div class="bl"><b>암 전체</b></div><div class="bt"><div class="bf" style="width:71.6%;background:var(--ink)"></div></div><div class="bv">71.6%</div></div></div>`;})();
+
+// conditional
+(()=>{const keys=['panc','cup','meso','gall','liver','brain','oes','lung','stom','myel','ovary','crc','breast'];
+const heat=v=>`background:color-mix(in srgb,var(--accent) ${Math.round(v*55)}%,var(--card))`;
+let h='<tr><th>암종</th><th>진단 시점</th><th>1년 생존 후</th><th>3년 생존 후</th><th>5년 생존 후</th></tr>';
+const rows=keys.map(L).filter(r=>r&&r.cond);
+rows.push({ko:'<b>암 전체</b>',cond:[D.ALL.cond['0'],D.ALL.cond['1'],D.ALL.cond['3'],D.ALL.cond['5']]});
+h+=rows.map(r=>`<tr><td>${r.ko}</td>${r.cond.map(v=>`<td class="h" style="${heat(v||0)}">${pc(v)}</td>`).join('')}</tr>`).join('');
+$('#condTbl').innerHTML=h;})();
+
+// 6. dumbbell
+(()=>{const it=R.filter(r=>r.s5!=null&&r.s5first!=null&&r.s5firstP!=='2017–2021').map(r=>({...r,g:r.s5-r.s5first})).sort((a,b)=>b.g-a.g);
+$('#dumbbell').innerHTML='<div class="legend"><span><i style="background:var(--other)"></i>1987–1991</span><span><i style="background:var(--accent)"></i>2017–2021</span></div>'+it.map(r=>{const a=Math.min(r.s5first,1)*100,b=Math.min(r.s5,1)*100,lo=Math.min(a,b),w=Math.abs(b-a);return `<div class="db ${r.g<0?'neg':''}"><div class="bl">${r.ko}${r.s5firstP!=='1987–1991'?' <span class="pill">'+r.s5firstP+'~</span>':''}</div><div class="tk"><div class="seg" style="left:${lo}%;width:${w}%"></div><div class="p0" style="left:${a}%"></div><div class="p1" style="left:${b}%"></div></div><div class="v">${pc(r.s5first,0)} → <b>${pc(r.s5,0)}</b> (${r.g>0?'+':''}${(r.g*100).toFixed(0)}%p)</div></div>`}).join('');})();
+
+// stage
+(()=>{const S=D.stage,N=D.stageN,st=['I','II','III','IV','Stage unknown'];
+const nm={'Breast cancer':['유방암','Females'],'Prostate cancer':['전립선암','Males'],'Colorectal cancer':['대장암','Persons'],'Lung cancer':['폐암','Persons'],'Melanoma of the skin':['흑색종','Persons']};
+const heat=v=>`background:color-mix(in srgb,${v<30?'var(--cancer)':'var(--accent)'} ${Math.round((v<30?(30-v)/30*45+10:v/100*50))}%,var(--card))`;
+let h='<tr><th>암종</th><th>1기</th><th>2기</th><th>3기</th><th>4기</th><th>병기 불명</th><th>4기 진단 비율</th></tr>';
+for(const [k,[ko,sx]] of Object.entries(nm)){const s=S[k][sx],n=N[k][sx];const tot=st.reduce((a,x)=>a+(n[x]||0),0);
+h+=`<tr><td>${ko}</td>${st.map(x=>s[x]==null?'<td>–</td>':`<td class="h" style="${heat(s[x])}">${s[x].toFixed(1)}%</td>`).join('')}<td><b>${(n.IV/tot*100).toFixed(0)}%</b></td></tr>`;}
+$('#stageTbl').innerHTML=h;})();
+
+// 7. line chart
+(()=>{const yrs=Object.keys(D.ALL.iasr).map(Number);const inc=yrs.map(y=>D.ALL.iasr[y][0]);const mor=yrs.map(y=>D.ALL.masr[y][0]);
+const W=760,H=300,Lp=44,Rp=20,T=18,B=30,ymax=550;const xs=i=>Lp+(W-Lp-Rp)*i/(yrs.length-1);const ys=v=>T+(H-T-B)*(1-v/ymax);
+let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="연령표준화 발생률과 사망률 추이">`;
+const pi=yrs.indexOf(2022);s+=`<rect x="${xs(pi)}" y="${T}" width="${W-Rp-xs(pi)}" height="${H-T-B}" fill="var(--soft)"/><text x="${(xs(pi)+W-Rp)/2}" y="${H-B-8}" text-anchor="middle">추정</text>`;
+for(let g=0;g<=5;g++){const v=ymax*g/5;s+=`<line class="ax" x1="${Lp}" x2="${W-Rp}" y1="${ys(v)}" y2="${ys(v)}"/><text x="${Lp-6}" y="${ys(v)+4}" text-anchor="end">${Math.round(v)}</text>`;}
+yrs.forEach((y,i)=>{if(y%5===0)s+=`<text x="${xs(i)}" y="${H-8}" text-anchor="middle">${y}</text>`;});
+[[inc,'var(--accent2)','발생률'],[mor,'var(--cancer)','사망률']].forEach(([d,c,n])=>{s+=`<polyline fill="none" stroke="${c}" stroke-width="2.6" points="${d.map((v,i)=>xs(i)+','+ys(v)).join(' ')}"/>`;
+s+=`<circle cx="${xs(0)}" cy="${ys(d[0])}" r="3.5" fill="${c}"/><circle cx="${xs(d.length-1)}" cy="${ys(d[d.length-1])}" r="3.5" fill="${c}"/>`;
+s+=`<text class="lbl" x="${xs(0)+6}" y="${ys(d[0])-9}" style="fill:${c}">${n} ${d[0]}</text><text class="lbl" x="${xs(d.length-1)-6}" y="${ys(d[d.length-1])-9}" text-anchor="end" style="fill:${c}">${d[d.length-1]}</text>`;});
+$('#asrChart').innerHTML=s+'</svg>';})();
+
+// sortable table helper
+function sortable(tblSel,cols,rows,init){let key=init,asc=false;const draw=()=>{const rs=[...rows].sort((a,b)=>{const x=a[key],y=b[key];if(x==null)return 1;if(y==null)return -1;return (typeof x==='string'?x.localeCompare(y,'ko'):x-y)*(asc?1:-1)});
+$(tblSel).innerHTML='<tr>'+cols.map(c=>`<th data-k="${c.k}">${c.t}${c.k===key?(asc?' ▲':' ▼'):''}</th>`).join('')+'</tr>'+rs.map(r=>'<tr>'+cols.map(c=>`<td${c.c?` class="${c.c(r)}"`:''}>${c.f?c.f(r):r[c.k]}</td>`).join('')+'</tr>').join('');
+$(tblSel).querySelectorAll('th').forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(k===key)asc=!asc;else{key=k;asc=false}draw()})};draw();}
+
+// 7 table
+(()=>{const rows=R.map(r=>({ko:r.ko,i0:r.iasr00,i1:r.iasr25,ic:chg(r.iasr00,r.iasr25),m0:r.masr00,m1:r.masr25,mc:chg(r.masr00,r.masr25)}));
+const v=x=>x==null?'–':x.toFixed(1);
+sortable('#chgTbl',[{k:'ko',t:'암종'},{k:'i0',t:'발생률 2000',f:r=>v(r.i0)},{k:'i1',t:'2025',f:r=>v(r.i1)},{k:'ic',t:'발생 변화',f:r=>sg(r.ic),c:r=>cls(r.ic)},{k:'m0',t:'사망률 2000',f:r=>v(r.m0)},{k:'m1',t:'2025',f:r=>v(r.m1)},{k:'mc',t:'사망 변화',f:r=>sg(r.mc),c:r=>cls(r.mc)}],rows,'mc');})();
+
+// 8 young
+(()=>{const rows=D.young.map(r=>({ko:r[0],a0:r[1],a1:r[2],ac:r[3],b0:r[4],b1:r[5],bc:r[6]}));
+const c=x=>x>0?'up':x<0?'down':'flat';const s=x=>(x>0?'+':'')+x.toFixed(1);
+sortable('#youngTbl',[{k:'ko',t:'암종'},{k:'a0',t:'30대 2000'},{k:'a1',t:'2025'},{k:'ac',t:'30대 변화',f:r=>s(r.ac),c:r=>c(r.ac)},{k:'b0',t:'40대 2000'},{k:'b1',t:'2025'},{k:'bc',t:'40대 변화',f:r=>s(r.bc),c:r=>c(r.bc)}],rows,'ac');})();
+
+// 9 rare
+$('#rareTbl').innerHTML='<tr><th>구분</th><th>2025 진단</th><th>진단 비중</th><th>2025 사망</th><th>사망 비중</th><th>5년 생존 1987–91</th><th>5년 생존 2017–21</th></tr>'+D.rare.map(r=>`<tr><td>${r[0]}</td><td>${fmt(r[1])}</td><td>${r[2]}</td><td>${fmt(r[3])}</td><td class="${r[0].startsWith('흔한')?'':'up'}">${r[4]}</td><td>${r[5]}</td><td>${r[6]}</td></tr>`).join('');
+
+// 11 scatter
+(()=>{const it=R.filter(r=>r.s5!=null&&r.d25);const W=760,H=400,Lp=56,Rp=20,T=16,B=40,ymax=10000;
+const xs=v=>Lp+(W-Lp-Rp)*Math.min(v,1);const ys=v=>T+(H-T-B)*(1-Math.sqrt(v/ymax));
+let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="생존율 대비 사망자 수">`;
+s+=`<rect x="${xs(0)}" y="${T}" width="${xs(.3)-xs(0)}" height="${H-T-B}" fill="var(--cancer-soft)" opacity=".7"/><text x="${xs(.15)}" y="${T+14}" text-anchor="middle" style="fill:var(--cancer)">생존율 30% 미만</text>`;
+[0,500,1000,2500,5000,10000].forEach(v=>{s+=`<line class="ax" x1="${Lp}" x2="${W-Rp}" y1="${ys(v)}" y2="${ys(v)}"/><text x="${Lp-6}" y="${ys(v)+4}" text-anchor="end">${v.toLocaleString()}</text>`});
+[0,.2,.4,.6,.8,1].forEach(v=>{s+=`<text x="${xs(v)}" y="${H-20}" text-anchor="middle">${v*100}%</text>`});
+s+=`<text x="${(Lp+W-Rp)/2}" y="${H-4}" text-anchor="middle">5년 상대생존율 (2017–2021)</text>`;
+it.sort((a,b)=>b.d25-a.d25).forEach(r=>{const c=r.s5<.3?'var(--cancer)':'var(--other)';const rad=4+Math.sqrt(r.d25)/8;
+s+=`<circle cx="${xs(r.s5)}" cy="${ys(r.d25)}" r="${rad}" fill="${c}" fill-opacity=".55" stroke="${c}"><title>${r.ko}: 사망 ${fmt(r.d25)}명, 5년 생존 ${pc(r.s5)}</title></circle>`;
+const below={liver:1,myel:1,oes:1};if(r.k==='blad')s+=`<text class="lbl" x="${xs(r.s5)}" y="${ys(r.d25)-rad-6}" text-anchor="middle" style="fill:var(--ink)">${r.ko}</text>`;else if(r.d25>=600||r.s5<.3)s+=below[r.k]?`<text class="lbl" x="${xs(r.s5)}" y="${ys(r.d25)+rad+14}" text-anchor="middle" style="fill:var(--ink)">${r.ko}</text>`:`<text class="lbl" x="${xs(r.s5)+rad+3}" y="${ys(r.d25)+4}" style="fill:var(--ink)">${r.ko}</text>`;});
+$('#scatter').innerHTML=s+'</svg>';})();
+
+// 11 priority
+(()=>{const rows=R.filter(r=>r.s5!=null).map(r=>{const mc=chg(r.masr00,r.masr25);const c1=r.s5<.3,c2=r.d25>=500,c3=mc!=null&&mc>-20;return {ko:r.ko,s5:r.s5,d25:r.d25,mc,n:(c1?1:0)+(c2?1:0)+(c3?1:0),c1,c2,c3}}).filter(r=>r.n>=2&&r.c1||r.n===3);
+rows.sort((a,b)=>b.n-a.n||b.d25-a.d25);const ck=b=>b?'<span style="color:var(--cancer)">●</span>':'<span style="color:var(--muted)">○</span>';
+$('#prioTbl').innerHTML='<tr><th>암종</th><th>충족</th><th>① 생존율</th><th>② 2025 사망</th><th>③ 사망률 변화 2000→2025</th></tr>'+rows.map(r=>`<tr><td>${r.ko}</td><td><span class="badge3">${r.n}/3</span></td><td>${ck(r.c1)} ${pc(r.s5)}</td><td>${ck(r.c2)} ${fmt(r.d25)}</td><td class="${cls(r.mc)}">${ck(r.c3)} ${sg(r.mc)}</td></tr>`).join('');})();
+
+// appendix master
+(()=>{const rows=R.map(r=>({ko:r.ko,inc:r.inc25,d:r.d25,ad:r.aihwD25,m:r.inc25?r.d25/r.inc25:null,s:r.s5,p:r.prev5,note:r.note}));
+sortable('#masterTbl',[{k:'ko',t:'암종'},{k:'inc',t:'2025 진단',f:r=>fmt(r.inc)},{k:'d',t:'2025 사망(ABS)',f:r=>fmt(r.d)},{k:'ad',t:'AIHW 사망 추정',f:r=>fmt(r.ad)},{k:'m',t:'사망/진단',f:r=>r.m==null?'–':r.m.toFixed(2)},{k:'s',t:'5년 생존',f:r=>pc(r.s)},{k:'p',t:'5년 유병',f:r=>fmt(r.p)},{k:'note',t:'코드 범위'}],rows,'d');})();
+</script>
+</body>
+</html>

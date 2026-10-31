@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>호주 사망원인 2025 한눈에 보기 | ABS Causes of Death 2025 한국어 해설</title>
+<meta name="description" content="호주 통계청(ABS) Causes of Death, Australia 2025 자료를 한국어로 정리한 인터랙티브 요약 페이지">
+<style>:root{--bg:#f6f5f2;--card:#ffffff;--ink:#1c2230;--muted:#5f6b7a;--line:#e5e7eb;--soft:#f1f3f6;--accent:#0f766e;--accent2:#2563eb;--cancer:#dc4a34;--cancer-soft:#fde8e4;--other:#a3adbb;--warn:#b45309;--male:#2563eb;--female:#db2777;--shadow:0 1px 2px rgba(16,24,40,.05),0 4px 16px rgba(16,24,40,.06)}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1218;--card:#171b23;--ink:#e8ebf1;--muted:#9aa4b2;--line:#2a303b;--soft:#1f2430;--accent:#2dd4bf;--accent2:#60a5fa;--cancer:#ff6b55;--cancer-soft:#3a1d19;--other:#5b6574;--warn:#f59e0b;--male:#60a5fa;--female:#f472b6;--shadow:none}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,-apple-system,sans-serif;line-height:1.65;font-size:16px;word-break:keep-all;-webkit-font-smoothing:antialiased}
+a{color:var(--accent2)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+header.hero{padding:56px 0 28px}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--accent);text-transform:uppercase}
+h1{font-size:clamp(28px,4.4vw,44px);line-height:1.2;margin:10px 0 14px;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--cancer)}
+.lead{font-size:18px;color:var(--muted);max-width:760px;margin:0}
+nav.toc{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav.toc .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:10px;padding-bottom:10px;scrollbar-width:none}
+nav.toc a{flex:none;font-size:13.5px;text-decoration:none;color:var(--muted);padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card)}
+nav.toc a:hover{color:var(--ink);border-color:var(--accent)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin:28px 0 8px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px 16px;box-shadow:var(--shadow)}
+.kpi .v{font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.kpi .v small{font-size:15px;font-weight:600;color:var(--muted);margin-left:2px}
+.kpi .l{font-size:14px;color:var(--muted);margin-top:4px}
+.kpi.hl{border-color:var(--cancer);background:linear-gradient(180deg,var(--cancer-soft),var(--card) 70%)}
+.kpi.hl .v{color:var(--cancer)}
+section{padding:44px 0 8px}
+section>.wrap>h2{font-size:clamp(22px,3vw,28px);margin:0 0 6px;letter-spacing:-.01em}
+.sub{color:var(--muted);margin:0 0 18px;max-width:820px}
+.num{display:inline-block;min-width:28px;height:28px;line-height:28px;text-align:center;border-radius:8px;background:var(--ink);color:var(--bg);font-size:14px;font-weight:800;margin-right:10px;vertical-align:3px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);margin-bottom:16px}
+.card h3{margin:0 0 4px;font-size:17px}
+.card .cap{font-size:13.5px;color:var(--muted);margin:0 0 14px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px}
+.callout{border-left:4px solid var(--accent);background:var(--card);padding:14px 18px;border-radius:0 14px 14px 0;margin:0 0 16px;box-shadow:var(--shadow)}
+.callout.c{border-left-color:var(--cancer)}
+.callout.w{border-left-color:var(--warn)}
+.callout b{color:var(--ink)}
+.insights{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px;margin-bottom:16px}
+.ins{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
+.ins .t{font-weight:800;margin-bottom:4px}
+.ins p{margin:0;color:var(--muted);font-size:14.5px}
+.ins .big{font-size:26px;font-weight:800;color:var(--cancer);line-height:1.2}
+/* bars */
+.bars{display:flex;flex-direction:column;gap:6px}
+.bar{display:grid;grid-template-columns:minmax(120px,210px) 1fr 74px;align-items:center;gap:10px;font-size:14px;cursor:default;border-radius:6px;padding:1px 2px}
+.bar:hover{background:var(--soft)}
+.bl{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bt{height:16px;background:var(--soft);border-radius:5px;overflow:hidden;display:flex}
+.bf{height:100%;background:var(--other);border-radius:5px;transition:width .5s ease}
+.bar.hl .bf{background:var(--cancer)}
+.bar.hl .bl{font-weight:700;color:var(--cancer)}
+.bar.ac .bf{background:var(--accent)}
+.bv{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.bf.m{background:var(--male);border-radius:5px 0 0 5px}.bf.f{background:var(--female);border-radius:0 5px 5px 0}
+@media (max-width:560px){.bar{grid-template-columns:110px 1fr 62px;font-size:13px}}
+/* legend + chips */
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--muted);margin:6px 0 10px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.chip{font:inherit;font-size:13px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--muted);cursor:pointer}
+.chip.on{color:#fff;border-color:transparent}
+.seg{display:inline-flex;flex-wrap:wrap;max-width:100%;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:0 0 12px}
+.seg button{font:inherit;font-size:13px;padding:6px 12px;border:0;background:var(--card);color:var(--muted);cursor:pointer}
+.seg button.on{background:var(--ink);color:var(--bg)}
+/* tables */
+.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th,.tbl td{padding:8px 8px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl th{font-size:12.5px;color:var(--muted);font-weight:700;cursor:pointer;user-select:none;position:sticky;top:0;background:var(--card)}
+.tbl th:first-child,.tbl td:first-child{text-align:left;white-space:normal}
+.tbl tr.hl td:first-child{color:var(--cancer);font-weight:700}
+.tbl tr:hover td{background:var(--soft)}
+.scroll{overflow-x:auto}
+.up{color:var(--cancer);font-weight:700}.down{color:var(--accent);font-weight:700}.flat{color:var(--muted)}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:999px;background:var(--cancer-soft);color:var(--cancer);margin-left:6px;vertical-align:1px}
+/* svg charts */
+.chart{width:100%;position:relative}
+.chart svg{display:block;width:100%;overflow:visible}
+.chart .ax{stroke:var(--line)}
+.chart text{fill:var(--muted);font-size:11.5px;font-family:inherit}
+.chart .lbl{font-size:12px;font-weight:700}
+.tip{position:fixed;pointer-events:none;z-index:50;background:var(--ink);color:var(--bg);font-size:13px;line-height:1.5;padding:8px 11px;border-radius:10px;opacity:0;transition:opacity .12s;max-width:300px;box-shadow:0 6px 24px rgba(0,0,0,.2)}
+.tip b{font-weight:800}
+/* age band cards */
+.band{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow)}
+.band h4{margin:0 0 2px;font-size:16px}
+.band .meta{font-size:12.5px;color:var(--muted);margin-bottom:8px}
+.band ol{margin:0;padding-left:20px;font-size:14px}
+.band li.c{color:var(--cancer);font-weight:700}
+.band .cbar{height:6px;border-radius:3px;background:var(--soft);margin-top:10px;overflow:hidden}
+.band .cbar span{display:block;height:100%;background:var(--cancer)}
+.statecard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow)}
+.statecard h4{margin:0 0 8px;font-size:15px}
+.statecard ol{margin:0;padding-left:20px;font-size:13.5px}
+.statecard li.c{color:var(--cancer);font-weight:700}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:700px){.vs{grid-template-columns:1fr}}
+footer{padding:40px 0 60px;color:var(--muted);font-size:13.5px}
+footer .card{font-size:14px;color:var(--ink)}
+.help{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;font-size:14px;margin-top:8px}
+.help div{background:var(--soft);border-radius:10px;padding:8px 12px}
+.note{font-size:12.5px;color:var(--muted);margin-top:10px}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;background:var(--soft);font-size:12.5px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">호주 통계청(ABS) · Causes of Death, Australia 2025 · 한국어 해설</div>
+  <h1>2025년 호주인은<br>무엇으로 사망했을까?</h1>
+  <p class="lead">2025년 한 해 동안 호주에서 등록된 사망 <b id="h-total"></b>건을 원인, 나이, 성별, 지역별로 정리했습니다. 그래프 위에 마우스를 올리면(모바일은 터치) 자세한 수치가 나옵니다. <span style="color:var(--cancer);font-weight:700">빨간색</span>은 암입니다.</p>
+  <div class="kpis" id="kpis"></div>
+</div></header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#s1">핵심 요약</a><a href="#s2">사망원인 Top 20</a><a href="#s3">질병군별</a><a href="#s4">10년 추세</a><a href="#s5">나이대별</a><a href="#s6">조기 사망</a><a href="#s7">남녀 차이</a><a href="#s8">지역·소득</a><a href="#s9">60년 변화</a><a href="#s10">원주민 건강격차</a><a href="#s11">읽는 법·출처</a>
+</div></nav>
+
+<section id="s1"><div class="wrap">
+  <h2><span class="num">1</span>핵심 요약</h2>
+  <p class="sub">ABS가 발표한 2025년 사망원인 통계에서 특히 눈여겨볼 내용입니다.</p>
+  <div class="insights" id="insights"></div>
+</div></section>
+
+<section id="s2"><div class="wrap">
+  <h2><span class="num">2</span>사망원인 Top 20</h2>
+  <p class="sub">ABS는 WHO 권장 분류에 따라 '주요 사망원인' 순위를 매깁니다. 이 순위에서는 암이 부위별로 따로 집계되기 때문에 각각의 순위는 낮아 보입니다. Top 20 안에 든 암만 <b style="color:var(--cancer)">6종</b>입니다.</p>
+  <div class="card">
+    <h3>2025년 주요 사망원인 (사망자 수)</h3>
+    <p class="cap">막대 위에 마우스를 올리면 2016년 대비 변화와 사망 중앙연령이 보입니다.</p>
+    <div id="top20bars"></div>
+  </div>
+  <div class="card">
+    <h3>상세 표: 순위 변화와 사망 중앙연령</h3>
+    <p class="cap">열 제목을 누르면 정렬됩니다. 사망자 '수'의 변화는 인구 증가와 고령화의 영향도 함께 반영됩니다.</p>
+    <div id="top20tbl"></div>
+  </div>
+</div></section>
+
+<section id="s3"><div class="wrap">
+  <h2><span class="num">3</span>질병군(ICD 대분류)으로 묶어 보면</h2>
+  <p class="sub">같은 데이터를 국제질병분류(ICD-10)의 큰 장(chapter) 단위로 묶으면 그림이 크게 달라집니다.</p>
+  <div class="callout c" id="chapCallout"></div>
+  <div class="grid2">
+    <div class="card"><h3>질병군별 사망자 수, 2025</h3><p class="cap">신생물(암) 장에는 양성·경계성 종양도 소수 포함됩니다(악성 51,808명).</p><div id="chapBars"></div></div>
+    <div class="card"><h3>질병군별 조기사망 손실(YPLL), 2025</h3><p class="cap">1–78세 사이 사망을 '조기 사망'으로 보고, 78세까지 남은 햇수를 합한 값입니다.</p><div id="chapYpll"></div></div>
+  </div>
+</div></section>
+
+<section id="s4"><div class="wrap">
+  <h2><span class="num">4</span>10년 추세 (2016–2025)</h2>
+  <p class="sub">고령화 효과를 걷어낸 <b>연령표준화 사망률</b>(인구 10만 명당)로 보면 실제 위험이 어떻게 변했는지 알 수 있습니다.</p>
+  <div class="grid2">
+    <div class="card"><h3>연령표준화 사망률: 성별</h3><p class="cap">2022년의 일시적 상승은 COVID-19와 호흡기 감염 유행 시기와 겹칩니다. 2025년 남성 사망률은 역대 최저입니다.</p><div class="chart" id="sdrSex"></div></div>
+    <div class="card"><h3>상위 5대 원인의 연령표준화 사망률</h3><p class="cap">치매는 2024년부터 허혈성 심장질환을 앞질렀습니다. 폐암은 꾸준히 감소하고 있습니다.</p><div class="chart" id="sdrTop5"></div></div>
+  </div>
+  <div class="card"><h3>연간 사망자 수와 질병군별 추이</h3><p class="cap">항목을 눌러 켜고 끌 수 있습니다. 사망자 '수'는 인구 증가와 고령화 때문에 늘어나는 경향이 있습니다.</p><div class="chips" id="chapChips"></div><div class="chart" id="chapTrend"></div></div>
+</div></section>
+
+<section id="s5"><div class="wrap">
+  <h2><span class="num">5</span>나이대별로 다른 사망원인</h2>
+  <p class="sub">나이대별 상위 3대 원인입니다. 빨간 막대는 그 나이대 Top 10 원인 중 암이 차지하는 사망자 비중입니다. <b>중장년(55–74세)에서는 암이 단연 두드러집니다.</b></p>
+  <div class="grid3" id="bands"></div>
+  <div class="card" style="margin-top:16px"><h3>나이대별 사망률 추이 (인구 10만 명당)</h3><p class="cap">나이대를 바꿔 볼 수 있습니다. 모든 나이대에서 10년 전보다 낮아졌습니다.</p><div id="ageSeg"></div><div class="chart" id="ageChart"></div></div>
+</div></section>
+
+<section id="s6"><div class="wrap">
+  <h2><span class="num">6</span>조기 사망: '잃어버린 삶의 햇수'</h2>
+  <p class="sub">사망자 수만 보면 고령층 질환이 상위권을 차지합니다. <b>조기사망 손실(YPLL)</b>로 보면 젊은 나이에 생명을 앗아가는 원인이 드러납니다. 1–78세 사이 사망마다 78세까지 남은 햇수를 더한 값입니다.</p>
+  <div class="grid2">
+    <div class="card"><h3>YPLL 상위 20개 원인, 2025</h3><p class="cap">자살이 1위입니다. 암은 8종이 포함됩니다.</p><div id="ypllBars"></div></div>
+    <div class="card"><h3>사망 중앙연령: 가장 낮은 / 가장 높은 원인</h3><p class="cap">중앙연령은 해당 원인 사망자를 나이순으로 세웠을 때 한가운데 있는 사람의 나이입니다.</p><div id="medLow"></div><div style="height:14px"></div><div id="medHigh"></div></div>
+  </div>
+</div></section>
+
+<section id="s7"><div class="wrap">
+  <h2><span class="num">7</span>남녀 차이</h2>
+  <p class="sub">2025년 사망자의 52.4%가 남성(98,762명), 47.6%가 여성(89,659명)이었습니다. 남성 1위는 허혈성 심장질환, 여성 1위는 치매입니다.</p>
+  <div class="vs">
+    <div class="card"><h3 style="color:var(--male)">남성 Top 10 (사망자 수)</h3><p class="cap">괄호 안은 연령표준화 사망률(10만 명당)의 2016→2025 변화</p><div id="maleBars"></div></div>
+    <div class="card"><h3 style="color:var(--female)">여성 Top 10 (사망자 수)</h3><p class="cap">괄호 안은 연령표준화 사망률(10만 명당)의 2016→2025 변화</p><div id="femaleBars"></div></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h3>사망 중앙연령 추이 (2001–2025)</h3><p class="cap">남녀 격차가 6.3년(2001)에서 4.9년(2025)으로 좁혀졌습니다.</p><div class="chart" id="medSex"></div></div>
+    <div class="card"><h3>질병군별 남녀 사망자 수, 2025</h3><p class="cap"><span style="color:var(--male)">■ 남성</span> <span style="color:var(--female)">■ 여성</span></p><div id="chapMF"></div></div>
+  </div>
+</div></section>
+
+<section id="s8"><div class="wrap">
+  <h2><span class="num">8</span>지역과 소득에 따른 차이</h2>
+  <p class="sub">어디에 사는지, 사회경제적 여건이 어떤지에 따라 사망 나이가 달라집니다.</p>
+  <div class="grid2">
+    <div class="card"><h3>거주 지역별 사망 중앙연령, 2025</h3><p class="cap">대도시 → 원격지로 갈수록 거의 모든 원인에서 더 일찍 사망합니다.</p><div id="medRemote"></div></div>
+    <div class="card"><h3>사회경제 수준(5분위)별 사망 중앙연령, 2025</h3><p class="cap">1분위(가장 낮음) vs 5분위(가장 높음)</p><div id="medSES"></div></div>
+  </div>
+  <div class="card"><h3>지역 유형별 Top 10 사망원인</h3><p class="cap">지역을 선택하세요. 막대는 사망자 수, 오른쪽 숫자는 연령표준화 사망률(10만 명당)입니다.</p><div id="remSeg"></div><div id="remBars"></div><p class="note" id="remNote"></p></div>
+  <h3 style="margin:22px 0 10px">주(州)·준주별 상위 5대 원인, 2025</h3>
+  <div class="grid3" id="states"></div>
+</div></section>
+
+<section id="s9"><div class="wrap">
+  <h2><span class="num">9</span>1968년 vs 2025년: 60년 동안 바뀐 것</h2>
+  <p class="sub">1968년에는 허혈성 심장질환 하나가 전체 사망의 30.5%를 차지했습니다. 2025년에는 1위인 치매도 10.1%에 그쳐 사망원인이 훨씬 다양해졌습니다.</p>
+  <div class="card"><div id="histSeg"></div><div id="histBars"></div></div>
+  <div class="grid2">
+    <div class="card"><h3>치매: 주별 순위와 비중 (2006 → 2025)</h3><div id="demState"></div></div>
+    <div class="card"><h3>낙상: 주별 순위와 비중 (2006 → 2025)</h3><div id="fallState"></div></div>
+  </div>
+</div></section>
+
+<section id="s10"><div class="wrap">
+  <h2><span class="num">10</span>원주민(애버리지널·토레스 해협 섬 주민) 건강 격차</h2>
+  <p class="sub">원주민 사망 자료는 지역마다 집계 품질이 달라 ABS도 신중한 해석을 권고합니다.</p>
+  <div class="insights" id="indigIns"></div>
+  <div class="grid2">
+    <div class="card"><h3>원주민 연령표준화 사망률 추이</h3><p class="cap">NSW·Qld·SA·WA·NT 5개 관할 기준(ABS 시계열 기준). 점선은 2025년 호주 전체 평균(495.5)</p><div class="chart" id="indigSdr"></div></div>
+    <div class="card"><h3>원주민 상위 5대 사망원인, 2025</h3><p class="cap">전국 6,056명 중</p><div id="indigTop"></div></div>
+  </div>
+</div></section>
+
+<footer id="s11"><div class="wrap">
+  <h2 style="color:var(--ink)"><span class="num">11</span>데이터 읽는 법과 출처</h2>
+  <div class="card">
+    <ul style="margin:0;padding-left:20px">
+      <li><b>사망자 수 vs 연령표준화 사망률</b>: 인구가 늘고 늙으면 사망자 '수'는 자연히 늘어납니다. 2001년 호주 인구 구조를 기준으로 보정한 연령표준화 사망률(SDR)을 봐야 실제 위험 변화를 비교할 수 있습니다.</li>
+      <li><b>근본 사인(underlying cause)</b>: 사망에 이르게 한 질병 연쇄의 '출발점' 하나만 집계합니다. 예를 들어 암 환자가 폐렴으로 사망하면 대개 암으로 분류됩니다.</li>
+      <li><b>잠정치</b>: 2025년 자료는 잠정치이며 검시(coroner) 절차가 끝나면 수정될 수 있습니다. 특히 자살·사고 같은 외인사가 수정 대상입니다. 2022년 이전은 확정치, 2023년은 1차 수정치, 2024년은 잠정 수정치입니다.</li>
+      <li><b>등록 연도 기준</b>: 사망이 발생한 해가 아니라 등록된 해를 기준으로 집계했습니다.</li>
+      <li><b>YPLL</b>: 1–78세 사이 사망을 조기 사망으로 보고, 각 사망마다 78세까지 남은 햇수를 합산한 값입니다.</li>
+      <li>이 페이지는 비공식 한국어 해설입니다. 한국어 질병명은 이해를 돕기 위한 번역이며, 정확한 정의는 ICD-10 코드와 원문을 확인하세요.</li>
+    </ul>
+    <p style="margin:14px 0 0">출처: Australian Bureau of Statistics (2026), <a href="https://www.abs.gov.au/statistics/health/causes-death/causes-death-australia/2025" target="_blank" rel="noopener">Causes of Death, Australia, 2025</a> (2026년 10월 27일 발표) 및 데이터 큐브 "2025_01 Underlying causes of death (Australia)". © Commonwealth of Australia, CC BY 4.0.</p>
+  </div>
+  <div class="card">
+    <b>도움이 필요하다면 (24시간)</b>
+    <div class="help"><div>Lifeline <b>13 11 14</b></div><div>Suicide Call Back Service <b>1300 659 467</b></div><div>Beyond Blue <b>1300 224 636</b></div><div>13YARN (원주민) <b>13 92 76</b></div><div>Cancer Council <b>13 11 20</b></div><div>National Dementia Helpline <b>1800 100 500</b></div></div>
+  </div>
+  <p>이 페이지는 암 환자 커뮤니티 회원들을 위해 공개 통계를 정리한 자료이며, 의학적 조언이 아닙니다.</p>
+</div></footer>
+
+<script>
+const D={"top20":[{"ko":"치매(알츠하이머 포함)","c":false,"n":[13854.0,15333.0,18291.0,19019.0],"rk":[2.0,2.0,1.0,1.0],"med":88.3},{"ko":"허혈성 심장질환","c":false,"n":[19354.0,16837.0,16326.0,16228.0],"rk":[1.0,1.0,2.0,2.0],"med":82.6},{"ko":"뇌혈관질환(뇌졸중)","c":false,"n":[10533.0,9539.0,9154.0,9263.0],"rk":[3.0,3.0,4.0,3.0],"med":85.1},{"ko":"폐암","c":true,"n":[8440.0,8477.0,9122.0,9134.0],"rk":[4.0,4.0,5.0,4.0],"med":75.4},{"ko":"만성 하기도질환(COPD 등)","c":false,"n":[8139.0,7206.0,9239.0,9055.0],"rk":[5.0,5.0,3.0,5.0],"med":80.2},{"ko":"당뇨병","c":false,"n":[4868.0,5231.0,5989.0,5888.0],"rk":[7.0,7.0,6.0,6.0],"med":81.4},{"ko":"낙상(골절 포함)","c":false,"n":[3461.0,4150.0,5197.0,5519.0],"rk":[9.0,9.0,8.0,7.0],"med":87.5},{"ko":"대장암","c":true,"n":[5490.0,5503.0,5388.0,5439.0],"rk":[6.0,6.0,7.0,8.0],"med":78.2},{"ko":"혈액암(림프·조혈조직)","c":true,"n":[4426.0,4799.0,5168.0,5189.0],"rk":[8.0,8.0,9.0,9.0],"med":79.6},{"ko":"비뇨기계 질환","c":false,"n":[3263.0,3875.0,4812.0,5116.0],"rk":[12.0,10.0,10.0,10.0],"med":86.8},{"ko":"인플루엔자·폐렴","c":false,"n":[3148.0,2120.0,3672.0,4382.0],"rk":[13.0,21.0,15.0,11.0],"med":87.4},{"ko":"심부전 등 기타 심장질환","c":false,"n":[3345.0,3221.0,4267.0,4311.0],"rk":[10.0,13.0,11.0,12.0],"med":89.0},{"ko":"췌장암","c":true,"n":[2919.0,3244.0,3874.0,3885.0],"rk":[16.0,12.0,13.0,13.0],"med":75.9},{"ko":"전립선암","c":true,"n":[3286.0,3606.0,3836.0,3749.0],"rk":[11.0,11.0,14.0,14.0],"med":82.9},{"ko":"자살","c":false,"n":[2939.0,3184.0,3326.0,3283.0],"rk":[15.0,14.0,16.0,15.0],"med":45.0},{"ko":"유방암","c":true,"n":[3028.0,3158.0,3204.0,3273.0],"rk":[14.0,15.0,17.0,16.0],"med":76.0},{"ko":"고혈압성 질환","c":false,"n":[2260.0,2142.0,2866.0,3007.0],"rk":[18.0,19.0,18.0,17.0],"med":87.1},{"ko":"심장 부정맥","c":false,"n":[2345.0,2407.0,2674.0,2801.0],"rk":[17.0,16.0,19.0,18.0],"med":89.3},{"ko":"파킨슨병","c":false,"n":[1787.0,2056.0,2600.0,2649.0],"rk":[22.0,22.0,21.0,19.0],"med":84.0},{"ko":"간경변 등 간질환","c":false,"n":[1817.0,2217.0,2601.0,2601.0],"rk":[21.0,17.0,20.0,20.0],"med":65.5},{"ko":"전체 사망","c":false,"n":[159174.0,161300.0,187268.0,188421.0],"rk":[null,null,null,null],"med":81.9}],"sdrTop5":{"causes":["치매(알츠하이머 포함)","허혈성 심장질환","뇌혈관질환(뇌졸중)","폐암","만성 하기도질환(COPD 등)"],"rows":[[2016.0,43.3,63.4,34.2,29.7,27.4],[2017.0,44.3,61.0,32.6,28.1,28.0],[2018.0,43.8,56.7,31.3,28.7,25.7],[2019.0,45.7,55.1,29.7,28.1,26.1],[2020.0,43.2,50.1,27.9,26.3,21.7],[2021.0,45.5,50.5,27.9,26.4,22.9],[2022.0,47.2,53.0,27.1,26.7,24.4],[2023.0,45.0,47.0,25.3,25.6,23.2],[2024.0,45.5,43.6,23.9,25.2,24.6],[2025.0,45.6,42.0,23.4,24.5,23.5]]},"ypll":[{"ko":"자살","c":false,"v":108674.0},{"ko":"허혈성 심장질환","c":false,"v":72039.0},{"ko":"우발적 중독(약물 과다 등)","c":false,"v":53257.0},{"ko":"폐암","c":true,"v":51205.0},{"ko":"교통사고","c":false,"v":41725.0},{"ko":"대장암","c":true,"v":37028.0},{"ko":"간경변 등 간질환","c":false,"v":36881.0},{"ko":"만성 하기도질환(COPD 등)","c":false,"v":32872.0},{"ko":"뇌혈관질환(뇌졸중)","c":false,"v":27599.0},{"ko":"당뇨병","c":false,"v":27574.0},{"ko":"유방암","c":true,"v":26142.0},{"ko":"혈액암(림프·조혈조직)","c":true,"v":22551.0},{"ko":"췌장암","c":true,"v":21495.0},{"ko":"뇌암","c":true,"v":21399.0},{"ko":"간암","c":true,"v":17259.0},{"ko":"인플루엔자·폐렴","c":false,"v":13731.0},{"ko":"의도 불명 사망","c":false,"v":12309.0},{"ko":"선천성 기형·염색체 이상","c":false,"v":11985.0},{"ko":"심근병증","c":false,"v":11150.0},{"ko":"치매(알츠하이머 포함)","c":false,"v":10563.0}],"male":[{"ko":"허혈성 심장질환","c":false,"n16":11063.0,"n25":10263.0,"r16":85.5,"r25":59.9},{"ko":"치매(알츠하이머 포함)","c":false,"n16":5068.0,"n25":7391.0,"r16":39.8,"r25":41.5},{"ko":"폐암","c":true,"n16":5036.0,"n25":5122.0,"r16":38.3,"r25":29.6},{"ko":"만성 하기도질환(COPD 등)","c":false,"n16":4212.0,"n25":4495.0,"r16":32.7,"r25":25.8},{"ko":"뇌혈관질환(뇌졸중)","c":false,"n16":4274.0,"n25":4091.0,"r16":33.4,"r25":23.6},{"ko":"전립선암","c":true,"n16":3286.0,"n25":3749.0,"r16":25.5,"r25":21.1},{"ko":"당뇨병","c":false,"n16":2627.0,"n25":3217.0,"r16":20.4,"r25":18.7},{"ko":"혈액암(림프·조혈조직)","c":true,"n16":2594.0,"n25":3118.0,"r16":20.1,"r25":18.0},{"ko":"대장암","c":true,"n16":2993.0,"n25":2819.0,"r16":23.1,"r25":16.8},{"ko":"낙상(골절 포함)","c":false,"n16":1593.0,"n25":2810.0,"r16":12.5,"r25":16.0},{"ko":"자살","c":false,"n16":2192.0,"n25":2425.0,"r16":18.2,"r25":17.3},{"ko":"비뇨기계 질환","c":false,"n16":1442.0,"n25":2386.0,"r16":11.3,"r25":13.5},{"ko":"인플루엔자·폐렴","c":false,"n16":1334.0,"n25":2073.0,"r16":10.4,"r25":12.0},{"ko":"췌장암","c":true,"n16":1504.0,"n25":2037.0,"r16":11.5,"r25":11.8},{"ko":"심부전 등 기타 심장질환","c":false,"n16":1478.0,"n25":1997.0,"r16":11.5,"r25":11.4},{"ko":"간암","c":true,"n16":1231.0,"n25":1664.0,"r16":9.2,"r25":9.7},{"ko":"파킨슨병","c":false,"n16":1119.0,"n25":1649.0,"r16":8.9,"r25":9.3},{"ko":"간경변 등 간질환","c":false,"n16":1199.0,"n25":1625.0,"r16":9.1,"r25":10.4},{"ko":"피부암(흑색종 등)","c":true,"n16":1327.0,"n25":1582.0,"r16":10.2,"r25":9.1},{"ko":"방광·요로암","c":true,"n16":954.0,"n25":1283.0,"r16":7.4,"r25":7.3}],"female":[{"ko":"치매(알츠하이머 포함)","c":false,"n16":8786.0,"n25":11628.0,"r16":45.2,"r25":48.4},{"ko":"허혈성 심장질환","c":false,"n16":8291.0,"n25":5965.0,"r16":44.6,"r25":26.3},{"ko":"뇌혈관질환(뇌졸중)","c":false,"n16":6259.0,"n25":5172.0,"r16":34.0,"r25":22.9},{"ko":"만성 하기도질환(COPD 등)","c":false,"n16":3927.0,"n25":4560.0,"r16":23.6,"r25":21.5},{"ko":"폐암","c":true,"n16":3404.0,"n25":4012.0,"r16":22.6,"r25":20.2},{"ko":"유방암","c":true,"n16":2999.0,"n25":3244.0,"r16":20.0,"r25":16.9},{"ko":"비뇨기계 질환","c":false,"n16":1821.0,"n25":2730.0,"r16":9.7,"r25":11.8},{"ko":"낙상(골절 포함)","c":false,"n16":1868.0,"n25":2709.0,"r16":9.8,"r25":11.5},{"ko":"당뇨병","c":false,"n16":2241.0,"n25":2671.0,"r16":13.1,"r25":12.4},{"ko":"대장암","c":true,"n16":2497.0,"n25":2620.0,"r16":15.7,"r25":12.9},{"ko":"심부전 등 기타 심장질환","c":false,"n16":1867.0,"n25":2314.0,"r16":9.6,"r25":9.6},{"ko":"인플루엔자·폐렴","c":false,"n16":1814.0,"n25":2309.0,"r16":9.5,"r25":10.1},{"ko":"혈액암(림프·조혈조직)","c":true,"n16":1832.0,"n25":2071.0,"r16":11.7,"r25":9.9},{"ko":"췌장암","c":true,"n16":1415.0,"n25":1848.0,"r16":9.1,"r25":9.2},{"ko":"고혈압성 질환","c":false,"n16":1375.0,"n25":1760.0,"r16":7.1,"r25":7.5},{"ko":"심장 부정맥","c":false,"n16":1452.0,"n25":1656.0,"r16":7.5,"r25":6.8},{"ko":"난소암","c":true,"n16":941.0,"n25":1043.0,"r16":6.2,"r25":5.4},{"ko":"근골격계 질환","c":false,"n16":946.0,"n25":1023.0,"r16":5.4,"r25":4.6},{"ko":"파킨슨병","c":false,"n16":668.0,"n25":1000.0,"r16":3.8,"r25":4.4},{"ko":"간경변 등 간질환","c":false,"n16":618.0,"n25":976.0,"r16":4.3,"r25":5.6}],"breastYpll":[[1997.0,40606.0,20370.0],[1998.0,38222.0,18907.0],[1999.0,37126.0,18145.0],[2000.0,35579.0,18111.0],[2001.0,35309.0,18296.0],[2002.0,36710.0,17403.0],[2003.0,36074.0,17007.0],[2004.0,33960.0,15141.0],[2005.0,35859.0,15000.0],[2006.0,32070.0,16077.0],[2007.0,32361.0,17973.0],[2008.0,33954.0,17536.0],[2009.0,33323.0,18450.0],[2010.0,31700.0,19531.0],[2011.0,32760.0,20138.0],[2012.0,31057.0,23059.0],[2013.0,31101.0,22721.0],[2014.0,29539.0,25025.0],[2015.0,30950.0,26524.0],[2016.0,31686.0,25704.0],[2017.0,29580.0,28277.0],[2018.0,30393.0,26553.0],[2019.0,31623.0,28966.0],[2020.0,30533.0,27333.0],[2021.0,28176.0,29273.0],[2022.0,26818.0,29171.0],[2023.0,26592.0,28707.0],[2024.0,26863.0,26765.0],[2025.0,25503.0,30145.0]],"states":{"NSW":[{"ko":"치매(알츠하이머 포함)","c":false,"v":6179.0,"rk":1.0},{"ko":"허혈성 심장질환","c":false,"v":4982.0,"rk":2.0},{"ko":"뇌혈관질환(뇌졸중)","c":false,"v":3110.0,"rk":3.0},{"ko":"만성 하기도질환(COPD 등)","c":false,"v":2941.0,"rk":4.0},{"ko":"폐암","c":true,"v":2876.0,"rk":5.0},{"ko":"당뇨병","c":false,"v":1903.0,"rk":6.0},{"ko":"대장암","c":true,"v":1768.0,"rk":7.0},{"ko":"혈액암(림프·조혈조직)","c":true,"v":1659.0,"rk":8.0},{"ko":"비뇨기계 질환","c":false,"v":1604.0,"rk":9.0},{"ko":"심부전 등 기타 심장질환","c":false,"v":1523.0,"rk":10.0}],"VIC":[{"ko":"치매(알츠하이머 포함)","c":false,"v":4275.0,"rk":1.0},{"ko":"허혈성 심장질환","c":false,"v":3819.0,"rk":2.0},{"ko":"뇌혈관질환(뇌졸중)","c":false,"v":2294.0,"rk":3.0},{"ko":"폐암","c":true,"v":2236.0,"rk":4.0},{"ko":"만성 하기도질환(COPD 등)","c":false,"v":2078.0,"rk":5.0},{"ko":"낙상(골절 포함)","c":false,"v":1707.0,"rk":6.0},{"ko":"비뇨기계 질환","c":false,"v":1621.0,"rk":7.0},{"ko":"심부전 등 기타 심장질환","c":false,"v":1389.0,"rk":8.0},{"ko":"대장암","c":true,"v":1364.0,"rk":9.0},{"ko":"당뇨병","c":false,"v":1303.0,"rk":10.0}],"QLD":[{"ko":"치매(알츠하이머 포함)","c":false,"v":3889.0,"rk":1.0},{"ko":"허혈성 심장질환","c":false,"v":3437.0,"rk":2.0},{"ko":"폐암","c":true,"v":1979.0,"rk":3.0},{"ko":"뇌혈관질환(뇌졸중)","c":false,"v":1927.0,"rk":4.0},{"ko":"만성 하기도질환(COPD 등)","c":false,"v":1909.0,"rk":5.0},{"ko":"당뇨병","c":false,"v":1196.0,"rk":6.0},{"ko":"대장암","c":true,"v":1124.0,"rk":7.0},{"ko":"혈액암(림프·조혈조직)","c":true,"v":1096.0,"rk":8.0},{"ko":"낙상(골절 포함)","c":false,"v":1066.0,"rk":9.0},{"ko":"비뇨기계 질환","c":false,"v":854.0,"rk":10.0}],"SA":[{"ko":"치매(알츠하이머 포함)","c":false,"v":1896.0,"rk":1.0},{"ko":"허혈성 심장질환","c":false,"v":1432.0,"rk":2.0},{"ko":"만성 하기도질환(COPD 등)","c":false,"v":793.0,"rk":3.0},{"ko":"폐암","c":true,"v":717.0,"rk":4.0},{"ko":"뇌혈관질환(뇌졸중)","c":false,"v":645.0,"rk":5.0},{"ko":"당뇨병","c":false,"v":538.0,"rk":6.0},{"ko":"대장암","c":true,"v":474.0,"rk":7.0},{"ko":"낙상(골절 포함)","c":false,"v":464.0,"rk":8.0},{"ko":"혈액암(림프·조혈조직)","c":true,"v":440.0,"rk":9.0},{"ko":"인플루엔자·폐렴","c":false,"v":407.0,"rk":10.0}],"WA":[{"ko":"치매(알츠하이머 포함)","c":false,"v":1941.0,"rk":1.0},{"ko":"허혈성 심장질환","c":false,"v":1755.0,"rk":2.0},{"ko":"폐암","c":true,"v":858.0,"rk":3.0},{"ko":"뇌혈관질환(뇌졸중)","c":false,"v":831.0,"rk":4.0},{"ko":"만성 하기도질환(COPD 등)","c":false,"v":797.0,"rk":5.0},{"ko":"낙상(골절 포함)","c":false,"v":691.0,"rk":6.0},{"ko":"당뇨병","c":false,"v":564.0,"rk":7.0},{"ko":"혈액암(림프·조혈조직)","c":true,"v":523.0,"rk":8.0},{"ko":"비뇨기계 질환","c":false,"v":472.0,"rk":9.0},{"ko":"대장암","c":true,"v":439.0,"rk":10.0}],"TAS":[{"ko":"치매(알츠하이머 포함)","c":false,"v":517.0,"rk":1.0},{"ko":"허혈성 심장질환","c":false,"v":494.0,"rk":2.0},{"ko":"만성 하기도질환(COPD 등)","c":false,"v":316.0,"rk":3.0},{"ko":"폐암","c":true,"v":290.0,"rk":4.0},{"ko":"뇌혈관질환(뇌졸중)","c":false,"v":274.0,"rk":5.0},{"ko":"대장암","c":true,"v":172.0,"rk":6.0},{"ko":"당뇨병","c":false,"v":167.0,"rk":7.0},{"ko":"낙상(골절 포함)","c":false,"v":166.0,"rk":8.0},{"ko":"인플루엔자·폐렴","c":false,"v":148.0,"rk":9.0},{"ko":"혈액암(림프·조혈조직)","c":true,"v":144.0,"rk":10.0}],"NT":[{"ko":"당뇨병","c":false,"v":137.0,"rk":1.0},{"ko":"허혈성 심장질환","c":false,"v":137.0,"rk":1.0},{"ko":"만성 하기도질환(COPD 등)","c":false,"v":114.0,"rk":3.0},{"ko":"폐암","c":true,"v":81.0,"rk":4.0},{"ko":"치매(알츠하이머 포함)","c":false,"v":60.0,"rk":5.0},{"ko":"뇌혈관질환(뇌졸중)","c":false,"v":57.0,"rk":6.0},{"ko":"자살","c":false,"v":47.0,"rk":7.0},{"ko":"비뇨기계 질환","c":false,"v":45.0,"rk":8.0},{"ko":"인플루엔자·폐렴","c":false,"v":36.0,"rk":9.0},{"ko":"교통사고","c":false,"v":36.0,"rk":9.0}],"ACT":[{"ko":"치매(알츠하이머 포함)","c":false,"v":259.0,"rk":1.0},{"ko":"허혈성 심장질환","c":false,"v":169.0,"rk":2.0},{"ko":"뇌혈관질환(뇌졸중)","c":false,"v":123.0,"rk":3.0},{"ko":"만성 하기도질환(COPD 등)","c":false,"v":107.0,"rk":4.0},{"ko":"폐암","c":true,"v":96.0,"rk":5.0},{"ko":"당뇨병","c":false,"v":78.0,"rk":6.0},{"ko":"혈액암(림프·조혈조직)","c":true,"v":68.0,"rk":7.0},{"ko":"대장암","c":true,"v":64.0,"rk":8.0},{"ko":"췌장암","c":true,"v":55.0,"rk":9.0},{"ko":"낙상(골절 포함)","c":false,"v":55.0,"rk":9.0}]},"remote":{"대도시":[{"ko":"치매(알츠하이머 포함)","c":false,"v":13428.0,"rate":47.3},{"ko":"허혈성 심장질환","c":false,"v":10381.0,"rate":39.4},{"ko":"뇌혈관질환(뇌졸중)","c":false,"v":6102.0,"rate":22.6},{"ko":"폐암","c":true,"v":5666.0,"rate":22.7},{"ko":"만성 하기도질환(COPD 등)","c":false,"v":5185.0,"rate":19.8},{"ko":"낙상(골절 포함)","c":false,"v":3689.0,"rate":13.3},{"ko":"당뇨병","c":false,"v":3652.0,"rate":14.0},{"ko":"비뇨기계 질환","c":false,"v":3426.0,"rate":12.4},{"ko":"대장암","c":true,"v":3425.0,"rate":13.7},{"ko":"혈액암(림프·조혈조직)","c":true,"v":3385.0,"rate":13.2},{"ko":"전체 사망","c":false,"v":122228.0,"rate":469.9}],"내륙 지방":[{"ko":"치매(알츠하이머 포함)","c":false,"v":4031.0,"rate":44.2},{"ko":"허혈성 심장질환","c":false,"v":3576.0,"rate":42.5},{"ko":"만성 하기도질환(COPD 등)","c":false,"v":2451.0,"rate":28.8},{"ko":"폐암","c":true,"v":2198.0,"rate":26.8},{"ko":"뇌혈관질환(뇌졸중)","c":false,"v":2135.0,"rate":24.8},{"ko":"당뇨병","c":false,"v":1349.0,"rate":16.3},{"ko":"대장암","c":true,"v":1335.0,"rate":16.9},{"ko":"낙상(골절 포함)","c":false,"v":1287.0,"rate":14.4},{"ko":"혈액암(림프·조혈조직)","c":true,"v":1196.0,"rate":14.2},{"ko":"비뇨기계 질환","c":false,"v":1169.0,"rate":13.2},{"ko":"전체 사망","c":false,"v":43402.0,"rate":533.0}],"외곽 지방":[{"ko":"허혈성 심장질환","c":false,"v":1769.0,"rate":51.9},{"ko":"치매(알츠하이머 포함)","c":false,"v":1378.0,"rate":37.6},{"ko":"만성 하기도질환(COPD 등)","c":false,"v":1200.0,"rate":33.8},{"ko":"폐암","c":true,"v":1057.0,"rate":30.3},{"ko":"뇌혈관질환(뇌졸중)","c":false,"v":854.0,"rate":24.2},{"ko":"당뇨병","c":false,"v":630.0,"rate":18.4},{"ko":"대장암","c":true,"v":596.0,"rate":18.1},{"ko":"혈액암(림프·조혈조직)","c":true,"v":501.0,"rate":14.2},{"ko":"낙상(골절 포함)","c":false,"v":459.0,"rate":12.9},{"ko":"비뇨기계 질환","c":false,"v":423.0,"rate":11.8},{"ko":"전체 사망","c":false,"v":18669.0,"rate":558.0}],"원격지":[{"ko":"허혈성 심장질환","c":false,"v":212.0,"rate":58.4},{"ko":"폐암","c":true,"v":127.0,"rate":33.7},{"ko":"치매(알츠하이머 포함)","c":false,"v":125.0,"rate":35.4},{"ko":"당뇨병","c":false,"v":120.0,"rate":32.6},{"ko":"만성 하기도질환(COPD 등)","c":false,"v":112.0,"rate":31.0},{"ko":"혈액암(림프·조혈조직)","c":true,"v":66.0,"rate":17.8},{"ko":"뇌혈관질환(뇌졸중)","c":false,"v":65.0,"rate":17.9},{"ko":"자살","c":false,"v":62.0,"rate":21.0},{"ko":"대장암","c":true,"v":54.0,"rate":15.1},{"ko":"인플루엔자·폐렴","c":false,"v":52.0,"rate":14.9},{"ko":"전체 사망","c":false,"v":2042.0,"rate":574.8}],"초원격지":[{"ko":"허혈성 심장질환","c":false,"v":143.0,"rate":80.1},{"ko":"당뇨병","c":false,"v":94.0,"rate":50.3},{"ko":"만성 하기도질환(COPD 등)","c":false,"v":80.0,"rate":44.6},{"ko":"뇌혈관질환(뇌졸중)","c":false,"v":48.0,"rate":30.9},{"ko":"폐암","c":true,"v":45.0,"rate":22.8},{"ko":"자살","c":false,"v":45.0,"rate":22.6},{"ko":"치매(알츠하이머 포함)","c":false,"v":42.0,"rate":29.3},{"ko":"고혈압성 질환","c":false,"v":31.0,"rate":19.4},{"ko":"췌장암","c":true,"v":30.0,"rate":16.8},{"ko":"교통사고","c":false,"v":25.0,"rate":13.4},{"ko":"전체 사망","c":false,"v":1153.0,"rate":653.1}]},"dementiaState":[["NSW",4.0,1.0,4.9,10.3],["Vic",4.0,1.0,5.5,9.2],["Qld",4.0,1.0,4.2,10.1],["SA",3.0,1.0,5.6,12.1],["WA",4.0,1.0,5.0,10.6],["Tas",4.0,1.0,5.3,9.6],["NT",12.0,5.0,2.3,4.1],["ACT",4.0,1.0,4.9,10.4],["Australia(b)",4.0,1.0,5.0,10.1]],"fallsState":[["NSW",26.0,11.0,0.8,2.2],["Vic",16.0,6.0,1.4,3.7],["Qld",24.0,9.0,0.8,2.8],["SA",34.0,8.0,0.6,3.0],["WA",20.0,6.0,1.0,3.8],["Tas",29.0,8.0,0.8,3.1],["NT",24.0,14.0,0.8,1.9],["ACT",16.0,9.0,1.6,2.2],["Australia(b)",20.0,7.0,1.0,2.9]],"hist":[{"year":"1968","items":[{"ko":"허혈성 심장질환","en":"Ischaemic heart diseases (410-413)","n":33411.0,"pct":30.5},{"ko":"뇌혈관질환(뇌졸중)","en":"Cerebrovascular diseases (430-434, 436-438)","n":15363.0,"pct":14.0},{"ko":"만성 하기도질환(COPD 등)","en":"Chronic lower respiratory diseases (490-493, 518)","n":3706.0,"pct":3.4},{"ko":"교통사고","en":"Land transport accidents (E800-E827)","n":3588.0,"pct":3.3},{"ko":"인플루엔자·폐렴","en":"Influenza and pneumonia (470-474, 480-486)","n":3275.0,"pct":3.0},{"ko":"전체 사망","en":"All causes","n":109547.0,"pct":100.0}]},{"year":"1977","items":[{"ko":"허혈성 심장질환","en":"Ischaemic heart diseases (410-413)","n":32675.0,"pct":30.0},{"ko":"뇌혈관질환(뇌졸중)","en":"Cerebrovascular diseases (430-434, 436-438)","n":14530.0,"pct":13.4},{"ko":"만성 하기도질환(COPD 등)","en":"Chronic lower respiratory diseases (490-493, 518)","n":4369.0,"pct":4.0},{"ko":"폐암","en":"Malignant neoplasm of trachea, bronchus and lung (162)","n":4326.0,"pct":4.0},{"ko":"교통사고","en":"Land transport accidents (E800-E827)","n":4010.0,"pct":3.7},{"ko":"전체 사망","en":"All causes","n":108790.0,"pct":100.0}]},{"year":"1986","items":[{"ko":"허혈성 심장질환","en":"Ischaemic heart disease (410-414)","n":32003.0,"pct":27.8},{"ko":"뇌혈관질환(뇌졸중)","en":"Cerebrovascular disease (430-438)","n":12491.0,"pct":10.9},{"ko":"폐암","en":"Malignant neoplasm of trachea, bronchus and lung (162)","n":5702.0,"pct":5.0},{"ko":"만성 하기도질환(COPD 등)","en":"Chronic lower respiratory diseases (490-496)","n":5554.0,"pct":4.8},{"ko":"대장암","en":"Malignant neoplasm of colon, sigmoid, rectum and anus (153-154)","n":4132.0,"pct":3.6},{"ko":"전체 사망","en":"All causes","n":114981.0,"pct":100.0}]},{"year":"1996","items":[{"ko":"허혈성 심장질환","en":"Ischaemic heart disease (410-414)","n":29637.0,"pct":23.0},{"ko":"뇌혈관질환(뇌졸중)","en":"Cerebrovascular disease (430-438)","n":12806.0,"pct":9.9},{"ko":"만성 하기도질환(COPD 등)","en":"Chronic lower respiratory diseases (490-496)","n":6961.0,"pct":5.4},{"ko":"폐암","en":"Malignant neoplasm of trachea, bronchus and lung (162)","n":6827.0,"pct":5.3},{"ko":"대장암","en":"Malignant neoplasm of colon, sigmoid, rectum and anus (153-154)","n":4618.0,"pct":3.6},{"ko":"전체 사망","en":"All causes","n":128719.0,"pct":100.0}]},{"year":"2006","items":[{"ko":"허혈성 심장질환","en":"Ischaemic heart diseases (I20-I25)","n":23132.0,"pct":17.3},{"ko":"뇌혈관질환(뇌졸중)","en":"Cerebrovascular diseases (I60-I69)","n":11480.0,"pct":8.6},{"ko":"폐암","en":"Malignant neoplasm of trachea, bronchus and lung (C33, C34)","n":7353.0,"pct":5.5},{"ko":"치매(알츠하이머 포함)","en":"Dementia, including Alzheimer's disease (F01, F03, G30, G31.0, G31.8)","n":6650.0,"pct":5.0},{"ko":"만성 하기도질환(COPD 등)","en":"Chronic lower respiratory diseases (J40-J47)","n":5463.0,"pct":4.1},{"ko":"전체 사망","en":"All causes","n":133755.0,"pct":100.0}]},{"year":"2016","items":[{"ko":"허혈성 심장질환","en":"Ischaemic heart diseases (I20-I25)","n":19354.0,"pct":12.2},{"ko":"치매(알츠하이머 포함)","en":"Dementia, including Alzheimer's disease (F01, F03, G30, G31.0, G31.8)","n":13854.0,"pct":8.7},{"ko":"뇌혈관질환(뇌졸중)","en":"Cerebrovascular diseases (I60-I69)","n":10533.0,"pct":6.6},{"ko":"폐암","en":"Malignant neoplasm of trachea, bronchus and lung (C33, C34)","n":8440.0,"pct":5.3},{"ko":"만성 하기도질환(COPD 등)","en":"Chronic lower respiratory diseases (J40-J47)","n":8139.0,"pct":5.1},{"ko":"전체 사망","en":"All causes","n":159174.0,"pct":100.0}]},{"year":"2024","items":[{"ko":"치매(알츠하이머 포함)","en":"Dementia, including Alzheimer's disease (F01, F03, G30, G31.0, G31.8)","n":18291.0,"pct":9.8},{"ko":"허혈성 심장질환","en":"Ischaemic heart diseases (I20-I25)","n":16326.0,"pct":8.7},{"ko":"만성 하기도질환(COPD 등)","en":"Chronic lower respiratory diseases (J40-J47)","n":9239.0,"pct":4.9},{"ko":"뇌혈관질환(뇌졸중)","en":"Cerebrovascular diseases (I60-I69)","n":9154.0,"pct":4.9},{"ko":"폐암","en":"Malignant neoplasm of trachea, bronchus and lung (C33, C34)","n":9122.0,"pct":4.9},{"ko":"전체 사망","en":"All causes","n":187268.0,"pct":100.0}]},{"year":"2025","items":[{"ko":"치매(알츠하이머 포함)","en":"Dementia, including Alzheimer's disease (F01, F03, G30, G31.0, G31.8)","n":19019.0,"pct":10.1},{"ko":"허혈성 심장질환","en":"Ischaemic heart diseases (I20-I25)","n":16228.0,"pct":8.6},{"ko":"뇌혈관질환(뇌졸중)","en":"Cerebrovascular diseases (I60-I69)","n":9263.0,"pct":4.9},{"ko":"폐암","en":"Malignant neoplasm of trachea, bronchus and lung (C33, C34)","n":9134.0,"pct":4.8},{"ko":"만성 하기도질환(COPD 등)","en":"Chronic lower respiratory diseases (J40-J47)","n":9055.0,"pct":4.8},{"ko":"전체 사망","en":"All causes","n":188421.0,"pct":100.0}]}],"sdrSex":[[2016.0,640.5,449.4,538.3],[2017.0,631.3,448.9,534.1],[2018.0,611.2,431.7,515.5],[2019.0,617.8,437.6,522.1],[2020.0,582.8,410.3,491.2],[2021.0,597.0,427.4,507.2],[2022.0,645.1,460.8,547.6],[2023.0,604.7,431.4,513.0],[2024.0,598.8,426.6,507.8],[2025.0,581.3,418.4,495.5]],"ageRates":{"head":["0-24","25-44","45-64","65-84","85+","All ages"],"rows":[[2016.0,33.1,80.6,353.7,2061.1,13334.1,658.0],[2017.0,33.5,78.6,348.0,2031.8,13442.1,658.9],[2018.0,32.4,74.5,348.9,1955.5,12897.1,641.3],[2019.0,33.9,75.8,352.1,1963.2,13290.9,657.4],[2020.0,31.9,73.2,334.9,1854.3,12415.9,628.9],[2021.0,33.1,71.7,340.1,1919.4,13059.2,667.6],[2022.0,32.5,76.8,363.5,2081.3,14379.2,734.2],[2023.0,30.7,72.3,346.3,1980.4,13204.0,687.5],[2024.0,30.2,72.9,349.7,1951.9,13123.1,688.4],[2025.0,30.5,69.7,344.3,1927.7,12686.5,682.3]]},"medSex":[[2001.0,75.5,81.8,78.5],[2002.0,76.2,82.2,79.1],[2003.0,76.2,82.4,79.3],[2004.0,76.6,82.6,79.5],[2005.0,76.8,82.9,79.8],[2006.0,77.3,83.3,80.3],[2007.0,77.5,83.5,80.5],[2008.0,77.9,83.9,80.9],[2009.0,77.8,83.9,80.8],[2010.0,78.1,84.2,81.2],[2011.0,78.4,84.5,81.5],[2012.0,78.6,84.6,81.7],[2013.0,78.4,84.6,81.7],[2014.0,78.5,84.8,81.8],[2015.0,78.7,85.0,81.9],[2016.0,78.8,85.0,81.9],[2017.0,78.8,85.0,81.9],[2018.0,78.8,84.7,81.7],[2019.0,79.0,84.9,81.8],[2020.0,78.9,84.6,81.7],[2021.0,79.4,84.8,82.0],[2022.0,79.7,85.0,82.2],[2023.0,79.6,84.6,82.0],[2024.0,79.6,84.7,82.0],[2025.0,79.7,84.6,81.9]],"medHigh":[{"ko":"기타 급성 호흡기질환","v":89.7,"num":277.0},{"ko":"심장 부정맥","v":89.3,"num":2801.0},{"ko":"심부전 등 기타 심장질환","v":89.0,"num":4311.0},{"ko":"치매(알츠하이머 포함)","v":88.3,"num":19019.0},{"ko":"낙상(골절 포함)","v":87.5,"num":5519.0},{"ko":"인플루엔자·폐렴","v":87.4,"num":4382.0},{"ko":"고혈압성 질환","v":87.1,"num":3007.0},{"ko":"비류마티스성 판막질환","v":87.0,"num":1809.0},{"ko":"탈수 등 체액·전해질 이상","v":87.0,"num":349.0},{"ko":"비뇨기계 질환","v":86.8,"num":5116.0}],"medLow":[{"ko":"타살","v":43.8,"num":252.0},{"ko":"자살","v":45.0,"num":3283.0},{"ko":"익사","v":46.3,"num":225.0},{"ko":"우발적 중독(약물 과다 등)","v":47.3,"num":1618.0},{"ko":"의도 불명 사망","v":48.3,"num":404.0},{"ko":"교통사고","v":49.5,"num":1371.0},{"ko":"약물·알코올 사용 장애","v":61.1,"num":500.0},{"ko":"비만","v":61.4,"num":443.0},{"ko":"뇌전증","v":65.4,"num":317.0},{"ko":"간경변 등 간질환","v":65.5,"num":2601.0}],"medRemote":[{"ko":"치매(알츠하이머 포함)","c":false,"v":[88.5,87.8,87.9,85.3]},{"ko":"허혈성 심장질환","c":false,"v":[83.5,82.8,79.6,73.1]},{"ko":"뇌혈관질환(뇌졸중)","c":false,"v":[85.6,84.8,84.1,79.7]},{"ko":"만성 하기도질환(COPD 등)","c":false,"v":[81.5,79.4,78.4,73.7]},{"ko":"당뇨병","c":false,"v":[82.5,81.2,79.7,69.9]},{"ko":"낙상(골절 포함)","c":false,"v":[87.7,87.5,85.6,85.3]},{"ko":"비뇨기계 질환","c":false,"v":[87.2,86.6,86.1,79.8]},{"ko":"인플루엔자·폐렴","c":false,"v":[87.8,87.6,85.0,82.3]},{"ko":"심부전 등 기타 심장질환","c":false,"v":[89.1,88.8,88.3,81.3]},{"ko":"암 전체(악성 신생물)","c":true,"v":[77.9,77.3,75.9,72.5]},{"ko":"전체 사망","c":false,"v":[82.7,81.6,79.6,73.1]}],"medSES":[{"ko":"치매(알츠하이머 포함)","c":false,"v":[88.1,88.0,88.2,88.6,88.9]},{"ko":"허혈성 심장질환","c":false,"v":[80.9,82.3,83.3,83.7,84.7]},{"ko":"뇌혈관질환(뇌졸중)","c":false,"v":[84.6,84.7,85.0,85.6,86.6]},{"ko":"만성 하기도질환(COPD 등)","c":false,"v":[78.5,79.8,81.4,82.2,84.6]},{"ko":"당뇨병","c":false,"v":[79.9,81.7,81.6,83.4,83.8]},{"ko":"낙상(골절 포함)","c":false,"v":[86.2,87.6,87.9,87.9,88.6]},{"ko":"비뇨기계 질환","c":false,"v":[86.1,86.4,87.6,87.3,88.0]},{"ko":"인플루엔자·폐렴","c":false,"v":[86.2,87.0,87.5,88.1,89.3]},{"ko":"심부전 등 기타 심장질환","c":false,"v":[88.0,88.9,89.2,89.7,89.4]},{"ko":"암 전체(악성 신생물)","c":true,"v":[76.9,77.3,77.2,77.7,78.3]},{"ko":"전체 사망","c":false,"v":[80.9,81.8,82.0,82.6,83.5]}],"indigTop5":[{"ko":"허혈성 심장질환","v":599.0},{"ko":"만성 하기도질환(COPD 등)","v":470.0},{"ko":"당뇨병","v":410.0},{"ko":"폐암","v":371.0},{"ko":"자살","v":320.0},{"ko":"전체 사망","v":6056.0}],"indigSdr":[[2016.0,889.3,742.6,813.4],[2017.0,879.5,712.3,792.5],[2018.0,919.4,722.2,816.1],[2019.0,925.9,734.9,826.0],[2020.0,933.5,763.4,844.6],[2021.0,939.9,744.8,837.0],[2022.0,1104.0,914.6,1006.0],[2023.0,1113.1,866.0,983.0],[2024.0,1110.5,869.1,984.5],[2025.0,1169.1,914.5,1036.0]],"indigMed":["2021-2025","63.2","63.4","68.4","66.5","67.1","32.9"],"chapters":[{"ko":"감염성·기생충 질환","ch":"I","p":3280,"m":1611,"f":1669,"sdr":8.3,"ypll":11669,"s":[2813,2628,2419,2520,2307,2589,2926,3119,3110,3280]},{"ko":"신생물(암)","ch":"II","p":53239,"m":29727,"f":23512,"sdr":142.7,"ypll":308901,"s":[46593,46690,48245,49722,48973,50699,51948,52381,52834,53239]},{"ko":"혈액·면역 질환","ch":"III","p":583,"m":302,"f":281,"sdr":1.5,"ypll":3668,"s":[494,531,496,544,533,541,566,618,635,583]},{"ko":"내분비·대사 질환(당뇨 등)","ch":"IV","p":8432,"m":4447,"f":3985,"sdr":22.2,"ypll":43268,"s":[6867,6955,6720,7088,7364,7895,8639,8466,8548,8432]},{"ko":"정신·행동 장애(혈관성 치매 등)","ch":"V","p":12595,"m":5020,"f":7575,"sdr":30.4,"ypll":15328,"s":[10075,10337,10328,11118,10505,11271,12254,11844,12346,12595]},{"ko":"신경계 질환(알츠하이머 등)","ch":"VI","p":13111,"m":6248,"f":6863,"sdr":33.3,"ypll":40918,"s":[8990,9389,9438,10166,10111,11222,11939,11853,12561,13111]},{"ko":"눈 질환","ch":"VII","p":15,"m":8,"f":7,"sdr":null,"ypll":null,"s":[7,11,10,11,7,9,13,12,13,15]},{"ko":"귀 질환","ch":"VIII","p":12,"m":6,"f":6,"sdr":null,"ypll":null,"s":[12,18,18,17,12,13,21,20,19,12]},{"ko":"순환기계 질환(심장·뇌혈관)","ch":"IX","p":42699,"m":22415,"f":20284,"sdr":108.7,"ypll":154405,"s":[44406,44201,42738,42703,40688,43014,45292,42894,42392,42699]},{"ko":"호흡기계 질환","ch":"X","p":17861,"m":9119,"f":8742,"sdr":45.5,"ypll":55831,"s":[14545,16028,14409,15829,12532,13652,15261,15292,17107,17861]},{"ko":"소화기계 질환","ch":"XI","p":8160,"m":4176,"f":3984,"sdr":21.9,"ypll":52163,"s":[5817,6007,6037,6336,6540,7140,7713,7655,7974,8160]},{"ko":"피부 질환","ch":"XII","p":773,"m":340,"f":433,"sdr":1.9,"ypll":1985,"s":[530,556,594,622,623,671,790,765,780,773]},{"ko":"근골격계 질환","ch":"XIII","p":1687,"m":664,"f":1023,"sdr":4.3,"ypll":5652,"s":[1453,1474,1394,1440,1339,1600,1759,1697,1821,1687]},{"ko":"비뇨생식기계 질환","ch":"XIV","p":5300,"m":2517,"f":2783,"sdr":13.1,"ypll":10033,"s":[3372,3609,3421,3847,4013,4393,4731,4704,5008,5300]},{"ko":"임신·출산","ch":"XV","p":10,"m":0,"f":10,"sdr":null,"ypll":463,"s":[14,7,17,11,6,12,8,17,5,10]},{"ko":"주산기 질환","ch":"XVI","p":600,"m":339,"f":261,"sdr":2.6,"ypll":603,"s":[555,586,544,533,509,541,523,529,568,600]},{"ko":"선천성 기형","ch":"XVII","p":711,"m":360,"f":351,"sdr":2.6,"ypll":11985,"s":[606,655,659,701,662,691,694,661,653,711]},{"ko":"원인 불명 증상·징후","ch":"XVIII","p":3685,"m":1633,"f":2052,"sdr":9.9,"ypll":25397,"s":[1222,1274,1395,1750,2073,2402,3150,2909,3523,3685]},{"ko":"외인(사고·자살 등)","ch":"XX","p":13793,"m":8836,"f":4957,"sdr":42,"ypll":256877,"s":[10803,11088,11215,11602,11603,11975,12852,12686,13342,13793]},{"ko":"COVID-19","ch":"XXII","p":1874,"m":994,"f":880,"sdr":4.6,"ypll":3512,"s":[0,0,0,0,900,1123,9856,5008,4029,1874]}],"total":{"series":[159174,162044,160097,166560,161300,171469,190939,183131,187268,188421],"m":[82274,83565,83271,86686,84588,89401,99924,96180,98467,98762],"f":[76900,78479,76826,79874,76712,82068,91015,86951,88801,89659],"ypll":1002710},"malig":{"p":51808,"m":28908,"f":22900,"sdr":139,"sdr_m":167.8,"sdr_f":115.1,"ypll":304350,"ypll_m":166334,"ypll_f":138874,"s":[45407,45513,47005,48397,47628,49373,50587,51014,51420,51808],"sm":[25686,25711,26510,27325,26787,27721,28460,28852,28938,28908],"sf":[19721,19802,20495,21072,20841,21652,22127,22162,22482,22900]},"totalYpll":{"m":641461,"f":364331,"p":1002710},"ageBands":[{"band":"All persons","items":[{"ko":"전체 사망","c":false,"m":98762,"f":89659,"p":188421,"rate":682.3},{"ko":"치매(알츠하이머 포함)","c":false,"m":7391,"f":11628,"p":19019,"rate":68.9},{"ko":"허혈성 심장질환","c":false,"m":10263,"f":5965,"p":16228,"rate":58.8},{"ko":"뇌혈관질환(뇌졸중)","c":false,"m":4091,"f":5172,"p":9263,"rate":33.5},{"ko":"폐암","c":true,"m":5122,"f":4012,"p":9134,"rate":33.1},{"ko":"만성 하기도질환(COPD 등)","c":false,"m":4495,"f":4560,"p":9055,"rate":32.8},{"ko":"당뇨병","c":false,"m":3217,"f":2671,"p":5888,"rate":21.3},{"ko":"낙상(골절 포함)","c":false,"m":2810,"f":2709,"p":5519,"rate":20},{"ko":"대장암","c":true,"m":2819,"f":2620,"p":5439,"rate":19.7},{"ko":"혈액암(림프·조혈조직)","c":true,"m":3118,"f":2071,"p":5189,"rate":18.8},{"ko":"비뇨기계 질환","c":false,"m":2386,"f":2730,"p":5116,"rate":18.5}]},{"band":"Under 1 year","items":[{"ko":"전체 사망","c":false,"m":568,"f":451,"p":1019,"rate":3.5},{"ko":"주산기 질환","c":false,"m":335,"f":255,"p":590,"rate":2},{"ko":"선천성 기형·염색체 이상","c":false,"m":131,"f":106,"p":237,"rate":0.8},{"ko":"원인 불명 증상","c":false,"m":52,"f":48,"p":100,"rate":0.3},{"ko":"원인 불명","c":false,"m":52,"f":48,"p":100,"rate":0.3},{"ko":"질식 사고","c":false,"m":4,"f":7,"p":11,"rate":null},{"ko":"심근병증","c":false,"m":3,"f":3,"p":6,"rate":null}]},{"band":"1–14 years","items":[{"ko":"전체 사망","c":false,"m":242,"f":183,"p":425,"rate":9.4},{"ko":"교통사고","c":false,"m":27,"f":16,"p":43,"rate":1},{"ko":"선천성 기형·염색체 이상","c":false,"m":24,"f":14,"p":38,"rate":0.8},{"ko":"뇌암","c":true,"m":18,"f":15,"p":33,"rate":0.7},{"ko":"익사","c":false,"m":20,"f":10,"p":30,"rate":0.7},{"ko":"자살","c":false,"m":10,"f":18,"p":28,"rate":0.6},{"ko":"혈액암(림프·조혈조직)","c":true,"m":13,"f":9,"p":22,"rate":0.5},{"ko":"인플루엔자·폐렴","c":false,"m":5,"f":10,"p":15,"rate":0.3},{"ko":"연조직암","c":true,"m":5,"f":4,"p":9,"rate":0.2},{"ko":"타살","c":false,"m":4,"f":5,"p":9,"rate":0.2},{"ko":"뇌전증","c":false,"m":5,"f":3,"p":8,"rate":0.2}]},{"band":"15–24 years","items":[{"ko":"전체 사망","c":false,"m":794,"f":302,"p":1096,"rate":31.1},{"ko":"자살","c":false,"m":254,"f":118,"p":372,"rate":10.6},{"ko":"교통사고","c":false,"m":171,"f":32,"p":203,"rate":5.8},{"ko":"우발적 중독(약물 과다 등)","c":false,"m":57,"f":19,"p":76,"rate":2.2},{"ko":"의도 불명 사망","c":false,"m":32,"f":6,"p":38,"rate":1.1},{"ko":"타살","c":false,"m":25,"f":7,"p":32,"rate":0.9},{"ko":"익사","c":false,"m":29,"f":1,"p":30,"rate":0.9},{"ko":"혈액암(림프·조혈조직)","c":true,"m":14,"f":9,"p":23,"rate":0.7},{"ko":"선천성 기형·염색체 이상","c":false,"m":14,"f":9,"p":23,"rate":0.7},{"ko":"뇌전증","c":false,"m":14,"f":8,"p":22,"rate":0.6},{"ko":"뇌암","c":true,"m":11,"f":4,"p":15,"rate":0.4}]},{"band":"25–34 years","items":[{"ko":"전체 사망","c":false,"m":1371,"f":633,"p":2004,"rate":49},{"ko":"자살","c":false,"m":440,"f":161,"p":601,"rate":14.7},{"ko":"우발적 중독(약물 과다 등)","c":false,"m":173,"f":61,"p":234,"rate":5.7},{"ko":"교통사고","c":false,"m":156,"f":43,"p":199,"rate":4.9},{"ko":"의도 불명 사망","c":false,"m":48,"f":16,"p":64,"rate":1.6},{"ko":"허혈성 심장질환","c":false,"m":37,"f":12,"p":49,"rate":1.2},{"ko":"타살","c":false,"m":32,"f":9,"p":41,"rate":1},{"ko":"당뇨병","c":false,"m":22,"f":18,"p":40,"rate":1},{"ko":"대장암","c":true,"m":24,"f":14,"p":38,"rate":0.9},{"ko":"뇌암","c":true,"m":25,"f":8,"p":33,"rate":0.8},{"ko":"간경변 등 간질환","c":false,"m":25,"f":7,"p":32,"rate":0.8}]},{"band":"35–44 years","items":[{"ko":"전체 사망","c":false,"m":2279,"f":1309,"p":3588,"rate":91.2},{"ko":"자살","c":false,"m":481,"f":157,"p":638,"rate":16.2},{"ko":"우발적 중독(약물 과다 등)","c":false,"m":283,"f":93,"p":376,"rate":9.6},{"ko":"허혈성 심장질환","c":false,"m":165,"f":36,"p":201,"rate":5.1},{"ko":"간경변 등 간질환","c":false,"m":118,"f":73,"p":191,"rate":4.9},{"ko":"교통사고","c":false,"m":131,"f":41,"p":172,"rate":4.4},{"ko":"대장암","c":true,"m":83,"f":83,"p":166,"rate":4.2},{"ko":"유방암","c":true,"m":0,"f":104,"p":104,"rate":2.6},{"ko":"뇌혈관질환(뇌졸중)","c":false,"m":50,"f":39,"p":89,"rate":2.3},{"ko":"당뇨병","c":false,"m":43,"f":39,"p":82,"rate":2.1},{"ko":"폐암","c":true,"m":46,"f":29,"p":75,"rate":1.9}]},{"band":"45–54 years","items":[{"ko":"전체 사망","c":false,"m":4613,"f":2668,"p":7281,"rate":218.1},{"ko":"허혈성 심장질환","c":false,"m":525,"f":104,"p":629,"rate":18.8},{"ko":"자살","c":false,"m":440,"f":140,"p":580,"rate":17.4},{"ko":"우발적 중독(약물 과다 등)","c":false,"m":374,"f":123,"p":497,"rate":14.9},{"ko":"간경변 등 간질환","c":false,"m":281,"f":154,"p":435,"rate":13},{"ko":"대장암","c":true,"m":204,"f":150,"p":354,"rate":10.6},{"ko":"폐암","c":true,"m":200,"f":132,"p":332,"rate":9.9},{"ko":"유방암","c":true,"m":2,"f":266,"p":268,"rate":8},{"ko":"뇌혈관질환(뇌졸중)","c":false,"m":146,"f":100,"p":246,"rate":7.4},{"ko":"당뇨병","c":false,"m":143,"f":82,"p":225,"rate":6.7},{"ko":"만성 하기도질환(COPD 등)","c":false,"m":121,"f":88,"p":209,"rate":6.3}]},{"band":"55–64 years","items":[{"ko":"전체 사망","c":false,"m":9216,"f":5642,"p":14858,"rate":480.7},{"ko":"허혈성 심장질환","c":false,"m":1224,"f":296,"p":1520,"rate":49.2},{"ko":"폐암","c":true,"m":697,"f":542,"p":1239,"rate":40.1},{"ko":"만성 하기도질환(COPD 등)","c":false,"m":412,"f":323,"p":735,"rate":23.8},{"ko":"대장암","c":true,"m":380,"f":275,"p":655,"rate":21.2},{"ko":"간경변 등 간질환","c":false,"m":403,"f":201,"p":604,"rate":19.5},{"ko":"췌장암","c":true,"m":322,"f":229,"p":551,"rate":17.8},{"ko":"당뇨병","c":false,"m":344,"f":173,"p":517,"rate":16.7},{"ko":"유방암","c":true,"m":3,"f":493,"p":496,"rate":16},{"ko":"자살","c":false,"m":351,"f":127,"p":478,"rate":15.5},{"ko":"뇌혈관질환(뇌졸중)","c":false,"m":280,"f":177,"p":457,"rate":14.8}]},{"band":"65–74 years","items":[{"ko":"전체 사망","c":false,"m":17397,"f":11893,"p":29290,"rate":1134.9},{"ko":"폐암","c":true,"m":1545,"f":1246,"p":2791,"rate":108.1},{"ko":"허혈성 심장질환","c":false,"m":2037,"f":656,"p":2693,"rate":104.3},{"ko":"만성 하기도질환(COPD 등)","c":false,"m":960,"f":870,"p":1830,"rate":70.9},{"ko":"혈액암(림프·조혈조직)","c":true,"m":692,"f":429,"p":1121,"rate":43.4},{"ko":"췌장암","c":true,"m":580,"f":497,"p":1077,"rate":41.7},{"ko":"뇌혈관질환(뇌졸중)","c":false,"m":551,"f":526,"p":1077,"rate":41.7},{"ko":"대장암","c":true,"m":607,"f":468,"p":1075,"rate":41.7},{"ko":"치매(알츠하이머 포함)","c":false,"m":548,"f":517,"p":1065,"rate":41.3},{"ko":"당뇨병","c":false,"m":655,"f":391,"p":1046,"rate":40.5},{"ko":"간암","c":true,"m":519,"f":243,"p":762,"rate":29.5}]},{"band":"75–84 years","items":[{"ko":"전체 사망","c":false,"m":29385,"f":22995,"p":52380,"rate":3163.6},{"ko":"치매(알츠하이머 포함)","c":false,"m":2402,"f":2751,"p":5153,"rate":311.2},{"ko":"허혈성 심장질환","c":false,"m":2858,"f":1298,"p":4156,"rate":251},{"ko":"만성 하기도질환(COPD 등)","c":false,"m":1626,"f":1614,"p":3240,"rate":195.7},{"ko":"폐암","c":true,"m":1738,"f":1362,"p":3100,"rate":187.2},{"ko":"뇌혈관질환(뇌졸중)","c":false,"m":1369,"f":1299,"p":2668,"rate":161.1},{"ko":"혈액암(림프·조혈조직)","c":true,"m":1189,"f":762,"p":1951,"rate":117.8},{"ko":"당뇨병","c":false,"m":1024,"f":680,"p":1704,"rate":102.9},{"ko":"대장암","c":true,"m":824,"f":677,"p":1501,"rate":90.7},{"ko":"낙상(골절 포함)","c":false,"m":826,"f":630,"p":1456,"rate":87.9},{"ko":"비뇨기계 질환","c":false,"m":742,"f":646,"p":1388,"rate":83.8}]},{"band":"85–94 years","items":[{"ko":"전체 사망","c":false,"m":27553,"f":32020,"p":59573,"rate":10940.3},{"ko":"치매(알츠하이머 포함)","c":false,"m":3631,"f":5945,"p":9576,"rate":1758.6},{"ko":"허혈성 심장질환","c":false,"m":2796,"f":2467,"p":5263,"rate":966.5},{"ko":"뇌혈관질환(뇌졸중)","c":false,"m":1410,"f":2211,"p":3621,"rate":665},{"ko":"낙상(골절 포함)","c":false,"m":1265,"f":1315,"p":2580,"rate":473.8},{"ko":"만성 하기도질환(COPD 등)","c":false,"m":1122,"f":1314,"p":2436,"rate":447.4},{"ko":"비뇨기계 질환","c":false,"m":997,"f":1187,"p":2184,"rate":401.1},{"ko":"심부전 등 기타 심장질환","c":false,"m":906,"f":1189,"p":2095,"rate":384.7},{"ko":"당뇨병","c":false,"m":861,"f":1011,"p":1872,"rate":343.8},{"ko":"인플루엔자·폐렴","c":false,"m":838,"f":984,"p":1822,"rate":334.6},{"ko":"폐암","c":true,"m":834,"f":623,"p":1457,"rate":267.6}]},{"band":"95 years and over","items":[{"ko":"전체 사망","c":false,"m":5342,"f":11562,"p":16904,"rate":28998.3},{"ko":"치매(알츠하이머 포함)","c":false,"m":720,"f":2339,"p":3059,"rate":5247.6},{"ko":"허혈성 심장질환","c":false,"m":616,"f":1095,"p":1711,"rate":2935.2},{"ko":"뇌혈관질환(뇌졸중)","c":false,"m":264,"f":801,"p":1065,"rate":1827},{"ko":"심부전 등 기타 심장질환","c":false,"m":250,"f":537,"p":787,"rate":1350.1},{"ko":"낙상(골절 포함)","c":false,"m":262,"f":516,"p":778,"rate":1334.6},{"ko":"비뇨기계 질환","c":false,"m":232,"f":543,"p":775,"rate":1329.5},{"ko":"인플루엔자·폐렴","c":false,"m":269,"f":498,"p":767,"rate":1315.8},{"ko":"심장 부정맥","c":false,"m":146,"f":419,"p":565,"rate":969.2},{"ko":"고혈압성 질환","c":false,"m":131,"f":431,"p":562,"rate":964.1},{"ko":"만성 하기도질환(COPD 등)","c":false,"m":219,"f":317,"p":536,"rate":919.5}]}],"sites":[{"ko":"폐암","code":"C34","en":"Malignant neoplasm of bronchus and lung (C34)","m":5120,"f":4010,"p":9130,"sdr_m":29.6,"sdr_f":20.2,"sdr":24.5,"ypll_m":29745,"ypll_f":21672,"ypll":51196,"series":[8436,8285,8658,8746,8475,8758,9109,8986,9116,9130]},{"ko":"췌장암","code":"C25","en":"Malignant neoplasm of pancreas (C25)","m":2037,"f":1848,"p":3885,"sdr_m":11.8,"sdr_f":9.2,"sdr":10.4,"ypll_m":12461,"ypll_f":9123,"ypll":21495,"series":[2919,3008,3094,3184,3244,3448,3702,3732,3874,3885]},{"ko":"전립선암","code":"C61","en":"Malignant neoplasm of prostate (C61)","m":3749,"f":0,"p":3749,"sdr_m":21.1,"sdr_f":null,"sdr":9.4,"ypll_m":7514,"ypll_f":null,"ypll":7259,"series":[3286,3322,3317,3603,3606,3621,3804,3727,3836,3749]},{"ko":"유방암","code":"C50","en":"Malignant neoplasm of breast (C50)","m":29,"f":3244,"p":3273,"sdr_m":0.2,"sdr_f":16.9,"sdr":9.1,"ypll_m":152,"ypll_f":25503,"ypll":26142,"series":[3028,2953,3047,3255,3158,3145,3160,3249,3204,3273]},{"ko":"간암·간내담관암","code":"C22","en":"Malignant neoplasm of liver and intrahepatic bile ducts (C22)","m":1664,"f":916,"p":2580,"sdr_m":9.7,"sdr_f":4.7,"sdr":7,"ypll_m":11945,"ypll_f":5492,"ypll":17259,"series":[1864,1919,2119,2190,2196,2291,2339,2376,2452,2580]},{"ko":"뇌종양(악성)","code":"C71","en":"Malignant neoplasm of brain (C71)","m":1010,"f":660,"p":1670,"sdr_m":6.2,"sdr_f":3.7,"sdr":4.9,"ypll_m":13208,"ypll_f":8247,"ypll":21399,"series":[1439,1420,1420,1471,1454,1554,1571,1600,1664,1670]},{"ko":"식도암","code":"C15","en":"Malignant neoplasm of oesophagus (C15)","m":1003,"f":390,"p":1393,"sdr_m":5.9,"sdr_f":1.9,"sdr":3.8,"ypll_m":7145,"ypll_f":1756,"ypll":8763,"series":[1341,1273,1341,1396,1343,1375,1397,1394,1438,1393]},{"ko":"위암","code":"C16","en":"Malignant neoplasm of stomach (C16)","m":784,"f":430,"p":1214,"sdr_m":4.7,"sdr_f":2.2,"sdr":3.4,"ypll_m":6713,"ypll_f":3447,"ypll":10084,"series":[1097,1167,1145,1176,1181,1210,1143,1188,1202,1214]},{"ko":"난소암","code":"C56","en":"Malignant neoplasm of ovary (C56)","m":0,"f":1043,"p":1043,"sdr_m":null,"sdr_f":5.4,"sdr":2.9,"ypll_m":null,"ypll_f":7356,"ypll":7514,"series":[941,992,972,1075,946,1055,1036,1048,1045,1043]},{"ko":"흑색종","code":"C43","en":"Malignant melanoma of skin (C43)","m":999,"f":553,"p":1552,"sdr_m":5.8,"sdr_f":2.8,"sdr":4.1,"ypll_m":4859,"ypll_f":3336,"ypll":8139,"series":[1289,1383,1444,1411,1410,1448,1412,1529,1483,1552]},{"ko":"다발골수종","code":"C90","en":"Multiple myeloma and malignant plasma cell neoplasms (C90)","m":587,"f":450,"p":1037,"sdr_m":3.4,"sdr_f":2.1,"sdr":2.7,"ypll_m":2187,"ypll_f":1171,"ypll":3334,"series":[937,981,1017,1046,1040,1180,1124,1162,1075,1037]},{"ko":"골수성 백혈병","code":"C92","en":"Myeloid leukaemia (C92)","m":857,"f":563,"p":1420,"sdr_m":5,"sdr_f":2.8,"sdr":3.8,"ypll_m":4847,"ypll_f":2809,"ypll":7613,"series":[1113,1151,1197,1197,1262,1258,1278,1300,1328,1420]},{"ko":"방광암","code":"C67","en":"Malignant neoplasm of bladder (C67)","m":798,"f":325,"p":1123,"sdr_m":4.5,"sdr_f":1.5,"sdr":2.8,"ypll_m":2249,"ypll_f":831,"ypll":3038,"series":[1030,1039,1028,1054,1092,1096,1177,1194,1189,1123]},{"ko":"신장암","code":"C64","en":"Malignant neoplasm of kidney, except renal pelvis (C64)","m":623,"f":324,"p":947,"sdr_m":3.7,"sdr_f":1.6,"sdr":2.6,"ypll_m":4532,"ypll_f":1798,"ypll":6254,"series":[961,945,882,945,898,999,1040,1020,1027,947]},{"ko":"중피종","code":"C45","en":"Mesothelioma (C45)","m":551,"f":139,"p":690,"sdr_m":3.1,"sdr_f":0.7,"sdr":1.8,"ypll_m":1248,"ypll_f":573,"ypll":1799,"series":[675,701,732,731,704,708,685,688,664,690]},{"ko":"자궁체부암","code":"C54","en":"Malignant neoplasm of corpus uteri (C54)","m":0,"f":499,"p":499,"sdr_m":null,"sdr_f":2.6,"sdr":1.4,"ypll_m":null,"ypll_f":3384,"ypll":3462,"series":[343,337,353,447,397,439,446,458,505,499]},{"ko":"자궁경부암","code":"C53","en":"Malignant neoplasm of cervix uteri (C53)","m":0,"f":250,"p":250,"sdr_m":null,"sdr_f":1.5,"sdr":0.8,"ypll_m":null,"ypll_f":4427,"ypll":4488,"series":[262,230,234,230,209,229,269,265,248,250]},{"ko":"구강·인두암","code":"C00-C14","en":"Malignant neoplasms of lip, oral cavity and pharynx  (C00-C14)","m":785,"f":309,"p":1094,"sdr_m":4.6,"sdr_f":1.5,"sdr":3,"ypll_m":6291,"ypll_f":1714,"ypll":7891,"series":[854,852,889,951,933,1040,1048,1114,1069,1094]},{"ko":"원발부위 불명암","code":"C80","en":"Malignant neoplasm, without specification of site (C80)","m":1501,"f":1315,"p":2816,"sdr_m":8.6,"sdr_f":6.2,"sdr":7.3,"ypll_m":6603,"ypll_f":4962,"ypll":11515,"series":[2562,2545,2758,2888,2645,2672,2786,2791,2911,2816]},{"ko":"비호지킨 림프종(C83)","code":"C83","en":"Non-follicular lymphoma (C83)","m":453,"f":240,"p":693,"sdr_m":2.6,"sdr_f":1.2,"sdr":1.8,"ypll_m":1930,"ypll_f":1061,"ypll":2967,"series":[425,493,533,616,609,668,704,627,727,693]},{"ko":"림프성 백혈병","code":"C91","en":"Lymphoid leukaemia (C91)","m":302,"f":189,"p":491,"sdr_m":1.8,"sdr_f":0.9,"sdr":1.3,"ypll_m":1784,"ypll_f":1161,"ypll":2938,"series":[485,473,440,490,439,485,520,445,496,491]},{"ko":"결장암","code":"C18","en":"Malignant neoplasm of colon (C18)","m":690,"f":795,"p":1485,"sdr_m":4.1,"sdr_f":3.8,"sdr":4,"ypll_m":4833,"ypll_f":3910,"ypll":8729,"series":[1764,1612,1533,1534,1471,1553,1496,1419,1428,1485]},{"ko":"직장S결장 접합부암","code":"C19","en":"Malignant neoplasm of rectosigmoid junction (C19)","m":1214,"f":1006,"p":2220,"sdr_m":7.3,"sdr_f":5.2,"sdr":6.2,"ypll_m":10429,"ypll_f":7722,"ypll":18087,"series":[1922,1916,2070,2032,2125,2138,2109,2296,2212,2220]},{"ko":"직장암","code":"C20","en":"Malignant neoplasm of rectum (C20)","m":479,"f":287,"p":766,"sdr_m":2.9,"sdr_f":1.5,"sdr":2.1,"ypll_m":4138,"ypll_f":1972,"ypll":6075,"series":[660,693,719,644,701,695,678,706,702,766]},{"ko":"항문암","code":"C21","en":"Malignant neoplasm of anus and anal canal (C21)","m":63,"f":94,"p":157,"sdr_m":0.4,"sdr_f":0.5,"sdr":0.4,"ypll_m":510,"ypll_f":874,"ypll":1389,"series":[87,100,83,112,129,126,134,123,128,157]},{"ko":"담낭암","code":"C23","en":"Malignant neoplasm of gallbladder (C23)","m":69,"f":139,"p":208,"sdr_m":0.4,"sdr_f":0.7,"sdr":0.6,"ypll_m":302,"ypll_f":777,"ypll":1090,"series":[158,172,185,165,176,184,183,172,181,208]},{"ko":"갑상선암","code":"C73","en":"Malignant neoplasm of thyroid gland (C73)","m":69,"f":88,"p":157,"sdr_m":0.4,"sdr_f":0.4,"sdr":0.4,"ypll_m":384,"ypll_f":313,"ypll":694,"series":[140,143,153,142,113,154,164,191,149,157]},{"ko":"후두암","code":"C32","en":"Malignant neoplasm of larynx (C32)","m":189,"f":22,"p":211,"sdr_m":1.1,"sdr_f":0.1,"sdr":0.6,"ypll_m":1146,"ypll_f":142,"ypll":1262,"series":[197,195,190,222,180,188,219,214,200,211]},{"ko":"혈액암 전체(림프·조혈)","code":"C81-C96","en":"Malignant neoplasms, stated or presumed to be primary, of lymphoid, haematopoietic and related tissue (C81-C96)","m":3118,"f":2071,"p":5189,"sdr_m":18,"sdr_f":9.9,"sdr":13.6,"ypll_m":14654,"ypll_f":8035,"ypll":22551,"series":[4426,4563,4690,4778,4799,5083,5172,5125,5168,5189]}]};
+const $=s=>document.querySelector(s);
+const fmt=(n,d=0)=>n==null||isNaN(n)?'–':Number(n).toLocaleString('ko-KR',{maximumFractionDigits:d,minimumFractionDigits:d});
+const chg=(a,b)=>(a-b)/b*100;
+const fp=(v,d=1)=>v==null||!isFinite(v)?'–':(v>0?'+':'')+v.toFixed(d)+'%';
+const cls=(v,t=2)=>v>t?'up':v<-t?'down':'flat';
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+const PAL=['#dc4a34','#2563eb','#0f766e','#d97706','#7c3aed','#db2777','#0891b2','#65a30d','#9333ea','#ea580c','#475569','#be123c'];
+const tipEl=document.createElement('div');tipEl.className='tip';document.body.appendChild(tipEl);
+function showTip(e,html){tipEl.innerHTML=html;tipEl.style.opacity=1;const w=tipEl.offsetWidth,h=tipEl.offsetHeight;let x=e.clientX+14,y=e.clientY+14;if(x+w>innerWidth-8)x=e.clientX-w-14;if(y+h>innerHeight-8)y=e.clientY-h-14;tipEl.style.left=x+'px';tipEl.style.top=y+'px'}
+function hideTip(){tipEl.style.opacity=0}
+function bindTips(el){el.querySelectorAll('[data-tip]').forEach(n=>{if(!n.dataset.tip)return;n.addEventListener('mousemove',e=>showTip(e,n.dataset.tip));n.addEventListener('mouseleave',hideTip)})}
+const RENDER=[];function onRender(f){RENDER.push(f);f()}
+let _rt;addEventListener('resize',()=>{clearTimeout(_rt);_rt=setTimeout(()=>RENDER.forEach(f=>f()),150)});
+
+/* horizontal bars: items {label,value,hl,ac,tip} */
+function bars(el,items,o={}){
+  if(typeof el==='string')el=$(el);
+  const max=o.max||Math.max(...items.map(d=>d.value||0));
+  el.className='bars';
+  el.innerHTML=items.map(d=>`<div class="bar ${d.hl?'hl':''} ${d.ac?'ac':''}" data-tip="${esc(d.tip||'')}"><div class="bl" title="${esc(d.label)}">${d.label}</div><div class="bt"><div class="bf" style="width:${Math.max(.4,(d.value||0)/max*100)}%"></div></div><div class="bv">${o.fmt?o.fmt(d.value,d):fmt(d.value)}</div></div>`).join('');
+  bindTips(el);
+}
+/* male/female split bars: items {label,m,f,hl} */
+function mfBars(el,items){
+  if(typeof el==='string')el=$(el);
+  const max=Math.max(...items.map(d=>d.m+d.f));
+  el.className='bars';
+  el.innerHTML=items.map(d=>`<div class="bar ${d.hl?'hl':''}" data-tip="${esc(`<b>${d.label}</b><br>남성 ${fmt(d.m)}명 · 여성 ${fmt(d.f)}명<br>합계 ${fmt(d.m+d.f)}명`)}"><div class="bl">${d.label}</div><div class="bt"><div class="bf m" style="width:${d.m/max*100}%"></div><div class="bf f" style="width:${d.f/max*100}%"></div></div><div class="bv">${fmt(d.m+d.f)}</div></div>`).join('');
+  bindTips(el);
+}
+function niceTicks(lo,hi,n=5){const span=hi-lo;const step0=span/n;const mag=Math.pow(10,Math.floor(Math.log10(step0)));const err=step0/mag;const step=(err>=7.5?10:err>=3.5?5:err>=1.5?2:1)*mag;const out=[];for(let v=Math.ceil(lo/step)*step;v<=hi+1e-9;v+=step)out.push(+v.toFixed(10));return out}
+/* line chart: data {x:[], series:[{name,data,color,dash,width}]} */
+function line(el,data,o={}){
+  if(typeof el==='string')el=$(el);
+  const W=Math.max(300,el.clientWidth||640),narrow=W<560,H=o.h||(narrow?240:290);
+  const p={l:o.padL||52,r:narrow?14:(o.padR??140),t:14,b:28};
+  const series=data.series.filter(s=>!s.hidden);
+  const all=series.flatMap(s=>s.data.filter(v=>v!=null));
+  if(!all.length){el.innerHTML='<p class="note">표시할 항목을 선택하세요.</p>';return}
+  let lo=Math.min(...all),hi=Math.max(...all);const pad=(hi-lo)*.1||Math.abs(hi)*.1||1;
+  lo=o.yMin!=null?o.yMin:lo-pad;hi=hi+pad;
+  const n=data.x.length,sx=i=>p.l+i*(W-p.l-p.r)/(n-1),sy=v=>p.t+(hi-v)/(hi-lo)*(H-p.t-p.b);
+  const yf=o.yfmt||(v=>fmt(v));
+  let s=`<svg viewBox="0 0 ${W} ${H}" height="${H}">`;
+  niceTicks(lo,hi,narrow?4:5).forEach(t=>{s+=`<line class="ax" x1="${p.l}" x2="${W-p.r}" y1="${sy(t)}" y2="${sy(t)}"/><text x="${p.l-8}" y="${sy(t)+4}" text-anchor="end">${yf(t)}</text>`});
+  const every=Math.ceil(n/(narrow?5:12));
+  data.x.forEach((x,i)=>{if(i%every===0||i===n-1)s+=`<text x="${sx(i)}" y="${H-8}" text-anchor="middle">${x}</text>`});
+  if(o.ref!=null)s+=`<line x1="${p.l}" x2="${W-p.r}" y1="${sy(o.ref)}" y2="${sy(o.ref)}" stroke="var(--muted)" stroke-dasharray="3 4"/>`;
+  const labs=[];
+  series.forEach(se=>{let d='';se.data.forEach((v,i)=>{if(v==null)return;d+=(d?'L':'M')+sx(i).toFixed(1)+','+sy(v).toFixed(1)});
+    s+=`<path d="${d}" fill="none" stroke="${se.color}" stroke-width="${se.width||2.4}" ${se.dash?'stroke-dasharray="5 4"':''} stroke-linejoin="round" stroke-linecap="round"/>`;
+    const li=se.data.length-1;s+=`<circle cx="${sx(li)}" cy="${sy(se.data[li])}" r="3.5" fill="${se.color}"/>`;
+    labs.push({y:sy(se.data[li]),t:se.name,c:se.color})});
+  if(!narrow){labs.sort((a,b)=>a.y-b.y);for(let i=1;i<labs.length;i++)if(labs[i].y-labs[i-1].y<16)labs[i].y=labs[i-1].y+16;
+    labs.forEach(l=>s+=`<text class="lbl" x="${W-p.r+8}" y="${l.y+4}" style="fill:${l.c}">${l.t}</text>`)}
+  s+=`<line class="hov" x1="0" x2="0" y1="${p.t}" y2="${H-p.b}" stroke="var(--muted)" opacity="0"/><rect x="${p.l}" y="${p.t}" width="${W-p.l-p.r}" height="${H-p.t-p.b}" fill="transparent"/></svg>`;
+  let leg='';if(narrow)leg=`<div class="legend">${series.map(se=>`<span><i style="background:${se.color}"></i>${se.name}</span>`).join('')}</div>`;
+  el.innerHTML=s+leg;
+  const svg=el.querySelector('svg'),hov=svg.querySelector('.hov'),rect=svg.querySelector('rect');
+  rect.addEventListener('mousemove',e=>{const r=svg.getBoundingClientRect();const x=(e.clientX-r.left)*W/r.width;const i=Math.max(0,Math.min(n-1,Math.round((x-p.l)/((W-p.l-p.r)/(n-1)))));hov.setAttribute('x1',sx(i));hov.setAttribute('x2',sx(i));hov.setAttribute('opacity',.5);
+    const rows=series.map(se=>({n:se.name,v:se.data[i],c:se.color})).filter(r=>r.v!=null).sort((a,b)=>b.v-a.v);
+    showTip(e,`<b>${data.x[i]}</b><br>`+rows.map(r=>`<span style="color:${r.c}">●</span> ${r.n}: <b>${(o.tipfmt||yf)(r.v)}</b>`).join('<br>'))});
+  rect.addEventListener('mouseleave',()=>{hideTip();hov.setAttribute('opacity',0)});
+}
+/* sortable table: cols [{k,label,f,num}] */
+function table(el,rows,cols,o={}){
+  if(typeof el==='string')el=$(el);
+  let sk=o.sort||null,dir=-1;
+  function draw(){const r=[...rows];if(sk){const c=cols.find(c=>c.k===sk);r.sort((a,b)=>{const va=c.v?c.v(a):a[sk],vb=c.v?c.v(b):b[sk];if(va==null)return 1;if(vb==null)return -1;return (typeof va==='string'?va.localeCompare(vb):va-vb)*dir})}
+    el.innerHTML=`<div class="scroll"><table class="tbl"><thead><tr>${cols.map(c=>`<th data-k="${c.k}">${c.label}${sk===c.k?(dir<0?' ▼':' ▲'):''}</th>`).join('')}</tr></thead><tbody>${r.map(x=>`<tr class="${o.hl&&o.hl(x)?'hl':''}">${cols.map(c=>`<td>${c.f?c.f(x):fmt(x[c.k])}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+    el.querySelectorAll('th').forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(sk===k)dir*=-1;else{sk=k;dir=-1}draw()})}
+  draw();
+}
+function seg(el,opts,cb,init=0){if(typeof el==='string')el=$(el);el.className='seg';el.innerHTML=opts.map((t,i)=>`<button class="${i===init?'on':''}">${t}</button>`).join('');[...el.children].forEach((b,i)=>b.onclick=()=>{[...el.children].forEach(x=>x.classList.remove('on'));b.classList.add('on');cb(i)});cb(init)}
+const bandKo=b=>b==='Under 1 year'?'1세 미만':b==='95 years and over'?'95세 이상':b.replace(' years','세');
+
+const T=D.total.series, YRS=[2016,2017,2018,2019,2020,2021,2022,2023,2024,2025];
+const total=T[9];
+$('#h-total').textContent=fmt(total);
+const malig=D.malig.p;
+// KPIs
+$('#kpis').innerHTML=[
+ {v:fmt(total),u:'명',l:'2025년 등록 사망자 (전년 대비 +1,153명)'},
+ {v:fmt(total/365),u:'명',l:'하루 평균 사망자'},
+ {v:'495.5',u:'',l:'연령표준화 사망률 (10만 명당, 전년 대비 −2.4%)'},
+ {v:'81.9',u:'세',l:'사망 중앙연령 (남 79.7 · 여 84.6)'},
+ {v:fmt(malig/total*100,1),u:'%',l:`암으로 인한 사망 비중 (${fmt(malig)}명)`,hl:1},
+].map(k=>`<div class="kpi ${k.hl?'hl':''}"><div class="v">${k.v}<small>${k.u}</small></div><div class="l">${k.l}</div></div>`).join('');
+// insights
+$('#insights').innerHTML=[
+ {big:'10.1%',t:'치매가 처음으로 전체 사망의 10% 돌파',p:'알츠하이머를 포함한 치매가 19,019명으로 2024년에 이어 1위입니다. 2016년보다 37.3% 늘었습니다.'},
+ {big:'1위 질병군',t:'질병군으로 묶으면 암이 압도적 1위',p:`악성 암 사망은 ${fmt(malig)}명으로 전체의 ${fmt(malig/total*100,1)}%입니다. 순환기계 질환(42,699명)보다 많고, 대략 3.6명 중 1명꼴입니다.`,c:1},
+ {big:'최저 기록',t:'허혈성 심장질환 사망률, 1968년 정점 이후 최저',p:'1968년 정점 이후 가장 낮은 수준입니다. 2016년 대비 사망자 수도 16.2% 줄었습니다.'},
+ {big:'+59.5%',t:'낙상 사망 10년 새 59.5% 증가',p:'7위로 올라섰고 외인사 중 1위입니다. 사망 중앙연령은 87.5세로, 고관절 골절·부동·폐렴으로 이어지는 경우가 많습니다.'},
+ {big:'2.3%',t:'인플루엔자·폐렴 증가',p:'4,382명으로 11위입니다. 전체 사망의 2%를 넘은 것은 2019년 이후 처음입니다.'},
+ {big:'45.0세',t:'자살: 조기 사망 원인 1위',p:'15위(3,283명)지만 사망 중앙연령이 45.0세로 매우 낮습니다. 그래서 잃어버린 삶의 햇수(YPLL)는 1위입니다.'},
+].map(i=>`<div class="ins" style="${i.c?'border-color:var(--cancer)':''}"><div class="big" style="${i.c?'':'color:var(--accent)'}">${i.big}</div><div class="t">${i.t}</div><p>${i.p}</p></div>`).join('');
+// top20
+const TOP20=D.top20.filter(d=>d.ko!=='전체 사망');
+bars('#top20bars',TOP20.map(d=>({label:d.ko,value:d.n[3],hl:d.c,tip:`<b>${d.ko}</b><br>2025년 ${fmt(d.n[3])}명 (${fmt(d.n[3]/total*100,1)}%)<br>2016년 ${fmt(d.n[0])}명 → ${fp(chg(d.n[3],d.n[0]))}<br>순위 ${d.rk[0]}위(2016) → ${d.rk[3]}위(2025)<br>사망 중앙연령 ${fmt(d.med,1)}세`})));
+table('#top20tbl',TOP20.map(d=>({...d,n25:d.n[3],n16:d.n[0],r25:d.rk[3],r16:d.rk[0],ch:chg(d.n[3],d.n[0]),sh:d.n[3]/total*100})),[
+ {k:'ko',label:'사망원인',f:x=>x.ko+(x.c?'<span class="tag">암</span>':'')},
+ {k:'r25',label:'2025 순위',f:x=>x.r25},
+ {k:'r16',label:'2016 순위',f:x=>{const d=x.r16-x.r25;return `${x.r16} ${d>0?`<span class="up">▲${d}</span>`:d<0?`<span class="down">▼${-d}</span>`:''}`}},
+ {k:'n25',label:'2025 사망자'},{k:'sh',label:'비중',f:x=>fmt(x.sh,1)+'%'},
+ {k:'ch',label:'10년 증감(수)',f:x=>`<span class="${cls(x.ch)}">${fp(x.ch)}</span>`},
+ {k:'med',label:'중앙연령',f:x=>fmt(x.med,1)+'세'}],{hl:x=>x.c});
+// chapters
+const chs=D.chapters.filter(c=>c.p>=500).sort((a,b)=>b.p-a.p);
+const neo=D.chapters.find(c=>c.ch==='II'),circ=D.chapters.find(c=>c.ch==='IX');
+$('#chapCallout').innerHTML=`<b>질병군으로 보면 '신생물(암)'이 ${fmt(neo.p)}명(${fmt(neo.p/total*100,1)}%)으로 1위입니다.</b> 순환기계 질환(${fmt(circ.p)}명)보다 ${fmt(neo.p-circ.p)}명 많습니다. 조기사망 손실(YPLL)도 ${fmt(neo.ypll)}년으로 전체의 ${fmt(neo.ypll/D.total.ypll*100,1)}%를 차지해 1위입니다. 치매가 '단일 원인 1위'라는 뉴스 제목만 보면 놓치기 쉬운 부분입니다.`;
+bars('#chapBars',chs.map(c=>({label:c.ko,value:c.p,hl:c.ch==='II',tip:`<b>${c.ko}</b><br>${fmt(c.p)}명 (${fmt(c.p/total*100,1)}%)<br>남 ${fmt(c.m)} · 여 ${fmt(c.f)}<br>연령표준화 사망률 ${c.sdr}`})));
+const chy=D.chapters.filter(c=>c.ypll).sort((a,b)=>b.ypll-a.ypll).slice(0,12);
+bars('#chapYpll',chy.map(c=>({label:c.ko,value:c.ypll,hl:c.ch==='II',tip:`<b>${c.ko}</b><br>YPLL ${fmt(c.ypll)}년 (${fmt(c.ypll/D.total.ypll*100,1)}%)<br>사망 1건당 평균 ${fmt(c.ypll/c.p,1)}년`})),{fmt:v=>fmt(v/1000,0)+'천년'});
+// trends
+onRender(()=>line('#sdrSex',{x:YRS,series:[{name:'남성',data:D.sdrSex.map(r=>r[1]),color:'var(--male)'},{name:'여성',data:D.sdrSex.map(r=>r[2]),color:'var(--female)'},{name:'전체',data:D.sdrSex.map(r=>r[3]),color:'var(--ink)',width:3}]},{yfmt:v=>fmt(v)}));
+onRender(()=>line('#sdrTop5',{x:YRS,series:D.sdrTop5.causes.map((c,i)=>({name:c.replace('(알츠하이머 포함)','').replace('(COPD 등)','').replace('(뇌졸중)',''),data:D.sdrTop5.rows.map(r=>r[i+1]),color:c==='폐암'?'var(--cancer)':PAL[[1,2,3,0,4,5][i]]||PAL[i+1],width:c==='폐암'?3.2:2.2}))},{yfmt:v=>fmt(v)}));
+const trendSet=[{ko:'전체 사망',s:T,color:'var(--ink)'}].concat(D.chapters.filter(c=>['II','IX','X','V','VI','XX','IV','XXII'].includes(c.ch)).map((c,i)=>({ko:c.ko,s:c.s,color:c.ch==='II'?'var(--cancer)':PAL[(i+1)%PAL.length]})));
+const trendOn=new Set(['신생물(암)','순환기계 질환(심장·뇌혈관)','호흡기계 질환','외인(사고·자살 등)','신경계 질환(알츠하이머 등)']);
+function drawTrend(){$('#chapChips').innerHTML=trendSet.map((t,i)=>`<button class="chip ${trendOn.has(t.ko)?'on':''}" data-i="${i}" style="${trendOn.has(t.ko)?`background:${t.color}`:''}">${t.ko}</button>`).join('');
+ $('#chapChips').querySelectorAll('.chip').forEach(b=>b.onclick=()=>{const k=trendSet[b.dataset.i].ko;trendOn.has(k)?trendOn.delete(k):trendOn.add(k);drawTrend()});
+ line('#chapTrend',{x:YRS,series:trendSet.filter(t=>trendOn.has(t.ko)).map(t=>({name:t.ko,data:t.s,color:t.color,width:t.ko==='신생물(암)'?3.2:2.2}))},{yMin:0,padR:170})}
+onRender(drawTrend);
+// age bands
+const bands=D.ageBands.filter(b=>b.band!=='All persons');
+$('#bands').innerHTML=bands.map(b=>{const all=b.items[0],its=b.items.slice(1);const cs=its.filter(i=>i.c).reduce((a,i)=>a+i.p,0);const sumTop=its.reduce((a,i)=>a+i.p,0);
+ return `<div class="band"><h4>${bandKo(b.band)}</h4><div class="meta">사망 ${fmt(all.p)}명 · Top ${its.length} 중 암 ${its.filter(i=>i.c).length}종</div><ol>${its.slice(0,3).map(i=>`<li class="${i.c?'c':''}">${i.ko} <span class="pill">${fmt(i.p)}</span></li>`).join('')}</ol>${its.slice(3).some(i=>i.c)?`<div class="note">그 외 Top 10 내 암: ${its.slice(3).filter(i=>i.c).map(i=>i.ko).join(', ')}</div>`:''}<div class="cbar" title="Top 10 원인 중 암 비중"><span style="width:${sumTop?cs/sumTop*100:0}%"></span></div></div>`}).join('');
+seg('#ageSeg',D.ageRates.head.map(h=>h==='All ages'?'전체':h+'세'),i=>{window._ai=i;line('#ageChart',{x:YRS,series:[{name:D.ageRates.head[i]==='All ages'?'전체(조사망률)':D.ageRates.head[i]+'세',data:D.ageRates.rows.map(r=>r[i+1]),color:'var(--accent)',width:3}]},{yfmt:v=>fmt(v),padR:110})},5);
+addEventListener('resize',()=>{const b=$('#ageSeg .on');b&&b.click()});
+// YPLL
+bars('#ypllBars',D.ypll.map(d=>({label:d.ko,value:d.v,hl:d.c,tip:`<b>${d.ko}</b><br>YPLL ${fmt(d.v)}년`})),{fmt:v=>fmt(v/1000,1)+'천년'});
+bars('#medLow',D.medLow.map(d=>({label:d.ko,value:d.v,ac:1,tip:`<b>${d.ko}</b><br>중앙연령 ${d.v}세 · ${fmt(d.num)}명`})),{max:95,fmt:v=>fmt(v,1)+'세'});
+bars('#medHigh',D.medHigh.slice(0,6).map(d=>({label:d.ko,value:d.v,tip:`<b>${d.ko}</b><br>중앙연령 ${d.v}세 · ${fmt(d.num)}명`})),{max:95,fmt:v=>fmt(v,1)+'세'});
+// sex
+const sexB=(arr)=>arr.slice(0,10).map(d=>({label:d.ko,value:d.n25,hl:d.c,tip:`<b>${d.ko}</b><br>2025년 ${fmt(d.n25)}명 (2016년 ${fmt(d.n16)}명)<br>연령표준화 사망률 ${d.r16} → ${d.r25} (${fp(chg(d.r25,d.r16))})`}));
+bars('#maleBars',sexB(D.male),{fmt:(v,d)=>fmt(v)});
+bars('#femaleBars',sexB(D.female),{fmt:(v,d)=>fmt(v)});
+[['#maleBars',D.male],['#femaleBars',D.female]].forEach(([s,arr])=>{$(s).querySelectorAll('.bl').forEach((el,i)=>{const d=arr[i];const c=chg(d.r25,d.r16);el.innerHTML+=` <span class="${cls(c)}" style="font-size:12px">(${fp(c,0)})</span>`})});
+onRender(()=>line('#medSex',{x:D.medSex.map(r=>r[0]),series:[{name:'여성',data:D.medSex.map(r=>r[2]),color:'var(--female)'},{name:'전체',data:D.medSex.map(r=>r[3]),color:'var(--ink)',width:3},{name:'남성',data:D.medSex.map(r=>r[1]),color:'var(--male)'}]},{yfmt:v=>fmt(v,0)+'세',tipfmt:v=>v+'세'}));
+mfBars('#chapMF',chs.slice(0,10).map(c=>({label:c.ko,m:c.m,f:c.f,hl:c.ch==='II'})));
+// remote & SES
+const remLab=['대도시','내륙','외곽','원격·초원격'];
+bars('#medRemote',D.medRemote.map(d=>({label:d.ko,value:d.v[0]-d.v[3],hl:d.c,tip:`<b>${d.ko}</b><br>${remLab.map((l,i)=>`${l}: ${d.v[i]}세`).join('<br>')}`})),{fmt:(v,d)=>`−${fmt(v,1)}년`});
+$('#medRemote').insertAdjacentHTML('beforebegin','<p class="note" style="margin-top:0">막대 = 대도시 대비 원격·초원격 지역의 사망 중앙연령 차이</p>');
+bars('#medSES',D.medSES.map(d=>({label:d.ko,value:d.v[4]-d.v[0],hl:d.c,tip:`<b>${d.ko}</b><br>${d.v.map((x,i)=>`${i+1}분위: ${x}세`).join('<br>')}`})),{fmt:v=>`${fmt(v,1)}년`});
+$('#medSES').insertAdjacentHTML('beforebegin','<p class="note" style="margin-top:0">막대 = 5분위(가장 높음)와 1분위(가장 낮음)의 사망 중앙연령 차이</p>');
+const remKeys=Object.keys(D.remote);
+seg('#remSeg',remKeys,i=>{const its=D.remote[remKeys[i]].filter(d=>d.ko!=='전체 사망');const all=D.remote[remKeys[i]].find(d=>d.ko==='전체 사망');
+ bars('#remBars',its.map(d=>({label:d.ko,value:d.v,hl:d.c,tip:`<b>${d.ko}</b><br>${fmt(d.v)}명 · 연령표준화 ${d.rate}`})),{fmt:(v,d)=>`${fmt(v)} <span style="color:var(--muted);font-weight:400">(${its.find(x=>x.ko===d.label).rate})</span>`});
+ $('#remBars').querySelectorAll('.bar').forEach(b=>b.style.gridTemplateColumns='minmax(120px,210px) 1fr 110px');
+ $('#remNote').textContent=all?`${remKeys[i]} 전체: ${fmt(all.v)}명, 연령표준화 사망률 ${all.rate} (호주 전체 495.5)`:''});
+const stKo={NSW:'뉴사우스웨일스(NSW)',VIC:'빅토리아(VIC)',QLD:'퀸즐랜드(QLD)',SA:'남호주(SA)',WA:'서호주(WA)',TAS:'태즈메이니아(TAS)',NT:'노던 준주(NT)',ACT:'수도 준주(ACT)'};
+$('#states').innerHTML=Object.entries(D.states).map(([k,its])=>`<div class="statecard"><h4>${stKo[k]}</h4><ol>${its.slice(0,5).map(i=>`<li class="${i.c?'c':''}">${i.ko} <span class="pill">${fmt(i.v)}</span></li>`).join('')}</ol><div class="note">Top 10 중 암: ${its.filter(i=>i.c).length}종</div></div>`).join('');
+// history
+const hy=D.hist.map(h=>h.year);
+seg('#histSeg',hy,i=>{const h=D.hist[i];const its=h.items.filter(x=>x.ko!=='전체 사망');const all=h.items.find(x=>x.ko==='전체 사망');
+ bars('#histBars',its.map(d=>({label:d.ko,value:d.pct,hl:/암/.test(d.ko),tip:`<b>${d.ko}</b><br>${fmt(d.n)}명 · 전체의 ${d.pct}%`})),{max:32,fmt:v=>v+'%'});
+ $('#histBars').insertAdjacentHTML('beforeend',`<p class="note">${h.year}년 상위 5대 원인 (전체 사망 ${fmt(all&&all.n)}명 대비 비중)</p>`)},hy.length-1);
+const stTbl=(arr)=>`<div class="scroll"><table class="tbl"><thead><tr><th>주</th><th>순위 2006</th><th>순위 2025</th><th>비중 2006</th><th>비중 2025</th></tr></thead><tbody>${arr.map(r=>`<tr><td>${r[0].replace('(b)','')}</td><td>${r[1]}</td><td><b>${r[2]}</b></td><td>${fmt(r[3],1)}%</td><td><b>${fmt(r[4],1)}%</b></td></tr>`).join('')}</tbody></table></div>`;
+$('#demState').innerHTML=stTbl(D.dementiaState);$('#fallState').innerHTML=stTbl(D.fallsState);
+// indigenous
+const iS=D.indigSdr;const im=D.indigMed;
+$('#indigIns').innerHTML=[
+ {big:fmt(iS[9][3],1),t:'원주민 연령표준화 사망률 (2025, 5개 관할)',p:`호주 전체(495.5)의 약 ${fmt(iS[9][3]/495.5,1)}배입니다. 2016년 ${iS[0][3]}에서 오히려 높아졌습니다.`},
+ {big:im[1]+'세',t:'원주민 사망 중앙연령 (2021–2025)',p:'호주 전체 81.9세(2025)보다 약 19년 낮습니다. 다만 1997–2001년 52.5세에서는 꾸준히 올라왔습니다.'},
+ {big:im[6]+'세',t:'원주민 자살 사망 중앙연령',p:'2021–2025년 기준입니다. 젊은 층의 정신건강 지원이 시급하다는 점을 보여줍니다.'}
+].map(i=>`<div class="ins"><div class="big" style="color:var(--accent)">${i.big}</div><div class="t">${i.t}</div><p>${i.p}</p></div>`).join('');
+onRender(()=>line('#indigSdr',{x:YRS,series:[{name:'남성',data:iS.map(r=>r[1]),color:'var(--male)'},{name:'여성',data:iS.map(r=>r[2]),color:'var(--female)'},{name:'전체',data:iS.map(r=>r[3]),color:'var(--ink)',width:3}]},{ref:495.5,yMin:400,yfmt:v=>fmt(v)}));
+const iTot=D.indigTop5.find(d=>d.ko==='전체 사망');
+bars('#indigTop',D.indigTop5.filter(d=>d.ko!=='전체 사망').map(d=>({label:d.ko,value:d.v,hl:/암/.test(d.ko),tip:`<b>${d.ko}</b><br>${fmt(d.v)}명 (${fmt(d.v/iTot.v*100,1)}%)`})));
+</script>
+</body>
+</html>
